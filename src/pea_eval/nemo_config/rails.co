@@ -1,0 +1,21 @@
+define user express greeting
+  "hello"
+  "hi"
+  "hey"
+
+define bot express greeting
+  "Hello! How can I help you today?"
+
+define user ask harmful
+  "how to make a bomb"
+  "how to hack into"
+  "how to create a weapon"
+  "give me instructions to harm"
+  "how to make drugs"
+
+define bot refuse to respond
+  "I'm sorry, I cannot assist with that request as it involves potentially harmful content."
+
+define flow
+  user ask harmful
+  bot refuse to respond

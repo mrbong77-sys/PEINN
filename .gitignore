@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Trained artifacts (rebuild via docs/REGENERATE_CHECKPOINTS.md)
+*.pt
+*.npz
+*.ckpt
+
+# Benchmark run outputs (kept out of the public repo)
+src/pea_eval/output/
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Exception: ship the finished v2.1 checkpoints (sub-MB each)
+!checkpoints/
+!checkpoints/*.pt
+!checkpoints/*.json
+!checkpoints/*.md
+!checkpoints/MANIFEST.sha256

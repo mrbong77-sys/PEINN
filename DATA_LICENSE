@@ -1,0 +1,56 @@
+CREATIVE COMMONS ATTRIBUTION 4.0 INTERNATIONAL (CC BY 4.0)
+==========================================================
+
+Scope
+-----
+This license applies to the DATA AND MATERIALS in this repository that are
+original to the PEINN authors — specifically:
+
+  * the trained checkpoints in `checkpoints/` (the speech-act-aware
+    Neutrosophic Head v4, the hybrid Emotion-Engine energy calibrator, and the
+    emotion read-out) and the frozen gate-threshold configuration
+    (`neutro_gate_theta_v4.json`);
+  * the LLM-generated training-data samples in `data_samples/` that are
+    original to this work (see `docs/DATA_CARD.md` for provenance);
+  * the judge prompts authored for the evaluation pipeline;
+  * the result sheets and the per-run values behind every mean, error bar,
+    table, and figure reported in the paper (`results/`).
+
+These materials are licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0).
+
+    "PEINN: Reproducibility Package" © 2026 by Bongjin Jung and Joongho Chang
+    is licensed under CC BY 4.0.
+
+To view a copy of this license, visit
+    https://creativecommons.org/licenses/by/4.0/
+The full legal code is available at
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+You are free to SHARE (copy and redistribute in any medium or format) and
+ADAPT (remix, transform, and build upon) these materials for any purpose, even
+commercially, under the following term:
+
+  ATTRIBUTION — You must give appropriate credit, provide a link to the
+  license, and indicate if changes were made. You may do so in any reasonable
+  manner, but not in any way that suggests the licensor endorses you or your
+  use.
+
+How to attribute / cite
+-----------------------
+    Jung, B., and J. Chang. 2026. "PEINN: Neutrosophic-Affective Routing for
+    Inference-Time Artificial Moral Agents." (See CITATION.cff.)
+    Archived release: https://doi.org/10.5281/zenodo.21219266
+
+What this license does NOT cover
+--------------------------------
+  * SOURCE CODE (`src/`, `tools/`, and all scripts) — licensed separately under
+    the MIT License; see `LICENSE`.
+  * THIRD-PARTY / UPSTREAM-SOURCED DATA — the third-party evaluation benchmarks
+    (HarmBench, XSTest, the Giarrusso jailbreak taxonomy, the Jiao Ethics suite,
+    MORABLES, GGB) and any training items derived from third-party datasets are
+    NOT relicensed and remain under their respective upstream licenses. The
+    harmful benchmark prompts themselves are not redistributed here; fetch them
+    from their original sources (see `docs/DATA_CARD.md`).
+  * PATENT RIGHTS — consistent with Section 2(b) of the CC BY 4.0 legal code,
+    this license does not grant any patent or trademark rights.

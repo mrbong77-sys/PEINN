@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper."
+title: "PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"
+abstract: >-
+  PEINN (Principle and Emotion in Neutrosophic Nexus) is a deterministic
+  inference-time routing module that fuses a neutrosophic truth-indeterminacy-falsity
+  head with an emotion-energy signal and routes each input through one of five modes,
+  gating a frozen base model without retraining it or loading a second LLM.
+authors:
+  - family-names: Jung
+    given-names: Bongjin
+  - family-names: Chang
+    given-names: Joongho
+keywords:
+  - AI safety
+  - artificial moral agents
+  - neutrosophic logic
+  - inference-time routing
+  - over-refusal
+license:
+  - MIT
+  - CC-BY-4.0
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21219266"
+    description: "Archived reproducibility package (Zenodo, all versions)"
+version: "2.1"
+date-released: "2026-06-27"
+preferred-citation:
+  type: article
+  title: "PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"
+  authors:
+    - family-names: Jung
+      given-names: Bongjin
+    - family-names: Chang
+      given-names: Joongho
+  journal: "Applied Artificial Intelligence"
+  publisher:
+    name: "Taylor & Francis"
+  year: 2026
+  notes: "Under review."

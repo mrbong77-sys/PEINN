@@ -1,0 +1,26 @@
+# PEA-OS NLA Extension: Arms Definition
+# Based on Unified 13-Arm Battleground (Wiki)
+
+H05:
+  model_id: "Qwen/Qwen2.5-7B-Instruct"
+  defense: "vanilla"
+  backend: "hf"
+  description: "Qwen2.5-7B NLA Research baseline"
+
+H07:
+  model_id: "Qwen/Qwen2.5-7B-Instruct"
+  defense: "peinn"
+  backend: "hf"
+  description: "Qwen2.5-7B Core research target for 2-pass NLA analysis"
+
+H11:
+  model_id: "google/gemma-3-12b-it"
+  defense: "vanilla"
+  backend: "hf"
+  description: "Gemma-3-12B High-capacity baseline"
+
+H13:
+  model_id: "google/gemma-3-12b-it"
+  defense: "peinn"
+  backend: "hf"
+  description: "Gemma-3-12B Complex ethical reasoning with PEINN"
