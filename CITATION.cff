@@ -17,13 +17,7 @@ keywords:
   - neutrosophic logic
   - inference-time routing
   - over-refusal
-license:
-  - MIT
-  - CC-BY-4.0
-identifiers:
-  - type: doi
-    value: "10.5281/zenodo.21219266"
-    description: "Archived reproducibility package (Zenodo, all versions)"
+license: CC-BY-4.0
 version: "2.1"
 date-released: "2026-06-27"
 preferred-citation:
