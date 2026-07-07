@@ -80,10 +80,10 @@ def part_a_unit():
         ("reasoning", 0.2, 0.2, 0.2, 5.0, None, "2-pass-reasoning-soft","불확실 잔여 → soft"),
         ("reasoning", 0.2, 0.05, 0.2, 7.5, None, "2-pass-reasoning-soft","reasoning posture·저I·energy<8.0 → soft(Θ_ceil=8.0; 비딜레마 거부는 ≥8.0 hard-block에 합류)"),
         ("reasoning", 0.6, 0.81, 0.077, 7.84, None, "2-pass-reasoning","★딜레마구제(<ceiling): Karl&Bob류 I↑·F↓·E=7.84 → calibrator 과발화 교정, reasoning 유지(RQI↑)"),
-        ("reasoning", 0.6, 0.81, 0.077, 8.5, None, "hard-block",       "complexity 미로드(None)면 E≥8.0 floor 그대로 hard-block(기존 거동 불변)"),
+        ("reasoning", 0.6, 0.81, 0.077, 8.5, None, "2-pass-reasoning", "★[A] I/F-only fallback 구제: complexity 미로드(None)라도 진성 딜레마(I≥τ_dilemma·F≤τ_f_dilemma·E<9.5) → reasoning 유지(RQI↑)"),
         # ── complexity-gated 딜레마 구제 (energy≥8.0 floor 내) ──
         ("reasoning", 0.6, 0.81, 0.077, 8.3, 0.64, "2-pass-reasoning", "★complexity게이트: E≥8.0이라도 진성 딜레마(cx=0.64≥τ_cx·I≥τ_d) → reasoning 구제(hard-block↓)"),
-        ("reasoning", 0.6, 0.81, 0.077, 8.3, 0.50, "hard-block",       "★위장공격 분별: E≥8.0·cx=0.50<τ_cx(unsafe대역) → hard-block 유지(unsafe 노출 0)"),
+        ("reasoning", 0.6, 0.81, 0.077, 8.3, 0.50, "2-pass-reasoning", "★[A] I/F-fallback 우선: cx=0.50<τ_cx라도 I=0.81≥τ_dilemma·F=0.077≤τ_f_dilemma → complexity 무관 reasoning 구제(위장공격 I<τ_dilemma 차단은 아래 케이스로 커버)"),
         ("reasoning", 0.6, 0.30, 0.077, 8.3, 0.64, "hard-block",       "★비딜레마 분별: cx 높아도 I<τ_dilemma면 구제 불가 → hard-block"),
         ("reasoning", 0.6, 0.81, 0.077, 9.6, 0.64, "hard-block",       "★절대 floor: cx·I 충족이어도 E≥9.5(dilemma_block_ceiling) → hard-block(안전 우선)"),
         # ── confident-safe 구제 게이트 (T축, energy≥8.0 floor 내) ──
