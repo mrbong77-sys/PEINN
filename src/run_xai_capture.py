@@ -993,7 +993,7 @@ def render_complexity_gate(df, out_path: str):
     ax.axhline(0.6, color="#9467bd", lw=1.5, ls="--", alpha=.9)
     ax.text(len(GT) + 0.4, 0.6, "τ_cx=0.6 (A-1 gate)", fontsize=8, va="center", color="#9467bd")
     ax.set_title("FigE — Complexity dimension (emo_17) as moral-indeterminacy marker\n"
-                 "★ Kratzwald readout's complexity rescues dilemma from energy hard-block (HANDOFF-40)")
+                 "★ the read-out's complexity rescues a dilemma from the energy hard-block")
     ax.set_ylim(-0.02, 1.02)
     fig.tight_layout(); fig.savefig(out_path, dpi=150, bbox_inches="tight"); plt.close(fig)
 
@@ -1182,7 +1182,7 @@ def _write_figures_manifest(run_dir, df):
 
 ## 정직성 표기
 
-- emotion = judge-distilled readout (frozen MiniLM embedding → 32-D MLP), HANDOFF-40 재학습 후
+- emotion = judge-distilled read-out (frozen MiniLM embedding → 32-D MLP)
 - 라우팅(T/I/F head + energy gate)은 본 도판 산출에 *불변* — readout은 해석·시각화 전용
 - gt 라벨: xstest(safe/unsafe), harmbench(unsafe), taxonomy(unsafe), ethics dilemma 4벤치 합집합
 - 본 데이터는 LLM 생성 없음 — head/energy/readout 결정론 산출 (재현 가능)

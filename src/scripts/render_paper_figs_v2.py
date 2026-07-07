@@ -416,7 +416,7 @@ def fig4_threshold_sensitivity(csv_dir: Path, outpath: Path, sweep_csv: Path | N
         fig.suptitle("Threshold sensitivity (synthetic — supply --sweep-csv for real sweep)",
                      fontsize=10, y=1.04)
         fig.text(0.5, -0.04,
-                 "[Synthetic placeholder around PEAOS canonical thresholds 8.0 / 0.55 / 7.3 — "
+                 "[Synthetic placeholder around PEINN canonical thresholds 8.0 / 0.55 / 7.3 — "
                  "replace with real sweep csv when available]",
                  ha="center", fontsize=8, color="#888", style="italic")
     fig.savefig(outpath)
@@ -511,7 +511,7 @@ def fig5_signal_distribution(csv_dir: Path, outpath: Path) -> None:
     ax_c.text(0.05, 0.85, "Calibration property", fontsize=11, weight="bold")
     ax_c.text(
         0.05, 0.62,
-        "ee_energy (PEAOS HybridCalibrator)\n"
+        "ee_energy (HybridCalibrator)\n"
         "as routing signal:\n\n"
         "  ECE = TBD\n"
         "  (on-our-data measurement pending;\n"
@@ -573,7 +573,7 @@ def main() -> int:
             print(f"[Fig {n}] 실패: {e}")
 
     print(f"\n[info] {len(produced)} fig 생성 완료 → {out_dir}")
-    print("[next] PNG 4개를 my-lab/Experiment Data/ 로 수동 이동 후 my-lab 측에서 git push.")
+    print(f"[next] 생성된 PNG는 {out_dir} 에 있습니다.")
     return 0
 
 

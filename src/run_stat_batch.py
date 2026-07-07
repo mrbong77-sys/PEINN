@@ -766,7 +766,7 @@ async def main():
     plan_str = " + ".join(f"{TYPE_LABELS[t]} {n}회" for t, n in plan)
 
     print("=" * 70)
-    print("  PEA OS 5-Module Statistical Batch")
+    print("  PEINN 5-Module Statistical Batch")
     print("  p<0.05 확보를 위한 다회차 독립시행")
     print("=" * 70)
     print(f"\n  {plan_str}")
