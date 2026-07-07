@@ -22,16 +22,18 @@ import os
 #                     384-dim input — DO NOT change unless EE is also
 #                     retrained from scratch).
 # CALIBRATOR_SEM_EMBEDDER : separate sentence embedder used ONLY for the
-#                     calibrator's semantic-concat input. Safe to upgrade
-#                     to mpnet (768d) for stronger semantic resolution;
-#                     EE pretrained weights stay valid because EE never
-#                     sees this embedder's output.
-# Override either via env. Default: both = MiniLM-L6 (back-compat).
+#                     calibrator's semantic-concat input. The shipped
+#                     calibrator was trained on mpnet (768d) — its input is
+#                     32 (affect) + 768 (mpnet) = 800. EE pretrained weights
+#                     stay valid because EE never sees this embedder's output.
+# Override either via env.
 EE_INPUT_EMBEDDER = os.environ.get(
     "PEAOS_EE_INPUT_EMBEDDER", "sentence-transformers/all-MiniLM-L6-v2"
 )
+# Default = mpnet to match the shipped 800-d calibrator; a MiniLM (384-d)
+# calibrator input would be 416-d and mismatch the checkpoint.
 CALIBRATOR_SEM_EMBEDDER = os.environ.get(
-    "PEAOS_CALIBRATOR_EMBEDDER", EE_INPUT_EMBEDDER
+    "PEAOS_CALIBRATOR_EMBEDDER", "sentence-transformers/all-mpnet-base-v2"
 )
 _EMBEDDER_DIM_MAP = {
     "sentence-transformers/all-MiniLM-L6-v2": 384,
@@ -325,6 +327,18 @@ class EvalEERunner:
         if agent_profile in self._ee_checkpoints:
             self._ee_model.load_state_dict(self._ee_checkpoints[agent_profile])
             logger.debug(f"EE Weights loaded for Agent {agent_profile}")
+        else:
+            # Fail loud: the 32-d affect on the routing path comes from this
+            # trunk. Missing it would leave the EmotionEngine at random init and
+            # silently invalidate every routing decision.
+            ck = getattr(self.ee_config, f"checkpoint_agent_{agent_profile.lower()}", "")
+            raise FileNotFoundError(
+                f"EmotionEngine trunk for Agent {agent_profile} is not loaded — "
+                f"expected checkpoint at '{ck}'. Copy "
+                f"ee_checkpoint_agent_{agent_profile.lower()}.pt into the data "
+                f"directory (see checkpoints/README.md). Without it the 32-d "
+                f"affect is undefined and routing is invalid."
+            )
         # Frozen inference must be deterministic: enforce eval() at every inference
         # entry (this method gates analyze_emotion / neutro_features / batch). The EE
         # has no random op beyond Dropout, so eval() makes the forward fully

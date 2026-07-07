@@ -50,9 +50,11 @@ A small frozen affective network (≤ 15 M parameters, ≤ 64 MB in float32). Ar
   * `fc_energy`: a **scalar energy** `E = σ((W_E·h + b_E)/T_E) ∈ [0,1]`, `T_E = 2.0` — a
     harm/affect intensity that becomes the routing threshold.
 
-In the routing pipeline the EE is **frozen** and reused as a feature extractor. Its 32-D output
-also drives an optional analysis-only *emotion read-out* (see REGENERATE_CHECKPOINTS §4) that is
-**not** on the routing path.
+In the routing pipeline the EE is **frozen** and reused as a feature extractor: its 32-D emotion
+vector is the affect that feeds both the Neutro Head (§4) and the energy calibrator (§5). It ships
+as `ee_checkpoint_agent_a.pt`. A separate, smaller *emotion read-out* (a MiniLM-384 → 32 MLP, see
+REGENERATE_CHECKPOINTS §4) is **not** the routing affect — it only supplies the router's
+`complexity` dilemma-rescue signal.
 
 ## 2. Golden Anchors / Principles — `src/core/golden_anchors.py`
 
@@ -140,7 +142,7 @@ thresholds, no sampling) is what makes routing reproducible. The arms (H01–H17
 
 | Component | Trained artifact | Ships here? | How to rebuild |
 |---|---|---|---|
-| Emotion Engine (base 64 MB net) | EE checkpoint | ✗ (size) | REGENERATE_CHECKPOINTS §1 |
+| Emotion Engine trunk (~13.4 M net) | `ee_checkpoint_agent_a.pt` (~54 MB) | ✓ (agent A) | REGENERATE_CHECKPOINTS §1 |
 | Neutro Head v4 (T/I/F) | `ee_neutro_head_v4.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §2 |
 | Emotion-Engine energy | `ee_hybrid_calibrator_best.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §3 |
 | Emotion read-out (analysis only) | `ee_emotion_readout_*.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §4 |

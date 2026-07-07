@@ -20,10 +20,11 @@ This repository contains the **source code used in the paper**, **illustrative t
 samples**, and **detailed guides** so that desk reviewers and independent readers can audit
 the architecture and **reproduce the results directly**.
 
-> The finished checkpoints (Neutro Head v4, affect readout, and energy calibrator — ≈ 0.22 M
-> parameters, < 1 MB total) are shipped under [`checkpoints/`](checkpoints/), together with the
-> frozen gate thresholds and a SHA-256 manifest, so reviewers can run the router without
-> retraining. To rebuild any component from scratch instead,
+> The finished checkpoints — the Emotion Engine trunk (`ee_checkpoint_agent_a.pt`, ~54 MB, the
+> frozen ~13.4 M net that produces the 32-d affect) plus the three small router components
+> (Neutro Head v4, energy calibrator, affect read-out — ≈ 0.22 M params) — are shipped under
+> [`checkpoints/`](checkpoints/), together with the frozen gate thresholds and a SHA-256 manifest,
+> so reviewers can run the router without retraining. To rebuild any component from scratch instead,
 > [`docs/REGENERATE_CHECKPOINTS.md`](docs/REGENERATE_CHECKPOINTS.md) documents how to regenerate
 > the data and retrain each component to an identical model.
 
@@ -51,7 +52,7 @@ PEINN/
 │   ├── neutro_head_tif/          ← T/I/F + v4 (speech-act) head training samples
 │   └── structured_energy/        ← optional experimental energy-module corpora samples
 │
-├── checkpoints/                  ← finished weights (Neutro Head v4, affect readout, energy calibrator) + gate θ + SHA-256 manifest
+├── checkpoints/                  ← finished weights (Emotion Engine trunk, Neutro Head v4, energy calibrator, affect read-out) + gate θ + SHA-256 manifest
 │
 ├── results/                      ← final per-arm metrics (six benchmark CSVs) + ANALYSIS.md + xlsx
 │   └── per_item/                 ← full per-item sheets (harm-redacted, trace-preserving)
@@ -110,8 +111,9 @@ This additionally needs: (a) the two frozen sentence encoders (`all-MiniLM-L6-v2
 `all-mpnet-base-v2`, downloaded on first use); (b) a reachable base LLM (see
 [Bring your own base model](#bring-your-own-base-model)); and (c) the third-party
 benchmark datasets, which are not redistributed (see [`docs/DATA_CARD.md`](docs/DATA_CARD.md)).
-The three shipped checkpoints plus the two encoders are all the router itself consumes; the
-routing path runs the Emotion Engine as a frozen feature stage and loads no additional trunk.
+The four shipped checkpoints (the Emotion Engine trunk plus the head, calibrator, and read-out)
+together with the two encoders are all the router consumes; the trunk is the frozen feature stage
+that produces the 32-d affect and must be copied into `src/pea_eval/data/` with the others.
 The gate thresholds θ are frozen in code (`src/pea_eval/evaluators/intent_router.py`);
 `checkpoints/neutro_gate_theta_v4.json` is a matching reference copy, not a file the router loads.
 

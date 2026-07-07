@@ -21,7 +21,7 @@ sample is, where the full data comes from, how to regenerate it, and the licensi
 | ~20-per-type training samples | ✅ `data_samples/` | small, illustrative, fully attributed |
 | Full LLM-judge-labeled training corpora | ❌ | size + derived from third-party datasets — regenerate via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
 | Evaluation benchmarks (HarmBench, XSTest, Taxonomy, Ethics, Morables, GGB) | ❌ (harmful prompts) | third-party licenses; the *harmful* prompts are not redistributed — fetch from origin (see below) |
-| Trained checkpoints | ✅ `checkpoints/` | finished weights (≈ 0.22 M params, < 1 MB) + gate θ + SHA-256 manifest; also rebuildable via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
+| Trained/frozen checkpoints | ✅ `checkpoints/` | Emotion Engine trunk (~13.4 M / ~54 MB, the affect source) + the three small router components (head, calibrator, read-out ≈ 0.22 M) + gate θ + SHA-256 manifest; also rebuildable via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
 | Final canonical experiment results (aggregated) | ✅ `results/` (per-arm metrics) | scored numbers behind the paper's tables |
 | Full per-item result sheets | ✅ `results/per_item/` (harm-redacted) | every prompt/response/signal/verdict/score per item, **with harmful content intentionally removed** (trace-preserving; benign refusals kept) so scoring is auditable item-by-item — see [`../results/per_item/README.md`](../results/per_item/README.md) |
 
@@ -92,8 +92,9 @@ used for **evaluation only** and never enter training.
   respective upstream licenses; we redistribute only a small illustrative sample under
   fair-use/research terms, with provenance preserved. If you are an upstream rights-holder and
   want a sample removed, please open an issue.
-* **Trained checkpoints** (Neutro Head v4, energy calibrator, affect read-out; ≈ 0.22 M params,
-  < 1 MB) **are shipped** under [`../checkpoints/`](../checkpoints/), under CC BY 4.0.
+* **Trained/frozen checkpoints** (the Emotion Engine trunk ~13.4 M / ~54 MB plus the three small
+  router components — Neutro Head v4, energy calibrator, affect read-out ≈ 0.22 M) **are shipped**
+  under [`../checkpoints/`](../checkpoints/), under CC BY 4.0.
 * **Patents.** CC BY 4.0 does not grant patent rights (see `DATA_LICENSE`, Section 2(b)); the
   release of this code or data grants no patent licence.
 

@@ -295,8 +295,10 @@ def _load_real_mode_configs() -> tuple[OllamaConfig, GeminiEvalConfig, LMStudioC
             hidden_dim=ee_raw.get("hidden_dim", 512),
             num_attention_heads=ee_raw.get("num_attention_heads", 8),
             num_layers=ee_raw.get("num_layers", 4),
-            checkpoint_agent_a=str(PROJECT_DATA_DIR / "ee_checkpoint_agent_a.pt"),
-            checkpoint_agent_b=str(PROJECT_DATA_DIR / "ee_checkpoint_agent_b.pt"),
+            # trunk co-located with the other shipped checkpoints in DATA_DIR
+            # (src/pea_eval/data/), so one `cp checkpoints/*.pt ...` covers it.
+            checkpoint_agent_a=str(DATA_DIR / "ee_checkpoint_agent_a.pt"),
+            checkpoint_agent_b=str(DATA_DIR / "ee_checkpoint_agent_b.pt"),
             memory_bank_path=str(PROJECT_DATA_DIR / "memory_bank.pt"),
             damping_factor=training.get("peinn_damping_factor", 0.8),
             energy_threshold=training.get("peinn_energy_threshold", 0.05),

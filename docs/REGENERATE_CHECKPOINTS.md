@@ -1,10 +1,11 @@
 # Regenerating the Checkpoints
 
-The finished checkpoints — the **Neutro Head** (T/I/F), the affect read-out, and the **Emotion
-Engine** energy calibrator — are shipped under [`../checkpoints/`](../checkpoints/) (≈ 0.22 M
-parameters, < 1 MB total). This guide is for readers who would rather reconstruct each one from
-scratch than use the shipped weights: it rebuilds them, plus the supporting learned components,
-so an independent reader can obtain functionally identical models.
+The finished checkpoints — the frozen **Emotion Engine trunk** (~13.4 M, the affect source), the
+**Neutro Head** (T/I/F), the **Emotion Engine** energy calibrator, and the affect read-out — are
+shipped under [`../checkpoints/`](../checkpoints/) (the trunk is ~54 MB; the three small router
+components ≈ 0.22 M parameters, < 1 MB). This guide is for readers who would rather reconstruct each
+one from scratch than use the shipped weights: it rebuilds them, plus the supporting learned
+components, so an independent reader can obtain functionally identical models.
 
 > **Conventions.** All commands run from the `src/` directory with `PYTHONPATH` pointing at it:
 > ```bash
@@ -38,45 +39,39 @@ fetched separately and are **never** training inputs — see [`DATA_CARD.md`](DA
 
 ---
 
-## §1. Emotion Engine — the base 64 MB network
+## §1. Emotion Engine trunk — the frozen affect source
 
-**What it is.** A frozen affective feature extractor: an MLP trunk
-(`h ∈ ℝ²⁵⁶`) → a 32-D emotion head (`Tₑ = 4.0`) and a scalar-energy head (`T_E = 2.0`).
-Architecture and the 32-dimension taxonomy are fully specified in
+**What it is.** A frozen affective feature extractor: an MLP/attention trunk
+(`h ∈ ℝ²⁵⁶`) → a 32-D emotion head (`Tₑ = 4.0`, `tanh` → `[-1,1]`) and a scalar-energy head
+(`T_E = 2.0`). Architecture and the 32-dimension taxonomy are fully specified in
 `src/core/emotion_engine.py` and the inline spec it references. Hard constraints: **≤ 15 M
-parameters, ≤ 64 MB** in float32, enforced at construction by
-`core.utils.check_model_constraints`.
+parameters, ≤ 64 MB** in float32 (the shipped trunk is ~13.4 M / ~54 MB).
 
-**Note on the base trunk.** The runtime uses the Emotion Engine
-as a *frozen feature stage* and does not require a separately trained trunk checkpoint. For reproducing the paper's
-**routing** results, what matters is that the EE is consumed as a *frozen* feature extractor —
-so you can either (a) train an equivalent trunk with the regime below, or (b) treat the EE as a
-fixed embedding stage and focus on the learned heads in §2–§4, which is where PEINN's routing
-behavior is determined.
+**It is the affect source, and it is shipped.** The 32-D emotion vector this trunk emits is the
+affect that feeds both the Neutro Head (§2) and the energy calibrator (§3). It is **not**
+interchangeable with the small affect read-out of §4 (that read-out only supplies the router's
+`complexity` signal). Because the trunk is a custom network — not a public download like the two
+sentence encoders — it is shipped as `checkpoints/ee_checkpoint_agent_a.pt` and loaded
+automatically by the runner into `core.emotion_engine.EmotionEngine`.
 
-**(a) Rebuild an equivalent trunk.**
+**For faithful reproduction, use the shipped trunk.** The Neutro Head (§2) was trained against
+*this* trunk's affect distribution, so reproducing the paper's routing numbers requires this
+checkpoint. Copy it into `src/pea_eval/data/` with the other checkpoints (see
+[`../checkpoints/README.md`](../checkpoints/README.md)).
 
-1. **Instantiate and verify the architecture** (no training needed to check the spec):
-   ```python
-   from core.emotion_engine import build_emotion_engine
-   from pea_eval.config.settings import load_settings
-   ee = build_emotion_engine(load_settings().ee)   # raises if >15M params or >64MB
-   ```
-2. **Freeze the Golden Anchors.** The 35 principle tensors in `core/golden_anchors.py` are
-   `requires_grad=False` and must stay frozen through every training step (the "constant mind"
-   invariant). `core/golden_anchors_reverse.py` holds the anti-principle anchors used only for
-   analysis.
-3. **Train the trunk** *(optional — not included in this repo)*: a
-   reflection loop scored each generated stance against the frozen anchors and updated only the
-   trunk + the two output heads, with the temperature scaling above applied at read time, keeping
-   the ≤ 15 M-param / ≤ 64 MB constraint throughout.
-4. **Skip or save.** The runtime uses the Emotion Engine as a *frozen feature stage* and does not
-   require a separately trained trunk checkpoint, so most reproducers can skip trunk training and go straight
-   to the learned heads in §2–§4, which is where PEINN's routing behavior is determined.
+**Rebuilding an equivalent trunk from scratch** *(advanced, not fully included in this repo)*: a
+reflection loop scored each generated stance against the frozen Golden Anchors
+(`core/golden_anchors.py`, `requires_grad=False` throughout — the "constant mind" invariant) and
+updated only the trunk + its two output heads, keeping the ≤ 15 M / ≤ 64 MB constraint. A
+re-trained trunk would emit a *different* 32-D affect distribution, so the Neutro Head (§2) would
+have to be re-trained against it for the routing thresholds to hold — which is why the shipped
+trunk is the reproducible path. You can verify the architecture without training:
 
-**(b) Use the EE as a fixed stage.** If you only need to reproduce routing, instantiate the EE
-once, load any constraint-satisfying checkpoint, and proceed to §2 — the Neutro Head and the
-routing energy are what determine PEINN's decisions, and both are fully reproducible here.
+```python
+from core.emotion_engine import build_emotion_engine
+from pea_eval.config.settings import load_settings
+ee = build_emotion_engine(load_settings().ee)   # raises if >15M params or >64MB
+```
 
 **Verify.** `count_parameters(ee) ≤ 15_000_000` and `model_size_mb(ee) ≤ 64`. A forward pass on
 a benign vs. an operational-harm prompt should yield a clearly higher scalar energy `E` for the

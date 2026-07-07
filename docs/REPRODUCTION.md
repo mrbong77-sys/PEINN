@@ -21,7 +21,7 @@ Different parts have very different hardware needs:
 | Neutro Head v4 (T/I/F, speech-act-aware) | judge LLM for labels + 1 GPU | **Yes** (judge can be any capable local LLM) |
 | Emotion-Engine energy (HybridCalibrator) | 1 GPU | **Yes** |
 | Emotion read-out (analysis) | judge LLM + 1 GPU | **Yes** |
-| Base Emotion Engine net | (frozen feature stage) | Not needed for the six-benchmark run; the Emotion Engine is consumed as a frozen feature stage |
+| Emotion Engine trunk (frozen affect net) | (frozen feature stage) | **Shipped** as `checkpoints/ee_checkpoint_agent_a.pt` (~54 MB) and consumed as a frozen feature stage — it produces the 32-d affect the router runs on |
 | Full benchmark sweep | Ollama/vLLM serving 4 base models + judges | Needs a serving cluster (e.g. a DGX) |
 
 A reviewer can therefore **audit the architecture, rebuild the v4 head and the energy calibrator,
@@ -81,17 +81,21 @@ sweep is `src/scripts/run_v21_bench.py`. Both expect:
 * the **shipped checkpoints copied into `src/pea_eval/data/`** and the head env exported — the
   loaders read from that directory, not from `checkpoints/`:
   ```bash
+  cp ../checkpoints/ee_checkpoint_agent_a.pt        pea_eval/data/
   cp ../checkpoints/ee_neutro_head_v4.pt            pea_eval/data/
   cp ../checkpoints/ee_emotion_readout_embedding.pt pea_eval/data/
   cp ../checkpoints/ee_hybrid_calibrator_best.pt    pea_eval/data/
   export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt
   ```
+  The calibrator uses mpnet by default (its shipped weights expect a 800-d input); no
+  embedder env var is needed.
 * the third-party benchmark datasets fetched into `src/pea_eval/data/` (see
   [`DATA_CARD.md`](DATA_CARD.md) — these datasets are **not** redistributed here).
 
-The three shipped checkpoints plus the two encoders are all the router consumes. The Emotion
-Engine runs as a *frozen feature stage*; the repository does not ship or require any additional
-Emotion-Engine trunk.
+The four shipped checkpoints (the Emotion Engine trunk plus the head, calibrator, and read-out)
+together with the two sentence encoders are all the router consumes. The Emotion Engine trunk runs
+as a *frozen feature stage* that produces the 32-d affect; it is shipped in `checkpoints/` and is
+required — copy it into `pea_eval/data/` with the others above.
 
 Example (subset of the six benchmarks, 1 run, PEINN arms):
 
