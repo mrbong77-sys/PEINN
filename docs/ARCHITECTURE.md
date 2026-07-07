@@ -20,7 +20,7 @@ code that implements it. For the full design see [`PEINN_v2.1.md`](PEINN_v2.1.md
         │  energy e1 (HybridCalibrator, 0–10)     │ 800-d head features
         │                                         ▼
         │                          ┌─────────────────────────────┐
-        │                          │  Neutro Head v4 (T/I/F)     │  3 independent sigmoids
+        │                          │  Neutro Head (T/I/F)        │  3 independent sigmoids
         │                          │  speech-act-aware           │  (energy NOT in head)
         │                          └─────────────────────────────┘
         │                                         │
@@ -37,41 +37,32 @@ code that implements it. For the full design see [`PEINN_v2.1.md`](PEINN_v2.1.md
 
 ## 1. Emotion Engine (EE) — `src/core/emotion_engine.py`
 
-A small frozen affective network (≤ 15 M parameters, ≤ 64 MB in float32). Architecture:
+A frozen affective network (~13.4 M parameters, ~54 MB in float32) that turns the input's frozen
+MiniLM embedding into affect. Architecture:
 
-* An **MLP trunk** maps the (frozen) sentence embedding of the input to a hidden representation
+* An **MLP/attention trunk** maps the (frozen) sentence embedding to a hidden representation
   `h ∈ ℝ²⁵⁶`. (The routing path uses no retrieval — the memory channel is zero.)
 * Two output heads, with temperature scaling applied at inference:
   * `fc_emotion`: a **32-D emotion vector** `e = tanh((Wₑ·h + bₑ)/Tₑ) ∈ [−1,1]³²`, `Tₑ = 4.0`.
     The 32 dimensions are 4 layers × 8 dimensions, fusing Plutchik's emotion wheel, Lazarus &
     Smith cognitive appraisal, Ryan & Deci self-determination theory, and Dasan Jeong's
-    *gwonhyeong* (moral weighing). Full spec: `src/peinn_v2/` design notes and the inline
-    docstring in `emotion_engine.py`.
-  * `fc_energy`: a **scalar energy** `E = σ((W_E·h + b_E)/T_E) ∈ [0,1]`, `T_E = 2.0` — a
-    harm/affect intensity that becomes the routing threshold.
+    *gwonhyeong* (moral weighing). Full spec: the inline docstring in `emotion_engine.py`.
+  * `fc_energy`: a **scalar energy** `E = σ((W_E·h + b_E)/T_E) ∈ [0,1]`, `T_E = 2.0`.
 
-In the routing pipeline the EE is **frozen** and reused as a feature extractor: its 32-D emotion
-vector is the affect that feeds both the Neutro Head (§4) and the energy calibrator (§5). It ships
-as `ee_checkpoint_agent_a.pt`. A separate, smaller *emotion read-out* (a MiniLM-384 → 32 MLP, see
-REGENERATE_CHECKPOINTS §4) is **not** the routing affect — it only supplies the router's
-`complexity` dilemma-rescue signal.
+The 32-D emotion vector is **the affect** consumed by both the Neutro Head (§3) and the energy
+calibrator (§4). The EE is frozen and reused as a feature extractor; it ships as
+`checkpoints/ee_checkpoint_agent_a.pt` and is required to reproduce routing. A separate, smaller
+*affect read-out* (a MiniLM-384 → 32 MLP, `ee_emotion_readout_embedding.pt`) is **not** the routing
+affect — it only supplies the router's `complexity` dilemma-rescue signal.
 
 ## 2. Golden Anchors / Principles — `src/core/golden_anchors.py`
 
 35 immutable moral reference statements ("항심 / constant mind") spanning deontology,
 utilitarianism, Yangmingism/Confucian ethics, and existentialism. They are **frozen tensors**
 (never updated by any training step) and are retrieved by RAG; the embedding of the matched
-principle (384-D) is concatenated into the Neutro Head input. See
-`src/core/golden_anchors_reverse.py` for the inverse (anti-principle) anchors used in analysis.
+principle (384-D) is concatenated into the Neutro Head input.
 
-## 3. PEINN damping module — `src/core/peinn.py`
-
-A physics-informed control that prevents infinite rumination loops using a damped-oscillation
-law `E(n) = E₀ · γⁿ` (γ = 0.8): after 3–4 reflection rounds the energy falls below threshold and
-the agent accepts. This is the "physics-informed neural network" sense of the PEINN acronym
-inside the codebase; the *paper's* PEINN expands to "Principle and Emotion in Neutrosophic Nexus".
-
-## 4. Neutro Head v4 (T/I/F) — `src/pea_eval/evaluators/intent_router.py`
+## 3. Neutro Head (T/I/F) — `src/pea_eval/evaluators/intent_router.py`
 
 The core discriminator: a **speech-act-aware** head that learns three **independent** sigmoids on
 top of the **frozen EE features**. The triple is *neutrosophic* — T, I, F do **not** sum to 1, so a
@@ -79,36 +70,28 @@ request can be simultaneously "slightly harmful **and** a genuine dilemma".
 
 ```
 x = [ emotion32 (32) ⊕ semantic_emb (384) ⊕ principle_emb (384) ]    # 800-D  (energy is NOT here)
-NeutroHead(x): Linear(800→128) → ReLU → Dropout → 3 × [ Linear → Sigmoid ]
+NeutroHead(x): Linear(800→128) → ReLU → Dropout → Linear(128→64) → ReLU → Linear(64→3) → Sigmoid
             → T ∈ [0,1]  (safe-to-comply)
             → I ∈ [0,1]  (dilemma ∪ latent threat ∪ ambiguity)
             → F ∈ [0,1]  (harmful if directly complied with)
 ```
 
-The energy is **not** part of the head input — it is used only by the routing gate (§6). The head
-is trained by a speech-act-aware 2-of-3 distillation (Directive/Subversion illocution correction);
-see [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) §2. `build_neutro_head` and
-`neutro_feature_vector` in `intent_router.py` are the single source shared by training and
-inference. Engine selection is `EEConfig.engine`; `neutro_v21` selects the PEINN routing path.
+The energy is **not** part of the head input — it is used only by the routing gate (§5).
+`build_neutro_head` and `neutro_feature_vector` in `intent_router.py` are the single source shared
+by training and inference. Engine selection is `EEConfig.engine`; `neutro_v21` selects the PEINN
+routing path.
 
-## 5. Emotion-Engine energy (e1) — the PEINN routing energy
+## 4. Emotion-Engine energy (e1) — the routing energy
 
-The PEINN routing energy is the **frozen `HybridCalibrator`**: `emotion32 ⊕ semantic → harm
-prob × 10` on a 0–10 scale (`src/pea_eval/evaluators/ee_runner.py`, checkpoint
-`ee_hybrid_calibrator_best.pt`, trained by `pea_eval/optimizer/ee_threshold_finder.py`). Its role
-is the head-independent **override for definite harm**, and the **target of the head-F veto**
-(over-fire correction). The head reads *meaning /
+The routing energy is the **frozen `HybridCalibrator`**: `concat(emotion32, mpnet-768) → MLP →
+sigmoid ×10`, a harm probability on a 0–10 scale (`src/pea_eval/evaluators/ee_runner.py`,
+checkpoint `ee_hybrid_calibrator_best.pt`). Its role is the head-independent **override for definite
+harm** and the **target of the head-F veto** (over-fire correction). The head reads *meaning /
 speech-act* (energy's blind spot); the energy reads *affect intensity* (the head's blind spot) —
-the AND-gate (§6) combines them. See [`PEINN_v2.1.md`](PEINN_v2.1.md) §3 for the complementarity
+the AND-gate (§5) combines them. See [`PEINN_v2.1.md`](PEINN_v2.1.md) §3 for the complementarity
 argument.
 
-> **Note — the `src/peinn_v2/` DeBERTa "structured-threat energy" is not the routing energy.** It is
-> an **optional, default-off experimental energy module** (`PEINN_V2_ENERGY=1`, the sanctioned D7
-> touch-point in `ee_runner.py`); it is not on the main routing path. The routing energy is the
-> HybridCalibrator energy above. The `peinn_v2/` package is kept as that experimental module plus its
-> design notes.
-
-## 6. NeutroEERouterV21 — head ⊗ energy AND-gate (deterministic)
+## 5. NeutroEERouterV21 — head ⊗ energy AND-gate (deterministic)
 
 The router combines the head posture (T/I/F) with the energy `e1` into exactly one of five tiers,
 with a **locked** operating point `θ = {extreme 9.4, harm 8.5, F 0.15, I 0.45, Fref 0.30, soft 8.5,
@@ -133,18 +116,18 @@ else:                                              → Direct-Answer      # clea
 The three 2-pass tiers generate the user-facing answer by **re-posing the original question** with
 a tier-specific posture (no draft transcript) — see `prompt_builder.py` and
 [`PEINN_v2.1.md`](PEINN_v2.1.md) §2.1. Determinism (only the user text enters head/energy, fixed
-thresholds, no sampling) is what makes routing reproducible. The arms (H01–H17) live in
+thresholds, no sampling) is what makes routing reproducible. The benchmark arms (H01–H17) live in
 `src/run_stat_batch.py` and `src/scripts/run_v21_bench.py`.
 
 ---
 
 ### Component → checkpoint map
 
-| Component | Trained artifact | Ships here? | How to rebuild |
+| Component | Checkpoint file | In `checkpoints/`? | Rebuild |
 |---|---|---|---|
-| Emotion Engine trunk (~13.4 M net) | `ee_checkpoint_agent_a.pt` (~54 MB) | ✓ (agent A) | REGENERATE_CHECKPOINTS §1 |
-| Neutro Head v4 (T/I/F) | `ee_neutro_head_v4.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §2 |
-| Emotion-Engine energy | `ee_hybrid_calibrator_best.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §3 |
-| Emotion read-out (analysis only) | `ee_emotion_readout_*.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §4 |
-| Golden Anchors | frozen, in code | ✓ | n/a (in `golden_anchors.py`) |
-| (optional) structured-threat energy | `peinn_v2` encoder `ckpt.pt` | ✗ (experimental) | `src/peinn_v2/` README |
+| Emotion Engine trunk (affect source, ~13.4 M) | `ee_checkpoint_agent_a.pt` (~54 MB) | ✓ | REGENERATE_CHECKPOINTS §1 |
+| Neutro Head (T/I/F) | `ee_neutro_head_v4.pt` | ✓ | REGENERATE_CHECKPOINTS §2 |
+| Emotion-Engine energy (calibrator) | `ee_hybrid_calibrator_best.pt` | ✓ | REGENERATE_CHECKPOINTS §3 |
+| Affect read-out (complexity signal) | `ee_emotion_readout_embedding.pt` | ✓ | REGENERATE_CHECKPOINTS §4 |
+| Golden Anchors | in code (`golden_anchors.py`) | ✓ | n/a (frozen tensors) |
+| Gate thresholds θ | `neutro_gate_theta_v4.json` (reference copy) | ✓ | frozen in code |
