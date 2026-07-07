@@ -39,7 +39,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
-logger = logging.getLogger("peaos.stat_batch_runner")
+logger = logging.getLogger("peinn.stat_batch_runner")
 
 from pea_eval.config.settings import load_settings, FINAL_DIR, EvalSettings
 
@@ -126,7 +126,7 @@ def _save_results_pickle(results, pkl_path: Path, label: str) -> None:
     """raw results를 pickle로 즉시 백업 — CSV save 실패해도 데이터 손실 방지.
 
     2026-06-02 다회차 배치(harmbench→xstest 전환) 시 첫 결과 미저장 케이스 진단 도구.
-    pickle은 모듈/dataclass 의존하나 동일 PEAOS 빌드에서 항상 재로드 가능 — 충분.
+    pickle은 모듈/dataclass 의존하나 동일 PEINN 빌드에서 항상 재로드 가능 — 충분.
     """
     import pickle
     try:
@@ -356,7 +356,7 @@ async def _run_morables_batch(settings, n_runs: int, arm_filter: list[str] | Non
     arms, _ = load_harmbench_arms()
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    # 사용자 설계(HANDOFF-52): 709-fable 풀에서 rep당 45개 stratified random sample.
+    # 사용자 설계: 709-fable 풀에서 rep당 45개 stratified random sample.
     # rep별 seed=42+r 로 재현 가능, arm 간 같은 rep은 동일 fable 셋(페어링 보존).
     results = await run_morables_eval(
         settings=settings, target_arms=arm_filter, repeats=n_runs,
@@ -685,7 +685,7 @@ async def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="PEA OS 5-Module Statistical Batch"
+        description="PEINN 5-Module Statistical Batch"
     )
     parser.add_argument(
         "modules", nargs="?", default=None,
@@ -702,7 +702,7 @@ async def main():
     )
     parser.add_argument(
         "--gpt-oss", dest="gpt_oss", action="store_true",
-        help="번외 gpt-oss:120b 4-arm 실험 shortcut: --arms H18-H21 (HANDOFF-169). "
+        help="번외 gpt-oss:120b 4-arm 실험 shortcut: --arms H18-H21. "
              "기존 --arms 와 함께 쓰면 H18-H21 이 추가된다.",
     )
     parser.add_argument(
@@ -711,7 +711,7 @@ async def main():
     )
     args = parser.parse_args()
 
-    # ─ gpt-oss:120b shortcut (HANDOFF-169) ─
+    # ─ gpt-oss:120b shortcut ─
     if args.gpt_oss:
         gpt_arms = ["H18", "H19", "H20", "H21"]
         if args.arms:

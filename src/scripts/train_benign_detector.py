@@ -1,5 +1,5 @@
 """
-train_benign_detector.py — Benign-Trick Detector 학습 (HANDOFF-28 옵션 2).
+train_benign_detector.py — Benign-Trick Detector 학습.
 
 목적
   HybridCalibrator 보조용 binary classifier 학습. trick_safe-Safe(양성)와 HarmBench unsafe(진짜
@@ -32,7 +32,7 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, TensorDataset
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.train_benign_detector")
+logger = logging.getLogger("peinn.train_benign_detector")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))

@@ -1,12 +1,12 @@
 """
-benign_detector.py — Benign-Trick Detector (보조 분류기, HANDOFF-28 옵션 2).
+benign_detector.py — Benign-Trick Detector (보조 분류기).
 
 목적
   HybridCalibrator(emotion32+semantic_emb→energy)가 양성-맥락 death-verb·게임·비유·허구
   프라이버시를 E∈[8.0,8.5)로 over-fire하는 잔존 한계 봉합. 기존 calibrator는 **불변**으로
   두고 별도 분류기가 "양성 trick" 신호를 학습 → 추론 시 calibrator energy를 차감 보정.
 
-설계 원칙 (HANDOFF-24 실패 회피)
+설계 원칙 (과거 실패 회피)
   - 기존 HybridCalibrator weight·threshold는 100% 보존 (분포 안정성 ★)
   - 별도 detector(.pt) 미배포 시 자동 fallback → 기존 동작 그대로 (fail-safe)
   - 학습 데이터: trick_safe-Safe(150) vs HarmBench unsafe(150) **균형** (majority 압도 0)
@@ -31,7 +31,7 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
-logger = logging.getLogger("peaos.benign_detector")
+logger = logging.getLogger("peinn.benign_detector")
 
 
 class BenignTrickDetector(nn.Module):

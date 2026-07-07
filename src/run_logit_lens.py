@@ -49,7 +49,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
-logger = logging.getLogger("peaos.run_logit_lens")
+logger = logging.getLogger("peinn.run_logit_lens")
 
 
 # ═══════════════════════════════════════════════════════════════════════

@@ -3,7 +3,7 @@ import logging
 import re
 from typing import List, Dict, Optional, Tuple
 
-logger = logging.getLogger("peaos.logit_lens.analyzer")
+logger = logging.getLogger("peinn.logit_lens.analyzer")
 
 def identify_sentence_ranges(text: str, tokenizer, tokens_array) -> List[Tuple[int, int]]:
     """

@@ -31,7 +31,7 @@ DATA_DIR = PROJECT_ROOT / "pea_eval" / "data"
 ETHICS_DIR = DATA_DIR / "ethics_benchmark"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.fetch_benchmark_data")
+logger = logging.getLogger("peinn.fetch_benchmark_data")
 
 HARMBENCH_ALL_URL = (
     "https://raw.githubusercontent.com/centerforaisafety/HarmBench/main/"

@@ -1,5 +1,5 @@
 """
-PEA OS UNESCO Eval — EE/PEINN 반추 루프 러너
+PEINN UNESCO Eval — EE/PEINN 반추 루프 러너
 평가 파이프라인에서 Emotion Engine + PEINN 감쇠 반추 루프를 실행합니다.
 
 기존 core/emotion_engine.py의 EmotionEngine과
@@ -12,7 +12,7 @@ from typing import Optional
 
 import torch
 
-logger = logging.getLogger("peaos.pea_eval.ee_runner")
+logger = logging.getLogger("peinn.pea_eval.ee_runner")
 
 
 import os
@@ -418,7 +418,7 @@ class EvalEERunner:
             # Calibrator가 없으면 기존 베이스 에너지 사용
             weighted_energy = base_energy
 
-        # ── Benign-Trick Detector 보조 보정 (HANDOFF-28 옵션 2) — 회수됨(HANDOFF-33) ──
+        # ── Benign-Trick Detector 보조 보정 — 회수됨 ──
         # 2026-05-30 sem embedder mismatch 봉합 후 audit: ★XSTest ASR LEAK 8→24건(+16) 회귀.
         # 봉합으로 detector 차감이 실제 발화하기 시작했으나, OOD에서 진짜 유해까지 양성 분류:
         # 자살(hang/drown), 폭발물(blow up house), 마약(buy coke), 폭력(axe attack), 유아 살해 추정,
@@ -436,7 +436,7 @@ class EvalEERunner:
                                        f"{CKPT_PATH_DEFAULT.name} — OOD ASR 회귀 위험 인지하고 사용")
                 det = self._benign_detector_cache
                 if det is not None:
-                    sem_for_det = text_embedding  # HANDOFF-32: 학습과 동일한 _embed_text 결과
+                    sem_for_det = text_embedding  # 학습과 동일한 _embed_text 결과
                     prev_E = weighted_energy
                     weighted_energy, _bp = adjust_energy(
                         weighted_energy, emotion_vector, sem_for_det, det,

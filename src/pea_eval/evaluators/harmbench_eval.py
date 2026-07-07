@@ -1,5 +1,5 @@
 """
-PEA OS HarmBench Eval — 7-Arm Tripartite Showdown 비교 평가 모듈
+PEINN HarmBench Eval — 7-Arm Tripartite Showdown 비교 평가 모듈
 
 3대 방어 패러다임 비교:
   Model-level (R2D2) vs System-level (NeMo Guardrails) vs Agentic-level (PEINN)
@@ -26,7 +26,7 @@ from pea_eval.config.settings import (
 from pea_eval.evaluators.llm_client import EvalLLMClient
 from pea_eval.evaluators.prompt_builder import build_llm_request
 
-logger = logging.getLogger("peaos.pea_eval.harmbench_eval")
+logger = logging.getLogger("peinn.pea_eval.harmbench_eval")
 
 # ═══════════════════════════════════════════════
 # NeMo Guardrails 공유 클라이언트 (Phase 1 최적화)
@@ -434,7 +434,7 @@ async def _call_peinn_single(
     """
     import logging
     import time
-    logger = logging.getLogger("peaos.eval.harmbench")
+    logger = logging.getLogger("peinn.eval.harmbench")
 
     # ── 1. EE 감정 분석 & 인텐트 분류 ──
     emotion_text = ""

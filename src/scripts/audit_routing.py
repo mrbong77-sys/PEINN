@@ -386,7 +386,7 @@ def main():
     router = get_intent_router(engine, runner=runner)
     logger.info(f"router engine={engine}  (배포와 동일 경로: analyze_emotion→calibrated energy→route_decision)")
 
-    # ── Detector 상태 진단 (HANDOFF-31, silent skip 회피) ──
+    # ── Detector 상태 진단 (silent skip 회피) ──
     try:
         from pea_eval.evaluators.benign_detector import load_detector, CKPT_PATH_DEFAULT
         det_check = load_detector()

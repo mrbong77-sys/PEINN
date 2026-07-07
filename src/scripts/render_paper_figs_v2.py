@@ -2,15 +2,15 @@
 """
 render_paper_figs_v2.py
 ───────────────────────
-PEINN 논문 본문용 Fig 2~5 를 PEAOS 실측 csv 위에서 생성한다.
+PEINN 논문 본문용 Fig 2~5 를 PEINN 실측 csv 위에서 생성한다.
 EnergyRoute (Jang et al., Sci Rep 2026) Fig 2~5 시각 convention 모방
-(My-Lab knowledge_base/figure_generation_prompts.md §2~§5 정본 사양).
+(knowledge_base/figure_generation_prompts.md §2~§5 정본 사양).
 
-본 스크립트는 my-lab 의 시각 스타일 (HANDOFF-125 dry-run 시점) 을 PEAOS 에
-이식한 것으로, my-lab `scripts/generate_paper_figures.py` 의 PEAOS-적합 변형판.
-- csv 입력 위치는 --csv-dir 로 지정 (기본: PEAOS FINAL_DIR 자동 탐색).
-- 출력 위치는 --out-dir 로 지정 (기본: PEAOS data/paper_figs/).
-- 4 figure (Fig 2~5) 생성 후 my-lab 의 Experiment Data/ 로 사용자가 *수동 이동*.
+본 스크립트는 표준 논문 시각 스타일을 PEINN 에
+이식한 변형판이다.
+- csv 입력 위치는 --csv-dir 로 지정 (기본: PEINN FINAL_DIR 자동 탐색).
+- 출력 위치는 --out-dir 로 지정 (기본: PEINN data/paper_figs/).
+- 4 figure (Fig 2~5) 생성 후 사용자가 결과물을 *수동 이동*.
 
 생성 figure:
   Fig 2  per-bench × per-defence grouped bars   (6-panel 2×3 grid)
@@ -35,7 +35,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-# ─── color convention (My-Lab paper_format_guide §4.3 정본) ────────────────
+# ─── color convention (paper_format_guide §4.3 정본) ────────────────
 DEFENSE_COLORS = {
     "Vanilla": "#888888",   # 회색
     "NeMo":    "#4A90D9",   # 청
@@ -44,7 +44,7 @@ DEFENSE_COLORS = {
 }
 DEFENSE_ORDER = ["Vanilla", "NeMo", "PEINN", "R2D2"]
 
-# routing 라벨 → 색 (HANDOFF-128 / 129 정본; csv 의 neutro_route 컬럼 값과 일치)
+# routing 라벨 → 색 (csv 의 neutro_route 컬럼 값과 일치)
 ROUTE_COLORS = {
     "1-pass":                "#66C266",  # 녹
     "2-pass-reasoning-soft": "#F2D464",  # 노
@@ -61,7 +61,7 @@ ROUTE_SHORT = {
 }
 ROUTE_ORDER = list(ROUTE_COLORS.keys())
 
-# PEAOS router 정본 threshold (pea_eval/evaluators/confucian_mux.py)
+# PEINN router 정본 threshold (pea_eval/evaluators/confucian_mux.py)
 THRESHOLD_DEFAULTS = {
     "ENERGY_THREAT_HIGH":              8.0,
     "ENERGY_REASONING_CEILING":        8.0,
@@ -103,12 +103,12 @@ plt.rcParams.update({
 def discover_csv_dir(cli_path: str | None) -> Path:
     """CSV directory 자동 탐색 — 우선순위:
     1. --csv-dir CLI 인자
-    2. PEAOS FINAL_DIR (pea_eval.config.settings)
-    3. <repo>/pea_eval/output/final/   ★ PEAOS 실제 위치 (HANDOFF-131)
+    2. PEINN FINAL_DIR (pea_eval.config.settings)
+    3. <repo>/pea_eval/output/final/   ★ PEINN 실제 위치
     4. <repo>/pea_eval/output/
     5. <repo>/data/stat_batch/
     6. <repo>/data/
-    7. <repo>/Experiment Data/  (my-lab convention)
+    7. <repo>/Experiment Data/
     8. 재귀 폴백: data/, pea_eval/, output/, results/ 하위에서 *_batch_*runs_*.csv 검색
     """
     if cli_path:
@@ -125,7 +125,7 @@ def discover_csv_dir(cli_path: str | None) -> Path:
     except Exception:
         pass
     candidates += [
-        repo / "pea_eval" / "output" / "final",    # ★ PEAOS 실제 csv 위치
+        repo / "pea_eval" / "output" / "final",    # ★ PEINN 실제 csv 위치
         repo / "pea_eval" / "output",
         repo / "data" / "stat_batch",
         repo / "data",
@@ -528,7 +528,7 @@ def fig5_signal_distribution(csv_dir: Path, outpath: Path) -> None:
 
 # ─── main ──────────────────────────────────────────────────────────────────
 def main() -> int:
-    ap = argparse.ArgumentParser(description="PEINN 논문 Fig 2~5 생성 (PEAOS)")
+    ap = argparse.ArgumentParser(description="PEINN 논문 Fig 2~5 생성")
     ap.add_argument("--csv-dir", default=None,
                     help="실험 csv 디렉토리 (생략 시 자동 탐색: FINAL_DIR → data/stat_batch → data → Experiment Data)")
     ap.add_argument("--out-dir", default="data/paper_figs",

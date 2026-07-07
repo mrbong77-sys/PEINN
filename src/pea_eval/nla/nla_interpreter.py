@@ -20,7 +20,7 @@ try:
 except ImportError:
     NLA_LIB_AVAILABLE = False
 
-logger = logging.getLogger("peaos.nla.nla_interpreter")
+logger = logging.getLogger("peinn.nla.nla_interpreter")
 
 NLA_CHECKPOINT_MAP = {
     "Qwen/Qwen2.5-7B-Instruct": "kitft/nla-qwen2.5-7b-L20-av",

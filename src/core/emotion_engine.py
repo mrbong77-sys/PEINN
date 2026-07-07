@@ -1,5 +1,5 @@
 """
-PEA OS v0.00 - Emotion Engine (EE) 64MB 신경망
+PEINN v0.00 - Emotion Engine (EE) 64MB 신경망
 정약용의 '권형(저울질)' — 감정 기반 도덕적 판단 엔진
 
 아키텍처:
@@ -18,7 +18,7 @@ import torch.nn.functional as F
 
 from core.utils import count_parameters, model_size_mb, check_model_constraints
 
-logger = logging.getLogger("peaos.core.emotion_engine")
+logger = logging.getLogger("peinn.core.emotion_engine")
 
 
 # ============================================
@@ -414,7 +414,7 @@ def create_emotion_engine(config) -> EmotionEngine:
     설정에 맞게 Emotion Engine을 생성하고 제약 조건을 검증합니다.
     
     Args:
-        config: PEAOSConfig 인스턴스
+        config: PEINNConfig 인스턴스
     
     Returns:
         검증된 EmotionEngine 인스턴스

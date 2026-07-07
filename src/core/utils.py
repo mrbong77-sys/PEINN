@@ -1,11 +1,11 @@
 """
-PEA OS v0.00 - 유틸리티 함수
+PEINN v0.00 - 유틸리티 함수
 파라미터 수 계산, CUDA 관리 등
 """
 import logging
 from typing import Optional
 
-logger = logging.getLogger("peaos.core.utils")
+logger = logging.getLogger("peinn.core.utils")
 
 
 def count_parameters(model, trainable_only: bool = False) -> int:

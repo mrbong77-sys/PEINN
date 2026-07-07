@@ -1,1 +1,1 @@
-# PEA OS - Core Package
+# PEINN - Core Package

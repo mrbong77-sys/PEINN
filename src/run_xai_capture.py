@@ -62,7 +62,7 @@ from pea_eval.nla.nla_interpreter import NLAInterpreter
 import run_logit_lens as ll
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.run_xai_capture")
+logger = logging.getLogger("peinn.run_xai_capture")
 
 GENERATION_MAX_NEW_TOKENS = ll.GENERATION_MAX_NEW_TOKENS
 
@@ -759,7 +759,7 @@ def render_affect_sphere(df, out_path: str):
 def render_emotion_spectrum(df, out_path: str):
     """Fig 3 — 32-dim emotion 누적(Σ|emotion|, ≥0) per Neutro-head class (4계층 색).
 
-    HANDOFF-40 readout 재학습 후: 32-D readout이 4계층(Plutchik/dyad/appraisal/agency) 전반에
+    readout 재학습 후: 32-D readout이 4계층(Plutchik/dyad/appraisal/agency) 전반에
     의미 있는 분포를 보이되, *예측된* head 클래스(T/I/F argmax) 그룹화 시 프로파일 형태는
     구조적으로 유사 — 차이는 주로 amplitude. 이는 'emotion이 공유 substrate, 판별은 energy+head'
     라는 paper 서사와 정합. **gt(safe/unsafe/dilemma) 기준 분리는 FigA(아래)** 에서 본다."""
@@ -970,11 +970,11 @@ def render_gt_emotion_figures(df, out_dir):
 
 
 def render_complexity_gate(df, out_path: str):
-    """FigE — complexity(emo_17) gate visualization per gt class (★HANDOFF-40 핵심 figure).
+    """FigE — complexity(emo_17) gate visualization per gt class (★핵심 figure).
 
     paper §7 Kratzwald readout의 핵심 주장 'complexity가 moral indeterminacy marker'를 정량
     시각화. dilemma >> unsafe ≈ safe 분리가 τ_cx=0.6에서 깨끗이 발생함을 보임. AUC ≈ 0.999
-    (HANDOFF-11) 정성 입증."""
+    정성 입증."""
     if "gt" not in df.columns or "emo_17" not in df.columns:
         return
     import matplotlib; matplotlib.use("Agg")
@@ -1147,7 +1147,7 @@ def render_3layer_hierarchy(df, out_path: str):
 
 
 def _write_figures_manifest(run_dir, df):
-    """figures_manifest.md — figure ↔ paper section 매핑 (My-Lab Hermes 활용 가이드)."""
+    """figures_manifest.md — figure ↔ paper section 매핑."""
     n = len(df)
     gt_counts = df["gt"].value_counts().to_dict() if "gt" in df.columns else {}
     bench_counts = df["bench"].value_counts().to_dict() if "bench" in df.columns else {}
@@ -1227,7 +1227,7 @@ async def _run_emotion_routing(args):
     render_affect_sphere(df, str(run_dir / "Fig2_affect_sphere.png"))
     render_emotion_spectrum(df, str(run_dir / "Fig3_emotion_spectrum.png"))
     render_gt_emotion_figures(df, run_dir)   # FigA-D (gt 기준 readout 해석)
-    # ★ 신규 4 figure (HANDOFF-40/41/42 lineage 입증용)
+    # ★ 신규 4 figure
     render_complexity_gate(df, str(run_dir / "FigE_complexity_gate.png"))
     render_tif_by_gt(df, str(run_dir / "FigF_tif_by_gt.png"))
     render_route_distribution(df, str(run_dir / "FigG_route_distribution.png"))
@@ -1350,7 +1350,7 @@ async def _run_paper_figures(args):
     agent_key = "A"
     import json as _json
 
-    # ── Incremental save 인프라 (HANDOFF-42, 2026-06-01 crash 대응) ──
+    # ── Incremental save 인프라 (2026-06-01 crash 대응) ──
     # 각 (arm pair × category)가 끝날 때마다 manifest/layerwise/items.json·png을 즉시 저장 →
     # NLA 다운로드 실패·OOM·중단 등 어떤 crash에서도 처리 완료분은 보존.
     manifest_path = run_dir / "manifest.csv"

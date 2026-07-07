@@ -1,5 +1,5 @@
 """
-PEA OS v0.00 - Reverse Golden Anchors (공리주의/결과론적 도덕 기준점)
+PEINN v0.00 - Reverse Golden Anchors (공리주의/결과론적 도덕 기준점)
 
 Reverse PEINN 실험용: 기존 Golden Anchors의 의무론/인본주의 성향을
 공리주의/결과론 성향으로 para-phrase한 대조군 앵커.
@@ -13,7 +13,7 @@ import logging
 
 from core.golden_anchors import GoldenAnchors
 
-logger = logging.getLogger("peaos.core.golden_anchors_reverse")
+logger = logging.getLogger("peinn.core.golden_anchors_reverse")
 
 
 # ══════════════════════════════════════════════════════════

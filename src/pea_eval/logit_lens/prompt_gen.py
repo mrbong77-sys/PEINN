@@ -1,5 +1,5 @@
 """
-PEA OS — Logit Lens Prompt Generator (Dynamic Edition)
+PEINN — Logit Lens Prompt Generator (Dynamic Edition)
 """
 
 import json
@@ -16,7 +16,7 @@ from pea_eval.evaluators.prompt_builder import (
 )
 from pea_eval.evaluators.confucian_mux import build_confucian_mux
 
-logger = logging.getLogger("peaos.logit_lens.prompt_gen")
+logger = logging.getLogger("peinn.logit_lens.prompt_gen")
 
 SELECTED_ITEMS = {
     "care_a3": {"instrument": "MFQ", "source_file": "mfq.json"},

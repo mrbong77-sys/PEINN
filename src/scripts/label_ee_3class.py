@@ -30,13 +30,13 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.label_ee_3class")
+logger = logging.getLogger("peinn.label_ee_3class")
 
 OUT_DIR = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class"
 TRAIN_3CLASS = OUT_DIR / "train.csv"
 HELDOUT_3CLASS = OUT_DIR / "heldout.csv"
 HELDOUT_ONLY_SOURCES = {"do_not_answer"}  # 학습 0% — 완전 미지 harm probe
-# 2026-05-24 gemma4:26b 통일. 2026-05-30(HANDOFF-36) qwen3:32b로 교체 — 평가 채점 judge와
+# 2026-05-24 gemma4:26b 통일. 2026-05-30 qwen3:32b로 교체 — 평가 채점 judge와
 # 통일(label-eval 일관성) + dilemma=5 분류 정확도↑(rule-priority 적용 강화). Ethics Dilemma
 # full reasoning 36.9% 봉합 사이클의 라벨링 단계 정밀도 보강.
 JUDGE_MODEL = "qwen3:32b"
@@ -170,7 +170,7 @@ def load_benign_harm_discussion(cap: int, seed: int = 42) -> list[tuple[str, str
     return out
 
 
-# ── 고전 윤리 dilemma 합성 (HANDOFF-35, Ethics RQI 36.9% → 70% 봉합) ──
+# ── 고전 윤리 dilemma 합성 (Ethics RQI 36.9% → 70% 봉합) ──
 # audit에서 trolley/Heinz/Karl-Bob 등 고전 케이스가 calibrator over-fire(E≥8.0)와 head I↓로
 # 라우팅 실패(hard-block 12% + 1-pass 37% = 49% RQI 손실). 같은 표현을 ethics_benchmark에 그대로
 # 두고 train에 동일 텍스트 넣으면 평가 오염이므로, 같은 **dilemma 유형의 fresh 합성**으로 보강.
@@ -295,8 +295,8 @@ _OTHER_CLASSIC = [
 
 
 def load_classical_dilemmas(cap: int) -> list[tuple[str, str]]:
-    """고전 윤리 dilemma fresh 합성 (HANDOFF-35, AMA 본질 보강).
-    HANDOFF-37 풀 대폭 확대(28→100+) + 8개 카테고리(trolley/heinz/kohlberg/drug_warning/
+    """고전 윤리 dilemma fresh 합성 (AMA 본질 보강).
+    풀 대폭 확대(28→100+) + 8개 카테고리(trolley/heinz/kohlberg/drug_warning/
     lifeboat_autonomy/duty_loyalty/promise_truth/other_classic).
     평가셋(ethics_benchmark/dilemmas.json)과 어휘 비복제 — 자동 누수 가드 적용(아래)."""
     pool = (_TROLLEY_VARIANTS + _HEINZ_VARIANTS + _KOHLBERG_VARIANTS
@@ -354,7 +354,7 @@ def gather_candidates(cap: int, seed: int) -> list[tuple[str, str]]:
     except Exception as e:
         logger.warning(f"dilemma 로더 실패: {type(e).__name__}: {str(e)[:120]}")
 
-    # I-class 추가 보강: 고전 윤리 dilemma fresh 합성 (HANDOFF-35)
+    # I-class 추가 보강: 고전 윤리 dilemma fresh 합성
     try:
         pool.extend(load_classical_dilemmas(cap))
     except Exception as e:

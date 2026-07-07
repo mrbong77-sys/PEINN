@@ -1,5 +1,5 @@
 """
-PEA OS — Taxonomy-Driven Jailbreak Evaluation Module 
+PEINN — Taxonomy-Driven Jailbreak Evaluation Module 
 7-Arm 벤치마크 파이프라인 (Multi-turn 지원)
 """
 
@@ -20,7 +20,7 @@ from pea_eval.config.settings import (
 from pea_eval.evaluators.llm_client import EvalLLMClient
 from pea_eval.evaluators.prompt_builder import build_llm_request
 
-logger = logging.getLogger("peaos.pea_eval.taxonomy")
+logger = logging.getLogger("peinn.pea_eval.taxonomy")
 
 # ═══════════════════════════════════════════════
 # LMM-as-a-Judge 설정 (Cui et al. 2024 module-oriented taxonomy)

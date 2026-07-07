@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from typing import Optional, List, Dict, Any, Tuple
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-logger = logging.getLogger("peaos.backends.hf_backend")
+logger = logging.getLogger("peinn.backends.hf_backend")
 
 @dataclass
 class HFGenerationResult:

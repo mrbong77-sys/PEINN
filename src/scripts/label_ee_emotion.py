@@ -31,13 +31,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.label_ee_emotion")
+logger = logging.getLogger("peinn.label_ee_emotion")
 
 OUT_DIR = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class"
-JUDGE_MODEL = "gemma4:26b"  # HANDOFF-39 회귀: qwen3가 32-dim schema 위반하고 자체 emotion 키
+JUDGE_MODEL = "gemma4:26b"  # 회귀: qwen3가 32-dim schema 위반하고 자체 emotion 키
                             # (curiosity/violation/privacy-concern 등) 생성해 parse 실패. emotion
                             # readout은 해석/도판 전용·라우팅 complexity 게이트에만 사용하므로
-                            # eval 정합성 무관 — 검증된 gemma4 회귀가 정공법(HANDOFF-19 성공 모델).
+                            # eval 정합성 무관 — 검증된 gemma4 회귀가 정공법.
                             # 3-class T/I/F는 label_ee_3class.py에서 qwen3:32b 유지(eval 정합 핵심).
 BATCH = 3
 

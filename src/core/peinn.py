@@ -1,5 +1,5 @@
 """
-PEA OS v0.00 - PEINN (물리 제약 모듈, Physics-Informed Neural Network)
+PEINN v0.00 - PEINN (물리 제약 모듈, Physics-Informed Neural Network)
 무한 루프 방지를 위한 감쇠(Damping) 법칙 적용
 
 물리학의 감쇠 진동 모델:
@@ -12,7 +12,7 @@ from typing import Optional
 
 import torch
 
-logger = logging.getLogger("peaos.core.peinn")
+logger = logging.getLogger("peinn.core.peinn")
 
 
 @dataclass

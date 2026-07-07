@@ -47,7 +47,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
-logger = logging.getLogger("peaos.eval_ee_ood")
+logger = logging.getLogger("peinn.eval_ee_ood")
 
 RESULTS_DIR = PROJECT_ROOT / "results" / "ee_ood"
 RECORD_MD = PROJECT_ROOT / "docs" / "ee_ood_generalization.md"

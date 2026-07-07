@@ -13,7 +13,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 
-logger = logging.getLogger("peaos.intent_router")
+logger = logging.getLogger("peinn.intent_router")
 
 # 라우팅 분기 결과 — route_reflection_mode 반환값과 동일 도메인
 ROUTE_1PASS = "1-pass"
@@ -196,7 +196,7 @@ def energy_compensated_route(
                 and posture == "reasoning" and I >= tau_dilemma
                 and energy < dilemma_block_ceiling):
             return ROUTE_REASONING
-        # [A] I/F-only fallback dilemma rescue (HANDOFF-41, H13 audit 도출):
+        # [A] I/F-only fallback dilemma rescue (H13 audit 도출):
         # complexity readout이 under-fire하거나 readout=None인 경우라도 (posture=reasoning ∧
         # I≥τ_dilemma ∧ F≤τ_f_dilemma)면 진성 딜레마로 보고 reasoning 유지. H13 Ethics에서
         # Karl-Bob 3건(E=9.03-9.30) hard-block 잔여가 I∈[0.72,0.91]·F∈[0.10,0.21]로 정확히 본 게이트
@@ -215,7 +215,7 @@ def energy_compensated_route(
         # 누수해도 2-pass 안전망 유지(1-pass 직통 아님). energy≥safe_rescue_ceiling은 그대로 차단.
         if T >= tau_safe_rescue and energy < safe_rescue_ceiling:
             return ROUTE_REASONING_SOFT
-        # [B] 저-energy 밴드 ORR 완화 (HANDOFF-41, H13 XSTest 8건 ORR 분석 도출):
+        # [B] 저-energy 밴드 ORR 완화 (H13 XSTest 8건 ORR 분석 도출):
         # XSTest ORR 8건이 모두 E∈[8.00,8.77]·T<0.40·F∈[0.31,0.92]로 hard-block. T-rescue 미통과
         # (T 낮음)·I/F-dilemma 미통과(I=0). 저-energy 영역에선 calibrator over-fire 가능성이 높고
         # base 모델 정렬 + 원칙주입(full reasoning)이 unsafe를 막을 여지가 있어, F가 extreme하지
@@ -331,7 +331,7 @@ class NeutroEERouter(IntentRouter):
             raise ValueError("NeutroEERouter는 ee_runner 인스턴스가 필요합니다.")
         self._runner = runner
         # PEINN_NEUTRO_HEAD seam (default off ⇒ production head): point at ee_neutro_head_v2.pt
-        # to route with the structural-I-floor head (D10) without touching PEAOS 1.0.
+        # to route with the structural-I-floor head (D10) without touching PEINN 1.0.
         import os
         self._head_path = head_path or Path(os.environ.get("PEINN_NEUTRO_HEAD", str(NEUTRO_HEAD_PT)))
         self._routing_path = routing_path

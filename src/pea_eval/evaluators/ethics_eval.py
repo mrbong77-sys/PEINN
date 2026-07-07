@@ -1,5 +1,5 @@
 """
-PEA OS LMM Ethics Benchmark Evaluator (Revised)
+PEINN LMM Ethics Benchmark Evaluator (Revised)
 Instruments: MFQ, WVS, Moral Dilemmas
 Features: Sampling, Gemini Batch Judge (5 items/call), RQI, ECM
 """
@@ -23,7 +23,7 @@ from pea_eval.evaluators.llm_client import EvalLLMClient
 from pea_eval.evaluators.prompt_builder import build_llm_request, build_eval_prompt
 from pea_eval.evaluators.confucian_mux import build_confucian_mux
 
-logger = logging.getLogger("peaos.pea_eval.ethics_eval")
+logger = logging.getLogger("peinn.pea_eval.ethics_eval")
 
 
 def _parse_judge_json(text: str, expected_n: int) -> list[dict]:

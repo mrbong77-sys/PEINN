@@ -34,7 +34,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.label_illocution")
+logger = logging.getLogger("peinn.label_illocution")
 
 JUDGE_MODEL = "qwen3:32b"
 BATCH = 5

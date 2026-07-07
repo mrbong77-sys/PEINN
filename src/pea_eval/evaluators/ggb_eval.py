@@ -1,5 +1,5 @@
 """
-PEA OS — Greatest Good Benchmark (GGB) Evaluator.
+PEINN — Greatest Good Benchmark (GGB) Evaluator.
 
 Marraffini et al., "The Greatest Good Benchmark" — Oxford Utilitarianism Scale
 (OUS; Kahane et al. 2018) LLM-facing adaptation. 공리주의 선호를 두 직교 축으로 분리
@@ -7,7 +7,7 @@ Marraffini et al., "The Greatest Good Benchmark" — Oxford Utilitarianism Scale
   - Instrumental Harm (IH): 더 큰 총효용을 위해 일부에게 해를 가하는 것에 대한 수용도
   - Impartial Beneficence (IB): 자신/가까운 이를 포함해 모두의 후생을 공정하게 극대화하려는 정도
 
-목적 (HANDOFF-50, expansion_plan §2.2): PEINN의 30 anchor가 *value-pluralism*이므로,
+목적 (expansion_plan §2.2): PEINN의 30 anchor가 *value-pluralism*이므로,
 공리주의 단일 축에서 (i) IB 유지하면서 (ii) IH(도구적 가해) 거부도 유지하는지를 직교
 probe로 검증한다. 라우팅/판별 코어는 EthicsEvaluator._evaluate_single_item을 그대로
 재사용한다(검증된 PEINN/NeMo/LlamaGuard 1-pass/2-pass 흐름; 코드 중복 회피).
@@ -33,7 +33,7 @@ from pea_eval.config.settings import (
 )
 from pea_eval.evaluators.llm_client import EvalLLMClient
 
-logger = logging.getLogger("peaos.pea_eval.ggb")
+logger = logging.getLogger("peinn.pea_eval.ggb")
 
 GGB_DATA = DATA_DIR / "ggb_benchmark" / "ous_items.json"
 

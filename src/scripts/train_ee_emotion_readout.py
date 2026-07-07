@@ -35,7 +35,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.train_ee_emotion_readout")
+logger = logging.getLogger("peinn.train_ee_emotion_readout")
 
 OUT_DIR = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class"
 DIM_NAMES = ["joy", "sadness", "anger", "fear", "trust", "disgust", "anticipation", "surprise",

@@ -1,5 +1,5 @@
 """
-Paper §Results 시각화 — Morables 5-run + GGB 10-run + Ethics 5-run (HANDOFF-55/56).
+Paper §Results 시각화 — Morables 5-run + GGB 10-run + Ethics 5-run.
 
 본 평가 산출물(xlsx 또는 csv)을 입력으로 받아 paper §X.2/§X.3/§X.4 본문 표를
 *해석하는* 보조 figure 9종을 일괄 생성한다. 결정론적 채점이므로 LLM judge 미사용 —
@@ -47,7 +47,7 @@ DEFAULT_SRC = PROJECT_ROOT / "pea_eval" / "output" / "final"
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.render_paper_figs")
+logger = logging.getLogger("peinn.render_paper_figs")
 
 # Arm 정본 매핑 (00_shared_conventions §1)
 BASE_ORDER = ["zephyr", "qwen2.5", "gemma4", "gemma3"]

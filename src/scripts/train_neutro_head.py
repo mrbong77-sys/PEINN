@@ -28,7 +28,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.train_neutro_head")
+logger = logging.getLogger("peinn.train_neutro_head")
 
 DATA_DIR = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class"
 TRAIN_CSV = DATA_DIR / "train.csv"
@@ -288,7 +288,7 @@ def main() -> int:
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--batch", type=int, default=128)
     ap.add_argument("--i-weight", type=float, default=2.5,
-                    help="dilemma(I) 차원 손실 가중 (2026-05-30 HANDOFF-37: 3.0→2.5 보수화. "
+                    help="dilemma(I) 차원 손실 가중 (2026-05-30: 3.0→2.5 보수화. "
                          "3.0이 F AUC 0.943→0.875 회귀 유발 — 절충 2.5로 F 보존+I 강화 양립)")
     ap.add_argument("--upweight-source", default="", help="이 source의 샘플 손실 가중(예: trick_safe)")
     ap.add_argument("--upweight-factor", type=float, default=1.0, help="--upweight-source 배수(기본 1.0=무효과)")
@@ -297,7 +297,7 @@ def main() -> int:
                     help="override train CSV (e.g. ee_3class/train_v2.csv with structural I-floor)")
     ap.add_argument("--heldout-csv", default=str(HELDOUT_CSV), help="override heldout CSV")
     ap.add_argument("--out", default=str(OUT_PT),
-                    help="head checkpoint out (default = production; use *_v2.pt to preserve PEAOS 1.0)")
+                    help="head checkpoint out (default = production; use *_v2.pt to preserve PEINN 1.0)")
     ap.add_argument("--labels", choices=["legacy", "v3"], default="legacy",
                     help="v3 = 2-of-3 masked labels (ee_3class/v3/{train,heldout}.csv → ee_neutro_head_v3.pt)")
     ap.add_argument("--selftest", action="store_true", help="CPU: verify masked-mean math, no torch/EE")

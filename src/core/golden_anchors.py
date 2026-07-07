@@ -1,5 +1,5 @@
 """
-PEA OS v0.00 - 황금 닻 (Golden Anchors)
+PEINN v0.00 - 황금 닻 (Golden Anchors)
 절대 변하지 않는 도덕적 기준점 관리 모듈
 
 맹자의 '항심(恒心)':
@@ -15,7 +15,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-logger = logging.getLogger("peaos.core.golden_anchors")
+logger = logging.getLogger("peinn.core.golden_anchors")
 
 
 # 기본 황금 닻 텍스트 (시스템에 내장되는 도덕적 기준점)

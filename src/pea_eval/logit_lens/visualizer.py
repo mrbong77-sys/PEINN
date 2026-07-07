@@ -1,5 +1,5 @@
 """
-PEA OS — Logit Lens Heatmap Visualizer (Calibrated Visualization Edition)
+PEINN — Logit Lens Heatmap Visualizer (Calibrated Visualization Edition)
 """
 
 import logging
@@ -16,7 +16,7 @@ import matplotlib.font_manager as fm
 import matplotlib.patches as patches
 
 warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
-logger = logging.getLogger("peaos.logit_lens.visualizer")
+logger = logging.getLogger("peinn.logit_lens.visualizer")
 
 def _setup_fonts():
     font_candidates = ["Noto Sans CJK KR", "Noto Sans CJK JP", "DejaVu Sans", "NanumGothic"]

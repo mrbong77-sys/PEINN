@@ -31,7 +31,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.build_neutro_v4_corpus")
+logger = logging.getLogger("peinn.build_neutro_v4_corpus")
 
 V3_CORPUS = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class" / "v3" / "corpus_unlabeled.jsonl"
 V4_DIR = PROJECT_ROOT / "pea_eval" / "data" / "ee_3class" / "v4"

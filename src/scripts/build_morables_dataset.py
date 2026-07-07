@@ -28,7 +28,7 @@ configs: fables_only / mcqa / binary / extracted_info / supporting_info / advers
     # 또는 column 명세 확인용
     python scripts/build_morables_dataset.py --inspect
 
-병합 후 PEAOS 환경에서:
+병합 후 PEINN 환경에서:
     python run_stat_batch.py morables 10 --arms H01-H13
     # → rep당 stratified 45 × 10-run × 13 arms × variants
 """
@@ -46,7 +46,7 @@ DEFAULT_OUT = PROJECT_ROOT / "pea_eval" / "data" / "morables_benchmark" / "morab
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.build_morables")
+logger = logging.getLogger("peinn.build_morables")
 
 DATASET_ID = "cardiffnlp/Morables"
 # ★ 실제 cardiffnlp/Morables 컬럼 명세 (DGX 검증 2026-06-05):

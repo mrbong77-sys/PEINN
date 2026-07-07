@@ -27,7 +27,7 @@ from typing import Optional
 import torch
 import torch.nn as nn
 
-logger = logging.getLogger("peaos.pea_eval.anchor_category_runner")
+logger = logging.getLogger("peinn.pea_eval.anchor_category_runner")
 
 DEFAULT_SEM_DIM = 768
 MODEL_PATH = Path("pea_eval/data/anchor_category_classifier_best.pt")

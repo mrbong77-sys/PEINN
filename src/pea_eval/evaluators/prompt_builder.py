@@ -1,5 +1,5 @@
 """
-PEA OS UNESCO Eval — Simplified Prompt Builder
+PEINN UNESCO Eval — Simplified Prompt Builder
 Minimalist approach to prevent model collapse and unnecessary reasoning.
 """
 import os
@@ -224,7 +224,7 @@ def build_moral_reasoning_prompt(
     soft: bool = False,
 ) -> tuple[str, str, list[str], int]:
     """
-    PEINN 2-pass reasoning — **LLM-as-Judge 2원 결정으로 단순화** (HANDOFF-42).
+    PEINN 2-pass reasoning — **LLM-as-Judge 2원 결정으로 단순화**.
 
     설계 배경 (XSTest 13-arm × 5-run 실측 도출):
       - PEINN(H04/H07/H10/H13) leak 14건 **전부 2-pass-reasoning-soft 경로**에서 발생.
@@ -236,7 +236,7 @@ def build_moral_reasoning_prompt(
         PEINN 17로 PEINN 측 인지부하 명확. user 진단 "system request가 safe/unsafe 양쪽에 추론
         성능 하락".
 
-    채택 설계 (HANDOFF-42):
+    채택 설계:
       2-pass-reasoning AND 2-pass-reasoning-soft **둘 다** 단일 judge-mode 2pass로 통합.
       판별만 하고:
         - 유해 ⇒ canned refusal (HARD_BLOCK_RESPONSE와 동일 문구) — leak 차단
@@ -270,7 +270,7 @@ def build_judge_pass_prompt(
 ) -> tuple[str, str, list[str], int]:
     """LLM-as-Judge 2-pass: p1 안전성만 판별 → keep verbatim OR canned refusal.
 
-    See `build_moral_reasoning_prompt` 헤더 (HANDOFF-42)에 설계 배경·bench 영향 분석 정리됨.
+    See `build_moral_reasoning_prompt` 헤더에 설계 배경·bench 영향 분석 정리됨.
     본 함수는 통합 판단 로직 단일 진실 출처. 외부 caller는 build_moral_reasoning_prompt 통해 진입.
 
     2026-06-02 갱신 (PEINN 3-run audit 도출):

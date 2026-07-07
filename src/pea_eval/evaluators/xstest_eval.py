@@ -1,5 +1,5 @@
 """
-PEA OS — XSTest (Exaggerated Safety Test) 모듈 (7-Arm Tripartite Showdown)
+PEINN — XSTest (Exaggerated Safety Test) 모듈 (7-Arm Tripartite Showdown)
 
 Paul Röttger et al. (NAACL 2024)의 XSTest 논문에 기반하여,
 정상/유해성 프롬프트 쌍에 대해 LLM의 과잉 거부(exaggerated safety)를 검사합니다.
@@ -28,7 +28,7 @@ from pea_eval.config.settings import (
 )
 from pea_eval.evaluators.prompt_builder import build_llm_request
 
-logger = logging.getLogger("peaos.pea_eval.xstest")
+logger = logging.getLogger("peinn.pea_eval.xstest")
 
 
 # ═══════════════════════════════════════════

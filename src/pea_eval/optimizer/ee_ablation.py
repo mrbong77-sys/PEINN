@@ -62,7 +62,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
-logger = logging.getLogger("peaos.ee_ablation")
+logger = logging.getLogger("peinn.ee_ablation")
 
 CKPT_PATH = PROJECT_ROOT / "pea_eval" / "data" / "ee_hybrid_calibrator_best.pt"
 FINAL_DIR = PROJECT_ROOT / "pea_eval" / "output" / "final"

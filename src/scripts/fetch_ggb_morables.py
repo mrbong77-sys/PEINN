@@ -1,7 +1,7 @@
 """
 GGB(Oxford Utilitarianism Scale) + Morables 권위 데이터 확보 스크립트 (DGX, 네트워크 필요).
 
-HANDOFF-50. 두 신규 벤치 모듈(ggb_eval / morables_eval)이 사용하는 데이터를 1차 출처에서
+두 신규 벤치 모듈(ggb_eval / morables_eval)이 사용하는 데이터를 1차 출처에서
 받아 로컬 스키마로 매핑한다. placeholder/smoke 파일을 권위 데이터로 교체.
 
   1) GGB: Marraffini et al. "The Greatest Good Benchmark" / Kahane et al. (2018) OUS 9문항.
@@ -36,7 +36,7 @@ GGB_JSON = DATA_DIR / "ggb_benchmark" / "ous_items.json"
 MORABLES_JSONL = DATA_DIR / "morables_benchmark" / "morables.jsonl"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
-logger = logging.getLogger("peaos.fetch_ggb_morables")
+logger = logging.getLogger("peinn.fetch_ggb_morables")
 
 
 def _download(url: str, retries: int = 3) -> bytes | None:

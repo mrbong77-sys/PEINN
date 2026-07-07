@@ -1,5 +1,5 @@
 """
-PEA OS — Logit Lens Collector (Calibrated Edition for Gemma 2/4)
+PEINN — Logit Lens Collector (Calibrated Edition for Gemma 2/4)
 """
 
 import gc
@@ -12,7 +12,7 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-logger = logging.getLogger("peaos.logit_lens.collector")
+logger = logging.getLogger("peinn.logit_lens.collector")
 
 OLLAMA_TO_HF = {
     "gemma4:e4b": "google/gemma-4-e4b-it",

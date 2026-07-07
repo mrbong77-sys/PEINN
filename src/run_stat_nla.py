@@ -52,7 +52,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
-logger = logging.getLogger("peaos.run_stat_nla")
+logger = logging.getLogger("peinn.run_stat_nla")
 
 
 # ═══════════════════════════════════════════════════════════════════════

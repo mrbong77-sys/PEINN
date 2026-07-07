@@ -32,7 +32,7 @@ from typing import Optional, Tuple
 import torch
 import torch.nn as nn
 
-logger = logging.getLogger("peaos.pea_eval.dilemma_runner")
+logger = logging.getLogger("peinn.pea_eval.dilemma_runner")
 
 
 # Hybrid Calibrator와 동일한 mpnet 임베딩(768d)을 입력으로 받는다.

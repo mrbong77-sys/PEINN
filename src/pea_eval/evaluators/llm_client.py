@@ -1,5 +1,5 @@
 """
-PEA OS UNESCO Eval — 평가 전용 LLM 클라이언트
+PEINN UNESCO Eval — 평가 전용 LLM 클라이언트
 Ollama(Local), Gemini(External), LM Studio(OpenAI-compatible) 호출을 통합 래핑합니다.
 
 기존 integrations/ollama_client.py, integrations/gemini_api.py를 재사용하되,
@@ -11,7 +11,7 @@ import time
 from dataclasses import dataclass
 from typing import Optional
 
-logger = logging.getLogger("peaos.pea_eval.llm_client")
+logger = logging.getLogger("peinn.pea_eval.llm_client")
 
 
 @dataclass

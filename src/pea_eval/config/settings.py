@@ -1,5 +1,5 @@
 """
-PEA OS UNESCO Eval — 설정 로더
+PEINN UNESCO Eval — 설정 로더
 arms.yaml, unesco_rubric.yaml 파싱 및 경로 관리
 Real 모드 시 상위 config/user_config.yaml에서 LLM 설정 로드
 """
