@@ -18,8 +18,8 @@ keywords:
   - inference-time routing
   - over-refusal
 license: CC-BY-4.0
-version: "2.1"
-date-released: "2026-06-27"
+version: "2.1.5"
+date-released: "2026-07-07"
 preferred-citation:
   type: article
   title: "PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"
