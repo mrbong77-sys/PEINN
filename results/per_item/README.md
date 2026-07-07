@@ -47,10 +47,10 @@ harmful benchmark prompts themselves are not redistributed (see
 `harmbench_per_item.csv` · `taxonomy_per_item.csv` · `xstest_per_item.csv` ·
 `ethics_per_item.csv` · `morables_per_item.csv` · `ggb_per_item.csv`
 
-Regenerate from a local PEAOS checkout, then apply the conservative item-keyed redaction:
+Regenerate from a local research checkout, then apply the conservative item-keyed redaction:
 
 ```bash
-python tools/export_per_item_sheets.py /path/to/PEAOS/pea_eval/output/v21  results/per_item
+python tools/export_per_item_sheets.py /path/to/research-checkout/pea_eval/output/v21  results/per_item
 python tools/reredact_per_item.py        # redacts attack-item text regardless of judge verdict
 ```
 

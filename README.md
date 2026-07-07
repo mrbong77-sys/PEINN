@@ -4,7 +4,7 @@
 *"PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"*
 (Bongjin Jung, Joongho Chang — submitted to *Applied Artificial Intelligence*, Taylor & Francis).
 
-PEINN (final version **v2.1**) is a **deterministic, inference-time routing module** that gates a
+PEINN is a **deterministic, inference-time routing module** that gates a
 *frozen* base language model without retraining it and without loading a second LLM. It fuses two
 learned signals through a complementary **AND-gate**:
 
@@ -42,22 +42,22 @@ PEINN/
 ├── src/                          ← the source code used in the paper (project root for imports)
 │   ├── core/                     ← Emotion Engine, Golden Anchors (Principles), PEINN damping
 │   ├── pea_eval/                 ← Neutro Head v4 router + energy + benchmark evaluators (code)
-│   ├── peinn_v2/                 ← optional v2.0 structured-energy seam (NOT the v2.1 energy)
+│   ├── peinn_v2/                 ← optional experimental energy module (default-off; not the routing energy)
 │   ├── config/                   ← runtime configuration
 │   ├── scripts/                  ← training, data-build, and bench-driver scripts
 │   └── run_stat_batch.py …       ← top-level benchmark drivers
 │
 ├── data_samples/                 ← ~20-per-type illustrative training samples (copyright-aware)
 │   ├── neutro_head_tif/          ← T/I/F + v4 (speech-act) head training samples
-│   └── structured_energy/        ← optional v2.0 energy-seam corpora samples
+│   └── structured_energy/        ← optional experimental energy-module corpora samples
 │
-├── checkpoints/                  ← finished v2.1 weights (Neutro Head v4, affect readout, energy calibrator) + gate θ + SHA-256 manifest
+├── checkpoints/                  ← finished weights (Neutro Head v4, affect readout, energy calibrator) + gate θ + SHA-256 manifest
 │
 ├── results/                      ← final per-arm metrics (six benchmark CSVs) + ANALYSIS.md + xlsx
 │   └── per_item/                 ← full per-item sheets (harm-redacted, trace-preserving)
 │
 ├── docs/
-│   ├── PEINN_v2.1.md             ← authoritative final v2.1 design & operation (read this)
+│   ├── PEINN_v2.1.md             ← authoritative PEINN design & operation (read this)
 │   ├── ARCHITECTURE.md           ← component-by-component architecture overview
 │   ├── REPRODUCTION.md           ← end-to-end reproduction map
 │   ├── REGENERATE_CHECKPOINTS.md ← step-by-step retraining of the checkpoints
@@ -71,11 +71,11 @@ PEINN/
 
 | If you want to… | Read |
 |---|---|
-| Understand the final v2.1 design | [`docs/PEINN_v2.1.md`](docs/PEINN_v2.1.md) |
+| Understand the PEINN design | [`docs/PEINN_v2.1.md`](docs/PEINN_v2.1.md) |
 | See the code↔component map | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
 | Reproduce the paper end-to-end | [`docs/REPRODUCTION.md`](docs/REPRODUCTION.md) |
 | Run the router with the shipped checkpoints | [`checkpoints/`](checkpoints/) + the [Quick start](#quick-start) below |
-| Run the v2.1 benchmarks (sets the engine + head env for you) | `src/scripts/run_v21_bench.py` |
+| Run the PEINN benchmarks (sets the engine + head env for you) | `src/scripts/run_v21_bench.py` |
 | See the headline results | [`results/ANALYSIS.md`](results/ANALYSIS.md) |
 | **Put PEINN on your own base LLM** | [Bring your own base model](#bring-your-own-base-model) |
 | Rebuild the checkpoints from scratch | [`docs/REGENERATE_CHECKPOINTS.md`](docs/REGENERATE_CHECKPOINTS.md) |
@@ -93,13 +93,13 @@ export PYTHONPATH="$PWD/src:$PYTHONPATH"          # code imports assume src/ is 
 cp checkpoints/ee_neutro_head_v4.pt            src/pea_eval/data/
 cp checkpoints/ee_emotion_readout_embedding.pt src/pea_eval/data/
 cp checkpoints/ee_hybrid_calibrator_best.pt    src/pea_eval/data/
-export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt    # selects the v2.1 head
+export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt    # selects the PEINN head
 
 # 3) dependency-light sanity check — CPU-only, downloads nothing:
-cd src && python -m peinn_v2.train.train --smoke  # optional v2.0 seam only — not the v2.1 energy
+cd src && python -m peinn_v2.train.train --smoke  # optional experimental module only — not the routing energy
 ```
 
-To run the actual v2.1 benchmarks, use the driver (run from `src/`; it sets `engine="neutro_v21"`
+To run the PEINN benchmarks, use the driver (run from `src/`; it sets `engine="neutro_v21"`
 and the head env for you):
 
 ```bash
@@ -110,8 +110,8 @@ This additionally needs: (a) the two frozen sentence encoders (`all-MiniLM-L6-v2
 `all-mpnet-base-v2`, downloaded on first use); (b) a reachable base LLM (see
 [Bring your own base model](#bring-your-own-base-model)); and (c) the third-party
 benchmark datasets, which are not redistributed (see [`docs/DATA_CARD.md`](docs/DATA_CARD.md)).
-The three shipped checkpoints plus the two encoders are all the router itself consumes — the v2.1
-routing path does **not** load any earlier reinforcement-learned Emotion-Engine trunk.
+The three shipped checkpoints plus the two encoders are all the router itself consumes; the
+routing path runs the Emotion Engine as a frozen feature stage and loads no additional trunk.
 The gate thresholds θ are frozen in code (`src/pea_eval/evaluators/intent_router.py`);
 `checkpoints/neutro_gate_theta_v4.json` is a matching reference copy, not a file the router loads.
 
@@ -138,20 +138,16 @@ change:
 3. **Backend note.** The only base-model backend included here is HuggingFace (`hf`,
    `src/pea_eval/backends/hf_backend.py`); it downloads the model from the Hub by default (set
    `PEAOS_HF_OFFLINE=1` to use only your local cache, or `PEAOS_HF_LOCAL_DIRS=/path/to/models`).
-   The native Ollama / vLLM / Gemini clients are part of the excluded operational PEA-OS
-   integrations; to use one, point an **OpenAI-compatible** endpoint (Ollama and vLLM both expose
-   `/v1`) at an arm with `llm_backend: lmstudio` and `base_url` in `user_config.yaml`.
+   For Ollama, vLLM, or another server, point an **OpenAI-compatible** endpoint (Ollama and vLLM
+   both expose `/v1`) at an arm with `llm_backend: lmstudio` and `base_url` in `user_config.yaml`.
 4. The shipped heads are locked to the two named encoders (800-d = 32 affect + 384 MiniLM
    semantic + 384 MiniLM principle); swapping encoders would require retraining the head.
 
 ## Scope and honesty notes
 
-* This package ships **only the PEINN routing core and the paper's benchmark reproduction**
+* This package ships **the PEINN routing core and the paper's benchmark reproduction**
   (model definitions, the v4 Neutro Head router, the Emotion-Engine energy, the six benchmark
-  evaluators, and the training/figure scripts). The earlier PEA-OS operating-system concept —
-  the agent orchestrator, the reinforcement-learned (RLAF) Emotion-Engine training loop, the
-  long-term memory bank, and the community/messaging/news activity — has been **removed**; none
-  of it is needed to reproduce the results.
+  evaluators, and the training/figure scripts) — everything needed to reproduce the results.
 * The serving setup here is **Ollama-based by default** (`llm_backend: local`), with a
   self-contained HuggingFace backend (`llm_backend: hf`) also included. Any other setup —
   vLLM, LM Studio, a hosted API, a different base model — is left to you: point an

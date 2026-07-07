@@ -21,7 +21,7 @@ sample is, where the full data comes from, how to regenerate it, and the licensi
 | ~20-per-type training samples | ✅ `data_samples/` | small, illustrative, fully attributed |
 | Full LLM-judge-labeled training corpora | ❌ | size + derived from third-party datasets — regenerate via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
 | Evaluation benchmarks (HarmBench, XSTest, Taxonomy, Ethics, Morables, GGB) | ❌ (harmful prompts) | third-party licenses; the *harmful* prompts are not redistributed — fetch from origin (see below) |
-| Trained checkpoints | ✅ `checkpoints/` | finished v2.1 weights (≈ 0.22 M params, < 1 MB) + gate θ + SHA-256 manifest; also rebuildable via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
+| Trained checkpoints | ✅ `checkpoints/` | finished weights (≈ 0.22 M params, < 1 MB) + gate θ + SHA-256 manifest; also rebuildable via [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) |
 | Final canonical experiment results (aggregated) | ✅ `results/` (per-arm metrics) | scored numbers behind the paper's tables |
 | Full per-item result sheets | ✅ `results/per_item/` (harm-redacted) | every prompt/response/signal/verdict/score per item, **with harmful content intentionally removed** (trace-preserving; benign refusals kept) so scoring is auditable item-by-item — see [`../results/per_item/README.md`](../results/per_item/README.md) |
 
@@ -31,15 +31,15 @@ sample is, where the full data comes from, how to regenerate it, and the licensi
 (`SEED = 20260627`, ~20 items per type). It groups each corpus by its type field, shuffles with a
 fixed seed, and takes the first ~20 of each group. Every original field — including provenance
 (`source`), labels (`T/I/F`, `harm_intent`, axes), and generation metadata — is preserved
-verbatim. To re-sample (e.g. a different N or seed) against a local PEAOS checkout:
+verbatim. To re-sample (e.g. a different N or seed) against a local research checkout:
 
 ```bash
-python tools/build_samples.py /path/to/PEAOS data_samples
+python tools/build_samples.py /path/to/research-checkout data_samples
 ```
 
 ## Sample inventory
 
-### `data_samples/neutro_head_tif/` — Neutro Head v4 (the final head)
+### `data_samples/neutro_head_tif/` — Neutro Head v4 (the PEINN head)
 
 | File | Rows | Grouped by | Notes |
 |---|---|---|---|
@@ -69,7 +69,7 @@ LLM-judge soft targets (2-of-3 + illocution); source labels are kept only as an 
 | `fusion_real_sample.jsonl` | 60 | `type` | carrier_benign / injected_harm / adversarial_benign |
 
 These LLM-generated synthetic corpora enter the **v4 head** corpus as the `syn_*` decorrelation
-sources (and were also the training corpus for the optional v2.0 energy seam). They are
+sources (and were also the training corpus for the optional experimental energy module). They are
 **independent of the evaluation benchmarks** (non-contamination invariant #1) and largely
 LLM-generated, so they carry minimal third-party copyright. Regenerate them with
 `peinn_v2/corpus/*.py`.

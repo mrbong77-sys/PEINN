@@ -4,7 +4,7 @@ PEINN is an **inference-time** decision-support layer. It never updates the base
 weights and never calls a second LLM at inference. For each incoming request it computes two
 small signals — a neutrosophic **T/I/F** head and a scalar **energy** — and combines them with a
 deterministic **AND-gate** into one of five routing modes. This document maps each signal to the
-code that implements it. For the full final design see [`PEINN_v2.1.md`](PEINN_v2.1.md).
+code that implements it. For the full design see [`PEINN_v2.1.md`](PEINN_v2.1.md).
 
 ```
                   ┌───────────────────────────────────────────────┐
@@ -40,8 +40,7 @@ code that implements it. For the full final design see [`PEINN_v2.1.md`](PEINN_v
 A small frozen affective network (≤ 15 M parameters, ≤ 64 MB in float32). Architecture:
 
 * An **MLP trunk** maps the (frozen) sentence embedding of the input to a hidden representation
-  `h ∈ ℝ²⁵⁶`. (The earlier PEA-OS long-term *memory bank* / RAG cross-attention has been removed;
-  the v2.1 routing path uses no retrieval — the memory channel is zero.)
+  `h ∈ ℝ²⁵⁶`. (The routing path uses no retrieval — the memory channel is zero.)
 * Two output heads, with temperature scaling applied at inference:
   * `fc_emotion`: a **32-D emotion vector** `e = tanh((Wₑ·h + bₑ)/Tₑ) ∈ [−1,1]³²`, `Tₑ = 4.0`.
     The 32 dimensions are 4 layers × 8 dimensions, fusing Plutchik's emotion wheel, Lazarus &
@@ -88,23 +87,23 @@ The energy is **not** part of the head input — it is used only by the routing 
 is trained by a speech-act-aware 2-of-3 distillation (Directive/Subversion illocution correction);
 see [`REGENERATE_CHECKPOINTS.md`](REGENERATE_CHECKPOINTS.md) §2. `build_neutro_head` and
 `neutro_feature_vector` in `intent_router.py` are the single source shared by training and
-inference. Engine selection is `EEConfig.engine` (`neutro` = v1.0 | `neutro_v21` = v2.1).
+inference. Engine selection is `EEConfig.engine`; `neutro_v21` selects the PEINN routing path.
 
-## 5. Emotion-Engine energy (e1) — the v2.1 routing energy
+## 5. Emotion-Engine energy (e1) — the PEINN routing energy
 
-The v2.1 routing energy is the **frozen v1 `HybridCalibrator`**: `emotion32 ⊕ semantic → harm
+The PEINN routing energy is the **frozen `HybridCalibrator`**: `emotion32 ⊕ semantic → harm
 prob × 10` on a 0–10 scale (`src/pea_eval/evaluators/ee_runner.py`, checkpoint
-`ee_hybrid_calibrator_best.pt`, trained by `pea_eval/optimizer/ee_threshold_finder.py`). It is
-**not retrained** in v2.1; its role is redefined: the head-independent **override for definite
-harm**, and the **target of the head-F veto** (over-fire correction). The head reads *meaning /
+`ee_hybrid_calibrator_best.pt`, trained by `pea_eval/optimizer/ee_threshold_finder.py`). Its role
+is the head-independent **override for definite harm**, and the **target of the head-F veto**
+(over-fire correction). The head reads *meaning /
 speech-act* (energy's blind spot); the energy reads *affect intensity* (the head's blind spot) —
 the AND-gate (§6) combines them. See [`PEINN_v2.1.md`](PEINN_v2.1.md) §3 for the complementarity
 argument.
 
-> **Note — the `src/peinn_v2/` DeBERTa "structured-threat energy" is NOT the v2.1 energy.** It is
-> an **optional, default-off experimental seam** (`PEINN_V2_ENERGY=1`, the sanctioned D7
-> touch-point in `ee_runner.py`) from the earlier v2.0 research line. The final v2.1 uses the
-> HybridCalibrator energy above. The `peinn_v2/` package is kept as that experimental seam plus its
+> **Note — the `src/peinn_v2/` DeBERTa "structured-threat energy" is not the routing energy.** It is
+> an **optional, default-off experimental energy module** (`PEINN_V2_ENERGY=1`, the sanctioned D7
+> touch-point in `ee_runner.py`); it is not on the main routing path. The routing energy is the
+> HybridCalibrator energy above. The `peinn_v2/` package is kept as that experimental module plus its
 > design notes.
 
 ## 6. NeutroEERouterV21 — head ⊗ energy AND-gate (deterministic)
@@ -146,4 +145,4 @@ thresholds, no sampling) is what makes routing reproducible. The arms (H01–H17
 | Emotion-Engine energy | `ee_hybrid_calibrator_best.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §3 |
 | Emotion read-out (analysis only) | `ee_emotion_readout_*.pt` | ✗ (rebuildable) | REGENERATE_CHECKPOINTS §4 |
 | Golden Anchors | frozen, in code | ✓ | n/a (in `golden_anchors.py`) |
-| (optional) v2.0 structured-threat energy | `peinn_v2` encoder `ckpt.pt` | ✗ (experimental seam) | `src/peinn_v2/` README |
+| (optional) structured-threat energy | `peinn_v2` encoder `ckpt.pt` | ✗ (experimental) | `src/peinn_v2/` README |

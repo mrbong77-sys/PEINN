@@ -1,6 +1,6 @@
 # results/ — final canonical result sheets
 
-Aggregated, per-arm result sheets for the definitive PEINN v2.1 evaluation: **six
+Aggregated, per-arm result sheets for the definitive PEINN evaluation: **six
 benchmarks × seventeen arms** (thirteen main arms H01–H13 = four base models ×
 {Vanilla, R2D2, NeMo, PEINN}; plus four Llama Guard arms H14–H17). These are the exact
 numbers behind the paper's tables and figures.
@@ -55,8 +55,8 @@ error), an unrated WVS item counts as out-of-range, and a refused dilemma sits a
 RQI floor. MORABLES uses the deterministic gold-position shuffle; MFA/WVS/accuracy are
 deterministic machine scores and RQI is the LLM-judge score.
 
-Regenerate from a local PEAOS checkout:
+Regenerate from a local research checkout:
 
 ```bash
-python tools/make_result_sheets.py /path/to/PEAOS/pea_eval/output/v21  results
+python tools/make_result_sheets.py /path/to/research-checkout/pea_eval/output/v21  results
 ```

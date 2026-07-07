@@ -40,18 +40,15 @@ fetched separately and are **never** training inputs — see [`DATA_CARD.md`](DA
 
 ## §1. Emotion Engine — the base 64 MB network
 
-**What it is.** A frozen affective feature extractor: cross-attention over a moral memory bank →
-MLP trunk (`h ∈ ℝ²⁵⁶`) → a 32-D emotion head (`Tₑ = 4.0`) and a scalar-energy head (`T_E = 2.0`).
+**What it is.** A frozen affective feature extractor: an MLP trunk
+(`h ∈ ℝ²⁵⁶`) → a 32-D emotion head (`Tₑ = 4.0`) and a scalar-energy head (`T_E = 2.0`).
 Architecture and the 32-dimension taxonomy are fully specified in
 `src/core/emotion_engine.py` and the inline spec it references. Hard constraints: **≤ 15 M
 parameters, ≤ 64 MB** in float32, enforced at construction by
 `core.utils.check_model_constraints`.
 
-**Honest provenance note.** The base EE *trunk* was trained by a historical RLAF
-(Reinforcement-Learning-from-AI-Feedback) **agent loop** (Wake → Reply → Comment → Sleep) that
-ran on a separate codebase; that training loop, together with the long-term memory bank, was part
-of the **removed PEA-OS concept** and is **not** part of this repository. The runtime uses the EE
-as a *frozen feature stage* and does not require an RLAF trunk checkpoint. For reproducing the paper's
+**Note on the base trunk.** The runtime uses the Emotion Engine
+as a *frozen feature stage* and does not require a separately trained trunk checkpoint. For reproducing the paper's
 **routing** results, what matters is that the EE is consumed as a *frozen* feature extractor —
 so you can either (a) train an equivalent trunk with the regime below, or (b) treat the EE as a
 fixed embedding stage and focus on the learned heads in §2–§4, which is where PEINN's routing
@@ -69,18 +66,17 @@ behavior is determined.
    `requires_grad=False` and must stay frozen through every training step (the "constant mind"
    invariant). `core/golden_anchors_reverse.py` holds the anti-principle anchors used only for
    analysis.
-3. **Train the trunk** *(optional — historical RLAF regime, not included in this repo)*: a
+3. **Train the trunk** *(optional — not included in this repo)*: a
    reflection loop scored each generated stance against the frozen anchors and updated only the
    trunk + the two output heads, with the temperature scaling above applied at read time, keeping
-   the ≤ 15 M-param / ≤ 64 MB constraint throughout. The long-term memory bank and question pool
-   this loop used were part of the removed PEA-OS concept.
+   the ≤ 15 M-param / ≤ 64 MB constraint throughout.
 4. **Skip or save.** The runtime uses the Emotion Engine as a *frozen feature stage* and does not
-   require an RLAF trunk checkpoint, so most reproducers can skip trunk training and go straight
+   require a separately trained trunk checkpoint, so most reproducers can skip trunk training and go straight
    to the learned heads in §2–§4, which is where PEINN's routing behavior is determined.
 
 **(b) Use the EE as a fixed stage.** If you only need to reproduce routing, instantiate the EE
 once, load any constraint-satisfying checkpoint, and proceed to §2 — the Neutro Head and the
-v2.1 energy are what determine PEINN's decisions, and both are fully reproducible here.
+routing energy are what determine PEINN's decisions, and both are fully reproducible here.
 
 **Verify.** `count_parameters(ee) ≤ 15_000_000` and `model_size_mb(ee) ≤ 64`. A forward pass on
 a benign vs. an operational-harm prompt should yield a clearly higher scalar energy `E` for the
@@ -136,12 +132,12 @@ score is the ground truth. The rubric references **no benchmark answer key**. No
 0–5 scores to `[0,1]` and split into `pea_eval/data/ee_3class/{train,heldout}.csv` with columns
 `text, source, T, I, F`. Keep `do_not_answer` and all of XSTest out of `train.csv`.
 
-The base T/I/F labeling above is the v1 form. The **final v2.1 head** is the *speech-act-aware
+The base T/I/F labeling above produces the initial labels. The **PEINN head** is the *speech-act-aware
 v4 head* — continue with §2.2b.
 
-### 2.2b Speech-act-aware v4 labeling (the final head)
+### 2.2b Speech-act-aware v4 labeling (the PEINN head)
 
-The final v2.1 head replaces "score all three axes at once" with a 2-of-3 + illocution pipeline
+The PEINN head replaces "score all three axes at once" with a 2-of-3 + illocution pipeline
 (see [`PEINN_v2.1.md`](PEINN_v2.1.md) §4.1):
 
 ```bash
@@ -179,7 +175,7 @@ soft-target loss**. Validation is **held-out judge reproducibility** (measured T
 
 ### 2.4 The routing gate is already locked
 
-PEINN v2.1 **locks** the operating point in `NeutroEERouterV21.THETA`
+PEINN **locks** the operating point in `NeutroEERouterV21.THETA`
 (`extreme 9.4, harm 8.5, F 0.15, I 0.45, Fref 0.30, soft 8.5, Fblk 0.45`) — fit on the independent
 corpus and frozen. To reproduce that fit, `scripts/tune_neutro_gate.py` reads a routing-signal CSV
 (`bench, subset, T, I, F, e1`), fits θ on the corpus split, and evaluates on the six held-out
@@ -190,10 +186,10 @@ benchmarks — never tuned on the benchmarks.
 
 ---
 
-## §3. Emotion-Engine energy (the v2.1 routing energy)
+## §3. Emotion-Engine energy (the PEINN routing energy)
 
-The v2.1 routing energy `e1` is the **frozen v1 `HybridCalibrator`** (`emotion32 ⊕ semantic →
-harm prob × 10`, range 0–10) — it is **not retrained** in v2.1, only reused frozen (see
+The PEINN routing energy `e1` is the **frozen `HybridCalibrator`** (`emotion32 ⊕ semantic →
+harm prob × 10`, range 0–10) — it is reused frozen (see
 [`PEINN_v2.1.md`](PEINN_v2.1.md) §4.2). If you need to rebuild the calibrator checkpoint:
 
 ```bash
@@ -201,13 +197,13 @@ python -m pea_eval.optimizer.ee_threshold_finder    # trains HybridCalibrator �
 ```
 The calibrator is a small head over `[emotion32 ⊕ semantic]` trained with class-weighted BCE; the
 architecture mirrors `ee_runner.HybridCalibrator` so the checkpoint loads on both sides. Its role
-in v2.1 is the head-independent **override for definite harm** and the **target of the head-F
+is the head-independent **override for definite harm** and the **target of the head-F
 veto**; the head reads meaning/speech-act, the energy reads affect intensity, and the AND-gate
 (`NeutroEERouterV21`, §2.4) combines them.
 
-> **Optional — the v2.0 DeBERTa "structured-threat energy" seam.** `src/peinn_v2/` is an
+> **Optional — the DeBERTa "structured-threat energy" module.** `src/peinn_v2/` is an
 > encoder-only experimental energy (`text → DeBERTa-v3-base → act × real × def → E_struct`) that
-> can be swapped in via `PEINN_V2_ENERGY=1`. **It is not the final v2.1 energy** and is off by
+> can be swapped in via `PEINN_V2_ENERGY=1`. **It is not the routing energy** and is off by
 > default. To experiment with it: regenerate its corpus (`python -m peinn_v2.corpus.llm_gen`,
 > `python -m peinn_v2.corpus.cad_generator`, …), then `python -m peinn_v2.train.train --backbone hf
 > --model-name microsoft/deberta-v3-base --out peinn_v2/encoder/ckpt.pt` (CPU smoke:
@@ -234,12 +230,12 @@ uses a clean MiniLM encoder instead of the frozen EE hidden state.
 
 | Artifact | Built by | Default path (under `src/`) | Loaded by |
 |---|---|---|---|
-| Emotion Engine trunk | §1 (historical RLAF / equivalent) | per `config/` | EE feature extraction |
-| `ee_neutro_head_v4.pt` | §2.3 `train_neutro_head.py` | `pea_eval/data/` | `intent_router` (v2.1 routing) |
+| Emotion Engine trunk | §1 (rebuild or fixed stage) | per `config/` | EE feature extraction |
+| `ee_neutro_head_v4.pt` | §2.3 `train_neutro_head.py` | `pea_eval/data/` | `intent_router` (PEINN routing) |
 | `ee_hybrid_calibrator_best.pt` | §3 `ee_threshold_finder.py` | `pea_eval/data/` | `ee_runner` energy (e1) |
 | `ee_emotion_readout_*.pt` | §4 `train_ee_emotion_readout.py` | `pea_eval/data/` | analysis figures only |
-| (optional) `peinn_v2/encoder/ckpt.pt` | §3 note `peinn_v2.train.train` | `peinn_v2/encoder/` | `PEINN_V2_ENERGY` seam (off by default) |
+| (optional) `peinn_v2/encoder/ckpt.pt` | §3 note `peinn_v2.train.train` | `peinn_v2/encoder/` | `PEINN_V2_ENERGY` module (off by default) |
 
-Once the v4 head (§2) and the EE feature/energy stage (§1, §3) are in place, the v2.1 routing
+Once the v4 head (§2) and the EE feature/energy stage (§1, §3) are in place, the PEINN routing
 module is complete and the benchmark drivers in [`REPRODUCTION.md`](REPRODUCTION.md) §4 will
 exercise it.

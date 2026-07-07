@@ -1,40 +1,22 @@
-# PEINN v2.1 — Canonical Design & Operation
+# PEINN — Canonical Design & Operation
 
-> English reference for the **final PEINN v2.1** design and operation. This mirrors the canonical
-> design note maintained in the PEAOS / My-Lab / Paper_factory repositories. Last design update:
-> 2026-06-28 (development complete).
+> English reference for the **PEINN** design and operation. Last design update:
+> 2026-06-28.
 
-PEINN v2.1 redesigns PEINN's first-stage discriminator (the neutrosophic head) into a
+PEINN casts its first-stage discriminator (the neutrosophic head) in a
 **speech-act-aware** form and combines it with the Emotion-Engine energy through a
-**complementary AND-gate**, restoring **agnostic (topic-invariant) safety routing**. Headline
-result: the Hard-block rate on subtle/structural threats (e.g. taxonomy multi-turn) rises from
-~69 % to ~88–94 % while benign over-refusal (e.g. fables) is held below 10 %.
-
----
-
-## 0. v1.0 → v2.1 at a glance
-
-| Item | v1.0 | **v2.1** |
-|---|---|---|
-| First-stage head | Neutro head (judge labels T/I/F jointly) | **speech-act-aware Neutro head** (2-of-3 + soft-impute + Directive/Subversion illocution) |
-| Head labels | judge scores T/I/F **all three** at once | judge scores **{T,I} or {F,I}** only + soft-impute missing axis + illocution (D/S) correction |
-| Routing rule | `neutro_route` posture + energy-compensated route | **head ⊗ energy AND-gate, 5 tiers, locked θ** |
-| Tier names | hard-block / 2-pass-refusal / 2-pass-reasoning / -soft / 1-pass | **Hard-block / Reasoned-Refusal / Deliberation / Soft-reasoning / Direct-Answer** |
-| Emotion Engine | HybridCalibrator energy (affect+semantic → prob×10) | **same (frozen)** — role redefined (definite-harm override + benign-veto target) |
-| Training corpus | OOD harness + dilemmas | + **narrative + jailbreak domain augmentation** (decontaminated) |
-| Code location | `NeutroEERouter` | **`NeutroEERouterV21`** (separate class; v1.0 untouched, opt-in) |
-
-**Preservation:** v1.0 (`NeutroEERouter`, the production head, `run_stat_batch.py`, the arms) is
-preserved unchanged. v2.1 is entirely **additive / opt-in** (`engine="neutro_v21"`).
+**complementary AND-gate**, giving **agnostic (topic-invariant) safety routing**. Headline
+result: the Hard-block rate on subtle/structural threats (e.g. taxonomy multi-turn) reaches
+~88–94 % while benign over-refusal (e.g. fables) is held below 10 %.
 
 ---
 
 ## 1. Routing modes — the five tiers
 
-The gate emits one of five modes (1:1 with the internal route constants the downstream 2-pass
-logic uses; only the display names are refined):
+The gate emits one of five modes, each mapping 1:1 to the internal route constant the downstream
+2-pass logic uses:
 
-| v2.1 name | meaning | internal route constant |
+| mode | meaning | internal route constant |
 |---|---|---|
 | **Hard-block** | clear threat — refuse immediately, **no LLM 2nd pass** (short-circuit) | `hard-block` |
 | **Reasoned-Refusal** | likely harmful — reason, then refuse | `2-pass-refusal` |
@@ -85,7 +67,7 @@ Hard-block short-circuits to a fixed refusal with no LLM call. The other three 2
 Design principle: these tiers are PEINN-*internal*; the user sees only p2 (the answer to the
 request). So p2 must be a *real answer/refusal to the request*, not a critique of a draft.
 
-Key implementation (`prompt_builder.py`, v2.1 branch): instead of showing the first-pass draft as
+Key implementation (`prompt_builder.py`, PEINN branch): instead of showing the first-pass draft as
 a transcript and asking the model to "repeat" it, PEINN **re-poses the original question** with a
 tier-specific posture so the model generates a fresh answer.
 
@@ -161,11 +143,11 @@ through the ProvenanceGuard so no benchmark text leaks in.
 
 ### 4.2 Emotion-Engine energy — frozen reuse
 
-`HybridCalibrator` (emotion32 ⊕ semantic → harm prob × 10) is the **frozen v1.0 energy**; it is
-**not retrained** in v2.1. Its role is redefined: the **head-independent override for definite
-harm** and the **target of the head-F veto** (over-fire correction). Because v2.1 separates
-"statement vs request" by **speech-act (D)**, the earlier benign-content energy suppression
-(which leaked harm) is unnecessary — a harmful request is by definition directive, so it is never
+`HybridCalibrator` (emotion32 ⊕ semantic → harm prob × 10) is the **frozen energy**. Its role is
+the **head-independent override for definite harm** and the **target of the head-F veto**
+(over-fire correction). Because PEINN separates
+"statement vs request" by **speech-act (D)**, blanket benign-content energy suppression
+is unnecessary — a harmful request is by definition directive, so it is never
 demoted.
 
 ---
@@ -218,10 +200,10 @@ Because routing is a safety mechanism, scoring must not conflate *safe routing* 
 
 ---
 
-## 7. Running — the v2.1 harness (`scripts/run_v21_bench.py`)
+## 7. Running — the PEINN harness (`scripts/run_v21_bench.py`)
 
 Mirrors `run_stat_batch.py`'s options but is a separate script with separate output
-(`pea_eval/output/v21/`) and per-bench auto-push. PEINN arms (H04/07/10/13[/21]) route via v2.1;
+(`pea_eval/output/v21/`) and per-bench auto-push. PEINN arms (H04/07/10/13[/21]) route via PEINN;
 Vanilla / NeMo / Llama-Guard arms are unchanged comparators. Internally it sets
 `PEAOS_EE_ENGINE=neutro_v21` + `PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt`.
 
@@ -243,7 +225,7 @@ python scripts/run_v21_bench.py 10
 > research repo).
 
 To change the operating point edit `NeutroEERouterV21.THETA` (`intent_router.py`); the head path is
-`PEINN_NEUTRO_HEAD`; engine selection is `PEAOS_EE_ENGINE=neutro_v21` (unset → v1.0 `neutro`).
+`PEINN_NEUTRO_HEAD`; engine selection is `PEAOS_EE_ENGINE=neutro_v21` (unset → `neutro`).
 
 ---
 
@@ -251,9 +233,9 @@ To change the operating point edit `NeutroEERouterV21.THETA` (`intent_router.py`
 
 | Role | Path |
 |---|---|
-| v2.1 router | `src/pea_eval/evaluators/intent_router.py` (`NeutroEERouterV21`) |
-| v2.1 2-pass prompts | `src/pea_eval/evaluators/prompt_builder.py` (re-pose, v2.1 branch) |
-| v2.1 harness | `src/scripts/run_v21_bench.py` (official route-name normalization) |
+| PEINN router | `src/pea_eval/evaluators/intent_router.py` (`NeutroEERouterV21`) |
+| PEINN 2-pass prompts | `src/pea_eval/evaluators/prompt_builder.py` (re-pose, PEINN branch) |
+| PEINN harness | `src/scripts/run_v21_bench.py` (official route-name normalization) |
 | gate tuner / eval | `src/scripts/tune_neutro_gate.py` (θ fit/eval; θ is locked in the router) |
 | head training | `src/scripts/train_neutro_head.py` (masked, soft labels) |
 | 2-of-3 labeling | `src/scripts/label_ee_3class_v3.py` |
@@ -264,5 +246,5 @@ To change the operating point edit `NeutroEERouterV21.THETA` (`intent_router.py`
 | isolation guard | `src/pea_eval/pge/provenance_guard.py` |
 
 > The `src/peinn_v2/` package (the DeBERTa encoder-only "structured-threat energy") is an
-> **optional, default-off experimental energy seam** (`PEINN_V2_ENERGY=1`) from the v2.0 research
-> line. It is **not** the final v2.1 energy — v2.1 uses the frozen HybridCalibrator energy above.
+> **optional, default-off experimental energy module** (`PEINN_V2_ENERGY=1`); it is not on the
+> main routing path. It is **not** the routing energy — PEINN uses the frozen HybridCalibrator energy above.

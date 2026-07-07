@@ -1,7 +1,7 @@
 # Training-data samples (~20 per type)
 
 These are small, **illustrative** samples — roughly 20 items per type — drawn from each training
-corpus used for PEINN v2.1's learned components. They let a reviewer see the exact format,
+corpus used for PEINN's learned components. They let a reviewer see the exact format,
 labels, and provenance of every training input **without** redistributing the full corpora
 (which are large and partly derived from third-party datasets).
 
@@ -28,10 +28,10 @@ data_samples/
     └── fusion_real_sample.jsonl       20 per type (carrier_benign/injected_harm/adversarial_benign)
 ```
 
-The **final v2.1 head (v4)** is trained on the speech-act-aware corpus in `neutro_head_tif/`: the
+The **PEINN head (v4)** is trained on the speech-act-aware corpus in `neutro_head_tif/`: the
 base T/I/F pool, the 2-of-3 masked labels, the illocution (D/S) labels, and the narrative +
 jailbreak augmentation. The `structured_energy/` corpora are the synthetic decorrelation sources
-that enter the v4 corpus as `syn_*` (and were also the corpus for the optional v2.0 energy seam).
+that enter the v4 corpus as `syn_*` (and were also the corpus for the optional experimental energy module).
 
 ## Field reference
 

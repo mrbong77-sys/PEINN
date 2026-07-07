@@ -1,6 +1,6 @@
-# Finished v2.1 checkpoints
+# Finished checkpoints
 
-The trained PEINN v2.1 components, shipped for direct reproduction. Total ≈ 0.22 M
+The trained PEINN components, shipped for direct reproduction. Total ≈ 0.22 M
 parameters (< 1 MB); the base LLM and the two sentence encoders are **not** here —
 they are downloaded from their original sources at run time.
 
@@ -32,10 +32,10 @@ The router loads its weights from the data directory (`src/pea_eval/data/`, i.e.
 cp checkpoints/ee_neutro_head_v4.pt            src/pea_eval/data/
 cp checkpoints/ee_emotion_readout_embedding.pt src/pea_eval/data/
 cp checkpoints/ee_hybrid_calibrator_best.pt    src/pea_eval/data/
-export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt   # selects the v2.1 head
+export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt   # selects the PEINN head
 ```
 
-The v2.1 gate is only used when the router is built with `engine="neutro_v21"`, and the
+The gate is only used when the router is built with `engine="neutro_v21"`, and the
 calibrator is loaded by a path relative to `src/`, so run with the current directory set to
 `src/`. The benchmark driver `src/scripts/run_v21_bench.py` sets the engine and the head env for
 you, so the simplest path is to use it rather than wiring these by hand. The gate thresholds θ
