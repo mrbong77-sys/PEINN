@@ -215,7 +215,10 @@ def build_ui():
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="PEINN routing demo (no LLM)")
-    ap.add_argument("--selftest", action="store_true", help="route a few prompts in the terminal, no UI")
+    ap.add_argument("--selftest", action="store_true", help="route prompts in the terminal, no UI")
+    ap.add_argument("--prompts-file",
+                    help="with --selftest: route prompts from this file (one per line; blank "
+                         "lines and lines starting with # are ignored) instead of the examples")
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=7860)
     ap.add_argument("--share", action="store_true", help="create a public Gradio share link")
@@ -223,7 +226,12 @@ def main() -> None:
 
     if args.selftest:
         load_models()
-        for t in EXAMPLES:
+        if args.prompts_file:
+            lines = Path(args.prompts_file).read_text(encoding="utf-8").splitlines()
+            prompts = [ln.strip() for ln in lines if ln.strip() and not ln.strip().startswith("#")]
+        else:
+            prompts = EXAMPLES
+        for t in prompts:
             r = route_once(t)
             print(f"\n> {t}\n  → {r['tier']} ({r['route']})  "
                   f"T={r['T']:.2f} I={r['I']:.2f} F={r['F']:.2f} E={r['energy']:.2f}")
