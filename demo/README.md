@@ -117,6 +117,53 @@ Dilemmas route to **Deliberation**; a jailbreak to **Hard-block**; benign prompt
 prompt (WWI trenches) to **Soft-reasoning**; and a low-affect dishonest request to
 **Reasoned-Refusal**.
 
+## Edge benchmark (routing cost, no LLM)
+
+`demo/edge_benchmark.py` measures the cost of the routing layer on CPU, to back the
+**edge-deployable** claim with honest, reproducible numbers. It reuses the same real `route_once`,
+times 20 prompts over several randomized sweeps, and writes a plain-text report:
+
+```bash
+pip install psutil                                     # optional, for the memory figure
+python demo/edge_benchmark.py --threads 1 --repeats 8  # single constrained CPU core
+```
+
+**Device-agnostic size** (independent of any accelerator, so valid regardless of the target device):
+
+| Component | Parameters | |
+|---|---:|---|
+| all-mpnet-base-v2 encoder | 109.5 M | frozen, off-the-shelf (calibrator input) |
+| all-MiniLM-L6-v2 encoder | 22.7 M | frozen, off-the-shelf (EE input + head channels) |
+| Emotion Engine trunk | 13.4 M | frozen feature extractor (32-d affect) |
+| Neutro Head v4 | 0.11 M | **PEINN-trained** (T/I/F) |
+| Energy calibrator | 0.05 M | **PEINN-trained** (energy) |
+| **Total** | **145.8 M** | shipped PEINN checkpoints: **51.8 MB** on disk |
+
+The key point: **PEINN's own trained additions are only ~0.16 M parameters** (head + calibrator);
+the ~132 M is stock frozen sentence encoders reused as-is. The routing *surcharge* PEINN adds on
+top of standard sentence embeddings is negligible.
+
+**Latency** — one PEINN routing decision, measured on a single CPU core of a consumer laptop
+(Intel Core, Raptor Lake mobile; Windows 11, `torch 2.12` CPU build), **no GPU**:
+
+| Metric (single CPU core) | Value |
+|---|---|
+| Per routing decision, best-case (unthrottled) | ~90–120 ms |
+| Per routing decision, median | ~130 ms |
+| Throughput (median) | ~8 prompts/s |
+| Peak process memory (RSS) | ~0.95 GB |
+| One-time cold start (load encoders + trunk + heads) | ~15 s |
+
+So the gate adds roughly **a tenth of a second per prompt on one laptop CPU core**, with no GPU and
+~1 GB RAM. This is a *conservative* figure — the shipped path re-encodes the prompt more than a
+fused edge build would (with 4 cores the best case drops to ~60 ms).
+
+> **Measurement honesty.** These runs were on a live laptop, not a controlled bench, so the mean and
+> tail (p95) are inflated by background OS scheduling and thermal throttling; the **minimum and
+> median** are the fair estimates of routing cost (the report prints all of them and says so).
+> Latency is hardware-specific — re-run `edge_benchmark.py` on your target device for its own
+> numbers; the size table above is the device-independent part. **No device is simulated.**
+
 ## Known limitations
 
 - **English only.** The heads were trained on English and frozen; non-English prompts and

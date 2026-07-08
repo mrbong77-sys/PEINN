@@ -70,6 +70,7 @@ PEINN/
 │
 └── demo/                         ← standalone interactive routing demo (no LLM) — see demo/README.md
     ├── peinn_demo.py             ← Gradio app: prompt → routing mode + rationale (also --selftest)
+    ├── edge_benchmark.py         ← CPU-edge latency / footprint benchmark (edge-deployability evidence)
     └── requirements-demo.txt     ← lean demo deps (torch, sentence-transformers, gradio)
 ```
 
@@ -82,6 +83,7 @@ PEINN/
 | Reproduce the paper end-to-end | [`docs/REPRODUCTION.md`](docs/REPRODUCTION.md) |
 | Run the router with the shipped checkpoints | [`checkpoints/`](checkpoints/) + the [Quick start](#quick-start) below |
 | **Try PEINN routing interactively, no LLM** | [`demo/`](demo/) — `python demo/peinn_demo.py` |
+| **See the edge-deployability numbers** | [`demo/edge_benchmark.py`](demo/edge_benchmark.py) — `python demo/edge_benchmark.py --threads 1` |
 | Run the PEINN benchmarks (sets the engine + head env for you) | `src/scripts/run_v21_bench.py` |
 | See the headline results | [`results/ANALYSIS.md`](results/ANALYSIS.md) |
 | **Put PEINN on your own base LLM** | [Bring your own base model](#bring-your-own-base-model) |
@@ -106,7 +108,8 @@ export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt    # selects the PEINN head
 cd src && python -m peinn_v2.train.train --smoke  # optional experimental module only — not the routing energy
 ```
 
-Want to *see* the routing decision without any LLM or benchmark setup? Use the interactive demo:
+Want to *see* the routing decision without any LLM or benchmark setup? Use the interactive demo
+(and `demo/edge_benchmark.py` for the edge latency/footprint numbers):
 
 ```bash
 pip install -r demo/requirements-demo.txt
