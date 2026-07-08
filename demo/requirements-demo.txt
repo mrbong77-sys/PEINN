@@ -1,0 +1,12 @@
+# PEINN routing demo — minimal dependencies (no LLM, no GPU required).
+# Install from the repo root:  pip install -r demo/requirements-demo.txt
+#
+# Deliberately does NOT pull the full research stack (bitsandbytes, nemoguardrails,
+# faiss, openai) — the routing path needs none of them.
+torch>=2.0
+sentence-transformers>=2.2
+numpy>=1.24
+pyyaml>=6.0
+pydantic>=2.0
+pydantic-settings>=2.0
+gradio>=4.0
