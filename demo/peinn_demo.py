@@ -208,10 +208,13 @@ def build_ui():
             "`Deliberation` (genuine dilemma) · `Reasoned-Refusal` · `Hard-block` "
             "(no 2nd pass).\n\n"
             "**Known limitation.** The routing energy (a frozen affect calibrator) can *over-fire* "
-            "on emotionally charged but benign prompts, so PEINN sometimes **over-refuses** — "
-            "e.g. “explain why phishing is harmful” may hard-block when F sits just above "
-            "θ_F. This is the over-refusal side of the ORR↔safety trade-off from the paper; "
-            "the demo shows the real router, limitations included."
+            "on emotionally charged but benign prompts. Usually this only nudges a would-be "
+            "`Direct-Answer` up into `Soft-reasoning` — a harmless extra 2-pass (e.g. the vivid but "
+            "benign WWI-trenches example, e1≈9.37 → Soft-reasoning). It tips into an outright "
+            "**over-refusal** (Hard-block) only when F *also* sits just above θ_F — a "
+            "phrasing-sensitive margin. This over-caution is the over-refusal (ORR) side of the "
+            "ORR↔safety trade-off from the paper; the demo shows the real router, limitations "
+            "included."
         )
         btn.click(render, inputs=[inp], outputs=[out])
         inp.submit(render, inputs=[inp], outputs=[out])

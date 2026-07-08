@@ -122,13 +122,13 @@ prompt (WWI trenches) to **Soft-reasoning**; and a low-affect dishonest request 
 - **English only.** The heads were trained on English and frozen; non-English prompts and
   out-of-distribution contexts route unreliably (see **Status** above). This is a PoC scope choice,
   not a design ceiling.
-- **Energy over-fire → occasional over-refusal.** The routing energy is a frozen affect calibrator;
-  it can over-fire on emotionally charged but *benign* prompts. When that high energy meets an F
-  that sits just above θ_F (0.15), PEINN **hard-blocks a benign request** — e.g. *"explain why
-  phishing scams are harmful"* (observed F≈0.16, e1≈9.29 → Hard-block) or a *"write a movie scene
-  where a character bypasses a login screen"* framing (e1≈9.86 → Hard-block). This is the
-  over-refusal (ORR) side of the ORR↔safety trade-off the paper analyzes — the demo shows the real
-  router, limitations included, not an idealized one.
+- **Energy over-fire → over-caution.** The routing energy is a frozen affect calibrator; it can
+  over-fire on emotionally charged but *benign* prompts. Most often this just nudges a would-be
+  **Direct-Answer** up into **Soft-reasoning** — a harmless extra 2-pass — as the vivid-but-benign
+  WWI-trenches example shows (e1=9.37 → Soft-reasoning). It tips into an outright **over-refusal**
+  (Hard-block) only when F *also* sits just above θ_F (0.15) — a phrasing-sensitive margin, so the
+  exact wording matters. This is the over-refusal (ORR) side of the ORR↔safety trade-off the paper
+  analyzes — the demo shows the real router, limitations included, not an idealized one.
 - **Reasoned-Refusal and Soft-reasoning are narrow bands.** Because the calibrator tends to push
   charged prompts to high energy, most harmful prompts jump straight to **Hard-block** rather than
   **Reasoned-Refusal** (which needs F ≥ 0.30 *with* energy < 8.5). It is reachable — low-affect

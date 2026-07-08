@@ -18,7 +18,8 @@ authoritative design is [`docs/PEINN_v2.1.md`](docs/PEINN_v2.1.md).
 
 This repository contains the **source code used in the paper**, **illustrative training-data
 samples**, and **detailed guides** so that desk reviewers and independent readers can audit
-the architecture and **reproduce the results directly**.
+the architecture and **reproduce the results directly**. A small **interactive demo** of the
+routing layer (no LLM required) lives under [`demo/`](demo/).
 
 > The finished checkpoints — the Emotion Engine trunk (`ee_checkpoint_agent_a.pt`, ~54 MB, the
 > frozen ~13.4 M net that produces the 32-d affect) plus the three small router components
@@ -64,8 +65,12 @@ PEINN/
 │   ├── REGENERATE_CHECKPOINTS.md ← step-by-step retraining of the checkpoints
 │   └── DATA_CARD.md              ← data provenance, sampling method, licensing
 │
-└── tools/                        ← build_samples.py (produces data_samples/) +
-                                     make/analyze/export helpers that produced results/
+├── tools/                        ← build_samples.py (produces data_samples/) +
+│                                    make/analyze/export helpers that produced results/
+│
+└── demo/                         ← standalone interactive routing demo (no LLM) — see demo/README.md
+    ├── peinn_demo.py             ← Gradio app: prompt → routing mode + rationale (also --selftest)
+    └── requirements-demo.txt     ← lean demo deps (torch, sentence-transformers, gradio)
 ```
 
 ## Where to start
@@ -76,6 +81,7 @@ PEINN/
 | See the code↔component map | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
 | Reproduce the paper end-to-end | [`docs/REPRODUCTION.md`](docs/REPRODUCTION.md) |
 | Run the router with the shipped checkpoints | [`checkpoints/`](checkpoints/) + the [Quick start](#quick-start) below |
+| **Try PEINN routing interactively, no LLM** | [`demo/`](demo/) — `python demo/peinn_demo.py` |
 | Run the PEINN benchmarks (sets the engine + head env for you) | `src/scripts/run_v21_bench.py` |
 | See the headline results | [`results/ANALYSIS.md`](results/ANALYSIS.md) |
 | **Put PEINN on your own base LLM** | [Bring your own base model](#bring-your-own-base-model) |
@@ -98,6 +104,13 @@ export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt    # selects the PEINN head
 
 # 3) dependency-light sanity check — CPU-only, downloads nothing:
 cd src && python -m peinn_v2.train.train --smoke  # optional experimental module only — not the routing energy
+```
+
+Want to *see* the routing decision without any LLM or benchmark setup? Use the interactive demo:
+
+```bash
+pip install -r demo/requirements-demo.txt
+python demo/peinn_demo.py             # web UI; or add --selftest for a terminal run
 ```
 
 To run the PEINN benchmarks, use the driver (run from `src/`; it sets `engine="neutro_v21"`
@@ -169,7 +182,7 @@ change:
 This repository is **dual-licensed** so that the reproduction materials meet an open-data
 standard while the code stays permissively reusable:
 
-* **Source code** (`src/`, `tools/`, and all scripts) — **MIT**; see [`LICENSE`](LICENSE).
+* **Source code** (`src/`, `tools/`, `demo/`, and all scripts) — **MIT**; see [`LICENSE`](LICENSE).
 * **Data and materials** original to this work — the trained checkpoints and gate-threshold
   config, the original training-data samples in `data_samples/`, the judge prompts, and the
   result sheets / per-run values behind the paper's figures and tables — **CC BY 4.0**; see
