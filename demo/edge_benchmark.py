@@ -16,22 +16,28 @@ paper's router, and it reports:
 Scope: the routing decision only (T/I/F head + energy calibrator + fixed gate).
 The base LLM is NOT involved -- this is the marginal cost PEINN adds on the edge.
 
+METHOD: prompts are timed in full sweeps, with the order randomized (seeded) each
+sweep. A transient system slowdown (thermal throttle, background task) then spreads
+across prompts instead of clustering on a few consecutive ones, so per-prompt
+medians stay robust. For clean numbers, run on an otherwise-idle machine on AC power.
+
 NOTE ON DEVICES: latency is a property of the actual silicon and is reported as
 measured on THIS machine. Do not present these numbers as another device's
 (e.g. a phone or a Raspberry Pi) -- re-run on the real target for that. Use
 --threads 1 to emulate a single constrained core. The parameter/footprint
-metrics above are the device-independent part of the edge argument.
+metrics are the device-independent part of the edge argument.
 
 Run (from the repo root):
     pip install -r demo/requirements-demo.txt psutil
     python demo/edge_benchmark.py                    # your CPU, library-default threads
     python demo/edge_benchmark.py --threads 1        # single constrained core
-    python demo/edge_benchmark.py --repeats 5 --out edge_result.txt
+    python demo/edge_benchmark.py --repeats 8 --out edge_result.txt
 """
 from __future__ import annotations
 
 import argparse
 import platform
+import random
 import statistics
 import sys
 import time
@@ -103,13 +109,18 @@ def _size_mb(paths):
 def main():
     ap = argparse.ArgumentParser(description="PEINN CPU-edge routing benchmark (no LLM)")
     ap.add_argument("--threads", type=int, default=0, help="torch CPU threads (0 = library default)")
-    ap.add_argument("--repeats", type=int, default=5, help="timed repeats over the prompt set")
+    ap.add_argument("--repeats", type=int, default=8,
+                    help="full sweeps over the prompt set (each prompt measured once per sweep)")
+    ap.add_argument("--shuffle", action=argparse.BooleanOptionalAction, default=True,
+                    help="randomize prompt order each sweep (default on) so transients spread")
+    ap.add_argument("--seed", type=int, default=0, help="RNG seed for the sweep order")
     ap.add_argument("--out", default="edge_benchmark_result.txt",
                     help="report path (relative to where you launched this)")
     args = ap.parse_args()
 
     if args.threads > 0:
         torch.set_num_threads(args.threads)
+    random.seed(args.seed)
 
     out_path = Path(args.out)
     if not out_path.is_absolute():
@@ -149,17 +160,21 @@ def main():
     for p in PROMPTS[:3]:
         peinn_demo.route_once(p)
 
-    # --- timed routing ---
-    per_prompt = []   # (prompt, tier, [latencies_ms])
-    for p in PROMPTS:
-        lat = []
-        tier = None
-        for _ in range(args.repeats):
+    # --- timed routing: full sweeps, order randomized per sweep so a transient
+    #     system slowdown spreads across prompts instead of clustering on a few. ---
+    n = len(PROMPTS)
+    lat_by = [[] for _ in range(n)]
+    tier_by = [None] * n
+    order = list(range(n))
+    for _sweep in range(args.repeats):
+        if args.shuffle:
+            random.shuffle(order)
+        for i in order:
             s = time.perf_counter()
-            r = peinn_demo.route_once(p)
-            lat.append((time.perf_counter() - s) * 1000.0)
-            tier = r["tier"]
-        per_prompt.append((p, tier, lat))
+            r = peinn_demo.route_once(PROMPTS[i])
+            lat_by[i].append((time.perf_counter() - s) * 1000.0)
+            tier_by[i] = r["tier"]
+    per_prompt = [(PROMPTS[i], tier_by[i], lat_by[i]) for i in range(n)]
 
     peak_mb = _peak_rss_mb()
 
@@ -180,12 +195,13 @@ def main():
     W(f"Processor     : {platform.processor() or 'n/a'}   machine: {platform.machine()}")
     W(f"Python        : {platform.python_version()}   torch: {torch.__version__}")
     W(f"Device        : cpu   torch threads: {torch.get_num_threads()}")
-    W(f"Prompts       : {len(PROMPTS)}   repeats/prompt: {args.repeats}")
+    W(f"Prompts       : {n}   sweeps: {args.repeats}   "
+      f"order: {'randomized' if args.shuffle else 'fixed'} (seed {args.seed})")
     W("")
     W("Device-agnostic size (independent of any accelerator)")
     W("-" * 64)
-    for name, n in param_rows:
-        W(f"  {name:22} {(f'{n:,} params' if n else 'n/a'):>20}")
+    for name, npar in param_rows:
+        W(f"  {name:22} {(f'{npar:,} params' if npar else 'n/a'):>20}")
     W(f"  {'TOTAL':22} {f'{total_params:,} params':>20}")
     W(f"  shipped checkpoints on disk : {footprint_mb:.1f} MB")
     W("  (frozen encoders downloaded separately: MiniLM-L6 ~80 MB, mpnet-base ~420 MB)")
@@ -203,7 +219,7 @@ def main():
           f"{min(lat):>8.1f} {max(lat):>8.1f}")
     W("  " + "-" * 52)
     W("")
-    W(f"  aggregate ({len(PROMPTS)} prompts x {args.repeats} repeats, warm):")
+    W(f"  aggregate ({n} prompts x {args.repeats} sweeps, warm):")
     W(f"    mean {mean_all:.1f} ms | median {median_all:.1f} ms | p95 {p95:.1f} ms")
     W(f"    per-prompt-median: mean {statistics.mean(med_each):.1f} ms | "
       f"max {max(med_each):.1f} ms")
@@ -215,6 +231,9 @@ def main():
     W("  gate). The base LLM is NOT involved; this is the marginal edge cost of PEINN.")
     W("- Conservative upper bound: the shipped route path re-encodes the prompt more")
     W("  than a fused production edge build would, so true routing cost is lower.")
+    W("- Prefer the median: measure on an idle machine on AC power. Order is randomized")
+    W("  per sweep so a transient slowdown spreads across prompts; if the mean/p95 still")
+    W("  sit well above the median, a transient occurred and the median is the fair figure.")
     W("- Latency is hardware/thread specific and is what THIS machine produced. For a")
     W("  different target (phone, Raspberry Pi, ...), re-run on that device -- do not")
     W("  extrapolate. The parameter/footprint block above is the device-independent part.")
