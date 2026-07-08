@@ -31,6 +31,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = REPO_ROOT / "src"
 CKPT_DIR = REPO_ROOT / "checkpoints"
+INVOCATION_CWD = Path.cwd()   # capture BEFORE we chdir into src/, for resolving user paths
 
 if not SRC_DIR.is_dir():
     sys.exit(f"[demo] cannot find src/ at {SRC_DIR} — run this from inside the PEINN repo.")
@@ -227,7 +228,10 @@ def main() -> None:
     if args.selftest:
         load_models()
         if args.prompts_file:
-            lines = Path(args.prompts_file).read_text(encoding="utf-8").splitlines()
+            pf = Path(args.prompts_file)
+            if not pf.is_absolute():
+                pf = INVOCATION_CWD / pf   # resolve against the original cwd, not src/
+            lines = pf.read_text(encoding="utf-8").splitlines()
             prompts = [ln.strip() for ln in lines if ln.strip() and not ln.strip().startswith("#")]
         else:
             prompts = EXAMPLES
