@@ -11,10 +11,31 @@ inference.
 ## Purpose
 
 PEINN gates a frozen base LLM by first classifying every prompt with two small, deterministic
-signals and routing it into one of five modes. That classification uses **no LLM** — only frozen
-sentence encoders and the shipped heads. This demo lets a reviewer or reader *feel* that routing
-layer directly: enter a prompt, see the mode and the exact rule that fired. It is meant for
-understanding and inspection, not for production use.
+signals — a neutrosophic **T / I / F** triple and a scalar **energy (E)** — and routing it into one
+of five modes, using **no LLM**. This demo is a **proof of concept**: it shows that those four
+channels can be *learned as independent signals* and *combined* into a useful first-pass routing
+decision, and it lets a reviewer feel that layer directly — enter a prompt, see the mode and the
+exact rule that fired.
+
+What it is meant to demonstrate is the **usefulness of PEINN as a first-pass classifier**: a cheap,
+deterministic, LLM-free gate that (a) blocks or de-risks the clearest cases and (b) hands the base
+LLM a *posture* to steer its second-pass reasoning. It is an **auxiliary aid**, not a standalone
+moral judge.
+
+## Status — proof of concept
+
+- **PoC, not production.** PEINN is a proof of concept. It does **not** route every language and
+  every context perfectly. What it validates — at PoC level — is a *method*: learning the
+  **T / I / F / E** channels as independent signals and using them together for routing.
+- **English-trained, then frozen.** Because of data and compute limits, the heads were trained on
+  **English** and are shipped **frozen**. Prompts in other languages, or contexts far from the
+  training distribution, route less reliably.
+- **Auxiliary by design.** PEINN is a *first-pass gate* and a *hint* for the base LLM's reasoning
+  direction — not the final decision-maker. A true Artificial Moral Agent (AMA) would need this
+  routing signal **coupled into the LLM backbone at the input–output level**, so the *timing* and
+  *strength* of the intervention can vary dynamically with context rather than acting as a fixed
+  pre-filter. This demo deliberately shows only the **first-pass-classifier** slice of that larger
+  vision — which is exactly the slice it is meant to make tangible.
 
 ## Run
 
@@ -38,6 +59,7 @@ python demo/peinn_demo.py --selftest --prompts-file my_prompts.txt
 ```
 
 Windows PowerShell is fine; a GPU is **not** required (CPU handles one prompt at a time easily).
+English prompts work best (see **Status** above).
 
 ## The five routing modes
 
@@ -97,6 +119,9 @@ prompt (WWI trenches) to **Soft-reasoning**; and a low-affect dishonest request 
 
 ## Known limitations
 
+- **English only.** The heads were trained on English and frozen; non-English prompts and
+  out-of-distribution contexts route unreliably (see **Status** above). This is a PoC scope choice,
+  not a design ceiling.
 - **Energy over-fire → occasional over-refusal.** The routing energy is a frozen affect calibrator;
   it can over-fire on emotionally charged but *benign* prompts. When that high energy meets an F
   that sits just above θ_F (0.15), PEINN **hard-blocks a benign request** — e.g. *"explain why
@@ -113,7 +138,8 @@ prompt (WWI trenches) to **Soft-reasoning**; and a low-affect dishonest request 
   needs an affect-charged but head-confidently-benign prompt, like the WWI-trenches example.
 - **Routing only — no reasoning.** The demo stops at the routing decision. The full system would run
   the base LLM's 2nd pass with the chosen posture; that generation step (and any nuance it adds) is
-  intentionally omitted.
+  intentionally omitted. A production AMA would fold this signal into the LLM backbone (see
+  **Status**).
 - **Deterministic.** Only the user text enters the head and energy; thresholds are fixed and there is
   no sampling, so the same prompt always routes the same way.
 
