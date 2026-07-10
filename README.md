@@ -2,7 +2,7 @@
 
 **Reproducibility package for the paper**
 *"PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"*
-(Bongjin Jung, Joongho Chang — submitted to *Applied Artificial Intelligence*, Taylor & Francis).
+(Bongjin Jung, Joongho Chang — submitted to *__*, __).
 
 PEINN is a **deterministic, inference-time routing module** that gates a
 *frozen* base language model without retraining it and without loading a second LLM. It fuses two
