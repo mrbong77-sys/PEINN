@@ -22,6 +22,8 @@ src/pea_eval/output/
 # Exception: ship the finished v2.1 checkpoints (sub-MB each)
 !checkpoints/
 !checkpoints/*.pt
+# and the revision's heads and calibrator trained on the isolated corpus (AAI R1)
+!revision/aai_r1/results/checkpoints/*.pt
 !checkpoints/*.json
 !checkpoints/*.md
 !checkpoints/MANIFEST.sha256

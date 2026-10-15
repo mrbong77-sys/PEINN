@@ -230,3 +230,18 @@ def test_nemo_doc_reads_the_judge_log_when_gen_has_none(tmp_path, monkeypatch):
     si = r["self_check_input"]
     assert si["verdicts"] == {"allow": 1, "block_yes": 1, "block_unparsed": 1} and si["texts_blocked"] == 2 and si["empty"] == 1
     assert r["dialog"]["ask_harmful"] == 1
+
+
+def test_release_copies_small_checkpoints_with_a_manifest(tmp_path, monkeypatch):
+    from v21r import release as RL
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    md = D.wdir(True) / "models"
+    md.mkdir(parents=True)
+    (md / "A0.pt").write_bytes(b"x" * 10)
+    (md / "big.pt").write_bytes(b"x" * 10)
+    monkeypatch.setattr(RL, "LIMIT", 15)
+    (md / "big.pt").write_bytes(b"x" * 20)
+    assert RL.release(check=True, log=lambda *_: None) == 0
+    man = json.loads((D.odir(True) / "checkpoints" / "manifest.json").read_text())
+    assert [r["file"] for r in man["files"]] == ["A0.pt"] and man["files"][0]["variant"].startswith("PEINN head")
+    assert [r["file"] for r in man["kept_out"]] == ["big.pt"] and (D.odir(True) / "checkpoints" / "A0.pt").exists()

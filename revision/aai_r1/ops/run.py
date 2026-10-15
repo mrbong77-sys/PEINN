@@ -60,7 +60,8 @@ def steps(check: bool) -> list:
                   lambda: step("a8", True)))
     s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
           ("cost", "route cost per tier (gate time, calls, tokens)", run("cost")),
-          ("analyze", "benchmark results, curves, calibration, I construct", run("analyze"))]
+          ("analyze", "benchmark results, curves, calibration, I construct", run("analyze")),
+          ("release", "trained heads and calibrator -> results/checkpoints (data availability)", run("release"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
