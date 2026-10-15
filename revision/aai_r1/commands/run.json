@@ -1,6 +1,6 @@
 {
- "id": "20261015T163820Z-update",
- "action": "update",
- "note": "load the A8 steps (a8-check, a8) before cost; applies at the next step boundary, the running matrix is not cut",
- "issued_utc": "2026-10-15 16:38:20"
+ "id": "20261015T235926Z-restart",
+ "action": "restart",
+ "note": "stop the matrix after gemma4 (Eugene 2026-10-16 08:57 KST: no more GPU before the diagnosis); rerun on bab679d: nemo-doc-early, gate-diag, then hold at gate-review. Finished generations stay in the cache.",
+ "issued_utc": "2026-10-15 23:59:26"
 }
