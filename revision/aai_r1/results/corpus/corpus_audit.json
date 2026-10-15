@@ -1,0 +1,87 @@
+{
+ "rows": 12511,
+ "kept": 12510,
+ "near_cos": 0.92,
+ "dropped": {
+  "guard": 1,
+  "embedding": 0
+ },
+ "dropped_by_source": {
+  "beavertails|guard": 1
+ },
+ "guard_reasons": {
+  "": 12510,
+  "near-dup": 1
+ },
+ "split": {
+  "train": 10630,
+  "test": 946,
+  "val": 934
+ },
+ "by_source_polar": {
+  "alpaca|F": 2,
+  "alpaca|T": 798,
+  "beavertails|F": 506,
+  "beavertails|T": 292,
+  "benign_harm_discuss|F": 8,
+  "benign_harm_discuss|T": 314,
+  "classical_dilemma|F": 4,
+  "classical_dilemma|T": 97,
+  "daily_dilemmas|F": 11,
+  "daily_dilemmas|T": 789,
+  "dolly|F": 1,
+  "dolly|T": 798,
+  "hh_rlhf_harmless|F": 574,
+  "hh_rlhf_harmless|T": 225,
+  "hh_rlhf_helpful|F": 1,
+  "hh_rlhf_helpful|T": 798,
+  "hh_rlhf_redteam|F": 614,
+  "hh_rlhf_redteam|T": 186,
+  "jailbreak|F": 446,
+  "jailbreak|T": 141,
+  "moralchoice_highamb|F": 52,
+  "moralchoice_highamb|T": 628,
+  "narrative|F": 13,
+  "narrative|T": 1187,
+  "syn_advbenign|F": 44,
+  "syn_advbenign|T": 250,
+  "syn_benignsensitive|F": 26,
+  "syn_benignsensitive|T": 576,
+  "syn_cad|T": 754,
+  "syn_intent|F": 441,
+  "syn_intent|T": 359,
+  "syn_subtleharm|F": 329,
+  "syn_subtleharm|T": 40,
+  "toxicchat_safe|F": 20,
+  "toxicchat_safe|T": 677,
+  "trick_safe|F": 178,
+  "trick_safe|T": 331
+ },
+ "bench_files_found": {
+  "harmbench_behaviors_text_all.csv": true,
+  "xstest_prompts.csv": true,
+  "morables_benchmark/morables_sample.jsonl": true,
+  "ggb_benchmark/ous_items.json": true,
+  "ethics_benchmark/dilemmas.json": true,
+  "ethics_benchmark/mfq.json": true,
+  "ethics_benchmark/wvs.json": true,
+  "taxonomy_40_scenarios.json": true,
+  "delphi_behaviors.csv": true,
+  "mach_items.json": true,
+  "unesco_items.csv": true,
+  "ksafe_mm_benchmark/gpt4_generated_questions": true
+ },
+ "corpus_dir_listing": [
+  "corpus_fit.jsonl",
+  "corpus_report.txt",
+  "corpus_unlabeled.jsonl",
+  "heldout.csv",
+  "illocution_labels.csv",
+  "labeled.csv",
+  "labeled_2of3.csv",
+  "train.csv"
+ ],
+ "dropped_sha": [
+  "ae87e2a82b24e7cf9fe8e8e49829f183de896c6c"
+ ]
+}
