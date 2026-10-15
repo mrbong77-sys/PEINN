@@ -14,7 +14,7 @@ import sys
 from . import paths, pipeline
 from .supervisor import launch, supervise
 
-APPROVED_M = False                  # Eugene's go for the full response matrix (DESIGN.md 8); set only on his word
+APPROVED_M = True                   # Eugene's go for the full response matrix (DESIGN.md 8): 2026-10-15 23:43 KST
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
 
 STATE = paths.CACHE / "run_state.json"

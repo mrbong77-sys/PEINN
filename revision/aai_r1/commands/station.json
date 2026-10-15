@@ -1,9 +1,9 @@
 {
- "id": "20261015T134716Z-launch",
+ "id": "20261015T153149Z-launch",
  "action": "launch",
  "steps": [],
- "note": "v2.1 revision: --check of every step (DESIGN.md 8, 9)",
- "issued_utc": "2026-10-15 13:47:16",
+ "note": "v2.1 revision: full run (all steps, 4 base models; estimate 30.4 h, results/estimate_before_M.json)",
+ "issued_utc": "2026-10-15 15:31:49",
  "module": "ops.run",
- "args": ["--check"]
+ "args": []
 }
