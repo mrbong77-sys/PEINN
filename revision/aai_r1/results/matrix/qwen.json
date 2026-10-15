@@ -1,0 +1,105 @@
+{
+ "rows": {
+  "da|ethics|H07": 400,
+  "da|ggb|H07": 90,
+  "da|harmbench|H07": 500,
+  "da|morables|H07": 900,
+  "da|taxonomy|H07": 200,
+  "da|xstest|H07": 225,
+  "de|ethics|H07": 400,
+  "de|ggb|H07": 90,
+  "de|harmbench|H07": 500,
+  "de|morables|H07": 900,
+  "de|taxonomy|H07": 200,
+  "de|xstest|H07": 225,
+  "hb|ethics|H07": 400,
+  "hb|ggb|H07": 90,
+  "hb|harmbench|H07": 500,
+  "hb|morables|H07": 900,
+  "hb|taxonomy|H07": 200,
+  "hb|xstest|H07": 225,
+  "others|ethics|H05": 400,
+  "others|ethics|H06": 400,
+  "others|ethics|H15": 400,
+  "others|ggb|H05": 90,
+  "others|ggb|H06": 90,
+  "others|ggb|H15": 90,
+  "others|harmbench|H05": 500,
+  "others|harmbench|H06": 500,
+  "others|harmbench|H15": 500,
+  "others|morables|H05": 900,
+  "others|morables|H06": 900,
+  "others|morables|H15": 900,
+  "others|taxonomy|H05": 200,
+  "others|taxonomy|H06": 200,
+  "others|taxonomy|H15": 200,
+  "others|xstest|H05": 225,
+  "others|xstest|H06": 225,
+  "others|xstest|H15": 225,
+  "rr|ethics|H07": 400,
+  "rr|ggb|H07": 90,
+  "rr|harmbench|H07": 500,
+  "rr|morables|H07": 900,
+  "rr|taxonomy|H07": 200,
+  "rr|xstest|H07": 225,
+  "sr|ethics|H07": 400,
+  "sr|ggb|H07": 90,
+  "sr|harmbench|H07": 500,
+  "sr|morables|H07": 900,
+  "sr|taxonomy|H07": 200,
+  "sr|xstest|H07": 225
+ },
+ "calls": {
+  "da_gen": {
+   "gen_live": 2515
+  },
+  "da_judge": {
+   "gen_reused": 2515,
+   "judge_live": 163
+  },
+  "de_gen": {
+   "gen_reused": 2515,
+   "gen_live": 2315
+  },
+  "de_judge": {
+   "gen_reused": 4830,
+   "judge_live": 154
+  },
+  "hb_gen": {
+   "gen_reused": 2515
+  },
+  "hb_judge": {
+   "gen_reused": 2515
+  },
+  "others_gen": {
+   "gen_live": 16694,
+   "gen_reused": 2015
+  },
+  "others_judge": {
+   "gen_reused": 18656,
+   "judge_live": 360,
+   "gen_live": 44,
+   "judge_reused": 15
+  },
+  "rr_gen": {
+   "gen_reused": 2515,
+   "gen_live": 2315
+  },
+  "rr_judge": {
+   "gen_reused": 4830,
+   "judge_live": 142
+  },
+  "sr_gen": {
+   "gen_reused": 4830
+  },
+  "sr_judge": {
+   "gen_reused": 4830,
+   "judge_reused": 57,
+   "judge_live": 99
+  }
+ },
+ "internal_error_rows": {
+  "H06": 3
+ },
+ "error_rows": {}
+}
