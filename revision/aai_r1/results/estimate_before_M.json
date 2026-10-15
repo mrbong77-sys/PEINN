@@ -1,0 +1,170 @@
+{
+ "full_rows_per_arm": 2315,
+ "per_tag": {
+  "da": {
+   "check_rows": 54,
+   "gen": {
+    "check_calls": {
+     "gen_live": 54
+    },
+    "check_sec": 83.5,
+    "full_calls": {
+     "gen_live": 2315
+    },
+    "full_hours_per_base": 1.0
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 54,
+     "judge_live": 9
+    },
+    "check_sec": 65.8,
+    "full_calls": {
+     "gen_reused": 2315,
+     "judge_live": 386
+    },
+    "full_hours_per_base": 0.8
+   }
+  },
+  "hb": {
+   "check_rows": 54,
+   "gen": {
+    "check_calls": {
+     "gen_reused": 54
+    },
+    "check_sec": 8.8,
+    "full_calls": {
+     "gen_reused": 2315
+    },
+    "full_hours_per_base": 0.1
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 54
+    },
+    "check_sec": 12.600000000000001,
+    "full_calls": {
+     "gen_reused": 2315
+    },
+    "full_hours_per_base": 0.2
+   }
+  },
+  "rr": {
+   "check_rows": 54,
+   "gen": {
+    "check_calls": {
+     "gen_reused": 54,
+     "gen_live": 54
+    },
+    "check_sec": 30.5,
+    "full_calls": {
+     "gen_reused": 2315,
+     "gen_live": 2315
+    },
+    "full_hours_per_base": 0.4
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 108,
+     "judge_live": 7
+    },
+    "check_sec": 33.2,
+    "full_calls": {
+     "gen_reused": 4630,
+     "judge_live": 300
+    },
+    "full_hours_per_base": 0.4
+   }
+  },
+  "de": {
+   "check_rows": 54,
+   "gen": {
+    "check_calls": {
+     "gen_reused": 54,
+     "gen_live": 54
+    },
+    "check_sec": 39.0,
+    "full_calls": {
+     "gen_reused": 2315,
+     "gen_live": 2315
+    },
+    "full_hours_per_base": 0.5
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 108,
+     "judge_live": 9
+    },
+    "check_sec": 44.9,
+    "full_calls": {
+     "gen_reused": 4630,
+     "judge_live": 386
+    },
+    "full_hours_per_base": 0.5
+   }
+  },
+  "sr": {
+   "check_rows": 54,
+   "gen": {
+    "check_calls": {
+     "gen_reused": 108
+    },
+    "check_sec": 8.3,
+    "full_calls": {
+     "gen_reused": 4630
+    },
+    "full_hours_per_base": 0.1
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 108,
+     "judge_live": 8,
+     "judge_reused": 1
+    },
+    "check_sec": 43.9,
+    "full_calls": {
+     "gen_reused": 4630,
+     "judge_live": 343,
+     "judge_reused": 43
+    },
+    "full_hours_per_base": 0.5
+   }
+  },
+  "others": {
+   "check_rows": 162,
+   "gen": {
+    "check_calls": {
+     "gen_reused": 54,
+     "gen_live": 336
+    },
+    "check_sec": 138.6,
+    "full_calls": {
+     "gen_reused": 2315,
+     "gen_live": 14404
+    },
+    "full_hours_per_base": 1.7
+   },
+   "judge": {
+    "check_calls": {
+     "gen_reused": 372,
+     "judge_live": 20,
+     "judge_reused": 2,
+     "gen_live": 16
+    },
+    "check_sec": 114.89999999999999,
+    "full_calls": {
+     "gen_reused": 15948,
+     "judge_live": 857,
+     "judge_reused": 86,
+     "gen_live": 686
+    },
+    "full_hours_per_base": 1.4
+   }
+  }
+ },
+ "total": {
+  "gen_live": 85396,
+  "judge_live": 9088,
+  "hours": 30.4
+ }
+}
