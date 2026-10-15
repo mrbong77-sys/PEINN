@@ -15,6 +15,8 @@ from . import paths, pipeline
 from .supervisor import launch, supervise
 
 APPROVED_M = True                   # Eugene's go for the full response matrix (DESIGN.md 8): 2026-10-15 23:43 KST
+REVIEWED_GATE = False               # DESIGN.md 11: nothing after the matrix runs until the gate diagnosis is reviewed and
+                                    # the direction confirmed by the professor (Eugene 2026-10-16 08:13 KST)
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
 
 STATE = paths.CACHE / "run_state.json"
@@ -39,6 +41,13 @@ def approval() -> int:
     return 3
 
 
+def gate_review() -> int:
+    if REVIEWED_GATE:
+        return 0
+    print("holding after the gate diagnosis until it is reviewed (REVIEWED_GATE in ops/run.py)", flush=True)
+    return 3
+
+
 def steps(check: bool) -> list:
     c = check
     run = lambda k: (lambda: step(k, c))                            # noqa: E731
@@ -56,6 +65,10 @@ def steps(check: bool) -> list:
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     if not check:
+        s += [("gate-diag-check", "gate diagnosis on the check cache first (pre-test, CPU)", lambda: step("gate-diag", True)),
+              ("gate-diag", "gate diagnosis: why the isolated gate blocks XSTest safe texts (CPU, counts only)",
+               run("gate-diag")),
+              ("gate-review", "hold until the diagnosis is reviewed and the direction confirmed", gate_review)]
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))
     s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),

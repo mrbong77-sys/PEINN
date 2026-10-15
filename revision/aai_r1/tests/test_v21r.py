@@ -245,3 +245,78 @@ def test_release_copies_small_checkpoints_with_a_manifest(tmp_path, monkeypatch)
     man = json.loads((D.odir(True) / "checkpoints" / "manifest.json").read_text())
     assert [r["file"] for r in man["files"]] == ["A0.pt"] and man["files"][0]["variant"].startswith("PEINN head")
     assert [r["file"] for r in man["kept_out"]] == ["big.pt"] and (D.odir(True) / "checkpoints" / "A0.pt").exists()
+
+
+def _diag_fixture(tmp_path, monkeypatch):
+    """A tiny check cache: corpus split, features, A0 and SHIPPED signals, thresholds and one judged XSTest CSV."""
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    from v21r import matrix as MX
+    from v21r import models as M
+    rng = np.random.default_rng(0)
+    n = 40
+    sp = pd.DataFrame({"sha": [f"c{i}" for i in range(n)], "text": [f"t{i}" for i in range(n)],
+                       "source": ["trick_safe"] * 20 + ["beavertails"] * 20,
+                       "split": (["train"] * 14 + ["val"] * 3 + ["test"] * 3) * 2,
+                       "T": 0.5, "I": 0.0, "F": np.r_[np.zeros(15), np.ones(5), np.ones(20)],
+                       "mask_T": 1.0, "mask_I": 0.0, "mask_F": np.r_[np.ones(10), np.zeros(10), np.ones(20)],
+                       "polar": ["T"] * 20 + ["F"] * 20})
+    sp.to_csv(D.wdir(True) / "corpus_split.csv", index=False)
+    bench = [f"x{i}" for i in range(6)]
+    keys = list(sp.sha) + bench
+    np.savez(D.wdir(True) / "features.npz", keys=np.array(keys), head_x=rng.normal(size=(len(keys), 800)).astype("float32"),
+             cal_x=rng.normal(size=(len(keys), 800)).astype("float32"), tif=rng.uniform(size=(len(keys), 3)),
+             e1=rng.uniform(0, 10, len(keys)).astype("float32"))
+    ev = sp[sp.split.isin(["val", "test"])]
+    sha = np.r_[ev.sha, bench]
+    part = np.r_[ev.split, ["bench"] * 6]
+    E = np.r_[rng.uniform(0, 10, len(ev)), [9.0, 9.0, 6.0, 1.0, 9.5, 9.5]]       # x0-x3 safe, x4-x5 unsafe
+    Fv = np.r_[rng.uniform(size=len(ev)), [0.1, 0.1, 0.9, 0.1, 0.9, 0.9]]
+    for name in ("A0", "SHIPPED"):
+        np.savez(M.sigdir(True) / f"{name}.npz", sha=sha, part=part, E=E, T=1 - Fv, I=np.zeros(len(sha)), F=Fv)
+    np.savez(M.sigdir(True) / "SHIPPED_E.npz", sha=sha, E=E / 2)
+    th = {"extreme": 8.0, "harm": 5.0, "soft": 5.0, "F": 0.8}
+    C.jdump({"variants": {"A0": {c: {"th": th} for c in ("0.005", "0.05", "0.1", "0.3")}}},
+            D.odir(True) / "thresholds.json")
+    d = MX.mdir(True, "qwen") / "peaos_out" / "da" / "xstest"
+    d.mkdir(parents=True)
+    pd.DataFrame({"neutro_posture": [f"v3:x|{C.sha(s)}" for s in bench], "expected_label": ["safe"] * 4 + ["unsafe"] * 2}
+                 ).to_csv(d / "xstest_batch_1.csv", index=False)
+    return bench
+
+
+def test_gate_diag_counts_the_block_conditions_and_labels(tmp_path, monkeypatch):
+    from v21r import gate_diag as G
+    bench = _diag_fixture(tmp_path, monkeypatch)
+    # the judged CSV carries sha1 of the routing text; the fixture's signals use the raw keys, so map them
+    import v21r.data as Dm
+    monkeypatch.setattr(Dm, "posture_sha", lambda s: s.str.extract(r"\|([0-9a-f]{40})$")[0].map(
+        {C.sha(b): b for b in bench}))
+    assert G.gate_diag(check=True, log=lambda *_: None) == 0
+    r = json.loads((D.odir(True) / "diag" / "gate_diag.json").read_text())
+    assert "error" not in r, r.get("error")
+    x = r["xstest"]
+    assert x["texts"] == {"safe": 4, "unsafe": 2}
+    h = x["hard_block"]["0.1"]
+    assert h["safe"] == {"extreme": 2, "harm_and_F": 1, "any": 3} and h["unsafe"]["any"] == 2
+    assert x["auroc_unsafe_vs_safe"]["F_A0"] > 0.5
+    lb = r["labels_by_source"]["trick_safe"]
+    assert lb["rows"] == 20 and lb["F_labelled"] == 10 and lb["energy_label_1"] == 5 and lb["polar_T_label_1"] == 5
+    nb = r["neighbours"]
+    assert nb["safe_blocked"]["texts"] == 3 and nb["safe_passed"]["texts"] == 1 and nb["unsafe"]["neighbours"] == 10
+    assert "게이트 진단" in (D.odir(True) / "diag" / "gate_diag.md").read_text()
+
+
+def test_gate_diag_reports_an_error_without_stopping(tmp_path, monkeypatch):
+    from v21r import gate_diag as G
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    assert G.gate_diag(check=True, log=lambda *_: None) == 0
+    r = json.loads((D.odir(True) / "diag" / "gate_diag.json").read_text())
+    assert "error" in r
+
+
+def test_auroc_rank_form():
+    from v21r import gate_diag as G
+    assert G.auroc([0, 0, 1, 1], [0.1, 0.2, 0.8, 0.9]) == 1.0
+    assert G.auroc([0, 1], [0.5, 0.5]) == 0.5 and G.auroc([1, 1], [0.1, 0.2]) is None
