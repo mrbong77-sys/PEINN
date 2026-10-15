@@ -262,7 +262,10 @@ def phase_cache(L, phase: str, out: Path, judge: str) -> None:
     if store.exists():
         for x in store.read_text(encoding="utf-8").split("\n"):
             if x.strip():
-                r = json.loads(x)
+                try:                                                          # a line cut by a stop is skipped
+                    r = json.loads(x)
+                except json.JSONDecodeError:
+                    continue
                 cache[r["k"]] = r
     stats = {"hit": 0, "miss": 0, "stored": 0}
     REUSE_GEN = os.environ.get("PEINN2_GEN_REUSE") == "1"

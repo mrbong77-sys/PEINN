@@ -136,7 +136,10 @@ def seeds(E, L, judge: str | None, out: Path, tag: str, phase: str, capture: lis
     if jstore.exists():
         for x in jstore.read_text(encoding="utf-8").split("\n"):
             if x.strip():
-                r = json.loads(x)
+                try:                                                          # a line cut by a stop is skipped
+                    r = json.loads(x)
+                except json.JSONDecodeError:
+                    continue
                 jcache[r["k"]] = r
     n = collections.Counter()
 

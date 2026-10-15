@@ -85,7 +85,12 @@ def config_hashes() -> dict:
 
 
 def nemo_doc(check: bool = False, log=print) -> int:
-    res = {b: base_doc(check, b) for b in M.bases(check)}
+    res = {}
+    for b in M.bases(check):                                        # a base still running or not started reports its error
+        try:
+            res[b] = base_doc(check, b)
+        except Exception as e:                                      # noqa: BLE001
+            res[b] = {"error": f"{type(e).__name__}: {e}"[:300]}
     res["config_sha256"] = config_hashes()
     for b, r in res.items():
         if b == "config_sha256":

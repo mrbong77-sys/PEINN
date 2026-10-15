@@ -16,7 +16,7 @@ from .supervisor import launch, supervise
 
 APPROVED_M = True                   # Eugene's go for the full response matrix (DESIGN.md 8): 2026-10-15 23:43 KST
 REVIEWED_GATE = False               # DESIGN.md 11: nothing after the matrix runs until the gate diagnosis is reviewed and
-                                    # the direction confirmed by the professor (Eugene 2026-10-16 08:13 KST)
+                                    # the direction confirmed by the professor (Eugene 2026-10-16 08:13 and 08:57 KST)
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
 
 STATE = paths.CACHE / "run_state.json"
@@ -62,13 +62,16 @@ def steps(check: bool) -> list:
          ("nemo", "NeMo Guardrails answers three probe prompts on every base", run("nemo"))]
     if not check:
         s.append(("approval", "the professor's go for the full matrix", approval))
-    s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
-    s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
-    if not check:
-        s += [("gate-diag-check", "gate diagnosis on the check cache first (pre-test, CPU)", lambda: step("gate-diag", True)),
+        # DESIGN.md 11 (Eugene 2026-10-16 08:57 KST): the matrix stopped after gemma4; diagnose the gate and the NeMo
+        # rails on qwen and gemma4 first, and hold until the direction is confirmed
+        s += [("nemo-doc-early", "NeMo rail verdicts on the bases answered so far (CPU)", run("nemo-doc")),
+              ("gate-diag-check", "gate diagnosis on the check cache first (pre-test, CPU)", lambda: step("gate-diag", True)),
               ("gate-diag", "gate diagnosis: why the isolated gate blocks XSTest safe texts (CPU, counts only)",
                run("gate-diag")),
               ("gate-review", "hold until the diagnosis is reviewed and the direction confirmed", gate_review)]
+    s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
+    s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
+    if not check:
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))
     s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
