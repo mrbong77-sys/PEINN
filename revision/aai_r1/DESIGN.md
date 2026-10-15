@@ -1,7 +1,7 @@
 # PEINN v2.1 심사 대응 실험 (Applied Artificial Intelligence 269417082, 1차)
 
 작성 2026-10-15 (KST). 계획 원본은 Paper_factory `peinn/v21_revision/00_plan.md`입니다. 이 문서는 실행 설계이고, 실험을 돌리기 전에 고정합니다.
-코드 `v21r/`, 결과 `results/`, 문장·응답 원문은 `cache/`(커밋하지 않음). 위성 실행은 PEINN_v2의 `peinn2.v21r.run`이 이 폴더의 단계를 차례로 부릅니다.
+코드 `v21r/`, 결과 `results/`, 문장·응답 원문은 `cache/`(커밋하지 않음). 위성 실행도 이 폴더의 `ops/`가 맡습니다(PEINN_v2와 격리, 교수님 2026-10-15 22:41 KST). 기동 `python revision/aai_r1/station.py`, 명령 파일 `commands/station.json`.
 
 ## 0. 결정 (교수님)
 
@@ -70,7 +70,7 @@
 - T/I/F 보정: test 분할에서 감독된 축마다 신뢰도 도표 10구간, ECE, Brier. XSTest 사람 라벨 대비 F의 보정.
 - I 구성 개념: test에서 I와 F 예측 불확실성(엔트로피)의 순위상관, 출처 묶음별(딜레마·탈옥 틀·유해·무해) I 분포, 채널 간 순위상관.
 
-## 8. 단계 (`python -m v21r STEP`, 위성 `peinn2.v21r.run`)
+## 8. 단계 (`python -m v21r STEP`, 위성 `ops.run`)
 
 | 단계 | 내용 | 자원 |
 |---|---|---|
@@ -96,5 +96,5 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **A3:** I 자리에 1 − 2|p − 0.5|를 넣어 같은 게이트로 띠를 적합합니다(δ = (1 − τ_I)/2). Fblk 조건은 적합 범위에 그대로 둡니다.
 - **UCR:** HarmBench ASR, Taxonomy 위험 응답률, XSTest 위험 순응의 단순 평균. 세 값도 따로 보고합니다. ORR은 XSTest 안전 문항 과잉 거부입니다.
 - **경로 비용:** "하네스" 값(평가가 실제로 한 호출 전부)과 "배치" 값(Hard-block은 게이트만; 하네스가 기록용으로 만드는 1차 답은 뺌)을 함께 둡니다. 토큰과 Ollama 시간은 같은 seed로 한 번 더 호출해 응답 필드에서 읽습니다.
-- **승인 관문:** 본 실행은 N 단계 뒤 `M0-approval`에서 멈춥니다. 교수님 확인 후 PEINN_v2 `peinn2/v21r/run.py`의 `APPROVED_M`을 켜서 푸시하면 이어서 돕니다.
+- **승인 관문:** 본 실행은 N 단계 뒤 `M0-approval`에서 멈춥니다. 교수님 확인 후 `ops/run.py`의 `APPROVED_M`을 켜서 푸시하면 이어서 돕니다.
 - **점검(`--check`):** qwen 하나, GGB·XSTest 1회로 모든 단계를 돌리고 결과를 `results/check/`에, 전체 호출 수·시간 추정을 `results/estimate_before_M.json`에 올립니다.

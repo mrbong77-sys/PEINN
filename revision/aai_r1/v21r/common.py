@@ -6,7 +6,6 @@ import json
 import os
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 import numpy as np
@@ -130,31 +129,11 @@ def peinn() -> Path:
 
 
 def publish(targets: list[Path], message: str) -> bool:
-    """Commit and push results to the current branch when V21R_PUSH=1 (the unattended runner); else a no-op."""
+    """Commit and push results to main when V21R_PUSH=1 (the unattended runner, ops.run); else a no-op."""
     if os.environ.get("V21R_PUSH") != "1":
         return True
-    env = dict(os.environ, GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never")
-
-    def git(*a):
-        return subprocess.run(["git", *a], cwd=PEINN, capture_output=True, text=True, encoding="utf-8",
-                              errors="replace", env=env, stdin=subprocess.DEVNULL)
-    branch = git("rev-parse", "--abbrev-ref", "HEAD").stdout.strip()
-    git("add", "--", *[str(t) for t in targets])
-    if git("diff", "--cached", "--quiet").returncode:
-        trailer = os.environ.get("V21R_TRAILER", "")
-        r = git("commit", "-m", f"{message}\n\n{trailer}".strip())
-        if r.returncode:
-            print(f"[git] commit failed: {r.stderr.strip()[:200]}", flush=True)
-            return False
-    for wait in (0, 2, 4, 8, 16):
-        time.sleep(wait)
-        git("pull", "--rebase", "--autostash", "origin", branch)
-        r = git("push", "-u", "origin", f"HEAD:{branch}")
-        if not r.returncode:
-            print(f"[git] pushed to {branch}", flush=True)
-            return True
-        print(f"[git] push failed: {r.stderr.strip()[:200]}", flush=True)
-    return False
+    from ops.gitutil import commit_and_push
+    return commit_and_push(targets, message)
 
 
 def ollama_url() -> str:
