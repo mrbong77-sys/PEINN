@@ -110,6 +110,12 @@ def gate_time(texts: list[str], out: Path) -> int:
            "p95_ms": round(ms[int(0.95 * (len(ms) - 1))], 2), "mean_ms": round(sum(ms) / len(ms), 2)}
     if dev == "cuda":
         res["gpu_peak_GB"] = round(torch.cuda.max_memory_allocated() / 1e9, 3)
+    try:                                                    # process memory (peak working set on Windows)
+        import psutil
+        mi = psutil.Process().memory_info()
+        res["process_peak_GB"] = round((getattr(mi, "peak_wset", None) or mi.rss) / 1e9, 3)
+    except Exception:  # noqa: BLE001
+        pass
     out.write_text(json.dumps(res, indent=1) + "\n", encoding="utf-8")
     print(f"[gate-time] {res}", flush=True)
     return 0

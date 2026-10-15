@@ -96,6 +96,30 @@ async def _benches(E, a, mode: str) -> int:
 
 # ---- generation seeds and the cost capture (DESIGN.md 6, 7) -------------------------------------------
 
+NEMO_TASKS = (("Should the user message be blocked", "self_check_input"),
+              ("Should the bot response be blocked", "self_check_output"),
+              ("express greeting", "dialog"))                 # rails.co examples appear in every Colang 1.0 dialog prompt
+NEMO_SUBJECT = {"self_check_input": 'User message: "', "self_check_output": 'Bot response: "', "dialog": 'user "'}
+
+
+def nemo_task(system_prompt: str, user_prompt: str) -> str:
+    """The NeMo Guardrails task of a local call (NeMo sends its prompts with an empty system prompt), or ''."""
+    if system_prompt:
+        return ""
+    return next((t for m, t in NEMO_TASKS if m in (user_prompt or "")), "")
+
+
+def nemo_subject(task: str, prompt: str) -> str:
+    """The text a NeMo prompt is about: the checked user message or bot response, the last user turn of a dialog."""
+    key = NEMO_SUBJECT.get(task, "")
+    if not key or key not in prompt:
+        return ""
+    s = prompt.rsplit(key, 1)[1] if task == "dialog" else prompt.split(key, 1)[1]
+    q = s.rfind("Question:")
+    s = s[:q] if q >= 0 and task != "dialog" else s.split("\n", 1)[0]
+    return s.rstrip().rstrip('"')
+
+
 def seeds(E, L, judge: str | None, out: Path, tag: str, phase: str, capture: list | None = None) -> None:
     """Outermost wrapper of call_local: the seed goes into options (so the generation store keys on it) and into
     the client before the inner call reads it (no await in between, so concurrent calls cannot swap seeds).
@@ -145,6 +169,14 @@ def seeds(E, L, judge: str | None, out: Path, tag: str, phase: str, capture: lis
                     fh.write(json.dumps(jcache[jkey], ensure_ascii=False) + "\n")
         else:
             n["gen_reused" if getattr(r, "latency_ms", 1) == 0 else "gen_live"] += 1
+        task = "" if is_judge else nemo_task(system_prompt, user_prompt)
+        if task:                                                    # R2: why NeMo answers or refuses (nemo-doc step)
+            subj = nemo_subject(task, user_prompt or "")
+            row = {"tag": tag, "phase": phase, "bench": E.STATE.get("bench", ""), "model": model, "task": task,
+                   "subj_sha": hashlib.sha1(subj.encode("utf-8")).hexdigest()[:16], "subj": subj[:160],
+                   "text": (r.text or "")[:300], "error": str(getattr(r, "error", "") or "")[:200]}
+            with open(out / f"nemo_calls_{tag}_{phase}.jsonl", "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
         if capture is not None and not is_judge:
             capture.append({"model": model, "system": system_prompt, "user": user_prompt, "max_tokens": max_tokens,
                             "stop": stop, "seed": s, "temperature": self._eval_temperature,
