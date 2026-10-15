@@ -1,0 +1,116 @@
+{
+ "gate": {
+  "gpu": {
+   "device": "cuda",
+   "threads": 20,
+   "n": 20,
+   "p50_ms": 27.0,
+   "p95_ms": 40.71,
+   "mean_ms": 31.89,
+   "gpu_peak_GB": 0.672
+  },
+  "cpu1": null
+ },
+ "tiers": {
+  "qwen|Direct-Answer": {
+   "requests": 45,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 39.8,
+    "output_tokens": 185.0,
+    "ollama_s": 0.745,
+    "load_s": 0.008,
+    "wall_s": 3.014
+   },
+   "deployed": {
+    "calls": 1.0,
+    "prompt_tokens": 39.8,
+    "output_tokens": 185.0,
+    "ollama_s": 0.745,
+    "load_s": 0.008,
+    "wall_s": 3.014
+   }
+  },
+  "qwen|Hard-block": {
+   "requests": 45,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 39.8,
+    "output_tokens": 185.0,
+    "ollama_s": 0.74,
+    "load_s": 0.009,
+    "wall_s": 3.03
+   },
+   "deployed": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "ollama_s": 0,
+    "load_s": 0,
+    "wall_s": 0
+   }
+  },
+  "qwen|Reasoned-Refusal": {
+   "requests": 45,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 156.7,
+    "output_tokens": 275.1,
+    "ollama_s": 1.103,
+    "load_s": 0.017,
+    "wall_s": 4.514
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 156.7,
+    "output_tokens": 275.1,
+    "ollama_s": 1.103,
+    "load_s": 0.017,
+    "wall_s": 4.514
+   }
+  },
+  "qwen|Deliberation": {
+   "requests": 45,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 136.7,
+    "output_tokens": 300.0,
+    "ollama_s": 1.196,
+    "load_s": 0.017,
+    "wall_s": 4.972
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 136.7,
+    "output_tokens": 300.0,
+    "ollama_s": 1.196,
+    "load_s": 0.017,
+    "wall_s": 4.972
+   }
+  },
+  "qwen|Soft-reasoning": {
+   "requests": 45,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 136.7,
+    "output_tokens": 300.0,
+    "ollama_s": 1.21,
+    "load_s": 0.017,
+    "wall_s": 5.001
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 136.7,
+    "output_tokens": 300.0,
+    "ollama_s": 1.21,
+    "load_s": 0.017,
+    "wall_s": 5.001
+   }
+  }
+ }
+}

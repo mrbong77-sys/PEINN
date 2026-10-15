@@ -1,0 +1,76 @@
+{
+ "rows": 400,
+ "kept": 400,
+ "near_cos": 0.92,
+ "dropped": {
+  "guard": 0,
+  "embedding": 0
+ },
+ "dropped_by_source": {},
+ "guard_reasons": {
+  "": 400
+ },
+ "split": {
+  "train": 200,
+  "test": 109,
+  "val": 91
+ },
+ "by_source_polar": {
+  "alpaca|T": 25,
+  "beavertails|F": 18,
+  "beavertails|T": 11,
+  "benign_harm_discuss|T": 10,
+  "classical_dilemma|F": 1,
+  "classical_dilemma|T": 1,
+  "daily_dilemmas|T": 26,
+  "dolly|T": 30,
+  "hh_rlhf_harmless|F": 13,
+  "hh_rlhf_harmless|T": 6,
+  "hh_rlhf_helpful|T": 32,
+  "hh_rlhf_redteam|F": 20,
+  "hh_rlhf_redteam|T": 4,
+  "jailbreak|F": 10,
+  "jailbreak|T": 10,
+  "moralchoice_highamb|T": 17,
+  "narrative|F": 1,
+  "narrative|T": 37,
+  "syn_advbenign|F": 3,
+  "syn_advbenign|T": 7,
+  "syn_benignsensitive|F": 2,
+  "syn_benignsensitive|T": 18,
+  "syn_cad|T": 25,
+  "syn_intent|F": 14,
+  "syn_intent|T": 13,
+  "syn_subtleharm|F": 9,
+  "syn_subtleharm|T": 1,
+  "toxicchat_safe|F": 2,
+  "toxicchat_safe|T": 22,
+  "trick_safe|F": 3,
+  "trick_safe|T": 9
+ },
+ "bench_files_found": {
+  "harmbench_behaviors_text_all.csv": true,
+  "xstest_prompts.csv": true,
+  "morables_benchmark/morables_sample.jsonl": true,
+  "ggb_benchmark/ous_items.json": true,
+  "ethics_benchmark/dilemmas.json": true,
+  "ethics_benchmark/mfq.json": true,
+  "ethics_benchmark/wvs.json": true,
+  "taxonomy_40_scenarios.json": true,
+  "delphi_behaviors.csv": true,
+  "mach_items.json": true,
+  "unesco_items.csv": true,
+  "ksafe_mm_benchmark/gpt4_generated_questions": true
+ },
+ "corpus_dir_listing": [
+  "corpus_fit.jsonl",
+  "corpus_report.txt",
+  "corpus_unlabeled.jsonl",
+  "heldout.csv",
+  "illocution_labels.csv",
+  "labeled.csv",
+  "labeled_2of3.csv",
+  "train.csv"
+ ],
+ "dropped_sha": []
+}
