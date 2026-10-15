@@ -227,6 +227,11 @@ def assign_split(df: pd.DataFrame, seed: int = SPLIT_SEED) -> pd.Series:
     return split
 
 
+def drop_table(df: pd.DataFrame) -> dict:
+    """Dropped rows per 'source|reason' (string keys, so the audit is JSON)."""
+    return {f"{s}|{w}": int(n) for (s, w), n in df[df["drop"] != ""].groupby(["source", "drop"]).size().items()}
+
+
 def split(check: bool = False, log=print) -> int:
     d = wdir(check)
     df = corpus_frame(check)
@@ -249,9 +254,8 @@ def split(check: bool = False, log=print) -> int:
         return {f"{s}|{p}": int(n) for (s, p), n in g.groupby(["source", "polar"]).size().items()}
     st = {"rows": int(len(df)), "kept": int(len(kept)), "near_cos": NEAR_COS,
           "dropped": {"guard": int((df["drop"] == "guard").sum()), "embedding": int((df["drop"] == "embedding").sum())},
-          "dropped_by_source": {k: int(v) for k, v in df[df["drop"] != ""].groupby(["source", "drop"]).size().rename(
-              lambda x: "|".join(x) if isinstance(x, tuple) else x).items()},
-          "guard_reasons": au.why.value_counts().to_dict() if len(au) else {},
+          "dropped_by_source": drop_table(df),
+          "guard_reasons": {str(k): int(v) for k, v in au.why.value_counts().items()} if len(au) else {},
           "split": kept.split.value_counts().to_dict(), "by_source_polar": tab(kept),
           "bench_files_found": meta.get("bench_files"), "corpus_dir_listing": meta.get("corpus_dir_listing"),
           "dropped_sha": sorted(df[df["drop"] != ""].sha)}

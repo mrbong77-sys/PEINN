@@ -151,3 +151,11 @@ def test_label_columns_are_read_by_name_not_as_a_transpose():
            "I": df["I"].to_numpy(), "F": df["F"].to_numpy(), "E": np.array([1.0, 2.0, 9.9])}
     r = TH.fit("A0", sig, val, 0.10)
     assert r["n_val"] == {"safe": 1, "dilemma": 1, "harm": 1}
+
+
+def test_drop_table_has_string_keys():
+    import json
+    df = pd.DataFrame({"source": ["a", "a", "b", "b"], "drop": ["guard", "embedding", "", "embedding"]})
+    tab = D.drop_table(df)
+    assert tab == {"a|embedding": 1, "a|guard": 1, "b|embedding": 1}
+    json.dumps(tab)
