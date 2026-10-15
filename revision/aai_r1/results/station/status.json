@@ -1,13 +1,13 @@
 {
- "verdict": "대기",
- "seq": 8,
- "mission": null,
- "time_utc": "2026-10-15 15:32:01",
- "time_local": "2026-10-16 00:32:01",
- "code": "cd0c647 station: 대기",
- "gpu": "1726 MiB, 32607 MiB, 1 %, 43",
- "ack": "20261015T134716Z-launch launch (임무 시작 ops.run, 2026-10-15 14:35:41 UTC)",
- "reason": "정기 보고",
+ "verdict": "임무 실행 중",
+ "seq": 9,
+ "mission": "ops.run",
+ "time_utc": "2026-10-15 15:34:05",
+ "time_local": "2026-10-16 00:34:05",
+ "code": "1a3808e revision/aai_r1: open the response-matrix gate and launch the full run",
+ "gpu": "1693 MiB, 32607 MiB, 0 %, 43",
+ "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
+ "reason": "ops.run 시작",
  "history": [
   {
    "module": "ops.run",
