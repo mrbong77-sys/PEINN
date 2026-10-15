@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 13,
+ "seq": 14,
  "mission": "ops.run",
- "time_utc": "2026-10-15 16:14:19",
- "time_local": "2026-10-16 01:14:19",
- "code": "efcfeef v2.1 심사 대응 runner: 실행 중 (attempt 3)",
- "gpu": "8412 MiB, 32607 MiB, 86 %, 67",
+ "time_utc": "2026-10-15 16:24:22",
+ "time_local": "2026-10-16 01:24:22",
+ "code": "388af3c v2.1 심사 대응 runner: 실행 중 (attempt 3)",
+ "gpu": "7608 MiB, 32607 MiB, 0 %, 53",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
