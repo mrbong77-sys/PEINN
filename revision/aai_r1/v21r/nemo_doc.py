@@ -77,9 +77,19 @@ def base_doc(check: bool, base: str) -> dict:
     return out
 
 
+def config_hashes() -> dict:
+    """sha256 of the NeMo config files the benches load (PEAOS checkout), to match the copy printed in the paper."""
+    import hashlib
+    d = C.peaos() / "pea_eval" / "nemo_config"
+    return {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(d.glob("*")) if f.is_file()} if d.exists() else {}
+
+
 def nemo_doc(check: bool = False, log=print) -> int:
     res = {b: base_doc(check, b) for b in M.bases(check)}
+    res["config_sha256"] = config_hashes()
     for b, r in res.items():
+        if b == "config_sha256":
+            continue
         log(f"NeMo {b}: {r.get('calls')} input {r.get('self_check_input', {}).get('verdicts')}")
     o = D.odir(check) / "nemo"
     o.mkdir(parents=True, exist_ok=True)
