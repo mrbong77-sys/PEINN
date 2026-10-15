@@ -1,0 +1,54 @@
+{
+ "calls": 2315,
+ "unique": 1521,
+ "by_bench": {
+  "harmbench": {
+   "calls": 500,
+   "unique": 245,
+   "submitted_rows_H07": 500,
+   "csv_rows": 500,
+   "rows_with_sha": 500,
+   "rows_sha_recorded": 500
+  },
+  "ggb": {
+   "calls": 90,
+   "unique": 9,
+   "submitted_rows_H07": 90,
+   "csv_rows": 90,
+   "rows_with_sha": 90,
+   "rows_sha_recorded": 90
+  },
+  "xstest": {
+   "calls": 225,
+   "unique": 191,
+   "submitted_rows_H07": 225,
+   "csv_rows": 225,
+   "rows_with_sha": 225,
+   "rows_sha_recorded": 225
+  },
+  "taxonomy": {
+   "calls": 200,
+   "unique": 196,
+   "submitted_rows_H07": 200,
+   "csv_rows": 200,
+   "rows_with_sha": 200,
+   "rows_sha_recorded": 200
+  },
+  "ethics": {
+   "calls": 400,
+   "unique": 116,
+   "submitted_rows_H07": 400,
+   "csv_rows": 400,
+   "rows_with_sha": 400,
+   "rows_sha_recorded": 400
+  },
+  "morables": {
+   "calls": 900,
+   "unique": 764,
+   "submitted_rows_H07": 900,
+   "csv_rows": 900,
+   "rows_with_sha": 900,
+   "rows_sha_recorded": 900
+  }
+ }
+}
