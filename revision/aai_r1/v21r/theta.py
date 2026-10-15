@@ -119,7 +119,7 @@ def fit(v: str, sig: dict, val: pd.DataFrame, cap: float) -> dict:
     pos = {s: i for i, s in enumerate(sig["sha"][ix])}
     sel = np.array([pos[s] for s in val.sha])
     T, I, F, E = (x[ix][sel] for x in inputs(v, sig))
-    cls = C.teacher_class(val.T, val.I, val.F)
+    cls = C.teacher_class(val["T"], val["I"], val["F"])
     opt = options(v)
     s1 = stage1(E, F, cls, opt["energy"], cap)
     s2 = stage2(T, I, F, E, cls, s1["th"], opt)

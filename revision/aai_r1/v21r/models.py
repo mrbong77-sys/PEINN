@@ -340,7 +340,7 @@ def train_all(check: bool = False, log=print) -> int:
     report["A1_val_loss"] = vl
 
     log("== A2: softmax safe / ambiguous / harmful")
-    ctr, cva = three_class(tr.T, tr.I, tr.F), three_class(va.T, va.I, va.F)
+    ctr, cva = three_class(tr["T"], tr["I"], tr["F"]), three_class(va["T"], va["I"], va["F"])
     m, vl = train_head(Hx[rtr], ctr, None, Hx[rva], cva, None, "softmax", None, hp, log)
     torch.save(m.state_dict(), md / "A2.pt")
     p = predict(m, Hx[ru], "softmax")

@@ -190,7 +190,7 @@ def calibration(check: bool, variants=("A0", "A2", "A7", "SHIPPED")) -> dict:
         r["I_vs_F_entropy_spearman"] = _rank_corr(P["I"], H)
         r["channel_spearman"] = {"T-I": _rank_corr(P["T"], P["I"]), "T-F": _rank_corr(P["T"], P["F"]),
                                  "I-F": _rank_corr(P["I"], P["F"])}
-        cls = C.teacher_class(t.T, t.I, t.F)
+        cls = C.teacher_class(t["T"], t["I"], t["F"])
         r["I_by_teacher_class"] = {c: _desc(P["I"][cls == c]) for c in ("safe", "dilemma", "harm")}
         r["I_by_source"] = {s: _desc(P["I"][(t.source == s).to_numpy()]) for s in sorted(t.source.unique())}
         out[v] = r

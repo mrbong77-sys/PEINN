@@ -140,3 +140,14 @@ def test_tags_force_every_tier_once_and_others_carry_the_defences():
     assert [x["force"] for x in t[:5]] == list(MX.FORCED) and t[0]["force"] == "Direct-Answer"
     assert t[-1]["arms"] == "H01,H02,H03,H14" and t[-1]["force"] is None
     assert json.dumps(D.runs(True)) == json.dumps({"ggb": 1, "xstest": 1})
+
+
+def test_label_columns_are_read_by_name_not_as_a_transpose():
+    from v21r import models as Mo
+    df = pd.DataFrame({"text": ["a", "b", "c"], "T": [1.0, 0.0, 0.0], "I": [0.0, 0.7, 0.2], "F": [0.0, 0.1, 0.9]})
+    assert list(Mo.three_class(df["T"], df["I"], df["F"])) == [0, 1, 2]
+    val = df.assign(sha=["x", "y", "z"])
+    sig = {"sha": np.array(["x", "y", "z"]), "part": np.array(["val"] * 3), "T": df["T"].to_numpy(),
+           "I": df["I"].to_numpy(), "F": df["F"].to_numpy(), "E": np.array([1.0, 2.0, 9.9])}
+    r = TH.fit("A0", sig, val, 0.10)
+    assert r["n_val"] == {"safe": 1, "dilemma": 1, "harm": 1}
