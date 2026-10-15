@@ -1,0 +1,6 @@
+{
+ "id": "20261015T163820Z-update",
+ "action": "update",
+ "note": "load the A8 steps (a8-check, a8) before cost; applies at the next step boundary, the running matrix is not cut",
+ "issued_utc": "2026-10-15 16:38:20"
+}

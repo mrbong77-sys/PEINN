@@ -2,7 +2,7 @@
 
     python -m v21r STEP [--check]
 
-Steps in order: record, audit, features, split, train, thresholds, routes, nemo, matrix, cost, analyze; with --check
+Steps in order: record, audit, features, split, train, thresholds, routes, nemo, matrix, a8, cost, analyze; with --check
 also push-check (copy cache/check/results to results/check/) and estimate (calls and hours for the full matrix, scaled from the check run). --check runs every step small (qwen
 only, GGB and XSTest once) into cache/check/. Results are committed and pushed only when V21R_PUSH=1.
 """
@@ -10,12 +10,12 @@ from __future__ import annotations
 
 import sys
 
-from . import analyze, data, matrix, models, theta
+from . import a8, analyze, data, matrix, models, theta
 
 STEPS = {
     "record": data.record, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
-    "matrix": matrix.matrix, "cost": matrix.cost, "analyze": analyze.analyze,
+    "matrix": matrix.matrix, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze,
 }
 
 

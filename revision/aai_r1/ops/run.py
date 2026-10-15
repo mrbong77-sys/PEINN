@@ -53,7 +53,11 @@ def steps(check: bool) -> list:
          ("nemo", "NeMo Guardrails answers three probe prompts on every base", run("nemo"))]
     if not check:
         s.append(("approval", "the professor's go for the full matrix", approval))
-    s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix")),
+    s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
+    if not check:
+        s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
+                  lambda: step("a8", True)))
+    s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
           ("cost", "route cost per tier (gate time, calls, tokens)", run("cost")),
           ("analyze", "benchmark results, curves, calibration, I construct", run("analyze"))]
     if check:

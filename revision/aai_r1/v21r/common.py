@@ -161,8 +161,8 @@ def pull_missing(models: list[str], log=print) -> int:
     return 0
 
 
-def r2d2_modelfile(base_modelfile: str, source: str) -> str:
-    """The zephyr:7b Modelfile (chat template, stop words, parameters) with its weights replaced by `source`:
+def modelfile_with_weights(base_modelfile: str, source: str) -> str:
+    """A served model's Modelfile (chat template, stop words, parameters) with its weights replaced by `source`:
     top-level comment and FROM lines are dropped, triple-quoted blocks are kept as they are."""
     out, inside = [f"FROM {source}"], False
     for line in base_modelfile.splitlines():
@@ -190,7 +190,7 @@ def ensure_r2d2(log=print) -> Path | None:
         raise SystemExit(f"ollama show {BASES['zephyr']} --modelfile failed: {r.stderr[-300:]}")
     f = OUT / "r2d2_Modelfile"
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(r2d2_modelfile(r.stdout, R2D2_GGUF), encoding="utf-8")
+    f.write_text(modelfile_with_weights(r.stdout, R2D2_GGUF), encoding="utf-8")
     log(f"  ollama create {R2D2} -f {f}")
     if subprocess.run(["ollama", "create", R2D2, "-f", str(f)]).returncode:
         raise SystemExit(f"ollama create {R2D2} failed")

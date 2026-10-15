@@ -47,7 +47,7 @@
 | A6p | 원칙 앵커 없음 | 원칙 384 차원 빼고 재학습 | A0 게이트 |
 | A6e | 감정 특징 없음 | 감정 32 차원 빼고 재학습 | A0 게이트 |
 | A7 | 미세 조정 SBERT | MiniLM-L6 전체 미세 조정 + T/I/F 시그모이드, 같은 손실 | A0 게이트 |
-| A8 | 보호 모델 LoRA | qwen2.5-7B, 같은 코퍼스의 목표 응답(차단·숙고·직답)으로 LoRA | 라우터 없음 (다음 단계, 별도 설계) |
+| A8 | 보호 모델 LoRA | qwen2.5-7B, 같은 코퍼스·같은 교사 범주의 목표 응답(차단·숙고·직답)으로 LoRA (10절) | 라우터 없음(맨 프롬프트) |
 
 ## 5. 문턱 적합 (모든 변형 같은 절차, val만 씀)
 
@@ -82,6 +82,7 @@
 | P | 경로표(변형 × 운영점 × 벤치 문장) | CPU |
 | N | NeMo 시험 3건 | GPU |
 | M | 응답 행렬 + 다른 팔, 기반 모델별 생성 → 판정 | GPU 대량 |
+| A8 | LoRA 비교(10절): 목표 응답 생성 → 학습 → Ollama 모델 → 벤치. 본 실행에서는 0.5B 점검(`a8-check`)을 먼저 | GPU |
 | K | 경로별 비용 측정 | GPU 소량 |
 | A | 분석·표 | CPU |
 
@@ -99,3 +100,14 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **승인 관문:** 본 실행은 N 단계 뒤 `M0-approval`에서 멈춥니다. 교수님 확인 후 `ops/run.py`의 `APPROVED_M`을 켜서 푸시하면 이어서 돕니다.
 - **R2D2 모델(H02):** Ollama 라이브러리에 없으므로 `cais/zephyr_7b_r2d2`의 GGUF를 zephyr:7b와 같은 양자화(Q4_0, `hf.co/RichardErkhov/cais_-_zephyr_7b_r2d2-gguf:Q4_0`)로 받아, zephyr:7b의 채팅 템플릿·정지어·매개변수를 그대로 붙여 `zephyr-r2d2:latest`로 만듭니다(`common.ensure_r2d2`, 만든 Modelfile은 `results/r2d2_Modelfile`). 모델은 기반 모델마다 그 차례 직전에 받으므로, 한 모델이 없어도 앞 기반 모델은 멈추지 않습니다.
 - **점검(`--check`):** qwen 하나, GGB·XSTest 1회로 모든 단계를 돌리고 결과를 `results/check/`에, 전체 호출 수·시간 추정을 `results/estimate_before_M.json`에 올립니다.
+
+## 10. A8: 보호 모델 LoRA (자원 맞춘 미세 조정 비교, R1-4 b)
+
+목적: 같은 감독(같은 코퍼스, 같은 교사 범주)을 라우터 대신 보호 모델의 가중치에 넣으면 어떻게 되는지를 봅니다. 추론 때는 라우터 없이 맨 프롬프트만 받습니다(Vanilla 팔 H05와 같은 호출).
+
+1. **목표 응답:** 격리 코퍼스의 train·val 문항마다 교사 범주(5절)가 정하는 답을 붙입니다. 유해 → Hard-block 거절문(`HARD_BLOCK_RESPONSE`), 딜레마 → Deliberation 경로의 시스템 프롬프트로 qwen2.5:7b-instruct가 낸 답, 안전 → 같은 모델의 맨 답. 프롬프트는 벤치를 돌리는 PEAOS 체크아웃의 `prompt_builder`에서 읽습니다(`PEAOS_EE_ENGINE=neutro_v21`). 생성은 temperature 0.3, top-p 0.95, seed 42, 최대 512토큰.
+2. **학습(`a8_train.py`):** `Qwen/Qwen2.5-7B-Instruct`(받은 스냅샷 해시를 보고서에 기록), 모델 자체 채팅 템플릿, 손실은 답 토큰만. LoRA rank 16, alpha 32, dropout 0.05, 주의·MLP 투영 7종 전부. AdamW 1e-4, 1에폭, 배치 4 × 누적 4, 코사인(워밍업 3%), 최대 1,024토큰, seed 42. 학습 전후 val 손실을 보고합니다. 어댑터를 기반 가중치에 합쳐 저장하고, 어댑터만 따로도 저장합니다.
+3. **서빙:** 합친 모델을 qwen2.5:7b-instruct와 같은 양자화(q4_K_M)로 Ollama에 올리고, 그 모델의 채팅 템플릿·정지어·매개변수를 그대로 붙입니다(`qwen2.5-a8:latest`). 한 문항 시험 답이 비면 멈춥니다.
+4. **벤치:** 투고본 규약(HarmBench·GGB 10회, 나머지 5회)으로 H05 팔을 돌리되 생성 모델만 A8 모델로 바꿉니다(`peaos_driver_a8.py --model-map`, 판정 호출은 그대로). 결과는 qwen 표의 방어 행 "A8"로 나옵니다.
+5. **점검:** 본 실행은 7B 전에 `a8-check`(Qwen2.5-0.5B-Instruct, 범주별 8문항, GGB·XSTest 1회)로 전체 경로를 먼저 통과시킵니다.
+

@@ -106,6 +106,13 @@ def evaluate(check: bool, log=print) -> dict:
             r = {bn: bench_metrics(bn, defence_rows(df, bn, arm)) for bn in D.runs(check)}
             r["summary"] = leak_and_orr(r)
             res["defences"][dname] = r
+        if b == "qwen":                                         # A8: LoRA on the protected model (DESIGN.md 10)
+            from . import a8 as A8
+            da = A8.collect(check)
+            if len(da):
+                r = {bn: bench_metrics(bn, units(da[da.arm_id == A8.ARM], bn)) for bn in D.runs(check)}
+                r["summary"] = leak_and_orr(r)
+                res["defences"]["A8"] = r
         for n in names:
             tiers = dict(zip(rt.sha, rt[n]))
             r, asm = {}, {}
