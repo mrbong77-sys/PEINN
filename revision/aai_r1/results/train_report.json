@@ -1,0 +1,22 @@
+{
+ "neg_weight": 0.0,
+ "n": {
+  "train": 10630,
+  "val": 934,
+  "test": 946,
+  "bench": 1521
+ },
+ "calibrator_val_auroc": 0.9664205091258405,
+ "A0_val_loss": 0.4157722294330597,
+ "A6p_val_loss": 0.414981484413147,
+ "A6e_val_loss": 0.4152703583240509,
+ "A1_val_loss": 0.24160437285900116,
+ "A2_val_loss": 0.30972981452941895,
+ "A2_class_counts_train": {
+  "safe": 6522,
+  "ambiguous": 1419,
+  "harmful": 2689
+ },
+ "A3_val_loss": 0.23878896236419678,
+ "A7_val_loss": 0.40932316360177523
+}
