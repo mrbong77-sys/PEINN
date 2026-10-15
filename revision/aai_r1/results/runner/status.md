@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-16 01:46:00 (UTC 2026-10-15 16:46:00), 시도 3, 비컨 #10 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: aef54b2 station: 임무 실행 중
-- 현재 단계: matrix (40.4분째)
+- 시각 2026-10-16 01:56:05 (UTC 2026-10-15 16:56:05), 시도 3, 비컨 #11 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a4b86bb station: 임무 실행 중
+- 현재 단계: matrix (50.5분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8130 MiB, 32607 MiB, 0 %, 53
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7651 MiB, 32607 MiB, 92 %, 67
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261015T163820Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-15 16:39:55 UTC)
@@ -14,44 +14,44 @@
 ## 마지막 로그
 
 ```
-2026-10-16 01:45:52,444 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 233.00it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 114.31it/s]
-2026-10-16 01:45:52,495 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 260.45it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 95.98it/s]
-2026-10-16 01:45:52,542 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 251.31it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 152.19it/s]
-2026-10-16 01:45:52,592 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 245.96it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 202.50it/s]
-2026-10-16 01:45:52,639 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 213.33it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 131.93it/s]
-2026-10-16 01:45:52,687 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 233.16it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 83.06it/s]
-2026-10-16 01:45:52,736 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-16 01:45:52,784 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-16 01:45:52,833 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-16 01:45:52,881 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-16 01:45:52,882 [bench.pea_eval.morables] INFO:   [Morables] PEINN/qwen2.5: acc_clean=0.436 acc_adv=0.403 RG=0.033 SCR=0.168
-2026-10-16 01:45:52,887 [bench.stat_batch_runner] INFO:   💾 morables raw pickle backup: morables_raw_5runs_20261016_014502.pkl (900 items)
-  💾 Morables CSV save 시작: morables_batch_5runs_20261016_014502.csv
-2026-10-16 01:45:52,887 [bench.stat_batch_runner] INFO:   💾 Morables CSV save 시작: morables_batch_5runs_20261016_014502.csv
-2026-10-16 01:45:52,907 [bench.pea_eval.morables] INFO: Morables 결과 저장: D:\Projects\PEINN\revision\aai_r1\cache\full\matrix\qwen\peaos_out\de\morables\morables_batch_5runs_20261016_014502.csv (900 rows)
-  ✓ Morables CSV 저장+fsync 확인: morables_batch_5runs_20261016_014502.csv (2,700,075 bytes)
-2026-10-16 01:45:52,913 [bench.stat_batch_runner] INFO:   ✓ Morables CSV 저장+fsync 확인: morables_batch_5runs_20261016_014502.csv (2,700,075 bytes)
-{'csv': 'morables_batch_5runs_20261016_014502.csv', 'total': 900, 'errors': 0, 'sec': 50.6}
-[phase gen] cache {'hit': 2515, 'miss': 0, 'stored': 2315} (7145 entries)
-== qwen sr [gen] arms H07 force Soft-reasoning
-[v21r] $ C:\Users\bojung\miniconda3\python.exe D:\Projects\PEINN\revision\aai_r1\v21r\peaos_driver.py run --out D:\Projects\PEINN\revision\aai_r1\cache\full\matrix\qwen --tag sr --runs {"harmbench": 10, "ggb": 10, "xstest": 5, "taxonomy": 5, "ethics": 5, "morables": 5} --arms H07 --phase gen --judge qwen3:32b --morables D:\Projects\PEINN\revision\aai_r1\cache\morables.jsonl --force Soft-reasoning 
-===== run sr harmbench (arms ['H07'], 10 runs) =====
-2026-10-16 01:45:59,142 [bench.pea_eval.harmbench_eval] INFO: HarmBench 로드: 300개 행동 (카테고리: ['standard', 'contextual'])
-2026-10-16 01:45:59,142 [bench.pea_eval.harmbench_eval] INFO: 파일럿 모드: 50개 샘플 선택 (seed=42)
-2026-10-16 01:45:59,142 [bench.pea_eval.harmbench_eval] INFO: HarmBench 평가 시작: 1 Arms × 50 프롬프트 × 10 반복
-2026-10-16 01:45:59,155 [bench.pea_eval.ee_runner] INFO: EE Runner 디바이스: cuda
-2026-10-16 01:45:59,327 [bench.core.peinn] INFO: PEINN 초기화: γ=0.8, 임계점=0.05, 최대 반추=4회
-2026-10-16 01:45:59,327 [bench.pea_eval.ee_runner] INFO: EE Threshold: 5.8
+2026-10-16 01:55:26,578 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:27,411 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:30,349 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:30,350 [bench.pea_eval.harmbench_eval] INFO:   [H05] 35/50 (70% · 0.65 req/s · ETA 23s)
+2026-10-16 01:55:32,016 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:32,676 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:33,989 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:35,606 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:36,006 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:36,006 [bench.pea_eval.harmbench_eval] INFO:   [H05] 40/50 (80% · 0.67 req/s · ETA 15s)
+2026-10-16 01:55:36,513 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:39,241 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:40,973 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:43,615 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:45,859 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:45,860 [bench.pea_eval.harmbench_eval] INFO:   [H05] 45/50 (90% · 0.65 req/s · ETA 8s)
+2026-10-16 01:55:46,429 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:48,281 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:49,009 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:50,033 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:50,935 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:50,936 [bench.pea_eval.harmbench_eval] INFO:   [H05] 50/50 (100% · 0.67 req/s · ETA 0s)
+2026-10-16 01:55:50,936 [bench.pea_eval.harmbench_eval] INFO: [H05] Rep7 50/50 응답 수집 완료
+2026-10-16 01:55:50,938 [bench.pea_eval.harmbench_eval] INFO: HarmBench 로드: 300개 행동 (카테고리: ['standard', 'contextual'])
+2026-10-16 01:55:50,938 [bench.pea_eval.harmbench_eval] INFO: 파일럿 모드: 50개 샘플 선택 (seed=49)
+2026-10-16 01:55:50,938 [bench.pea_eval.harmbench_eval] INFO: [H05] Rep8 Base 병렬 처리 모드 (GPU-aware Concurrency: 8, nemo=False, 총 50건)
+2026-10-16 01:55:50,938 [bench.pea_eval.harmbench_eval] INFO:   [H05] 🚀 Rep8 시작 (총 50건, 동시성 8)
+2026-10-16 01:55:53,432 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:53,433 [bench.pea_eval.harmbench_eval] INFO:   [H05] 1/50 (2% · 0.40 req/s · ETA 122s)
+2026-10-16 01:55:53,957 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:54,734 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:55,350 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:55,744 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:55,745 [bench.pea_eval.harmbench_eval] INFO:   [H05] 5/50 (10% · 1.04 req/s · ETA 43s)
+2026-10-16 01:55:56,329 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:55:58,524 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:56:01,547 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:56:02,891 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:56:03,682 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 01:56:03,683 [bench.pea_eval.harmbench_eval] INFO:   [H05] 10/50 (20% · 0.78 req/s · ETA 51s)
 ```
