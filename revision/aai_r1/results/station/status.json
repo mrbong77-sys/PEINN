@@ -1,0 +1,14 @@
+{
+ "verdict": "대기",
+ "seq": 1,
+ "mission": null,
+ "time_utc": "2026-10-15 14:33:37",
+ "time_local": "2026-10-15 23:33:37",
+ "code": "04b7138 revision/aai_r1: own satellite (station, supervisor, beacons, git pushes; isolated from PEINN_v2) and the check ",
+ "gpu": "2420 MiB, 32607 MiB, 0 %, 41",
+ "ack": null,
+ "reason": "시작",
+ "history": [],
+ "beacon_min": 10.0,
+ "poll_min": 2.0
+}
