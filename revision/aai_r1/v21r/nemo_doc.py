@@ -42,6 +42,11 @@ def calls(check: bool, base: str) -> tuple[str, list[dict]]:
 def base_doc(check: bool, base: str) -> dict:
     phase, rows = calls(check, base)
     out = {"log_phase": phase, "calls": dict(collections.Counter(r["task"] for r in rows))}
+    pf = D.wdir(check) / "nemo_probe" / base / "nemo_probe.json"
+    if pf.exists():                                                 # package versions and the probe replies
+        pr = C.jload(pf)
+        out["versions"] = pr.get("versions")
+        out["probe_calls"] = [{k: c.get(k) for k in ("model", "max_tokens", "text", "error")} for c in pr.get("calls", [])]
     for task in ("self_check_input", "self_check_output"):
         rs = [r for r in rows if r["task"] == task]
         if not rs:
