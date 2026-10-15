@@ -97,4 +97,5 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **UCR:** HarmBench ASR, Taxonomy 위험 응답률, XSTest 위험 순응의 단순 평균. 세 값도 따로 보고합니다. ORR은 XSTest 안전 문항 과잉 거부입니다.
 - **경로 비용:** "하네스" 값(평가가 실제로 한 호출 전부)과 "배치" 값(Hard-block은 게이트만; 하네스가 기록용으로 만드는 1차 답은 뺌)을 함께 둡니다. 토큰과 Ollama 시간은 같은 seed로 한 번 더 호출해 응답 필드에서 읽습니다.
 - **승인 관문:** 본 실행은 N 단계 뒤 `M0-approval`에서 멈춥니다. 교수님 확인 후 `ops/run.py`의 `APPROVED_M`을 켜서 푸시하면 이어서 돕니다.
+- **R2D2 모델(H02):** Ollama 라이브러리에 없으므로 `cais/zephyr_7b_r2d2`의 GGUF를 zephyr:7b와 같은 양자화(Q4_0, `hf.co/RichardErkhov/cais_-_zephyr_7b_r2d2-gguf:Q4_0`)로 받아, zephyr:7b의 채팅 템플릿·정지어·매개변수를 그대로 붙여 `zephyr-r2d2:latest`로 만듭니다(`common.ensure_r2d2`, 만든 Modelfile은 `results/r2d2_Modelfile`). 모델은 기반 모델마다 그 차례 직전에 받으므로, 한 모델이 없어도 앞 기반 모델은 멈추지 않습니다.
 - **점검(`--check`):** qwen 하나, GGB·XSTest 1회로 모든 단계를 돌리고 결과를 `results/check/`에, 전체 호출 수·시간 추정을 `results/estimate_before_M.json`에 올립니다.

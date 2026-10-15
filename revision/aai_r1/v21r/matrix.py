@@ -72,7 +72,12 @@ def _drive(d: Path, t: dict, phase: str, runs: dict, extra: list | None = None) 
 
 def models_needed(check: bool) -> list[str]:
     return sorted({C.BASES[b] for b in bases(check)} | {C.JUDGE, "llama-guard3:8b"} |
-                  ({"zephyr-r2d2:latest"} if "zephyr" in bases(check) else set()))
+                  ({C.R2D2} if "zephyr" in bases(check) else set()))
+
+
+def models_of(base: str) -> list[str]:
+    """Models one base's tags call (pulled just before that base, so a missing model stops only its own base)."""
+    return [C.BASES[base], C.JUDGE, "llama-guard3:8b"]
 
 
 # ---- N: NeMo must answer before any NeMo arm runs ----------------------------------------------------
@@ -136,9 +141,13 @@ def summary(check: bool, base: str) -> dict:
 
 
 def matrix(check: bool = False, log=print) -> int:
-    C.pull_missing(models_needed(check), log=log)
     runs = D.runs(check)
     for b in bases(check):
+        C.pull_missing(models_of(b), log=log)
+        if b == "zephyr":
+            mf = C.ensure_r2d2(log)
+            if mf and not check and not C.publish([mf], f"v21r M: R2D2 model for Ollama ({C.R2D2_GGUF}, zephyr:7b template)"):
+                return 1
         d = mdir(check, b)
         for phase in ("gen", "judge"):
             for t in tags(b):
