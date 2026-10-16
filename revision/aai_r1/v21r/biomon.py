@@ -55,15 +55,26 @@ def wdir(check: bool):
 
 # ---- items ----------------------------------------------------------------------------------------------------
 
+HB_URL = ("https://raw.githubusercontent.com/centerforaisafety/HarmBench/main/data/behavior_datasets/"
+          "harmbench_behaviors_text_all.csv")
+
+
 def _harmbench() -> list[dict]:
-    from datasets import load_dataset
+    """HarmBench text behaviours (standard and contextual) of the chemical_biological category, from the CSV the PEAOS
+    harness reads (pea_eval/data/harmbench_behaviors_text_all.csv), else the same file in the HarmBench repository
+    (walledai/HarmBench on the Hub is gated)."""
+    f = C.peaos() / "pea_eval" / "data" / "harmbench_behaviors_text_all.csv"
+    df = pd.read_csv(f if f.exists() else HB_URL, encoding="utf-8", keep_default_na=False)
     out = []
-    for cfg in ("standard", "contextual"):
-        for r in load_dataset("walledai/HarmBench", cfg)["train"]:
-            if r.get("category") != "chemical_biological":
-                continue
-            text = (r["context"] + "\n\n" + r["prompt"]) if cfg == "contextual" and r.get("context") else r["prompt"]
-            out.append({"group": "bio" if BIO.search(r["prompt"]) else "chem", "text": text, "source": f"harmbench_{cfg}"})
+    for _, r in df.iterrows():
+        cfg = str(r.get("FunctionalCategory", "")).strip()
+        if r.get("SemanticCategory") != "chemical_biological" or cfg not in ("standard", "contextual"):
+            continue
+        b, ctx = str(r["Behavior"]), str(r.get("ContextString", "") or "").strip()
+        text = (ctx + "\n\n" + b) if cfg == "contextual" and ctx else b
+        out.append({"group": "bio" if BIO.search(b) else "chem", "text": text, "source": f"harmbench_{cfg}"})
+    if not out:
+        raise SystemExit(f"no chemical_biological behaviours in {f if f.exists() else HB_URL}")
     return out
 
 
