@@ -184,15 +184,15 @@ def dev_groups(sp: pd.DataFrame) -> dict:
             "adversarial_benign": te[te.source.isin(ADV_BENIGN).to_numpy() & ~y], "supp_harmful": te[supp & y]}
 
 
-def dev_by_variant(check: bool, sp: pd.DataFrame, th_all: dict) -> dict:
-    """Refusal share (Hard-block or Reasoned-Refusal) per test group at each variant's main operating point."""
+def dev_by_variant(check: bool, sp: pd.DataFrame, th_all: dict, cap: str = MAIN) -> dict:
+    """Refusal share (Hard-block or Reasoned-Refusal) per test group at each variant's operating point `cap`."""
     from . import theta as TH
     out = {}
     for v in DEV_VARIANTS:
-        if v not in th_all:
+        if v not in th_all or cap not in th_all[v]:
             continue
         sig = M.load_signals(check, v)
-        t = th_all[v][MAIN]["th"]
+        t = th_all[v][cap]["th"]
         res = {}
         for g, d in dev_groups(sp).items():
             if not len(d):
@@ -221,6 +221,12 @@ def run(check: bool) -> dict:
     if gf.exists():
         res["dev_guard"] = C.jload(gf)["groups"]
         res["dev_parity"] = parity(res["dev"], res["dev_guard"])
+        # every operating point of the curve: where (if anywhere) each variant is on par with the guard
+        tha = C.jload(D.odir(check) / "thresholds.json")["variants"]
+        caps = sorted({c for v in DEV_VARIANTS if v in tha for c in tha[v]}, key=float)
+        res["dev_curve"] = {c: dev_by_variant(check, sp, tha, c) for c in caps}
+        res["dev_parity_points"] = [f"{v}@{c}" for c, d in res["dev_curve"].items()
+                                    for v, x in parity(d, res["dev_guard"]).items() if x["all"]]
     if len(lab):
         a0, shp = on(a0sig, "bench", lab.sha), on(shsig, "bench", lab.sha)
         res["xstest"] = symptom(lab, th, a0, shp)
@@ -269,6 +275,11 @@ def render(r: dict) -> str:
                                                        for k in next(iter(r["dev"].values()))) + " |")
             L += ["", "- Llama Guard 동등(무해는 거절이 같거나 적고, 유해는 같거나 많음): "
                   + ", ".join(f"{v} {'예' if x['all'] else '아니오'} {x['groups']}" for v, x in r["dev_parity"].items())]
+            L += [f"- 곡선 전체에서 동등인 운영점: {', '.join(r.get('dev_parity_points') or []) or '없음'}", "",
+                  "| 운영점 | 변형 | " + " | ".join(gg) + " |", "|---|---|" + "---|" * len(gg)]
+            for c, d in (r.get("dev_curve") or {}).items():
+                for v, g in d.items():
+                    L.append(f"| {c} | {v} | " + " | ".join(f"{g[k]['refusal']:.3f}" if k in g else "" for k in gg) + " |")
     if "error" in r:
         L += ["", "## 오류", "", "```", r["error"], "```"]
     return "\n".join(L) + "\n"

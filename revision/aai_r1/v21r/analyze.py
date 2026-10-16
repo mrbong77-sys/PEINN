@@ -274,8 +274,9 @@ def preview(check: bool = False, log=print) -> int:
     """DESIGN.md 11: benchmark metrics of the current gate on the bases already answered (CPU, no model call), so the
     gate is reviewed on real answers before the rest of the matrix spends GPU time."""
     gd = D.odir(check) / "diag" / "gate_diag.json"
-    par = (C.jload(gd).get("dev_parity") or {}) if gd.exists() else {}
-    if PREVIEW_NEEDS_DEV_PARITY and not check and not any(x.get("all") for x in par.values()):
+    gdj = C.jload(gd) if gd.exists() else {}
+    par = gdj.get("dev_parity_points") or []
+    if PREVIEW_NEEDS_DEV_PARITY and not check and not par:
         o = D.odir(check) / "analysis_preview"
         md = o / "preview.md"
         o.mkdir(parents=True, exist_ok=True)
