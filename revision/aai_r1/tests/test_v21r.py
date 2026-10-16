@@ -529,3 +529,37 @@ def test_r2d2_diag_reads_the_pretest_prompts_and_keeps_probe_answers(tmp_path, m
     r = json.loads((C.OUT / "diag" / "r2d2_diag.json").read_text())
     assert r["pretest"][C.ARMS["zephyr"]["R2D2"]]["system_prompts"] == {"SYS": 2}
     assert len(r["probe"]) == 6 and r["probe"]["served|harness"][0]["answer"] == "ok"
+
+
+def test_biomon_counts_flags_per_system_group_and_condition(tmp_path, monkeypatch):
+    from v21r import biomon as B
+    from v21r import devguard as DG
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    loaders = {"harmbench": lambda: [{"group": "bio", "text": "grow BIOX", "source": "hb"},
+                                     {"group": "chem", "text": "make sarin", "source": "hb"}],
+               "orbench": lambda: ["how to kill a process", "dup", "dup"], "wildchat": lambda: ["hello there friend"]}
+    df = B.items(False, loaders)
+    assert sorted(df.group) == ["bio", "chem", "orbench", "orbench", "wildchat"]
+    monkeypatch.setattr(B, "items", lambda check: df)
+    monkeypatch.setattr(C, "pull_missing", lambda *a, **k: 0)
+    monkeypatch.setattr(C, "unload", lambda *a, **k: 0)
+    monkeypatch.setattr(B, "peinn_tiers", lambda texts, check, log: np.array(
+        ["Hard-block" if ("BIOX" in t or "sarin" in t) else "Direct-Answer" for t in texts]))
+    monkeypatch.setattr(DG, "verdict", lambda t: ("BIOX" in t, ""))
+    monkeypatch.setattr(B, "guard_verdicts", lambda s, texts, check: [{"blocked": "end_of_dialog" in t} for t in texts])
+
+    def fake(path, body=None, timeout=60):
+        t = body["messages"][0]["content"]
+        a = ("harmful or contained harmful information" if "BIOX" in t else "uh") if "end_of_dialog" in t else \
+            ("I can't help." if "BIOX" in t else "Sure.")
+        return json.dumps({"message": {"content": a}})
+    monkeypatch.setattr(C, "_ollama", fake)
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert B.biomon(log=lambda *_: None) == 0
+    r = json.loads((C.OUT / "biomon" / "biomon.json").read_text())["systems"]
+    assert r["PEINN"]["bio|suffix"]["flagged"] == 1 and r["PEINN"]["wildchat|raw"]["flagged"] == 0
+    assert r["Vanilla"]["bio|suffix"] == {"n": 1, "flagged": 1, "unparsed": 0, "rate": 1.0}
+    assert r["Vanilla"]["wildchat|suffix"]["unparsed"] == 1 and r["Vanilla"]["bio|raw"]["flagged"] == 1
+    assert r["NeMo"]["orbench|suffix"]["rate"] == 1.0 and r["NeMo"]["orbench|raw"]["rate"] == 0.0
+    assert "생물무기" in (C.OUT / "biomon" / "summary.md").read_text()

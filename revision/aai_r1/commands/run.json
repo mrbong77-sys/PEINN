@@ -1,6 +1,6 @@
 {
- "id": "20261016T072500Z-update",
+ "id": "20261016T080500Z-update",
  "action": "update",
- "note": "DESIGN.md 25: add r2d2-diag before zephyr-review; applies at the next step boundary (after matrix-gemma3).",
- "issued_utc": "2026-10-16 07:25:00"
+ "note": "DESIGN.md 26: biomon-check and biomon right after matrix-gemma3, then r2d2-diag; applies at the next step boundary.",
+ "issued_utc": "2026-10-16 08:05:00"
 }
