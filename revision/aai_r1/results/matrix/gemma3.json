@@ -1,0 +1,96 @@
+{
+ "rows": {
+  "da|ethics|H13": 400,
+  "da|ggb|H13": 90,
+  "da|harmbench|H13": 500,
+  "da|morables|H13": 900,
+  "da|taxonomy|H13": 200,
+  "da|xstest|H13": 225,
+  "de|ethics|H13": 400,
+  "de|ggb|H13": 90,
+  "de|harmbench|H13": 500,
+  "de|morables|H13": 900,
+  "de|taxonomy|H13": 200,
+  "de|xstest|H13": 225,
+  "hb|ethics|H13": 400,
+  "hb|ggb|H13": 90,
+  "hb|harmbench|H13": 500,
+  "hb|morables|H13": 900,
+  "hb|taxonomy|H13": 200,
+  "hb|xstest|H13": 225,
+  "others|ethics|H11": 400,
+  "others|ethics|H12": 400,
+  "others|ethics|H17": 400,
+  "others|ggb|H11": 90,
+  "others|ggb|H12": 90,
+  "others|ggb|H17": 90,
+  "others|harmbench|H11": 500,
+  "others|harmbench|H12": 500,
+  "others|harmbench|H17": 500,
+  "others|morables|H11": 900,
+  "others|morables|H12": 900,
+  "others|morables|H17": 900,
+  "others|taxonomy|H11": 200,
+  "others|taxonomy|H12": 200,
+  "others|taxonomy|H17": 200,
+  "others|xstest|H11": 225,
+  "others|xstest|H12": 225,
+  "others|xstest|H17": 225,
+  "rr|ethics|H13": 400,
+  "rr|ggb|H13": 90,
+  "rr|harmbench|H13": 500,
+  "rr|morables|H13": 900,
+  "rr|taxonomy|H13": 200,
+  "rr|xstest|H13": 225,
+  "sr|ethics|H13": 400,
+  "sr|ggb|H13": 90,
+  "sr|harmbench|H13": 500,
+  "sr|morables|H13": 900,
+  "sr|taxonomy|H13": 200,
+  "sr|xstest|H13": 225
+ },
+ "calls": {
+  "da_gen": {},
+  "da_judge": {
+   "gen_reused": 2515,
+   "judge_live": 172
+  },
+  "de_gen": {
+   "gen_reused": 1732,
+   "gen_live": 1468
+  },
+  "de_judge": {
+   "gen_reused": 4830,
+   "judge_live": 155
+  },
+  "hb_gen": {},
+  "hb_judge": {
+   "gen_reused": 2515
+  },
+  "others_gen": {
+   "gen_live": 14917,
+   "gen_reused": 2015
+  },
+  "others_judge": {
+   "gen_reused": 8478,
+   "judge_reused": 86,
+   "judge_live": 230,
+   "gen_live": 8462
+  },
+  "rr_gen": {},
+  "rr_judge": {
+   "gen_reused": 4830,
+   "judge_live": 154
+  },
+  "sr_gen": {
+   "gen_reused": 4830
+  },
+  "sr_judge": {
+   "gen_reused": 4830,
+   "judge_reused": 81,
+   "judge_live": 74
+  }
+ },
+ "internal_error_rows": {},
+ "error_rows": {}
+}
