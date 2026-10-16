@@ -1,6 +1,6 @@
 {
- "rows": 36024,
- "kept": 35178,
+ "rows": 47870,
+ "kept": 47024,
  "near_cos": 0.92,
  "dropped": {
   "guard": 12,
@@ -20,14 +20,14 @@
   "trick_safe|xstest_type": 509
  },
  "guard_reasons": {
-  "": 36033,
+  "": 47879,
   "near-dup": 11,
   "exact-collision": 1
  },
  "split": {
-  "train": 28723,
-  "test": 3231,
-  "val": 3224
+  "train": 38199,
+  "test": 4415,
+  "val": 4410
  },
  "by_source_polar": {
   "alpaca|F": 2,
@@ -53,16 +53,17 @@
   "narrative|F": 13,
   "narrative|T": 1187,
   "supp:coconot_contrast|T": 377,
-  "supp:falsereject_train|T": 2000,
+  "supp:falsereject_train|T": 5000,
   "supp:orbench_80k|T": 3000,
+  "supp:orbench_hard|T": 1273,
   "supp:orbench_toxic|F": 652,
-  "supp:phtest_harmless|T": 500,
-  "supp:wildguardmix_adv_benign|T": 500,
-  "supp:wildguardmix_adv_harmful|F": 500,
+  "supp:phtest_harmless|T": 2073,
+  "supp:wildguardmix_adv_benign|T": 1500,
+  "supp:wildguardmix_adv_harmful|F": 1500,
   "supp:wildguardmix_van_benign|T": 1993,
   "supp:wildguardmix_van_harmful|F": 1984,
-  "supp:wildjailbreak_adv_benign|T": 1000,
-  "supp:wildjailbreak_adv_harmful|F": 1000,
+  "supp:wildjailbreak_adv_benign|T": 3000,
+  "supp:wildjailbreak_adv_harmful|F": 3000,
   "supp:wildjailbreak_van_benign|T": 4994,
   "supp:wildjailbreak_van_harmful|F": 4999,
   "syn_advbenign|F": 44,
