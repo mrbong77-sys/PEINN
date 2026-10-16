@@ -460,3 +460,25 @@ def test_bases_env_narrows_the_matrix(monkeypatch):
     assert MX.bases(True) == ("qwen",) and MX.bases(False) == MX.ORDER
     monkeypatch.setenv("V21R_BASES", "zephyr")
     assert MX.bases(True) == ("zephyr",)
+
+
+def test_zephyr_review_needs_every_arm_and_tier_without_errors(monkeypatch):
+    from ops import run as R
+    from v21r import matrix as MX
+    rows = []
+    tags = [(t, C.ARMS["zephyr"]["PEINN"]) for t in MX.FORCED.values()]
+    tags += [("others", C.ARMS["zephyr"][k]) for k in ("Vanilla", "R2D2", "NeMo", "LlamaGuard")]
+    for tag, arm in tags:
+        for b in C.CHECK_BENCHES:
+            for lab in ("safe", "unsafe"):
+                rows.append({"tag": tag, "arm_id": arm, "bench": b, "response": "an answer", "expected_label": lab,
+                             "unsafe_compliance": 0.0, "over_refusal": 0.0})
+    df = pd.DataFrame(rows)
+    monkeypatch.setattr(MX, "collect", lambda check, base: df)
+    assert R.zephyr_review() == 0
+    bad = df.copy()
+    bad.loc[bad.arm_id == C.ARMS["zephyr"]["R2D2"], "response"] = ""
+    monkeypatch.setattr(MX, "collect", lambda check, base: bad)
+    assert R.zephyr_review() == 1
+    monkeypatch.setattr(MX, "collect", lambda check, base: df[df.arm_id != C.ARMS["zephyr"]["NeMo"]].reset_index(drop=True))
+    assert R.zephyr_review() == 1

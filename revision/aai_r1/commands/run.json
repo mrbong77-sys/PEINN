@@ -1,16 +1,6 @@
 {
- "id": "20261016T055500Z-rerun",
- "action": "rerun",
- "steps": [
-  "supp-check",
-  "train",
-  "thresholds",
-  "routes",
-  "gate-diag-check",
-  "gate-diag",
-  "preview-check",
-  "preview"
- ],
- "note": "DESIGN.md 24: A0ftM@0.03 confirmed (14:40 KST). Retrain once to save the fine-tuned encoders, rescore (CPU), main-check gate, zephyr/R2D2 pre-test on the check benches, then the matrix (gemma3, zephyr) and the rest.",
- "issued_utc": "2026-10-16 05:55:00"
+ "id": "20261016T060500Z-update",
+ "action": "update",
+ "note": "DESIGN.md 24: add zephyr-review (the zephyr pre-test judged on its answers) before the matrix; reload at the next step boundary.",
+ "issued_utc": "2026-10-16 06:05:00"
 }

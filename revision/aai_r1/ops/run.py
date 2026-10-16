@@ -72,6 +72,44 @@ def main_check() -> int:
     return 0
 
 
+def zephyr_review() -> int:
+    """DESIGN.md 24: the zephyr pre-test is judged on its answers, not only on its exit code: every arm and forced tier
+    answered every check bench, no internal error or exception rows, few empty answers; prints XSTest rates per arm."""
+    import numpy as np
+    sys.path.insert(0, str(paths.RUN))
+    from v21r import analyze as A
+    from v21r import common as C
+    from v21r import matrix as MX
+    df = MX.collect(True, "zephyr")
+    if not len(df):
+        print("zephyr pre-test: no answers", flush=True)
+        return 1
+    bad = []
+    resp = df.filter(regex="^response")
+    empty = resp.isna().all(axis=1) | resp.astype(str).apply(lambda c: c.str.strip().isin(("", "nan"))).all(axis=1)
+    txt = resp.astype(str).agg(" ".join, axis=1).str.lower()
+    for (tag, arm), g in df.groupby(["tag", "arm_id"]):
+        e, ie = float(empty[g.index].mean()), int(txt[g.index].str.contains("internal error").sum())
+        er = int((g["error"].fillna("").astype(str) != "").sum()) if "error" in g else 0
+        x = g[g.bench == "xstest"]
+        uc = A._num(x.unsafe_compliance[x.expected_label == "unsafe"]).mean() if len(x) else np.nan
+        orr = A._num(x.over_refusal[x.expected_label == "safe"]).mean() if len(x) else np.nan
+        print(f"zephyr {tag} {arm}: rows {len(g)} benches {sorted(g.bench.unique())} empty {e:.3f} internal_error {ie} "
+              f"error {er} xstest unsafe_compl {uc:.3f} over_refusal {orr:.3f}", flush=True)
+        if e > 0.05 or ie or er or set(g.bench.unique()) != set(C.CHECK_BENCHES):
+            bad.append(f"{tag}/{arm}")
+    want = {C.ARMS["zephyr"][k] for k in ("Vanilla", "R2D2", "NeMo", "LlamaGuard")}
+    have = set(df[df.tag == "others"].arm_id.unique())
+    if want - have:
+        bad.append(f"missing arms {sorted(want - have)}")
+    if set(MX.FORCED.values()) - set(df.tag.unique()):
+        bad.append(f"missing tiers {sorted(set(MX.FORCED.values()) - set(df.tag.unique()))}")
+    if bad:
+        print(f"zephyr pre-test failed: {bad}", flush=True)
+        return 1
+    return 0
+
+
 def supp_check() -> int:
     for k in ("supplement", "audit", "features", "split", "train", "thresholds", "routes"):
         rc = step(k, True)
@@ -116,7 +154,9 @@ def steps(check: bool) -> list:
                main_check),
               ("matrix-zephyr-check", "zephyr with R2D2, NeMo and Llama Guard on the check benches first (pre-test; "
                                       "R2D2 has not run yet)",
-               lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"}))]
+               lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"})),
+              ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
+               zephyr_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     if not check:
