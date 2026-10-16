@@ -825,6 +825,727 @@
    "extreme_label0": 2
   }
  },
+ "dev": {
+  "A0": {
+   "v4_safe": {
+    "rows": 647,
+    "refusal": 0.0526,
+    "hard_block": 0.0526
+   },
+   "v4_harmful": {
+    "rows": 235,
+    "refusal": 0.8681,
+    "hard_block": 0.8681
+   },
+   "overrefusal_benign": {
+    "rows": 588,
+    "refusal": 0.0612,
+    "hard_block": 0.0612
+   },
+   "adversarial_benign": {
+    "rows": 150,
+    "refusal": 0.28,
+    "hard_block": 0.28
+   },
+   "supp_harmful": {
+    "rows": 215,
+    "refusal": 0.8791,
+    "hard_block": 0.8791
+   }
+  },
+  "A0ft": {
+   "v4_safe": {
+    "rows": 647,
+    "refusal": 0.1036,
+    "hard_block": 0.1036
+   },
+   "v4_harmful": {
+    "rows": 235,
+    "refusal": 0.9277,
+    "hard_block": 0.9277
+   },
+   "overrefusal_benign": {
+    "rows": 588,
+    "refusal": 0.0408,
+    "hard_block": 0.0408
+   },
+   "adversarial_benign": {
+    "rows": 150,
+    "refusal": 0.28,
+    "hard_block": 0.28
+   },
+   "supp_harmful": {
+    "rows": 215,
+    "refusal": 0.9349,
+    "hard_block": 0.9349
+   }
+  }
+ },
+ "dev_guard": {
+  "v4_safe": {
+   "rows": 647,
+   "refusal": 0.0185
+  },
+  "v4_harmful": {
+   "rows": 235,
+   "refusal": 0.6511
+  },
+  "overrefusal_benign": {
+   "rows": 588,
+   "refusal": 0.0765
+  },
+  "adversarial_benign": {
+   "rows": 150,
+   "refusal": 0.0533
+  },
+  "supp_harmful": {
+   "rows": 215,
+   "refusal": 0.6047
+  }
+ },
+ "dev_parity": {
+  "A0": {
+   "groups": {
+    "v4_safe": false,
+    "v4_harmful": true,
+    "overrefusal_benign": true,
+    "adversarial_benign": false,
+    "supp_harmful": true
+   },
+   "all": false
+  },
+  "A0ft": {
+   "groups": {
+    "v4_safe": false,
+    "v4_harmful": true,
+    "overrefusal_benign": true,
+    "adversarial_benign": false,
+    "supp_harmful": true
+   },
+   "all": false
+  }
+ },
+ "dev_curve": {
+  "0.005": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8638,
+     "hard_block": 0.8638
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0204,
+     "hard_block": 0.0204
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.1067,
+     "hard_block": 0.1067
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8512,
+     "hard_block": 0.8512
+    }
+   }
+  },
+  "0.01": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8638,
+     "hard_block": 0.8638
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0204,
+     "hard_block": 0.0204
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.1067,
+     "hard_block": 0.1067
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8512,
+     "hard_block": 0.8512
+    }
+   }
+  },
+  "0.02": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0155,
+     "hard_block": 0.0155
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8383,
+     "hard_block": 0.8383
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0102,
+     "hard_block": 0.0085
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.0267,
+     "hard_block": 0.0267
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8093,
+     "hard_block": 0.8
+    }
+   }
+  },
+  "0.03": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8638,
+     "hard_block": 0.8638
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0204,
+     "hard_block": 0.0204
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.1067,
+     "hard_block": 0.1067
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8512,
+     "hard_block": 0.8512
+    }
+   }
+  },
+  "0.04": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0433,
+     "hard_block": 0.0433
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8809,
+     "hard_block": 0.8809
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0221,
+     "hard_block": 0.0221
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.1267,
+     "hard_block": 0.1267
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8698,
+     "hard_block": 0.8698
+    }
+   }
+  },
+  "0.05": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0476,
+     "hard_block": 0.0476
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2,
+     "hard_block": 0.2
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8372,
+     "hard_block": 0.8372
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0464,
+     "hard_block": 0.0464
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8894,
+     "hard_block": 0.8894
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0221,
+     "hard_block": 0.0221
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.1333,
+     "hard_block": 0.1333
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9116,
+     "hard_block": 0.9116
+    }
+   }
+  },
+  "0.07": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0325,
+     "hard_block": 0.0325
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.051,
+     "hard_block": 0.051
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2133,
+     "hard_block": 0.2133
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8465,
+     "hard_block": 0.8465
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0603,
+     "hard_block": 0.0603
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9106,
+     "hard_block": 0.9106
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0238,
+     "hard_block": 0.0238
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.2867,
+     "hard_block": 0.2867
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9442,
+     "hard_block": 0.9442
+    }
+   }
+  },
+  "0.1": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0526,
+     "hard_block": 0.0526
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8681,
+     "hard_block": 0.8681
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0612,
+     "hard_block": 0.0612
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.28,
+     "hard_block": 0.28
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.8791,
+     "hard_block": 0.8791
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1036,
+     "hard_block": 0.1036
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9277,
+     "hard_block": 0.9277
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0408,
+     "hard_block": 0.0408
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.28,
+     "hard_block": 0.28
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9349,
+     "hard_block": 0.9349
+    }
+   }
+  },
+  "0.15": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1036,
+     "hard_block": 0.1036
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9277,
+     "hard_block": 0.9277
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.1241,
+     "hard_block": 0.1241
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.38,
+     "hard_block": 0.38
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9302,
+     "hard_block": 0.9302
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1901,
+     "hard_block": 0.1901
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9447,
+     "hard_block": 0.9447
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.051,
+     "hard_block": 0.051
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.3533,
+     "hard_block": 0.3533
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9581,
+     "hard_block": 0.9581
+    }
+   }
+  },
+  "0.2": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1175,
+     "hard_block": 0.1175
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9447,
+     "hard_block": 0.9447
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.1446,
+     "hard_block": 0.1446
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.5067,
+     "hard_block": 0.5067
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9674,
+     "hard_block": 0.9674
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.2921,
+     "hard_block": 0.2921
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.966,
+     "hard_block": 0.966
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0612,
+     "hard_block": 0.0612
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.44,
+     "hard_block": 0.44
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.9674,
+     "hard_block": 0.9674
+    }
+   }
+  },
+  "0.3": {
+   "A0": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1685,
+     "hard_block": 0.1685
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9574,
+     "hard_block": 0.9574
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.2041,
+     "hard_block": 0.2041
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.62,
+     "hard_block": 0.62
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.986,
+     "hard_block": 0.986
+    }
+   },
+   "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.4003,
+     "hard_block": 0.4003
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9787,
+     "hard_block": 0.9787
+    },
+    "overrefusal_benign": {
+     "rows": 588,
+     "refusal": 0.0816,
+     "hard_block": 0.0816
+    },
+    "adversarial_benign": {
+     "rows": 150,
+     "refusal": 0.5733,
+     "hard_block": 0.5733
+    },
+    "supp_harmful": {
+     "rows": 215,
+     "refusal": 0.986,
+     "hard_block": 0.986
+    }
+   }
+  }
+ },
+ "dev_parity_points": [
+  "A0ft@0.02"
+ ],
  "xstest": {
   "texts": {
    "safe": 108,

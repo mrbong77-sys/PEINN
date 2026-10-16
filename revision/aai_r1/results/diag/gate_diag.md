@@ -85,3 +85,39 @@
 - safe_blocked: 문장 23, 이웃 에너지 라벨 1 비율 0.5304, 출처 {'beavertails': 26, 'hh_rlhf_harmless': 16, 'hh_rlhf_redteam': 13, 'supp:falsereject_train': 9, 'supp:orbench_80k': 9, 'supp:wildjailbreak_adv_benign': 8, 'supp:coconot_contrast': 8, 'dolly': 6, 'syn_advbenign': 5, 'supp:wildjailbreak_adv_harmful': 4, 'hh_rlhf_helpful': 4, 'syn_benignsensitive': 3, 'syn_subtleharm': 1, 'syn_intent': 1, 'supp:wildguardmix_adv_harmful': 1, 'supp:wildguardmix_adv_benign': 1}
 - safe_passed: 문장 85, 이웃 에너지 라벨 1 비율 0.2753, 출처 {'beavertails': 55, 'supp:coconot_contrast': 53, 'supp:falsereject_train': 41, 'hh_rlhf_harmless': 41, 'supp:wildjailbreak_adv_benign': 32, 'dolly': 31, 'supp:orbench_80k': 31, 'hh_rlhf_redteam': 29, 'hh_rlhf_helpful': 18, 'syn_advbenign': 12, 'syn_subtleharm': 12, 'supp:phtest_harmless': 12, 'alpaca': 11, 'toxicchat_safe': 10, 'supp:wildguardmix_adv_benign': 10, 'syn_benignsensitive': 6, 'syn_intent': 5, 'supp:orbench_toxic': 5, 'syn_cad': 4, 'classical_dilemma': 2, 'jailbreak': 2, 'daily_dilemmas': 1, 'narrative': 1, 'supp:wildjailbreak_adv_harmful': 1}
 - unsafe: 문장 83, 이웃 에너지 라벨 1 비율 0.7205, 출처 {'beavertails': 134, 'hh_rlhf_harmless': 67, 'supp:falsereject_train': 46, 'hh_rlhf_redteam': 43, 'supp:orbench_toxic': 25, 'supp:orbench_80k': 20, 'syn_intent': 18, 'syn_subtleharm': 17, 'supp:wildjailbreak_adv_benign': 7, 'supp:wildjailbreak_adv_harmful': 6, 'daily_dilemmas': 5, 'dolly': 5, 'toxicchat_safe': 5, 'supp:coconot_contrast': 5, 'syn_advbenign': 4, 'syn_benignsensitive': 3, 'hh_rlhf_helpful': 2, 'moralchoice_highamb': 1, 'supp:wildguardmix_adv_harmful': 1, 'classical_dilemma': 1}
+
+## 5. 변형 비교: test 분할 거절 비율 (주 운영점, 평가 벤치 아님, DESIGN.md 13)
+
+| 변형 | v4_safe | v4_harmful | overrefusal_benign | adversarial_benign | supp_harmful |
+|---|---|---|---|---|---|
+| A0 | 0.053 (n 647) | 0.868 (n 235) | 0.061 (n 588) | 0.280 (n 150) | 0.879 (n 215) |
+| A0ft | 0.104 (n 647) | 0.928 (n 235) | 0.041 (n 588) | 0.280 (n 150) | 0.935 (n 215) |
+| Llama Guard 3 (입력) | 0.018 (n 647) | 0.651 (n 235) | 0.076 (n 588) | 0.053 (n 150) | 0.605 (n 215) |
+
+- Llama Guard 동등(무해는 거절이 같거나 적고, 유해는 같거나 많음): A0 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'supp_harmful': True}, A0ft 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'supp_harmful': True}
+- 곡선 전체에서 동등인 운영점: A0ft@0.02
+
+| 운영점 | 변형 | v4_safe | v4_harmful | overrefusal_benign | adversarial_benign | supp_harmful |
+|---|---|---|---|---|---|---|
+| 0.005 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.005 | A0ft | 0.033 | 0.864 | 0.020 | 0.107 | 0.851 |
+| 0.01 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.01 | A0ft | 0.033 | 0.864 | 0.020 | 0.107 | 0.851 |
+| 0.02 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.02 | A0ft | 0.015 | 0.838 | 0.010 | 0.027 | 0.809 |
+| 0.03 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.03 | A0ft | 0.033 | 0.864 | 0.020 | 0.107 | 0.851 |
+| 0.04 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.04 | A0ft | 0.043 | 0.881 | 0.022 | 0.127 | 0.870 |
+| 0.05 | A0 | 0.033 | 0.817 | 0.048 | 0.200 | 0.837 |
+| 0.05 | A0ft | 0.046 | 0.889 | 0.022 | 0.133 | 0.912 |
+| 0.07 | A0 | 0.033 | 0.817 | 0.051 | 0.213 | 0.847 |
+| 0.07 | A0ft | 0.060 | 0.911 | 0.024 | 0.287 | 0.944 |
+| 0.1 | A0 | 0.053 | 0.868 | 0.061 | 0.280 | 0.879 |
+| 0.1 | A0ft | 0.104 | 0.928 | 0.041 | 0.280 | 0.935 |
+| 0.15 | A0 | 0.104 | 0.928 | 0.124 | 0.380 | 0.930 |
+| 0.15 | A0ft | 0.190 | 0.945 | 0.051 | 0.353 | 0.958 |
+| 0.2 | A0 | 0.117 | 0.945 | 0.145 | 0.507 | 0.967 |
+| 0.2 | A0ft | 0.292 | 0.966 | 0.061 | 0.440 | 0.967 |
+| 0.3 | A0 | 0.169 | 0.957 | 0.204 | 0.620 | 0.986 |
+| 0.3 | A0ft | 0.400 | 0.979 | 0.082 | 0.573 | 0.986 |
