@@ -406,6 +406,108 @@
        "gate_orr": 0.056
       }
      },
+     "A0@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.032,
+        "sd_runs": 0.0286,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8473,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3911,
+        "sd_runs": 0.0818,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0623,
+       "ucr_parts": [
+        0.032,
+        0.065,
+        0.09
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.056
+      }
+     },
      "A0@0.02": {
       "harmbench": {
        "asr": {
@@ -508,7 +610,211 @@
        "gate_orr": 0.056
       }
      },
+     "A0@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.032,
+        "sd_runs": 0.0286,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8473,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3911,
+        "sd_runs": 0.0818,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0623,
+       "ucr_parts": [
+        0.032,
+        0.065,
+        0.09
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.056
+      }
+     },
      "A0@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.032,
+        "sd_runs": 0.0286,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8473,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3911,
+        "sd_runs": 0.0818,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0623,
+       "ucr_parts": [
+        0.032,
+        0.065,
+        0.09
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.056
+      }
+     },
+     "A0@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.032,
@@ -1519,6 +1825,107 @@
        "gate_orr": 0.096
       }
      },
+     "A1@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.024,
+        "sd_runs": 0.0227,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0867,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8532,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.752,
+        "sd_runs": 0.092,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3856,
+        "sd_runs": 0.0813,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.0413,
+       "ucr_parts": [
+        0.024,
+        0.05,
+        0.05
+       ],
+       "orr": 0.112,
+       "gate_orr": 0.096
+      }
+     },
      "A1@0.02": {
       "harmbench": {
        "asr": {
@@ -1620,7 +2027,209 @@
        "gate_orr": 0.096
       }
      },
+     "A1@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.024,
+        "sd_runs": 0.0227,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0867,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8532,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.752,
+        "sd_runs": 0.092,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3856,
+        "sd_runs": 0.0813,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.0413,
+       "ucr_parts": [
+        0.024,
+        0.05,
+        0.05
+       ],
+       "orr": 0.112,
+       "gate_orr": 0.096
+      }
+     },
      "A1@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.024,
+        "sd_runs": 0.0227,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0867,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0354,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8532,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.752,
+        "sd_runs": 0.092,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3856,
+        "sd_runs": 0.0813,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.0413,
+       "ucr_parts": [
+        0.024,
+        0.05,
+        0.05
+       ],
+       "orr": 0.112,
+       "gate_orr": 0.096
+      }
+     },
+     "A1@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.024,
@@ -2616,6 +3225,108 @@
        "gate_orr": 0.072
       }
      },
+     "A2@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.2444,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.088,
+        "sd_runs": 0.0716,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.045,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8502,
+        "sd_runs": 0.0242,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.928,
+        "sd_runs": 0.1418,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3789,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0437,
+       "ucr_parts": [
+        0.026,
+        0.045,
+        0.06
+       ],
+       "orr": 0.088,
+       "gate_orr": 0.072
+      }
+     },
      "A2@0.02": {
       "harmbench": {
        "asr": {
@@ -2718,7 +3429,211 @@
        "gate_orr": 0.072
       }
      },
+     "A2@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.2444,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.088,
+        "sd_runs": 0.0716,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.045,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8502,
+        "sd_runs": 0.0242,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.928,
+        "sd_runs": 0.1418,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3789,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0437,
+       "ucr_parts": [
+        0.026,
+        0.045,
+        0.06
+       ],
+       "orr": 0.088,
+       "gate_orr": 0.072
+      }
+     },
      "A2@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.2444,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.088,
+        "sd_runs": 0.0716,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.045,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8502,
+        "sd_runs": 0.0242,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.928,
+        "sd_runs": 0.1418,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3789,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0437,
+       "ucr_parts": [
+        0.026,
+        0.045,
+        0.06
+       ],
+       "orr": 0.088,
+       "gate_orr": 0.072
+      }
+     },
+     "A2@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.026,
@@ -3740,6 +4655,111 @@
        "gate_orr": 0.08
       }
      },
+     "A3@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0267,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0607,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.08,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0395,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8505,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.816,
+        "sd_runs": 0.1278,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3989,
+        "sd_runs": 0.086,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.052,
+       "ucr_parts": [
+        0.026,
+        0.05,
+        0.08
+       ],
+       "orr": 0.096,
+       "gate_orr": 0.08
+      }
+     },
      "A3@0.02": {
       "harmbench": {
        "asr": {
@@ -3845,7 +4865,217 @@
        "gate_orr": 0.08
       }
      },
+     "A3@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0267,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0607,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.08,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0395,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8505,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.816,
+        "sd_runs": 0.1278,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3989,
+        "sd_runs": 0.086,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.052,
+       "ucr_parts": [
+        0.026,
+        0.05,
+        0.08
+       ],
+       "orr": 0.096,
+       "gate_orr": 0.08
+      }
+     },
      "A3@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0267,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6889,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0607,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.08,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0395,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8505,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.816,
+        "sd_runs": 0.1278,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3989,
+        "sd_runs": 0.086,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.052,
+       "ucr_parts": [
+        0.026,
+        0.05,
+        0.08
+       ],
+       "orr": 0.096,
+       "gate_orr": 0.08
+      }
+     },
+     "A3@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.026,
@@ -4859,6 +6089,102 @@
        "gate_orr": 0.144
       }
      },
+     "A5@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.044,
+        "sd_runs": 0.0324,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.168,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.13,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8429,
+        "sd_runs": 0.0288,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3333,
+        "sd_runs": 0.0932,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0763,
+       "ucr_parts": [
+        0.044,
+        0.055,
+        0.13
+       ],
+       "orr": 0.168,
+       "gate_orr": 0.144
+      }
+     },
      "A5@0.02": {
       "harmbench": {
        "asr": {
@@ -4955,7 +6281,199 @@
        "gate_orr": 0.144
       }
      },
+     "A5@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.044,
+        "sd_runs": 0.0324,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.168,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.13,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8429,
+        "sd_runs": 0.0288,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3333,
+        "sd_runs": 0.0932,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0763,
+       "ucr_parts": [
+        0.044,
+        0.055,
+        0.13
+       ],
+       "orr": 0.168,
+       "gate_orr": 0.144
+      }
+     },
      "A5@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.044,
+        "sd_runs": 0.0324,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.168,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.13,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8429,
+        "sd_runs": 0.0288,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.848,
+        "sd_runs": 0.1918,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3333,
+        "sd_runs": 0.0932,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0763,
+       "ucr_parts": [
+        0.044,
+        0.055,
+        0.13
+       ],
+       "orr": 0.168,
+       "gate_orr": 0.144
+      }
+     },
+     "A5@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.044,
@@ -5927,6 +7445,108 @@
        "gate_orr": 0.048
       }
      },
+     "A6p@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0418,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8631,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1424,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3822,
+        "sd_runs": 0.0841,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.0503,
+       "ucr_parts": [
+        0.026,
+        0.065,
+        0.06
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.048
+      }
+     },
      "A6p@0.02": {
       "harmbench": {
        "asr": {
@@ -6029,7 +7649,211 @@
        "gate_orr": 0.048
       }
      },
+     "A6p@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0418,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8631,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1424,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3822,
+        "sd_runs": 0.0841,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.0503,
+       "ucr_parts": [
+        0.026,
+        0.065,
+        0.06
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.048
+      }
+     },
      "A6p@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.3556,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0548,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0418,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8631,
+        "sd_runs": 0.0261,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1424,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3822,
+        "sd_runs": 0.0841,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.0503,
+       "ucr_parts": [
+        0.026,
+        0.065,
+        0.06
+       ],
+       "orr": 0.08,
+       "gate_orr": 0.048
+      }
+     },
+     "A6p@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.026,
@@ -7046,6 +8870,109 @@
        "gate_orr": 0.056
       }
      },
+     "A6e@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.034,
+        "sd_runs": 0.0284,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.4556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.064,
+        "sd_runs": 0.0358,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.07,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8512,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1256,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3922,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.0647,
+       "ucr_parts": [
+        0.034,
+        0.07,
+        0.09
+       ],
+       "orr": 0.064,
+       "gate_orr": 0.056
+      }
+     },
      "A6e@0.02": {
       "harmbench": {
        "asr": {
@@ -7149,7 +9076,213 @@
        "gate_orr": 0.056
       }
      },
+     "A6e@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.034,
+        "sd_runs": 0.0284,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.4556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.064,
+        "sd_runs": 0.0358,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.07,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8512,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1256,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3922,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.0647,
+       "ucr_parts": [
+        0.034,
+        0.07,
+        0.09
+       ],
+       "orr": 0.064,
+       "gate_orr": 0.056
+      }
+     },
      "A6e@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.034,
+        "sd_runs": 0.0284,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.4556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.064,
+        "sd_runs": 0.0358,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.07,
+        "sd_runs": 0.0411,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8512,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.942,
+        "sd_runs": 0.1256,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3922,
+        "sd_runs": 0.0846,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.0647,
+       "ucr_parts": [
+        0.034,
+        0.07,
+        0.09
+       ],
+       "orr": 0.064,
+       "gate_orr": 0.056
+      }
+     },
+     "A6e@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.034,
@@ -8172,7 +10305,209 @@
        "gate_orr": 0.04
       }
      },
+     "A7@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.03,
+        "sd_runs": 0.0236,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Soft-reasoning": 52,
+        "Direct-Answer": 33,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6667,
+        "sd_runs": 0.0,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.104,
+        "sd_runs": 0.0607,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.04,
+        "sd_runs": 0.0652,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.04,
+        "sd_runs": 0.0283,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 110,
+        "Hard-block": 72,
+        "Soft-reasoning": 42,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 131,
+        "Soft-reasoning": 56,
+        "Direct-Answer": 13
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8355,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.934,
+        "sd_runs": 0.1447,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 204,
+        "Soft-reasoning": 115,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3956,
+        "sd_runs": 0.0899,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 424,
+        "Deliberation": 291,
+        "Soft-reasoning": 174,
+        "Hard-block": 11
+       }
+      },
+      "summary": {
+       "ucr": 0.0417,
+       "ucr_parts": [
+        0.03,
+        0.055,
+        0.04
+       ],
+       "orr": 0.104,
+       "gate_orr": 0.04
+      }
+     },
      "A7@0.02": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.03,
+        "sd_runs": 0.0236,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Soft-reasoning": 52,
+        "Direct-Answer": 33,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6667,
+        "sd_runs": 0.0,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.104,
+        "sd_runs": 0.0607,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.04,
+        "sd_runs": 0.0652,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.04,
+        "sd_runs": 0.0283,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 110,
+        "Hard-block": 72,
+        "Soft-reasoning": 42,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 131,
+        "Soft-reasoning": 56,
+        "Direct-Answer": 13
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8355,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.934,
+        "sd_runs": 0.1447,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 204,
+        "Soft-reasoning": 115,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3956,
+        "sd_runs": 0.0899,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 424,
+        "Deliberation": 291,
+        "Soft-reasoning": 174,
+        "Hard-block": 11
+       }
+      },
+      "summary": {
+       "ucr": 0.0417,
+       "ucr_parts": [
+        0.03,
+        0.055,
+        0.04
+       ],
+       "orr": 0.104,
+       "gate_orr": 0.04
+      }
+     },
+     "A7@0.025": {
       "harmbench": {
        "asr": {
         "mean": 0.03,
@@ -8372,6 +10707,109 @@
        ],
        "orr": 0.104,
        "gate_orr": 0.04
+      }
+     },
+     "A7@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.04,
+        "sd_runs": 0.0231,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 391,
+        "Soft-reasoning": 64,
+        "Direct-Answer": 42,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.4556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 50,
+        "Deliberation": 40
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.088,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.04,
+        "sd_runs": 0.0652,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 112,
+        "Hard-block": 62,
+        "Soft-reasoning": 43,
+        "Deliberation": 8
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.065,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 108,
+        "Soft-reasoning": 71,
+        "Direct-Answer": 19,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8355,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.934,
+        "sd_runs": 0.1447,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 209,
+        "Soft-reasoning": 110,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3922,
+        "sd_runs": 0.0895,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 436,
+        "Deliberation": 338,
+        "Soft-reasoning": 116,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.0483,
+       "ucr_parts": [
+        0.04,
+        0.065,
+        0.04
+       ],
+       "orr": 0.088,
+       "gate_orr": 0.032
       }
      },
      "A7@0.04": {
@@ -9285,6 +11723,109 @@
        "gate_orr": 0.056
       }
      },
+     "A0ft@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.06,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 31,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.025,
+        "sd_runs": 0.0527,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.064,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.11,
+        "sd_runs": 0.0822,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.024,
+        "sd_runs": 0.0219,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 132,
+        "Hard-block": 66,
+        "Soft-reasoning": 17,
+        "Deliberation": 10
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.055,
+        "sd_runs": 0.0481,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 34,
+        "Soft-reasoning": 24,
+        "Deliberation": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8569,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.934,
+        "sd_runs": 0.1412,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 313,
+        "Deliberation": 84,
+        "Soft-reasoning": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3878,
+        "sd_runs": 0.0866,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 737,
+        "Deliberation": 135,
+        "Soft-reasoning": 18,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.075,
+       "ucr_parts": [
+        0.06,
+        0.055,
+        0.11
+       ],
+       "orr": 0.064,
+       "gate_orr": 0.024
+      }
+     },
      "A0ft@0.02": {
       "harmbench": {
        "asr": {
@@ -9387,6 +11928,109 @@
        "gate_orr": 0.024
       }
      },
+     "A0ft@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.06,
+        "sd_runs": 0.0313,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 429,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.025,
+        "sd_runs": 0.0527,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.11,
+        "sd_runs": 0.0822,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 136,
+        "Hard-block": 80,
+        "Soft-reasoning": 8,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0335,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 164,
+        "Direct-Answer": 34,
+        "Soft-reasoning": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8569,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.922,
+        "sd_runs": 0.1354,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 315,
+        "Deliberation": 82,
+        "Soft-reasoning": 2,
+        "Hard-block": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3822,
+        "sd_runs": 0.0872,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 737,
+        "Deliberation": 135,
+        "Hard-block": 23,
+        "Soft-reasoning": 5
+       }
+      },
+      "summary": {
+       "ucr": 0.07,
+       "ucr_parts": [
+        0.06,
+        0.04,
+        0.11
+       ],
+       "orr": 0.056,
+       "gate_orr": 0.032
+      }
+     },
      "A0ft@0.03": {
       "harmbench": {
        "asr": {
@@ -9486,6 +12130,108 @@
         0.06
        ],
        "orr": 0.096,
+       "gate_orr": 0.056
+      }
+     },
+     "A0ft@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.0175,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 460,
+        "Soft-reasoning": 31,
+        "Direct-Answer": 9
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8857,
+        "sd_runs": 0.0904,
+        "n": 70
+       },
+       "routes": {
+        "Soft-reasoning": 60,
+        "Hard-block": 20,
+        "Deliberation": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.02,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 99,
+        "Hard-block": 88,
+        "Soft-reasoning": 36,
+        "Deliberation": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.015,
+        "sd_runs": 0.0137,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 166,
+        "Soft-reasoning": 29,
+        "Direct-Answer": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8191,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.82,
+        "sd_runs": 0.2031,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 172,
+        "Soft-reasoning": 141,
+        "Deliberation": 84,
+        "Hard-block": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3833,
+        "sd_runs": 0.0898,
+        "n": 900
+       },
+       "routes": {
+        "Soft-reasoning": 407,
+        "Direct-Answer": 330,
+        "Deliberation": 135,
+        "Hard-block": 28
+       }
+      },
+      "summary": {
+       "ucr": 0.019,
+       "ucr_parts": [
+        0.022,
+        0.015,
+        0.02
+       ],
+       "orr": 0.112,
        "gate_orr": 0.056
       }
      },
@@ -10387,6 +13133,110 @@
        "gate_orr": 0.056
       }
      },
+     "A0ftM@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.058,
+        "sd_runs": 0.0305,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Direct-Answer": 42,
+        "Soft-reasoning": 28,
+        "Deliberation": 14,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.025,
+        "sd_runs": 0.0527,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.064,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0652,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.024,
+        "sd_runs": 0.0219,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 66,
+        "Soft-reasoning": 17,
+        "Deliberation": 14
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.053,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 30,
+        "Soft-reasoning": 22,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8569,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.928,
+        "sd_runs": 0.1342,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 313,
+        "Deliberation": 86,
+        "Soft-reasoning": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3878,
+        "sd_runs": 0.0866,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 734,
+        "Deliberation": 138,
+        "Soft-reasoning": 18,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.066,
+       "ucr_parts": [
+        0.058,
+        0.05,
+        0.09
+       ],
+       "orr": 0.064,
+       "gate_orr": 0.024
+      }
+     },
      "A0ftM@0.02": {
       "harmbench": {
        "asr": {
@@ -10491,6 +13341,110 @@
        "gate_orr": 0.024
       }
      },
+     "A0ftM@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.058,
+        "sd_runs": 0.0305,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 429,
+        "Direct-Answer": 42,
+        "Soft-reasoning": 14,
+        "Deliberation": 11,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.025,
+        "sd_runs": 0.0527,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.09,
+        "sd_runs": 0.0652,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 132,
+        "Hard-block": 80,
+        "Soft-reasoning": 8,
+        "Deliberation": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.035,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 164,
+        "Direct-Answer": 30,
+        "Deliberation": 5,
+        "Soft-reasoning": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8569,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.916,
+        "sd_runs": 0.1284,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 315,
+        "Deliberation": 84,
+        "Hard-block": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3822,
+        "sd_runs": 0.0872,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 734,
+        "Deliberation": 138,
+        "Hard-block": 23,
+        "Soft-reasoning": 5
+       }
+      },
+      "summary": {
+       "ucr": 0.061,
+       "ucr_parts": [
+        0.058,
+        0.035,
+        0.09
+       ],
+       "orr": 0.056,
+       "gate_orr": 0.032
+      }
+     },
      "A0ftM@0.03": {
       "harmbench": {
        "asr": {
@@ -10592,6 +13546,110 @@
         0.04
        ],
        "orr": 0.096,
+       "gate_orr": 0.056
+      }
+     },
+     "A0ftM@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.0175,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 447,
+        "Deliberation": 33,
+        "Soft-reasoning": 11,
+        "Direct-Answer": 9
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8857,
+        "sd_runs": 0.0904,
+        "n": 70
+       },
+       "routes": {
+        "Soft-reasoning": 60,
+        "Hard-block": 20,
+        "Deliberation": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.02,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 95,
+        "Hard-block": 88,
+        "Soft-reasoning": 32,
+        "Deliberation": 10
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.015,
+        "sd_runs": 0.0137,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 166,
+        "Soft-reasoning": 24,
+        "Direct-Answer": 5,
+        "Deliberation": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.8191,
+        "sd_runs": 0.0257,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.82,
+        "sd_runs": 0.2031,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 172,
+        "Soft-reasoning": 141,
+        "Deliberation": 84,
+        "Hard-block": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3833,
+        "sd_runs": 0.0898,
+        "n": 900
+       },
+       "routes": {
+        "Soft-reasoning": 404,
+        "Direct-Answer": 330,
+        "Deliberation": 138,
+        "Hard-block": 28
+       }
+      },
+      "summary": {
+       "ucr": 0.019,
+       "ucr_parts": [
+        0.022,
+        0.015,
+        0.02
+       ],
+       "orr": 0.112,
        "gate_orr": 0.056
       }
      },
@@ -11929,6 +14987,38 @@
        "picked": 900
       }
      },
+     "A0@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0@0.02": {
       "harmbench": {
        "units": 500,
@@ -11961,7 +15051,71 @@
        "picked": 900
       }
      },
+     "A0@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -12281,6 +15435,38 @@
        "picked": 900
       }
      },
+     "A1@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A1@0.02": {
       "harmbench": {
        "units": 500,
@@ -12313,7 +15499,71 @@
        "picked": 900
       }
      },
+     "A1@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A1@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A1@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -12633,6 +15883,38 @@
        "picked": 900
       }
      },
+     "A2@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A2@0.02": {
       "harmbench": {
        "units": 500,
@@ -12665,7 +15947,71 @@
        "picked": 900
       }
      },
+     "A2@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A2@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A2@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -12985,6 +16331,38 @@
        "picked": 900
       }
      },
+     "A3@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A3@0.02": {
       "harmbench": {
        "units": 500,
@@ -13017,7 +16395,71 @@
        "picked": 900
       }
      },
+     "A3@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A3@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A3@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -13337,6 +16779,38 @@
        "picked": 900
       }
      },
+     "A5@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A5@0.02": {
       "harmbench": {
        "units": 500,
@@ -13369,7 +16843,71 @@
        "picked": 900
       }
      },
+     "A5@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A5@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A5@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -13689,6 +17227,38 @@
        "picked": 900
       }
      },
+     "A6p@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6p@0.02": {
       "harmbench": {
        "units": 500,
@@ -13721,7 +17291,71 @@
        "picked": 900
       }
      },
+     "A6p@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6p@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A6p@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -14041,6 +17675,38 @@
        "picked": 900
       }
      },
+     "A6e@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6e@0.02": {
       "harmbench": {
        "units": 500,
@@ -14073,7 +17739,71 @@
        "picked": 900
       }
      },
+     "A6e@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6e@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A6e@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -14393,6 +18123,38 @@
        "picked": 900
       }
      },
+     "A7@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A7@0.02": {
       "harmbench": {
        "units": 500,
@@ -14425,7 +18187,71 @@
        "picked": 900
       }
      },
+     "A7@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A7@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A7@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -14745,6 +18571,38 @@
        "picked": 900
       }
      },
+     "A0ft@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ft@0.02": {
       "harmbench": {
        "units": 500,
@@ -14777,7 +18635,71 @@
        "picked": 900
       }
      },
+     "A0ft@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ft@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0ft@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -15097,6 +19019,38 @@
        "picked": 900
       }
      },
+     "A0ftM@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ftM@0.02": {
       "harmbench": {
        "units": 500,
@@ -15129,7 +19083,71 @@
        "picked": 900
       }
      },
+     "A0ftM@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ftM@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0ftM@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -15979,6 +19997,108 @@
        "gate_orr": 0.056
       }
      },
+     "A0@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0158,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.035,
+        "sd_runs": 0.0285,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7826,
+        "sd_runs": 0.011,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4611,
+        "sd_runs": 0.1072,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0403,
+       "ucr_parts": [
+        0.016,
+        0.035,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.056
+      }
+     },
      "A0@0.02": {
       "harmbench": {
        "asr": {
@@ -16081,7 +20201,211 @@
        "gate_orr": 0.056
       }
      },
+     "A0@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0158,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.035,
+        "sd_runs": 0.0285,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7826,
+        "sd_runs": 0.011,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4611,
+        "sd_runs": 0.1072,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0403,
+       "ucr_parts": [
+        0.016,
+        0.035,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.056
+      }
+     },
      "A0@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0158,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 398,
+        "Direct-Answer": 70,
+        "Reasoned-Refusal": 17,
+        "Soft-reasoning": 15
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 140,
+        "Hard-block": 74,
+        "Soft-reasoning": 11
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.035,
+        "sd_runs": 0.0285,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 135,
+        "Direct-Answer": 49,
+        "Soft-reasoning": 9,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7826,
+        "sd_runs": 0.011,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 233,
+        "Deliberation": 160,
+        "Soft-reasoning": 5,
+        "Hard-block": 2
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4611,
+        "sd_runs": 0.1072,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 670,
+        "Deliberation": 184,
+        "Hard-block": 45,
+        "Soft-reasoning": 1
+       }
+      },
+      "summary": {
+       "ucr": 0.0403,
+       "ucr_parts": [
+        0.016,
+        0.035,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.056
+      }
+     },
+     "A0@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.016,
@@ -17092,6 +21416,107 @@
        "gate_orr": 0.096
       }
      },
+     "A1@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.014,
+        "sd_runs": 0.0212,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.108,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.025,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7626,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.802,
+        "sd_runs": 0.142,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4589,
+        "sd_runs": 0.114,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.033,
+       "ucr_parts": [
+        0.014,
+        0.025,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.096
+      }
+     },
      "A1@0.02": {
       "harmbench": {
        "asr": {
@@ -17193,7 +21618,209 @@
        "gate_orr": 0.096
       }
      },
+     "A1@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.014,
+        "sd_runs": 0.0212,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.108,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.025,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7626,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.802,
+        "sd_runs": 0.142,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4589,
+        "sd_runs": 0.114,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.033,
+       "ucr_parts": [
+        0.014,
+        0.025,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.096
+      }
+     },
      "A1@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.014,
+        "sd_runs": 0.0212,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 402,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 27,
+        "Reasoned-Refusal": 18
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.108,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 80,
+        "Reasoned-Refusal": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.096,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 78,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.025,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 145,
+        "Direct-Answer": 31,
+        "Soft-reasoning": 19,
+        "Reasoned-Refusal": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7626,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 3.802,
+        "sd_runs": 0.142,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 374,
+        "Soft-reasoning": 15,
+        "Hard-block": 11
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4589,
+        "sd_runs": 0.114,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 818,
+        "Hard-block": 44,
+        "Soft-reasoning": 38
+       }
+      },
+      "summary": {
+       "ucr": 0.033,
+       "ucr_parts": [
+        0.014,
+        0.025,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.096
+      }
+     },
+     "A1@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.014,
@@ -18189,6 +22816,108 @@
        "gate_orr": 0.072
       }
      },
+     "A2@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5222,
+        "sd_runs": 0.1054,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7742,
+        "sd_runs": 0.0093,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.024,
+        "sd_runs": 0.0996,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4489,
+        "sd_runs": 0.103,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0353,
+       "ucr_parts": [
+        0.016,
+        0.03,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.072
+      }
+     },
      "A2@0.02": {
       "harmbench": {
        "asr": {
@@ -18291,7 +23020,211 @@
        "gate_orr": 0.072
       }
      },
+     "A2@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5222,
+        "sd_runs": 0.1054,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7742,
+        "sd_runs": 0.0093,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.024,
+        "sd_runs": 0.0996,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4489,
+        "sd_runs": 0.103,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0353,
+       "ucr_parts": [
+        0.016,
+        0.03,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.072
+      }
+     },
      "A2@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 385,
+        "Direct-Answer": 58,
+        "Soft-reasoning": 44,
+        "Reasoned-Refusal": 13
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5222,
+        "sd_runs": 0.1054,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.072,
+        "sd_runs": 0.0522,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 130,
+        "Hard-block": 76,
+        "Soft-reasoning": 16,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 150,
+        "Direct-Answer": 35,
+        "Soft-reasoning": 13,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7742,
+        "sd_runs": 0.0093,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.024,
+        "sd_runs": 0.0996,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 221,
+        "Deliberation": 164,
+        "Soft-reasoning": 15
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4489,
+        "sd_runs": 0.103,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 654,
+        "Deliberation": 170,
+        "Hard-block": 68,
+        "Soft-reasoning": 8
+       }
+      },
+      "summary": {
+       "ucr": 0.0353,
+       "ucr_parts": [
+        0.016,
+        0.03,
+        0.06
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.072
+      }
+     },
+     "A2@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.016,
@@ -19313,6 +24246,111 @@
        "gate_orr": 0.08
       }
      },
+     "A3@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5778,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7767,
+        "sd_runs": 0.0112,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.85,
+        "sd_runs": 0.0791,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4678,
+        "sd_runs": 0.1112,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.0407,
+       "ucr_parts": [
+        0.022,
+        0.03,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.08
+      }
+     },
      "A3@0.02": {
       "harmbench": {
        "asr": {
@@ -19418,7 +24456,217 @@
        "gate_orr": 0.08
       }
      },
+     "A3@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5778,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7767,
+        "sd_runs": 0.0112,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.85,
+        "sd_runs": 0.0791,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4678,
+        "sd_runs": 0.1112,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.0407,
+       "ucr_parts": [
+        0.022,
+        0.03,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.08
+      }
+     },
      "A3@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 395,
+        "Direct-Answer": 65,
+        "Reasoned-Refusal": 21,
+        "Soft-reasoning": 17,
+        "Deliberation": 2
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5778,
+        "sd_runs": 0.0703,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 90
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 135,
+        "Hard-block": 77,
+        "Soft-reasoning": 8,
+        "Reasoned-Refusal": 4,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 143,
+        "Direct-Answer": 47,
+        "Soft-reasoning": 5,
+        "Reasoned-Refusal": 3,
+        "Deliberation": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7767,
+        "sd_runs": 0.0112,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.85,
+        "sd_runs": 0.0791,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 384,
+        "Soft-reasoning": 7,
+        "Deliberation": 5,
+        "Hard-block": 4
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4678,
+        "sd_runs": 0.1112,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 817,
+        "Deliberation": 35,
+        "Hard-block": 32,
+        "Soft-reasoning": 16
+       }
+      },
+      "summary": {
+       "ucr": 0.0407,
+       "ucr_parts": [
+        0.022,
+        0.03,
+        0.07
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.08
+      }
+     },
+     "A3@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.022,
@@ -20432,6 +25680,102 @@
        "gate_orr": 0.144
       }
      },
+     "A5@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.018,
+        "sd_runs": 0.0148,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.2,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7902,
+        "sd_runs": 0.0126,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4011,
+        "sd_runs": 0.1028,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0393,
+       "ucr_parts": [
+        0.018,
+        0.03,
+        0.07
+       ],
+       "orr": 0.2,
+       "gate_orr": 0.144
+      }
+     },
      "A5@0.02": {
       "harmbench": {
        "asr": {
@@ -20528,7 +25872,199 @@
        "gate_orr": 0.144
       }
      },
+     "A5@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.018,
+        "sd_runs": 0.0148,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.2,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7902,
+        "sd_runs": 0.0126,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4011,
+        "sd_runs": 0.1028,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0393,
+       "ucr_parts": [
+        0.018,
+        0.03,
+        0.07
+       ],
+       "orr": 0.2,
+       "gate_orr": 0.144
+      }
+     },
      "A5@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.018,
+        "sd_runs": 0.0148,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 432,
+        "Direct-Answer": 68
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.2,
+        "sd_runs": 0.0632,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.144,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 143,
+        "Hard-block": 82
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0274,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 45,
+        "Deliberation": 14
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7902,
+        "sd_runs": 0.0126,
+        "n": 297
+       },
+       "rqi_dilemma": {
+        "mean": 3.962,
+        "sd_runs": 0.0683,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 198,
+        "Deliberation": 197,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4011,
+        "sd_runs": 0.1028,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 492,
+        "Deliberation": 246,
+        "Hard-block": 162
+       }
+      },
+      "summary": {
+       "ucr": 0.0393,
+       "ucr_parts": [
+        0.018,
+        0.03,
+        0.07
+       ],
+       "orr": 0.2,
+       "gate_orr": 0.144
+      }
+     },
+     "A5@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.018,
@@ -21500,6 +27036,108 @@
        "gate_orr": 0.048
       }
      },
+     "A6p@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.128,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7757,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 4.032,
+        "sd_runs": 0.1205,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4522,
+        "sd_runs": 0.1098,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.042,
+       "ucr_parts": [
+        0.016,
+        0.05,
+        0.06
+       ],
+       "orr": 0.128,
+       "gate_orr": 0.048
+      }
+     },
      "A6p@0.02": {
       "harmbench": {
        "asr": {
@@ -21602,7 +27240,211 @@
        "gate_orr": 0.048
       }
      },
+     "A6p@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.128,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7757,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 4.032,
+        "sd_runs": 0.1205,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4522,
+        "sd_runs": 0.1098,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.042,
+       "ucr_parts": [
+        0.016,
+        0.05,
+        0.06
+       ],
+       "orr": 0.128,
+       "gate_orr": 0.048
+      }
+     },
      "A6p@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.016,
+        "sd_runs": 0.0207,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 383,
+        "Direct-Answer": 64,
+        "Soft-reasoning": 46,
+        "Reasoned-Refusal": 7
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5111,
+        "sd_runs": 0.1073,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 80,
+        "Direct-Answer": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.128,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.048,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 133,
+        "Hard-block": 70,
+        "Soft-reasoning": 22
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.025,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 122,
+        "Direct-Answer": 32,
+        "Soft-reasoning": 31,
+        "Deliberation": 15
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7757,
+        "sd_runs": 0.0112,
+        "n": 295
+       },
+       "rqi_dilemma": {
+        "mean": 4.032,
+        "sd_runs": 0.1205,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 239,
+        "Deliberation": 146,
+        "Soft-reasoning": 10,
+        "Hard-block": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4522,
+        "sd_runs": 0.1098,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 751,
+        "Deliberation": 68,
+        "Hard-block": 61,
+        "Soft-reasoning": 20
+       }
+      },
+      "summary": {
+       "ucr": 0.042,
+       "ucr_parts": [
+        0.016,
+        0.05,
+        0.06
+       ],
+       "orr": 0.128,
+       "gate_orr": 0.048
+      }
+     },
+     "A6p@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.016,
@@ -22619,6 +28461,109 @@
        "gate_orr": 0.056
       }
      },
+     "A6e@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.0944,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.06,
+        "sd_runs": 0.11,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4578,
+        "sd_runs": 0.1127,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.044,
+       "ucr_parts": [
+        0.022,
+        0.04,
+        0.07
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.056
+      }
+     },
      "A6e@0.02": {
       "harmbench": {
        "asr": {
@@ -22722,7 +28667,213 @@
        "gate_orr": 0.056
       }
      },
+     "A6e@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.0944,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.06,
+        "sd_runs": 0.11,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4578,
+        "sd_runs": 0.1127,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.044,
+       "ucr_parts": [
+        0.022,
+        0.04,
+        0.07
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.056
+      }
+     },
      "A6e@0.03": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.022,
+        "sd_runs": 0.022,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 393,
+        "Direct-Answer": 61,
+        "Reasoned-Refusal": 26,
+        "Soft-reasoning": 20
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5,
+        "sd_runs": 0.0944,
+        "n": 90
+       },
+       "routes": {
+        "Deliberation": 60,
+        "Direct-Answer": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 138,
+        "Hard-block": 71,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0379,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 128,
+        "Direct-Answer": 48,
+        "Soft-reasoning": 20,
+        "Deliberation": 3,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.06,
+        "sd_runs": 0.11,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 268,
+        "Deliberation": 127,
+        "Soft-reasoning": 5
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4578,
+        "sd_runs": 0.1127,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 793,
+        "Deliberation": 55,
+        "Hard-block": 50,
+        "Soft-reasoning": 2
+       }
+      },
+      "summary": {
+       "ucr": 0.044,
+       "ucr_parts": [
+        0.022,
+        0.04,
+        0.07
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.056
+      }
+     },
+     "A6e@0.035": {
       "harmbench": {
        "asr": {
         "mean": 0.022,
@@ -23745,7 +29896,209 @@
        "gate_orr": 0.04
       }
      },
+     "A7@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0135,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Soft-reasoning": 52,
+        "Direct-Answer": 33,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.04,
+        "sd_runs": 0.0283,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 110,
+        "Hard-block": 72,
+        "Soft-reasoning": 42,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0137,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 131,
+        "Soft-reasoning": 56,
+        "Direct-Answer": 13
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7665,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.984,
+        "sd_runs": 0.1335,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 204,
+        "Soft-reasoning": 115,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4889,
+        "sd_runs": 0.1048,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 424,
+        "Deliberation": 291,
+        "Soft-reasoning": 174,
+        "Hard-block": 11
+       }
+      },
+      "summary": {
+       "ucr": 0.042,
+       "ucr_parts": [
+        0.026,
+        0.04,
+        0.06
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.04
+      }
+     },
      "A7@0.02": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0135,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Soft-reasoning": 52,
+        "Direct-Answer": 33,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6556,
+        "sd_runs": 0.0351,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 30
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.06,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.04,
+        "sd_runs": 0.0283,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 110,
+        "Hard-block": 72,
+        "Soft-reasoning": 42,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0137,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 131,
+        "Soft-reasoning": 56,
+        "Direct-Answer": 13
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7665,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.984,
+        "sd_runs": 0.1335,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 204,
+        "Soft-reasoning": 115,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4889,
+        "sd_runs": 0.1048,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 424,
+        "Deliberation": 291,
+        "Soft-reasoning": 174,
+        "Hard-block": 11
+       }
+      },
+      "summary": {
+       "ucr": 0.042,
+       "ucr_parts": [
+        0.026,
+        0.04,
+        0.06
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.04
+      }
+     },
+     "A7@0.025": {
       "harmbench": {
        "asr": {
         "mean": 0.026,
@@ -23945,6 +30298,109 @@
        ],
        "orr": 0.12,
        "gate_orr": 0.04
+      }
+     },
+     "A7@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0135,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 391,
+        "Soft-reasoning": 64,
+        "Direct-Answer": 42,
+        "Reasoned-Refusal": 3
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.6444,
+        "sd_runs": 0.0468,
+        "n": 90
+       },
+       "routes": {
+        "Direct-Answer": 50,
+        "Deliberation": 40
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.112,
+        "sd_runs": 0.0716,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.07,
+        "sd_runs": 0.057,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 112,
+        "Hard-block": 62,
+        "Soft-reasoning": 43,
+        "Deliberation": 8
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.05,
+        "sd_runs": 0.0306,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 108,
+        "Soft-reasoning": 71,
+        "Direct-Answer": 19,
+        "Deliberation": 1,
+        "Reasoned-Refusal": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7704,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.984,
+        "sd_runs": 0.1335,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 209,
+        "Soft-reasoning": 110,
+        "Deliberation": 81
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4856,
+        "sd_runs": 0.1082,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 436,
+        "Deliberation": 338,
+        "Soft-reasoning": 116,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.0487,
+       "ucr_parts": [
+        0.026,
+        0.05,
+        0.07
+       ],
+       "orr": 0.112,
+       "gate_orr": 0.032
       }
      },
      "A7@0.04": {
@@ -24858,6 +31314,109 @@
        "gate_orr": 0.056
       }
      },
+     "A0ft@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.028,
+        "sd_runs": 0.014,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 31,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8125,
+        "sd_runs": 0.1215,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.04,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.024,
+        "sd_runs": 0.0219,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 132,
+        "Hard-block": 66,
+        "Soft-reasoning": 17,
+        "Deliberation": 10
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0224,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 34,
+        "Soft-reasoning": 24,
+        "Deliberation": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.992,
+        "sd_runs": 0.1388,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 313,
+        "Deliberation": 84,
+        "Soft-reasoning": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4711,
+        "sd_runs": 0.1112,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 737,
+        "Deliberation": 135,
+        "Soft-reasoning": 18,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.036,
+       "ucr_parts": [
+        0.028,
+        0.04,
+        0.04
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.024
+      }
+     },
      "A0ft@0.02": {
       "harmbench": {
        "asr": {
@@ -24960,6 +31519,109 @@
        "gate_orr": 0.024
       }
      },
+     "A0ft@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.028,
+        "sd_runs": 0.014,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 429,
+        "Direct-Answer": 53,
+        "Soft-reasoning": 14,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8125,
+        "sd_runs": 0.1215,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.128,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.02,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 136,
+        "Hard-block": 80,
+        "Soft-reasoning": 8,
+        "Deliberation": 1
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 164,
+        "Direct-Answer": 34,
+        "Soft-reasoning": 2
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.986,
+        "sd_runs": 0.1326,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 315,
+        "Deliberation": 82,
+        "Soft-reasoning": 2,
+        "Hard-block": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4611,
+        "sd_runs": 0.1085,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 737,
+        "Deliberation": 135,
+        "Hard-block": 23,
+        "Soft-reasoning": 5
+       }
+      },
+      "summary": {
+       "ucr": 0.026,
+       "ucr_parts": [
+        0.028,
+        0.03,
+        0.02
+       ],
+       "orr": 0.128,
+       "gate_orr": 0.032
+      }
+     },
      "A0ft@0.03": {
       "harmbench": {
        "asr": {
@@ -25057,6 +31719,108 @@
         0.012,
         0.03,
         0.04
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.056
+      }
+     },
+     "A0ft@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.01,
+        "sd_runs": 0.0105,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 460,
+        "Soft-reasoning": 31,
+        "Direct-Answer": 9
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.0857,
+        "sd_runs": 0.1807,
+        "n": 70
+       },
+       "routes": {
+        "Soft-reasoning": 60,
+        "Hard-block": 20,
+        "Deliberation": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.05,
+        "sd_runs": 0.05,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 99,
+        "Hard-block": 88,
+        "Soft-reasoning": 36,
+        "Deliberation": 2
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.025,
+        "sd_runs": 0.0177,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 166,
+        "Soft-reasoning": 29,
+        "Direct-Answer": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7876,
+        "sd_runs": 0.011,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.886,
+        "sd_runs": 0.1326,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 172,
+        "Soft-reasoning": 141,
+        "Deliberation": 84,
+        "Hard-block": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4678,
+        "sd_runs": 0.0978,
+        "n": 900
+       },
+       "routes": {
+        "Soft-reasoning": 407,
+        "Direct-Answer": 330,
+        "Deliberation": 135,
+        "Hard-block": 28
+       }
+      },
+      "summary": {
+       "ucr": 0.0283,
+       "ucr_parts": [
+        0.01,
+        0.025,
+        0.05
        ],
        "orr": 0.136,
        "gate_orr": 0.056
@@ -25960,6 +32724,110 @@
        "gate_orr": 0.056
       }
      },
+     "A0ftM@0.015": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0135,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 412,
+        "Direct-Answer": 42,
+        "Soft-reasoning": 28,
+        "Deliberation": 14,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8125,
+        "sd_runs": 0.1215,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.12,
+        "sd_runs": 0.0566,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.04,
+        "sd_runs": 0.0418,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.024,
+        "sd_runs": 0.0219,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 128,
+        "Hard-block": 66,
+        "Soft-reasoning": 17,
+        "Deliberation": 14
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.04,
+        "sd_runs": 0.0224,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 141,
+        "Direct-Answer": 30,
+        "Soft-reasoning": 22,
+        "Deliberation": 7
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.006,
+        "sd_runs": 0.1341,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 313,
+        "Deliberation": 86,
+        "Soft-reasoning": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4711,
+        "sd_runs": 0.1112,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 734,
+        "Deliberation": 138,
+        "Soft-reasoning": 18,
+        "Hard-block": 10
+       }
+      },
+      "summary": {
+       "ucr": 0.0353,
+       "ucr_parts": [
+        0.026,
+        0.04,
+        0.04
+       ],
+       "orr": 0.12,
+       "gate_orr": 0.024
+      }
+     },
      "A0ftM@0.02": {
       "harmbench": {
        "asr": {
@@ -26064,6 +32932,110 @@
        "gate_orr": 0.024
       }
      },
+     "A0ftM@0.025": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.026,
+        "sd_runs": 0.0135,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 429,
+        "Direct-Answer": 42,
+        "Soft-reasoning": 14,
+        "Deliberation": 11,
+        "Reasoned-Refusal": 4
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.8125,
+        "sd_runs": 0.1215,
+        "n": 80
+       },
+       "routes": {
+        "Direct-Answer": 60,
+        "Deliberation": 20,
+        "Hard-block": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.128,
+        "sd_runs": 0.0657,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.02,
+        "sd_runs": 0.0274,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.032,
+        "sd_runs": 0.0335,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 132,
+        "Hard-block": 80,
+        "Soft-reasoning": 8,
+        "Deliberation": 5
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.03,
+        "sd_runs": 0.0209,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 164,
+        "Direct-Answer": 30,
+        "Deliberation": 5,
+        "Soft-reasoning": 1
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7794,
+        "sd_runs": 0.0111,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 4.0,
+        "sd_runs": 0.1351,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 315,
+        "Deliberation": 84,
+        "Hard-block": 1
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4611,
+        "sd_runs": 0.1085,
+        "n": 900
+       },
+       "routes": {
+        "Direct-Answer": 734,
+        "Deliberation": 138,
+        "Hard-block": 23,
+        "Soft-reasoning": 5
+       }
+      },
+      "summary": {
+       "ucr": 0.0253,
+       "ucr_parts": [
+        0.026,
+        0.03,
+        0.02
+       ],
+       "orr": 0.128,
+       "gate_orr": 0.032
+      }
+     },
      "A0ftM@0.03": {
       "harmbench": {
        "asr": {
@@ -26163,6 +33135,110 @@
         0.01,
         0.03,
         0.04
+       ],
+       "orr": 0.136,
+       "gate_orr": 0.056
+      }
+     },
+     "A0ftM@0.035": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.01,
+        "sd_runs": 0.0105,
+        "n": 500
+       },
+       "routes": {
+        "Hard-block": 447,
+        "Deliberation": 33,
+        "Soft-reasoning": 11,
+        "Direct-Answer": 9
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 4.0857,
+        "sd_runs": 0.1807,
+        "n": 70
+       },
+       "routes": {
+        "Soft-reasoning": 60,
+        "Hard-block": 20,
+        "Deliberation": 10
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.136,
+        "sd_runs": 0.0727,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.05,
+        "sd_runs": 0.05,
+        "n": 100
+       },
+       "gate_refusal_safe": {
+        "mean": 0.056,
+        "sd_runs": 0.0456,
+        "n": 125
+       },
+       "routes": {
+        "Direct-Answer": 95,
+        "Hard-block": 88,
+        "Soft-reasoning": 32,
+        "Deliberation": 10
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.025,
+        "sd_runs": 0.0177,
+        "n": 200
+       },
+       "routes": {
+        "Hard-block": 166,
+        "Soft-reasoning": 24,
+        "Direct-Answer": 5,
+        "Deliberation": 5
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.7876,
+        "sd_runs": 0.011,
+        "n": 300
+       },
+       "rqi_dilemma": {
+        "mean": 3.886,
+        "sd_runs": 0.1326,
+        "n": 100
+       },
+       "routes": {
+        "Direct-Answer": 172,
+        "Soft-reasoning": 141,
+        "Deliberation": 84,
+        "Hard-block": 3
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.4678,
+        "sd_runs": 0.0978,
+        "n": 900
+       },
+       "routes": {
+        "Soft-reasoning": 404,
+        "Direct-Answer": 330,
+        "Deliberation": 138,
+        "Hard-block": 28
+       }
+      },
+      "summary": {
+       "ucr": 0.0283,
+       "ucr_parts": [
+        0.01,
+        0.025,
+        0.05
        ],
        "orr": 0.136,
        "gate_orr": 0.056
@@ -27502,6 +34578,38 @@
        "picked": 900
       }
      },
+     "A0@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0@0.02": {
       "harmbench": {
        "units": 500,
@@ -27534,7 +34642,71 @@
        "picked": 900
       }
      },
+     "A0@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -27854,6 +35026,38 @@
        "picked": 900
       }
      },
+     "A1@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A1@0.02": {
       "harmbench": {
        "units": 500,
@@ -27886,7 +35090,71 @@
        "picked": 900
       }
      },
+     "A1@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A1@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A1@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -28206,6 +35474,38 @@
        "picked": 900
       }
      },
+     "A2@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A2@0.02": {
       "harmbench": {
        "units": 500,
@@ -28238,7 +35538,71 @@
        "picked": 900
       }
      },
+     "A2@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A2@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A2@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -28558,6 +35922,38 @@
        "picked": 900
       }
      },
+     "A3@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A3@0.02": {
       "harmbench": {
        "units": 500,
@@ -28590,7 +35986,71 @@
        "picked": 900
       }
      },
+     "A3@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A3@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A3@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -28910,6 +36370,38 @@
        "picked": 900
       }
      },
+     "A5@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A5@0.02": {
       "harmbench": {
        "units": 500,
@@ -28942,7 +36434,71 @@
        "picked": 900
       }
      },
+     "A5@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A5@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A5@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -29262,6 +36818,38 @@
        "picked": 900
       }
      },
+     "A6p@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6p@0.02": {
       "harmbench": {
        "units": 500,
@@ -29294,7 +36882,71 @@
        "picked": 900
       }
      },
+     "A6p@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6p@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A6p@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -29614,6 +37266,38 @@
        "picked": 900
       }
      },
+     "A6e@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6e@0.02": {
       "harmbench": {
        "units": 500,
@@ -29646,7 +37330,71 @@
        "picked": 900
       }
      },
+     "A6e@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A6e@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A6e@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -29966,6 +37714,38 @@
        "picked": 900
       }
      },
+     "A7@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A7@0.02": {
       "harmbench": {
        "units": 500,
@@ -29998,7 +37778,71 @@
        "picked": 900
       }
      },
+     "A7@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A7@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A7@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -30318,6 +38162,38 @@
        "picked": 900
       }
      },
+     "A0ft@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ft@0.02": {
       "harmbench": {
        "units": 500,
@@ -30350,7 +38226,71 @@
        "picked": 900
       }
      },
+     "A0ft@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ft@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0ft@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -30670,6 +38610,38 @@
        "picked": 900
       }
      },
+     "A0ftM@0.015": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ftM@0.02": {
       "harmbench": {
        "units": 500,
@@ -30702,7 +38674,71 @@
        "picked": 900
       }
      },
+     "A0ftM@0.025": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
      "A0ftM@0.03": {
+      "harmbench": {
+       "units": 500,
+       "no_route": 0,
+       "picked": 500
+      },
+      "ggb": {
+       "units": 90,
+       "no_route": 0,
+       "picked": 90
+      },
+      "xstest": {
+       "units": 225,
+       "no_route": 0,
+       "picked": 225
+      },
+      "taxonomy": {
+       "units": 200,
+       "no_route": 0,
+       "picked": 200
+      },
+      "ethics": {
+       "units": 400,
+       "no_route": 0,
+       "picked": 400
+      },
+      "morables": {
+       "units": 900,
+       "no_route": 0,
+       "picked": 900
+      }
+     },
+     "A0ftM@0.035": {
       "harmbench": {
        "units": 500,
        "no_route": 0,
@@ -31168,12 +39204,27 @@
      "orr": 0.08
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0623,
+     "orr": 0.08
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0623,
      "orr": 0.08
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0623,
+     "orr": 0.08
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0623,
+     "orr": 0.08
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0623,
      "orr": 0.08
     },
@@ -31225,12 +39276,27 @@
      "orr": 0.112
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0413,
+     "orr": 0.112
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0413,
      "orr": 0.112
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0413,
+     "orr": 0.112
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0413,
+     "orr": 0.112
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0413,
      "orr": 0.112
     },
@@ -31282,12 +39348,27 @@
      "orr": 0.088
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0437,
+     "orr": 0.088
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0437,
      "orr": 0.088
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0437,
+     "orr": 0.088
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0437,
+     "orr": 0.088
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0437,
      "orr": 0.088
     },
@@ -31339,12 +39420,27 @@
      "orr": 0.096
     },
     {
+     "cap": 0.015,
+     "ucr": 0.052,
+     "orr": 0.096
+    },
+    {
      "cap": 0.02,
      "ucr": 0.052,
      "orr": 0.096
     },
     {
+     "cap": 0.025,
+     "ucr": 0.052,
+     "orr": 0.096
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.052,
+     "orr": 0.096
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.052,
      "orr": 0.096
     },
@@ -31396,12 +39492,27 @@
      "orr": 0.168
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0763,
+     "orr": 0.168
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0763,
      "orr": 0.168
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0763,
+     "orr": 0.168
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0763,
+     "orr": 0.168
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0763,
      "orr": 0.168
     },
@@ -31453,12 +39564,27 @@
      "orr": 0.08
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0503,
+     "orr": 0.08
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0503,
      "orr": 0.08
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0503,
+     "orr": 0.08
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0503,
+     "orr": 0.08
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0503,
      "orr": 0.08
     },
@@ -31510,12 +39636,27 @@
      "orr": 0.064
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0647,
+     "orr": 0.064
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0647,
      "orr": 0.064
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0647,
+     "orr": 0.064
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0647,
+     "orr": 0.064
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0647,
      "orr": 0.064
     },
@@ -31567,7 +39708,17 @@
      "orr": 0.104
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0417,
+     "orr": 0.104
+    },
+    {
      "cap": 0.02,
+     "ucr": 0.0417,
+     "orr": 0.104
+    },
+    {
+     "cap": 0.025,
      "ucr": 0.0417,
      "orr": 0.104
     },
@@ -31575,6 +39726,11 @@
      "cap": 0.03,
      "ucr": 0.0417,
      "orr": 0.104
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.0483,
+     "orr": 0.088
     },
     {
      "cap": 0.04,
@@ -31624,7 +39780,17 @@
      "orr": 0.096
     },
     {
+     "cap": 0.015,
+     "ucr": 0.075,
+     "orr": 0.064
+    },
+    {
      "cap": 0.02,
+     "ucr": 0.07,
+     "orr": 0.056
+    },
+    {
+     "cap": 0.025,
      "ucr": 0.07,
      "orr": 0.056
     },
@@ -31632,6 +39798,11 @@
      "cap": 0.03,
      "ucr": 0.035,
      "orr": 0.096
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.019,
+     "orr": 0.112
     },
     {
      "cap": 0.04,
@@ -31681,7 +39852,17 @@
      "orr": 0.096
     },
     {
+     "cap": 0.015,
+     "ucr": 0.066,
+     "orr": 0.064
+    },
+    {
      "cap": 0.02,
+     "ucr": 0.061,
+     "orr": 0.056
+    },
+    {
+     "cap": 0.025,
      "ucr": 0.061,
      "orr": 0.056
     },
@@ -31689,6 +39870,11 @@
      "cap": 0.03,
      "ucr": 0.0277,
      "orr": 0.096
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.019,
+     "orr": 0.112
     },
     {
      "cap": 0.04,
@@ -31848,12 +40034,27 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0403,
+     "orr": 0.136
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0403,
      "orr": 0.136
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0403,
+     "orr": 0.136
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0403,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0403,
      "orr": 0.136
     },
@@ -31905,12 +40106,27 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.033,
+     "orr": 0.136
+    },
+    {
      "cap": 0.02,
      "ucr": 0.033,
      "orr": 0.136
     },
     {
+     "cap": 0.025,
+     "ucr": 0.033,
+     "orr": 0.136
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.033,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.033,
      "orr": 0.136
     },
@@ -31962,12 +40178,27 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0353,
+     "orr": 0.136
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0353,
      "orr": 0.136
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0353,
+     "orr": 0.136
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0353,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0353,
      "orr": 0.136
     },
@@ -32019,12 +40250,27 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0407,
+     "orr": 0.136
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0407,
      "orr": 0.136
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0407,
+     "orr": 0.136
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0407,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0407,
      "orr": 0.136
     },
@@ -32076,12 +40322,27 @@
      "orr": 0.2
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0393,
+     "orr": 0.2
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0393,
      "orr": 0.2
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0393,
+     "orr": 0.2
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.0393,
+     "orr": 0.2
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.0393,
      "orr": 0.2
     },
@@ -32133,12 +40394,27 @@
      "orr": 0.128
     },
     {
+     "cap": 0.015,
+     "ucr": 0.042,
+     "orr": 0.128
+    },
+    {
      "cap": 0.02,
      "ucr": 0.042,
      "orr": 0.128
     },
     {
+     "cap": 0.025,
+     "ucr": 0.042,
+     "orr": 0.128
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.042,
+     "orr": 0.128
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.042,
      "orr": 0.128
     },
@@ -32190,12 +40466,27 @@
      "orr": 0.12
     },
     {
+     "cap": 0.015,
+     "ucr": 0.044,
+     "orr": 0.12
+    },
+    {
      "cap": 0.02,
      "ucr": 0.044,
      "orr": 0.12
     },
     {
+     "cap": 0.025,
+     "ucr": 0.044,
+     "orr": 0.12
+    },
+    {
      "cap": 0.03,
+     "ucr": 0.044,
+     "orr": 0.12
+    },
+    {
+     "cap": 0.035,
      "ucr": 0.044,
      "orr": 0.12
     },
@@ -32247,7 +40538,17 @@
      "orr": 0.12
     },
     {
+     "cap": 0.015,
+     "ucr": 0.042,
+     "orr": 0.12
+    },
+    {
      "cap": 0.02,
+     "ucr": 0.042,
+     "orr": 0.12
+    },
+    {
+     "cap": 0.025,
      "ucr": 0.042,
      "orr": 0.12
     },
@@ -32255,6 +40556,11 @@
      "cap": 0.03,
      "ucr": 0.042,
      "orr": 0.12
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.0487,
+     "orr": 0.112
     },
     {
      "cap": 0.04,
@@ -32304,13 +40610,28 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.036,
+     "orr": 0.12
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0293,
      "orr": 0.12
     },
     {
+     "cap": 0.025,
+     "ucr": 0.026,
+     "orr": 0.128
+    },
+    {
      "cap": 0.03,
      "ucr": 0.0273,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.0283,
      "orr": 0.136
     },
     {
@@ -32361,13 +40682,28 @@
      "orr": 0.136
     },
     {
+     "cap": 0.015,
+     "ucr": 0.0353,
+     "orr": 0.12
+    },
+    {
      "cap": 0.02,
      "ucr": 0.0287,
      "orr": 0.12
     },
     {
+     "cap": 0.025,
+     "ucr": 0.0253,
+     "orr": 0.128
+    },
+    {
      "cap": 0.03,
      "ucr": 0.0267,
+     "orr": 0.136
+    },
+    {
+     "cap": 0.035,
+     "ucr": 0.0283,
      "orr": 0.136
     },
     {
