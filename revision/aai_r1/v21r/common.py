@@ -30,11 +30,14 @@ ARMS = {  # base -> {defense: arm id} (paper Table 2 and Appendix A)
 JUDGE = "qwen3:32b"                                  # the submitted judge (all LLM-judged benches)
 R2D2 = "zephyr-r2d2:latest"                          # the name the PEAOS arm H02 calls
 # The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST); R2D2 uses CPEG's weights, mradermacher's
-# Q8_0 GGUF of cais/zephyr_7b_r2d2 (the blob CPEG's zephyr-r2d2:7b-q8_0 also holds), served with the model's own chat
-# template as the GGUF carries it ("{prompt}</s>"). CPEG's Modelfile took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"),
-# under which R2D2 left 8 of 12 submitted XSTest safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
+# Q8_0 GGUF of cais/zephyr_7b_r2d2 (the blob CPEG's zephyr-r2d2:7b-q8_0 also holds), served with HarmBench's own prompt for
+# this model (baselines/model_utils.py ZEPHYR_ROBUST_PROMPT, configs/model_configs/models.yaml zephyr_7b_robust; no system
+# block). CPEG's Modelfile took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"), under which R2D2 left 8 of 12 submitted
+# XSTest safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
 R2D2_CPEG = "zephyr-r2d2:7b-q8_0"
 R2D2_GGUF = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0"
+R2D2_TEMPLATE = "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n"     # HarmBench ZEPHYR_ROBUST_PROMPT
+R2D2_STOPS = ("</s>", "<|user|>", "<|assistant|>", "<|system|>")
 EXTRA_MODELS = (R2D2, "llama-guard3:8b")
 
 TIERS = ("Hard-block", "Reasoned-Refusal", "Deliberation", "Soft-reasoning", "Direct-Answer")
@@ -183,26 +186,51 @@ def _digests() -> dict:
     return {m["name"]: m.get("digest", "") for m in json.loads(_ollama("/api/tags"))["models"]}
 
 
-def ensure_r2d2(log=print) -> Path | None:
-    """R2D2 (arm H02) under the name H02 calls: a copy of R2D2_GGUF (CPEG's weights, the GGUF's own template). A model of
-    that name with another digest is replaced. Returns the served Modelfile written to results/ (None if in place)."""
+def _show(name: str) -> dict:
+    return json.loads(_ollama("/api/show", {"model": name}))
+
+
+def _blob(show: dict) -> str:
+    """The weights file a served model reads (its Modelfile's FROM line)."""
+    return next((l.split()[-1].replace("\\", "/").rsplit("/", 1)[-1] for l in show.get("modelfile", "").splitlines()
+                 if l.startswith("FROM ")), "")
+
+
+def r2d2_served() -> dict:
+    """What H02 is served with now: the weights blob against R2D2_GGUF's and the template against HarmBench's."""
     have = _digests()
-    if R2D2_GGUF in have and have.get(R2D2) == have[R2D2_GGUF]:
-        return None
+    if R2D2 not in have or R2D2_GGUF not in have:
+        return {"ok": False, "missing": [m for m in (R2D2, R2D2_GGUF) if m not in have]}
+    me, ref = _show(R2D2), _show(R2D2_GGUF)
+    rep = {"blob": _blob(me), "gguf_blob": _blob(ref), "template": me.get("template", ""),
+           "harmbench_template": R2D2_TEMPLATE}
+    rep["ok"] = bool(rep["blob"]) and rep["blob"] == rep["gguf_blob"] and rep["template"] == R2D2_TEMPLATE
+    return rep
+
+
+def ensure_r2d2(log=print) -> Path | None:
+    """R2D2 (arm H02) under the name H02 calls: R2D2_GGUF's weights (CPEG's) with HarmBench's prompt (R2D2_TEMPLATE).
+    A model of that name with other weights or another template is replaced. Returns the Modelfile record written to
+    results/ (None if already in place)."""
     pull_missing([R2D2_GGUF], log=log)
-    if R2D2 in have:
-        log(f"  ollama rm {R2D2} (another build or template)")
+    if r2d2_served().get("ok"):
+        return None
+    if R2D2 in _digests():
+        log(f"  ollama rm {R2D2} (other weights or template)")
         subprocess.run(["ollama", "rm", R2D2])
-    log(f"  ollama cp {R2D2_GGUF} {R2D2}")
-    if subprocess.run(["ollama", "cp", R2D2_GGUF, R2D2]).returncode:
-        raise SystemExit(f"ollama cp {R2D2_GGUF} {R2D2} failed")
     f = OUT / "r2d2_Modelfile"
     f.parent.mkdir(parents=True, exist_ok=True)
-    out = []
-    for what in ("--modelfile", "--template"):
-        r = subprocess.run(["ollama", "show", R2D2, what], capture_output=True, encoding="utf-8", errors="replace")
-        out.append(f"# ollama show {R2D2} {what}\n{r.stdout}")
-    f.write_text("\n".join(out), encoding="utf-8")
+    src = CACHE / "r2d2.Modelfile"
+    src.parent.mkdir(parents=True, exist_ok=True)
+    src.write_text(f'FROM {R2D2_GGUF}\nTEMPLATE """{R2D2_TEMPLATE}"""\n'
+                   + "".join(f'PARAMETER stop "{s}"\n' for s in R2D2_STOPS), encoding="utf-8")
+    log(f"  ollama create {R2D2} -f {src}")
+    if subprocess.run(["ollama", "create", R2D2, "-f", str(src)]).returncode:
+        raise SystemExit(f"ollama create {R2D2} failed")
+    rep = r2d2_served()
+    f.write_text(f"# built from\n{src.read_text(encoding='utf-8')}\n# ollama show {R2D2} (api/show)\n"
+                 + json.dumps({k: rep.get(k) for k in ("blob", "gguf_blob", "template", "ok")}, indent=1) + "\n",
+                 encoding="utf-8")
     return f
 
 

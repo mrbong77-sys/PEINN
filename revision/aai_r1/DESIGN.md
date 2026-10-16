@@ -264,6 +264,11 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 자체 템플릿 답은 제출본처럼 "I don't have the capability ..."로 시작하는 경우가 많습니다.
   - 차이는 가중치가 아니라 CPEG Modelfile이 가져온 `zephyr:7b-beta-q8_0` 템플릿(`{prompt}\n</s>`)에서 납니다. 그래서 H02는 CPEG와 같은 가중치 파일(같은 blob)을 쓰되, 템플릿은 GGUF 자체 템플릿으로 띄웁니다. `ensure_r2d2`는 `hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0`을 `zephyr-r2d2:latest`로 복사하고, 두 이름의 digest가 같은지 확인합니다.
   - 잘못된 템플릿으로 돌던 `matrix-zephyr-check2`는 다시 돌립니다(`r2d2-cpeg`부터).
+- **HarmBench 정본 프롬프트로 맞춤(교수님 2026-10-17 00:10 KST, HarmBench 저자의 R2D2 = `cais/zephyr_7b_r2d2` 확인):**
+  - mradermacher GGUF는 그 모델의 정적 양자화입니다(README `base_model: cais/zephyr_7b_r2d2`).
+  - HarmBench가 이 모델을 평가할 때 쓰는 프롬프트는 `<|user|>\n{instruction}</s>\n<|assistant|>\n`이고, 시스템 블록이 없습니다(`baselines/model_utils.py` `ZEPHYR_ROBUST_PROMPT`, `configs/model_configs/models.yaml` `zephyr_7b_robust`).
+  - GGUF 템플릿은 시스템 프롬프트가 비어 있어도 `<|system|>\n</s>`를 앞에 붙입니다. 하네스는 H02에 시스템 프롬프트를 보내지 않습니다.
+  - 그래서 H02는 같은 가중치(blob 확인)에 HarmBench 프롬프트를 템플릿으로 써서 `ollama create`로 띄웁니다(`common.R2D2_TEMPLATE`, `r2d2_served`). `r2d2-cpeg`는 blob과 템플릿이 모두 맞을 때만 통과합니다. `r2d2-fingerprint`도 이 모델로 다시 돌려 기록합니다.
   - CPEG(PEINN_v2, 투고 완료·동결)도 같은 Modelfile을 썼으므로 영향 여부는 따로 확인할 일입니다. 이 저장소에서는 PEINN_v2를 고치지 않습니다.
 
 ## 27. NeMo 과잉 거절의 문항 유형과 거절 경로 (교수님 지시 2026-10-16 18:11 KST)

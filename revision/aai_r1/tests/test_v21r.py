@@ -746,27 +746,39 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
     assert r["zephyr:7b"]["same_start"] == 0 and r[RP.Q8] == {"error": "not in ollama list"}
 
 
-def test_r2d2_cpeg_serves_the_cpeg_build_and_drops_the_zephyr_pretest(tmp_path, monkeypatch):
+def test_r2d2_cpeg_serves_cpeg_weights_with_harmbench_prompt_and_drops_the_zephyr_pretest(tmp_path, monkeypatch):
     from v21r import r2d2_probe as RP
     monkeypatch.setattr(C, "CACHE", tmp_path)
     monkeypatch.setattr(C, "OUT", tmp_path / "out")
-    tags = {C.R2D2: "q4", C.R2D2_GGUF: "q8"}
+    gguf = {"modelfile": "FROM C:\\Users\\x\\blobs\\sha256-q8\nTEMPLATE x", "template": "<|system|>\n{{ .System }}</s>\n"}
+    models = {C.R2D2: {"modelfile": "FROM C:\\blobs\\sha256-q8\n", "template": "{{ .Prompt }}\n</s>"}, C.R2D2_GGUF: gguf}
     calls = []
 
     def run(cmd, **k):
         calls.append(cmd[:2])
         if cmd[1] == "rm":
-            tags.pop(cmd[2])
-        if cmd[1] == "cp":
-            tags[cmd[3]] = tags[cmd[2]]
-        return type("R", (), {"returncode": 0, "stdout": "FROM x\nTEMPLATE t", "stderr": ""})()
+            models.pop(cmd[2])
+        if cmd[1] == "create":
+            mf = C.Path(cmd[4]).read_text(encoding="utf-8")
+            assert mf.startswith(f"FROM {C.R2D2_GGUF}\n") and 'PARAMETER stop "</s>"' in mf
+            tpl = mf.split('"""')[1]
+            models[cmd[2]] = {"modelfile": "FROM /root/.ollama/models/blobs/sha256-q8\n", "template": tpl}
+        return type("R", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+    def api(path, body=None, timeout=60):
+        if path == "/api/tags":
+            return json.dumps({"models": [{"name": n, "digest": n} for n in models]})
+        return json.dumps(models[body["model"]])
     monkeypatch.setattr(C.subprocess, "run", run)
-    monkeypatch.setattr(C, "_ollama", lambda path, body=None, timeout=60: json.dumps(
-        {"models": [{"name": n, "digest": d} for n, d in tags.items()]}))
+    monkeypatch.setattr(C, "_ollama", api)
     monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert not C.r2d2_served()["ok"]                       # same weights, but CPEG's template
     pre = D.wdir(True) / "matrix" / "zephyr" / "peaos_out"
     pre.mkdir(parents=True)
     assert RP.r2d2_cpeg(log=lambda *_: None) == 0
-    assert tags[C.R2D2] == "q8" and ["ollama", "cp"] in calls and not pre.exists()
+    assert models[C.R2D2]["template"] == "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n" and not pre.exists()
+    assert ["ollama", "create"] in calls and C.r2d2_served()["ok"]
     calls.clear()
     assert C.ensure_r2d2(log=lambda *_: None) is None and not calls
+    models[C.R2D2]["modelfile"] = "FROM /blobs/sha256-q4\n"           # other weights under the name: fails the check
+    assert RP.r2d2_cpeg(log=lambda *_: None) == 0 and C.r2d2_served()["ok"]
