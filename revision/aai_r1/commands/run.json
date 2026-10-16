@@ -1,6 +1,6 @@
 {
- "id": "20261016T060500Z-update",
+ "id": "20261016T072500Z-update",
  "action": "update",
- "note": "DESIGN.md 24: add zephyr-review (the zephyr pre-test judged on its answers) before the matrix; reload at the next step boundary.",
- "issued_utc": "2026-10-16 06:05:00"
+ "note": "DESIGN.md 25: add r2d2-diag before zephyr-review; applies at the next step boundary (after matrix-gemma3).",
+ "issued_utc": "2026-10-16 07:25:00"
 }

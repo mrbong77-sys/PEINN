@@ -175,6 +175,8 @@ def steps(check: bool) -> list:
                run("r2d2-probe")),
               ("matrix-gemma3", "the matrix on gemma3 first (does not depend on the zephyr review, DESIGN.md 25)",
                lambda: step("matrix", False, env_add={"V21R_BASES": "gemma3"})),
+              ("r2d2-diag", "what the harness sent to R2D2 in the pre-test; probe answers kept (DESIGN.md 25)",
+               run("r2d2-diag")),
               ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
                zephyr_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]

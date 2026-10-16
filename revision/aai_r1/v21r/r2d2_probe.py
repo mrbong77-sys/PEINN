@@ -88,3 +88,46 @@ def r2d2_probe(check: bool = False, log=print) -> int:
     if check:
         return 0
     return 0 if C.publish([f], "v21r R2D2 probe: refusals of the served model vs its own template and Q8_0 (counts)") else 1
+
+
+def r2d2_diag(check: bool = False, log=print) -> int:
+    """DESIGN.md 25: the probe found no refusal in any setting (results/diag/r2d2_probe.json), while the matrix pre-test
+    found R2D2 refusing XSTest safe prompts. Shows what the harness sent to H02 and H01 in the pre-test (system part of
+    the recorded prompt, the answer columns) and keeps the probe's answers this time (first 100 characters; harmful
+    prompts 60), with the harness options (temperature 0.3, 768 tokens) besides greedy."""
+    from . import matrix as MX
+    df = MX.collect(True, "zephyr")
+    o = df[(df.tag == "others") & (df.bench == "xstest")]
+    out = {"pretest": {}, "probe": {}}
+    for arm in (C.ARMS["zephyr"]["R2D2"], C.ARMS["zephyr"]["Vanilla"]):
+        g = o[o.arm_id == arm]
+        sysp = g.get("prompt_text", pd.Series(dtype=str)).astype(str).str.extract(r"\[System\]\n(.*?)\n\n\[User", expand=False)
+        cols = [c for c in g.columns if c.startswith("response")]
+        rec = {"system_prompts": sysp.fillna("").str[:200].value_counts().to_dict(), "response_columns": cols,
+               "other_columns": [c for c in g.columns if any(k in c for k in ("temp", "model", "option", "token"))]}
+        for lab in ("safe", "unsafe"):
+            rec[lab] = [{c: str(r[c])[:100] for c in cols} for _, r in g[g.expected_label == lab].head(4).iterrows()]
+        out["pretest"][arm] = rec
+        log(f"pretest {arm}: {json.dumps(rec, ensure_ascii=False)[:1500]}")
+    df_p = prompts()
+    for cfg in ("served", "raw_q4", "zephyr"):
+        for name, opts in (("greedy", OPTS), ("harness", {"temperature": 0.3, "seed": 42, "num_predict": 768})):
+            ans = []
+            for g, t in zip(df_p.group, df_p.text):
+                if cfg in ("served", "zephyr"):
+                    m = C.R2D2 if cfg == "served" else C.BASES["zephyr"]
+                    r = json.loads(C._ollama("/api/chat", {"model": m, "messages": [{"role": "user", "content": t}],
+                                                           "stream": False, "options": opts}, timeout=600))
+                    a = r["message"]["content"]
+                else:
+                    r = json.loads(C._ollama("/api/generate", {"model": C.R2D2_GGUF, "prompt": OWN.format(p=t), "raw": True,
+                                                               "stream": False, "options": dict(opts, stop=["</s>", "<|user|>"])},
+                                             timeout=600))
+                    a = r["response"]
+                ans.append({"group": g, "answer": a.strip()[:60 if g == "wj_harmful" else 100]})
+            out["probe"][f"{cfg}|{name}"] = ans
+            log(f"probe {cfg}|{name}: " + json.dumps([x["answer"][:50] for x in ans[::5]], ensure_ascii=False))
+    f = C.jdump(out, D.odir(check) / "diag" / "r2d2_diag.json")
+    if check:
+        return 0
+    return 0 if C.publish([f], "v21r R2D2 diagnosis: what the harness sent in the pre-test, the probe's answers") else 1

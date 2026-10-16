@@ -510,3 +510,22 @@ def test_r2d2_probe_counts_refusals_per_config_and_group(tmp_path, monkeypatch):
     assert r["served"]["plain_benign"] == {"n": 10, "refusal": 10, "empty": 0}
     assert r["raw_q4"]["plain_benign"]["refusal"] == 0 and r["raw_q4"]["wj_harmful"]["refusal"] == 10
     assert r["raw_q8"]["orbench_benign"] == {"n": 10, "refusal": 0, "empty": 1}
+
+
+def test_r2d2_diag_reads_the_pretest_prompts_and_keeps_probe_answers(tmp_path, monkeypatch):
+    from v21r import matrix as MX
+    from v21r import r2d2_probe as RP
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setattr(RP, "prompts", lambda: pd.DataFrame({"group": ["plain_benign", "wj_harmful"], "text": ["a", "b"]}))
+    pre = pd.DataFrame({"tag": "others", "bench": "xstest", "arm_id": [C.ARMS["zephyr"]["R2D2"]] * 2,
+                        "expected_label": ["safe", "unsafe"], "response": ["Sorry, I can't do that."] * 2,
+                        "prompt_text": ["[System]\nSYS\n\n[User Request]\nq"] * 2})
+    monkeypatch.setattr(MX, "collect", lambda check, base: pre)
+    monkeypatch.setattr(C, "_ollama", lambda path, body=None, timeout=60: json.dumps(
+        {"message": {"content": "ok"}} if path == "/api/chat" else {"response": "ok"}))
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert RP.r2d2_diag(log=lambda *_: None) == 0
+    r = json.loads((C.OUT / "diag" / "r2d2_diag.json").read_text())
+    assert r["pretest"][C.ARMS["zephyr"]["R2D2"]]["system_prompts"] == {"SYS": 2}
+    assert len(r["probe"]) == 6 and r["probe"]["served|harness"][0]["answer"] == "ok"
