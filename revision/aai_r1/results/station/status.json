@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 97,
+ "seq": 98,
  "mission": "ops.run",
- "time_utc": "2026-10-16 06:18:19",
- "time_local": "2026-10-16 15:18:19",
- "code": "fb22cea v2.1 심사 대응 runner: 실행 중 (attempt 25)",
- "gpu": "1578 MiB, 32607 MiB, 0 %, 40",
+ "time_utc": "2026-10-16 06:28:22",
+ "time_local": "2026-10-16 15:28:22",
+ "code": "230a432 v21r A-preview: benchmark metrics of the fixed gate on the bases answered so far",
+ "gpu": "1568 MiB, 32607 MiB, 0 %, 39",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
