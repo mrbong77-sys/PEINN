@@ -1,16 +1,22 @@
 {
- "id": "20261016T011422Z-rerun",
+ "id": "20261016T014017Z-rerun",
  "action": "rerun",
  "steps": [
   "supp-check",
+  "supplement",
+  "audit",
+  "features",
+  "split",
   "train",
   "thresholds",
   "routes",
+  "dev-guard-check",
+  "dev-guard",
   "gate-diag-check",
   "gate-diag",
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 14, second try: encoders loaded in float32 (DeBERTa-v3-large ships fp16 -> NaN), warm-up, clipping and NaN guards; same chain, hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 01:14:22"
+ "note": "DESIGN.md 15, iteration 2: plain WildJailbreak/WildGuardMix rows added, dev groups split plain/adversarial; preview only if a variant is on par with Llama Guard on the test split; hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 01:40:17"
 }

@@ -18,10 +18,13 @@ from . import common as C
 from . import data as D
 
 SEED = 42
-# (source, label, rows): benign over-refusal 7,379 at most, harmful counterparts 3,000
+# (source, label, rows): benign over-refusal 7,379 at most, harmful counterparts 3,000; DESIGN.md 15 adds 6,000 plain rows
 RECIPE = (("orbench_80k", 0, 3000), ("falsereject_train", 0, 2000), ("phtest_harmless", 0, 500),
           ("coconot_contrast", 0, 1000), ("wildjailbreak_adv_benign", 0, 1000), ("wildguardmix_adv_benign", 0, 500),
-          ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 1000), ("wildguardmix_adv_harmful", 1, 500))
+          ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 1000), ("wildguardmix_adv_harmful", 1, 500),
+          # DESIGN.md 15: plain (vanilla) requests, harmful and harmful-looking benign, as in CPEG's WildGuardMix patch
+          ("wildjailbreak_van_benign", 0, 2000), ("wildguardmix_van_benign", 0, 1000),
+          ("wildjailbreak_van_harmful", 1, 2000), ("wildguardmix_van_harmful", 1, 1000))
 CHECK_ROWS = 20
 
 
@@ -34,14 +37,15 @@ def _orbench(cfg):
 def _wildjailbreak(dt):
     from datasets import load_dataset
     rows = load_dataset("allenai/wildjailbreak", "train", split="train", delimiter="\t", keep_default_na=False)
-    return [x["adversarial"] for x in rows if str(x.get("data_type", "")) == dt]
+    col = "vanilla" if dt.startswith("vanilla") else "adversarial"
+    return [x[col] for x in rows if str(x.get("data_type", "")) == dt]
 
 
-def _wildguardmix(harmful):
+def _wildguardmix(harmful, adversarial=True):
     from datasets import load_dataset
     rows = load_dataset("allenai/wildguardmix", "wildguardtrain", split="train")
     want = "harmful" if harmful else "unharmful"
-    return [x["prompt"] for x in rows if x.get("adversarial") and x.get("prompt_harm_label") == want]
+    return [x["prompt"] for x in rows if bool(x.get("adversarial")) == adversarial and x.get("prompt_harm_label") == want]
 
 
 def _falsereject():
@@ -63,7 +67,11 @@ LOADERS = {"orbench_80k": lambda: _orbench("or-bench-80k"), "orbench_toxic": lam
            "falsereject_train": _falsereject, "phtest_harmless": _phtest, "coconot_contrast": _coconot,
            "wildjailbreak_adv_benign": lambda: _wildjailbreak("adversarial_benign"),
            "wildjailbreak_adv_harmful": lambda: _wildjailbreak("adversarial_harmful"),
-           "wildguardmix_adv_benign": lambda: _wildguardmix(False), "wildguardmix_adv_harmful": lambda: _wildguardmix(True)}
+           "wildguardmix_adv_benign": lambda: _wildguardmix(False), "wildguardmix_adv_harmful": lambda: _wildguardmix(True),
+           "wildjailbreak_van_benign": lambda: _wildjailbreak("vanilla_benign"),
+           "wildjailbreak_van_harmful": lambda: _wildjailbreak("vanilla_harmful"),
+           "wildguardmix_van_benign": lambda: _wildguardmix(False, False),
+           "wildguardmix_van_harmful": lambda: _wildguardmix(True, False)}
 
 
 def rows(check: bool, loaders=None, log=print) -> pd.DataFrame:

@@ -158,9 +158,13 @@ def neighbours(Fe: dict, sp: pd.DataFrame, lab: pd.DataFrame, groups: dict, k: i
 
 OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast")
 ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
+# DESIGN.md 15: plain requests, the form of most evaluation items, judged apart from the adversarial ones
+PLAIN_BENIGN = ("supp:wildjailbreak_van_benign", "supp:wildguardmix_van_benign")
+PLAIN_HARMFUL = ("supp:orbench_toxic", "supp:wildjailbreak_van_harmful", "supp:wildguardmix_van_harmful")
+ADV_HARMFUL = ("supp:wildjailbreak_adv_harmful", "supp:wildguardmix_adv_harmful")
 DEV_VARIANTS = ("A0", "A0ft")
-BENIGN_GROUPS = ("v4_safe", "overrefusal_benign", "adversarial_benign")
-HARMFUL_GROUPS = ("v4_harmful", "supp_harmful")
+BENIGN_GROUPS = ("v4_safe", "overrefusal_benign", "adversarial_benign", "plain_benign")
+HARMFUL_GROUPS = ("v4_harmful", "plain_harmful", "adversarial_harmful")
 
 
 def parity(dev: dict, guard: dict) -> dict:
@@ -181,7 +185,10 @@ def dev_groups(sp: pd.DataFrame) -> dict:
     supp = te.source.astype(str).str.startswith("supp:").to_numpy()
     return {"v4_safe": te[~supp & ~y], "v4_harmful": te[~supp & y],
             "overrefusal_benign": te[te.source.isin(OVERREFUSAL).to_numpy() & ~y],
-            "adversarial_benign": te[te.source.isin(ADV_BENIGN).to_numpy() & ~y], "supp_harmful": te[supp & y]}
+            "adversarial_benign": te[te.source.isin(ADV_BENIGN).to_numpy() & ~y],
+            "plain_benign": te[te.source.isin(PLAIN_BENIGN).to_numpy() & ~y],
+            "plain_harmful": te[te.source.isin(PLAIN_HARMFUL).to_numpy() & y],
+            "adversarial_harmful": te[te.source.isin(ADV_HARMFUL).to_numpy() & y]}
 
 
 def dev_by_variant(check: bool, sp: pd.DataFrame, th_all: dict, cap: str = MAIN) -> dict:
