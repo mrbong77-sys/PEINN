@@ -50,6 +50,16 @@ def gate_review() -> int:
     return 3
 
 
+REVIEWED_NEMO = False                # DESIGN.md 28: the full matrix waits for the NeMo set-up decision
+
+
+def nemo_review() -> int:
+    if REVIEWED_NEMO:
+        return 0
+    print("holding before the full matrix until the NeMo set-up audit is decided (REVIEWED_NEMO in ops/run.py)", flush=True)
+    return 3
+
+
 def main_check() -> int:
     """DESIGN.md 24: the retrained main variant (now saved for release and cost) still meets the target on the rescored
     bases before the matrix spends GPU time; otherwise hold."""
@@ -195,7 +205,8 @@ def steps(check: bool) -> list:
               ("matrix-zephyr-check2", "the zephyr pre-test again with CPEG's R2D2 (check benches)",
                lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"})),
               ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
-               zephyr_review)]
+               zephyr_review),
+              ("nemo-review", "hold until the NeMo set-up audit is decided (DESIGN.md 28)", nemo_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     s += [("nemo-orr-all", "NeMo's XSTest safe refusals by type and rail on every base (CPU)", run("nemo-orr"))]
