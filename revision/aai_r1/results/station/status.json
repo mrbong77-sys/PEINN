@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 74,
+ "seq": 75,
  "mission": "ops.run",
- "time_utc": "2026-10-16 02:27:17",
- "time_local": "2026-10-16 11:27:17",
- "code": "4f19f3a v2.1 심사 대응 runner: 실행 중 (attempt 16)",
- "gpu": "11852 MiB, 32607 MiB, 52 %, 67",
+ "time_utc": "2026-10-16 02:37:20",
+ "time_local": "2026-10-16 11:37:20",
+ "code": "4925c46 v21r P: route tables of every variant and operating point (counts)",
+ "gpu": "23368 MiB, 32607 MiB, 51 %, 51",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
