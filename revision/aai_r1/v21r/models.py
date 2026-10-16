@@ -308,6 +308,9 @@ def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, l
 
 FT_ON = True
 FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, accum=1, max_len=256, amp=False)
+# DESIGN.md 18: the head's F separates less than the energy (test AUROC 0.914 vs 0.962 on adversarial pairs, XSTest 0.885 vs
+# 0.962); the small MiniLM head is trained longer at the learning rate usual for it
+FT_HEAD_HP = dict(FT_HP, epochs=5, lr_enc=4e-5)
 FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
           "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
 
@@ -325,7 +328,8 @@ def _fp32_model(cls, name: str):
     return m
 
 
-def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print):
+def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print,
+             hist: list | None = None):
     """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
     focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
     principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
@@ -440,6 +444,10 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             sc = float((el * np.array([1.0, HEAD_HP["i_weight"], 1.0]) * wv).sum() / max(wv.sum(), 1.0))
             better = best is None or sc < best
         log(f"    {kind} epoch {ep + 1} val {'AUROC' if energy_kind else 'loss'} {sc:.4f}")
+        if hist is not None:                                              # per-epoch record for train_report.json
+            yb = (va.F.to_numpy() >= 0.5).astype(int)
+            hist.append({"epoch": ep + 1, "val": round(float(sc), 4),
+                         "val_F_auroc": round(float(_auroc(yb, pv.ravel() if energy_kind else pv[:, 2])), 4)})
         if better:
             best, best_state = sc, {k: v.detach().cpu().clone() for k, v in net.state_dict().items()}
     net.load_state_dict(best_state)
@@ -551,9 +559,12 @@ def train_all(check: bool = False, log=print) -> int:
         log("== A0ft: PEINN with the calibrator's mpnet and the head's MiniLM fine-tuned (DESIGN.md 13)")
         fhp = dict(FT_HP, epochs=1) if check else FT_HP
         hb = np.r_[0:32, 416:800]                                                  # emotion | principle
-        e_inf, e_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, fhp, log)
+        e_inf, e_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, fhp, log,
+                                hist=report.setdefault("A0ft_energy_epochs", []))
         E_ft = e_inf(uni.text.tolist(), Cx[ru][:, :32]).ravel() * 10.0
-        h_inf, h_vl = train_ft("head", trs, va, Hx[D.rows_of(F, trs.sha)][:, hb], Hx[rva][:, hb], neg_w, fhp, log)
+        hhp = dict(FT_HEAD_HP, epochs=1) if check else FT_HEAD_HP
+        h_inf, h_vl = train_ft("head", trs, va, Hx[D.rows_of(F, trs.sha)][:, hb], Hx[rva][:, hb], neg_w, hhp, log,
+                               hist=report.setdefault("A0ft_head_epochs", []))
         p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
