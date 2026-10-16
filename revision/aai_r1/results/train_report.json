@@ -52,7 +52,7 @@
   "harmful": 12242
  },
  "A3_val_loss": 0.33733469247817993,
- "A7_val_loss": 0.23088347757811042,
+ "A7_val_loss": 0.2308834826938709,
  "A0ft_energy_epochs": [
   {
    "epoch": 1,
@@ -73,30 +73,39 @@
  "A0ft_head_epochs": [
   {
    "epoch": 1,
-   "val": 0.2488,
+   "val": 0.2489,
    "val_F_auroc": 0.9664
   },
   {
    "epoch": 2,
-   "val": 0.2402,
-   "val_F_auroc": 0.9732
+   "val": 0.2413,
+   "val_F_auroc": 0.9729
   },
   {
    "epoch": 3,
-   "val": 0.2581,
-   "val_F_auroc": 0.9745
+   "val": 0.2563,
+   "val_F_auroc": 0.9744
   },
   {
    "epoch": 4,
-   "val": 0.2933,
-   "val_F_auroc": 0.9762
+   "val": 0.2889,
+   "val_F_auroc": 0.9763
   },
   {
    "epoch": 5,
-   "val": 0.3056,
-   "val_F_auroc": 0.9767
+   "val": 0.3041,
+   "val_F_auroc": 0.9769
   }
  ],
  "A0ft_energy_val_auroc": 0.9873205169588407,
- "A0ft_head_val_loss": 0.2402436880760878
+ "A0ft_head_val_loss": 0.2413194334912164,
+ "A0ftM_ood": {
+  "tau": 48.9456,
+  "q": 0.99,
+  "share": {
+   "bench": 0.0256,
+   "test": 0.0202,
+   "val": 0.0184
+  }
+ }
 }
