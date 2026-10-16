@@ -1,12 +1,12 @@
-# v2.1 심사 대응 무인 실행 상태: 실행 중
+# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
 
-- 시각 2026-10-16 09:59:11 (UTC 2026-10-16 00:59:11), 시도 9, 비컨 #66 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 2c2520f v21r: A0ft variant (sentence encoders fine-tuned end to end) and a test-split comparison in the gate diagnosis
-- 현재 단계: 없음
+- 시각 2026-10-16 09:59:14 (UTC 2026-10-16 00:59:14), 시도 9, 비컨 #67 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 7b8cc03 v2.1 심사 대응 runner: 실행 중 (attempt 9)
+- 현재 단계: gate-review (0.0분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1577 MiB, 32607 MiB, 0 %, 44
-- 다음 동작: 단계 진행
-- 사유: 시작
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1581 MiB, 32607 MiB, 0 %, 44
+- 다음 동작: 새 코드나 명령을 기다림
+- 사유: 코드 1
 - 마지막으로 처리한 명령: 20261016T003308Z-rerun rerun (대기 끝, 재시도, 2026-10-16 00:34:03 UTC)
 - 남은 단계: gate-review; matrix; nemo-doc; a8-check; a8; cost; analyze; release
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, supp-check, supplement, audit, unload-1, features, split, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview
