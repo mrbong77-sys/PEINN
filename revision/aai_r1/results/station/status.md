@@ -1,9 +1,9 @@
 # 위성(station) 상태: 임무 실행 중
 
-- 시각 2026-10-16 09:36:47 (UTC 2026-10-16 00:36:47), 비컨 #63 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
+- 시각 2026-10-16 09:46:50 (UTC 2026-10-16 00:46:50), 비컨 #64 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
 - 임무: ops.run
-- 실행 코드: e9cb9dc v21r S: public over-refusal and adversarial training sets added to the corpus (counts)
-- GPU: 2806 MiB, 32607 MiB, 0 %, 44
+- 실행 코드: 5aee000 v21r C: isolation audit of the v4 head corpus and the train/val/test split
+- GPU: 2234 MiB, 32607 MiB, 10 %, 37
 - 마지막으로 처리한 명령: 20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)
 - 사유: 정기 보고
 - 최근 임무: ops.run → 코드 0 (2026-10-15 15:21:55 UTC)
