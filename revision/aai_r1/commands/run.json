@@ -1,16 +1,22 @@
 {
- "id": "20261016T024433Z-rerun",
+ "id": "20261016T030740Z-rerun",
  "action": "rerun",
  "steps": [
   "supp-check",
+  "supplement",
+  "audit",
+  "features",
+  "split",
   "train",
   "thresholds",
   "routes",
+  "dev-guard-check",
+  "dev-guard",
   "gate-diag-check",
   "gate-diag",
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 18, iteration 4: head trained longer (5 epochs, lr 4e-5); same corpus; dev comparison and one CPU rescore; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 02:44:33"
+ "note": "DESIGN.md 19, iteration 5: wider contrast and adversarial public sets; dev comparison and one CPU rescore; hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 03:07:40"
 }

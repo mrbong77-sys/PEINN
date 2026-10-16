@@ -219,7 +219,8 @@ def neighbours(Fe: dict, sp: pd.DataFrame, lab: pd.DataFrame, groups: dict, k: i
     return out
 
 
-OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast")
+OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast",
+               "supp:orbench_hard")
 ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
 # DESIGN.md 15: plain requests, the form of most evaluation items, judged apart from the adversarial ones
 PLAIN_BENIGN = ("supp:wildjailbreak_van_benign", "supp:wildguardmix_van_benign")

@@ -19,13 +19,15 @@ from . import data as D
 
 SEED = 42
 # (source, label, rows): benign over-refusal 7,379 at most, harmful counterparts 3,000; DESIGN.md 15/17 add 14,000 plain rows
-RECIPE = (("orbench_80k", 0, 3000), ("falsereject_train", 0, 2000), ("phtest_harmless", 0, 500),
-          ("coconot_contrast", 0, 1000), ("wildjailbreak_adv_benign", 0, 1000), ("wildguardmix_adv_benign", 0, 500),
-          ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 1000), ("wildguardmix_adv_harmful", 1, 500),
+# DESIGN.md 19: contrast and adversarial sets taken further in the same seed-42 orders (earlier rows kept)
+RECIPE = (("orbench_80k", 0, 3000), ("falsereject_train", 0, 5000), ("phtest_harmless", 0, 3000),
+          ("coconot_contrast", 0, 1000), ("wildjailbreak_adv_benign", 0, 3000), ("wildguardmix_adv_benign", 0, 1500),
+          ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 3000), ("wildguardmix_adv_harmful", 1, 1500),
           # DESIGN.md 15: plain (vanilla) requests, harmful and harmful-looking benign, as in CPEG's WildGuardMix patch
           # DESIGN.md 17: the same seed-42 orders taken further (the first rows are the ones of DESIGN.md 15)
           ("wildjailbreak_van_benign", 0, 5000), ("wildguardmix_van_benign", 0, 2000),
-          ("wildjailbreak_van_harmful", 1, 5000), ("wildguardmix_van_harmful", 1, 2000))
+          ("wildjailbreak_van_harmful", 1, 5000), ("wildguardmix_van_harmful", 1, 2000),
+          ("orbench_hard", 0, 1500))
 CHECK_ROWS = 20
 
 
@@ -65,6 +67,7 @@ def _coconot():
 
 
 LOADERS = {"orbench_80k": lambda: _orbench("or-bench-80k"), "orbench_toxic": lambda: _orbench("or-bench-toxic"),
+           "orbench_hard": lambda: _orbench("or-bench-hard-1k"),
            "falsereject_train": _falsereject, "phtest_harmless": _phtest, "coconot_contrast": _coconot,
            "wildjailbreak_adv_benign": lambda: _wildjailbreak("adversarial_benign"),
            "wildjailbreak_adv_harmful": lambda: _wildjailbreak("adversarial_harmful"),
