@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 05:43:35 (UTC 2026-10-16 20:43:35), 시도 36, 비컨 #223 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: fde05f8 station: 임무 실행 중
-- 현재 단계: matrix (291.2분째)
+- 시각 2026-10-17 05:53:40 (UTC 2026-10-16 20:53:40), 시도 36, 비컨 #224 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: f252688 station: 임무 실행 중
+- 현재 단계: matrix (301.2분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7843 MiB, 32607 MiB, 91 %, 65
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7846 MiB, 32607 MiB, 93 %, 65
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261016T151800Z-rerun rerun (자식 종료 후 재실행, 2026-10-16 15:15:14 UTC)
@@ -14,44 +14,44 @@
 ## 마지막 로그
 
 ```
-2026-10-17 05:42:43,578 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:44,407 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:44,407 [bench.pea_eval.harmbench_eval] INFO:   [H01] 50/50 (100% · 0.52 req/s · ETA 0s)
-2026-10-17 05:42:44,407 [bench.pea_eval.harmbench_eval] INFO: [H01] Rep2 50/50 응답 수집 완료
-2026-10-17 05:42:44,409 [bench.pea_eval.harmbench_eval] INFO: HarmBench 로드: 300개 행동 (카테고리: ['standard', 'contextual'])
-2026-10-17 05:42:44,410 [bench.pea_eval.harmbench_eval] INFO: 파일럿 모드: 50개 샘플 선택 (seed=44)
-2026-10-17 05:42:44,410 [bench.pea_eval.harmbench_eval] INFO: [H01] Rep3 Base 병렬 처리 모드 (GPU-aware Concurrency: 8, nemo=False, 총 50건)
-2026-10-17 05:42:44,410 [bench.pea_eval.harmbench_eval] INFO:   [H01] 🚀 Rep3 시작 (총 50건, 동시성 8)
-2026-10-17 05:42:46,993 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:46,994 [bench.pea_eval.harmbench_eval] INFO:   [H01] 1/50 (2% · 0.39 req/s · ETA 127s)
-2026-10-17 05:42:48,629 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:50,136 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:52,627 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:53,621 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:53,621 [bench.pea_eval.harmbench_eval] INFO:   [H01] 5/50 (10% · 0.54 req/s · ETA 83s)
-2026-10-17 05:42:55,843 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:42:58,763 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:01,679 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:03,108 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:04,138 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:04,139 [bench.pea_eval.harmbench_eval] INFO:   [H01] 10/50 (20% · 0.51 req/s · ETA 79s)
-2026-10-17 05:43:06,921 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:09,846 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:11,237 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:12,225 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:13,894 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:13,895 [bench.pea_eval.harmbench_eval] INFO:   [H01] 15/50 (30% · 0.51 req/s · ETA 69s)
-2026-10-17 05:43:16,759 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:17,826 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:18,199 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:18,817 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:21,689 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:21,690 [bench.pea_eval.harmbench_eval] INFO:   [H01] 20/50 (40% · 0.54 req/s · ETA 56s)
-2026-10-17 05:43:22,759 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:24,798 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:26,250 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:29,077 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:30,517 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:43:30,518 [bench.pea_eval.harmbench_eval] INFO:   [H01] 25/50 (50% · 0.54 req/s · ETA 46s)
-2026-10-17 05:43:32,706 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:28,788 [bench.pea_eval.harmbench_eval] INFO: [H01] Rep9 Base 병렬 처리 모드 (GPU-aware Concurrency: 8, nemo=False, 총 50건)
+2026-10-17 05:52:28,788 [bench.pea_eval.harmbench_eval] INFO:   [H01] 🚀 Rep9 시작 (총 50건, 동시성 8)
+2026-10-17 05:52:31,350 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:31,351 [bench.pea_eval.harmbench_eval] INFO:   [H01] 1/50 (2% · 0.39 req/s · ETA 126s)
+2026-10-17 05:52:34,207 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:35,536 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:37,471 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:40,274 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:40,275 [bench.pea_eval.harmbench_eval] INFO:   [H01] 5/50 (10% · 0.44 req/s · ETA 103s)
+2026-10-17 05:52:43,059 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:43,533 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:44,586 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:46,420 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:48,737 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:48,738 [bench.pea_eval.harmbench_eval] INFO:   [H01] 10/50 (20% · 0.50 req/s · ETA 80s)
+2026-10-17 05:52:49,781 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:52,529 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:54,753 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:52:57,357 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:00,130 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:00,132 [bench.pea_eval.harmbench_eval] INFO:   [H01] 15/50 (30% · 0.48 req/s · ETA 73s)
+2026-10-17 05:53:02,802 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:04,849 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:06,707 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:09,523 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:12,274 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:12,275 [bench.pea_eval.harmbench_eval] INFO:   [H01] 20/50 (40% · 0.46 req/s · ETA 65s)
+2026-10-17 05:53:14,215 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:15,698 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:18,585 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:21,031 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:23,798 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:23,798 [bench.pea_eval.harmbench_eval] INFO:   [H01] 25/50 (50% · 0.45 req/s · ETA 55s)
+2026-10-17 05:53:26,641 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:29,426 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:32,185 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:34,698 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:36,267 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:53:36,268 [bench.pea_eval.harmbench_eval] INFO:   [H01] 30/50 (60% · 0.44 req/s · ETA 45s)
+2026-10-17 05:53:38,406 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
 ```
