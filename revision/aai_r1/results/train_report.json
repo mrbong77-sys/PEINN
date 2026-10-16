@@ -2,100 +2,101 @@
  "neg_weight": 1.0,
  "row_weight": "sqrt_inverse_source_frequency",
  "row_weight_by_source": {
-  "alpaca": 1.291,
-  "beavertails": 1.292,
-  "classical_dilemma": 3.649,
-  "daily_dilemmas": 1.29,
-  "dolly": 1.291,
-  "hh_rlhf_harmless": 1.291,
-  "hh_rlhf_helpful": 1.291,
-  "hh_rlhf_redteam": 1.29,
-  "jailbreak": 1.506,
-  "moralchoice_highamb": 1.399,
-  "narrative": 1.053,
-  "supp:coconot_contrast": 1.936,
-  "supp:falsereject_train": 0.841,
-  "supp:orbench_80k": 0.687,
-  "supp:orbench_toxic": 1.472,
-  "supp:phtest_harmless": 1.682,
-  "supp:wildguardmix_adv_benign": 1.682,
-  "supp:wildguardmix_adv_harmful": 1.682,
-  "supp:wildguardmix_van_benign": 0.843,
-  "supp:wildguardmix_van_harmful": 0.844,
-  "supp:wildjailbreak_adv_benign": 1.189,
-  "supp:wildjailbreak_adv_harmful": 1.189,
-  "supp:wildjailbreak_van_benign": 0.532,
-  "supp:wildjailbreak_van_harmful": 0.532,
-  "syn_advbenign": 2.132,
-  "syn_benignsensitive": 1.487,
-  "syn_cad": 1.329,
-  "syn_intent": 1.29,
-  "syn_subtleharm": 1.898,
-  "toxicchat_safe": 1.383
+  "alpaca": 1.465,
+  "beavertails": 1.466,
+  "classical_dilemma": 4.142,
+  "daily_dilemmas": 1.464,
+  "dolly": 1.465,
+  "hh_rlhf_harmless": 1.465,
+  "hh_rlhf_helpful": 1.465,
+  "hh_rlhf_redteam": 1.464,
+  "jailbreak": 1.709,
+  "moralchoice_highamb": 1.588,
+  "narrative": 1.196,
+  "supp:coconot_contrast": 2.197,
+  "supp:falsereject_train": 0.604,
+  "supp:orbench_80k": 0.779,
+  "supp:orbench_hard": 1.197,
+  "supp:orbench_toxic": 1.671,
+  "supp:phtest_harmless": 0.938,
+  "supp:wildguardmix_adv_benign": 1.102,
+  "supp:wildguardmix_adv_harmful": 1.102,
+  "supp:wildguardmix_van_benign": 0.956,
+  "supp:wildguardmix_van_harmful": 0.959,
+  "supp:wildjailbreak_adv_benign": 0.779,
+  "supp:wildjailbreak_adv_harmful": 0.779,
+  "supp:wildjailbreak_van_benign": 0.604,
+  "supp:wildjailbreak_van_harmful": 0.604,
+  "syn_advbenign": 2.42,
+  "syn_benignsensitive": 1.688,
+  "syn_cad": 1.508,
+  "syn_intent": 1.464,
+  "syn_subtleharm": 2.155,
+  "toxicchat_safe": 1.569
  },
  "n": {
-  "train": 28723,
-  "val": 3224,
-  "test": 3231,
+  "train": 38199,
+  "val": 4410,
+  "test": 4415,
   "bench": 1521
  },
- "calibrator_val_auroc": 0.9697210800003198,
- "A0_val_loss": 0.30965715646743774,
- "A6p_val_loss": 0.3001670241355896,
- "A6e_val_loss": 0.31058505177497864,
- "A1_val_loss": 0.3263467848300934,
- "A2_val_loss": 0.37263089418411255,
+ "calibrator_val_auroc": 0.9658576981807617,
+ "A0_val_loss": 0.31209173798561096,
+ "A6p_val_loss": 0.2953265309333801,
+ "A6e_val_loss": 0.30651381611824036,
+ "A1_val_loss": 0.35022562742233276,
+ "A2_val_loss": 0.37561506032943726,
  "A2_class_counts_train": {
-  "safe": 17472,
+  "safe": 24548,
   "ambiguous": 1409,
-  "harmful": 9842
+  "harmful": 12242
  },
- "A3_val_loss": 0.3156493306159973,
- "A7_val_loss": 0.25728626890643796,
+ "A3_val_loss": 0.33733469247817993,
+ "A7_val_loss": 0.23088347757811042,
  "A0ft_energy_epochs": [
   {
    "epoch": 1,
-   "val": 0.9854,
-   "val_F_auroc": 0.9854
+   "val": 0.9836,
+   "val_F_auroc": 0.9836
   },
   {
    "epoch": 2,
-   "val": 0.9849,
-   "val_F_auroc": 0.9849
+   "val": 0.9858,
+   "val_F_auroc": 0.9858
   },
   {
    "epoch": 3,
-   "val": 0.9854,
-   "val_F_auroc": 0.9854
+   "val": 0.9873,
+   "val_F_auroc": 0.9873
   }
  ],
  "A0ft_head_epochs": [
   {
    "epoch": 1,
-   "val": 0.267,
-   "val_F_auroc": 0.9665
+   "val": 0.2488,
+   "val_F_auroc": 0.9664
   },
   {
    "epoch": 2,
-   "val": 0.266,
-   "val_F_auroc": 0.9733
+   "val": 0.2402,
+   "val_F_auroc": 0.9732
   },
   {
    "epoch": 3,
-   "val": 0.2657,
-   "val_F_auroc": 0.9768
+   "val": 0.2581,
+   "val_F_auroc": 0.9745
   },
   {
    "epoch": 4,
-   "val": 0.284,
-   "val_F_auroc": 0.975
+   "val": 0.2933,
+   "val_F_auroc": 0.9762
   },
   {
    "epoch": 5,
-   "val": 0.2956,
-   "val_F_auroc": 0.9752
+   "val": 0.3056,
+   "val_F_auroc": 0.9767
   }
  ],
- "A0ft_energy_val_auroc": 0.985420980240274,
- "A0ft_head_val_loss": 0.2657104955454602
+ "A0ft_energy_val_auroc": 0.9873205169588407,
+ "A0ft_head_val_loss": 0.2402436880760878
 }
