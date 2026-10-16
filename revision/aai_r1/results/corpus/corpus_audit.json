@@ -1,25 +1,27 @@
 {
- "rows": 12511,
- "kept": 11679,
+ "rows": 22045,
+ "kept": 21208,
  "near_cos": 0.92,
  "dropped": {
-  "guard": 1,
+  "guard": 6,
   "embedding": 0,
   "xstest_type": 831
  },
  "dropped_by_source": {
   "beavertails|guard": 1,
   "benign_harm_discuss|xstest_type": 322,
+  "supp:coconot_contrast|guard": 2,
+  "supp:orbench_toxic|guard": 3,
   "trick_safe|xstest_type": 509
  },
  "guard_reasons": {
-  "": 12510,
-  "near-dup": 1
+  "": 22039,
+  "near-dup": 6
  },
  "split": {
-  "train": 9924,
-  "test": 882,
-  "val": 873
+  "train": 17548,
+  "test": 1835,
+  "val": 1825
  },
  "by_source_polar": {
   "alpaca|F": 2,
@@ -44,6 +46,15 @@
   "moralchoice_highamb|T": 628,
   "narrative|F": 13,
   "narrative|T": 1187,
+  "supp:coconot_contrast|T": 377,
+  "supp:falsereject_train|T": 2000,
+  "supp:orbench_80k|T": 3000,
+  "supp:orbench_toxic|F": 652,
+  "supp:phtest_harmless|T": 500,
+  "supp:wildguardmix_adv_benign|T": 500,
+  "supp:wildguardmix_adv_harmful|F": 500,
+  "supp:wildjailbreak_adv_benign|T": 1000,
+  "supp:wildjailbreak_adv_harmful|F": 1000,
   "syn_advbenign|F": 44,
   "syn_advbenign|T": 250,
   "syn_benignsensitive|F": 26,
@@ -849,6 +860,7 @@
   "e50fda6bda5433e4d7481db3555ed697fe95ef75",
   "e5593b20b69d3fbf0a22033ff74693b2327b5e80",
   "e5601febc24af5ddd2925d66fbb0c1b80f7ae56a",
+  "e5ed713564f2619e770278aa0b7b06981952ace3",
   "e60ea7af147fcc81b584da9944eae1bb7c77f29c",
   "e6bc96fbe24241f6c9cd756643f32185d38d9a14",
   "e6c2064fa190ff4e01e02af8514a7e5101ef5e8f",
@@ -856,6 +868,7 @@
   "e7595a8eefa997c983a809867c543a2e5db9c8c5",
   "e76e0631e6e10b9513d2cca7466e916ab02df9bb",
   "e778c5a43a3f0e03a55f0ad949ac05e389fbe13a",
+  "e786c20677d2727704e85c6e6920faf375940385",
   "e79e6b299db8759ebfab8719a59991d39bcacb4b",
   "e7d3dbecc32c8f6966fd40ec357fe1a5a776324e",
   "e8059e3930e4cc33dd219a44b2f22450f470072b",
@@ -873,7 +886,10 @@
   "ec9a3723ab278fb382b99105e50e5e78ea78275a",
   "ecb45ce445d6b52da397ee00925e8772ad3a215f",
   "ed2f45d7d5db6e0df63434629c83f38b6b575fa8",
+  "ee28773ce660aa5ff3acf6837daf8817233179c4",
+  "ee41ae9928be1f6a35994f6cb8b0808412a5fa15",
   "ee89afb0533e1adab52dc5fcb78dc6dc3bb43f1e",
+  "ee93e1ff58dcb844dce8ab783c5bea6b70bf8b16",
   "ef16a141d9c41cdd38601184c4f0946377ce9a76",
   "ef3c2f77a11cf33f09fb5f05d4db76ad3b07f0e2",
   "ef78cb33b9fee97d85a03c29dbcdd30ce0fb7bd3",
