@@ -51,7 +51,51 @@
   "harmful": 9842
  },
  "A3_val_loss": 0.3156493306159973,
- "A7_val_loss": 0.25728630206250314,
+ "A7_val_loss": 0.25728626890643796,
+ "A0ft_energy_epochs": [
+  {
+   "epoch": 1,
+   "val": 0.9854,
+   "val_F_auroc": 0.9854
+  },
+  {
+   "epoch": 2,
+   "val": 0.9849,
+   "val_F_auroc": 0.9849
+  },
+  {
+   "epoch": 3,
+   "val": 0.9854,
+   "val_F_auroc": 0.9854
+  }
+ ],
+ "A0ft_head_epochs": [
+  {
+   "epoch": 1,
+   "val": 0.267,
+   "val_F_auroc": 0.9665
+  },
+  {
+   "epoch": 2,
+   "val": 0.266,
+   "val_F_auroc": 0.9733
+  },
+  {
+   "epoch": 3,
+   "val": 0.2657,
+   "val_F_auroc": 0.9768
+  },
+  {
+   "epoch": 4,
+   "val": 0.284,
+   "val_F_auroc": 0.975
+  },
+  {
+   "epoch": 5,
+   "val": 0.2956,
+   "val_F_auroc": 0.9752
+  }
+ ],
  "A0ft_energy_val_auroc": 0.985420980240274,
- "A0ft_head_val_loss": 0.24452701822115475
+ "A0ft_head_val_loss": 0.2657104955454602
 }
