@@ -4168,34 +4168,34 @@
      "extreme": 6.241,
      "Fref": 0.95,
      "I": 0.2,
-     "Fblk": 0.8
+     "Fblk": 0.5
     },
     "stage1": {
-     "harm_hb": 0.9299097848716169,
-     "safe_hb": 0.03028169014084507,
+     "harm_hb": 0.9306037473976405,
+     "safe_hb": 0.03063380281690141,
      "met": false
     },
-    "val_cost": 0.04421768707482993,
+    "val_cost": 0.04408163265306122,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0303,
+      "Hard-block": 0.0306,
       "Reasoned-Refusal": 0.0011,
-      "Deliberation": 0.0085,
-      "Soft-reasoning": 0.0292,
-      "Direct-Answer": 0.931
+      "Deliberation": 0.0046,
+      "Soft-reasoning": 0.0313,
+      "Direct-Answer": 0.9324
      },
      "dilemma": {
       "Hard-block": 0.0853,
       "Reasoned-Refusal": 0.0,
-      "Deliberation": 0.8527,
-      "Soft-reasoning": 0.0078,
+      "Deliberation": 0.845,
+      "Soft-reasoning": 0.0155,
       "Direct-Answer": 0.0543
      },
      "harm": {
-      "Hard-block": 0.9299,
+      "Hard-block": 0.9306,
       "Reasoned-Refusal": 0.0014,
-      "Deliberation": 0.0097,
-      "Soft-reasoning": 0.0222,
+      "Deliberation": 0.0083,
+      "Soft-reasoning": 0.0229,
       "Direct-Answer": 0.0368
      }
     },
@@ -4215,34 +4215,34 @@
      "extreme": 6.241,
      "Fref": 0.95,
      "I": 0.2,
-     "Fblk": 0.8
+     "Fblk": 0.5
     },
     "stage1": {
-     "harm_hb": 0.9299097848716169,
-     "safe_hb": 0.03028169014084507,
+     "harm_hb": 0.9306037473976405,
+     "safe_hb": 0.03063380281690141,
      "met": false
     },
-    "val_cost": 0.04421768707482993,
+    "val_cost": 0.04408163265306122,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0303,
+      "Hard-block": 0.0306,
       "Reasoned-Refusal": 0.0011,
-      "Deliberation": 0.0085,
-      "Soft-reasoning": 0.0292,
-      "Direct-Answer": 0.931
+      "Deliberation": 0.0046,
+      "Soft-reasoning": 0.0313,
+      "Direct-Answer": 0.9324
      },
      "dilemma": {
       "Hard-block": 0.0853,
       "Reasoned-Refusal": 0.0,
-      "Deliberation": 0.8527,
-      "Soft-reasoning": 0.0078,
+      "Deliberation": 0.845,
+      "Soft-reasoning": 0.0155,
       "Direct-Answer": 0.0543
      },
      "harm": {
-      "Hard-block": 0.9299,
+      "Hard-block": 0.9306,
       "Reasoned-Refusal": 0.0014,
-      "Deliberation": 0.0097,
-      "Soft-reasoning": 0.0222,
+      "Deliberation": 0.0083,
+      "Soft-reasoning": 0.0229,
       "Direct-Answer": 0.0368
      }
     },
@@ -4258,24 +4258,24 @@
     "th": {
      "harm": 6.241,
      "soft": 6.241,
-     "F": 0.3,
-     "extreme": 8.475,
+     "F": 0.25,
+     "extreme": 8.978,
      "Fref": 0.95,
      "I": 0.2,
-     "Fblk": 0.3
+     "Fblk": 0.4
     },
     "stage1": {
-     "harm_hb": 0.8959056210964608,
-     "safe_hb": 0.01971830985915493,
+     "harm_hb": 0.8931297709923665,
+     "safe_hb": 0.01936619718309859,
      "met": true
     },
-    "val_cost": 0.0472108843537415,
+    "val_cost": 0.04784580498866213,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0197,
-      "Reasoned-Refusal": 0.0021,
-      "Deliberation": 0.0039,
-      "Soft-reasoning": 0.007,
+      "Hard-block": 0.0194,
+      "Reasoned-Refusal": 0.0025,
+      "Deliberation": 0.0035,
+      "Soft-reasoning": 0.0074,
       "Direct-Answer": 0.9673
      },
      "dilemma": {
@@ -4286,11 +4286,11 @@
       "Direct-Answer": 0.0775
      },
      "harm": {
-      "Hard-block": 0.8959,
-      "Reasoned-Refusal": 0.0069,
-      "Deliberation": 0.0069,
-      "Soft-reasoning": 0.0222,
-      "Direct-Answer": 0.068
+      "Hard-block": 0.8924,
+      "Reasoned-Refusal": 0.0076,
+      "Deliberation": 0.0083,
+      "Soft-reasoning": 0.025,
+      "Direct-Answer": 0.0666
      }
     },
     "n_val": {
@@ -4309,34 +4309,34 @@
      "extreme": 6.241,
      "Fref": 0.95,
      "I": 0.2,
-     "Fblk": 0.8
+     "Fblk": 0.5
     },
     "stage1": {
-     "harm_hb": 0.9278278972935462,
-     "safe_hb": 0.029577464788732393,
+     "harm_hb": 0.9285218598195697,
+     "safe_hb": 0.02992957746478873,
      "met": true
     },
-    "val_cost": 0.044444444444444446,
+    "val_cost": 0.04430839002267574,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0296,
+      "Hard-block": 0.0299,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0085,
-      "Soft-reasoning": 0.05,
-      "Direct-Answer": 0.9113
+      "Deliberation": 0.0046,
+      "Soft-reasoning": 0.0525,
+      "Direct-Answer": 0.9123
      },
      "dilemma": {
       "Hard-block": 0.0853,
       "Reasoned-Refusal": 0.0,
-      "Deliberation": 0.8527,
-      "Soft-reasoning": 0.0233,
+      "Deliberation": 0.845,
+      "Soft-reasoning": 0.031,
       "Direct-Answer": 0.0388
      },
      "harm": {
-      "Hard-block": 0.9278,
+      "Hard-block": 0.9285,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0097,
-      "Soft-reasoning": 0.0333,
+      "Deliberation": 0.0083,
+      "Soft-reasoning": 0.034,
       "Direct-Answer": 0.0285
      }
     },
@@ -4360,17 +4360,17 @@
     },
     "stage1": {
      "harm_hb": 0.9403192227619709,
-     "safe_hb": 0.03943661971830986,
+     "safe_hb": 0.0397887323943662,
      "met": true
     },
-    "val_cost": 0.04625850340136054,
+    "val_cost": 0.04630385487528344,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0384,
+      "Hard-block": 0.0387,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0085,
-      "Soft-reasoning": 0.0412,
-      "Direct-Answer": 0.9113
+      "Deliberation": 0.007,
+      "Soft-reasoning": 0.0415,
+      "Direct-Answer": 0.912
      },
      "dilemma": {
       "Hard-block": 0.0853,
@@ -4380,10 +4380,10 @@
       "Direct-Answer": 0.0388
      },
      "harm": {
-      "Hard-block": 0.9396,
+      "Hard-block": 0.9403,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0097,
-      "Soft-reasoning": 0.0215,
+      "Deliberation": 0.0083,
+      "Soft-reasoning": 0.0222,
       "Direct-Answer": 0.0285
      }
     },
@@ -4399,10 +4399,10 @@
     "th": {
      "harm": 1.489,
      "soft": 1.489,
-     "F": 0.65,
+     "F": 0.7,
      "extreme": 3.587,
      "Fref": 0.95,
-     "I": 0.25,
+     "I": 0.2,
      "Fblk": 0.5
     },
     "stage1": {
@@ -4410,28 +4410,28 @@
      "safe_hb": 0.048591549295774646,
      "met": true
     },
-    "val_cost": 0.04981859410430839,
+    "val_cost": 0.049795918367346946,
     "val_routes": {
      "safe": {
       "Hard-block": 0.0486,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0028,
+      "Deliberation": 0.0032,
       "Soft-reasoning": 0.0352,
-      "Direct-Answer": 0.9127
+      "Direct-Answer": 0.9123
      },
      "dilemma": {
-      "Hard-block": 0.1628,
+      "Hard-block": 0.155,
       "Reasoned-Refusal": 0.0,
       "Deliberation": 0.7829,
-      "Soft-reasoning": 0.0155,
+      "Soft-reasoning": 0.0233,
       "Direct-Answer": 0.0388
      },
      "harm": {
       "Hard-block": 0.9514,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0049,
+      "Deliberation": 0.0056,
       "Soft-reasoning": 0.0139,
-      "Direct-Answer": 0.0291
+      "Direct-Answer": 0.0285
      }
     },
     "n_val": {
@@ -4444,27 +4444,27 @@
     "variant": "A0ft",
     "cap": 0.07,
     "th": {
-     "harm": 0.95,
-     "soft": 0.95,
-     "F": 0.7,
+     "harm": 1.191,
+     "soft": 1.191,
+     "F": 0.65,
      "extreme": 2.07,
      "Fref": 0.95,
-     "I": 0.25,
-     "Fblk": 0.3
+     "I": 0.2,
+     "Fblk": 0.45
     },
     "stage1": {
      "harm_hb": 0.9632199861207494,
-     "safe_hb": 0.06971830985915493,
+     "safe_hb": 0.06795774647887325,
      "met": true
     },
-    "val_cost": 0.06058956916099773,
+    "val_cost": 0.05913832199546486,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0697,
+      "Hard-block": 0.068,
       "Reasoned-Refusal": 0.0007,
-      "Deliberation": 0.0018,
-      "Soft-reasoning": 0.0623,
-      "Direct-Answer": 0.8655
+      "Deliberation": 0.0028,
+      "Soft-reasoning": 0.038,
+      "Direct-Answer": 0.8905
      },
      "dilemma": {
       "Hard-block": 0.1938,
@@ -4475,10 +4475,10 @@
      },
      "harm": {
       "Hard-block": 0.9632,
-      "Reasoned-Refusal": 0.0,
-      "Deliberation": 0.0014,
-      "Soft-reasoning": 0.018,
-      "Direct-Answer": 0.0173
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0028,
+      "Soft-reasoning": 0.0111,
+      "Direct-Answer": 0.0222
      }
     },
     "n_val": {
@@ -4496,21 +4496,21 @@
      "F": 0.3,
      "extreme": 1.489,
      "Fref": 0.95,
-     "I": 0.25,
+     "I": 0.3,
      "Fblk": 0.65
     },
     "stage1": {
      "harm_hb": 0.9757113115891742,
-     "safe_hb": 0.0982394366197183,
+     "safe_hb": 0.09859154929577464,
      "met": true
     },
-    "val_cost": 0.07551020408163266,
+    "val_cost": 0.07573696145124717,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.0972,
+      "Hard-block": 0.0975,
       "Reasoned-Refusal": 0.0007,
       "Deliberation": 0.0028,
-      "Soft-reasoning": 0.0616,
+      "Soft-reasoning": 0.0613,
       "Direct-Answer": 0.8377
      },
      "dilemma": {
@@ -4543,21 +4543,21 @@
      "F": 0.2,
      "extreme": 0.95,
      "Fref": 0.95,
-     "I": 0.25,
+     "I": 0.2,
      "Fblk": 0.05
     },
     "stage1": {
      "harm_hb": 0.9854267869535045,
-     "safe_hb": 0.1443661971830986,
+     "safe_hb": 0.14471830985915493,
      "met": true
     },
-    "val_cost": 0.10414965986394559,
+    "val_cost": 0.10437641723356009,
     "val_routes": {
      "safe": {
-      "Hard-block": 0.1444,
+      "Hard-block": 0.1447,
       "Reasoned-Refusal": 0.0007,
       "Deliberation": 0.0007,
-      "Soft-reasoning": 0.044,
+      "Soft-reasoning": 0.0437,
       "Direct-Answer": 0.8102
      },
      "dilemma": {
@@ -4653,6 +4653,525 @@
       "Deliberation": 0.0004,
       "Soft-reasoning": 0.0,
       "Direct-Answer": 0.7581
+     },
+     "dilemma": {
+      "Hard-block": 0.7132,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.2636,
+      "Soft-reasoning": 0.0,
+      "Direct-Answer": 0.0233
+     },
+     "harm": {
+      "Hard-block": 0.9917,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.0,
+      "Soft-reasoning": 0.0,
+      "Direct-Answer": 0.0083
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   }
+  },
+  "A0ftM": {
+   "0.005": {
+    "variant": "A0ftM",
+    "cap": 0.005,
+    "th": {
+     "harm": 2.07,
+     "soft": 2.07,
+     "F": 0.85,
+     "extreme": 6.241,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.5
+    },
+    "stage1": {
+     "harm_hb": 0.9306037473976405,
+     "safe_hb": 0.03063380281690141,
+     "met": false
+    },
+    "val_cost": 0.0454875283446712,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0306,
+      "Reasoned-Refusal": 0.0011,
+      "Deliberation": 0.0236,
+      "Soft-reasoning": 0.0278,
+      "Direct-Answer": 0.9169
+     },
+     "dilemma": {
+      "Hard-block": 0.0853,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.8527,
+      "Soft-reasoning": 0.0155,
+      "Direct-Answer": 0.0465
+     },
+     "harm": {
+      "Hard-block": 0.9306,
+      "Reasoned-Refusal": 0.0014,
+      "Deliberation": 0.0139,
+      "Soft-reasoning": 0.0201,
+      "Direct-Answer": 0.034
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.01": {
+    "variant": "A0ftM",
+    "cap": 0.01,
+    "th": {
+     "harm": 2.07,
+     "soft": 2.07,
+     "F": 0.85,
+     "extreme": 6.241,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.5
+    },
+    "stage1": {
+     "harm_hb": 0.9306037473976405,
+     "safe_hb": 0.03063380281690141,
+     "met": false
+    },
+    "val_cost": 0.0454875283446712,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0306,
+      "Reasoned-Refusal": 0.0011,
+      "Deliberation": 0.0236,
+      "Soft-reasoning": 0.0278,
+      "Direct-Answer": 0.9169
+     },
+     "dilemma": {
+      "Hard-block": 0.0853,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.8527,
+      "Soft-reasoning": 0.0155,
+      "Direct-Answer": 0.0465
+     },
+     "harm": {
+      "Hard-block": 0.9306,
+      "Reasoned-Refusal": 0.0014,
+      "Deliberation": 0.0139,
+      "Soft-reasoning": 0.0201,
+      "Direct-Answer": 0.034
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.02": {
+    "variant": "A0ftM",
+    "cap": 0.02,
+    "th": {
+     "harm": 6.241,
+     "soft": 6.241,
+     "F": 0.25,
+     "extreme": 8.978,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.4
+    },
+    "stage1": {
+     "harm_hb": 0.8931297709923665,
+     "safe_hb": 0.01936619718309859,
+     "met": true
+    },
+    "val_cost": 0.04925170068027211,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0194,
+      "Reasoned-Refusal": 0.0025,
+      "Deliberation": 0.0225,
+      "Soft-reasoning": 0.0074,
+      "Direct-Answer": 0.9482
+     },
+     "dilemma": {
+      "Hard-block": 0.0465,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.876,
+      "Soft-reasoning": 0.0078,
+      "Direct-Answer": 0.0698
+     },
+     "harm": {
+      "Hard-block": 0.8917,
+      "Reasoned-Refusal": 0.0076,
+      "Deliberation": 0.0153,
+      "Soft-reasoning": 0.0243,
+      "Direct-Answer": 0.0611
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.03": {
+    "variant": "A0ftM",
+    "cap": 0.03,
+    "th": {
+     "harm": 1.489,
+     "soft": 1.489,
+     "F": 0.9,
+     "extreme": 6.241,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.5
+    },
+    "stage1": {
+     "harm_hb": 0.9285218598195697,
+     "safe_hb": 0.02992957746478873,
+     "met": true
+    },
+    "val_cost": 0.04571428571428572,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0299,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0236,
+      "Soft-reasoning": 0.0458,
+      "Direct-Answer": 0.9
+     },
+     "dilemma": {
+      "Hard-block": 0.0853,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.8527,
+      "Soft-reasoning": 0.0233,
+      "Direct-Answer": 0.0388
+     },
+     "harm": {
+      "Hard-block": 0.9285,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0139,
+      "Soft-reasoning": 0.0305,
+      "Direct-Answer": 0.0264
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.04": {
+    "variant": "A0ftM",
+    "cap": 0.04,
+    "th": {
+     "harm": 1.489,
+     "soft": 1.489,
+     "F": 0.6,
+     "extreme": 6.241,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.8
+    },
+    "stage1": {
+     "harm_hb": 0.9403192227619709,
+     "safe_hb": 0.0397887323943662,
+     "met": true
+    },
+    "val_cost": 0.047573696145124716,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0384,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0268,
+      "Soft-reasoning": 0.0345,
+      "Direct-Answer": 0.8996
+     },
+     "dilemma": {
+      "Hard-block": 0.0853,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.8605,
+      "Soft-reasoning": 0.0155,
+      "Direct-Answer": 0.0388
+     },
+     "harm": {
+      "Hard-block": 0.9403,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0139,
+      "Soft-reasoning": 0.0187,
+      "Direct-Answer": 0.0264
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.05": {
+    "variant": "A0ftM",
+    "cap": 0.05,
+    "th": {
+     "harm": 1.489,
+     "soft": 1.489,
+     "F": 0.7,
+     "extreme": 3.587,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.75
+    },
+    "stage1": {
+     "harm_hb": 0.9514226231783484,
+     "safe_hb": 0.048591549295774646,
+     "met": true
+    },
+    "val_cost": 0.05102040816326531,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0482,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0218,
+      "Soft-reasoning": 0.0296,
+      "Direct-Answer": 0.8996
+     },
+     "dilemma": {
+      "Hard-block": 0.155,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.7984,
+      "Soft-reasoning": 0.0078,
+      "Direct-Answer": 0.0388
+     },
+     "harm": {
+      "Hard-block": 0.9514,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0097,
+      "Soft-reasoning": 0.0118,
+      "Direct-Answer": 0.0264
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.07": {
+    "variant": "A0ftM",
+    "cap": 0.07,
+    "th": {
+     "harm": 1.191,
+     "soft": 1.191,
+     "F": 0.65,
+     "extreme": 2.07,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.95
+    },
+    "stage1": {
+     "harm_hb": 0.9632199861207494,
+     "safe_hb": 0.06795774647887325,
+     "met": true
+    },
+    "val_cost": 0.06049886621315192,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0676,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0197,
+      "Soft-reasoning": 0.0327,
+      "Direct-Answer": 0.8792
+     },
+     "dilemma": {
+      "Hard-block": 0.1938,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.7597,
+      "Soft-reasoning": 0.0155,
+      "Direct-Answer": 0.031
+     },
+     "harm": {
+      "Hard-block": 0.9632,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0056,
+      "Soft-reasoning": 0.009,
+      "Direct-Answer": 0.0215
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.1": {
+    "variant": "A0ftM",
+    "cap": 0.1,
+    "th": {
+     "harm": 0.823,
+     "soft": 0.823,
+     "F": 0.3,
+     "extreme": 1.489,
+     "Fref": 0.95,
+     "I": 0.3,
+     "Fblk": 0.95
+    },
+    "stage1": {
+     "harm_hb": 0.9757113115891742,
+     "safe_hb": 0.09859154929577464,
+     "met": true
+    },
+    "val_cost": 0.07702947845804989,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.0972,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0155,
+      "Soft-reasoning": 0.0563,
+      "Direct-Answer": 0.8303
+     },
+     "dilemma": {
+      "Hard-block": 0.3178,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.6434,
+      "Soft-reasoning": 0.0155,
+      "Direct-Answer": 0.0233
+     },
+     "harm": {
+      "Hard-block": 0.975,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.0035,
+      "Soft-reasoning": 0.0069,
+      "Direct-Answer": 0.0146
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.15": {
+    "variant": "A0ftM",
+    "cap": 0.15,
+    "th": {
+     "harm": 0.693,
+     "soft": 0.693,
+     "F": 0.2,
+     "extreme": 0.95,
+     "Fref": 0.95,
+     "I": 0.2,
+     "Fblk": 0.05
+    },
+    "stage1": {
+     "harm_hb": 0.9854267869535045,
+     "safe_hb": 0.14471830985915493,
+     "met": true
+    },
+    "val_cost": 0.10537414965986396,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.1447,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0085,
+      "Soft-reasoning": 0.0408,
+      "Direct-Answer": 0.8053
+     },
+     "dilemma": {
+      "Hard-block": 0.4651,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.5039,
+      "Soft-reasoning": 0.0078,
+      "Direct-Answer": 0.0233
+     },
+     "harm": {
+      "Hard-block": 0.9854,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.0007,
+      "Soft-reasoning": 0.0021,
+      "Direct-Answer": 0.0118
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.2": {
+    "variant": "A0ftM",
+    "cap": 0.2,
+    "th": {
+     "harm": 0.609,
+     "soft": 0.609,
+     "F": 0.9,
+     "extreme": 0.693,
+     "Fref": 0.95,
+     "I": 0.6,
+     "Fblk": 0.05
+    },
+    "stage1": {
+     "harm_hb": 0.9882026370575989,
+     "safe_hb": 0.18838028169014084,
+     "met": true
+    },
+    "val_cost": 0.1329705215419501,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.1884,
+      "Reasoned-Refusal": 0.0007,
+      "Deliberation": 0.0053,
+      "Soft-reasoning": 0.0264,
+      "Direct-Answer": 0.7792
+     },
+     "dilemma": {
+      "Hard-block": 0.5349,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.4419,
+      "Soft-reasoning": 0.0,
+      "Direct-Answer": 0.0233
+     },
+     "harm": {
+      "Hard-block": 0.9882,
+      "Reasoned-Refusal": 0.0,
+      "Deliberation": 0.0,
+      "Soft-reasoning": 0.0014,
+      "Direct-Answer": 0.0104
+     }
+    },
+    "n_val": {
+     "safe": 2840,
+     "dilemma": 129,
+     "harm": 1441
+    }
+   },
+   "0.3": {
+    "variant": "A0ftM",
+    "cap": 0.3,
+    "th": {
+     "harm": 0.543,
+     "soft": 0.543,
+     "F": 0.05,
+     "extreme": 0.543,
+     "Fref": 0.95,
+     "I": 0.6,
+     "Fblk": 0.05
+    },
+    "stage1": {
+     "harm_hb": 0.9916724496877168,
+     "safe_hb": 0.24119718309859156,
+     "met": true
+    },
+    "val_cost": 0.16739229024943308,
+    "val_routes": {
+     "safe": {
+      "Hard-block": 0.2412,
+      "Reasoned-Refusal": 0.0004,
+      "Deliberation": 0.0028,
+      "Soft-reasoning": 0.0,
+      "Direct-Answer": 0.7556
      },
      "dilemma": {
       "Hard-block": 0.7132,
