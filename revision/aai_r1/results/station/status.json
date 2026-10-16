@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 78,
+ "seq": 79,
  "mission": "ops.run",
- "time_utc": "2026-10-16 03:07:27",
- "time_local": "2026-10-16 12:07:27",
- "code": "bdc6adc v2.1 심사 대응 runner: 실패 후 대기 (attempt 18)",
- "gpu": "1597 MiB, 32607 MiB, 1 %, 43",
+ "time_utc": "2026-10-16 03:17:30",
+ "time_local": "2026-10-16 12:17:30",
+ "code": "805bf14 v21r S: public over-refusal and adversarial training sets added to the corpus (counts)",
+ "gpu": "2848 MiB, 32607 MiB, 17 %, 39",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
