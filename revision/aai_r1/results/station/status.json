@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 101,
+ "seq": 102,
  "mission": "ops.run",
- "time_utc": "2026-10-16 06:58:32",
- "time_local": "2026-10-16 15:58:32",
- "code": "4b39001 station: 임무 실행 중",
- "gpu": "1468 MiB, 32607 MiB, 0 %, 45",
+ "time_utc": "2026-10-16 07:08:38",
+ "time_local": "2026-10-16 16:08:38",
+ "code": "9caf229 v21r R2D2 probe: refusals of the served model vs its own template and Q8_0 (counts)",
+ "gpu": "12608 MiB, 32607 MiB, 68 %, 65",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
