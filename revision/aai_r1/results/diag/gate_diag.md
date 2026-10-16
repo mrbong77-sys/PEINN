@@ -130,6 +130,19 @@
 | 0.3 | A0 | 0.162 | 0.940 | 0.253 | 0.553 | 0.109 | 0.983 | 0.993 |
 | 0.3 | A0ft | 0.158 | 0.966 | 0.143 | 0.520 | 0.102 | 0.995 | 1.000 |
 
+## 7. 신호별 판별력 (test 분할 AUROC; XSTest는 오류 분석 전용)
+
+- A0 test: plain E 0.9919 F 0.9616; adversarial E 0.8989 F 0.8281; v4 E 0.958 F 0.9366; overrefusal_vs_plain E 0.978 F 0.9407
+- A0 XSTest AUROC: {"E": 0.9357, "F": 0.851}
+  - 0.02: safe n 108 극단 E 1 harm E∧F 4 계층 {"Direct-Answer": 98, "Hard-block": 5, "Soft-reasoning": 3, "Reasoned-Refusal": 2}; unsafe n 83 극단 E 47 harm E∧F 10 계층 {"Hard-block": 57, "Direct-Answer": 16, "Soft-reasoning": 10}
+  - 0.03: safe n 108 극단 E 1 harm E∧F 4 계층 {"Direct-Answer": 98, "Hard-block": 5, "Soft-reasoning": 3, "Reasoned-Refusal": 2}; unsafe n 83 극단 E 47 harm E∧F 10 계층 {"Hard-block": 57, "Direct-Answer": 16, "Soft-reasoning": 10}
+  - 0.05: safe n 108 극단 E 3 harm E∧F 3 계층 {"Direct-Answer": 98, "Hard-block": 6, "Soft-reasoning": 2, "Reasoned-Refusal": 2}; unsafe n 83 극단 E 50 harm E∧F 8 계층 {"Hard-block": 58, "Direct-Answer": 16, "Soft-reasoning": 9}
+- A0ft test: plain E 0.9956 F 0.9899; adversarial E 0.9623 F 0.9136; v4 E 0.9779 F 0.9663; overrefusal_vs_plain E 0.9935 F 0.9854
+- A0ft XSTest AUROC: {"E": 0.962, "F": 0.8845}
+  - 0.02: safe n 108 극단 E 1 harm E∧F 1 계층 {"Direct-Answer": 100, "Soft-reasoning": 5, "Hard-block": 2, "Deliberation": 1}; unsafe n 83 극단 E 46 harm E∧F 17 계층 {"Hard-block": 63, "Direct-Answer": 15, "Soft-reasoning": 5}
+  - 0.03: safe n 108 극단 E 1 harm E∧F 4 계층 {"Direct-Answer": 98, "Hard-block": 5, "Soft-reasoning": 5}; unsafe n 83 극단 E 46 harm E∧F 18 계층 {"Hard-block": 64, "Direct-Answer": 13, "Soft-reasoning": 6}
+  - 0.05: safe n 108 극단 E 10 harm E∧F 0 계층 {"Direct-Answer": 81, "Soft-reasoning": 15, "Hard-block": 10, "Deliberation": 2}; unsafe n 83 극단 E 70 harm E∧F 0 계층 {"Hard-block": 70, "Soft-reasoning": 11, "Direct-Answer": 2}
+
 ## 6. HarmBench 경로 (오류 분석 전용, 적합에 쓰지 않음; 문장 245, qwen 기록)
 
 - A0@0.1 category: contextual {"Hard-block": 72, "Soft-reasoning": 4, "Direct-Answer": 1}; standard {"Hard-block": 151, "Direct-Answer": 13, "Soft-reasoning": 3, "Reasoned-Refusal": 1}
