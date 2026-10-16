@@ -178,7 +178,7 @@ def r2d2_fingerprint(check: bool = False, log=print) -> int:
 
 
 def r2d2_cpeg(check: bool = False, log=print) -> int:
-    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 as CPEG served R2D2 (common.ensure_r2d2), then drop the
+    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with CPEG's R2D2 weights (common.ensure_r2d2), then drop the
     zephyr pre-test cache (answers and done files of every zephyr tag) so the pre-test runs again on this model."""
     import shutil
     from . import matrix as MX
@@ -188,11 +188,11 @@ def r2d2_cpeg(check: bool = False, log=print) -> int:
         log(f"  remove the zephyr pre-test cache {d}")
         shutil.rmtree(d)
     have = C._digests()
-    log(f"  {C.R2D2} {have.get(C.R2D2, '?')[:12]} = {C.R2D2_CPEG} {have.get(C.R2D2_CPEG, '?')[:12]}")
-    if have.get(C.R2D2) != have.get(C.R2D2_CPEG) or not have.get(C.R2D2):
-        log("  R2D2 is not the CPEG build")
+    log(f"  {C.R2D2} {have.get(C.R2D2, '?')[:12]} = {C.R2D2_GGUF} {have.get(C.R2D2_GGUF, '?')[:12]}")
+    if have.get(C.R2D2) != have.get(C.R2D2_GGUF) or not have.get(C.R2D2):
+        log("  R2D2 is not a copy of R2D2_GGUF")
         return 1
     if check or mf is None:
         return 0
-    return 0 if C.publish([mf], f"v21r R2D2 served as CPEG served it ({C.R2D2_CPEG})") else 1
+    return 0 if C.publish([mf], f"v21r R2D2: CPEG's weights with the GGUF's own template ({C.R2D2_GGUF})") else 1
 

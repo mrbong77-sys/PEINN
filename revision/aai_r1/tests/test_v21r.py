@@ -750,7 +750,7 @@ def test_r2d2_cpeg_serves_the_cpeg_build_and_drops_the_zephyr_pretest(tmp_path, 
     from v21r import r2d2_probe as RP
     monkeypatch.setattr(C, "CACHE", tmp_path)
     monkeypatch.setattr(C, "OUT", tmp_path / "out")
-    tags = {C.R2D2: "q4", C.R2D2_CPEG: "q8"}
+    tags = {C.R2D2: "q4", C.R2D2_GGUF: "q8"}
     calls = []
 
     def run(cmd, **k):

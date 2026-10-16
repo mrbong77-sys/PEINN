@@ -148,7 +148,7 @@ def matrix(check: bool = False, log=print) -> int:
         C.pull_missing(models_of(b), log=log)
         if b == "zephyr":
             mf = C.ensure_r2d2(log)
-            if mf and not check and not C.publish([mf], f"v21r M: R2D2 model for Ollama (as CPEG, {C.R2D2_CPEG})"):
+            if mf and not check and not C.publish([mf], f"v21r M: R2D2 model for Ollama ({C.R2D2_GGUF})"):
                 return 1
         d = mdir(check, b)
         for phase in ("gen", "judge"):

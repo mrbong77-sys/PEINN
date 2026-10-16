@@ -257,6 +257,14 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **식별(`r2d2-fingerprint`, 생물무기 시험 뒤):** 제출본 기록지에 그대로 남은 H02 답변(XSTest 안전 문항, 1회차, 거부 안 함 8 + 거부 4)을 공개 R2D2 빌드 6종과 zephyr:7b(대조)의 greedy 답과 맞춰 봅니다. 가중치를 가려내는 데만 쓰고, 채점·적합에는 쓰지 않습니다.
 - **결정(교수님 2026-10-16 17:56 KST "다른 PC였고 복구 불가. CPEG 구동 버전으로"):** H02는 CPEG가 쓴 R2D2 그대로 띄웁니다. 위성에 있는 `zephyr-r2d2:7b-q8_0`(mradermacher Q8_0 GGUF + `zephyr:7b-beta-q8_0` 템플릿, PEINN_v2 `peinn2/c/newbench.py:26`)을 PEAOS가 부르는 이름 `zephyr-r2d2:latest`로 복사합니다(`r2d2-cpeg`, `common.ensure_r2d2`; 없으면 같은 방식으로 빌드). Vanilla(H01)는 제출본과 같은 `zephyr:7b`를 유지합니다. CPEG에서 이 빌드의 HarmBench ASR은 14.3%(문헌 16.7%)였습니다.
 - **순서:** `biomon` 뒤 `r2d2-cpeg`(첫 사전 점검 캐시 `.cache/v21r/check/matrix/zephyr/` 삭제) → `r2d2-fingerprint`(위성에 있는 빌드만, 내려받지 않음, 기록용) → `matrix-zephyr-check2`(사전 점검 다시) → `zephyr-review` → `matrix`. `zephyr-review`는 R2D2의 XSTest 안전 문항 과잉 거절 50% 이상이면 멈춥니다(첫 사전 점검 96%, 제출본 14.4%). `r2d2-diag`는 이 판정이 실패할 때만 돌립니다.
+- **식별 결과와 템플릿 정정(2026-10-17 00:0x KST, `results/diag/r2d2_fingerprint.json`, 제출본 XSTest 안전 문항 12개, greedy):** 제출본 답과의 평균 문자열 유사도는 다음과 같습니다.
+  - CPEG Modelfile 그대로 띄운 `zephyr-r2d2:latest`: 0.094. 12개 중 8개가 빈 답, 3개가 "Sorry, I can't do that."입니다.
+  - 같은 가중치(mradermacher Q8_0)를 GGUF에 들어 있는 모델 자체 템플릿(`<|user|>\n{prompt}</s>\n<|assistant|>\n`)으로 띄운 경우: 0.465. RichardErkhov Q8_0도 0.465입니다.
+  - RichardErkhov Q4_0: 0.277. zephyr:7b(대조): 0.301.
+  - 자체 템플릿 답은 제출본처럼 "I don't have the capability ..."로 시작하는 경우가 많습니다.
+  - 차이는 가중치가 아니라 CPEG Modelfile이 가져온 `zephyr:7b-beta-q8_0` 템플릿(`{prompt}\n</s>`)에서 납니다. 그래서 H02는 CPEG와 같은 가중치 파일(같은 blob)을 쓰되, 템플릿은 GGUF 자체 템플릿으로 띄웁니다. `ensure_r2d2`는 `hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0`을 `zephyr-r2d2:latest`로 복사하고, 두 이름의 digest가 같은지 확인합니다.
+  - 잘못된 템플릿으로 돌던 `matrix-zephyr-check2`는 다시 돌립니다(`r2d2-cpeg`부터).
+  - CPEG(PEINN_v2, 투고 완료·동결)도 같은 Modelfile을 썼으므로 영향 여부는 따로 확인할 일입니다. 이 저장소에서는 PEINN_v2를 고치지 않습니다.
 
 ## 27. NeMo 과잉 거절의 문항 유형과 거절 경로 (교수님 지시 2026-10-16 18:11 KST)
 

@@ -29,11 +29,12 @@ ARMS = {  # base -> {defense: arm id} (paper Table 2 and Appendix A)
 }
 JUDGE = "qwen3:32b"                                  # the submitted judge (all LLM-judged benches)
 R2D2 = "zephyr-r2d2:latest"                          # the name the PEAOS arm H02 calls
-# The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST); R2D2 is served as CPEG served it
-# (PEINN_v2 peinn2/c/newbench.py WD_BUILD): mradermacher's Q8_0 GGUF of cais/zephyr_7b_r2d2, zephyr:7b-beta-q8_0 template
+# The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST); R2D2 uses CPEG's weights, mradermacher's
+# Q8_0 GGUF of cais/zephyr_7b_r2d2 (the blob CPEG's zephyr-r2d2:7b-q8_0 also holds), served with the model's own chat
+# template as the GGUF carries it ("{prompt}</s>"). CPEG's Modelfile took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"),
+# under which R2D2 left 8 of 12 submitted XSTest safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
 R2D2_CPEG = "zephyr-r2d2:7b-q8_0"
 R2D2_GGUF = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0"
-R2D2_TEMPLATE = "zephyr:7b-beta-q8_0"
 EXTRA_MODELS = (R2D2, "llama-guard3:8b")
 
 TIERS = ("Hard-block", "Reasoned-Refusal", "Deliberation", "Soft-reasoning", "Direct-Answer")
@@ -183,35 +184,25 @@ def _digests() -> dict:
 
 
 def ensure_r2d2(log=print) -> Path | None:
-    """R2D2 (arm H02) under the name H02 calls, as CPEG served it (DESIGN.md 25): a copy of CPEG's model if Ollama holds
-    it, else built the same way (R2D2_GGUF with R2D2_TEMPLATE's Modelfile). A model of that name with other weights is
-    replaced. Returns the served Modelfile written to results/ (None if already in place)."""
+    """R2D2 (arm H02) under the name H02 calls: a copy of R2D2_GGUF (CPEG's weights, the GGUF's own template). A model of
+    that name with another digest is replaced. Returns the served Modelfile written to results/ (None if in place)."""
     have = _digests()
-    if R2D2_CPEG in have and have.get(R2D2) == have[R2D2_CPEG]:
+    if R2D2_GGUF in have and have.get(R2D2) == have[R2D2_GGUF]:
         return None
+    pull_missing([R2D2_GGUF], log=log)
     if R2D2 in have:
-        log(f"  ollama rm {R2D2} (not the CPEG build)")
+        log(f"  ollama rm {R2D2} (another build or template)")
         subprocess.run(["ollama", "rm", R2D2])
-    if R2D2_CPEG in have:
-        log(f"  ollama cp {R2D2_CPEG} {R2D2}")
-        if subprocess.run(["ollama", "cp", R2D2_CPEG, R2D2]).returncode:
-            raise SystemExit(f"ollama cp {R2D2_CPEG} {R2D2} failed")
-    else:
-        pull_missing([R2D2_TEMPLATE, R2D2_GGUF], log=log)
-        r = subprocess.run(["ollama", "show", R2D2_TEMPLATE, "--modelfile"], capture_output=True, encoding="utf-8",
-                           errors="replace")
-        if r.returncode or "TEMPLATE" not in r.stdout:
-            raise SystemExit(f"ollama show {R2D2_TEMPLATE} --modelfile failed: {r.stderr[-300:]}")
-        f = OUT / "r2d2_build_Modelfile"
-        f.parent.mkdir(parents=True, exist_ok=True)
-        f.write_text(modelfile_with_weights(r.stdout, R2D2_GGUF), encoding="utf-8")
-        log(f"  ollama create {R2D2} -f {f}")
-        if subprocess.run(["ollama", "create", R2D2, "-f", str(f)]).returncode:
-            raise SystemExit(f"ollama create {R2D2} failed")
-    r = subprocess.run(["ollama", "show", R2D2, "--modelfile"], capture_output=True, encoding="utf-8", errors="replace")
+    log(f"  ollama cp {R2D2_GGUF} {R2D2}")
+    if subprocess.run(["ollama", "cp", R2D2_GGUF, R2D2]).returncode:
+        raise SystemExit(f"ollama cp {R2D2_GGUF} {R2D2} failed")
     f = OUT / "r2d2_Modelfile"
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(r.stdout, encoding="utf-8")
+    out = []
+    for what in ("--modelfile", "--template"):
+        r = subprocess.run(["ollama", "show", R2D2, what], capture_output=True, encoding="utf-8", errors="replace")
+        out.append(f"# ollama show {R2D2} {what}\n{r.stdout}")
+    f.write_text("\n".join(out), encoding="utf-8")
     return f
 
 
