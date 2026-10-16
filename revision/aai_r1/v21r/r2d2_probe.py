@@ -178,9 +178,9 @@ def r2d2_fingerprint(check: bool = False, log=print) -> int:
 
 
 def r2d2_cpeg(check: bool = False, log=print) -> int:
-    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with the canonical checkpoint (cais/zephyr_7b_r2d2,
-    unquantized, 2026-10-17 00:15 KST) and HarmBench's prompt (common.ensure_r2d2), then drop the zephyr pre-test cache (answers and done files of every zephyr tag) so the
-    pre-test runs again on this model."""
+    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with the canonical checkpoint unquantized (an F16 GGUF
+    checked against cais/zephyr_7b_r2d2, Eugene 2026-10-17 00:15 KST) and HarmBench's prompt (common.ensure_r2d2), then
+    drop the zephyr pre-test cache (answers and done files of every zephyr tag) so the pre-test runs again."""
     import shutil
     from . import matrix as MX
     mf = C.ensure_r2d2(log)
@@ -195,5 +195,6 @@ def r2d2_cpeg(check: bool = False, log=print) -> int:
         return 1
     if check or mf is None:
         return 0
-    return 0 if C.publish([mf], f"v21r R2D2: {C.R2D2_HF} unquantized with HarmBench's prompt") else 1
+    return 0 if C.publish([mf, C.OUT / "diag" / "r2d2_weights_check.json"],
+                           f"v21r R2D2: {C.R2D2_HF} unquantized (F16 GGUF, weights checked) with HarmBench's prompt") else 1
 

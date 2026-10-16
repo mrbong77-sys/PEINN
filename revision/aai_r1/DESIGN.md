@@ -270,8 +270,11 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - GGUF 템플릿은 시스템 프롬프트가 비어 있어도 `<|system|>\n</s>`를 앞에 붙입니다. 하네스는 H02에 시스템 프롬프트를 보내지 않습니다.
   - 그래서 H02는 HarmBench 프롬프트를 템플릿으로 써서 `ollama create`로 띄웁니다(`common.R2D2_TEMPLATE`). 첫 시도(00:15 KST)는 Windows에서 Modelfile이 CRLF로 저장되어 템플릿 점검에서 멈췄습니다. 지금은 LF로 씁니다.
 - **양자화하지 않은 정본으로 바꿈(교수님 2026-10-17 00:15 KST "양자화로 인해 퇴화 가능성 있네. 정본 사용하지?"):**
-  - H02는 `cais/zephyr_7b_r2d2`의 bf16 safetensors를 Hub 리비전 `214e3d4e`(2024-02-26)로 고정해 내려받고, 양자화 없이 Ollama로 가져옵니다(`common.ensure_r2d2`, `R2D2_HF_REV`).
-  - `r2d2-cpeg`는 다음을 모두 확인할 때만 통과합니다. 이 코드가 만든 모델(digest 기록과 일치)이어야 하고, 양자화 수준이 F16·BF16·F32 중 하나여야 하고, 템플릿이 HarmBench 프롬프트와 같아야 합니다.
+  - H02는 `cais/zephyr_7b_r2d2`의 가중치를 양자화 없이 띄웁니다. 기준 체크포인트는 Hub 리비전 `214e3d4e`(2024-02-26)로 고정한 bf16 safetensors입니다.
+  - 위성의 Ollama는 이 safetensors를 직접 가져오지 못합니다("unsupported MLX architecture: MistralForCausalLM", 00:25 KST). 그래서 H02는 같은 체크포인트를 F16으로 변환한 mradermacher GGUF(`zephyr_7b_r2d2.f16.gguf`, 메타데이터 `general.source.url` = cais/zephyr_7b_r2d2)를 씁니다.
+  - 띄우기 전에 텐서를 하나씩 대조합니다(`v21r/wcheck.py`, `results/diag/r2d2_weights_check.json`). 체크포인트의 모든 텐서가 같은 모양으로 있어야 하고, 값은 bf16을 float16으로 바꾼 값과 같아야 합니다. llama.cpp가 순서를 바꾸는 attn_q·attn_k는 같은 순서 바꿈을 적용해 비교합니다. 하나라도 다르면 멈춥니다.
+  - 사전 확인(컨테이너에서 범위 요청으로, 1층 q·k·v·norm): 순서 바꿈을 적용한 q 16,777,216개와 k 4,194,304개, 그대로인 v 4,194,304개, F32 norm 4,096개가 모두 같았습니다. 텐서 수는 291개(=3 + 32층×9)입니다.
+  - `r2d2-cpeg`는 다음을 모두 확인할 때만 통과합니다. 대조를 통과하고 이 코드가 만든 모델(digest 기록과 일치)이어야 하고, 양자화 수준이 F16이어야 하고, 템플릿이 HarmBench 프롬프트와 같아야 합니다.
   - CPEG의 Q8_0은 `r2d2-fingerprint`의 비교 대상으로만 남깁니다.
   - Vanilla(H01)는 제출본과 같은 `zephyr:7b`를 유지합니다.
   - CPEG(PEINN_v2, 투고 완료·동결)도 같은 Modelfile을 썼으므로 영향 여부는 따로 확인할 일입니다. 이 저장소에서는 PEINN_v2를 고치지 않습니다.

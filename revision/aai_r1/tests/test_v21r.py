@@ -746,18 +746,22 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
     assert r["zephyr:7b"]["same_start"] == 0 and r[RP.Q8] == {"error": "not in ollama list"}
 
 
-def test_r2d2_cpeg_imports_the_canonical_checkpoint_unquantized_with_harmbench_prompt(tmp_path, monkeypatch):
+def test_r2d2_cpeg_serves_the_checked_f16_gguf_with_harmbench_prompt(tmp_path, monkeypatch):
     import sys
     import types
     from v21r import r2d2_probe as RP
+    from v21r import wcheck as W
     monkeypatch.setattr(C, "CACHE", tmp_path)
     monkeypatch.setattr(C, "OUT", tmp_path / "out")
-    snap = tmp_path / "hf" / "snap"
+    snap, gg = _tiny_r2d2(tmp_path / "hf" / "snap")
     got = []
     hub = types.ModuleType("huggingface_hub")
     hub.snapshot_download = lambda repo, revision, local_dir, allow_patterns: got.append((repo, revision)) or str(snap)
     monkeypatch.setitem(sys.modules, "huggingface_hub", hub)
-    models = {C.R2D2: {"digest": "cpeg", "details": {"quantization_level": "Q8_0"}, "template": "{{ .Prompt }}\n</s>"}}
+    models = {C.R2D2: {"digest": "cpeg", "details": {"quantization_level": "Q8_0"}, "template": "{{ .Prompt }}\n</s>",
+                       "modelfile": "FROM /b/q8\n"},
+              C.R2D2_F16: {"digest": "f16", "details": {"quantization_level": "F16"}, "template": "x",
+                           "modelfile": f"FROM {gg}\n"}}
     calls = []
 
     def run(cmd, **k):
@@ -766,8 +770,9 @@ def test_r2d2_cpeg_imports_the_canonical_checkpoint_unquantized_with_harmbench_p
             models.pop(cmd[2])
         if cmd[1] == "create":
             mf = C.Path(cmd[4]).read_bytes().decode("utf-8")
-            assert mf.startswith(f"FROM {snap}\n") and 'PARAMETER stop "</s>"' in mf and "\r" not in mf
-            models[cmd[2]] = {"digest": "new", "details": {"quantization_level": "BF16"}, "template": mf.split('"""')[1]}
+            assert mf.startswith(f"FROM {C.R2D2_F16}\n") and 'PARAMETER stop "</s>"' in mf and "\r" not in mf
+            models[cmd[2]] = {"digest": "new", "details": {"quantization_level": "F16"}, "template": mf.split('"""')[1],
+                              "modelfile": f"FROM {gg}\n"}
         return type("R", (), {"returncode": 0, "stdout": "", "stderr": ""})()
 
     def api(path, body=None, timeout=60):
@@ -783,8 +788,74 @@ def test_r2d2_cpeg_imports_the_canonical_checkpoint_unquantized_with_harmbench_p
     assert RP.r2d2_cpeg(log=lambda *_: None) == 0
     assert got == [(C.R2D2_HF, C.R2D2_HF_REV)] and not pre.exists() and ["ollama", "create"] in calls
     assert models[C.R2D2]["template"] == "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n" and C.r2d2_served()["ok"]
-    assert str(snap) not in (tmp_path / "out" / "r2d2_Modelfile").read_text(encoding="utf-8")
+    assert C.jload(tmp_path / "out" / "diag" / "r2d2_weights_check.json")["ok"]
     calls.clear()
     assert C.ensure_r2d2(log=lambda *_: None) is None and not calls
     models[C.R2D2]["digest"] = "other"                                  # another model under the name: rebuilt
     assert not C.r2d2_served()["ok"] and RP.r2d2_cpeg(log=lambda *_: None) == 0 and C.r2d2_served()["ok"]
+    _, bad = _tiny_r2d2(tmp_path / "bad", drop="output.weight")         # a GGUF that is not the checkpoint: refused
+    models[C.R2D2_F16]["modelfile"] = f"FROM {bad}\n"
+    models[C.R2D2]["digest"] = "other"
+    import pytest
+    with pytest.raises(SystemExit):
+        C.ensure_r2d2(log=lambda *_: None)
+
+
+def _tiny_r2d2(d, f16_values=None, drop=None):
+    """A two-tensor-per-kind checkpoint (bf16 safetensors) and its GGUF as llama.cpp writes it (q/k permuted)."""
+    import struct
+    from v21r import wcheck as W
+    rng = np.random.default_rng(0)
+    nh, nkv, hid = 4, 2, 8
+    hf = {"model.embed_tokens.weight": (6, hid), "model.norm.weight": (hid,), "lm_head.weight": (6, hid),
+          "model.layers.0.self_attn.q_proj.weight": (hid, hid), "model.layers.0.self_attn.k_proj.weight": (4, hid),
+          "model.layers.0.input_layernorm.weight": (hid,)}
+    ts = {k: (rng.standard_normal(v).astype(np.float32).view(np.uint32) >> 16).astype(np.uint16) for k, v in hf.items()}
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "config.json").write_text(json.dumps({"num_attention_heads": nh, "num_key_value_heads": nkv}))
+    head, off, blob = {}, 0, b""
+    for k, a in ts.items():
+        head[k] = {"dtype": "BF16", "shape": list(a.shape), "data_offsets": [off, off + a.nbytes]}
+        off += a.nbytes
+        blob += a.tobytes()
+    hj = json.dumps(head).encode()
+    (d / "model.safetensors").write_bytes(struct.pack("<Q", len(hj)) + hj + blob)
+    g = {}
+    for k, a in ts.items():
+        x = W._bf16(a)
+        gn = W.gguf_name(k)
+        if gn.endswith("attn_q.weight"):
+            x = W.permute(x, nh)
+        if gn.endswith("attn_k.weight"):
+            x = W.permute(x, nkv)
+        g[gn] = x if x.ndim == 1 else x.astype(np.float16)
+    if f16_values:
+        g.update(f16_values(g))
+    if drop:
+        g.pop(drop)
+    s = lambda t: struct.pack("<Q", len(t.encode())) + t.encode()       # noqa: E731
+    out = b"GGUF" + struct.pack("<IQQ", 3, len(g), 1) + s("general.alignment") + struct.pack("<II", 4, 32)
+    data, offs = b"", []
+    for k, a in g.items():
+        offs.append(len(data))
+        data += a.tobytes() + b"\0" * (-a.nbytes % 32)
+    for (k, a), o in zip(g.items(), offs):
+        out += s(k) + struct.pack("<I", a.ndim) + struct.pack(f"<{a.ndim}Q", *reversed(a.shape))
+        out += struct.pack("<IQ", 0 if a.dtype == np.float32 else 1, o)
+    out += b"\0" * (-len(out) % 32) + data
+    (d / "m.gguf").write_bytes(out)
+    return d, d / "m.gguf"
+
+
+def test_wcheck_accepts_an_exact_f16_conversion_and_rejects_altered_or_missing_tensors(tmp_path):
+    from v21r import wcheck as W
+    st, gg = _tiny_r2d2(tmp_path / "ok")
+    r = W.compare(st, gg, log=lambda *_: None)
+    assert r["ok"] and r["tensors"] == 6 and r["unequal_elements"] == 0 and r["gguf_types"] == {"0": 2, "1": 4}
+    st, gg = _tiny_r2d2(tmp_path / "bad", f16_values=lambda g: {"blk.0.attn_q.weight": g["blk.0.attn_q.weight"] * 1.01})
+    r = W.compare(st, gg, log=lambda *_: None)
+    assert not r["ok"] and r["unequal_tensors"][0][0] == "model.layers.0.self_attn.q_proj.weight"
+    st, gg = _tiny_r2d2(tmp_path / "rows", f16_values=lambda g: {"blk.0.attn_k.weight": g["blk.0.attn_k.weight"][::-1].copy()})
+    assert not W.compare(st, gg, log=lambda *_: None)["ok"]
+    st, gg = _tiny_r2d2(tmp_path / "missing", drop="output.weight")
+    assert W.compare(st, gg, log=lambda *_: None)["missing"] == ["lm_head.weight"]

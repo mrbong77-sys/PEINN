@@ -29,14 +29,16 @@ ARMS = {  # base -> {defense: arm id} (paper Table 2 and Appendix A)
 }
 JUDGE = "qwen3:32b"                                  # the submitted judge (all LLM-judged benches)
 R2D2 = "zephyr-r2d2:latest"                          # the name the PEAOS arm H02 calls
-# The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST). R2D2 is served from the canonical checkpoint
-# HarmBench's authors evaluated, cais/zephyr_7b_r2d2 (bf16 safetensors, pinned revision), imported into Ollama without
-# quantization (Eugene 2026-10-17 00:15 KST: quantization may degrade it), with HarmBench's own prompt for this model
-# (baselines/model_utils.py ZEPHYR_ROBUST_PROMPT, configs/model_configs/models.yaml zephyr_7b_robust; no system block).
-# CPEG's Q8_0 build took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"), under which R2D2 left 8 of 12 submitted XSTest
-# safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
+# The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST). R2D2 is the canonical checkpoint HarmBench's
+# authors evaluated, cais/zephyr_7b_r2d2 (bf16, pinned revision), unquantized (Eugene 2026-10-17 00:15 KST: quantization may
+# degrade it). Ollama cannot import its safetensors ("unsupported MLX architecture: MistralForCausalLM"), so H02 serves
+# mradermacher's F16 GGUF of it, checked tensor by tensor against the checkpoint (v21r.wcheck), with HarmBench's own prompt
+# for this model (baselines/model_utils.py ZEPHYR_ROBUST_PROMPT, configs/model_configs/models.yaml zephyr_7b_robust; no
+# system block). CPEG's Q8_0 build took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"), under which R2D2 left 8 of 12
+# submitted XSTest safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
 R2D2_CPEG = "zephyr-r2d2:7b-q8_0"
 R2D2_GGUF = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0"       # CPEG's weights (compared in r2d2-fingerprint only)
+R2D2_F16 = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:F16"         # served (after the weights check)
 R2D2_HF = "cais/zephyr_7b_r2d2"
 R2D2_HF_REV = "214e3d4e117a1f2b58fbc334e0fe58d93c9365d6"        # the Hub revision of 2024-02-26
 R2D2_TEMPLATE = "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n"     # HarmBench ZEPHYR_ROBUST_PROMPT
@@ -194,12 +196,18 @@ def _show(name: str) -> dict:
     return json.loads(_ollama("/api/show", {"model": name}))
 
 
+def _blob_path(show: dict) -> Path | None:
+    """The weights file a served model reads (its Modelfile's FROM line)."""
+    p = next((l[5:].strip() for l in show.get("modelfile", "").splitlines() if l.startswith("FROM ")), "")
+    return Path(p) if p else None
+
+
 def _r2d2_marker() -> Path:
     return CACHE / "r2d2_canonical.json"
 
 
 def r2d2_served() -> dict:
-    """What H02 is served with now: the model this code built from the canonical checkpoint (same digest as recorded),
+    """What H02 is served with now: the model this code built after the weights check (same digest as recorded),
     unquantized, with HarmBench's prompt."""
     have = _digests()
     if R2D2 not in have:
@@ -207,39 +215,49 @@ def r2d2_served() -> dict:
     me = _show(R2D2)
     mk = jload(_r2d2_marker()) if _r2d2_marker().exists() else {}
     rep = {"digest": have[R2D2], "built_digest": mk.get("digest"), "source": mk.get("source"),
-           "quantization": me.get("details", {}).get("quantization_level", ""), "template": me.get("template", ""),
-           "harmbench_template": R2D2_TEMPLATE}
-    rep["ok"] = (rep["digest"] == rep["built_digest"] and rep["source"] == f"{R2D2_HF}@{R2D2_HF_REV}"
-                 and rep["quantization"] in UNQUANTIZED and rep["template"] == R2D2_TEMPLATE)
+           "weights_check": mk.get("weights_check"), "quantization": me.get("details", {}).get("quantization_level", ""),
+           "template": me.get("template", ""), "harmbench_template": R2D2_TEMPLATE}
+    rep["ok"] = (rep["digest"] == rep["built_digest"] and rep["source"] == f"{R2D2_F16} = {R2D2_HF}@{R2D2_HF_REV}"
+                 and rep["weights_check"] is True and rep["quantization"] in UNQUANTIZED
+                 and rep["template"] == R2D2_TEMPLATE)
     return rep
 
 
 def ensure_r2d2(log=print) -> Path | None:
-    """R2D2 (arm H02) under the name H02 calls: cais/zephyr_7b_r2d2 at R2D2_HF_REV, imported unquantized, with HarmBench's
-    prompt (R2D2_TEMPLATE). Any other model of that name is replaced. Returns the record written to results/ (None if
-    already in place)."""
+    """R2D2 (arm H02) under the name H02 calls: R2D2_F16 with HarmBench's prompt (R2D2_TEMPLATE), served only after its
+    tensors equal cais/zephyr_7b_r2d2 at R2D2_HF_REV (bf16 cast to float16). Any other model of that name is replaced.
+    Returns the record written to results/ (None if already in place)."""
     if r2d2_served().get("ok"):
         return None
     from huggingface_hub import snapshot_download
-    log(f"  download {R2D2_HF}@{R2D2_HF_REV[:12]} (bf16 safetensors)")
+    from . import wcheck
+    log(f"  download {R2D2_HF}@{R2D2_HF_REV[:12]} (bf16 safetensors, for the weights check)")
     src_dir = snapshot_download(R2D2_HF, revision=R2D2_HF_REV, local_dir=str(CACHE / "hf" / "zephyr_7b_r2d2"),
                                 allow_patterns=["*.json", "*.safetensors", "tokenizer.model"])
+    pull_missing([R2D2_F16], log=log)
+    blob = _blob_path(_show(R2D2_F16))
+    chk = wcheck.compare(Path(src_dir), blob, log=log)
+    chk["gguf"], chk["checkpoint"] = R2D2_F16, f"{R2D2_HF}@{R2D2_HF_REV}"
+    jdump(chk, OUT / "diag" / "r2d2_weights_check.json")
+    if not chk["ok"]:
+        publish([OUT / "diag" / "r2d2_weights_check.json"], f"v21r R2D2: weights check failed ({R2D2_F16})")
+        raise SystemExit(f"{R2D2_F16} does not hold {R2D2_HF}'s weights (results/diag/r2d2_weights_check.json)")
     if R2D2 in _digests():
-        log(f"  ollama rm {R2D2} (not the canonical import)")
+        log(f"  ollama rm {R2D2} (not the checked F16 import)")
         subprocess.run(["ollama", "rm", R2D2])
     mf = CACHE / "r2d2.Modelfile"
     mf.parent.mkdir(parents=True, exist_ok=True)
     with open(mf, "w", encoding="utf-8", newline="\n") as h:        # no CRLF on Windows: the template is compared as is
-        h.write(f'FROM {src_dir}\nTEMPLATE """{R2D2_TEMPLATE}"""\n' + "".join(f'PARAMETER stop "{s}"\n' for s in R2D2_STOPS))
-    log(f"  ollama create {R2D2} -f {mf} (no quantization)")
+        h.write(f'FROM {R2D2_F16}\nTEMPLATE """{R2D2_TEMPLATE}"""\n' + "".join(f'PARAMETER stop "{s}"\n' for s in R2D2_STOPS))
+    log(f"  ollama create {R2D2} -f {mf}")
     if subprocess.run(["ollama", "create", R2D2, "-f", str(mf)]).returncode:
         raise SystemExit(f"ollama create {R2D2} failed")
-    jdump({"source": f"{R2D2_HF}@{R2D2_HF_REV}", "digest": _digests().get(R2D2)}, _r2d2_marker())
+    jdump({"source": f"{R2D2_F16} = {R2D2_HF}@{R2D2_HF_REV}", "weights_check": True, "digest": _digests().get(R2D2)},
+          _r2d2_marker())
     rep = r2d2_served()
     f = OUT / "r2d2_Modelfile"
     f.parent.mkdir(parents=True, exist_ok=True)
-    body = mf.read_text(encoding="utf-8").replace(str(src_dir), f"<snapshot of {R2D2_HF}@{R2D2_HF_REV}>")
-    f.write_text(f"# built from\n{body}\n# ollama show {R2D2} (api/show)\n"
+    f.write_text(f"# built from\n{mf.read_text(encoding='utf-8')}\n# ollama show {R2D2} (api/show)\n"
                  + json.dumps({k: rep.get(k) for k in ("source", "digest", "quantization", "template", "ok")}, indent=1)
                  + "\n", encoding="utf-8")
     return f
