@@ -129,3 +129,21 @@
 | 0.2 | A0ft | 0.223 | 0.945 | 0.100 | 0.327 | 0.143 | 0.986 | 0.980 |
 | 0.3 | A0 | 0.236 | 0.957 | 0.316 | 0.513 | 0.220 | 0.975 | 0.980 |
 | 0.3 | A0ft | 0.304 | 0.970 | 0.134 | 0.353 | 0.183 | 0.986 | 0.980 |
+
+## 6. HarmBench 경로 (오류 분석 전용, 적합에 쓰지 않음; 문장 245, qwen 기록)
+
+- A0@0.1 category: contextual {"Hard-block": 71, "Direct-Answer": 4, "Soft-reasoning": 2}; standard {"Hard-block": 145, "Direct-Answer": 13, "Soft-reasoning": 10}
+- A0@0.1 semantic_category: chemical_biological {"Hard-block": 40, "Direct-Answer": 5, "Soft-reasoning": 1}; cybercrime_intrusion {"Hard-block": 42, "Direct-Answer": 8, "Soft-reasoning": 3}; harassment_bullying {"Hard-block": 21, "Soft-reasoning": 1}; harmful {"Hard-block": 15, "Soft-reasoning": 2, "Direct-Answer": 1}; illegal {"Hard-block": 48, "Soft-reasoning": 3, "Direct-Answer": 1}; misinformation_disinformation {"Hard-block": 50, "Direct-Answer": 2, "Soft-reasoning": 2}
+- A0@0.1 length: 300-1000 {"Hard-block": 24, "Direct-Answer": 2, "Soft-reasoning": 1}; <300 {"Hard-block": 145, "Direct-Answer": 13, "Soft-reasoning": 10}; >1000 {"Hard-block": 47, "Direct-Answer": 2, "Soft-reasoning": 1}
+- A0ft@0.005 category: contextual {"Hard-block": 66, "Direct-Answer": 10, "Soft-reasoning": 1}; standard {"Hard-block": 155, "Direct-Answer": 12, "Reasoned-Refusal": 1}
+- A0ft@0.005 semantic_category: chemical_biological {"Hard-block": 41, "Direct-Answer": 4, "Soft-reasoning": 1}; cybercrime_intrusion {"Hard-block": 42, "Direct-Answer": 11}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 14, "Direct-Answer": 3, "Reasoned-Refusal": 1}; illegal {"Hard-block": 50, "Direct-Answer": 2}; misinformation_disinformation {"Hard-block": 52, "Direct-Answer": 2}
+- A0ft@0.005 length: 300-1000 {"Hard-block": 20, "Direct-Answer": 6, "Soft-reasoning": 1}; <300 {"Hard-block": 155, "Direct-Answer": 12, "Reasoned-Refusal": 1}; >1000 {"Hard-block": 46, "Direct-Answer": 4}
+- A0ft@0.02 category: contextual {"Hard-block": 65, "Direct-Answer": 10, "Soft-reasoning": 2}; standard {"Hard-block": 153, "Direct-Answer": 12, "Soft-reasoning": 2, "Reasoned-Refusal": 1}
+- A0ft@0.02 semantic_category: chemical_biological {"Hard-block": 41, "Direct-Answer": 4, "Soft-reasoning": 1}; cybercrime_intrusion {"Hard-block": 40, "Direct-Answer": 11, "Soft-reasoning": 2}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 14, "Direct-Answer": 3, "Reasoned-Refusal": 1}; illegal {"Hard-block": 49, "Direct-Answer": 2, "Soft-reasoning": 1}; misinformation_disinformation {"Hard-block": 52, "Direct-Answer": 2}
+- A0ft@0.02 length: 300-1000 {"Hard-block": 19, "Direct-Answer": 6, "Soft-reasoning": 2}; <300 {"Hard-block": 153, "Direct-Answer": 12, "Soft-reasoning": 2, "Reasoned-Refusal": 1}; >1000 {"Hard-block": 46, "Direct-Answer": 4}
+- A0ft@0.05 category: contextual {"Hard-block": 68, "Direct-Answer": 7, "Soft-reasoning": 2}; standard {"Hard-block": 157, "Direct-Answer": 6, "Soft-reasoning": 5}
+- A0ft@0.05 semantic_category: chemical_biological {"Hard-block": 42, "Direct-Answer": 4}; cybercrime_intrusion {"Hard-block": 43, "Direct-Answer": 6, "Soft-reasoning": 4}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 16, "Soft-reasoning": 1, "Direct-Answer": 1}; illegal {"Hard-block": 50, "Soft-reasoning": 2}; misinformation_disinformation {"Hard-block": 52, "Direct-Answer": 2}
+- A0ft@0.05 length: 300-1000 {"Hard-block": 21, "Direct-Answer": 4, "Soft-reasoning": 2}; <300 {"Hard-block": 157, "Direct-Answer": 6, "Soft-reasoning": 5}; >1000 {"Hard-block": 47, "Direct-Answer": 3}
+- A0ft@0.1 category: contextual {"Hard-block": 73, "Direct-Answer": 3, "Soft-reasoning": 1}; standard {"Hard-block": 165, "Soft-reasoning": 2, "Direct-Answer": 1}
+- A0ft@0.1 semantic_category: chemical_biological {"Hard-block": 44, "Direct-Answer": 2}; cybercrime_intrusion {"Hard-block": 48, "Soft-reasoning": 3, "Direct-Answer": 2}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 52}; misinformation_disinformation {"Hard-block": 54}
+- A0ft@0.1 length: 300-1000 {"Hard-block": 25, "Direct-Answer": 1, "Soft-reasoning": 1}; <300 {"Hard-block": 165, "Soft-reasoning": 2, "Direct-Answer": 1}; >1000 {"Hard-block": 48, "Direct-Answer": 2}
