@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 147,
+ "seq": 148,
  "mission": "ops.run",
- "time_utc": "2026-10-16 14:40:41",
- "time_local": "2026-10-16 23:40:41",
- "code": "5d91ec3 v21r R2: NeMo arm set-up audit (wrapper, rails parameters, answers vs Vanilla; counts)",
- "gpu": "25567 MiB, 32607 MiB, 0 %, 50",
+ "time_utc": "2026-10-16 14:50:44",
+ "time_local": "2026-10-16 23:50:44",
+ "code": "617b5b6 v21r R2D2 fingerprint: submitted H02 answers vs the public R2D2 builds (greedy, 12 safe prompts)",
+ "gpu": "9330 MiB, 32607 MiB, 94 %, 61",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
