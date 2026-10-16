@@ -274,7 +274,7 @@ def preview(check: bool = False, log=print) -> int:
     th = C.jload(D.odir(check) / "thresholds.json")
     ev = evaluate(check, log, only=done)
     main = str(th["main_cap"])
-    rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v == "A0"]
+    rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v in ("A0", "A0ft")]
     rows += ["SHIPPED", "A0paper", "A4a", "A4b", "A4c", "A4d"]
     L = ["# 게이트 수정 뒤 미리보기 (DESIGN.md 11)", "",
          f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main}. 모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]

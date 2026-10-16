@@ -304,6 +304,116 @@ def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, l
     return infer, best
 
 
+# ---- FT: PEINN with its sentence encoders fine-tuned (DESIGN.md 13) ------------------------------------------
+
+FT_ON = True
+FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, max_len=256)
+FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
+          "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
+
+
+def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print):
+    """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
+    focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
+    principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
+    Xtr / Xva: the frozen blocks around the encoder slot (energy: emotion; head: emotion and principle).
+    Returns (infer(texts, X) -> outputs, best val score)."""
+    import torch
+    import torch.nn as nn
+    from transformers import AutoModel, AutoTokenizer
+    _seed()
+    dev = _dev()
+    tok = AutoTokenizer.from_pretrained(FT_ENC[kind])
+    energy_kind = kind == "energy"
+
+    class Net(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.enc = AutoModel.from_pretrained(FT_ENC[kind])
+            self.out = calibrator() if energy_kind else mlp(800, 3, sigmoid=True)
+
+        def forward(self, ids, att, x):
+            h = self.enc(input_ids=ids, attention_mask=att).last_hidden_state
+            m = att.unsqueeze(-1).float()
+            e = (h * m).sum(1) / m.sum(1).clamp_min(1e-9)
+            e = nn.functional.normalize(e, dim=1)              # both sentence-transformers models end in Normalize
+            z = torch.cat([x[:, :32], e], 1) if energy_kind else torch.cat([x[:, :32], e, x[:, 32:]], 1)
+            return self.out(z)
+
+    net = Net().to(dev)
+    opt = torch.optim.AdamW([{"params": net.enc.parameters(), "lr": hp["lr_enc"]},
+                             {"params": net.out.parameters(), "lr": hp["lr_out"]}], weight_decay=0.01)
+    ytr = (tr.F.to_numpy() >= 0.5).astype("float32")
+    pos_w = float((ytr == 0).sum() / max(1, (ytr == 1).sum()))
+    neg_cw = float((ytr == 1).sum() / max(1, (ytr == 0).sum()))
+    dw = torch.tensor([1.0, HEAD_HP["i_weight"], 1.0], device=dev)
+
+    def batches(df, X, shuffle):
+        ix = np.arange(len(df))
+        if shuffle:
+            np.random.default_rng(SEED).shuffle(ix)
+        for s in range(0, len(ix), hp["batch"]):
+            j = ix[s:s + hp["batch"]]
+            b = df.iloc[j]
+            enc = tok(b.text.astype(str).tolist(), truncation=True, max_length=hp["max_len"], padding=True,
+                      return_tensors="pt")
+            r = torch.tensor(b["rw"].to_numpy(dtype="float32") if "rw" in b else np.ones(len(b), "float32"), device=dev)
+            x = torch.tensor(X[j], device=dev, dtype=torch.float32)
+            if energy_kind:
+                y = torch.tensor((b.F.to_numpy() >= 0.5).astype("float32"), device=dev).unsqueeze(1)
+                w = (y * pos_w + (1 - y) * neg_cw) * r[:, None]
+            else:
+                y = torch.tensor(b[["T", "I", "F"]].to_numpy(dtype="float32"), device=dev)
+                w = torch.tensor(head_weights(b, neg_w), device=dev) * r[:, None]
+            yield enc["input_ids"].to(dev), enc["attention_mask"].to(dev), x, y, w
+
+    def loss(p, y, w):
+        p = p.clamp(1e-7, 1 - 1e-7)
+        if energy_kind:                                                   # focal BCE as train_calibrator
+            pt = y * p + (1 - y) * (1 - p)
+            lp = y * torch.log(p) + (1 - y) * torch.log(1 - p)
+            return -(w * (1 - pt).pow(CAL_HP["focal_gamma"]) * lp).mean()
+        el = nn.functional.binary_cross_entropy(p, y, reduction="none")
+        return (el * dw * w).sum() / w.sum().clamp_min(1.0)
+
+    def predict(df, X):
+        out = []
+        net.eval()
+        with torch.no_grad():
+            for ids, att, x, _, _ in batches(df, X, False):
+                out.append(net(ids, att, x).cpu().numpy())
+        return np.concatenate(out) if out else np.zeros((0, 1 if energy_kind else 3), dtype="float32")
+
+    best, best_state = None, None
+    for ep in range(hp["epochs"]):
+        net.train()
+        for i, (ids, att, x, y, w) in enumerate(batches(tr, Xtr, True)):
+            l_ = loss(net(ids, att, x), y, w)
+            opt.zero_grad()
+            l_.backward()
+            opt.step()
+            if i % 200 == 0:
+                log(f"    {kind} epoch {ep + 1} batch {i} loss {float(l_):.4f}")
+        pv = predict(va, Xva)
+        if energy_kind:
+            sc = _auroc((va.F.to_numpy() >= 0.5).astype(int), pv.ravel())
+            better = best is None or sc > best
+        else:
+            yv, wv = va[["T", "I", "F"]].to_numpy(dtype="float32"), head_weights(va, neg_w) * va["rw"].to_numpy()[:, None]
+            el = -(yv * np.log(np.clip(pv, 1e-7, 1)) + (1 - yv) * np.log(np.clip(1 - pv, 1e-7, 1)))
+            sc = float((el * np.array([1.0, HEAD_HP["i_weight"], 1.0]) * wv).sum() / max(wv.sum(), 1.0))
+            better = best is None or sc < best
+        log(f"    {kind} epoch {ep + 1} val {'AUROC' if energy_kind else 'loss'} {sc:.4f}")
+        if better:
+            best, best_state = sc, {k: v.detach().cpu().clone() for k, v in net.state_dict().items()}
+    net.load_state_dict(best_state)
+
+    def infer(texts: list[str], X) -> np.ndarray:
+        df = pd.DataFrame({"text": texts, "F": 0.0, "T": 0.0, "I": 0.0, "mask_T": 1.0, "mask_I": 1.0, "mask_F": 1.0})
+        return predict(df, X)
+    return infer, best
+
+
 # ---- step T ------------------------------------------------------------------------------------------------
 
 VARIANTS = ("A0", "A1", "A2", "A3", "A6p", "A6e", "A7")
@@ -352,8 +462,9 @@ def train_all(check: bool = False, log=print) -> int:
     E = energy(cal, Cx[ru])
     report["calibrator_val_auroc"] = auc
 
-    def save(name, **arrs):
-        np.savez(sigdir(check) / f"{name}.npz", sha=uni.sha.to_numpy(), part=uni.part.to_numpy(), E=E, **arrs)
+    def save(name, E_=None, **arrs):
+        np.savez(sigdir(check) / f"{name}.npz", sha=uni.sha.to_numpy(), part=uni.part.to_numpy(),
+                 E=E if E_ is None else E_, **arrs)
 
     cols = {"A0": slice(0, 800), "A6p": np.r_[0:416], "A6e": np.r_[32:800]}
     for name, ix in cols.items():
@@ -396,6 +507,17 @@ def train_all(check: bool = False, log=print) -> int:
     p = infer(uni.text.tolist())
     save("A7", T=p[:, 0], I=p[:, 1], F=p[:, 2])
     report["A7_val_loss"] = vl
+
+    if FT_ON:
+        log("== A0ft: PEINN with the calibrator's mpnet and the head's MiniLM fine-tuned (DESIGN.md 13)")
+        fhp = dict(FT_HP, epochs=1) if check else FT_HP
+        hb = np.r_[0:32, 416:800]                                                  # emotion | principle
+        e_inf, e_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, fhp, log)
+        E_ft = e_inf(uni.text.tolist(), Cx[ru][:, :32]).ravel() * 10.0
+        h_inf, h_vl = train_ft("head", trs, va, Hx[D.rows_of(F, trs.sha)][:, hb], Hx[rva][:, hb], neg_w, fhp, log)
+        p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
+        save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
+        report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
 
     # reference: the shipped (bench-contaminated) system, never used for fitting or reported as a result
     save("SHIPPED", T=F["tif"][ru, 0], I=F["tif"][ru, 1], F=F["tif"][ru, 2])

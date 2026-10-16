@@ -275,7 +275,7 @@ def _diag_fixture(tmp_path, monkeypatch):
     for name in ("A0", "SHIPPED"):
         np.savez(M.sigdir(True) / f"{name}.npz", sha=sha, part=part, E=E, T=1 - Fv, I=np.zeros(len(sha)), F=Fv)
     np.savez(M.sigdir(True) / "SHIPPED_E.npz", sha=sha, E=E / 2)
-    th = {"extreme": 8.0, "harm": 5.0, "soft": 5.0, "F": 0.8}
+    th = {"extreme": 8.0, "harm": 5.0, "soft": 5.0, "F": 0.8, "Fref": 0.95, "I": 0.35, "Fblk": 0.95}
     C.jdump({"variants": {"A0": {c: {"th": th} for c in ("0.005", "0.05", "0.1", "0.3")}}},
             D.odir(True) / "thresholds.json")
     d = MX.mdir(True, "qwen") / "peaos_out" / "da" / "xstest"
@@ -297,6 +297,8 @@ def test_gate_diag_counts_the_block_conditions_and_labels(tmp_path, monkeypatch)
     assert "error" not in r, r.get("error")
     x = r["xstest"]
     assert x["texts"] == {"safe": 4, "unsafe": 2}
+    assert set(r["dev"]) == {"A0"}
+    assert sum(g["rows"] for g in r["dev"]["A0"].values()) == 6                     # the test split
     h = x["hard_block"]["0.1"]
     assert h["safe"] == {"extreme": 2, "harm_and_F": 1, "any": 3} and h["unsafe"]["any"] == 2
     assert x["auroc_unsafe_vs_safe"]["F_A0"] > 0.5

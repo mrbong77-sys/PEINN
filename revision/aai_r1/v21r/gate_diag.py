@@ -156,6 +156,43 @@ def neighbours(Fe: dict, sp: pd.DataFrame, lab: pd.DataFrame, groups: dict, k: i
     return out
 
 
+OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast")
+ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
+DEV_VARIANTS = ("A0", "A0ft")
+
+
+def dev_groups(sp: pd.DataFrame) -> dict:
+    """DESIGN.md 13: groups of the test split (never used for fitting) on which variants are compared; not XSTest."""
+    te = sp[sp.split == "test"]
+    y = te["F"].to_numpy(dtype=float) >= 0.5
+    supp = te.source.astype(str).str.startswith("supp:").to_numpy()
+    return {"v4_safe": te[~supp & ~y], "v4_harmful": te[~supp & y],
+            "overrefusal_benign": te[te.source.isin(OVERREFUSAL).to_numpy() & ~y],
+            "adversarial_benign": te[te.source.isin(ADV_BENIGN).to_numpy() & ~y], "supp_harmful": te[supp & y]}
+
+
+def dev_by_variant(check: bool, sp: pd.DataFrame, th_all: dict) -> dict:
+    """Refusal share (Hard-block or Reasoned-Refusal) per test group at each variant's main operating point."""
+    from . import theta as TH
+    out = {}
+    for v in DEV_VARIANTS:
+        if v not in th_all:
+            continue
+        sig = M.load_signals(check, v)
+        t = th_all[v][MAIN]["th"]
+        res = {}
+        for g, d in dev_groups(sp).items():
+            if not len(d):
+                continue
+            x = on(sig, "test", d.sha)
+            T, I, F, E = TH.inputs(v, x)
+            r = C.gate(T, I, F, E, t, **TH.options(v))
+            res[g] = {"rows": int(len(d)), "refusal": round(float(np.isin(r, ("Hard-block", "Reasoned-Refusal")).mean()), 4),
+                      "hard_block": round(float((r == "Hard-block").mean()), 4)}
+        out[v] = res
+    return out
+
+
 def run(check: bool) -> dict:
     th = C.jload(D.odir(check) / "thresholds.json")["variants"]["A0"]
     t = th[MAIN]["th"]
@@ -165,7 +202,8 @@ def run(check: bool) -> dict:
     have = set(a0sig["sha"][a0sig["part"] == "bench"])
     lab = lab[lab.sha.isin(have)].reset_index(drop=True)
     res = {"main_cap": MAIN, "main_th": t, "labels_by_source": labels_by_source(sp),
-           "energy_by_source": energy_by_source(sp, a0sig, t)}
+           "energy_by_source": energy_by_source(sp, a0sig, t),
+           "dev": dev_by_variant(check, sp, C.jload(D.odir(check) / "thresholds.json")["variants"])}
     if len(lab):
         a0, shp = on(a0sig, "bench", lab.sha), on(shsig, "bench", lab.sha)
         res["xstest"] = symptom(lab, th, a0, shp)
@@ -202,6 +240,12 @@ def render(r: dict) -> str:
         L += ["", "## 4. XSTest 문장의 학습 이웃 (mpnet 코사인 상위 5)", ""]
         for g, v in r["neighbours"].items():
             L.append(f"- {g}: 문장 {v['texts']}, 이웃 에너지 라벨 1 비율 {v.get('energy_label_1_share')}, 출처 {v.get('by_source')}")
+    if r.get("dev"):
+        L += ["", "## 5. 변형 비교: test 분할 거절 비율 (주 운영점, 평가 벤치 아님, DESIGN.md 13)", "",
+              "| 변형 | " + " | ".join(next(iter(r["dev"].values())).keys()) + " |",
+              "|---|" + "---|" * len(next(iter(r["dev"].values())))]
+        for v, g in r["dev"].items():
+            L.append(f"| {v} | " + " | ".join(f"{x['refusal']:.3f} (n {x['rows']})" for x in g.values()) + " |")
     if "error" in r:
         L += ["", "## 오류", "", "```", r["error"], "```"]
     return "\n".join(L) + "\n"

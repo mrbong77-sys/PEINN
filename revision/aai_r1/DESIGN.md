@@ -145,3 +145,15 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **사전 테스트:** 본 실행 전에 `supp-check`가 supplement → audit → features → split → train → thresholds → routes를 check 캐시에서 끝까지 돌립니다.
 - **사전 기준 (결과 전에 정함):** 주 운영점에서 qwen, gemma4 재채점 XSTest ORR ≤ 15%, UCR ≤ 5%. val 목표(유해 Hard-block ≥ 85%, 안전 < 10%)는 그대로입니다. 판단은 val과 보충 자료 test 분할로 하고, XSTest 결과를 보고 자료나 가중을 고치지 않습니다. 기준을 못 맞추면 그대로 보고합니다.
 - **GPU:** 특징 추출(수 분)만 씁니다. 응답 행렬은 교수님 확인 전에는 재개하지 않습니다(gate-review).
+- **결과 (09:51 KST):** 주 운영점 qwen UCR 5.8% / ORR 26.4%, gemma4 4.7% / 29.6%. 사전 기준을 못 맞췄습니다(`results/analysis_preview/preview.md`).
+
+## 13. 인코더 미세 조정 A0ft (2026-10-16, 교수님 결정 대기 중 준비)
+
+- **근거(평가 벤치 아님):** 12절 결과에서 test 분할의 적대 형식 무해 문장(WildJailbreak, WildGuardMix)이 23–44% 막히고, v4의 유해 출처 라벨 0 행은 에너지가 높습니다. 고정 특징이 표면 주제를 따라가는 것으로 봅니다(추론). CPEG ablation에서도 주된 이득은 미세 조정 인코더였습니다.
+- **구성 (`models.train_ft`, 변형 `A0ft`):** v2.1 망을 그대로 두고 문장 인코더만 끝까지 학습합니다.
+  - 에너지: [감정 32 | mpnet 768] → 교정기. mpnet(all-mpnet-base-v2)을 미세 조정하고, 초점 BCE에 클래스·출처 가중을 씁니다. val AUROC로 고릅니다.
+  - 헤드: [감정 32 | MiniLM 384 | 원칙 384] → Neutro Head. MiniLM(all-MiniLM-L6-v2)을 미세 조정하고, 세 축 모두 지도에 출처 가중을 씁니다. val 손실로 고릅니다.
+  - 3에폭, 인코더 lr 2e-5, 출력층 lr 1e-3, 배치 32, 최대 256 토큰, seed 42.
+- **비교 (결과 전에 정함, `gate_diag` 5절):** test 분할 집단별 거절 비율(Hard-block + Reasoned-Refusal)을 주 운영점에서 A0와 비교합니다. 집단은 v4 안전, v4 유해, 과잉 거절형 무해, 적대 무해, 보충 유해입니다.
+  - A0ft를 PEINN으로 쓰는 조건: 과잉 거절형·적대 무해 거절이 함께 줄고, 유해 두 집단의 거절이 각각 2%p 넘게 줄지 않을 것.
+  - XSTest와 벤치 재채점은 그 뒤에 한 번만 보고, 이것으로 구성을 확정합니다.
