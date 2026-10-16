@@ -1,12 +1,12 @@
-# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
+# v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 00:24:30 (UTC 2026-10-16 15:24:30), 시도 35, 비컨 #191 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 526e993 station: 임무 실행 중
-- 현재 단계: r2d2-cpeg (5.1분째)
-- 마지막 출력 후: 0.1분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1376 MiB, 32607 MiB, 0 %, 48
-- 다음 동작: 새 코드나 명령을 기다림
-- 사유: 코드 1
+- 시각 2026-10-17 00:30:36 (UTC 2026-10-16 15:30:36), 시도 36, 비컨 #192 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 1a0ac60 v21r R2D2: serve the F16 GGUF of cais/zephyr_7b_r2d2 after a tensor-by-tensor check against the pinned bf16 chec
+- 현재 단계: 없음
+- 마지막 출력 후: 0.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1415 MiB, 32607 MiB, 0 %, 52
+- 다음 동작: 단계 진행
+- 사유: 시작
 - 마지막으로 처리한 명령: 20261016T151800Z-rerun rerun (자식 종료 후 재실행, 2026-10-16 15:15:14 UTC)
 - 남은 단계: r2d2-cpeg; r2d2-fingerprint; matrix-zephyr-check2; zephyr-review; nemo-fair-review-zephyr; nemo-reset; matrix; nemo-doc; nemo-orr-all; nemo-audit-all; a8-check; a8; cost; analyze; release
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review
@@ -49,13 +49,4 @@
 
 [v21r] ===== r2d2-cpeg: R2D2 from the canonical checkpoint, unquantized, HarmBench prompt; the zephyr pre-test cache dropped (DESIGN.md 25) =====
 [ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r r2d2-cpeg
-  download cais/zephyr_7b_r2d2@214e3d4e117a (bf16 safetensors)
-Fetching 10 files:   0%|          | 0/10 [00:00<?, ?it/s]Fetching 10 files:  10%|█         | 1/10 [00:00<00:05,  1.58it/s]Fetching 10 files:  30%|███       | 3/10 [04:54<12:43, 109.03s/it]Fetching 10 files: 100%|██████████| 10/10 [04:54<00:00, 29.46s/it]
-  ollama rm zephyr-r2d2:latest (not the canonical import)
-[?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25hdeleted 'zephyr-r2d2:latest'
-  ollama create zephyr-r2d2:latest -f D:\Projects\PEINN\revision\aai_r1\cache\r2d2.Modelfile (no quantization)
-[?2026h[?25l[1Gimporting safetensors model [K[?25h[?2026l
-Error: unsupported MLX architecture: model "MistralForCausalLM"
-ollama create zephyr-r2d2:latest failed
-[v21r] r2d2-cpeg failed (code 1); fix it and run the same command again
 ```
