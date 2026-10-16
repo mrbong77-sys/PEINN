@@ -1,9 +1,9 @@
 # 위성(station) 상태: 임무 실행 중
 
-- 시각 2026-10-17 00:00:47 (UTC 2026-10-16 15:00:47), 비컨 #149 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
+- 시각 2026-10-17 00:10:50 (UTC 2026-10-16 15:10:50), 비컨 #150 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
 - 임무: ops.run
-- 실행 코드: 3daaab0 v21r R2D2: CPEG's weights with the GGUF's own template (hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0)
-- GPU: 3075 MiB, 32607 MiB, 5 %, 45
+- 실행 코드: 28d7df0 v2.1 심사 대응 runner: 실행 중 (attempt 33)
+- GPU: 26312 MiB, 32607 MiB, 97 %, 62
 - 마지막으로 처리한 명령: 20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)
 - 사유: 정기 보고
 - 최근 임무: ops.run → 코드 0 (2026-10-15 15:21:55 UTC)
