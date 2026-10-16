@@ -249,8 +249,8 @@ def analyze(check: bool = False, log=print) -> int:
     return 0 if C.publish([f, md], "v21r A: benchmark results, curves, calibration and I-construct analyses") else 1
 
 
-# DESIGN.md 14: the evaluation benches are scored only after the dev target is met; DESIGN.md 16: off for one rescore of
-# iteration 2 under the new target (UCR < 5 %, gate ORR < 5 %), back on for the next iteration
+# DESIGN.md 14: the evaluation benches were scored only after the dev target was met; DESIGN.md 17: each iteration is
+# rescored (CPU only; operating points stay fitted on val) and every look is logged in DESIGN.md
 PREVIEW_NEEDS_DEV_PARITY = False
 
 
