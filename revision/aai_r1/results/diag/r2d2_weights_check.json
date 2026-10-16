@@ -1,0 +1,19 @@
+{
+ "gguf_file_type": 1,
+ "gguf_version": 3,
+ "tensors": 291,
+ "elements": 7241732096,
+ "unequal_elements": 0,
+ "max_abs_diff": 2.9802322387695312e-08,
+ "missing": [],
+ "shape_mismatch": [],
+ "unequal_tensors": [],
+ "gguf_types": {
+  "1": 226,
+  "0": 65
+ },
+ "gguf_only": [],
+ "ok": true,
+ "gguf": "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:F16",
+ "checkpoint": "cais/zephyr_7b_r2d2@214e3d4e117a1f2b58fbc334e0fe58d93c9365d6"
+}
