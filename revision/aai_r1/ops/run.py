@@ -109,8 +109,11 @@ def zephyr_review() -> int:
                 for i in x.index[(x.expected_label == "safe").to_numpy()][:5]:
                     print(f"    R2D2 xstest safe: {snip(i)!r}", flush=True)
     for what in ("--template", "--parameters"):                     # the R2D2 model as served (DESIGN.md 9)
-        r = subprocess.run(["ollama", "show", C.R2D2, what], capture_output=True, encoding="utf-8", errors="replace")
-        print(f"ollama show {C.R2D2} {what}: {(r.stdout or r.stderr).strip()!r}"[:600], flush=True)
+        try:
+            r = subprocess.run(["ollama", "show", C.R2D2, what], capture_output=True, encoding="utf-8", errors="replace")
+            print(f"ollama show {C.R2D2} {what}: {(r.stdout or r.stderr).strip()!r}"[:600], flush=True)
+        except OSError as e:
+            print(f"ollama show {C.R2D2} {what}: {e}", flush=True)
     want = {C.ARMS["zephyr"][k] for k in ("Vanilla", "R2D2", "NeMo", "LlamaGuard")}
     have = set(df[df.tag == "others"].arm_id.unique())
     if want - have:
