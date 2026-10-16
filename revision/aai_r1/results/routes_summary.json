@@ -2,3493 +2,3384 @@
  "routes": {
   "A0@0.005": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.01": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.02": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.03": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.04": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.05": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 46,
+    "Deliberation": 40,
+    "Soft-reasoning": 30
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 203,
+    "Soft-reasoning": 31,
+    "Direct-Answer": 11
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 75,
-    "Hard-block": 14
+    "Direct-Answer": 345,
+    "Deliberation": 208,
+    "Soft-reasoning": 183,
+    "Hard-block": 28
    },
    "taxonomy": {
-    "Hard-block": 115,
+    "Hard-block": 144,
     "Soft-reasoning": 41,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Deliberation": 6,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Deliberation": 9
+    "Hard-block": 79,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 32,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.07": {
    "ethics": {
-    "Deliberation": 67,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 57,
+    "Deliberation": 43,
+    "Soft-reasoning": 16
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 37,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Soft-reasoning": 24,
+    "Direct-Answer": 17,
+    "Deliberation": 2
    },
    "morables": {
-    "Deliberation": 367,
-    "Direct-Answer": 308,
-    "Soft-reasoning": 74,
-    "Hard-block": 15
+    "Direct-Answer": 352,
+    "Deliberation": 267,
+    "Soft-reasoning": 124,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 116,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 22,
-    "Deliberation": 17,
-    "Reasoned-Refusal": 1
+    "Hard-block": 144,
+    "Soft-reasoning": 35,
+    "Deliberation": 10,
+    "Direct-Answer": 7
    },
    "xstest": {
-    "Hard-block": 76,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 37,
-    "Deliberation": 9
+    "Direct-Answer": 80,
+    "Hard-block": 79,
+    "Soft-reasoning": 24,
+    "Deliberation": 7,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.1": {
    "ethics": {
-    "Deliberation": 56,
-    "Direct-Answer": 56,
-    "Soft-reasoning": 3,
-    "Hard-block": 1
+    "Direct-Answer": 58,
+    "Deliberation": 39,
+    "Soft-reasoning": 17,
+    "Hard-block": 2
    },
    "ggb": {
-    "Deliberation": 8,
-    "Direct-Answer": 1
+    "Deliberation": 5,
+    "Soft-reasoning": 2,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 177,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 23,
-    "Reasoned-Refusal": 2
+    "Hard-block": 216,
+    "Direct-Answer": 17,
+    "Soft-reasoning": 12
    },
    "morables": {
-    "Direct-Answer": 414,
-    "Deliberation": 233,
-    "Soft-reasoning": 85,
-    "Hard-block": 32
+    "Direct-Answer": 394,
+    "Deliberation": 207,
+    "Soft-reasoning": 122,
+    "Hard-block": 41
    },
    "taxonomy": {
-    "Hard-block": 140,
-    "Soft-reasoning": 28,
-    "Direct-Answer": 23,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Hard-block": 167,
+    "Soft-reasoning": 20,
+    "Direct-Answer": 7,
+    "Deliberation": 2
    },
    "xstest": {
     "Hard-block": 89,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 28,
-    "Deliberation": 3
+    "Direct-Answer": 82,
+    "Soft-reasoning": 16,
+    "Deliberation": 3,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.15": {
    "ethics": {
-    "Deliberation": 62,
-    "Direct-Answer": 51,
-    "Hard-block": 2,
-    "Soft-reasoning": 1
+    "Direct-Answer": 42,
+    "Deliberation": 42,
+    "Soft-reasoning": 20,
+    "Hard-block": 12
    },
    "ggb": {
-    "Deliberation": 8,
-    "Direct-Answer": 1
+    "Deliberation": 5,
+    "Hard-block": 3,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 195,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 5,
-    "Reasoned-Refusal": 2
+    "Hard-block": 224,
+    "Soft-reasoning": 12,
+    "Direct-Answer": 8,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 330,
-    "Deliberation": 299,
-    "Hard-block": 114,
-    "Soft-reasoning": 21
+    "Deliberation": 264,
+    "Direct-Answer": 244,
+    "Hard-block": 204,
+    "Soft-reasoning": 52
    },
    "taxonomy": {
-    "Hard-block": 168,
-    "Direct-Answer": 23,
-    "Soft-reasoning": 4,
-    "Reasoned-Refusal": 1
+    "Hard-block": 175,
+    "Soft-reasoning": 16,
+    "Direct-Answer": 3,
+    "Deliberation": 2
    },
    "xstest": {
-    "Hard-block": 117,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 2
+    "Hard-block": 93,
+    "Direct-Answer": 67,
+    "Soft-reasoning": 25,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.2": {
    "ethics": {
-    "Deliberation": 55,
-    "Direct-Answer": 55,
-    "Soft-reasoning": 3,
-    "Hard-block": 3
+    "Direct-Answer": 43,
+    "Deliberation": 40,
+    "Hard-block": 27,
+    "Soft-reasoning": 6
    },
    "ggb": {
-    "Deliberation": 9
+    "Hard-block": 6,
+    "Deliberation": 3
    },
    "harmbench": {
-    "Hard-block": 205,
-    "Direct-Answer": 26,
-    "Soft-reasoning": 12,
-    "Reasoned-Refusal": 2
+    "Hard-block": 231,
+    "Direct-Answer": 8,
+    "Soft-reasoning": 6
    },
    "morables": {
-    "Direct-Answer": 345,
-    "Deliberation": 188,
-    "Hard-block": 164,
-    "Soft-reasoning": 67
+    "Hard-block": 279,
+    "Direct-Answer": 251,
+    "Deliberation": 234
    },
    "taxonomy": {
-    "Hard-block": 172,
-    "Direct-Answer": 15,
-    "Soft-reasoning": 8,
-    "Reasoned-Refusal": 1
+    "Hard-block": 187,
+    "Soft-reasoning": 5,
+    "Direct-Answer": 3,
+    "Deliberation": 1
    },
    "xstest": {
-    "Hard-block": 120,
-    "Direct-Answer": 56,
-    "Soft-reasoning": 14,
-    "Deliberation": 1
+    "Hard-block": 98,
+    "Direct-Answer": 68,
+    "Soft-reasoning": 20,
+    "Deliberation": 4,
+    "Reasoned-Refusal": 1
    }
   },
   "A0@0.3": {
    "ethics": {
-    "Deliberation": 58,
-    "Direct-Answer": 46,
-    "Hard-block": 10,
-    "Soft-reasoning": 2
+    "Hard-block": 53,
+    "Direct-Answer": 38,
+    "Deliberation": 25
    },
    "ggb": {
-    "Deliberation": 7,
-    "Hard-block": 2
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 218,
-    "Direct-Answer": 15,
-    "Soft-reasoning": 10,
-    "Deliberation": 1,
-    "Reasoned-Refusal": 1
+    "Hard-block": 237,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Hard-block": 290,
-    "Deliberation": 224,
-    "Direct-Answer": 210,
-    "Soft-reasoning": 40
+    "Hard-block": 441,
+    "Direct-Answer": 286,
+    "Deliberation": 37
    },
    "taxonomy": {
-    "Hard-block": 185,
-    "Direct-Answer": 9,
-    "Soft-reasoning": 2
+    "Hard-block": 195,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 136,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 11,
-    "Deliberation": 2
+    "Hard-block": 126,
+    "Direct-Answer": 64,
+    "Reasoned-Refusal": 1
    }
   },
   "A1@0.005": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.01": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.02": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.03": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.04": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.05": {
    "ethics": {
-    "Direct-Answer": 111,
-    "Hard-block": 4,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 8,
-    "Soft-reasoning": 1
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Direct-Answer": 45,
-    "Soft-reasoning": 32
+    "Hard-block": 196,
+    "Direct-Answer": 34,
+    "Reasoned-Refusal": 12,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Direct-Answer": 614,
-    "Soft-reasoning": 76,
-    "Hard-block": 74
+    "Direct-Answer": 743,
+    "Hard-block": 21
    },
    "taxonomy": {
-    "Hard-block": 146,
-    "Soft-reasoning": 26,
-    "Direct-Answer": 24
+    "Hard-block": 148,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 5,
+    "Reasoned-Refusal": 5
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 72,
-    "Soft-reasoning": 42
+    "Direct-Answer": 105,
+    "Hard-block": 71,
+    "Soft-reasoning": 10,
+    "Reasoned-Refusal": 5
    }
   },
   "A1@0.07": {
    "ethics": {
-    "Direct-Answer": 114,
-    "Hard-block": 2
+    "Direct-Answer": 75,
+    "Soft-reasoning": 41
    },
    "ggb": {
-    "Direct-Answer": 9
+    "Soft-reasoning": 8,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 167,
-    "Direct-Answer": 50,
-    "Soft-reasoning": 28
+    "Hard-block": 202,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 651,
-    "Soft-reasoning": 74,
-    "Hard-block": 39
+    "Direct-Answer": 419,
+    "Soft-reasoning": 330,
+    "Hard-block": 15
    },
    "taxonomy": {
-    "Hard-block": 137,
-    "Soft-reasoning": 30,
-    "Direct-Answer": 29
+    "Hard-block": 152,
+    "Soft-reasoning": 40,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 76,
-    "Direct-Answer": 75,
-    "Soft-reasoning": 40
+    "Hard-block": 82,
+    "Direct-Answer": 76,
+    "Soft-reasoning": 33
    }
   },
   "A1@0.1": {
    "ethics": {
-    "Direct-Answer": 107,
-    "Hard-block": 6,
-    "Soft-reasoning": 3
+    "Direct-Answer": 75,
+    "Soft-reasoning": 35,
+    "Hard-block": 6
    },
    "ggb": {
-    "Direct-Answer": 7,
-    "Hard-block": 1,
-    "Soft-reasoning": 1
+    "Soft-reasoning": 7,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 176,
-    "Direct-Answer": 33,
-    "Soft-reasoning": 32,
-    "Reasoned-Refusal": 4
+    "Hard-block": 215,
+    "Soft-reasoning": 20,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 545,
-    "Hard-block": 128,
-    "Soft-reasoning": 91
+    "Direct-Answer": 419,
+    "Soft-reasoning": 276,
+    "Hard-block": 69
    },
    "taxonomy": {
-    "Hard-block": 159,
-    "Soft-reasoning": 19,
-    "Direct-Answer": 18
+    "Hard-block": 169,
+    "Soft-reasoning": 23,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 82,
-    "Direct-Answer": 59,
-    "Soft-reasoning": 49,
-    "Reasoned-Refusal": 1
+    "Hard-block": 86,
+    "Direct-Answer": 76,
+    "Soft-reasoning": 29
    }
   },
   "A1@0.15": {
    "ethics": {
-    "Direct-Answer": 99,
-    "Hard-block": 13,
-    "Soft-reasoning": 4
+    "Direct-Answer": 72,
+    "Soft-reasoning": 32,
+    "Hard-block": 12
    },
    "ggb": {
-    "Direct-Answer": 7,
-    "Hard-block": 1,
-    "Soft-reasoning": 1
+    "Soft-reasoning": 6,
+    "Hard-block": 3
    },
    "harmbench": {
-    "Hard-block": 196,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 17,
-    "Reasoned-Refusal": 2
+    "Hard-block": 225,
+    "Soft-reasoning": 12,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Direct-Answer": 504,
-    "Hard-block": 183,
-    "Soft-reasoning": 77
+    "Direct-Answer": 371,
+    "Hard-block": 265,
+    "Soft-reasoning": 128
    },
    "taxonomy": {
-    "Hard-block": 171,
-    "Direct-Answer": 17,
-    "Soft-reasoning": 8
+    "Hard-block": 182,
+    "Soft-reasoning": 11,
+    "Direct-Answer": 3
    },
    "xstest": {
-    "Hard-block": 106,
-    "Direct-Answer": 60,
+    "Hard-block": 96,
+    "Direct-Answer": 70,
     "Soft-reasoning": 25
    }
   },
   "A1@0.2": {
    "ethics": {
-    "Direct-Answer": 99,
-    "Hard-block": 15,
-    "Soft-reasoning": 2
+    "Direct-Answer": 63,
+    "Hard-block": 29,
+    "Soft-reasoning": 24
    },
    "ggb": {
-    "Direct-Answer": 7,
-    "Hard-block": 2
+    "Hard-block": 6,
+    "Soft-reasoning": 3
    },
    "harmbench": {
-    "Hard-block": 208,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 5,
-    "Reasoned-Refusal": 2
+    "Hard-block": 228,
+    "Soft-reasoning": 9,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Direct-Answer": 504,
-    "Hard-block": 255,
-    "Soft-reasoning": 5
+    "Hard-block": 403,
+    "Direct-Answer": 323,
+    "Soft-reasoning": 38
    },
    "taxonomy": {
-    "Hard-block": 178,
-    "Direct-Answer": 17,
-    "Soft-reasoning": 1
+    "Hard-block": 190,
+    "Soft-reasoning": 5,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 122,
-    "Direct-Answer": 60,
-    "Soft-reasoning": 9
+    "Hard-block": 105,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 21
    }
   },
   "A1@0.3": {
    "ethics": {
-    "Direct-Answer": 80,
-    "Hard-block": 34,
-    "Soft-reasoning": 2
+    "Direct-Answer": 63,
+    "Hard-block": 52,
+    "Soft-reasoning": 1
    },
    "ggb": {
-    "Direct-Answer": 5,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 226,
-    "Direct-Answer": 16,
-    "Soft-reasoning": 3
+    "Hard-block": 237,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Hard-block": 395,
-    "Direct-Answer": 364,
-    "Soft-reasoning": 5
+    "Hard-block": 441,
+    "Direct-Answer": 323
    },
    "taxonomy": {
-    "Hard-block": 186,
-    "Direct-Answer": 9,
-    "Soft-reasoning": 1
+    "Hard-block": 194,
+    "Soft-reasoning": 1,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 140,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 9
+    "Hard-block": 122,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 4
    }
   },
   "A2@0.005": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.01": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.02": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.03": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.04": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.05": {
    "ethics": {
     "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
+    "Deliberation": 54,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 175,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 25,
-    "Reasoned-Refusal": 2
+    "Hard-block": 202,
+    "Direct-Answer": 29,
+    "Soft-reasoning": 11,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 286,
-    "Soft-reasoning": 81,
-    "Hard-block": 33
+    "Direct-Answer": 521,
+    "Deliberation": 210,
+    "Hard-block": 17,
+    "Soft-reasoning": 16
    },
    "taxonomy": {
-    "Hard-block": 127,
-    "Soft-reasoning": 40,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 152,
+    "Direct-Answer": 30,
+    "Soft-reasoning": 14
    },
    "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 37,
+    "Direct-Answer": 101,
+    "Hard-block": 78,
+    "Soft-reasoning": 10,
     "Deliberation": 2
    }
   },
   "A2@0.07": {
    "ethics": {
-    "Direct-Answer": 63,
-    "Deliberation": 51,
-    "Hard-block": 2
+    "Direct-Answer": 55,
+    "Deliberation": 54,
+    "Soft-reasoning": 6,
+    "Hard-block": 1
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 170,
-    "Direct-Answer": 54,
-    "Soft-reasoning": 19,
-    "Reasoned-Refusal": 2
+    "Hard-block": 205,
+    "Soft-reasoning": 21,
+    "Direct-Answer": 16,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 407,
-    "Deliberation": 286,
-    "Soft-reasoning": 44,
-    "Hard-block": 27
+    "Direct-Answer": 422,
+    "Deliberation": 210,
+    "Soft-reasoning": 103,
+    "Hard-block": 29
    },
    "taxonomy": {
-    "Hard-block": 124,
-    "Soft-reasoning": 34,
-    "Direct-Answer": 33,
-    "Deliberation": 5
+    "Hard-block": 155,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 9
    },
    "xstest": {
-    "Direct-Answer": 90,
-    "Hard-block": 73,
-    "Soft-reasoning": 25,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 91,
+    "Hard-block": 80,
+    "Soft-reasoning": 19,
+    "Deliberation": 1
    }
   },
   "A2@0.1": {
    "ethics": {
-    "Direct-Answer": 61,
-    "Deliberation": 51,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 54,
+    "Direct-Answer": 39,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
     "Deliberation": 9
    },
    "harmbench": {
-    "Hard-block": 183,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 17,
+    "Hard-block": 214,
+    "Soft-reasoning": 21,
+    "Direct-Answer": 8,
     "Reasoned-Refusal": 2
    },
    "morables": {
-    "Direct-Answer": 364,
-    "Deliberation": 284,
-    "Hard-block": 69,
-    "Soft-reasoning": 47
+    "Direct-Answer": 292,
+    "Deliberation": 210,
+    "Soft-reasoning": 174,
+    "Hard-block": 88
    },
    "taxonomy": {
-    "Hard-block": 143,
-    "Soft-reasoning": 24,
-    "Direct-Answer": 24,
-    "Deliberation": 5
+    "Hard-block": 171,
+    "Soft-reasoning": 21,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 32,
-    "Deliberation": 2
+    "Hard-block": 88,
+    "Direct-Answer": 76,
+    "Soft-reasoning": 26,
+    "Deliberation": 1
    }
   },
   "A2@0.15": {
    "ethics": {
-    "Direct-Answer": 58,
-    "Deliberation": 51,
-    "Hard-block": 5,
-    "Soft-reasoning": 2
+    "Direct-Answer": 42,
+    "Soft-reasoning": 34,
+    "Deliberation": 26,
+    "Hard-block": 14
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 197,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 16,
-    "Reasoned-Refusal": 2
+    "Hard-block": 225,
+    "Soft-reasoning": 12,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Direct-Answer": 284,
-    "Deliberation": 271,
-    "Hard-block": 132,
-    "Soft-reasoning": 77
+    "Direct-Answer": 312,
+    "Soft-reasoning": 243,
+    "Hard-block": 189,
+    "Deliberation": 20
    },
    "taxonomy": {
-    "Hard-block": 165,
-    "Direct-Answer": 17,
-    "Soft-reasoning": 13,
-    "Deliberation": 1
+    "Hard-block": 186,
+    "Soft-reasoning": 9,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 107,
-    "Direct-Answer": 59,
-    "Soft-reasoning": 23,
-    "Deliberation": 2
+    "Hard-block": 98,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 28
    }
   },
   "A2@0.2": {
    "ethics": {
-    "Direct-Answer": 61,
-    "Deliberation": 45,
-    "Hard-block": 7,
-    "Soft-reasoning": 3
+    "Direct-Answer": 50,
+    "Deliberation": 26,
+    "Hard-block": 25,
+    "Soft-reasoning": 15
    },
    "ggb": {
-    "Deliberation": 9
+    "Hard-block": 6,
+    "Deliberation": 3
    },
    "harmbench": {
-    "Hard-block": 206,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 7,
-    "Reasoned-Refusal": 2
+    "Hard-block": 231,
+    "Direct-Answer": 8,
+    "Soft-reasoning": 6
    },
    "morables": {
-    "Direct-Answer": 318,
-    "Deliberation": 221,
-    "Hard-block": 216,
-    "Soft-reasoning": 9
+    "Direct-Answer": 358,
+    "Hard-block": 315,
+    "Soft-reasoning": 71,
+    "Deliberation": 20
    },
    "taxonomy": {
-    "Hard-block": 175,
-    "Direct-Answer": 17,
-    "Soft-reasoning": 4
+    "Hard-block": 189,
+    "Soft-reasoning": 4,
+    "Direct-Answer": 3
    },
    "xstest": {
-    "Hard-block": 122,
-    "Direct-Answer": 59,
-    "Soft-reasoning": 9,
-    "Deliberation": 1
+    "Hard-block": 102,
+    "Direct-Answer": 70,
+    "Soft-reasoning": 19
    }
   },
   "A2@0.3": {
    "ethics": {
-    "Direct-Answer": 53,
-    "Deliberation": 43,
-    "Hard-block": 18,
-    "Soft-reasoning": 2
+    "Hard-block": 51,
+    "Direct-Answer": 42,
+    "Deliberation": 22,
+    "Soft-reasoning": 1
    },
    "ggb": {
-    "Deliberation": 7,
-    "Hard-block": 2
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 223,
-    "Direct-Answer": 15,
-    "Soft-reasoning": 6,
-    "Reasoned-Refusal": 1
+    "Hard-block": 237,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Hard-block": 339,
-    "Direct-Answer": 225,
-    "Deliberation": 195,
-    "Soft-reasoning": 5
+    "Hard-block": 439,
+    "Direct-Answer": 312,
+    "Deliberation": 13
    },
    "taxonomy": {
-    "Hard-block": 185,
-    "Direct-Answer": 9,
-    "Soft-reasoning": 2
+    "Hard-block": 194,
+    "Soft-reasoning": 1,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 137,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 11,
-    "Deliberation": 1
+    "Hard-block": 124,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 2
    }
   },
   "A3@0.005": {
    "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.01": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.02": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.03": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.04": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.05": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.07": {
-   "ethics": {
-    "Direct-Answer": 109,
-    "Soft-reasoning": 3,
-    "Deliberation": 2,
-    "Hard-block": 2
-   },
-   "ggb": {
-    "Direct-Answer": 8,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 163,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 34,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 578,
-    "Soft-reasoning": 124,
-    "Deliberation": 41,
-    "Hard-block": 21
-   },
-   "taxonomy": {
-    "Hard-block": 115,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 22,
-    "Deliberation": 4
-   },
-   "xstest": {
-    "Hard-block": 81,
-    "Direct-Answer": 69,
-    "Soft-reasoning": 38,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.1": {
-   "ethics": {
-    "Direct-Answer": 101,
-    "Deliberation": 12,
-    "Hard-block": 2,
+    "Direct-Answer": 114,
+    "Hard-block": 1,
     "Soft-reasoning": 1
    },
    "ggb": {
     "Direct-Answer": 7,
     "Deliberation": 1,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 167,
-    "Direct-Answer": 34,
-    "Soft-reasoning": 25,
-    "Deliberation": 16,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 466,
-    "Deliberation": 227,
-    "Soft-reasoning": 38,
-    "Hard-block": 33
-   },
-   "taxonomy": {
-    "Hard-block": 124,
-    "Deliberation": 31,
-    "Soft-reasoning": 25,
-    "Direct-Answer": 16
-   },
-   "xstest": {
-    "Hard-block": 82,
-    "Direct-Answer": 65,
-    "Soft-reasoning": 31,
-    "Deliberation": 10,
-    "Reasoned-Refusal": 3
-   }
-  },
-  "A3@0.15": {
-   "ethics": {
-    "Direct-Answer": 95,
-    "Soft-reasoning": 8,
-    "Deliberation": 8,
-    "Hard-block": 5
-   },
-   "ggb": {
-    "Direct-Answer": 6,
-    "Deliberation": 1,
-    "Hard-block": 1,
-    "Soft-reasoning": 1
-   },
-   "harmbench": {
-    "Hard-block": 193,
-    "Direct-Answer": 25,
-    "Soft-reasoning": 18,
-    "Deliberation": 6,
-    "Reasoned-Refusal": 3
-   },
-   "morables": {
-    "Direct-Answer": 453,
-    "Hard-block": 114,
-    "Deliberation": 105,
-    "Soft-reasoning": 92
-   },
-   "taxonomy": {
-    "Hard-block": 164,
-    "Direct-Answer": 12,
-    "Soft-reasoning": 12,
-    "Deliberation": 8
-   },
-   "xstest": {
-    "Hard-block": 106,
-    "Direct-Answer": 58,
-    "Soft-reasoning": 20,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 2
-   }
-  },
-  "A3@0.2": {
-   "ethics": {
-    "Direct-Answer": 67,
-    "Deliberation": 41,
-    "Hard-block": 4,
-    "Soft-reasoning": 4
-   },
-   "ggb": {
-    "Deliberation": 4,
-    "Direct-Answer": 4,
     "Hard-block": 1
    },
    "harmbench": {
     "Hard-block": 196,
-    "Deliberation": 25,
-    "Direct-Answer": 16,
-    "Soft-reasoning": 5,
-    "Reasoned-Refusal": 3
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
    },
    "morables": {
-    "Deliberation": 493,
-    "Direct-Answer": 138,
-    "Hard-block": 121,
-    "Soft-reasoning": 12
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
    },
    "taxonomy": {
-    "Hard-block": 168,
-    "Deliberation": 19,
-    "Direct-Answer": 6,
-    "Soft-reasoning": 3
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
+    "Reasoned-Refusal": 2
    },
    "xstest": {
-    "Hard-block": 118,
-    "Direct-Answer": 49,
-    "Deliberation": 12,
-    "Soft-reasoning": 10,
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.01": {
+   "ethics": {
+    "Direct-Answer": 114,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
+   },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 196,
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
+   },
+   "taxonomy": {
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
     "Reasoned-Refusal": 2
+   },
+   "xstest": {
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.02": {
+   "ethics": {
+    "Direct-Answer": 114,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
+   },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 196,
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
+   },
+   "taxonomy": {
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
+    "Reasoned-Refusal": 2
+   },
+   "xstest": {
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.03": {
+   "ethics": {
+    "Direct-Answer": 114,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
+   },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 196,
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
+   },
+   "taxonomy": {
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
+    "Reasoned-Refusal": 2
+   },
+   "xstest": {
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.04": {
+   "ethics": {
+    "Direct-Answer": 114,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
+   },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 196,
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
+   },
+   "taxonomy": {
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
+    "Reasoned-Refusal": 2
+   },
+   "xstest": {
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.05": {
+   "ethics": {
+    "Direct-Answer": 114,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
+   },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 196,
+    "Direct-Answer": 40,
+    "Reasoned-Refusal": 5,
+    "Deliberation": 3,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Direct-Answer": 723,
+    "Deliberation": 21,
+    "Hard-block": 20
+   },
+   "taxonomy": {
+    "Hard-block": 151,
+    "Direct-Answer": 41,
+    "Soft-reasoning": 2,
+    "Reasoned-Refusal": 2
+   },
+   "xstest": {
+    "Direct-Answer": 109,
+    "Hard-block": 74,
+    "Soft-reasoning": 7,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.07": {
+   "ethics": {
+    "Direct-Answer": 78,
+    "Soft-reasoning": 33,
+    "Deliberation": 5
+   },
+   "ggb": {
+    "Soft-reasoning": 8,
+    "Deliberation": 1
+   },
+   "harmbench": {
+    "Hard-block": 206,
+    "Soft-reasoning": 25,
+    "Direct-Answer": 11,
+    "Deliberation": 3
+   },
+   "morables": {
+    "Direct-Answer": 460,
+    "Soft-reasoning": 223,
+    "Deliberation": 66,
+    "Hard-block": 15
+   },
+   "taxonomy": {
+    "Hard-block": 148,
+    "Soft-reasoning": 40,
+    "Direct-Answer": 5,
+    "Deliberation": 3
+   },
+   "xstest": {
+    "Hard-block": 83,
+    "Direct-Answer": 76,
+    "Soft-reasoning": 30,
+    "Deliberation": 1,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.1": {
+   "ethics": {
+    "Direct-Answer": 63,
+    "Soft-reasoning": 46,
+    "Deliberation": 5,
+    "Hard-block": 2
+   },
+   "ggb": {
+    "Soft-reasoning": 7,
+    "Deliberation": 1,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 218,
+    "Soft-reasoning": 17,
+    "Direct-Answer": 8,
+    "Deliberation": 2
+   },
+   "morables": {
+    "Soft-reasoning": 355,
+    "Direct-Answer": 310,
+    "Deliberation": 62,
+    "Hard-block": 37
+   },
+   "taxonomy": {
+    "Hard-block": 167,
+    "Soft-reasoning": 27,
+    "Direct-Answer": 1,
+    "Deliberation": 1
+   },
+   "xstest": {
+    "Hard-block": 92,
+    "Direct-Answer": 63,
+    "Soft-reasoning": 34,
+    "Deliberation": 1,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.15": {
+   "ethics": {
+    "Direct-Answer": 69,
+    "Soft-reasoning": 34,
+    "Deliberation": 11,
+    "Hard-block": 2
+   },
+   "ggb": {
+    "Soft-reasoning": 6,
+    "Deliberation": 2,
+    "Hard-block": 1
+   },
+   "harmbench": {
+    "Hard-block": 220,
+    "Soft-reasoning": 13,
+    "Direct-Answer": 7,
+    "Deliberation": 5
+   },
+   "morables": {
+    "Direct-Answer": 316,
+    "Soft-reasoning": 197,
+    "Deliberation": 195,
+    "Hard-block": 56
+   },
+   "taxonomy": {
+    "Hard-block": 170,
+    "Soft-reasoning": 14,
+    "Deliberation": 10,
+    "Direct-Answer": 2
+   },
+   "xstest": {
+    "Hard-block": 93,
+    "Direct-Answer": 66,
+    "Soft-reasoning": 26,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A3@0.2": {
+   "ethics": {
+    "Direct-Answer": 66,
+    "Soft-reasoning": 20,
+    "Hard-block": 15,
+    "Deliberation": 15
+   },
+   "ggb": {
+    "Hard-block": 7,
+    "Soft-reasoning": 2
+   },
+   "harmbench": {
+    "Hard-block": 228,
+    "Soft-reasoning": 7,
+    "Deliberation": 5,
+    "Direct-Answer": 5
+   },
+   "morables": {
+    "Direct-Answer": 259,
+    "Deliberation": 245,
+    "Hard-block": 160,
+    "Soft-reasoning": 100
+   },
+   "taxonomy": {
+    "Hard-block": 187,
+    "Soft-reasoning": 5,
+    "Direct-Answer": 2,
+    "Deliberation": 2
+   },
+   "xstest": {
+    "Hard-block": 101,
+    "Direct-Answer": 63,
+    "Soft-reasoning": 17,
+    "Deliberation": 9,
+    "Reasoned-Refusal": 1
    }
   },
   "A3@0.3": {
    "ethics": {
-    "Direct-Answer": 57,
-    "Deliberation": 45,
-    "Hard-block": 9,
-    "Soft-reasoning": 5
+    "Direct-Answer": 63,
+    "Hard-block": 53
    },
    "ggb": {
-    "Deliberation": 5,
-    "Hard-block": 2,
-    "Direct-Answer": 2
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 210,
-    "Deliberation": 22,
-    "Soft-reasoning": 7,
-    "Direct-Answer": 5,
-    "Reasoned-Refusal": 1
+    "Hard-block": 237,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Deliberation": 461,
-    "Hard-block": 219,
-    "Direct-Answer": 75,
-    "Soft-reasoning": 9
+    "Hard-block": 441,
+    "Direct-Answer": 320,
+    "Deliberation": 3
    },
    "taxonomy": {
-    "Hard-block": 178,
-    "Deliberation": 12,
-    "Direct-Answer": 4,
-    "Soft-reasoning": 2
+    "Hard-block": 195,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 132,
-    "Direct-Answer": 32,
-    "Deliberation": 14,
-    "Soft-reasoning": 12,
+    "Hard-block": 126,
+    "Direct-Answer": 64,
     "Reasoned-Refusal": 1
    }
   },
   "A5@0.005": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.01": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.02": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.03": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.04": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.05": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.07": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.1": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 69,
+    "Deliberation": 37,
+    "Hard-block": 10
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 195,
+    "Direct-Answer": 50
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Direct-Answer": 390,
+    "Hard-block": 195,
+    "Deliberation": 179
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 120,
+    "Direct-Answer": 63,
+    "Deliberation": 13
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
+    "Direct-Answer": 120,
+    "Hard-block": 66,
     "Deliberation": 5
    }
   },
   "A5@0.15": {
    "ethics": {
-    "Deliberation": 60,
-    "Direct-Answer": 56
+    "Direct-Answer": 64,
+    "Deliberation": 40,
+    "Hard-block": 12
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 153,
-    "Direct-Answer": 91,
-    "Deliberation": 1
+    "Hard-block": 208,
+    "Direct-Answer": 35,
+    "Deliberation": 2
    },
    "morables": {
-    "Direct-Answer": 459,
-    "Deliberation": 249,
-    "Hard-block": 56
+    "Hard-block": 271,
+    "Direct-Answer": 262,
+    "Deliberation": 231
    },
    "taxonomy": {
-    "Hard-block": 104,
-    "Direct-Answer": 73,
-    "Deliberation": 19
+    "Hard-block": 128,
+    "Direct-Answer": 48,
+    "Deliberation": 20
    },
    "xstest": {
-    "Direct-Answer": 98,
-    "Hard-block": 88,
-    "Deliberation": 5
+    "Direct-Answer": 114,
+    "Hard-block": 71,
+    "Deliberation": 6
    }
   },
   "A5@0.2": {
    "ethics": {
-    "Deliberation": 65,
-    "Direct-Answer": 48,
-    "Hard-block": 3
+    "Direct-Answer": 51,
+    "Deliberation": 40,
+    "Hard-block": 25
    },
    "ggb": {
-    "Deliberation": 8,
-    "Hard-block": 1
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 173,
-    "Direct-Answer": 71,
-    "Deliberation": 1
+    "Hard-block": 217,
+    "Direct-Answer": 26,
+    "Deliberation": 2
    },
    "morables": {
-    "Direct-Answer": 334,
-    "Deliberation": 286,
-    "Hard-block": 144
+    "Hard-block": 376,
+    "Deliberation": 231,
+    "Direct-Answer": 157
    },
    "taxonomy": {
-    "Hard-block": 145,
-    "Direct-Answer": 39,
-    "Deliberation": 12
+    "Hard-block": 138,
+    "Direct-Answer": 38,
+    "Deliberation": 20
    },
    "xstest": {
-    "Hard-block": 98,
-    "Direct-Answer": 87,
+    "Direct-Answer": 107,
+    "Hard-block": 78,
     "Deliberation": 6
    }
   },
   "A5@0.3": {
    "ethics": {
-    "Deliberation": 65,
-    "Direct-Answer": 47,
-    "Hard-block": 4
+    "Deliberation": 40,
+    "Direct-Answer": 39,
+    "Hard-block": 37
    },
    "ggb": {
-    "Deliberation": 8,
-    "Hard-block": 1
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Direct-Answer": 1
    },
    "harmbench": {
-    "Hard-block": 190,
-    "Direct-Answer": 54,
-    "Deliberation": 1
+    "Hard-block": 226,
+    "Direct-Answer": 17,
+    "Deliberation": 2
    },
    "morables": {
-    "Deliberation": 286,
-    "Hard-block": 247,
-    "Direct-Answer": 231
+    "Hard-block": 479,
+    "Deliberation": 231,
+    "Direct-Answer": 54
    },
    "taxonomy": {
-    "Hard-block": 163,
-    "Direct-Answer": 21,
-    "Deliberation": 12
+    "Hard-block": 150,
+    "Direct-Answer": 26,
+    "Deliberation": 20
    },
    "xstest": {
-    "Hard-block": 107,
-    "Direct-Answer": 78,
+    "Direct-Answer": 102,
+    "Hard-block": 83,
     "Deliberation": 6
    }
   },
   "A6p@0.005": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.01": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.02": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.03": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.04": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.05": {
    "ethics": {
-    "Direct-Answer": 77,
-    "Deliberation": 35,
-    "Hard-block": 3,
-    "Soft-reasoning": 1
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 169,
-    "Direct-Answer": 42,
-    "Soft-reasoning": 31,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 32,
+    "Direct-Answer": 10
    },
    "morables": {
-    "Direct-Answer": 401,
-    "Deliberation": 241,
-    "Soft-reasoning": 95,
-    "Hard-block": 27
+    "Deliberation": 461,
+    "Direct-Answer": 156,
+    "Soft-reasoning": 115,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Soft-reasoning": 37,
-    "Direct-Answer": 24,
-    "Deliberation": 3
+    "Hard-block": 154,
+    "Soft-reasoning": 31,
+    "Deliberation": 7,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 77,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 41,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
+    "Hard-block": 78,
+    "Direct-Answer": 74,
+    "Soft-reasoning": 33,
+    "Deliberation": 6
    }
   },
   "A6p@0.07": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 30,
-    "Hard-block": 2
+    "Deliberation": 51,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 19,
+    "Hard-block": 4
    },
    "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 3
+    "Deliberation": 7,
+    "Hard-block": 1,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 165,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 30,
-    "Reasoned-Refusal": 3
+    "Hard-block": 203,
+    "Soft-reasoning": 34,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Direct-Answer": 438,
-    "Deliberation": 227,
-    "Soft-reasoning": 79,
-    "Hard-block": 20
+    "Deliberation": 461,
+    "Direct-Answer": 145,
+    "Soft-reasoning": 126,
+    "Hard-block": 32
    },
    "taxonomy": {
-    "Hard-block": 119,
-    "Soft-reasoning": 48,
-    "Direct-Answer": 29
+    "Hard-block": 154,
+    "Soft-reasoning": 32,
+    "Deliberation": 7,
+    "Direct-Answer": 3
    },
    "xstest": {
-    "Hard-block": 75,
-    "Direct-Answer": 73,
-    "Soft-reasoning": 40,
-    "Reasoned-Refusal": 2,
-    "Deliberation": 1
+    "Hard-block": 79,
+    "Direct-Answer": 68,
+    "Soft-reasoning": 38,
+    "Deliberation": 6
    }
   },
   "A6p@0.1": {
    "ethics": {
-    "Direct-Answer": 71,
-    "Deliberation": 35,
-    "Hard-block": 7,
-    "Soft-reasoning": 3
-   },
-   "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 2,
-    "Hard-block": 1
-   },
-   "harmbench": {
-    "Hard-block": 177,
-    "Soft-reasoning": 36,
-    "Direct-Answer": 30,
-    "Reasoned-Refusal": 2
-   },
-   "morables": {
-    "Direct-Answer": 323,
-    "Deliberation": 240,
-    "Soft-reasoning": 158,
-    "Hard-block": 43
-   },
-   "taxonomy": {
-    "Hard-block": 149,
-    "Soft-reasoning": 28,
-    "Direct-Answer": 17,
-    "Deliberation": 2
-   },
-   "xstest": {
-    "Hard-block": 83,
-    "Direct-Answer": 59,
-    "Soft-reasoning": 47,
-    "Reasoned-Refusal": 1,
-    "Deliberation": 1
-   }
-  },
-  "A6p@0.15": {
-   "ethics": {
-    "Direct-Answer": 70,
-    "Deliberation": 40,
-    "Hard-block": 6
-   },
-   "ggb": {
-    "Deliberation": 6,
-    "Direct-Answer": 2,
-    "Hard-block": 1
-   },
-   "harmbench": {
-    "Hard-block": 197,
-    "Direct-Answer": 37,
-    "Soft-reasoning": 9,
-    "Reasoned-Refusal": 2
-   },
-   "morables": {
-    "Deliberation": 448,
-    "Direct-Answer": 210,
-    "Hard-block": 103,
-    "Soft-reasoning": 3
-   },
-   "taxonomy": {
-    "Hard-block": 167,
-    "Direct-Answer": 18,
-    "Deliberation": 9,
-    "Soft-reasoning": 2
-   },
-   "xstest": {
-    "Hard-block": 101,
-    "Direct-Answer": 64,
-    "Soft-reasoning": 20,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 1
-   }
-  },
-  "A6p@0.2": {
-   "ethics": {
-    "Direct-Answer": 64,
-    "Deliberation": 42,
-    "Hard-block": 10
-   },
-   "ggb": {
-    "Deliberation": 7,
-    "Hard-block": 1,
-    "Direct-Answer": 1
-   },
-   "harmbench": {
-    "Hard-block": 204,
-    "Direct-Answer": 29,
-    "Soft-reasoning": 9,
-    "Reasoned-Refusal": 2,
-    "Deliberation": 1
-   },
-   "morables": {
-    "Deliberation": 361,
-    "Direct-Answer": 224,
-    "Hard-block": 173,
-    "Soft-reasoning": 6
-   },
-   "taxonomy": {
-    "Hard-block": 176,
-    "Direct-Answer": 14,
-    "Deliberation": 5,
-    "Soft-reasoning": 1
-   },
-   "xstest": {
-    "Hard-block": 114,
-    "Direct-Answer": 58,
-    "Soft-reasoning": 16,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
-   }
-  },
-  "A6p@0.3": {
-   "ethics": {
-    "Direct-Answer": 52,
-    "Deliberation": 45,
-    "Hard-block": 19
+    "Deliberation": 53,
+    "Direct-Answer": 42,
+    "Soft-reasoning": 18,
+    "Hard-block": 3
    },
    "ggb": {
     "Deliberation": 6,
     "Hard-block": 2,
-    "Direct-Answer": 1
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 220,
-    "Direct-Answer": 16,
-    "Soft-reasoning": 8,
-    "Deliberation": 1
+    "Hard-block": 214,
+    "Soft-reasoning": 23,
+    "Direct-Answer": 8
    },
    "morables": {
-    "Deliberation": 354,
-    "Hard-block": 279,
-    "Direct-Answer": 126,
-    "Soft-reasoning": 5
+    "Deliberation": 468,
+    "Direct-Answer": 145,
+    "Soft-reasoning": 115,
+    "Hard-block": 36
    },
    "taxonomy": {
-    "Hard-block": 182,
-    "Direct-Answer": 8,
-    "Deliberation": 4,
-    "Soft-reasoning": 2
+    "Hard-block": 163,
+    "Soft-reasoning": 22,
+    "Deliberation": 8,
+    "Direct-Answer": 3
    },
    "xstest": {
-    "Hard-block": 135,
-    "Direct-Answer": 38,
+    "Hard-block": 87,
+    "Direct-Answer": 68,
+    "Soft-reasoning": 30,
+    "Deliberation": 6
+   }
+  },
+  "A6p@0.15": {
+   "ethics": {
+    "Deliberation": 47,
+    "Direct-Answer": 37,
+    "Soft-reasoning": 20,
+    "Hard-block": 12
+   },
+   "ggb": {
+    "Deliberation": 6,
+    "Hard-block": 2,
+    "Soft-reasoning": 1
+   },
+   "harmbench": {
+    "Hard-block": 224,
     "Soft-reasoning": 13,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 2
+    "Direct-Answer": 8
+   },
+   "morables": {
+    "Deliberation": 393,
+    "Hard-block": 168,
+    "Direct-Answer": 150,
+    "Soft-reasoning": 53
+   },
+   "taxonomy": {
+    "Hard-block": 181,
+    "Soft-reasoning": 10,
+    "Deliberation": 4,
+    "Direct-Answer": 1
+   },
+   "xstest": {
+    "Hard-block": 94,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 31,
+    "Deliberation": 2
+   }
+  },
+  "A6p@0.2": {
+   "ethics": {
+    "Deliberation": 47,
+    "Direct-Answer": 37,
+    "Hard-block": 22,
+    "Soft-reasoning": 10
+   },
+   "ggb": {
+    "Deliberation": 4,
+    "Hard-block": 4,
+    "Soft-reasoning": 1
+   },
+   "harmbench": {
+    "Hard-block": 227,
+    "Soft-reasoning": 10,
+    "Direct-Answer": 8
+   },
+   "morables": {
+    "Deliberation": 379,
+    "Hard-block": 232,
+    "Direct-Answer": 150,
+    "Soft-reasoning": 3
+   },
+   "taxonomy": {
+    "Hard-block": 187,
+    "Soft-reasoning": 6,
+    "Deliberation": 2,
+    "Direct-Answer": 1
+   },
+   "xstest": {
+    "Hard-block": 103,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 22,
+    "Deliberation": 2
+   }
+  },
+  "A6p@0.3": {
+   "ethics": {
+    "Hard-block": 53,
+    "Direct-Answer": 37,
+    "Deliberation": 26
+   },
+   "ggb": {
+    "Hard-block": 9
+   },
+   "harmbench": {
+    "Hard-block": 237,
+    "Direct-Answer": 8
+   },
+   "morables": {
+    "Hard-block": 441,
+    "Deliberation": 173,
+    "Direct-Answer": 150
+   },
+   "taxonomy": {
+    "Hard-block": 195,
+    "Direct-Answer": 1
+   },
+   "xstest": {
+    "Hard-block": 126,
+    "Direct-Answer": 64,
+    "Deliberation": 1
    }
   },
   "A6e@0.005": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.01": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.02": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.03": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.04": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.05": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.07": {
    "ethics": {
-    "Direct-Answer": 66,
     "Deliberation": 48,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
+    "Direct-Answer": 38,
+    "Soft-reasoning": 30
    },
    "ggb": {
     "Deliberation": 7,
-    "Direct-Answer": 2
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 31,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 400,
-    "Deliberation": 248,
-    "Soft-reasoning": 90,
-    "Hard-block": 26
+    "Soft-reasoning": 353,
+    "Direct-Answer": 268,
+    "Deliberation": 126,
+    "Hard-block": 17
    },
    "taxonomy": {
-    "Hard-block": 106,
-    "Soft-reasoning": 46,
-    "Deliberation": 23,
-    "Direct-Answer": 21
+    "Hard-block": 147,
+    "Soft-reasoning": 44,
+    "Deliberation": 4,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 71,
-    "Direct-Answer": 68,
-    "Soft-reasoning": 39,
-    "Deliberation": 13
+    "Hard-block": 81,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 44,
+    "Reasoned-Refusal": 1,
+    "Deliberation": 1
    }
   },
   "A6e@0.1": {
    "ethics": {
-    "Direct-Answer": 72,
-    "Deliberation": 42,
-    "Soft-reasoning": 1,
-    "Hard-block": 1
-   },
-   "ggb": {
-    "Deliberation": 7,
-    "Direct-Answer": 2
-   },
-   "harmbench": {
-    "Hard-block": 177,
-    "Direct-Answer": 44,
-    "Soft-reasoning": 21,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
-   },
-   "morables": {
-    "Direct-Answer": 450,
-    "Deliberation": 189,
-    "Hard-block": 84,
-    "Soft-reasoning": 41
-   },
-   "taxonomy": {
-    "Hard-block": 144,
-    "Direct-Answer": 23,
-    "Soft-reasoning": 17,
-    "Deliberation": 12
-   },
-   "xstest": {
-    "Hard-block": 80,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 34,
-    "Deliberation": 6
-   }
-  },
-  "A6e@0.15": {
-   "ethics": {
-    "Direct-Answer": 62,
-    "Deliberation": 48,
-    "Hard-block": 4,
-    "Soft-reasoning": 2
+    "Deliberation": 61,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 14,
+    "Hard-block": 3
    },
    "ggb": {
     "Deliberation": 7,
     "Hard-block": 1,
-    "Direct-Answer": 1
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 187,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 23,
-    "Deliberation": 3,
-    "Reasoned-Refusal": 2
+    "Hard-block": 214,
+    "Soft-reasoning": 20,
+    "Direct-Answer": 7,
+    "Reasoned-Refusal": 3,
+    "Deliberation": 1
    },
    "morables": {
-    "Direct-Answer": 326,
-    "Deliberation": 248,
-    "Hard-block": 175,
-    "Soft-reasoning": 15
+    "Direct-Answer": 289,
+    "Deliberation": 229,
+    "Soft-reasoning": 135,
+    "Hard-block": 111
    },
    "taxonomy": {
-    "Hard-block": 145,
-    "Deliberation": 23,
-    "Direct-Answer": 16,
-    "Soft-reasoning": 12
+    "Hard-block": 162,
+    "Soft-reasoning": 20,
+    "Deliberation": 10,
+    "Direct-Answer": 4
    },
    "xstest": {
-    "Hard-block": 91,
-    "Direct-Answer": 55,
-    "Soft-reasoning": 30,
-    "Deliberation": 13,
-    "Reasoned-Refusal": 2
+    "Hard-block": 86,
+    "Direct-Answer": 73,
+    "Soft-reasoning": 27,
+    "Deliberation": 4,
+    "Reasoned-Refusal": 1
+   }
+  },
+  "A6e@0.15": {
+   "ethics": {
+    "Deliberation": 59,
+    "Direct-Answer": 38,
+    "Soft-reasoning": 12,
+    "Hard-block": 7
+   },
+   "ggb": {
+    "Deliberation": 6,
+    "Hard-block": 3
+   },
+   "harmbench": {
+    "Hard-block": 222,
+    "Soft-reasoning": 13,
+    "Direct-Answer": 7,
+    "Reasoned-Refusal": 3
+   },
+   "morables": {
+    "Direct-Answer": 291,
+    "Hard-block": 221,
+    "Deliberation": 215,
+    "Soft-reasoning": 37
+   },
+   "taxonomy": {
+    "Hard-block": 184,
+    "Soft-reasoning": 7,
+    "Direct-Answer": 4,
+    "Deliberation": 1
+   },
+   "xstest": {
+    "Hard-block": 96,
+    "Direct-Answer": 73,
+    "Soft-reasoning": 17,
+    "Deliberation": 4,
+    "Reasoned-Refusal": 1
    }
   },
   "A6e@0.2": {
    "ethics": {
-    "Direct-Answer": 67,
-    "Deliberation": 41,
-    "Hard-block": 8
+    "Direct-Answer": 46,
+    "Deliberation": 33,
+    "Hard-block": 27,
+    "Soft-reasoning": 10
    },
    "ggb": {
-    "Deliberation": 8,
-    "Direct-Answer": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 205,
-    "Direct-Answer": 30,
-    "Soft-reasoning": 7,
-    "Reasoned-Refusal": 2,
-    "Deliberation": 1
+    "Hard-block": 229,
+    "Soft-reasoning": 8,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 370,
-    "Hard-block": 218,
-    "Deliberation": 173,
-    "Soft-reasoning": 3
+    "Direct-Answer": 327,
+    "Hard-block": 287,
+    "Soft-reasoning": 86,
+    "Deliberation": 64
    },
    "taxonomy": {
-    "Hard-block": 175,
-    "Direct-Answer": 17,
-    "Soft-reasoning": 3,
-    "Deliberation": 1
+    "Hard-block": 189,
+    "Soft-reasoning": 4,
+    "Direct-Answer": 3
    },
    "xstest": {
-    "Hard-block": 121,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 10,
-    "Reasoned-Refusal": 2,
+    "Hard-block": 106,
+    "Direct-Answer": 69,
+    "Soft-reasoning": 14,
+    "Reasoned-Refusal": 1,
     "Deliberation": 1
    }
   },
   "A6e@0.3": {
    "ethics": {
-    "Direct-Answer": 54,
-    "Deliberation": 49,
-    "Hard-block": 13
+    "Hard-block": 53,
+    "Direct-Answer": 43,
+    "Deliberation": 20
    },
    "ggb": {
-    "Deliberation": 8,
-    "Direct-Answer": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 218,
-    "Direct-Answer": 15,
-    "Soft-reasoning": 10,
-    "Deliberation": 1,
-    "Reasoned-Refusal": 1
+    "Hard-block": 237,
+    "Direct-Answer": 5,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Hard-block": 305,
-    "Direct-Answer": 230,
-    "Deliberation": 226,
-    "Soft-reasoning": 3
+    "Hard-block": 441,
+    "Direct-Answer": 286,
+    "Deliberation": 37
    },
    "taxonomy": {
-    "Hard-block": 182,
-    "Direct-Answer": 9,
-    "Deliberation": 3,
-    "Soft-reasoning": 2
+    "Hard-block": 195,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 124,
-    "Direct-Answer": 40,
-    "Soft-reasoning": 20,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 2
+    "Hard-block": 126,
+    "Direct-Answer": 64,
+    "Reasoned-Refusal": 1
    }
   },
   "A7@0.005": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 68,
+    "Deliberation": 25,
+    "Soft-reasoning": 23
    },
    "ggb": {
-    "Direct-Answer": 4,
+    "Hard-block": 5,
     "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 210,
+    "Soft-reasoning": 18,
+    "Direct-Answer": 15,
+    "Reasoned-Refusal": 2
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 535,
+    "Soft-reasoning": 193,
+    "Deliberation": 30,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 144,
+    "Soft-reasoning": 44,
+    "Direct-Answer": 7,
+    "Deliberation": 1
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 86,
+    "Hard-block": 74,
+    "Soft-reasoning": 30,
+    "Deliberation": 1
    }
   },
   "A7@0.01": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 68,
+    "Deliberation": 25,
+    "Soft-reasoning": 23
    },
    "ggb": {
-    "Direct-Answer": 4,
+    "Hard-block": 5,
     "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 210,
+    "Soft-reasoning": 18,
+    "Direct-Answer": 15,
+    "Reasoned-Refusal": 2
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 535,
+    "Soft-reasoning": 193,
+    "Deliberation": 30,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 144,
+    "Soft-reasoning": 44,
+    "Direct-Answer": 7,
+    "Deliberation": 1
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 86,
+    "Hard-block": 74,
+    "Soft-reasoning": 30,
+    "Deliberation": 1
    }
   },
   "A7@0.02": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 68,
+    "Deliberation": 25,
+    "Soft-reasoning": 23
    },
    "ggb": {
-    "Direct-Answer": 4,
+    "Hard-block": 5,
     "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 210,
+    "Soft-reasoning": 18,
+    "Direct-Answer": 15,
+    "Reasoned-Refusal": 2
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 535,
+    "Soft-reasoning": 193,
+    "Deliberation": 30,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 144,
+    "Soft-reasoning": 44,
+    "Direct-Answer": 7,
+    "Deliberation": 1
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 86,
+    "Hard-block": 74,
+    "Soft-reasoning": 30,
+    "Deliberation": 1
    }
   },
   "A7@0.03": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 68,
+    "Deliberation": 25,
+    "Soft-reasoning": 23
    },
    "ggb": {
-    "Direct-Answer": 4,
+    "Hard-block": 5,
     "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 210,
+    "Soft-reasoning": 18,
+    "Direct-Answer": 15,
+    "Reasoned-Refusal": 2
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 535,
+    "Soft-reasoning": 193,
+    "Deliberation": 30,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 144,
+    "Soft-reasoning": 44,
+    "Direct-Answer": 7,
+    "Deliberation": 1
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 86,
+    "Hard-block": 74,
+    "Soft-reasoning": 30,
+    "Deliberation": 1
    }
   },
   "A7@0.04": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 88,
+    "Deliberation": 26,
+    "Soft-reasoning": 2
    },
    "ggb": {
     "Direct-Answer": 4,
-    "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Deliberation": 3,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 197,
+    "Direct-Answer": 26,
+    "Soft-reasoning": 18,
+    "Reasoned-Refusal": 4
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 658,
+    "Soft-reasoning": 56,
+    "Deliberation": 44,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 131,
+    "Soft-reasoning": 41,
+    "Direct-Answer": 18,
+    "Deliberation": 5,
+    "Reasoned-Refusal": 1
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Direct-Answer": 100,
+    "Hard-block": 66,
+    "Soft-reasoning": 22,
+    "Deliberation": 3
    }
   },
   "A7@0.05": {
    "ethics": {
-    "Direct-Answer": 82,
-    "Deliberation": 22,
-    "Soft-reasoning": 12
+    "Direct-Answer": 85,
+    "Deliberation": 25,
+    "Soft-reasoning": 6
    },
    "ggb": {
-    "Direct-Answer": 6,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 4,
+    "Deliberation": 2,
+    "Direct-Answer": 2,
+    "Soft-reasoning": 1
    },
    "harmbench": {
-    "Hard-block": 114,
-    "Soft-reasoning": 99,
-    "Direct-Answer": 31,
-    "Reasoned-Refusal": 1
+    "Hard-block": 203,
+    "Direct-Answer": 24,
+    "Soft-reasoning": 15,
+    "Reasoned-Refusal": 3
    },
    "morables": {
-    "Direct-Answer": 498,
-    "Soft-reasoning": 255,
-    "Deliberation": 10,
-    "Hard-block": 1
+    "Direct-Answer": 638,
+    "Soft-reasoning": 90,
+    "Deliberation": 30,
+    "Hard-block": 6
    },
    "taxonomy": {
-    "Hard-block": 96,
-    "Soft-reasoning": 77,
-    "Direct-Answer": 17,
-    "Deliberation": 6
-   },
-   "xstest": {
-    "Hard-block": 87,
-    "Direct-Answer": 58,
-    "Soft-reasoning": 44,
+    "Hard-block": 142,
+    "Soft-reasoning": 38,
+    "Direct-Answer": 14,
     "Deliberation": 1,
     "Reasoned-Refusal": 1
+   },
+   "xstest": {
+    "Direct-Answer": 97,
+    "Hard-block": 70,
+    "Soft-reasoning": 23,
+    "Deliberation": 1
    }
   },
   "A7@0.07": {
    "ethics": {
-    "Direct-Answer": 83,
-    "Deliberation": 21,
-    "Soft-reasoning": 11,
-    "Hard-block": 1
+    "Direct-Answer": 54,
+    "Soft-reasoning": 36,
+    "Deliberation": 26
    },
    "ggb": {
-    "Direct-Answer": 4,
-    "Deliberation": 2,
-    "Hard-block": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 4,
+    "Deliberation": 3,
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 158,
-    "Soft-reasoning": 55,
-    "Direct-Answer": 31,
+    "Hard-block": 215,
+    "Soft-reasoning": 19,
+    "Direct-Answer": 10,
     "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 501,
-    "Soft-reasoning": 244,
-    "Hard-block": 12,
-    "Deliberation": 7
+    "Direct-Answer": 461,
+    "Soft-reasoning": 251,
+    "Deliberation": 44,
+    "Hard-block": 8
    },
    "taxonomy": {
-    "Hard-block": 109,
-    "Soft-reasoning": 63,
-    "Direct-Answer": 17,
-    "Deliberation": 7
+    "Hard-block": 156,
+    "Soft-reasoning": 30,
+    "Deliberation": 5,
+    "Direct-Answer": 5
    },
    "xstest": {
-    "Hard-block": 86,
-    "Direct-Answer": 57,
-    "Soft-reasoning": 43,
-    "Deliberation": 4,
-    "Reasoned-Refusal": 1
+    "Hard-block": 79,
+    "Direct-Answer": 78,
+    "Soft-reasoning": 31,
+    "Deliberation": 3
    }
   },
   "A7@0.1": {
    "ethics": {
-    "Direct-Answer": 68,
-    "Soft-reasoning": 25,
-    "Deliberation": 22,
+    "Soft-reasoning": 46,
+    "Direct-Answer": 44,
+    "Deliberation": 25,
     "Hard-block": 1
    },
    "ggb": {
-    "Hard-block": 4,
-    "Direct-Answer": 4,
-    "Reasoned-Refusal": 1
+    "Hard-block": 7,
+    "Soft-reasoning": 2
    },
    "harmbench": {
-    "Hard-block": 168,
-    "Soft-reasoning": 61,
-    "Direct-Answer": 16
+    "Hard-block": 222,
+    "Soft-reasoning": 15,
+    "Direct-Answer": 7,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Soft-reasoning": 375,
-    "Direct-Answer": 360,
-    "Hard-block": 19,
-    "Deliberation": 10
+    "Soft-reasoning": 398,
+    "Direct-Answer": 314,
+    "Deliberation": 37,
+    "Hard-block": 15
    },
    "taxonomy": {
-    "Hard-block": 128,
-    "Soft-reasoning": 57,
-    "Direct-Answer": 9,
-    "Deliberation": 2
+    "Hard-block": 162,
+    "Soft-reasoning": 33,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 95,
-    "Soft-reasoning": 52,
-    "Direct-Answer": 41,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 90,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 36
    }
   },
   "A7@0.15": {
    "ethics": {
-    "Direct-Answer": 68,
-    "Deliberation": 22,
-    "Soft-reasoning": 13,
-    "Hard-block": 13
+    "Direct-Answer": 44,
+    "Soft-reasoning": 42,
+    "Deliberation": 25,
+    "Hard-block": 5
    },
    "ggb": {
-    "Hard-block": 3,
-    "Direct-Answer": 3,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 184,
-    "Soft-reasoning": 45,
-    "Direct-Answer": 16
+    "Hard-block": 231,
+    "Direct-Answer": 7,
+    "Soft-reasoning": 6,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Soft-reasoning": 381,
-    "Direct-Answer": 360,
-    "Hard-block": 13,
-    "Deliberation": 10
+    "Soft-reasoning": 346,
+    "Direct-Answer": 314,
+    "Hard-block": 62,
+    "Deliberation": 42
    },
    "taxonomy": {
-    "Hard-block": 148,
-    "Soft-reasoning": 32,
-    "Direct-Answer": 9,
-    "Deliberation": 7
+    "Hard-block": 188,
+    "Soft-reasoning": 7,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 109,
-    "Direct-Answer": 41,
-    "Soft-reasoning": 34,
-    "Deliberation": 6,
-    "Reasoned-Refusal": 1
+    "Hard-block": 101,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 25
    }
   },
   "A7@0.2": {
    "ethics": {
-    "Direct-Answer": 68,
-    "Deliberation": 22,
-    "Hard-block": 14,
-    "Soft-reasoning": 12
+    "Direct-Answer": 44,
+    "Hard-block": 30,
+    "Deliberation": 25,
+    "Soft-reasoning": 17
    },
    "ggb": {
-    "Hard-block": 3,
-    "Direct-Answer": 3,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 205,
-    "Soft-reasoning": 24,
-    "Direct-Answer": 16
+    "Hard-block": 234,
+    "Direct-Answer": 7,
+    "Soft-reasoning": 3,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 360,
-    "Soft-reasoning": 281,
-    "Hard-block": 114,
-    "Deliberation": 9
+    "Direct-Answer": 314,
+    "Soft-reasoning": 268,
+    "Hard-block": 144,
+    "Deliberation": 38
    },
    "taxonomy": {
-    "Hard-block": 177,
-    "Soft-reasoning": 10,
-    "Direct-Answer": 9
+    "Hard-block": 194,
+    "Direct-Answer": 1,
+    "Soft-reasoning": 1
    },
    "xstest": {
-    "Hard-block": 130,
-    "Direct-Answer": 41,
-    "Soft-reasoning": 17,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 111,
+    "Direct-Answer": 65,
+    "Soft-reasoning": 15
    }
   },
   "A7@0.3": {
    "ethics": {
-    "Direct-Answer": 68,
-    "Deliberation": 22,
-    "Hard-block": 18,
-    "Soft-reasoning": 8
+    "Direct-Answer": 45,
+    "Hard-block": 44,
+    "Deliberation": 21,
+    "Soft-reasoning": 6
    },
    "ggb": {
-    "Direct-Answer": 4,
-    "Hard-block": 3,
-    "Deliberation": 1,
-    "Reasoned-Refusal": 1
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 214,
-    "Direct-Answer": 16,
-    "Soft-reasoning": 15
+    "Hard-block": 237,
+    "Direct-Answer": 7,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 360,
-    "Hard-block": 219,
-    "Soft-reasoning": 178,
+    "Hard-block": 393,
+    "Direct-Answer": 319,
+    "Soft-reasoning": 45,
     "Deliberation": 7
    },
    "taxonomy": {
-    "Hard-block": 181,
-    "Direct-Answer": 9,
-    "Soft-reasoning": 6
+    "Hard-block": 193,
+    "Soft-reasoning": 2,
+    "Direct-Answer": 1
    },
    "xstest": {
-    "Hard-block": 137,
-    "Direct-Answer": 41,
-    "Soft-reasoning": 10,
-    "Deliberation": 2,
-    "Reasoned-Refusal": 1
+    "Hard-block": 121,
+    "Direct-Answer": 64,
+    "Soft-reasoning": 5,
+    "Deliberation": 1
    }
   },
   "A0ft@0.005": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 27,
-    "Soft-reasoning": 4,
+    "Direct-Answer": 87,
+    "Deliberation": 28,
     "Hard-block": 1
    },
    "ggb": {
-    "Soft-reasoning": 4,
-    "Direct-Answer": 2,
-    "Deliberation": 2,
-    "Hard-block": 1
+    "Direct-Answer": 7,
+    "Hard-block": 1,
+    "Deliberation": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 37
+    "Hard-block": 221,
+    "Direct-Answer": 22,
+    "Soft-reasoning": 1,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 526,
-    "Deliberation": 136,
-    "Soft-reasoning": 96,
-    "Hard-block": 6
+    "Direct-Answer": 491,
+    "Deliberation": 248,
+    "Soft-reasoning": 15,
+    "Hard-block": 10
    },
    "taxonomy": {
-    "Hard-block": 117,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 30,
-    "Deliberation": 2
+    "Hard-block": 139,
+    "Direct-Answer": 45,
+    "Soft-reasoning": 12
    },
    "xstest": {
-    "Hard-block": 87,
-    "Direct-Answer": 66,
-    "Soft-reasoning": 35,
+    "Direct-Answer": 106,
+    "Hard-block": 72,
+    "Soft-reasoning": 10,
     "Deliberation": 3
    }
   },
   "A0ft@0.01": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 27,
-    "Soft-reasoning": 4,
+    "Direct-Answer": 87,
+    "Deliberation": 28,
     "Hard-block": 1
    },
    "ggb": {
-    "Soft-reasoning": 4,
-    "Direct-Answer": 2,
-    "Deliberation": 2,
-    "Hard-block": 1
+    "Direct-Answer": 7,
+    "Hard-block": 1,
+    "Deliberation": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 37
+    "Hard-block": 221,
+    "Direct-Answer": 22,
+    "Soft-reasoning": 1,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 526,
-    "Deliberation": 136,
-    "Soft-reasoning": 96,
-    "Hard-block": 6
+    "Direct-Answer": 491,
+    "Deliberation": 248,
+    "Soft-reasoning": 15,
+    "Hard-block": 10
    },
    "taxonomy": {
-    "Hard-block": 117,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 30,
-    "Deliberation": 2
+    "Hard-block": 139,
+    "Direct-Answer": 45,
+    "Soft-reasoning": 12
    },
    "xstest": {
-    "Hard-block": 87,
-    "Direct-Answer": 66,
-    "Soft-reasoning": 35,
+    "Direct-Answer": 106,
+    "Hard-block": 72,
+    "Soft-reasoning": 10,
     "Deliberation": 3
    }
   },
   "A0ft@0.02": {
    "ethics": {
-    "Direct-Answer": 88,
-    "Deliberation": 27,
-    "Soft-reasoning": 1
-   },
-   "ggb": {
-    "Direct-Answer": 6,
-    "Deliberation": 2,
+    "Direct-Answer": 86,
+    "Deliberation": 29,
     "Hard-block": 1
    },
+   "ggb": {
+    "Direct-Answer": 7,
+    "Hard-block": 1,
+    "Deliberation": 1
+   },
    "harmbench": {
-    "Hard-block": 142,
-    "Direct-Answer": 86,
-    "Soft-reasoning": 17
+    "Hard-block": 218,
+    "Direct-Answer": 22,
+    "Soft-reasoning": 4,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 620,
-    "Deliberation": 136,
-    "Hard-block": 7,
-    "Soft-reasoning": 1
+    "Direct-Answer": 447,
+    "Deliberation": 292,
+    "Soft-reasoning": 18,
+    "Hard-block": 7
    },
    "taxonomy": {
-    "Hard-block": 111,
-    "Direct-Answer": 77,
-    "Soft-reasoning": 6,
-    "Deliberation": 2
+    "Hard-block": 133,
+    "Direct-Answer": 45,
+    "Soft-reasoning": 18
    },
    "xstest": {
-    "Direct-Answer": 101,
-    "Hard-block": 80,
-    "Deliberation": 5,
-    "Soft-reasoning": 5
+    "Direct-Answer": 108,
+    "Hard-block": 67,
+    "Soft-reasoning": 14,
+    "Deliberation": 2
    }
   },
   "A0ft@0.03": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 27,
-    "Soft-reasoning": 4,
+    "Direct-Answer": 87,
+    "Deliberation": 28,
     "Hard-block": 1
    },
    "ggb": {
-    "Soft-reasoning": 4,
-    "Direct-Answer": 2,
-    "Deliberation": 2,
-    "Hard-block": 1
+    "Direct-Answer": 7,
+    "Hard-block": 1,
+    "Deliberation": 1
    },
    "harmbench": {
-    "Hard-block": 162,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 37
+    "Hard-block": 222,
+    "Direct-Answer": 22,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 526,
-    "Deliberation": 136,
-    "Soft-reasoning": 96,
-    "Hard-block": 6
+    "Direct-Answer": 491,
+    "Deliberation": 248,
+    "Soft-reasoning": 15,
+    "Hard-block": 10
    },
    "taxonomy": {
-    "Hard-block": 117,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 30,
-    "Deliberation": 2
+    "Hard-block": 144,
+    "Direct-Answer": 45,
+    "Soft-reasoning": 7
    },
    "xstest": {
-    "Hard-block": 87,
-    "Direct-Answer": 66,
-    "Soft-reasoning": 35,
+    "Direct-Answer": 106,
+    "Hard-block": 74,
+    "Soft-reasoning": 8,
     "Deliberation": 3
    }
   },
   "A0ft@0.04": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 26,
-    "Soft-reasoning": 5,
+    "Direct-Answer": 87,
+    "Deliberation": 28,
     "Hard-block": 1
    },
    "ggb": {
-    "Soft-reasoning": 4,
-    "Hard-block": 2,
-    "Direct-Answer": 2,
+    "Direct-Answer": 7,
+    "Hard-block": 1,
     "Deliberation": 1
    },
    "harmbench": {
-    "Hard-block": 166,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 33
+    "Hard-block": 222,
+    "Direct-Answer": 22,
+    "Reasoned-Refusal": 1
    },
    "morables": {
-    "Direct-Answer": 547,
-    "Deliberation": 113,
-    "Soft-reasoning": 97,
-    "Hard-block": 7
+    "Direct-Answer": 491,
+    "Deliberation": 248,
+    "Hard-block": 20,
+    "Soft-reasoning": 5
    },
    "taxonomy": {
-    "Hard-block": 118,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 31
+    "Hard-block": 151,
+    "Direct-Answer": 45
    },
    "xstest": {
-    "Hard-block": 89,
-    "Direct-Answer": 67,
-    "Soft-reasoning": 35
+    "Direct-Answer": 106,
+    "Hard-block": 80,
+    "Deliberation": 4,
+    "Soft-reasoning": 1
    }
   },
   "A0ft@0.05": {
    "ethics": {
     "Direct-Answer": 84,
-    "Deliberation": 27,
-    "Soft-reasoning": 4,
+    "Deliberation": 29,
+    "Soft-reasoning": 2,
     "Hard-block": 1
    },
    "ggb": {
     "Soft-reasoning": 4,
-    "Deliberation": 3,
-    "Hard-block": 1,
-    "Direct-Answer": 1
+    "Direct-Answer": 2,
+    "Deliberation": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 170,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 29
+    "Hard-block": 225,
+    "Direct-Answer": 13,
+    "Soft-reasoning": 7
    },
    "morables": {
-    "Direct-Answer": 494,
-    "Deliberation": 174,
-    "Soft-reasoning": 88,
-    "Hard-block": 8
+    "Direct-Answer": 428,
+    "Deliberation": 290,
+    "Hard-block": 28,
+    "Soft-reasoning": 18
    },
    "taxonomy": {
-    "Hard-block": 120,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 29
+    "Hard-block": 153,
+    "Direct-Answer": 31,
+    "Soft-reasoning": 12
    },
    "xstest": {
-    "Hard-block": 93,
-    "Direct-Answer": 67,
-    "Soft-reasoning": 29,
-    "Deliberation": 2
+    "Direct-Answer": 97,
+    "Hard-block": 83,
+    "Soft-reasoning": 7,
+    "Deliberation": 4
    }
   },
   "A0ft@0.07": {
    "ethics": {
-    "Direct-Answer": 84,
-    "Deliberation": 27,
-    "Soft-reasoning": 4,
+    "Direct-Answer": 56,
+    "Soft-reasoning": 31,
+    "Deliberation": 28,
     "Hard-block": 1
    },
    "ggb": {
-    "Hard-block": 4,
-    "Deliberation": 3,
-    "Soft-reasoning": 1,
-    "Direct-Answer": 1
+    "Soft-reasoning": 7,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 178,
-    "Direct-Answer": 46,
-    "Soft-reasoning": 21
+    "Hard-block": 234,
+    "Soft-reasoning": 7,
+    "Direct-Answer": 4
    },
    "morables": {
-    "Direct-Answer": 494,
-    "Deliberation": 174,
-    "Soft-reasoning": 72,
-    "Hard-block": 24
+    "Direct-Answer": 339,
+    "Soft-reasoning": 228,
+    "Deliberation": 167,
+    "Hard-block": 30
    },
    "taxonomy": {
-    "Hard-block": 132,
-    "Direct-Answer": 47,
-    "Soft-reasoning": 17
+    "Hard-block": 160,
+    "Soft-reasoning": 27,
+    "Direct-Answer": 9
    },
    "xstest": {
-    "Hard-block": 104,
-    "Direct-Answer": 67,
-    "Soft-reasoning": 18,
-    "Deliberation": 2
+    "Hard-block": 85,
+    "Direct-Answer": 77,
+    "Soft-reasoning": 29
    }
   },
   "A0ft@0.1": {
    "ethics": {
-    "Direct-Answer": 71,
+    "Direct-Answer": 60,
+    "Soft-reasoning": 27,
     "Deliberation": 20,
-    "Soft-reasoning": 17,
-    "Hard-block": 8
+    "Hard-block": 9
    },
    "ggb": {
-    "Hard-block": 6,
-    "Soft-reasoning": 3
+    "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 194,
-    "Direct-Answer": 26,
-    "Soft-reasoning": 25
+    "Hard-block": 238,
+    "Direct-Answer": 4,
+    "Soft-reasoning": 3
    },
    "morables": {
-    "Soft-reasoning": 503,
-    "Direct-Answer": 150,
-    "Deliberation": 59,
-    "Hard-block": 52
+    "Direct-Answer": 397,
+    "Soft-reasoning": 212,
+    "Hard-block": 98,
+    "Deliberation": 57
    },
    "taxonomy": {
-    "Hard-block": 135,
-    "Soft-reasoning": 39,
-    "Direct-Answer": 22
+    "Hard-block": 171,
+    "Soft-reasoning": 16,
+    "Direct-Answer": 9
    },
    "xstest": {
-    "Hard-block": 125,
-    "Direct-Answer": 34,
-    "Soft-reasoning": 32
+    "Hard-block": 103,
+    "Direct-Answer": 77,
+    "Soft-reasoning": 11
    }
   },
   "A0ft@0.15": {
    "ethics": {
-    "Direct-Answer": 70,
-    "Deliberation": 18,
-    "Soft-reasoning": 14,
-    "Hard-block": 14
-   },
-   "ggb": {
-    "Hard-block": 7,
-    "Soft-reasoning": 1,
-    "Deliberation": 1
-   },
-   "harmbench": {
-    "Hard-block": 201,
-    "Direct-Answer": 26,
-    "Soft-reasoning": 18
-   },
-   "morables": {
-    "Soft-reasoning": 366,
-    "Deliberation": 154,
-    "Direct-Answer": 128,
-    "Hard-block": 116
-   },
-   "taxonomy": {
-    "Hard-block": 149,
-    "Soft-reasoning": 25,
-    "Direct-Answer": 22
-   },
-   "xstest": {
-    "Hard-block": 129,
-    "Direct-Answer": 34,
-    "Soft-reasoning": 26,
-    "Deliberation": 2
-   }
-  },
-  "A0ft@0.2": {
-   "ethics": {
-    "Direct-Answer": 70,
-    "Hard-block": 22,
-    "Soft-reasoning": 12,
-    "Deliberation": 12
+    "Direct-Answer": 43,
+    "Soft-reasoning": 32,
+    "Deliberation": 24,
+    "Hard-block": 17
    },
    "ggb": {
     "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 207,
-    "Direct-Answer": 26,
-    "Soft-reasoning": 12
+    "Hard-block": 241,
+    "Direct-Answer": 2,
+    "Soft-reasoning": 2
    },
    "morables": {
-    "Hard-block": 278,
-    "Soft-reasoning": 260,
-    "Direct-Answer": 133,
-    "Deliberation": 93
+    "Deliberation": 252,
+    "Soft-reasoning": 208,
+    "Direct-Answer": 161,
+    "Hard-block": 143
    },
    "taxonomy": {
-    "Hard-block": 166,
-    "Direct-Answer": 22,
-    "Soft-reasoning": 8
+    "Hard-block": 176,
+    "Soft-reasoning": 14,
+    "Direct-Answer": 6
    },
    "xstest": {
-    "Hard-block": 144,
-    "Direct-Answer": 34,
+    "Hard-block": 109,
+    "Direct-Answer": 59,
+    "Soft-reasoning": 20,
+    "Deliberation": 3
+   }
+  },
+  "A0ft@0.2": {
+   "ethics": {
+    "Direct-Answer": 43,
+    "Hard-block": 42,
+    "Deliberation": 18,
     "Soft-reasoning": 13
+   },
+   "ggb": {
+    "Hard-block": 9
+   },
+   "harmbench": {
+    "Hard-block": 242,
+    "Direct-Answer": 2,
+    "Soft-reasoning": 1
+   },
+   "morables": {
+    "Hard-block": 326,
+    "Deliberation": 170,
+    "Direct-Answer": 161,
+    "Soft-reasoning": 107
+   },
+   "taxonomy": {
+    "Hard-block": 187,
+    "Direct-Answer": 6,
+    "Soft-reasoning": 3
+   },
+   "xstest": {
+    "Hard-block": 117,
+    "Direct-Answer": 60,
+    "Soft-reasoning": 14
    }
   },
   "A0ft@0.3": {
    "ethics": {
-    "Direct-Answer": 70,
-    "Hard-block": 36,
-    "Deliberation": 7,
+    "Hard-block": 57,
+    "Direct-Answer": 43,
+    "Deliberation": 13,
     "Soft-reasoning": 3
    },
    "ggb": {
     "Hard-block": 9
    },
    "harmbench": {
-    "Hard-block": 217,
-    "Direct-Answer": 26,
-    "Soft-reasoning": 2
-   },
-   "morables": {
-    "Hard-block": 519,
-    "Direct-Answer": 128,
-    "Soft-reasoning": 63,
-    "Deliberation": 54
-   },
-   "taxonomy": {
-    "Hard-block": 173,
-    "Direct-Answer": 22,
+    "Hard-block": 242,
+    "Direct-Answer": 2,
     "Soft-reasoning": 1
    },
+   "morables": {
+    "Hard-block": 461,
+    "Direct-Answer": 167,
+    "Deliberation": 90,
+    "Soft-reasoning": 46
+   },
+   "taxonomy": {
+    "Hard-block": 190,
+    "Direct-Answer": 6
+   },
    "xstest": {
-    "Hard-block": 155,
-    "Direct-Answer": 34,
+    "Hard-block": 129,
+    "Direct-Answer": 60,
     "Soft-reasoning": 2
    }
   },
@@ -3532,38 +3423,39 @@
   },
   "A0paper": {
    "ethics": {
-    "Deliberation": 57,
-    "Direct-Answer": 56,
-    "Soft-reasoning": 3
+    "Direct-Answer": 58,
+    "Deliberation": 40,
+    "Soft-reasoning": 17,
+    "Hard-block": 1
    },
    "ggb": {
-    "Deliberation": 8,
-    "Direct-Answer": 1
+    "Deliberation": 6,
+    "Soft-reasoning": 2,
+    "Hard-block": 1
    },
    "harmbench": {
-    "Hard-block": 177,
-    "Direct-Answer": 43,
-    "Soft-reasoning": 23,
-    "Reasoned-Refusal": 2
+    "Hard-block": 216,
+    "Direct-Answer": 17,
+    "Soft-reasoning": 12
    },
    "morables": {
-    "Direct-Answer": 414,
-    "Deliberation": 236,
-    "Soft-reasoning": 85,
-    "Hard-block": 29
+    "Direct-Answer": 394,
+    "Deliberation": 210,
+    "Soft-reasoning": 122,
+    "Hard-block": 38
    },
    "taxonomy": {
-    "Hard-block": 139,
-    "Soft-reasoning": 28,
-    "Direct-Answer": 23,
-    "Deliberation": 5,
-    "Reasoned-Refusal": 1
+    "Hard-block": 144,
+    "Deliberation": 25,
+    "Soft-reasoning": 20,
+    "Direct-Answer": 7
    },
    "xstest": {
-    "Hard-block": 88,
-    "Direct-Answer": 71,
-    "Soft-reasoning": 28,
-    "Deliberation": 4
+    "Direct-Answer": 82,
+    "Hard-block": 82,
+    "Soft-reasoning": 16,
+    "Deliberation": 10,
+    "Reasoned-Refusal": 1
    }
   },
   "A4a": {
@@ -3608,62 +3500,62 @@
   },
   "A4c": {
    "ethics": {
-    "Direct-Answer": 115,
-    "Hard-block": 1
+    "Direct-Answer": 114,
+    "Hard-block": 2
    },
    "ggb": {
-    "Direct-Answer": 9
+    "Direct-Answer": 7,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 177,
-    "Direct-Answer": 66,
-    "Reasoned-Refusal": 2
+    "Hard-block": 216,
+    "Direct-Answer": 29
    },
    "morables": {
-    "Direct-Answer": 732,
-    "Hard-block": 32
+    "Direct-Answer": 723,
+    "Hard-block": 41
    },
    "taxonomy": {
-    "Hard-block": 140,
-    "Direct-Answer": 55,
-    "Reasoned-Refusal": 1
+    "Hard-block": 167,
+    "Direct-Answer": 29
    },
    "xstest": {
-    "Direct-Answer": 102,
-    "Hard-block": 89
+    "Direct-Answer": 101,
+    "Hard-block": 89,
+    "Reasoned-Refusal": 1
    }
   },
   "A4d": {
    "ethics": {
-    "Deliberation": 115,
-    "Hard-block": 1
+    "Deliberation": 114,
+    "Hard-block": 2
    },
    "ggb": {
-    "Deliberation": 9
+    "Deliberation": 7,
+    "Hard-block": 2
    },
    "harmbench": {
-    "Hard-block": 177,
-    "Deliberation": 66,
-    "Reasoned-Refusal": 2
+    "Hard-block": 216,
+    "Deliberation": 29
    },
    "morables": {
-    "Deliberation": 732,
-    "Hard-block": 32
+    "Deliberation": 723,
+    "Hard-block": 41
    },
    "taxonomy": {
-    "Hard-block": 140,
-    "Deliberation": 55,
-    "Reasoned-Refusal": 1
+    "Hard-block": 167,
+    "Deliberation": 29
    },
    "xstest": {
-    "Deliberation": 102,
-    "Hard-block": 89
+    "Deliberation": 101,
+    "Hard-block": 89,
+    "Reasoned-Refusal": 1
    }
   }
  },
  "unique_texts": 1521,
  "extreme_not_blocked": {
-  "A0paper": 6,
+  "A0paper": 35,
   "A0@0.1": 0
  }
 }
