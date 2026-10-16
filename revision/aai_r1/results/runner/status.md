@@ -1,12 +1,12 @@
-# v2.1 심사 대응 무인 실행 상태: 실행 중
+# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
 
-- 시각 2026-10-17 00:15:18 (UTC 2026-10-16 15:15:18), 시도 34, 비컨 #188 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: ff65bfb v2.1 심사 대응 runner: 명령 처리 (attempt 34)
-- 현재 단계: r2d2-cpeg (-0.0분째)
-- 마지막 출력 후: -0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25421 MiB, 32607 MiB, 2 %, 54
-- 다음 동작: 단계 진행
-- 사유: 시작
+- 시각 2026-10-17 00:15:20 (UTC 2026-10-16 15:15:20), 시도 34, 비컨 #189 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: f770f24 v2.1 심사 대응 runner: 실행 중 (attempt 34)
+- 현재 단계: r2d2-cpeg (0.0분째)
+- 마지막 출력 후: 0.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25431 MiB, 32607 MiB, 1 %, 53
+- 다음 동작: 새 코드나 명령을 기다림
+- 사유: 코드 1
 - 마지막으로 처리한 명령: 20261016T151800Z-rerun rerun (자식 종료 후 재실행, 2026-10-16 15:15:14 UTC)
 - 남은 단계: r2d2-cpeg; r2d2-fingerprint; matrix-zephyr-check2; zephyr-review; nemo-fair-review-zephyr; nemo-reset; matrix; nemo-doc; nemo-orr-all; nemo-audit-all; a8-check; a8; cost; analyze; release
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review
@@ -49,4 +49,21 @@
 
 [v21r] ===== r2d2-cpeg: R2D2 served as CPEG served it; the zephyr pre-test cache dropped (Eugene 17:56 KST, DESIGN.md 25) =====
 [ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r r2d2-cpeg
+  ollama rm zephyr-r2d2:latest (other weights or template)
+[?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25hdeleted 'zephyr-r2d2:latest'
+  ollama create zephyr-r2d2:latest -f D:\Projects\PEINN\revision\aai_r1\cache\r2d2.Modelfile
+[?2026h[?25l[1Ggathering model components [K
+using existing layer sha256:5dff12d79658558d731bee34dc34d60e616ea6355d37cbf4a3c956f82ef3fb8c [K
+creating new layer sha256:d6e2449a6fa6e9bce024ce8d959e2cc215031331f431115027548e34c18c468d [K
+creating new layer sha256:63beee24467844489d3b24a4b22091ba8e78ef8dddea2e3ed3018415f32096dc [K
+writing manifest ⠋ [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Ggathering model components [K
+using existing layer sha256:5dff12d79658558d731bee34dc34d60e616ea6355d37cbf4a3c956f82ef3fb8c [K
+creating new layer sha256:d6e2449a6fa6e9bce024ce8d959e2cc215031331f431115027548e34c18c468d [K
+creating new layer sha256:63beee24467844489d3b24a4b22091ba8e78ef8dddea2e3ed3018415f32096dc [K
+writing manifest [K
+success [K[?25h[?2026l
+  remove the zephyr pre-test cache D:\Projects\PEINN\revision\aai_r1\cache\check\matrix\zephyr
+  zephyr-r2d2:latest: blob sha256-5dff12d79658 (GGUF sha256-5dff12d79658), template '<|user|>\r\n{{ .Prompt }}</s>\r\n<|assistant|>\r\n', ok False
+  R2D2 is not R2D2_GGUF's weights with HarmBench's prompt
+[v21r] r2d2-cpeg failed (code 1); fix it and run the same command again
 ```
