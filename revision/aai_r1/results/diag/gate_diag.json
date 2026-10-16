@@ -978,38 +978,38 @@
   "A0ft": {
    "v4_safe": {
     "rows": 647,
-    "refusal": 0.0804,
-    "hard_block": 0.0804
+    "refusal": 0.0819,
+    "hard_block": 0.0819
    },
    "v4_harmful": {
     "rows": 235,
-    "refusal": 0.9234,
-    "hard_block": 0.9234
+    "refusal": 0.9277,
+    "hard_block": 0.9277
    },
    "overrefusal_benign": {
     "rows": 588,
-    "refusal": 0.0816,
-    "hard_block": 0.0816
+    "refusal": 0.0867,
+    "hard_block": 0.0748
    },
    "adversarial_benign": {
     "rows": 150,
-    "refusal": 0.28,
-    "hard_block": 0.28
+    "refusal": 0.3133,
+    "hard_block": 0.3133
    },
    "plain_benign": {
     "rows": 698,
-    "refusal": 0.0415,
-    "hard_block": 0.0415
+    "refusal": 0.0444,
+    "hard_block": 0.0401
    },
    "plain_harmful": {
     "rows": 763,
-    "refusal": 0.9843,
-    "hard_block": 0.9843
+    "refusal": 0.9856,
+    "hard_block": 0.9856
    },
    "adversarial_harmful": {
     "rows": 150,
-    "refusal": 0.9667,
-    "hard_block": 0.9667
+    "refusal": 0.9733,
+    "hard_block": 0.9733
    }
   }
  },
@@ -1062,7 +1062,7 @@
     "v4_harmful": true,
     "overrefusal_benign": false,
     "adversarial_benign": false,
-    "plain_benign": true,
+    "plain_benign": false,
     "plain_harmful": true,
     "adversarial_harmful": true
    },
@@ -1111,38 +1111,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0355,
-     "hard_block": 0.0355
+     "refusal": 0.034,
+     "hard_block": 0.034
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8681,
-     "hard_block": 0.8681
+     "refusal": 0.8809,
+     "hard_block": 0.8809
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0238,
+     "refusal": 0.0391,
      "hard_block": 0.0238
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.0667,
-     "hard_block": 0.06
+     "refusal": 0.0933,
+     "hard_block": 0.0533
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0115,
+     "refusal": 0.0158,
      "hard_block": 0.0115
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9384,
-     "hard_block": 0.9384
+     "refusal": 0.9581,
+     "hard_block": 0.9463
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.8467,
-     "hard_block": 0.8467
+     "refusal": 0.86,
+     "hard_block": 0.8533
     }
    }
   },
@@ -1187,38 +1187,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0355,
-     "hard_block": 0.0355
+     "refusal": 0.034,
+     "hard_block": 0.034
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8681,
-     "hard_block": 0.8681
+     "refusal": 0.8809,
+     "hard_block": 0.8809
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0238,
+     "refusal": 0.0391,
      "hard_block": 0.0238
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.0667,
-     "hard_block": 0.06
+     "refusal": 0.0933,
+     "hard_block": 0.0533
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0115,
+     "refusal": 0.0158,
      "hard_block": 0.0115
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9384,
-     "hard_block": 0.9384
+     "refusal": 0.9581,
+     "hard_block": 0.9463
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.8467,
-     "hard_block": 0.8467
+     "refusal": 0.86,
+     "hard_block": 0.8533
     }
    }
   },
@@ -1263,38 +1263,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0278,
-     "hard_block": 0.0278
+     "refusal": 0.0232,
+     "hard_block": 0.0232
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8213,
-     "hard_block": 0.8213
+     "refusal": 0.8085,
+     "hard_block": 0.8085
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0153,
+     "refusal": 0.0323,
      "hard_block": 0.0153
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.04,
+     "refusal": 0.0867,
      "hard_block": 0.0333
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0115,
+     "refusal": 0.0158,
      "hard_block": 0.0115
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9279,
-     "hard_block": 0.9266
+     "refusal": 0.9502,
+     "hard_block": 0.9292
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.8133,
-     "hard_block": 0.8133
+     "refusal": 0.8333,
+     "hard_block": 0.82
     }
    }
   },
@@ -1339,38 +1339,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0355,
-     "hard_block": 0.0355
+     "refusal": 0.034,
+     "hard_block": 0.034
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8681,
-     "hard_block": 0.8681
+     "refusal": 0.8809,
+     "hard_block": 0.8809
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0238,
+     "refusal": 0.0391,
      "hard_block": 0.0238
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.0667,
-     "hard_block": 0.06
+     "refusal": 0.0933,
+     "hard_block": 0.0533
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0115,
+     "refusal": 0.0158,
      "hard_block": 0.0115
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9384,
-     "hard_block": 0.9384
+     "refusal": 0.9581,
+     "hard_block": 0.9463
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.8467,
-     "hard_block": 0.8467
+     "refusal": 0.86,
+     "hard_block": 0.8533
     }
    }
   },
@@ -1415,33 +1415,33 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0402,
-     "hard_block": 0.0402
+     "refusal": 0.0294,
+     "hard_block": 0.0294
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8809,
-     "hard_block": 0.8809
+     "refusal": 0.8468,
+     "hard_block": 0.8468
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0374,
+     "refusal": 0.0493,
      "hard_block": 0.0374
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.0733,
-     "hard_block": 0.0667
+     "refusal": 0.1267,
+     "hard_block": 0.12
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0143,
-     "hard_block": 0.0143
+     "refusal": 0.0244,
+     "hard_block": 0.0201
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9502,
-     "hard_block": 0.9502
+     "refusal": 0.9672,
+     "hard_block": 0.9672
     },
     "adversarial_harmful": {
      "rows": 150,
@@ -1501,28 +1501,28 @@
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0425,
-     "hard_block": 0.0425
+     "refusal": 0.0561,
+     "hard_block": 0.0442
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.1267,
-     "hard_block": 0.1267
+     "refusal": 0.1533,
+     "hard_block": 0.1467
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0172,
-     "hard_block": 0.0172
+     "refusal": 0.0272,
+     "hard_block": 0.0229
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9581,
-     "hard_block": 0.9581
+     "refusal": 0.9738,
+     "hard_block": 0.9738
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.8933,
-     "hard_block": 0.8933
+     "refusal": 0.9067,
+     "hard_block": 0.9067
     }
    }
   },
@@ -1567,38 +1567,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0572,
-     "hard_block": 0.0572
+     "refusal": 0.0603,
+     "hard_block": 0.0603
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8979,
-     "hard_block": 0.8979
+     "refusal": 0.9149,
+     "hard_block": 0.9149
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0612,
-     "hard_block": 0.0612
+     "refusal": 0.0748,
+     "hard_block": 0.0629
     },
     "adversarial_benign": {
      "rows": 150,
      "refusal": 0.2267,
-     "hard_block": 0.2267
+     "hard_block": 0.22
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0287,
-     "hard_block": 0.0287
+     "refusal": 0.0387,
+     "hard_block": 0.0344
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9738,
-     "hard_block": 0.9738
+     "refusal": 0.979,
+     "hard_block": 0.979
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.9267,
-     "hard_block": 0.9267
+     "refusal": 0.9333,
+     "hard_block": 0.9333
     }
    }
   },
@@ -1643,38 +1643,38 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0804,
-     "hard_block": 0.0804
+     "refusal": 0.0819,
+     "hard_block": 0.0819
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.9234,
-     "hard_block": 0.9234
+     "refusal": 0.9277,
+     "hard_block": 0.9277
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.0816,
-     "hard_block": 0.0816
+     "refusal": 0.0867,
+     "hard_block": 0.0748
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.28,
-     "hard_block": 0.28
+     "refusal": 0.3133,
+     "hard_block": 0.3133
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0415,
-     "hard_block": 0.0415
+     "refusal": 0.0444,
+     "hard_block": 0.0401
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9843,
-     "hard_block": 0.9843
+     "refusal": 0.9856,
+     "hard_block": 0.9856
     },
     "adversarial_harmful": {
      "rows": 150,
-     "refusal": 0.9667,
-     "hard_block": 0.9667
+     "refusal": 0.9733,
+     "hard_block": 0.9733
     }
    }
   },
@@ -1719,8 +1719,8 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.1252,
-     "hard_block": 0.1252
+     "refusal": 0.1267,
+     "hard_block": 0.1267
     },
     "v4_harmful": {
      "rows": 235,
@@ -1729,8 +1729,8 @@
     },
     "overrefusal_benign": {
      "rows": 588,
-     "refusal": 0.1259,
-     "hard_block": 0.1259
+     "refusal": 0.1327,
+     "hard_block": 0.1224
     },
     "adversarial_benign": {
      "rows": 150,
@@ -1739,13 +1739,13 @@
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0759,
-     "hard_block": 0.0759
+     "refusal": 0.086,
+     "hard_block": 0.0845
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9921,
-     "hard_block": 0.9921
+     "refusal": 0.9934,
+     "hard_block": 0.9934
     },
     "adversarial_harmful": {
      "rows": 150,
@@ -1795,33 +1795,33 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.1577,
-     "hard_block": 0.1577
+     "refusal": 0.1546,
+     "hard_block": 0.1546
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.966,
-     "hard_block": 0.966
+     "refusal": 0.9617,
+     "hard_block": 0.9617
     },
     "overrefusal_benign": {
      "rows": 588,
      "refusal": 0.1429,
-     "hard_block": 0.1429
+     "hard_block": 0.1327
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.52,
-     "hard_block": 0.52
+     "refusal": 0.4867,
+     "hard_block": 0.4867
     },
     "plain_benign": {
      "rows": 698,
      "refusal": 0.1017,
-     "hard_block": 0.1017
+     "hard_block": 0.1003
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9948,
-     "hard_block": 0.9948
+     "refusal": 0.9934,
+     "hard_block": 0.9934
     },
     "adversarial_harmful": {
      "rows": 150,
@@ -1871,33 +1871,33 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.1577,
-     "hard_block": 0.1577
+     "refusal": 0.1546,
+     "hard_block": 0.1546
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.966,
-     "hard_block": 0.966
+     "refusal": 0.9617,
+     "hard_block": 0.9617
     },
     "overrefusal_benign": {
      "rows": 588,
      "refusal": 0.1429,
-     "hard_block": 0.1429
+     "hard_block": 0.1327
     },
     "adversarial_benign": {
      "rows": 150,
-     "refusal": 0.52,
-     "hard_block": 0.52
+     "refusal": 0.4867,
+     "hard_block": 0.4867
     },
     "plain_benign": {
      "rows": 698,
      "refusal": 0.1017,
-     "hard_block": 0.1017
+     "hard_block": 0.1003
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9948,
-     "hard_block": 0.9948
+     "refusal": 0.9934,
+     "hard_block": 0.9934
     },
     "adversarial_harmful": {
      "rows": 150,
@@ -1976,59 +1976,63 @@
    "category": {
     "contextual": {
      "Hard-block": 69,
-     "Direct-Answer": 6,
-     "Soft-reasoning": 1,
-     "Reasoned-Refusal": 1
+     "Reasoned-Refusal": 4,
+     "Direct-Answer": 3,
+     "Soft-reasoning": 1
     },
     "standard": {
-     "Hard-block": 158,
-     "Direct-Answer": 8,
-     "Soft-reasoning": 2
+     "Hard-block": 157,
+     "Direct-Answer": 7,
+     "Soft-reasoning": 3,
+     "Reasoned-Refusal": 1
     }
    },
    "semantic_category": {
     "chemical_biological": {
      "Hard-block": 40,
-     "Direct-Answer": 4,
-     "Soft-reasoning": 1,
-     "Reasoned-Refusal": 1
+     "Direct-Answer": 3,
+     "Reasoned-Refusal": 2,
+     "Soft-reasoning": 1
     },
     "cybercrime_intrusion": {
-     "Hard-block": 44,
-     "Direct-Answer": 8,
-     "Soft-reasoning": 1
+     "Hard-block": 45,
+     "Direct-Answer": 6,
+     "Reasoned-Refusal": 2
     },
     "harassment_bullying": {
      "Hard-block": 22
     },
     "harmful": {
-     "Hard-block": 18
+     "Hard-block": 17,
+     "Soft-reasoning": 1
     },
     "illegal": {
-     "Hard-block": 51,
+     "Hard-block": 50,
+     "Soft-reasoning": 1,
      "Direct-Answer": 1
     },
     "misinformation_disinformation": {
      "Hard-block": 52,
-     "Direct-Answer": 1,
+     "Reasoned-Refusal": 1,
      "Soft-reasoning": 1
     }
    },
    "length": {
     "300-1000": {
      "Hard-block": 23,
-     "Direct-Answer": 2,
-     "Soft-reasoning": 1,
-     "Reasoned-Refusal": 1
+     "Reasoned-Refusal": 3,
+     "Soft-reasoning": 1
     },
     "<300": {
-     "Hard-block": 158,
-     "Direct-Answer": 8,
-     "Soft-reasoning": 2
+     "Hard-block": 157,
+     "Direct-Answer": 7,
+     "Soft-reasoning": 3,
+     "Reasoned-Refusal": 1
     },
     ">1000": {
      "Hard-block": 46,
-     "Direct-Answer": 4
+     "Direct-Answer": 3,
+     "Reasoned-Refusal": 1
     }
    }
   },
@@ -2036,25 +2040,25 @@
    "category": {
     "contextual": {
      "Hard-block": 65,
-     "Direct-Answer": 11,
-     "Reasoned-Refusal": 1
+     "Direct-Answer": 7,
+     "Reasoned-Refusal": 5
     },
     "standard": {
-     "Hard-block": 155,
-     "Direct-Answer": 12,
-     "Soft-reasoning": 1
+     "Hard-block": 156,
+     "Direct-Answer": 11,
+     "Reasoned-Refusal": 1
     }
    },
    "semantic_category": {
     "chemical_biological": {
      "Hard-block": 39,
-     "Direct-Answer": 6,
-     "Reasoned-Refusal": 1
+     "Direct-Answer": 5,
+     "Reasoned-Refusal": 2
     },
     "cybercrime_intrusion": {
-     "Hard-block": 40,
-     "Direct-Answer": 12,
-     "Soft-reasoning": 1
+     "Hard-block": 41,
+     "Direct-Answer": 9,
+     "Reasoned-Refusal": 3
     },
     "harassment_bullying": {
      "Hard-block": 22
@@ -2069,47 +2073,51 @@
     },
     "misinformation_disinformation": {
      "Hard-block": 52,
-     "Direct-Answer": 2
+     "Reasoned-Refusal": 1,
+     "Direct-Answer": 1
     }
    },
    "length": {
     "300-1000": {
      "Hard-block": 21,
-     "Direct-Answer": 5,
-     "Reasoned-Refusal": 1
+     "Reasoned-Refusal": 3,
+     "Direct-Answer": 3
     },
     "<300": {
-     "Hard-block": 155,
-     "Direct-Answer": 12,
-     "Soft-reasoning": 1
+     "Hard-block": 156,
+     "Direct-Answer": 11,
+     "Reasoned-Refusal": 1
     },
     ">1000": {
      "Hard-block": 44,
-     "Direct-Answer": 6
+     "Direct-Answer": 4,
+     "Reasoned-Refusal": 2
     }
    }
   },
   "A0ft@0.05": {
    "category": {
     "contextual": {
-     "Hard-block": 74,
-     "Soft-reasoning": 3
+     "Hard-block": 76,
+     "Reasoned-Refusal": 1
     },
     "standard": {
      "Hard-block": 161,
-     "Soft-reasoning": 5,
-     "Direct-Answer": 2
+     "Direct-Answer": 3,
+     "Soft-reasoning": 3,
+     "Reasoned-Refusal": 1
     }
    },
    "semantic_category": {
     "chemical_biological": {
-     "Hard-block": 44,
-     "Soft-reasoning": 2
+     "Hard-block": 45,
+     "Soft-reasoning": 1
     },
     "cybercrime_intrusion": {
-     "Hard-block": 47,
-     "Soft-reasoning": 4,
-     "Direct-Answer": 2
+     "Hard-block": 48,
+     "Direct-Answer": 3,
+     "Reasoned-Refusal": 1,
+     "Soft-reasoning": 1
     },
     "harassment_bullying": {
      "Hard-block": 22
@@ -2123,34 +2131,34 @@
     },
     "misinformation_disinformation": {
      "Hard-block": 53,
-     "Soft-reasoning": 1
+     "Reasoned-Refusal": 1
     }
    },
    "length": {
     "300-1000": {
-     "Hard-block": 26,
-     "Soft-reasoning": 1
+     "Hard-block": 27
     },
     "<300": {
      "Hard-block": 161,
-     "Soft-reasoning": 5,
-     "Direct-Answer": 2
+     "Direct-Answer": 3,
+     "Soft-reasoning": 3,
+     "Reasoned-Refusal": 1
     },
     ">1000": {
-     "Hard-block": 48,
-     "Soft-reasoning": 2
+     "Hard-block": 49,
+     "Reasoned-Refusal": 1
     }
    }
   },
   "A0ft@0.1": {
    "category": {
     "contextual": {
-     "Hard-block": 76,
-     "Direct-Answer": 1
+     "Hard-block": 77
     },
     "standard": {
      "Hard-block": 164,
-     "Direct-Answer": 4
+     "Soft-reasoning": 2,
+     "Direct-Answer": 2
     }
    },
    "semantic_category": {
@@ -2159,7 +2167,8 @@
     },
     "cybercrime_intrusion": {
      "Hard-block": 49,
-     "Direct-Answer": 4
+     "Soft-reasoning": 2,
+     "Direct-Answer": 2
     },
     "harassment_bullying": {
      "Hard-block": 22
@@ -2171,8 +2180,7 @@
      "Hard-block": 52
     },
     "misinformation_disinformation": {
-     "Hard-block": 53,
-     "Direct-Answer": 1
+     "Hard-block": 54
     }
    },
    "length": {
@@ -2181,11 +2189,11 @@
     },
     "<300": {
      "Hard-block": 164,
-     "Direct-Answer": 4
+     "Soft-reasoning": 2,
+     "Direct-Answer": 2
     },
     ">1000": {
-     "Hard-block": 49,
-     "Direct-Answer": 1
+     "Hard-block": 50
     }
    }
   }
@@ -2292,46 +2300,46 @@
    "test": {
     "plain": {
      "E": 0.9956,
-     "F": 0.9899
+     "F": 0.9933
     },
     "adversarial": {
      "E": 0.9623,
-     "F": 0.9136
+     "F": 0.9204
     },
     "v4": {
      "E": 0.9779,
-     "F": 0.9663
+     "F": 0.9644
     },
     "overrefusal_vs_plain": {
      "E": 0.9935,
-     "F": 0.9854
+     "F": 0.9912
     }
    },
    "xstest": {
     "auroc": {
      "E": 0.962,
-     "F": 0.8845
+     "F": 0.9036
     },
     "by_cap": {
      "0.02": {
       "safe": {
        "extreme": 1,
-       "harm_and_F": 1,
+       "harm_and_F": 2,
        "tiers": {
         "Direct-Answer": 100,
-        "Soft-reasoning": 5,
-        "Hard-block": 2,
+        "Soft-reasoning": 4,
+        "Hard-block": 3,
         "Deliberation": 1
        },
        "n": 108
       },
       "unsafe": {
        "extreme": 46,
-       "harm_and_F": 17,
+       "harm_and_F": 18,
        "tiers": {
-        "Hard-block": 63,
+        "Hard-block": 64,
         "Direct-Answer": 15,
-        "Soft-reasoning": 5
+        "Soft-reasoning": 4
        },
        "n": 83
       }
@@ -2342,8 +2350,8 @@
        "harm_and_F": 4,
        "tiers": {
         "Direct-Answer": 98,
-        "Hard-block": 5,
-        "Soft-reasoning": 5
+        "Soft-reasoning": 5,
+        "Hard-block": 5
        },
        "n": 108
       },
@@ -2363,19 +2371,19 @@
        "extreme": 10,
        "harm_and_F": 0,
        "tiers": {
-        "Direct-Answer": 81,
-        "Soft-reasoning": 15,
+        "Direct-Answer": 86,
+        "Soft-reasoning": 11,
         "Hard-block": 10,
-        "Deliberation": 2
+        "Deliberation": 1
        },
        "n": 108
       },
       "unsafe": {
        "extreme": 70,
-       "harm_and_F": 0,
+       "harm_and_F": 1,
        "tiers": {
-        "Hard-block": 70,
-        "Soft-reasoning": 11,
+        "Hard-block": 71,
+        "Soft-reasoning": 10,
         "Direct-Answer": 2
        },
        "n": 83
