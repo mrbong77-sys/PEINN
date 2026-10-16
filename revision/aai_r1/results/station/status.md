@@ -1,9 +1,9 @@
 # 위성(station) 상태: 임무 실행 중
 
-- 시각 2026-10-16 10:37:03 (UTC 2026-10-16 01:37:03), 비컨 #69 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
+- 시각 2026-10-16 10:47:06 (UTC 2026-10-16 01:47:06), 비컨 #70 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
 - 임무: ops.run
-- 실행 코드: 718c513 v2.1 심사 대응 runner: 실패 후 대기 (attempt 12)
-- GPU: 1596 MiB, 32607 MiB, 1 %, 41
+- 실행 코드: 48421f2 v21r C: isolation audit of the v4 head corpus and the train/val/test split
+- GPU: 2193 MiB, 32607 MiB, 8 %, 37
 - 마지막으로 처리한 명령: 20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)
 - 사유: 정기 보고
 - 최근 임무: ops.run → 코드 0 (2026-10-15 15:21:55 UTC)
