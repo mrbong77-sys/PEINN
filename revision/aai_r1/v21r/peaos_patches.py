@@ -441,6 +441,79 @@ def langchain_shim() -> None:
     sys.modules["langchain.llms"], sys.modules["langchain.llms.base"] = pkg, base
 
 
+# DESIGN.md 29 (Eugene 2026-10-16 19:24 KST "fix the wrapper, make NeMo fair"): PEAOS's provider PEAOSLocalLLM forwards
+# only the prompt, so NeMo's own call parameters (temperature, max_tokens, stop, bound by nemoguardrails to every rail
+# call) never reached the model, and the main answer ran at whatever temperature the shared client held.
+NEMO_GEN_TEMPERATURE = 0.3          # the main-model answer: the temperature every other arm generates with
+NEMO_GEN_MAX_TOKENS = 768           # and the harness's answer cap (prompt_builder.build_llm_request), never shorter
+_NEMO_CLIENT = {}
+
+
+def _nemo_client():
+    """A client of NeMo's own: call_local stores options['temperature'] on its client, so NeMo's near-zero rail
+    temperature must not leak into the shared client the other arms use."""
+    if "c" not in _NEMO_CLIENT:
+        from pea_eval.config.settings import load_settings
+        from pea_eval.evaluators.llm_client import EvalLLMClient
+        _NEMO_CLIENT["c"] = EvalLLMClient(load_settings("real").ollama)
+    return _NEMO_CLIENT["c"]
+
+
+def nemo_params(kwargs: dict, stop) -> tuple[int, list | None, dict]:
+    """max_tokens, stop and options of one NeMo call: NeMo's own values where it sets them (rail calls), else the
+    other arms' answer settings."""
+    t = kwargs.get("temperature")
+    m = kwargs.get("max_tokens")
+    st = list(stop) if stop else (list(kwargs["stop"]) if kwargs.get("stop") else None)
+    return (int(m) if m else NEMO_GEN_MAX_TOKENS, st,
+            {"temperature": float(t) if t is not None else NEMO_GEN_TEMPERATURE})
+
+
+def nemo_fair() -> None:
+    """Registers a subclass of PEAOS's provider whose calls carry NeMo's parameters (nemo_params) through a client of
+    their own. Applied by wrapping register_llm_provider, since PEAOS defines the class inside _create_nemo_rails."""
+    try:
+        import nemoguardrails.llm.providers as P
+    except ImportError:
+        return
+    if getattr(P.register_llm_provider, "_v21r_fair", False):
+        return
+    orig = P.register_llm_provider
+
+    def register(name, cls):
+        if name != "peaos_engine" or getattr(cls, "_v21r_fair", False):
+            return orig(name, cls)
+
+        class FairLLM(cls):
+            _v21r_fair = True
+
+            async def _acall(self, prompt, stop=None, run_manager=None, **kwargs):
+                if ":" not in self.model:                                     # PEAOS's HF path: unchanged
+                    return await self._gen_async(prompt)
+                mt, st, opts = nemo_params(kwargs, stop)
+                r = await _nemo_client().call_local(system_prompt="", user_prompt=prompt, model_override=self.model,
+                                                    max_tokens=mt, stop=st, options=opts)
+                return r.text
+
+            def _call(self, prompt, stop=None, run_manager=None, **kwargs):
+                try:
+                    loop = asyncio.get_running_loop()
+                except RuntimeError:
+                    loop = None
+                if loop is not None and loop.is_running():
+                    import concurrent.futures
+                    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+                        return ex.submit(asyncio.run, self._acall(prompt, stop=stop, **kwargs)).result()
+                return asyncio.run(self._acall(prompt, stop=stop, **kwargs))
+
+        FairLLM.__name__ = cls.__name__
+        return orig(name, FairLLM)
+    register._v21r_fair = True
+    P.register_llm_provider = register
+    print(f"[v21r] NeMo provider: NeMo's temperature, max_tokens and stop forwarded; answers at T={NEMO_GEN_TEMPERATURE}, "
+          f"<= {NEMO_GEN_MAX_TOKENS} tokens", flush=True)
+
+
 def patch_shieldstral(out: Path) -> int:
     """docs/76: S03 (gemma4:e4b + Shieldstral-1.0-3B) exactly as PEAOS scripts/run_shieldstral_bench.py sets it up
     (moderate instruct, tau 0.5, self-test must pass)."""
@@ -810,6 +883,7 @@ def main(argv=None) -> int:
     routes = (json.loads(a.routes.read_text(encoding="utf-8")) if a.routes else {}) if a.mode == "run" else None
     quiet_noise()
     langchain_shim()
+    nemo_fair()
     patch(a.mode, a.out, routes, a.morables, a.judge)
     if routes and a.v3_runtime:
         v3_runtime(routes)

@@ -1,6 +1,6 @@
 {
- "id": "20261016T093500Z-update",
+ "id": "20261016T104500Z-update",
  "action": "update",
- "note": "DESIGN.md 25, 27, 28: R2D2 as CPEG, nemo-orr, nemo-audit; applies at the next step boundary (after matrix-gemma3).",
- "issued_utc": "2026-10-16 09:35:00"
+ "note": "DESIGN.md 29: NeMo provider fixed, NeMo pre-test and rerun; applies at the next step boundary (after matrix-gemma3).",
+ "issued_utc": "2026-10-16 10:45:00"
 }

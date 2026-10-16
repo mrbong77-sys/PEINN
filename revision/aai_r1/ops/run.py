@@ -50,16 +50,6 @@ def gate_review() -> int:
     return 3
 
 
-REVIEWED_NEMO = False                # DESIGN.md 28: the full matrix waits for the NeMo set-up decision
-
-
-def nemo_review() -> int:
-    if REVIEWED_NEMO:
-        return 0
-    print("holding before the full matrix until the NeMo set-up audit is decided (REVIEWED_NEMO in ops/run.py)", flush=True)
-    return 3
-
-
 def main_check() -> int:
     """DESIGN.md 24: the retrained main variant (now saved for release and cost) still meets the target on the rescored
     bases before the matrix spends GPU time; otherwise hold."""
@@ -198,6 +188,12 @@ def steps(check: bool) -> list:
                            "Eugene 2026-10-16 18:11 KST)", run("nemo-orr")),
               ("nemo-audit", "NeMo arm set-up audit: wrapper parameters, system prompt, answer format vs Vanilla (CPU; "
                              "Eugene 2026-10-16 18:17 KST)", run("nemo-audit")),
+              ("nemo-reset-check", "NeMo with the fixed provider: the qwen pre-test's 'others' tag set aside (DESIGN.md 29)",
+               lambda: step("nemo-reset", True, env_add={"V21R_BASES": "qwen"})),
+              ("matrix-nemo-check", "the qwen pre-test's 'others' tag again (NeMo live, other arms from the stores)",
+               lambda: step("matrix", True, env_add={"V21R_BASES": "qwen"})),
+              ("nemo-fair-review", "NeMo calls carry NeMo's parameters; NeMo answered every check bench (DESIGN.md 29)",
+               lambda: step("nemo-fair-review", True, env_add={"V21R_BASES": "qwen"})),
               ("r2d2-cpeg", "R2D2 served as CPEG served it; the zephyr pre-test cache dropped (Eugene 17:56 KST, DESIGN.md 25)",
                run("r2d2-cpeg")),
               ("r2d2-fingerprint", "how close each R2D2 build Ollama holds comes to the submitted H02 answers (12 XSTest "
@@ -206,10 +202,14 @@ def steps(check: bool) -> list:
                lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"})),
               ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
                zephyr_review),
-              ("nemo-review", "hold until the NeMo set-up audit is decided (DESIGN.md 28)", nemo_review)]
+              ("nemo-fair-review-zephyr", "the same NeMo checks on the zephyr pre-test (DESIGN.md 29)",
+               lambda: step("nemo-fair-review", True, env_add={"V21R_BASES": "zephyr"})),
+              ("nemo-reset", "the 'others' tag of qwen, gemma4 and gemma3 set aside so NeMo runs again (DESIGN.md 29)",
+               lambda: step("nemo-reset", False, env_add={"V21R_BASES": "qwen,gemma4,gemma3"}))]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     s += [("nemo-orr-all", "NeMo's XSTest safe refusals by type and rail on every base (CPU)", run("nemo-orr"))]
+    s += [("nemo-audit-all", "NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)", run("nemo-audit"))]
     if not check:
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))

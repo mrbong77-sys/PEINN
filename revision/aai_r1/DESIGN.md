@@ -282,3 +282,17 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 기반 모델·벤치마다 NeMo와 Vanilla를 비교합니다. 시스템 프롬프트가 비어 있지 않은 행, 답 길이(중앙값, 90분위, 900자 이상), 답에 남은 NeMo 대화 형식("User intent:", "Bot message:", 'user "' 줄), 내부 오류 행과 그 채점을 셉니다.
   - 대화 기록에서 봇 메시지 뒤로 다음 사용자 턴까지 이어 쓴 응답 수를 셉니다.
 - **다음:** 전체 행렬 앞에 `nemo-review` 보류 단계를 둡니다(`REVIEWED_NEMO`). 기록 점검 결과로 S1·S2가 답을 바꿨는지 봅니다. 바꿨다면 래퍼가 NeMo의 온도·토큰 상한·정지 문자열을 넘기도록 고치고, 모든 기반 모델에서 NeMo 팔만 다시 돌리는 안을 교수님께 여쭙니다.
+
+## 29. NeMo 래퍼 수정과 NeMo 팔 재실행 (교수님 결정 2026-10-16 19:24 KST "래퍼 고쳐서 NeMo는 공정하게")
+
+- **수정(`peaos_patches.nemo_fair`, 드라이버와 `peaos_patches run` 모두에 적용):** PEAOS의 `PEAOSLocalLLM`을 등록 시점에 하위 클래스로 바꿉니다. PEAOS 저장소는 고치지 않습니다.
+  - NeMo가 레일 호출마다 지정하는 값을 그대로 모델에 넘깁니다. 온도(입력·출력 자체 점검, 의도·다음 단계 생성의 `lowest_temperature`), `max_tokens`(자체 점검 3), 정지 문자열입니다.
+  - NeMo가 값을 지정하지 않는 본 답 생성은 다른 팔과 같은 조건으로 돌립니다. 온도 0.3, 상한 768토큰(하네스 `build_llm_request`의 답 상한)입니다. 설정 파일의 `temperature: 0.1`, `max_new_tokens: 256`은 원래 래퍼에서도 모델에 닿지 않았습니다.
+  - NeMo 호출은 전용 클라이언트로 보냅니다. `call_local`이 `options["temperature"]`를 클라이언트에 저장하므로, 공유 클라이언트를 쓰면 NeMo의 0에 가까운 온도가 다른 팔로 번집니다.
+  - seed는 지금처럼 드라이버가 고정합니다. NeMo 호출 기록에 `temperature`, `max_tokens`, `stop`을 함께 남깁니다.
+- **사전 점검:**
+  - `nemo-reset-check`: qwen 점검 캐시의 others 태그를 보관 폴더로 옮깁니다.
+  - `matrix-nemo-check`: 점검 행렬을 다시 돌립니다. NeMo만 새로 생성하고, 다른 팔은 생성·판정 저장소에서 그대로 가져옵니다.
+  - `nemo-fair-review`가 다음을 확인합니다. 모든 NeMo 호출에 온도가 실렸는지, 자체 점검 온도가 0.05 이하인지, 정지 문자열이 붙은 대화 호출이 있는지, 모든 점검 벤치에 NeMo 답이 있는지, 빈 답·내부 오류가 5% 이하인지입니다. zephyr 사전 점검에서도 같은 확인을 합니다.
+- **본 실행:** `nemo-reset`이 qwen·gemma4·gemma3 전체 캐시의 others 태그를 `archive_nemo_wrapper_v1/`로 한 번만 옮깁니다(표지 파일). 이어서 `matrix`가 그 태그를 다시 돌리고 zephyr 전체를 돌립니다. NeMo 호출은 키가 바뀌어(options 포함) 새로 생성되고, Vanilla·R2D2·Llama Guard는 저장소에서 다시 씁니다. 끝나면 `nemo-doc`, `nemo-orr-all`, `nemo-audit-all`로 거절 경로와 설정을 다시 셉니다.
+- **원고:** NeMo 구성 서술에 "레일 호출은 NeMo가 정한 매개변수, 본 답은 다른 팔과 같은 온도·상한"이라고 적습니다. 설정 파일 사본의 `parameters` 줄도 실제 실행과 맞춥니다.

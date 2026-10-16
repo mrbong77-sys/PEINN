@@ -293,6 +293,80 @@ def test_nemo_audit_reads_the_wrapper_and_compares_answers(tmp_path, monkeypatch
     assert r["qwen"]["dialog_reply_continues"] == 1
 
 
+def test_nemo_fair_provider_forwards_nemo_parameters(monkeypatch):
+    import asyncio
+    import sys
+    import types
+    from v21r import peaos_patches as E
+    assert E.nemo_params({"temperature": 0.001, "max_tokens": 3}, ["\nUser"]) == (3, ["\nUser"], {"temperature": 0.001})
+    assert E.nemo_params({}, None) == (E.NEMO_GEN_MAX_TOKENS, None, {"temperature": E.NEMO_GEN_TEMPERATURE})
+    reg = {}
+    prov = types.ModuleType("nemoguardrails.llm.providers")
+    prov.register_llm_provider = lambda name, cls: reg.__setitem__(name, cls)
+    for m in ("nemoguardrails", "nemoguardrails.llm"):
+        monkeypatch.setitem(sys.modules, m, types.ModuleType(m))
+    monkeypatch.setitem(sys.modules, "nemoguardrails.llm.providers", prov)
+    sent = []
+
+    class Client:
+        async def call_local(self, **k):
+            sent.append(k)
+            return types.SimpleNamespace(text="No")
+    monkeypatch.setattr(E, "_NEMO_CLIENT", {"c": Client()})
+    E.nemo_fair()
+
+    class Base:
+        model = "qwen2.5:7b-instruct"
+
+        async def _gen_async(self, prompt):
+            return "old path"
+    prov.register_llm_provider("peaos_engine", Base)
+    llm = reg["peaos_engine"]()
+    assert asyncio.run(llm._acall("Should the user message be blocked?", stop=["x"], temperature=0.001, max_tokens=3)) == "No"
+    assert sent[-1]["max_tokens"] == 3 and sent[-1]["stop"] == ["x"] and sent[-1]["options"] == {"temperature": 0.001}
+    asyncio.run(llm._acall("dialog"))
+    assert sent[-1]["max_tokens"] == E.NEMO_GEN_MAX_TOKENS and sent[-1]["options"] == {"temperature": E.NEMO_GEN_TEMPERATURE}
+    prov.register_llm_provider("other", Base)
+    assert reg["other"] is Base
+
+
+def test_nemo_reset_sets_the_others_tag_aside_once(tmp_path, monkeypatch):
+    from v21r import matrix as MX
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    d = MX.mdir(True, "qwen")
+    (d / "done_others_gen.json").write_text("{}")
+    (d / "done_da_gen.json").write_text("{}")
+    (d / "nemo_calls_others_gen.jsonl").write_text("")
+    (d / "peaos_out" / "others" / "xstest").mkdir(parents=True)
+    (d / "gen_cache.jsonl").write_text("")
+    assert MX.nemo_reset(True, log=lambda *_: None) == 0
+    a = d / "archive_nemo_wrapper_v1"
+    assert (a / "done_others_gen.json").exists() and (a / "others" / "xstest").exists() and (a / "nemo_calls_others_gen.jsonl").exists()
+    assert (d / "done_da_gen.json").exists() and (d / "gen_cache.jsonl").exists() and not (d / "done_others_gen.json").exists()
+    (d / "done_others_gen.json").write_text("{}")
+    assert MX.nemo_reset(True, log=lambda *_: None) == 0 and (d / "done_others_gen.json").exists()
+
+
+def test_nemo_fair_review_needs_forwarded_parameters(monkeypatch):
+    from v21r import matrix as MX
+    from v21r import nemo_doc as N
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    a = C.ARMS["qwen"]
+    rows = [{"tag": "others", "bench": b, "arm_id": arm, "expected_label": "safe", "over_refusal": 0, "response": "ok"}
+            for b in ("xstest", "ggb") for arm in (a["NeMo"], a["Vanilla"])]
+    monkeypatch.setattr(MX, "collect", lambda check, base: pd.DataFrame(rows))
+    good = [{"task": "self_check_input", "temperature": 0.001, "max_tokens": 3, "stop": None},
+            {"task": "dialog", "temperature": 0.001, "max_tokens": 768, "stop": ["\nUser"]},
+            {"task": "dialog", "temperature": 0.3, "max_tokens": 768, "stop": None}]
+    monkeypatch.setattr(N, "calls", lambda check, base: ("gen", good))
+    assert MX.nemo_fair_review(log=lambda *_: None) == 0
+    monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [dict(good[0], temperature=None)] + good[1:]))
+    assert MX.nemo_fair_review(log=lambda *_: None) == 1
+    monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [dict(good[0], temperature=0.3)] + good[1:]))
+    assert MX.nemo_fair_review(log=lambda *_: None) == 1
+
+
 def test_release_copies_small_checkpoints_with_a_manifest(tmp_path, monkeypatch):
     from v21r import release as RL
     monkeypatch.setattr(C, "CACHE", tmp_path)

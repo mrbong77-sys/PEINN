@@ -177,7 +177,8 @@ def seeds(E, L, judge: str | None, out: Path, tag: str, phase: str, capture: lis
             subj = nemo_subject(task, user_prompt or "")
             row = {"tag": tag, "phase": phase, "bench": E.STATE.get("bench", ""), "model": model, "task": task,
                    "subj_sha": hashlib.sha1(subj.encode("utf-8")).hexdigest()[:16], "subj": subj[:160],
-                   "text": (r.text or "")[:300], "error": str(getattr(r, "error", "") or "")[:200]}
+                   "text": (r.text or "")[:300], "error": str(getattr(r, "error", "") or "")[:200],
+                   "max_tokens": max_tokens, "stop": stop, "temperature": (options or {}).get("temperature")}
             with open(out / f"nemo_calls_{tag}_{phase}.jsonl", "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(row, ensure_ascii=False) + "\n")
         if capture is not None and not is_judge:
@@ -279,6 +280,7 @@ def main(argv=None) -> int:
     E = _e2e()
     E.quiet_noise()
     E.langchain_shim()
+    E.nemo_fair()
     if a.mode == "nemo-probe":
         E.patch("run", a.out, {}, a.morables, a.judge)
         return asyncio.run(E.nemo_probe(a.out, a.model))

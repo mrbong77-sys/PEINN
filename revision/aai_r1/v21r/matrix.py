@@ -167,6 +167,80 @@ def matrix(check: bool = False, log=print) -> int:
     return 0
 
 
+# ---- DESIGN.md 29: NeMo again with the fixed provider ------------------------------------------------------------
+
+def nemo_reset(check: bool = False, log=print) -> int:
+    """Moves the 'others' tag's done files, answers and NeMo logs of every base already answered into
+    archive_nemo_wrapper_v1/, once per base (marker file), so the matrix runs that tag again: Vanilla, R2D2 and Llama
+    Guard come back from the generation and judge stores, NeMo calls (new keys: they now carry options) run live."""
+    import shutil
+    for b in bases(check):
+        d = mdir(check, b)
+        mark = d / "nemo_fair.reset"
+        if mark.exists():
+            log(f"  {b}: already reset ({mark.read_text(encoding='utf-8').strip()})")
+            continue
+        arch = d / "archive_nemo_wrapper_v1"
+        moved = []
+        for f in [*d.glob("done_others_*.json"), *d.glob("nemo_calls_others_*.jsonl"), *d.glob("calls_others_*.json"),
+                  d / "peaos_out" / "others"]:
+            if f.exists():
+                arch.mkdir(exist_ok=True)
+                shutil.move(str(f), str(arch / f.name))
+                moved.append(f.name)
+        mark.write_text(f"{len(moved)} moved: {', '.join(moved)}\n", encoding="utf-8")
+        log(f"  {b}: {len(moved)} moved to {arch.name}")
+    return 0
+
+
+def nemo_fair_review(check: bool = True, log=print) -> int:
+    """The NeMo arm on the pre-test after nemo_reset: every rail call carries a temperature (forwarded), the input and
+    output self-checks run at NeMo's near-zero temperature, some dialog calls carry stop words, and NeMo answered every
+    check bench with few empty or internal-error rows. Prints XSTest over-refusal of NeMo and Vanilla."""
+    from . import nemo_doc as N
+    bad = []
+    for b in bases(check):
+        _, rows = N.calls(check, b)
+        if not rows:
+            bad.append(f"{b}: no NeMo log")
+            continue
+        t = [r.get("temperature") for r in rows]
+        sc = [r for r in rows if r["task"] in ("self_check_input", "self_check_output")]
+        dl = [r for r in rows if r["task"] == "dialog"]
+        log(f"{b}: NeMo calls {len(rows)}, without temperature {sum(x is None for x in t)}, self-check temperatures "
+            f"{sorted({r.get('temperature') for r in sc}, key=str)[:5]}, self-check max_tokens "
+            f"{sorted({r.get('max_tokens') for r in sc}, key=str)[:5]}, dialog with stop {sum(1 for r in dl if r.get('stop'))}/{len(dl)}")
+        if any(x is None for x in t):
+            bad.append(f"{b}: calls without temperature")
+        if any((r.get("temperature") or 1) > 0.05 for r in sc):
+            bad.append(f"{b}: self-check above NeMo's lowest temperature")
+        if dl and not any(r.get("stop") for r in dl):
+            bad.append(f"{b}: no dialog call with stop words")
+        df = collect(check, b)
+        o = df[df.tag == "others"] if len(df) else df
+        n = o[o.arm_id == C.ARMS[b]["NeMo"]] if len(o) else o
+        if not len(n):
+            bad.append(f"{b}: no NeMo rows")
+            continue
+        resp = n.filter(regex="^response").fillna("").astype(str)
+        empty = resp.apply(lambda c: c.str.strip().isin(("", "nan"))).all(axis=1)
+        ie = resp.agg(" ".join, axis=1).str.lower().str.contains("internal error|\\[nemo blocked|\\[nemo error")
+        share = float((empty | ie).mean())
+        benches = set(n.bench.unique())
+        x = o[o.bench == "xstest"]
+        orr = {k: round(float(pd.to_numeric(x[(x.arm_id == C.ARMS[b][k]) & (x.expected_label == "safe")].over_refusal,
+                                             errors="coerce").mean()), 3) for k in ("NeMo", "Vanilla")} if len(x) else {}
+        log(f"{b}: NeMo rows {len(n)}, empty or internal error {share:.3f}, benches {sorted(benches)}, XSTest ORR {orr}")
+        if share > 0.05:
+            bad.append(f"{b}: NeMo empty or internal error {share:.3f}")
+        if benches != set(o.bench.unique()):
+            bad.append(f"{b}: NeMo missing benches {sorted(set(o.bench.unique()) - benches)}")
+    if bad:
+        log(f"NeMo pre-test failed: {bad}")
+        return 1
+    return 0
+
+
 # ---- K: route cost ------------------------------------------------------------------------------------
 
 def gate_time(check: bool, log=print) -> dict:
