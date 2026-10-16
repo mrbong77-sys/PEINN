@@ -434,3 +434,29 @@ def test_mahalanobis_ood_flags_points_far_from_both_classes():
     d = M.mahalanobis_min(m, np.array([[0.0] * 4, [5.0] * 4, [20.0] * 4, [-15.0] * 4]))
     assert (d[:2] < m["tau"]).all() and (d[2:] > m["tau"]).all()
     assert abs(float(np.mean(M.mahalanobis_min(m, Z) > m["tau"])) - 0.01) < 0.006
+
+
+def test_main_check_holds_unless_the_main_variant_meets_the_target_on_every_base(tmp_path, monkeypatch):
+    from ops import paths
+    from ops import run as R
+    monkeypatch.setattr(paths, "RUN", tmp_path)
+    f = tmp_path / "results" / "analysis_preview" / "preview.json"
+    f.parent.mkdir(parents=True)
+    name = f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}"
+
+    def write(**bases):
+        f.write_text(json.dumps({"benchmarks": {"bases": {b: {"variants": {name: {"summary": {"ucr": u, "gate_orr": g}}}}
+                                                          for b, (u, g) in bases.items()}}}), encoding="utf-8")
+    write(qwen=(0.035, 0.04), gemma4=(0.013, 0.04))
+    assert R.main_check() == 0
+    write(qwen=(0.035, 0.056), gemma4=(0.013, 0.04))
+    assert R.main_check() == 3
+    write()
+    assert R.main_check() == 3
+
+
+def test_bases_env_narrows_the_matrix(monkeypatch):
+    from v21r import matrix as MX
+    assert MX.bases(True) == ("qwen",) and MX.bases(False) == MX.ORDER
+    monkeypatch.setenv("V21R_BASES", "zephyr")
+    assert MX.bases(True) == ("zephyr",)

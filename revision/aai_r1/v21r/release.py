@@ -2,9 +2,10 @@
 
     python -m v21r release [--check]
 
-Copies every head and the energy calibrator trained on the isolated corpus (cache/<mode>/models/*.pt, all well under
-1 MB) to results/checkpoints/ with a manifest (file, bytes, sha256, the variant it belongs to). The A8 LoRA adapters
-(about 160 MB) stay out of git; the manifest records their size and sha256 for the archived release.
+Copies every head and the energy calibrator trained on the isolated corpus (cache/<mode>/models/*.pt, the small ones
+well under 1 MB) to results/checkpoints/ with a manifest (file, bytes, sha256, the variant it belongs to). The A8 LoRA
+adapters and the fine-tuned encoders of A0ft / A0ftM (hundreds of MB) stay out of git; the manifest records their size
+and sha256 for the archived release.
 """
 from __future__ import annotations
 
@@ -16,7 +17,9 @@ from . import data as D
 
 VARIANT = {"A0": "PEINN head (T/I/F, 800-d)", "calibrator": "energy calibrator (affect 32 + mpnet 768)",
            "A1": "no I channel", "A2": "softmax head", "A3": "binary harm classifier (uncertainty routing)",
-           "A6p": "no principle anchors", "A6e": "no emotion feature"}
+           "A6p": "no principle anchors", "A6e": "no emotion feature",
+           "A0ft_energy": "fine-tuned mpnet energy calibrator (A0ft, A0ftM)", "A0ft_head": "fine-tuned MiniLM T/I/F head (A0ft, A0ftM)",
+           "A0ftM_ood": "Mahalanobis OOD of A0ftM (class means, precision, tau)"}
 LIMIT = 5_000_000
 
 

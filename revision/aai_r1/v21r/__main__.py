@@ -32,12 +32,17 @@ def push_check() -> int:
 
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv or argv[0] not in (*STEPS, "estimate", "unload", "push-check"):
+    if not argv or argv[0] not in (*STEPS, "estimate", "unload", "push-check", "ft-gate-time"):
         print(__doc__)
         return 2
     step, check = argv[0], "--check" in argv
     if step == "push-check":
         return push_check()
+    if step == "ft-gate-time":                  # helper of cost (one process per device)
+        import json
+        from pathlib import Path
+        a = {argv[i]: argv[i + 1] for i in range(1, len(argv) - 1) if argv[i] in ("--texts", "--out")}
+        return models.ft_gate_time(json.loads(Path(a["--texts"]).read_text(encoding="utf-8")), Path(a["--out"]), check)
     if step == "estimate":
         return matrix.estimate()
     if step == "unload":

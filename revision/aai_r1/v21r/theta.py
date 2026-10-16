@@ -20,7 +20,8 @@ from . import data as D
 from . import models as M
 
 HB_TARGET = 0.85                          # paper 3.4: harmful Hard-block >= 85 %
-SAFE_CAP = 0.10                           # paper 3.4: safe Hard-block < 10 % (the main operating point)
+SAFE_CAP = 0.10                           # paper 3.4: safe Hard-block < 10 % (the submitted main operating point)
+MAIN_VARIANT, MAIN_CAP = "A0ftM", 0.03    # DESIGN.md 24: the revision's isolated PEINN (Eugene 2026-10-16 14:40 KST)
 CURVE_CAPS = (0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.05, 0.07, 0.10, 0.15, 0.20, 0.30)   # 0.03-0.07: DESIGN.md 14; 0.015-0.035: 21
 COST = {("safe", "1-pass"): 0.0, ("safe", "reasoning"): 0.2, ("safe", "refusal"): 1.0,
         ("harm", "refusal"): 0.0, ("harm", "reasoning"): 0.5, ("harm", "1-pass"): 1.0,
@@ -143,8 +144,9 @@ def thresholds(check: bool = False, log=print) -> int:
     if check and not len(val):
         val = sp.head(40)
     res = {"rule": "DESIGN.md 5", "hb_target": HB_TARGET, "main_cap": SAFE_CAP, "caps": list(CURVE_CAPS),
+           "main": {"variant": MAIN_VARIANT, "cap": f"{MAIN_CAP:g}"},
            "cost": {f"{a}->{b}": w for (a, b), w in COST.items()}, "variants": {}}
-    caps = (SAFE_CAP,) if check else CURVE_CAPS
+    caps = (SAFE_CAP, MAIN_CAP) if check else CURVE_CAPS
     for v in FITTED:
         sig = signals_for(v, check)
         res["variants"][v] = {f"{c:g}": fit(v, sig, val, c) for c in caps}

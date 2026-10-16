@@ -177,7 +177,10 @@ def _rank_corr(a, b) -> float | None:
     return round(float(a[ok].rank().corr(b[ok].rank())), 4)
 
 
-def calibration(check: bool, variants=("A0", "A2", "A7", "SHIPPED")) -> dict:
+CAL_VARIANTS = ("A0", "A2", "A7", "A0ft", "A0ftM", "SHIPPED")
+
+
+def calibration(check: bool, variants=CAL_VARIANTS) -> dict:
     sp = D.load_split(check)
     te = sp[sp.split == "test"].reset_index(drop=True)
     if check and not len(te):
@@ -224,7 +227,7 @@ def xstest_f_calibration(check: bool, ev_bases) -> dict:
     for b in ev_bases[:1]:
         df = MX.collect(check, b)
         x = units(df[df.tag == "da"], "xstest")[["sha", "expected_label"]].dropna().drop_duplicates("sha")
-        for v in ("A0", "A2", "A7", "SHIPPED"):
+        for v in CAL_VARIANTS:
             sig = M.load_signals(check, v)
             ix = sig["part"] == "bench"
             f = dict(zip(sig["sha"][ix], np.asarray(sig["F"], dtype=float)[ix]))
@@ -237,7 +240,7 @@ def xstest_f_calibration(check: bool, ev_bases) -> dict:
 def analyze(check: bool = False, log=print) -> int:
     th = C.jload(D.odir(check) / "thresholds.json")
     ev = evaluate(check, log)
-    res = {"benchmarks": ev, "curves": curves(ev, th), "calibration": calibration(check),
+    res = {"main": main_point(), "benchmarks": ev, "curves": curves(ev, th), "calibration": calibration(check),
            "xstest_F": xstest_f_calibration(check, list(ev["bases"])),
            "route_cost": C.jload(D.odir(check) / "route_cost.json") if (D.odir(check) / "route_cost.json").exists() else None}
     o = D.odir(check) / "analysis"
@@ -298,7 +301,8 @@ def preview(check: bool = False, log=print) -> int:
     rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v in ("A0", "A0ft", "A0ftM")]
     rows += ["SHIPPED", "A0paper", "A4a", "A4b", "A4c", "A4d"]
     L = ["# 게이트 수정 뒤 미리보기 (DESIGN.md 11)", "",
-         f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main}. 모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]
+         f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main_point()['name']} (제출본 운영점 {main}). "
+         "모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]
     for b, res in ev["bases"].items():
         L += [f"## {C.BASES[b]}", "", "| 체계 | " + " | ".join(c for c, _ in PREVIEW_COLS) + " |",
               "|---|" + "---|" * len(PREVIEW_COLS)]
@@ -309,7 +313,7 @@ def preview(check: bool = False, log=print) -> int:
             L.append(f"| {n} | " + " | ".join(_cell(f, r) for _, f in PREVIEW_COLS) + " |")
         L.append("")
     o = D.odir(check) / "analysis_preview"
-    f = C.jdump({"bases_done": done, "main_cap": th["main_cap"], "benchmarks": ev, "curves": curves(ev, th)},
+    f = C.jdump({"bases_done": done, "main_cap": th["main_cap"], "main": main_point(), "benchmarks": ev, "curves": curves(ev, th)},
                 o / "preview.json")
     md = o / "preview.md"
     md.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -319,8 +323,22 @@ def preview(check: bool = False, log=print) -> int:
     return 0 if C.publish([f, md], "v21r A-preview: benchmark metrics of the fixed gate on the bases answered so far") else 1
 
 
+def main_point() -> dict:
+    return {"variant": TH.MAIN_VARIANT, "cap": f"{TH.MAIN_CAP:g}", "name": f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}"}
+
+
 def render(res: dict) -> str:
     L = ["# v2.1 심사 대응 결과 요약 (DESIGN.md)", ""]
+    mp = res.get("main") or main_point()
+    L += [f"## 주 운영점: 격리 PEINN {mp['name']} (DESIGN.md 24)", "", "| 기반 모델 | 체계 | UCR | ORR | 게이트 ORR |",
+          "|---|---|---|---|---|"]
+    for b, r in res["benchmarks"]["bases"].items():
+        rows = [("PEINN", r["variants"].get(mp["name"]))] + list(r["defences"].items())
+        for n, x in rows:
+            if x:
+                s = x["summary"]
+                L.append(f"| {C.BASES[b]} | {n} | {s['ucr']} | {s['orr']} | {'' if s.get('gate_orr') is None else s['gate_orr']} |")
+    L.append("")
     for b, cur in res["curves"].items():
         L += [f"## {C.BASES[b]}", "", "| 체계 | 운영점 | UCR | ORR |", "|---|---|---|---|"]
         for n, pts in cur.items():

@@ -23,7 +23,9 @@ COST_BENCHES = {"xstest": 1, "harmbench": 1}          # K: one run of each (95 t
 
 
 def bases(check: bool) -> tuple:
-    return ("qwen",) if check else ORDER
+    """V21R_BASES (comma list) narrows a run to some bases (the zephyr pre-test on the check benches, DESIGN.md 24)."""
+    only = tuple(b for b in os.environ.get("V21R_BASES", "").split(",") if b in ORDER)
+    return only or (("qwen",) if check else ORDER)
 
 
 def tags(base: str) -> list[dict]:
@@ -168,7 +170,8 @@ def matrix(check: bool = False, log=print) -> int:
 # ---- K: route cost ------------------------------------------------------------------------------------
 
 def gate_time(check: bool, log=print) -> dict:
-    """Gate compute per text (features + head + energy) on the GPU and on one CPU thread."""
+    """Gate compute per text (features + head + energy) on the GPU and on one CPU thread; ft_* is what the main
+    variant A0ftM adds (its fine-tuned encoder passes and the Mahalanobis distance, DESIGN.md 24)."""
     texts = D.record_texts(check).text.tolist()[: 20 if check else 200]
     d = D.wdir(check) / "cost"
     d.mkdir(parents=True, exist_ok=True)
@@ -182,6 +185,10 @@ def gate_time(check: bool, log=print) -> dict:
         C.child([C.PY, D.SIDE, "gate-time", "--texts", tf, "--out", f], src,
                 env={"PEINN_NEUTRO_HEAD": "ee_neutro_head_v4.pt", **env})
         out[dev] = C.jload(f) if f.exists() else None
+        g = d / f"ft_gate_{dev}.json"
+        C.child([C.PY, "-m", "v21r", "ft-gate-time", "--texts", tf, "--out", g, *(["--check"] if check else [])], C.ROOT,
+                env=env)
+        out[f"ft_{dev}"] = C.jload(g) if g.exists() else None
     return out
 
 

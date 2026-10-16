@@ -329,20 +329,12 @@ def _fp32_model(cls, name: str):
     return m
 
 
-def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print,
-             hist: list | None = None):
-    """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
-    focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
-    principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
-    Xtr / Xva: the frozen blocks around the encoder slot (energy: emotion; head: emotion and principle).
-    Returns (infer(texts, X) -> outputs, best val score)."""
+def _ft_net(kind: str, name: str):
+    """The v2.1 network around a trainable encoder: energy [emotion 32 | encoder] -> calibrator; head [emotion 32 |
+    encoder | principle 384] -> neutro head. embed() is the pooled, normalised sentence representation."""
     import torch
     import torch.nn as nn
-    from transformers import AutoModel, AutoTokenizer
-    _seed()
-    dev = _dev()
-    name = hp.get("enc") or FT_ENC[kind]
-    tok = AutoTokenizer.from_pretrained(name)
+    from transformers import AutoModel
     energy_kind = kind == "energy"
 
     class Net(nn.Module):
@@ -363,7 +355,27 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             z = torch.cat([x[:, :32], e], 1) if energy_kind else torch.cat([x[:, :32], e, x[:, 32:]], 1)
             return self.out(z)
 
-    net = Net().to(dev)
+    return Net()
+
+
+def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print,
+             hist: list | None = None, save: Path | None = None):
+    """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
+    focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
+    principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
+    Xtr / Xva: the frozen blocks around the encoder slot (energy: emotion; head: emotion and principle).
+    save: the selected weights go there with the encoder name (the released checkpoint, ft_load reads it).
+    Returns (infer(texts, X) -> outputs, best val score)."""
+    import torch
+    import torch.nn as nn
+    from transformers import AutoTokenizer
+    _seed()
+    dev = _dev()
+    name = hp.get("enc") or FT_ENC[kind]
+    tok = AutoTokenizer.from_pretrained(name)
+    energy_kind = kind == "energy"
+
+    net = _ft_net(kind, name).to(dev)
     opt = torch.optim.AdamW([{"params": net.enc.parameters(), "lr": hp["lr_enc"]},
                              {"params": net.out.parameters(), "lr": hp["lr_out"]}], weight_decay=0.01)
     acc = int(hp.get("accum") or 1)
@@ -455,6 +467,8 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
         if better:
             best, best_state = sc, {k: v.detach().cpu().clone() for k, v in net.state_dict().items()}
     net.load_state_dict(best_state)
+    if save is not None:
+        torch.save({"kind": kind, "enc": name, "max_len": hp["max_len"], "state_dict": best_state}, save)
 
     def infer(texts: list[str], X, emb: bool = False) -> np.ndarray:
         """Outputs, or with emb the fine-tuned encoder's pooled, normalised representation (DESIGN.md 20)."""
@@ -498,6 +512,60 @@ def mahalanobis_min(m: dict, Z: np.ndarray) -> np.ndarray:
     Z = np.asarray(Z, dtype=np.float64)
     d = [np.sqrt(np.maximum(np.einsum("ij,jk,ik->i", Z - mu, m["P"], Z - mu), 0.0)) for mu in m["mu"]]
     return np.minimum(d[0], d[1])
+
+
+def ft_load(f: Path):
+    """A fine-tuned network saved by train_ft (save=...), on the current device, in eval mode, with its tokenizer."""
+    import torch
+    from transformers import AutoTokenizer
+    ck = torch.load(f, map_location="cpu")
+    net = _ft_net(ck["kind"], ck["enc"])
+    net.load_state_dict(ck["state_dict"])
+    return net.to(_dev()).eval(), AutoTokenizer.from_pretrained(ck["enc"]), ck
+
+
+def ft_gate_time(texts: list[str], out: Path, check: bool = False) -> int:
+    """DESIGN.md 24: per-text compute of what A0ftM adds to the v2.1 input gate: the fine-tuned mpnet energy and MiniLM
+    head passes (in place of the frozen passes the shipped gate makes) and the Mahalanobis distance, after five warm-up
+    texts, on whatever device torch sees. The emotion and principle blocks are the shipped gate's (timed there), so
+    zeros stand in for them here."""
+    import statistics
+    import time
+    import torch
+    md = D.wdir(check) / "models"
+    nets = {k: ft_load(md / f"A0ft_{k}.pt") for k in ("energy", "head")}
+    ood = torch.load(md / "A0ftM_ood.pt", map_location="cpu")
+    dev = _dev()
+    mu, P = ood["mu"].to(dev), ood["P"].to(dev)
+
+    def one(t: str):
+        with torch.no_grad():
+            for k, (net, tok, ck) in nets.items():
+                enc = tok([t], truncation=True, max_length=ck["max_len"], return_tensors="pt")
+                ids, att = enc["input_ids"].to(dev), enc["attention_mask"].to(dev)
+                e = net.embed(ids, att)
+                x = torch.zeros((1, 32 if k == "energy" else 416), device=dev)
+                net.out(torch.cat([x[:, :32], e], 1) if k == "energy" else torch.cat([x[:, :32], e, x[:, 32:]], 1))
+                if k == "energy":
+                    r = e - mu
+                    torch.einsum("ij,jk,ik->i", r, P, r).min()
+    for t in texts[:5]:
+        one(t)
+    ms = []
+    for t in texts:
+        if dev.type == "cuda":
+            torch.cuda.synchronize()
+        t0 = time.perf_counter()
+        one(t)
+        if dev.type == "cuda":
+            torch.cuda.synchronize()
+        ms.append((time.perf_counter() - t0) * 1000)
+    ms.sort()
+    res = {"device": dev.type, "threads": torch.get_num_threads(), "n": len(ms), "p50_ms": round(statistics.median(ms), 2),
+           "p95_ms": round(ms[int(0.95 * (len(ms) - 1))], 2), "mean_ms": round(sum(ms) / len(ms), 2)}
+    out.write_text(json.dumps(res, indent=1) + "\n", encoding="utf-8")
+    print(f"[ft-gate-time] {res}", flush=True)
+    return 0
 
 
 # ---- step T ------------------------------------------------------------------------------------------------
@@ -602,11 +670,11 @@ def train_all(check: bool = False, log=print) -> int:
         fhp = dict(FT_HP, epochs=1) if check else FT_HP
         hb = np.r_[0:32, 416:800]                                                  # emotion | principle
         e_inf, e_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, fhp, log,
-                                hist=report.setdefault("A0ft_energy_epochs", []))
+                                hist=report.setdefault("A0ft_energy_epochs", []), save=md / "A0ft_energy.pt")
         E_ft = e_inf(uni.text.tolist(), Cx[ru][:, :32]).ravel() * 10.0
         hhp = dict(FT_HEAD_HP, epochs=1) if check else FT_HEAD_HP
         h_inf, h_vl = train_ft("head", trs, va, Hx[D.rows_of(F, trs.sha)][:, hb], Hx[rva][:, hb], neg_w, hhp, log,
-                               hist=report.setdefault("A0ft_head_epochs", []))
+                               hist=report.setdefault("A0ft_head_epochs", []), save=md / "A0ft_head.pt")
         p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
@@ -615,6 +683,9 @@ def train_all(check: bool = False, log=print) -> int:
             md_ = mahalanobis_fit(e_inf(trs.text.astype(str).tolist(), None, emb=True), trs.F.to_numpy() >= 0.5)
             dm = mahalanobis_min(md_, e_inf(uni.text.astype(str).tolist(), None, emb=True))
             ood = (dm > md_["tau"]).astype(float)
+            import torch
+            torch.save({"mu": torch.tensor(md_["mu"], dtype=torch.float32), "P": torch.tensor(md_["P"], dtype=torch.float32),
+                        "tau": md_["tau"], "q": OOD_Q, "ridge": OOD_RIDGE}, md / "A0ftM_ood.pt")
             save("A0ftM", E_=E_ft, T=p[:, 0], I=np.maximum(p[:, 1], ood), F=p[:, 2])
             report["A0ftM_ood"] = {"tau": round(md_["tau"], 4), "q": OOD_Q,
                                    "share": {str(k): round(float(ood[(uni.part == k).to_numpy()].mean()), 4)

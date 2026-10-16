@@ -1,22 +1,16 @@
 {
- "id": "20261016T044500Z-rerun",
+ "id": "20261016T055500Z-rerun",
  "action": "rerun",
  "steps": [
   "supp-check",
-  "supplement",
-  "audit",
-  "features",
-  "split",
   "train",
   "thresholds",
   "routes",
-  "dev-guard-check",
-  "dev-guard",
   "gate-diag-check",
   "gate-diag",
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 23, iteration 7: more plain WildJailbreak/WildGuardMix rows; dev comparison and one CPU rescore; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 04:45:00"
+ "note": "DESIGN.md 24: A0ftM@0.03 confirmed (14:40 KST). Retrain once to save the fine-tuned encoders, rescore (CPU), main-check gate, zephyr/R2D2 pre-test on the check benches, then the matrix (gemma3, zephyr) and the rest.",
+ "issued_utc": "2026-10-16 05:55:00"
 }
