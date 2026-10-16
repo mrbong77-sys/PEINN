@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 64,
+ "seq": 65,
  "mission": "ops.run",
- "time_utc": "2026-10-16 00:46:50",
- "time_local": "2026-10-16 09:46:50",
- "code": "5aee000 v21r C: isolation audit of the v4 head corpus and the train/val/test split",
- "gpu": "2234 MiB, 32607 MiB, 10 %, 37",
+ "time_utc": "2026-10-16 00:56:52",
+ "time_local": "2026-10-16 09:56:52",
+ "code": "c393743 v2.1 심사 대응 runner: 실패 후 대기 (attempt 8)",
+ "gpu": "1600 MiB, 32607 MiB, 3 %, 43",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
