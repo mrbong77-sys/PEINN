@@ -1,0 +1,25 @@
+{
+ "guard": "llama-guard3:8b",
+ "groups": {
+  "v4_safe": {
+   "rows": 647,
+   "refusal": 0.0185
+  },
+  "v4_harmful": {
+   "rows": 235,
+   "refusal": 0.6511
+  },
+  "overrefusal_benign": {
+   "rows": 588,
+   "refusal": 0.0765
+  },
+  "adversarial_benign": {
+   "rows": 150,
+   "refusal": 0.0533
+  },
+  "supp_harmful": {
+   "rows": 215,
+   "refusal": 0.6047
+  }
+ }
+}
