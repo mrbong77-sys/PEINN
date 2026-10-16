@@ -46,9 +46,10 @@ class Features:
         self.out = out
         self.store: dict[str, tuple] = {}
         if out.exists():
-            z = np.load(out, allow_pickle=False)
-            for i, k in enumerate(z["keys"]):
-                self.store[str(k)] = (z["head_x"][i], z["cal_x"][i], z["tif"][i], float(z["e1"][i]))
+            with np.load(out, allow_pickle=False) as z:          # read each array once (z[name] re-reads the file)
+                keys, hx, cx, tif, e1 = (z[n] for n in ("keys", "head_x", "cal_x", "tif", "e1"))
+            for i, k in enumerate(keys):
+                self.store[str(k)] = (hx[i], cx[i], tif[i], float(e1[i]))
 
     def one(self, text: str):
         from pea_eval.evaluators.intent_router import neutro_feature_vector
