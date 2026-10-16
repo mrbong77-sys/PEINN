@@ -361,3 +361,35 @@ def test_preview_scores_only_finished_bases(tmp_path, monkeypatch):
     assert seen["only"] == ("qwen",)
     md = (out / "analysis_preview" / "preview.md").read_text(encoding="utf-8")
     assert "| A1@0.1 | 0.100 | 0.200 | 0.050 |" in md and "A1@0.05" not in md and "| NeMo |" in md
+
+
+def test_supplement_rows_take_the_recipe_with_dataset_labels():
+    from v21r import supplement as S
+    loaders = {src: (lambda src=src: [f"{src} {i}" for i in range(30)] + ["", None, f"{src} 0"]) for src, _, _ in S.RECIPE}
+    df = S.rows(True, loaders, log=lambda *_: None)
+    assert len(df) == S.CHECK_ROWS * len(S.RECIPE) and df.text.is_unique
+    harm = df[df.source == "supp:orbench_toxic"]
+    assert (harm.F == 1).all() and (harm["T"] == 0).all() and (harm.polar == "F").all()
+    ben = df[df.source == "supp:orbench_80k"]
+    assert (ben.F == 0).all() and (ben["T"] == 1).all() and (ben.I == 0).all() and (ben.mask_F == 1).all()
+    assert list(df.columns[:3]) == ["text", "T", "I"]
+
+
+def test_split_keeps_v4_rows_when_the_supplement_is_added():
+    v4 = pd.DataFrame({"source": ["a"] * 8 + ["b"] * 4, "polar": ["T"] * 4 + ["F"] * 4 + ["T"] * 4,
+                       "file_role": ["train"] * 2 + ["heldout"] * 10})
+    supp = pd.DataFrame({"source": ["supp:x"] * 20, "polar": ["T"] * 20, "file_role": ["supp"] * 20})
+    s0 = D.assign_split(v4)
+    s1 = D.assign_split(pd.concat([v4, supp], ignore_index=True))
+    assert (s1[:12].to_numpy() == s0.to_numpy()).all()
+    assert s1[12:].value_counts().to_dict() == {"train": 16, "val": 2, "test": 2}
+
+
+def test_row_weights_are_sqrt_inverse_source_frequency_with_mean_one():
+    from v21r import models as M
+    tr = pd.DataFrame({"source": ["big"] * 90 + ["small"] * 10})
+    w = M.row_weights(tr, tr)
+    assert abs(w.mean() - 1.0) < 1e-6
+    assert abs(w[-1] / w[0] - 3.0) < 1e-5                           # sqrt(90 / 10)
+    va = pd.DataFrame({"source": ["small", "unseen"]})
+    assert M.row_weights(tr, va)[1] == M.row_weights(tr, va)[0]      # a source absent from train takes the largest weight

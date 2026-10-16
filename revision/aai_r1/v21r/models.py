@@ -24,6 +24,10 @@ CAL_HP = dict(epochs=80, batch=64, lr=1e-3, wd=1e-2, focal_gamma=2.0, warmup=5, 
 # report: n_sup 1,880 = the whole held-out file on T, I and F), so an unlabelled axis's placeholder 0 is a negative
 # target. neg_weight 1.0 reproduces that; the 2-of-3 mask with neg_weight 0 left F almost without negatives.
 SHIPPED_NEG_W = 1.0
+# DESIGN.md 12 (Eugene 2026-10-16 09:28 KST: diverse isolated data, finer head training): every row's loss is weighted by
+# sqrt(N / (K * n_source)) from the train split (mean 1 on train), so the many small sources of the supplement are not
+# drowned by the large ones and no single source decides the boundary. Same weights for every variant and the calibrator.
+ROW_WEIGHT = "sqrt_inverse_source_frequency"
 SBERT_HP = dict(model="sentence-transformers/all-MiniLM-L6-v2", epochs=3, lr=2e-5, batch=32, max_len=256)
 
 
@@ -65,6 +69,14 @@ def three_class(T, I, F) -> np.ndarray:
     return y
 
 
+def row_weights(train: pd.DataFrame, d: pd.DataFrame) -> np.ndarray:
+    """sqrt(N / (K * n_s)) per row of d, n_s counted on the train split; scaled to mean 1 over the train split."""
+    n = train.source.value_counts()
+    w = np.sqrt(len(train) / (len(n) * n))
+    scale = float(w.reindex(train.source).mean())
+    return (d.source.map(w).fillna(float(w.max())) / scale).to_numpy(dtype="float32")
+
+
 def head_weights(d: pd.DataFrame, neg_w: float) -> np.ndarray:
     """Per-element loss weights: 1 where the axis is labelled, neg_w where it holds the placeholder 0."""
     M = d[["mask_T", "mask_I", "mask_F"]].to_numpy(dtype="float32")
@@ -73,9 +85,9 @@ def head_weights(d: pd.DataFrame, neg_w: float) -> np.ndarray:
 
 # ---- heads on frozen features -------------------------------------------------------------------------
 
-def train_head(Xtr, Ytr, Wtr, Xva, Yva, Wva, kind: str, dim_w=None, hp=HEAD_HP, log=print):
+def train_head(Xtr, Ytr, Wtr, Xva, Yva, Wva, kind: str, dim_w=None, hp=HEAD_HP, log=print, rtr=None, rva=None):
     """kind 'sigmoid': masked soft-target BCE (weights W per element); 'softmax': cross-entropy on class ids (Y 1-d);
-    'binary': BCE on a 0/1 target. Model selection by the lowest validation loss."""
+    'binary': BCE on a 0/1 target. rtr / rva: row weights (DESIGN.md 12). Model selection by the lowest validation loss."""
     import torch
     import torch.nn as nn
     _seed()
@@ -89,16 +101,21 @@ def train_head(Xtr, Ytr, Wtr, Xva, Yva, Wva, kind: str, dim_w=None, hp=HEAD_HP, 
     else:
         Yt = torch.tensor(Ytr.reshape(len(Ytr), -1), device=dev, dtype=torch.float32)
         Yv = torch.tensor(Yva.reshape(len(Yva), -1), device=dev, dtype=torch.float32)
+    Rt = torch.tensor(np.ones(len(Xtr)) if rtr is None else rtr, device=dev, dtype=torch.float32)
+    Rv = torch.tensor(np.ones(len(Xva)) if rva is None else rva, device=dev, dtype=torch.float32)
     if kind == "sigmoid":
-        Wt, Wv = torch.tensor(Wtr, device=dev, dtype=torch.float32), torch.tensor(Wva, device=dev, dtype=torch.float32)
+        Wt = torch.tensor(Wtr, device=dev, dtype=torch.float32) * Rt[:, None]
+        Wv = torch.tensor(Wva, device=dev, dtype=torch.float32) * Rv[:, None]
         dw = torch.tensor(dim_w if dim_w is not None else [1.0] * k, device=dev, dtype=torch.float32)
+    else:
+        Wt, Wv = Rt, Rv
 
-    def loss_fn(pred, y, w=None):
+    def loss_fn(pred, y, w):
         if kind == "softmax":
-            return nn.functional.cross_entropy(pred, y)
+            return (nn.functional.cross_entropy(pred, y, reduction="none") * w).sum() / w.sum().clamp_min(1e-8)
         el = nn.functional.binary_cross_entropy(pred, y, reduction="none")
         if kind == "binary":
-            return el.mean()
+            return (el.squeeze(1) * w).sum() / w.sum().clamp_min(1e-8)
         return (el * dw * w).sum() / w.sum().clamp_min(1.0)
 
     best, best_state, n = 1e18, None, len(Xt)
@@ -107,13 +124,13 @@ def train_head(Xtr, Ytr, Wtr, Xva, Yva, Wva, kind: str, dim_w=None, hp=HEAD_HP, 
         perm = torch.randperm(n, device=dev)
         for s in range(0, n, hp["batch"]):
             ix = perm[s:s + hp["batch"]]
-            loss = loss_fn(model(Xt[ix]), Yt[ix], Wt[ix] if kind == "sigmoid" else None)
+            loss = loss_fn(model(Xt[ix]), Yt[ix], Wt[ix])
             opt.zero_grad()
             loss.backward()
             opt.step()
         model.eval()
         with torch.no_grad():
-            vl = float(loss_fn(model(Xv), Yv, Wv if kind == "sigmoid" else None))
+            vl = float(loss_fn(model(Xv), Yv, Wv))
         if vl < best:
             best, best_state = vl, {k_: v.detach().cpu().clone() for k_, v in model.state_dict().items()}
         if ep == 0 or (ep + 1) % 10 == 0:
@@ -151,9 +168,9 @@ def _auroc(y, s) -> float:
     return float((r[:len(pos)].sum() - len(pos) * (len(pos) + 1) / 2) / (len(pos) * len(neg)))
 
 
-def train_calibrator(Xtr, ytr, Xva, yva, hp=CAL_HP, log=print):
+def train_calibrator(Xtr, ytr, Xva, yva, hp=CAL_HP, log=print, rtr=None):
     """ee_threshold_finder.train_calibrator: class-weighted focal BCE, AdamW, cosine LR with warm-up, selection by
-    validation AUROC, patience 12."""
+    validation AUROC, patience 12. rtr: row weights (DESIGN.md 12) times the class weights."""
     import torch
     from torch.utils.data import DataLoader, TensorDataset
     _seed()
@@ -162,15 +179,16 @@ def train_calibrator(Xtr, ytr, Xva, yva, hp=CAL_HP, log=print):
     pos_w = float((ytr == 0).sum() / max(1, (ytr == 1).sum()))
     neg_w = float((ytr == 1).sum() / max(1, (ytr == 0).sum()))
 
-    def focal(pred, t):
+    def focal(pred, t, r):
         pred = pred.clamp(1e-7, 1 - 1e-7)
-        w = t * pos_w + (1 - t) * neg_w
+        w = (t * pos_w + (1 - t) * neg_w) * r
         pt = t * pred + (1 - t) * (1 - pred)
         lp = t * torch.log(pred) + (1 - t) * torch.log(1 - pred)
         return -(w * (1 - pt).pow(hp["focal_gamma"]) * lp).mean()
 
     g = torch.Generator().manual_seed(SEED)
-    dl = DataLoader(TensorDataset(torch.tensor(Xtr), torch.tensor(ytr, dtype=torch.float32).unsqueeze(1)),
+    R = torch.tensor(np.ones(len(Xtr)) if rtr is None else rtr, dtype=torch.float32).unsqueeze(1)
+    dl = DataLoader(TensorDataset(torch.tensor(Xtr), torch.tensor(ytr, dtype=torch.float32).unsqueeze(1), R),
                     batch_size=hp["batch"], shuffle=True, generator=g)
     opt = torch.optim.AdamW(m.parameters(), lr=hp["lr"], weight_decay=hp["wd"])
     E, wu = hp["epochs"], hp["warmup"]
@@ -180,10 +198,10 @@ def train_calibrator(Xtr, ytr, Xva, yva, hp=CAL_HP, log=print):
     Xv = torch.tensor(Xva, device=dev)
     for ep in range(1, E + 1):
         m.train()
-        for bx, by in dl:
-            bx, by = bx.to(dev), by.to(dev)
+        for bx, by, br in dl:
+            bx, by, br = bx.to(dev), by.to(dev), br.to(dev)
             opt.zero_grad()
-            focal(m(bx), by).backward()
+            focal(m(bx), by, br).backward()
             opt.step()
         sched.step()
         m.eval()
@@ -244,7 +262,9 @@ def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, l
             enc = tok(b.text.tolist(), truncation=True, max_length=hp["max_len"], padding=True, return_tensors="pt")
             Y = torch.tensor(b[["T", "I", "F"]].to_numpy(dtype="float32"), device=dev)
             M = torch.tensor(b[["mask_T", "mask_I", "mask_F"]].to_numpy(dtype="float32"), device=dev)
-            yield enc["input_ids"].to(dev), enc["attention_mask"].to(dev), Y, M + (1 - M) * neg_w
+            R = torch.tensor(b["rw"].to_numpy(dtype="float32") if "rw" in b else np.ones(len(b), dtype="float32"),
+                             device=dev)
+            yield enc["input_ids"].to(dev), enc["attention_mask"].to(dev), Y, (M + (1 - M) * neg_w) * R[:, None]
 
     def loss(p, Y, W):
         el = nn.functional.binary_cross_entropy(p, Y, reduction="none")
@@ -314,17 +334,20 @@ def train_all(check: bool = False, log=print) -> int:
     ru = D.rows_of(F, uni.sha)
     Hx, Cx = F["head_x"], F["cal_x"]
     rtr, rva = D.rows_of(F, tr.sha), D.rows_of(F, va.sha)
+    wtr, wva = row_weights(tr, tr), row_weights(tr, va)                              # DESIGN.md 12
+    tr, va = tr.assign(rw=wtr), va.assign(rw=wva)
+    rw_src = {k: round(float(v), 3) for k, v in tr.groupby("source").rw.first().items()}
     Y = lambda d: d[["T", "I", "F"]].to_numpy(dtype="float32")                       # noqa: E731
     W = lambda d: head_weights(d, neg_w)                                              # noqa: E731
     hp = dict(HEAD_HP, epochs=3) if check else HEAD_HP
     chp = dict(CAL_HP, epochs=3) if check else CAL_HP
     md = D.wdir(check) / "models"
     md.mkdir(parents=True, exist_ok=True)
-    report = {"neg_weight": neg_w, "n": {"train": len(tr), "val": len(va), "test": len(te), "bench": len(rec)}}
+    report = {"neg_weight": neg_w, "row_weight": ROW_WEIGHT, "row_weight_by_source": rw_src, "n": {"train": len(tr), "val": len(va), "test": len(te), "bench": len(rec)}}
 
     log("== energy calibrator (label F >= 0.5)")
     ytr, yva = (tr.F.to_numpy() >= 0.5).astype("float32"), (va.F.to_numpy() >= 0.5).astype("float32")
-    cal, auc = train_calibrator(Cx[rtr], ytr, Cx[rva], yva, chp, log)
+    cal, auc = train_calibrator(Cx[rtr], ytr, Cx[rva], yva, chp, log, rtr=wtr)
     torch.save(cal.state_dict(), md / "calibrator.pt")
     E = energy(cal, Cx[ru])
     report["calibrator_val_auroc"] = auc
@@ -336,7 +359,7 @@ def train_all(check: bool = False, log=print) -> int:
     for name, ix in cols.items():
         log(f"== {name}: T/I/F head on {'all 800' if name == 'A0' else ('no principle block' if name == 'A6p' else 'no affect block')}")
         m, vl = train_head(Hx[rtr][:, ix], Y(tr), W(tr), Hx[rva][:, ix], Y(va), W(va), "sigmoid",
-                           [1.0, hp["i_weight"], 1.0], hp, log)
+                           [1.0, hp["i_weight"], 1.0], hp, log, wtr, wva)
         torch.save(m.state_dict(), md / f"{name}.pt")
         p = predict(m, Hx[ru][:, ix], "sigmoid")
         save(name, T=p[:, 0], I=p[:, 1], F=p[:, 2])
@@ -344,7 +367,7 @@ def train_all(check: bool = False, log=print) -> int:
 
     log("== A1: T/F head (no I)")
     m, vl = train_head(Hx[rtr], Y(tr)[:, [0, 2]], W(tr)[:, [0, 2]], Hx[rva], Y(va)[:, [0, 2]], W(va)[:, [0, 2]],
-                       "sigmoid", [1.0, 1.0], hp, log)
+                       "sigmoid", [1.0, 1.0], hp, log, wtr, wva)
     torch.save(m.state_dict(), md / "A1.pt")
     p = predict(m, Hx[ru], "sigmoid")
     save("A1", T=p[:, 0], I=np.zeros(len(p)), F=p[:, 1])
@@ -352,7 +375,7 @@ def train_all(check: bool = False, log=print) -> int:
 
     log("== A2: softmax safe / ambiguous / harmful")
     ctr, cva = three_class(tr["T"], tr["I"], tr["F"]), three_class(va["T"], va["I"], va["F"])
-    m, vl = train_head(Hx[rtr], ctr, None, Hx[rva], cva, None, "softmax", None, hp, log)
+    m, vl = train_head(Hx[rtr], ctr, None, Hx[rva], cva, None, "softmax", None, hp, log, wtr, wva)
     torch.save(m.state_dict(), md / "A2.pt")
     p = predict(m, Hx[ru], "softmax")
     save("A2", T=p[:, 0], I=p[:, 1], F=p[:, 2])
@@ -360,7 +383,7 @@ def train_all(check: bool = False, log=print) -> int:
     report["A2_class_counts_train"] = {k: int(v) for k, v in zip(("safe", "ambiguous", "harmful"), np.bincount(ctr, minlength=3))}
 
     log("== A3: binary harm classifier (F >= 0.5)")
-    m, vl = train_head(Hx[rtr], ytr, None, Hx[rva], yva, None, "binary", None, hp, log)
+    m, vl = train_head(Hx[rtr], ytr, None, Hx[rva], yva, None, "binary", None, hp, log, wtr, wva)
     torch.save(m.state_dict(), md / "A3.pt")
     p = predict(m, Hx[ru], "binary").ravel()
     save("A3", T=1 - p, I=np.zeros(len(p)), F=p)

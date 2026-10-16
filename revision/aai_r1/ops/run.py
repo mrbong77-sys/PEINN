@@ -48,10 +48,23 @@ def gate_review() -> int:
     return 3
 
 
+def supp_check() -> int:
+    for k in ("supplement", "audit", "features", "split", "train", "thresholds", "routes"):
+        rc = step(k, True)
+        if rc:
+            print(f"pre-test failed at {k} (check cache)", flush=True)
+            return rc
+    return 0
+
+
 def steps(check: bool) -> list:
     c = check
     run = lambda k: (lambda: step(k, c))                            # noqa: E731
-    s = [("record", "routing texts of the benches with a mock LLM", run("record")),
+    s = [("record", "routing texts of the benches with a mock LLM", run("record"))]
+    if not check:                     # DESIGN.md 12: the new corpus chain end to end on the check cache first
+        s.append(("supp-check", "supplement, audit, features, split, train, thresholds, routes on the check cache "
+                                "(pre-test)", supp_check))
+    s += [("supplement", "public over-refusal and adversarial training sets (DESIGN.md 12)", run("supplement")),
          ("audit", "isolation audit of the v4 corpus (guard + recorded texts)", run("audit")),
          ("unload-1", "free the GPU (any Ollama model)", lambda: step("unload", c, *OTHER_OLLAMA)),
          ("features", "frozen v2.1 features of the corpus and the routing texts", run("features")),

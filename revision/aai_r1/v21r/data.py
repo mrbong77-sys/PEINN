@@ -24,6 +24,7 @@ SPLIT_SEED = 42
 # both (2026-10-16 09:06 KST decision card: evaluation-bench isolation also covers sources designed from a bench).
 XSTEST_TYPE_SOURCES = ("trick_safe", "benign_harm_discuss")
 EXCLUDE_SOURCES: tuple = XSTEST_TYPE_SOURCES
+USE_SUPPLEMENT = True              # DESIGN.md 12: public over-refusal and adversarial training sets (v21r/supplement.py)
 
 
 def wdir(check: bool) -> Path:
@@ -139,6 +140,8 @@ def audit(check: bool = False, log=print) -> int:
             pd.read_csv(f).sample(n=200, random_state=0).to_csv(t, index=False, encoding="utf-8")
             sm.append(t)
         files = sm
+    if USE_SUPPLEMENT:
+        files.append(supplement_file(check))
     rc = C.child([C.PY, DRIVER, "audit", "--out", d, "--record", d / "record.jsonl", "--corpus", *files], C.peaos())
     meta = C.jload(d / "audit_meta.json") if (d / "audit_meta.json").exists() else {}
     meta["corpus_dir_listing"] = cf["listing"]
@@ -148,6 +151,10 @@ def audit(check: bool = False, log=print) -> int:
 
 
 # ---- F: features -------------------------------------------------------------------------------------
+
+def supplement_file(check: bool) -> Path:
+    return wdir(check) / "supplement.csv"
+
 
 def corpus_frame(check: bool) -> pd.DataFrame:
     cf = corpus_files()
@@ -159,6 +166,13 @@ def corpus_frame(check: bool) -> pd.DataFrame:
         p = d / f"check_{f.name}" if check else f
         x = pd.read_csv(p)
         x["file_role"] = role
+        parts.append(x)
+    sp = supplement_file(check)
+    if USE_SUPPLEMENT:
+        if not sp.exists():
+            raise SystemExit(f"supplement missing: {sp} (step supplement, DESIGN.md 12)")
+        x = pd.read_csv(sp)
+        x["file_role"] = "supp"
         parts.append(x)
     df = pd.concat(parts, ignore_index=True)
     df["text"] = df["text"].astype(str)
@@ -215,11 +229,14 @@ def _cos_max(A: np.ndarray, B: np.ndarray, chunk: int = 4096) -> np.ndarray:
 
 def assign_split(df: pd.DataFrame, seed: int = SPLIT_SEED) -> pd.Series:
     """train file -> train; held-out file halved by (source, polar) into val and test. Without a held-out file the
-    train file is split 80/10/10 by (source, polar)."""
+    train file is split 80/10/10 by (source, polar). Supplement rows (file_role 'supp', DESIGN.md 12) are split
+    80/10/10 by (source, polar) after the v4 rows, so the v4 rows keep their split."""
     rng = random.Random(seed)
     split = pd.Series("train", index=df.index, dtype=object)
-    has_held = (df.file_role == "heldout").any()
-    pool = df[df.file_role == "heldout"] if has_held else df
+    supp = df.file_role == "supp"
+    v4 = df[~supp]
+    has_held = (v4.file_role == "heldout").any()
+    pool = v4[v4.file_role == "heldout"] if has_held else v4
     for _, g in pool.groupby(["source", "polar"], sort=True):
         ix = list(g.index)
         rng.shuffle(ix)
@@ -230,6 +247,12 @@ def assign_split(df: pd.DataFrame, seed: int = SPLIT_SEED) -> pd.Series:
             n = len(ix)
             a, b = int(round(n * 0.8)), int(round(n * 0.9))
             split[ix[a:b]], split[ix[b:]] = "val", "test"
+    for _, g in df[supp].groupby(["source", "polar"], sort=True):
+        ix = list(g.index)
+        rng.shuffle(ix)
+        n = len(ix)
+        a, b = int(round(n * 0.8)), int(round(n * 0.9))
+        split[ix[a:b]], split[ix[b:]] = "val", "test"
     return split
 
 

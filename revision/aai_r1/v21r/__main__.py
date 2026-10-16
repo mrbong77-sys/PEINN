@@ -2,7 +2,7 @@
 
     python -m v21r STEP [--check]
 
-Steps in order: record, audit, features, split, train, thresholds, routes, nemo, matrix, nemo-doc, gate-diag, a8, cost, analyze, release; with --check
+Steps in order: record, supplement, audit, features, split, train, thresholds, routes, nemo, matrix, nemo-doc, gate-diag, a8, cost, analyze, release; with --check
 also push-check (copy cache/check/results to results/check/) and estimate (calls and hours for the full matrix, scaled from the check run). --check runs every step small (qwen
 only, GGB and XSTest once) into cache/check/. Results are committed and pushed only when V21R_PUSH=1.
 """
@@ -10,10 +10,10 @@ from __future__ import annotations
 
 import sys
 
-from . import a8, analyze, data, gate_diag, matrix, models, nemo_doc, release, theta
+from . import a8, analyze, data, gate_diag, matrix, models, nemo_doc, release, supplement, theta
 
 STEPS = {
-    "record": data.record, "audit": data.audit, "features": data.features, "split": data.split,
+    "record": data.record, "supplement": supplement.supplement, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
     "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "gate-diag": gate_diag.gate_diag, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
 }

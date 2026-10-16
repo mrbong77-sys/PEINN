@@ -1,14 +1,19 @@
 {
- "id": "20261016T000838Z-rerun",
+ "id": "20261016T003308Z-rerun",
  "action": "rerun",
  "steps": [
+  "unload-1",
+  "audit",
+  "features",
   "split",
   "train",
   "thresholds",
   "routes",
   "gate-diag-check",
-  "gate-diag"
+  "gate-diag",
+  "preview-check",
+  "preview"
  ],
- "note": "gate fix (DESIGN.md 11, Eugene 2026-10-16 09:06 KST 'drop and retrain'): head trained on every axis like the shipped head, trick_safe and benign_harm_discuss out of the corpus; redo split, train, thresholds, routes and the diagnosis, then hold again at gate-review. No matrix.",
- "issued_utc": "2026-10-16 00:08:38"
+ "note": "DESIGN.md 12 (Eugene 2026-10-16 09:26/09:28 KST): public over-refusal + adversarial training sets and source-balanced row weights; supp-check pre-test on the check cache first, then the full chain to preview, then hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 00:33:08"
 }

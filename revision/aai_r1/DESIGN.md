@@ -133,3 +133,15 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 다시 돌리는 단계: split → train → thresholds → routes → gate-diag-check → gate-diag. 그다음 gate-review에서 다시 멈추고, 교수님 확인 뒤에만 행렬을 재개합니다. 이미 생성한 qwen, gemma4 답변은 다시 채점만 합니다.
 - **재진단 결과 (09:13 KST):** A0 F의 XSTest AUROC 0.73 → 0.82(투고본 0.84), 안전 문장 F 중앙값 0.86 → 0.11. 교정기 val AUROC 0.970. 주 운영점 val: 유해 Hard-block 96.0%, 안전 9.9%. XSTest 안전 문장 차단 55/108은 대부분 극단 에너지(51) 조건입니다. 같은 조건에서 투고본 헤드·교정기(SHIPPED, XSTest 학습)도 XSTest 191문장 중 119개를 거절 경로로 보냅니다.
 - **미리보기 `preview` (CPU):** 행렬이 끝난 기반 모델(qwen, gemma4)의 답을 새 게이트로 다시 채점해 벤치 지표를 냅니다(`results/analysis_preview/`). 생성 답변은 강제 계층별이라 게이트와 무관하므로 그대로 씁니다. 순서: gate-diag → preview-check → preview → gate-review.
+
+## 12. 격리된 다양한 학습 자료와 헤드 학습 가중 (2026-10-16, 교수님 지시 09:26·09:28 KST)
+
+- **배경:** 수정한 게이트(11절)는 val에서 목표를 맞추지만, 재채점한 XSTest 과잉 거절이 31–54%입니다(qwen, gemma4). XSTest형 합성 출처를 뺀 뒤 코퍼스에 유해해 보이는 무해 문장이 거의 없기 때문입니다(추론). CPEG의 "평가 벤치 문항 없음" 재학습(과잉 거절 평균 9.9%)은 공개 과잉 거절·적대 학습 자료를 썼습니다.
+- **자료 (`v21r/supplement.py`, step `supplement`):** 여섯 평가 벤치가 아니고 XSTest를 보고 만들지 않은 공개 자료만 씁니다. 라벨은 각 자료의 것입니다(무해: T 1, I 0, F 0 / 유해: F 1). seed 42 표집, 분할은 출처·라벨별 80/10/10(v4 행의 분할은 그대로).
+  - 무해: OR-Bench-80k 3,000, FalseReject train 2,000, PHTest harmless 500, CoCoNot contrast 최대 1,000, WildJailbreak train 적대 무해 1,000, WildGuardMix train 적대 무해 500.
+  - 유해: OR-Bench-toxic 1,500, WildJailbreak train 적대 유해 1,000, WildGuardMix train 적대 유해 500.
+  - 격리 검사(3절: 정확 일치, 5-gram 포함률, MiniLM 코사인 ≥ 0.92)가 라우팅 문장과 겹치는 행을 그대로 뺍니다.
+- **헤드 학습 가중 (`models.ROW_WEIGHT`):** 행마다 sqrt(N / (K·n_출처)) 가중(train 평균 1). 작은 출처가 큰 출처에 묻히지 않게 하고, 한 출처가 경계를 정하지 않게 합니다. A0–A7 헤드, 교정기(클래스 가중과 곱), A7 미세 조정에 같게 씁니다.
+- **사전 테스트:** 본 실행 전에 `supp-check`가 supplement → audit → features → split → train → thresholds → routes를 check 캐시에서 끝까지 돌립니다.
+- **사전 기준 (결과 전에 정함):** 주 운영점에서 qwen, gemma4 재채점 XSTest ORR ≤ 15%, UCR ≤ 5%. val 목표(유해 Hard-block ≥ 85%, 안전 < 10%)는 그대로입니다. 판단은 val과 보충 자료 test 분할로 하고, XSTest 결과를 보고 자료나 가중을 고치지 않습니다. 기준을 못 맞추면 그대로 보고합니다.
+- **GPU:** 특징 추출(수 분)만 씁니다. 응답 행렬은 교수님 확인 전에는 재개하지 않습니다(gate-review).
