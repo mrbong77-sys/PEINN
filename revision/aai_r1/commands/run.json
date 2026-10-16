@@ -1,5 +1,5 @@
 {
- "id": "20261016T041600Z-rerun",
+ "id": "20261016T042942Z-rerun",
  "action": "rerun",
  "steps": [
   "thresholds",
@@ -9,6 +9,6 @@
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 21: finer curve points (0.015, 0.025, 0.035) fitted on val; CPU rescore; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 04:16:00"
+ "note": "DESIGN.md 22: energy threshold grid with a uniform 0.25 step added; val fitting only; CPU rescore; hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 04:29:42"
 }

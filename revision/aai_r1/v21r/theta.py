@@ -52,8 +52,12 @@ def signals_for(v: str, check: bool) -> dict:
 
 # ---- fitting --------------------------------------------------------------------------------------------
 
+E_STEP = 0.25                 # DESIGN.md 22: a fine-tuned calibrator piles its energies near 0 and 10, so the quantile
+                              # grid alone leaves the band between them almost empty; a uniform 0.25 grid fills it
+
+
 def _e_grid(E: np.ndarray) -> np.ndarray:
-    g = np.unique(np.round(np.quantile(E, E_QUANTILES), 3))
+    g = np.unique(np.r_[np.round(np.quantile(E, E_QUANTILES), 3), np.round(np.arange(E_STEP, 10.0, E_STEP), 3)])
     return np.r_[g, 10.01]                                    # 10.01 = condition off
 
 
