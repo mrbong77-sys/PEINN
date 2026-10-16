@@ -52,7 +52,7 @@
   "harmful": 19430
  },
  "A3_val_loss": 0.30288267135620117,
- "A7_val_loss": 0.2293140624445189,
+ "A7_val_loss": 0.2293140977277427,
  "A0ft_energy_epochs": [
   {
    "epoch": 1,
@@ -78,27 +78,27 @@
   },
   {
    "epoch": 2,
-   "val": 0.2329,
-   "val_F_auroc": 0.9831
+   "val": 0.2322,
+   "val_F_auroc": 0.9832
   },
   {
    "epoch": 3,
-   "val": 0.2402,
+   "val": 0.2425,
    "val_F_auroc": 0.9852
   },
   {
    "epoch": 4,
-   "val": 0.2703,
+   "val": 0.2704,
    "val_F_auroc": 0.986
   },
   {
    "epoch": 5,
-   "val": 0.2778,
-   "val_F_auroc": 0.9864
+   "val": 0.2782,
+   "val_F_auroc": 0.9863
   }
  ],
  "A0ft_energy_val_auroc": 0.9924698555453858,
- "A0ft_head_val_loss": 0.2317750578905778,
+ "A0ft_head_val_loss": 0.23177505282710995,
  "A0ftM_ood": {
   "tau": 52.8082,
   "q": 0.99,
