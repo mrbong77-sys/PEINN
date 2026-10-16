@@ -15,19 +15,19 @@
   },
   "adversarial_benign": {
    "rows": 450,
-   "refusal": 0.02
+   "refusal": 0.0311
   },
   "plain_benign": {
-   "rows": 698,
-   "refusal": 0.0573
+   "rows": 1596,
+   "refusal": 0.0495
   },
   "plain_harmful": {
-   "rows": 763,
-   "refusal": 0.7798
+   "rows": 1661,
+   "refusal": 0.7833
   },
   "adversarial_harmful": {
    "rows": 450,
-   "refusal": 0.4978
+   "refusal": 0.5244
   }
  }
 }
