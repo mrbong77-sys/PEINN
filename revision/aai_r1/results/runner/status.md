@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 05:13:19 (UTC 2026-10-16 20:13:19), 시도 36, 비컨 #220 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 8b0ff8e station: 임무 실행 중
-- 현재 단계: matrix (260.9분째)
+- 시각 2026-10-17 05:23:24 (UTC 2026-10-16 20:23:24), 시도 36, 비컨 #221 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a02f17f station: 임무 실행 중
+- 현재 단계: matrix (271.0분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8661 MiB, 32607 MiB, 71 %, 64
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8648 MiB, 32607 MiB, 91 %, 65
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261016T151800Z-rerun rerun (자식 종료 후 재실행, 2026-10-16 15:15:14 UTC)
@@ -14,44 +14,44 @@
 ## 마지막 로그
 
 ```
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 265.08it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 332.09it/s]
-2026-10-17 05:13:08,475 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:08,476 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 281.95it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 332.33it/s]
-2026-10-17 05:13:10,249 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:10,250 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 298.42it/s]
-2026-10-17 05:13:10,259 [bench.pea_eval.harmbench_eval] INFO:   [H04] 10/50 (20% · 0.64 req/s · ETA 63s)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 309.73it/s]
-2026-10-17 05:13:12,148 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:12,148 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 290.83it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 299.00it/s]
-2026-10-17 05:13:12,802 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:12,803 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 317.51it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.89it/s]
-2026-10-17 05:13:14,030 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:14,031 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 219.93it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 317.75it/s]
-2026-10-17 05:13:14,737 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:14,738 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 178.68it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 89.97it/s]
-2026-10-17 05:13:16,516 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:16,517 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 179.30it/s]
-2026-10-17 05:13:16,531 [bench.pea_eval.harmbench_eval] INFO:   [H04] 15/50 (30% · 0.68 req/s · ETA 51s)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 313.78it/s]
-2026-10-17 05:13:18,424 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:18,424 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 158.28it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 344.59it/s]
-2026-10-17 05:13:19,327 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-10-17 05:13:19,327 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 326.68it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 335.38it/s]
+2026-10-17 05:23:10,441 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:10,441 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 283.84it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 350.20it/s]
+2026-10-17 05:23:12,292 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:12,292 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 316.77it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 161.87it/s]
+2026-10-17 05:23:14,147 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:14,148 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 179.74it/s]
+2026-10-17 05:23:14,162 [bench.pea_eval.harmbench_eval] INFO:   [H04] 20/50 (40% · 0.67 req/s · ETA 45s)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 210.78it/s]
+2026-10-17 05:23:15,997 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:15,998 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 236.21it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 369.97it/s]
+2026-10-17 05:23:17,867 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:17,868 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 190.06it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 261.25it/s]
+2026-10-17 05:23:19,725 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:19,726 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 193.79it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 358.12it/s]
+2026-10-17 05:23:20,214 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:20,215 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 323.19it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 351.90it/s]
+2026-10-17 05:23:21,583 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:21,584 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 300.34it/s]
+2026-10-17 05:23:21,592 [bench.pea_eval.harmbench_eval] INFO:   [H04] 25/50 (50% · 0.67 req/s · ETA 37s)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 342.48it/s]
+2026-10-17 05:23:22,834 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:22,835 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 291.11it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 332.91it/s]
+2026-10-17 05:23:24,705 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-17 05:23:24,706 [bench.eval.harmbench] INFO: [H04] 🛡️ Reflection Complete (2-pass-reasoning · tier=low)
 ```
