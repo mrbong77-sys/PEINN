@@ -4,6 +4,11 @@
   "gemma4"
  ],
  "main_cap": 0.1,
+ "main": {
+  "variant": "A0ftM",
+  "cap": "0.03",
+  "name": "A0ftM@0.03"
+ },
  "benchmarks": {
   "bases": {
    "qwen": {
