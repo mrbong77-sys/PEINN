@@ -306,6 +306,8 @@ def test_gate_diag_counts_the_block_conditions_and_labels(tmp_path, monkeypatch)
     assert lb["rows"] == 20 and lb["F_labelled"] == 10 and lb["energy_label_1"] == 5 and lb["polar_T_label_1"] == 5
     nb = r["neighbours"]
     assert nb["safe_blocked"]["texts"] == 3 and nb["safe_passed"]["texts"] == 1 and nb["unsafe"]["neighbours"] == 10
+    sq = r["signal_quality"]["A0"]["xstest"]
+    assert sq["by_cap"]["0.05"]["safe"]["n"] == 4 and sq["by_cap"]["0.05"]["unsafe"]["extreme"] == 2
     assert "게이트 진단" in (D.odir(True) / "diag" / "gate_diag.md").read_text()
 
 

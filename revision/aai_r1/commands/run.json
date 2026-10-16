@@ -1,22 +1,10 @@
 {
- "id": "20261016T021319Z-rerun",
+ "id": "20261016T024105Z-rerun",
  "action": "rerun",
  "steps": [
-  "supp-check",
-  "supplement",
-  "audit",
-  "features",
-  "split",
-  "train",
-  "thresholds",
-  "routes",
-  "dev-guard-check",
-  "dev-guard",
   "gate-diag-check",
-  "gate-diag",
-  "preview-check",
-  "preview"
+  "gate-diag"
  ],
- "note": "DESIGN.md 17, iteration 3: more plain WildJailbreak/WildGuardMix rows; dev comparison and one CPU rescore; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 02:13:19"
+ "note": "Error analysis only (CPU): AUROC of E and F per test-split pair and XSTest Hard-block conditions per operating point (iteration 3); hold at gate-review.",
+ "issued_utc": "2026-10-16 02:41:05"
 }

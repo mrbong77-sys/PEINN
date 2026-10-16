@@ -83,6 +83,47 @@ def xstest_labels(check: bool) -> pd.DataFrame:
     return pd.DataFrame(columns=["sha", "expected_label"])
 
 
+PAIRS = (("plain", "plain_benign", "plain_harmful"), ("adversarial", "adversarial_benign", "adversarial_harmful"),
+         ("v4", "v4_safe", "v4_harmful"), ("overrefusal_vs_plain", "overrefusal_benign", "plain_harmful"))
+
+
+def signal_quality(check: bool, sp: pd.DataFrame, tha: dict, lab: pd.DataFrame, caps=("0.02", "0.03", "0.05")) -> dict:
+    """Which signal limits the gate: AUROC of E and F on test-split pairs, and on XSTest (error analysis only) the
+    Hard-block conditions and tiers per label at a few operating points."""
+    from . import theta as TH
+    gr = dev_groups(sp)
+    out = {}
+    for v in DEV_VARIANTS:
+        if v not in tha:
+            continue
+        sig = M.load_signals(check, v)
+        r = {"test": {}}
+        for name, b, h in PAIRS:
+            if len(gr[b]) and len(gr[h]):
+                xb, xh = on(sig, "test", gr[b].sha), on(sig, "test", gr[h].sha)
+                y = np.r_[np.zeros(len(gr[b])), np.ones(len(gr[h]))]
+                r["test"][name] = {"E": auroc(y, np.r_[xb["E"], xh["E"]]), "F": auroc(y, np.r_[xb["F"], xh["F"]])}
+        have = set(sig["sha"][sig["part"] == "bench"])
+        lx = lab[lab.sha.isin(have)].reset_index(drop=True)
+        if len(lx):
+            x = on(sig, "bench", lx.sha)
+            y = (lx.expected_label == "unsafe").to_numpy()
+            r["xstest"] = {"auroc": {"E": auroc(y, x["E"]), "F": auroc(y, x["F"])}, "by_cap": {}}
+            T, I, F, E = TH.inputs(v, x)
+            for c in caps:
+                if c not in tha[v]:
+                    continue
+                th = tha[v][c]["th"]
+                p = hb_parts(E, F, th)
+                rt = C.gate(T, I, F, E, th, **TH.options(v))
+                r["xstest"]["by_cap"][c] = {
+                    lbl: {"extreme": int(p["extreme"][m].sum()), "harm_and_F": int(p["harm_and_F"][m].sum()),
+                          "tiers": {str(k): int(n) for k, n in pd.Series(rt[m]).value_counts().items()}, "n": int(m.sum())}
+                    for lbl, m in (("safe", ~y), ("unsafe", y))}
+        out[v] = r
+    return out
+
+
 def harmbench_routes(check: bool, rt: pd.DataFrame, names) -> dict:
     """Error analysis only (never fitting): routes of the HarmBench routing texts by category, semantic category and
     prompt length, for the named variants."""
@@ -263,6 +304,7 @@ def run(check: bool) -> dict:
                                                                            "A0ft@0.1") if n in rt])
     except FileNotFoundError:
         pass
+    res["signal_quality"] = signal_quality(check, sp, C.jload(D.odir(check) / "thresholds.json")["variants"], lab)
     if len(lab):
         a0, shp = on(a0sig, "bench", lab.sha), on(shsig, "bench", lab.sha)
         res["xstest"] = symptom(lab, th, a0, shp)
@@ -316,6 +358,16 @@ def render(r: dict) -> str:
             for c, d in (r.get("dev_curve") or {}).items():
                 for v, g in d.items():
                     L.append(f"| {c} | {v} | " + " | ".join(f"{g[k]['refusal']:.3f}" if k in g else "" for k in gg) + " |")
+    sq = r.get("signal_quality") or {}
+    if sq:
+        L += ["", "## 7. 신호별 판별력 (test 분할 AUROC; XSTest는 오류 분석 전용)", ""]
+        for v, x in sq.items():
+            L.append(f"- {v} test: " + "; ".join(f"{k} E {a['E']} F {a['F']}" for k, a in x["test"].items()))
+            if "xstest" in x:
+                L.append(f"- {v} XSTest AUROC: {json.dumps(x['xstest']['auroc'])}")
+                for c, d in x["xstest"]["by_cap"].items():
+                    L.append(f"  - {c}: " + "; ".join(f"{lbl} n {e['n']} 극단 E {e['extreme']} harm E∧F {e['harm_and_F']} 계층 "
+                                                     f"{json.dumps(e['tiers'], ensure_ascii=False)}" for lbl, e in d.items()))
     hr = r.get("harmbench_routes") or {}
     if hr:
         L += ["", f"## 6. HarmBench 경로 (오류 분석 전용, 적합에 쓰지 않음; 문장 {hr['texts']}, {hr['base']} 기록)", ""]
