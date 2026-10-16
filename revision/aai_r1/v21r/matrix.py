@@ -195,7 +195,7 @@ def nemo_reset(check: bool = False, log=print) -> int:
 
 def nemo_fair_review(check: bool = True, log=print) -> int:
     """The NeMo arm on the pre-test after nemo_reset: every rail call carries a temperature (forwarded), the input and
-    output self-checks run at NeMo's near-zero temperature, some dialog calls carry stop words, and NeMo answered every
+    output self-checks run at NeMo's near-zero temperature, and NeMo answered every
     check bench with few empty or internal-error rows. Prints XSTest over-refusal of NeMo and Vanilla."""
     from . import nemo_doc as N
     bad = []
@@ -214,8 +214,8 @@ def nemo_fair_review(check: bool = True, log=print) -> int:
             bad.append(f"{b}: calls without temperature")
         if any((r.get("temperature") or 1) > 0.05 for r in sc):
             bad.append(f"{b}: self-check above NeMo's lowest temperature")
-        if dl and not any(r.get("stop") for r in dl):
-            bad.append(f"{b}: no dialog call with stop words")
+        # stop words: nemoguardrails 0.21 sets none for the Colang 1.0 intent, next-step and bot-message calls of this
+        # config (generation.py binds only the temperature there), so they are reported, not required
         df = collect(check, b)
         o = df[df.tag == "others"] if len(df) else df
         n = o[o.arm_id == C.ARMS[b]["NeMo"]] if len(o) else o

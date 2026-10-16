@@ -361,6 +361,8 @@ def test_nemo_fair_review_needs_forwarded_parameters(monkeypatch):
             {"task": "dialog", "temperature": 0.3, "max_tokens": 768, "stop": None}]
     monkeypatch.setattr(N, "calls", lambda check, base: ("gen", good))
     assert MX.nemo_fair_review(log=lambda *_: None) == 0
+    monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [dict(r, stop=None) for r in good]))
+    assert MX.nemo_fair_review(log=lambda *_: None) == 0
     monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [dict(good[0], temperature=None)] + good[1:]))
     assert MX.nemo_fair_review(log=lambda *_: None) == 1
     monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [dict(good[0], temperature=0.3)] + good[1:]))
