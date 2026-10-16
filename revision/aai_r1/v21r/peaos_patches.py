@@ -304,13 +304,16 @@ def phase_cache(L, phase: str, out: Path, judge: str) -> None:
         return resp
     L.EvalLLMClient.call_local = call
     if phase == "judge":
+        # Only the judge is called live here, so it stays loaded: PEAOS's unload after each judged arm made every next
+        # warm-up reload qwen3:32b (about 6 s each, Eugene 2026-10-17 08:48 KST). Unloads are skipped for every model;
+        # the judge's warm-up still runs (it unloads any other model first, guard_warmup) and is instant when loaded.
         for name in ("warmup_model", "unload_model"):
             if hasattr(L.EvalLLMClient, name):
                 inner = getattr(L.EvalLLMClient, name)
 
-                def make(inner):
+                def make(inner, name=name):
                     async def w(self, model, *a, **k):
-                        if jk and str(model).split(":latest")[0] == jk:
+                        if name == "warmup_model" and jk and str(model).split(":latest")[0] == jk:
                             return await inner(self, model, *a, **k)
                         return None
                     return w

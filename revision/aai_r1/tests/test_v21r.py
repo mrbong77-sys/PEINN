@@ -859,3 +859,28 @@ def test_wcheck_accepts_an_exact_f16_conversion_and_rejects_altered_or_missing_t
     assert not W.compare(st, gg, log=lambda *_: None)["ok"]
     st, gg = _tiny_r2d2(tmp_path / "missing", drop="output.weight")
     assert W.compare(st, gg, log=lambda *_: None)["missing"] == ["lm_head.weight"]
+
+
+def test_phase_cache_judge_keeps_the_judge_loaded(tmp_path):
+    import asyncio
+    import types
+    from v21r import peaos_patches as P
+    seen = []
+
+    class Client:
+        async def call_local(self, backend="ollama", system_prompt="", user_prompt="", model_override="",
+                             max_tokens=None, stop=None, options=None):
+            return types.SimpleNamespace(text="x", error="")
+
+        async def warmup_model(self, model):
+            seen.append(("warm", model))
+
+        async def unload_model(self, model):
+            seen.append(("unload", model))
+    L = types.SimpleNamespace(EvalLLMClient=Client, LLMResponse=lambda **k: types.SimpleNamespace(**k))
+    P.phase_cache(L, "judge", tmp_path, "qwen3:32b")
+    c = Client()
+    for m in ("qwen3:32b", "zephyr:7b"):
+        asyncio.run(c.warmup_model(m))
+        asyncio.run(c.unload_model(m))
+    assert seen == [("warm", "qwen3:32b")]
