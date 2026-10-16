@@ -1,9 +1,7 @@
 {
- "id": "20261016T034603Z-rerun",
+ "id": "20261016T041600Z-rerun",
  "action": "rerun",
  "steps": [
-  "supp-check",
-  "train",
   "thresholds",
   "routes",
   "gate-diag-check",
@@ -11,6 +9,6 @@
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 20, iteration 6: A0ftM (Mahalanobis OOD raises I) on the iteration-5 corpus; dev comparison and one CPU rescore; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 03:46:03"
+ "note": "DESIGN.md 21: finer curve points (0.015, 0.025, 0.035) fitted on val; CPU rescore; hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 04:16:00"
 }
