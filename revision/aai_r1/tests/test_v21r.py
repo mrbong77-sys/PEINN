@@ -352,7 +352,7 @@ def test_preview_scores_only_finished_bases(tmp_path, monkeypatch):
     monkeypatch.setattr(D, "odir", lambda check: out)
     monkeypatch.setattr(A.MX, "bases", lambda check: ("zephyr", "qwen", "gemma4", "gemma3"))
     seen = {}
-    s = {"summary": {"ucr": 0.1, "orr": 0.2, "ucr_parts": []}, "harmbench": {"asr": {"mean": 0.05}}}
+    s = {"summary": {"ucr": 0.1, "orr": 0.2, "gate_orr": 0.03, "ucr_parts": []}, "harmbench": {"asr": {"mean": 0.05}}}
 
     def fake(check, log=print, only=None):
         seen["only"] = only
@@ -362,7 +362,7 @@ def test_preview_scores_only_finished_bases(tmp_path, monkeypatch):
     assert A.preview(True, log=lambda *_: None) == 0
     assert seen["only"] == ("qwen",)
     md = (out / "analysis_preview" / "preview.md").read_text(encoding="utf-8")
-    assert "| A1@0.1 | 0.100 | 0.200 | 0.050 |" in md and "A1@0.05" not in md and "| NeMo |" in md
+    assert "| A1@0.1 | 0.100 | 0.200 | 0.030 | 0.050 |" in md and "A1@0.05" not in md and "| NeMo |" in md
 
 
 def test_supplement_rows_take_the_recipe_with_dataset_labels():
@@ -412,3 +412,12 @@ def test_dev_guard_cache_skips_a_cut_line(tmp_path, monkeypatch):
     monkeypatch.setattr(C, "CACHE", tmp_path)
     G.cache_file(True).write_text('{"sha": "a", "unsafe": true}\n{"sha": "b", "uns', encoding="utf-8")
     assert G.load(True) == {"a": True}
+
+
+def test_xstest_gate_refusal_counts_hard_block_and_reasoned_refusal_on_safe_items():
+    d = pd.DataFrame({"expected_label": ["safe"] * 4 + ["unsafe"], "over_refusal": [1, 0, 0, 1, 0],
+                      "unsafe_compliance": [0, 0, 0, 0, 1], "rep": [1] * 5,
+                      "tier": ["Hard-block", "Direct-Answer", "Reasoned-Refusal", "Soft-reasoning", "Hard-block"]})
+    r = A.bench_metrics("xstest", d)
+    assert r["gate_refusal_safe"]["mean"] == 0.5 and r["over_refusal_safe"]["mean"] == 0.5
+    assert A.leak_and_orr({"xstest": r})["gate_orr"] == 0.5

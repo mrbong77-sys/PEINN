@@ -1,10 +1,10 @@
 {
- "id": "20261016T020456Z-rerun",
+ "id": "20261016T021048Z-rerun",
  "action": "rerun",
  "steps": [
-  "gate-diag-check",
-  "gate-diag"
+  "preview-check",
+  "preview"
  ],
- "note": "Error analysis only (CPU): HarmBench routes of the iteration-2 variants by category and length; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 02:04:56"
+ "note": "DESIGN.md 16: one CPU rescore of iteration 2 under the new target (UCR < 5 %, gate ORR < 5 %); hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 02:10:48"
 }
