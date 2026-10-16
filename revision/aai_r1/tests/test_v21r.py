@@ -482,6 +482,10 @@ def test_zephyr_review_needs_every_arm_and_tier_without_errors(monkeypatch):
     assert R.zephyr_review() == 1
     monkeypatch.setattr(MX, "collect", lambda check, base: df[df.arm_id != C.ARMS["zephyr"]["NeMo"]].reset_index(drop=True))
     assert R.zephyr_review() == 1
+    refuse = df.copy()
+    refuse.loc[refuse.arm_id == C.ARMS["zephyr"]["R2D2"], "over_refusal"] = 1.0
+    monkeypatch.setattr(MX, "collect", lambda check, base: refuse)
+    assert R.zephyr_review() == 1
 
 
 def test_r2d2_probe_counts_refusals_per_config_and_group(tmp_path, monkeypatch):
@@ -576,7 +580,7 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
                   "response_p1": [f"submitted answer number {i} with some words" for i in range(6)]}
                  ).to_csv(pi / "xstest_per_item.csv", index=False)
     monkeypatch.setattr(C, "peinn", lambda: tmp_path / "peinn")
-    monkeypatch.setattr(C, "pull_missing", lambda *a, **k: 0)
+    monkeypatch.setattr(C, "_digests", lambda: {m: "d" for m in RP.FP_CANDIDATES if m != RP.Q8})
     monkeypatch.setattr(C, "unload", lambda *a, **k: 0)
     monkeypatch.setattr(C, "publish", lambda *a, **k: True)
 
@@ -588,4 +592,30 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
     assert RP.r2d2_fingerprint(log=lambda *_: None) == 0
     r = json.loads((C.OUT / "diag" / "r2d2_fingerprint.json").read_text())
     assert r[RP.FP_CANDIDATES[0]]["mean_ratio"] == 1.0 and r[RP.FP_CANDIDATES[0]]["same_start"] == 6
-    assert r["zephyr:7b"]["same_start"] == 0
+    assert r["zephyr:7b"]["same_start"] == 0 and r[RP.Q8] == {"error": "not in ollama list"}
+
+
+def test_r2d2_cpeg_serves_the_cpeg_build_and_drops_the_zephyr_pretest(tmp_path, monkeypatch):
+    from v21r import r2d2_probe as RP
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    tags = {C.R2D2: "q4", C.R2D2_CPEG: "q8"}
+    calls = []
+
+    def run(cmd, **k):
+        calls.append(cmd[:2])
+        if cmd[1] == "rm":
+            tags.pop(cmd[2])
+        if cmd[1] == "cp":
+            tags[cmd[3]] = tags[cmd[2]]
+        return type("R", (), {"returncode": 0, "stdout": "FROM x\nTEMPLATE t", "stderr": ""})()
+    monkeypatch.setattr(C.subprocess, "run", run)
+    monkeypatch.setattr(C, "_ollama", lambda path, body=None, timeout=60: json.dumps(
+        {"models": [{"name": n, "digest": d} for n, d in tags.items()]}))
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    pre = D.wdir(True) / "matrix" / "zephyr" / "peaos_out"
+    pre.mkdir(parents=True)
+    assert RP.r2d2_cpeg(log=lambda *_: None) == 0
+    assert tags[C.R2D2] == "q8" and ["ollama", "cp"] in calls and not pre.exists()
+    calls.clear()
+    assert C.ensure_r2d2(log=lambda *_: None) is None and not calls
