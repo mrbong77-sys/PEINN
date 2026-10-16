@@ -51,45 +51,25 @@
  },
  "calls": {
   "da_gen": {},
-  "da_judge": {
-   "gen_reused": 2515,
-   "judge_live": 172
-  },
-  "de_gen": {
-   "gen_reused": 1732,
-   "gen_live": 1468
-  },
-  "de_judge": {
-   "gen_reused": 4830,
-   "judge_live": 155
-  },
+  "da_judge": {},
+  "de_gen": {},
+  "de_judge": {},
   "hb_gen": {},
-  "hb_judge": {
-   "gen_reused": 2515
-  },
+  "hb_judge": {},
   "others_gen": {
-   "gen_live": 14917,
-   "gen_reused": 2015
-  },
-  "others_judge": {
    "gen_reused": 8478,
-   "judge_reused": 86,
-   "judge_live": 230,
    "gen_live": 8462
   },
+  "others_judge": {
+   "gen_reused": 16920,
+   "judge_reused": 247,
+   "gen_live": 20,
+   "judge_live": 71
+  },
   "rr_gen": {},
-  "rr_judge": {
-   "gen_reused": 4830,
-   "judge_live": 154
-  },
-  "sr_gen": {
-   "gen_reused": 4830
-  },
-  "sr_judge": {
-   "gen_reused": 4830,
-   "judge_reused": 81,
-   "judge_live": 74
-  }
+  "rr_judge": {},
+  "sr_gen": {},
+  "sr_judge": {}
  },
  "internal_error_rows": {},
  "error_rows": {}
