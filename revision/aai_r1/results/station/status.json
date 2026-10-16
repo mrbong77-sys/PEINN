@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 81,
+ "seq": 82,
  "mission": "ops.run",
- "time_utc": "2026-10-16 03:37:37",
- "time_local": "2026-10-16 12:37:37",
- "code": "b1991db v21r T: variants A0-A7 trained on the isolated corpus (seed 42)",
- "gpu": "1564 MiB, 32607 MiB, 0 %, 42",
+ "time_utc": "2026-10-16 03:47:39",
+ "time_local": "2026-10-16 12:47:39",
+ "code": "9ff25ac v2.1 심사 대응 runner: 실행 중 (attempt 20)",
+ "gpu": "1560 MiB, 32607 MiB, 0 %, 43",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
