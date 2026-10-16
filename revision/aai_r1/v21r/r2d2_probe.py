@@ -136,8 +136,8 @@ def r2d2_diag(check: bool = False, log=print) -> int:
 
 
 # ---- which build was the submitted R2D2? (Eugene 2026-10-16 17:48 KST: find the original model) ------------------
-FP_CANDIDATES = ("zephyr-r2d2:latest",                                   # served now (r2d2-cpeg): CPEG's weights, HarmBench's prompt
-                 "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0",          # the same weights, the GGUF's template (empty system block)
+FP_CANDIDATES = ("zephyr-r2d2:latest",                                   # served now (r2d2-cpeg): canonical, unquantized
+                 "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0",          # CPEG's Q8_0 weights, the GGUF's template
                  Q4,                                                     # RichardErkhov Q4_0 (tested 10-16)
                  Q8,
                  "zephyr:7b")                                            # the base model (negative control)
@@ -178,8 +178,8 @@ def r2d2_fingerprint(check: bool = False, log=print) -> int:
 
 
 def r2d2_cpeg(check: bool = False, log=print) -> int:
-    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with CPEG's R2D2 weights and HarmBench's prompt
-    (common.ensure_r2d2), then drop the zephyr pre-test cache (answers and done files of every zephyr tag) so the
+    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with the canonical checkpoint (cais/zephyr_7b_r2d2,
+    unquantized, 2026-10-17 00:15 KST) and HarmBench's prompt (common.ensure_r2d2), then drop the zephyr pre-test cache (answers and done files of every zephyr tag) so the
     pre-test runs again on this model."""
     import shutil
     from . import matrix as MX
@@ -189,12 +189,11 @@ def r2d2_cpeg(check: bool = False, log=print) -> int:
         log(f"  remove the zephyr pre-test cache {d}")
         shutil.rmtree(d)
     rep = C.r2d2_served()
-    log(f"  {C.R2D2}: blob {str(rep.get('blob'))[:19]} (GGUF {str(rep.get('gguf_blob'))[:19]}), "
-        f"template {rep.get('template')!r}, ok {rep.get('ok')}")
+    log(f"  {C.R2D2}: {rep.get('source')} {rep.get('quantization')}, template {rep.get('template')!r}, ok {rep.get('ok')}")
     if not rep.get("ok"):
-        log("  R2D2 is not R2D2_GGUF's weights with HarmBench's prompt")
+        log("  R2D2 is not the unquantized canonical checkpoint with HarmBench's prompt")
         return 1
     if check or mf is None:
         return 0
-    return 0 if C.publish([mf], f"v21r R2D2: CPEG's weights ({C.R2D2_GGUF}) with HarmBench's prompt") else 1
+    return 0 if C.publish([mf], f"v21r R2D2: {C.R2D2_HF} unquantized with HarmBench's prompt") else 1
 

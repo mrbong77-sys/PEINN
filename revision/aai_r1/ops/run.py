@@ -194,7 +194,7 @@ def steps(check: bool) -> list:
                lambda: step("matrix", True, env_add={"V21R_BASES": "qwen"})),
               ("nemo-fair-review", "NeMo calls carry NeMo's parameters; NeMo answered every check bench (DESIGN.md 29)",
                lambda: step("nemo-fair-review", True, env_add={"V21R_BASES": "qwen"})),
-              ("r2d2-cpeg", "R2D2 served as CPEG served it; the zephyr pre-test cache dropped (Eugene 17:56 KST, DESIGN.md 25)",
+              ("r2d2-cpeg", "R2D2 from the canonical checkpoint, unquantized, HarmBench prompt; the zephyr pre-test cache dropped (DESIGN.md 25)",
                run("r2d2-cpeg")),
               ("r2d2-fingerprint", "how close each R2D2 build Ollama holds comes to the submitted H02 answers (12 XSTest "
                                    "safe prompts, greedy; record only)", run("r2d2-fingerprint")),

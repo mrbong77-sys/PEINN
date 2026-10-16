@@ -746,12 +746,18 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
     assert r["zephyr:7b"]["same_start"] == 0 and r[RP.Q8] == {"error": "not in ollama list"}
 
 
-def test_r2d2_cpeg_serves_cpeg_weights_with_harmbench_prompt_and_drops_the_zephyr_pretest(tmp_path, monkeypatch):
+def test_r2d2_cpeg_imports_the_canonical_checkpoint_unquantized_with_harmbench_prompt(tmp_path, monkeypatch):
+    import sys
+    import types
     from v21r import r2d2_probe as RP
     monkeypatch.setattr(C, "CACHE", tmp_path)
     monkeypatch.setattr(C, "OUT", tmp_path / "out")
-    gguf = {"modelfile": "FROM C:\\Users\\x\\blobs\\sha256-q8\nTEMPLATE x", "template": "<|system|>\n{{ .System }}</s>\n"}
-    models = {C.R2D2: {"modelfile": "FROM C:\\blobs\\sha256-q8\n", "template": "{{ .Prompt }}\n</s>"}, C.R2D2_GGUF: gguf}
+    snap = tmp_path / "hf" / "snap"
+    got = []
+    hub = types.ModuleType("huggingface_hub")
+    hub.snapshot_download = lambda repo, revision, local_dir, allow_patterns: got.append((repo, revision)) or str(snap)
+    monkeypatch.setitem(sys.modules, "huggingface_hub", hub)
+    models = {C.R2D2: {"digest": "cpeg", "details": {"quantization_level": "Q8_0"}, "template": "{{ .Prompt }}\n</s>"}}
     calls = []
 
     def run(cmd, **k):
@@ -759,26 +765,26 @@ def test_r2d2_cpeg_serves_cpeg_weights_with_harmbench_prompt_and_drops_the_zephy
         if cmd[1] == "rm":
             models.pop(cmd[2])
         if cmd[1] == "create":
-            mf = C.Path(cmd[4]).read_text(encoding="utf-8")
-            assert mf.startswith(f"FROM {C.R2D2_GGUF}\n") and 'PARAMETER stop "</s>"' in mf
-            tpl = mf.split('"""')[1]
-            models[cmd[2]] = {"modelfile": "FROM /root/.ollama/models/blobs/sha256-q8\n", "template": tpl}
+            mf = C.Path(cmd[4]).read_bytes().decode("utf-8")
+            assert mf.startswith(f"FROM {snap}\n") and 'PARAMETER stop "</s>"' in mf and "\r" not in mf
+            models[cmd[2]] = {"digest": "new", "details": {"quantization_level": "BF16"}, "template": mf.split('"""')[1]}
         return type("R", (), {"returncode": 0, "stdout": "", "stderr": ""})()
 
     def api(path, body=None, timeout=60):
         if path == "/api/tags":
-            return json.dumps({"models": [{"name": n, "digest": n} for n in models]})
+            return json.dumps({"models": [{"name": n, "digest": m["digest"]} for n, m in models.items()]})
         return json.dumps(models[body["model"]])
     monkeypatch.setattr(C.subprocess, "run", run)
     monkeypatch.setattr(C, "_ollama", api)
     monkeypatch.setattr(C, "publish", lambda *a, **k: True)
-    assert not C.r2d2_served()["ok"]                       # same weights, but CPEG's template
+    assert not C.r2d2_served()["ok"]
     pre = D.wdir(True) / "matrix" / "zephyr" / "peaos_out"
     pre.mkdir(parents=True)
     assert RP.r2d2_cpeg(log=lambda *_: None) == 0
-    assert models[C.R2D2]["template"] == "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n" and not pre.exists()
-    assert ["ollama", "create"] in calls and C.r2d2_served()["ok"]
+    assert got == [(C.R2D2_HF, C.R2D2_HF_REV)] and not pre.exists() and ["ollama", "create"] in calls
+    assert models[C.R2D2]["template"] == "<|user|>\n{{ .Prompt }}</s>\n<|assistant|>\n" and C.r2d2_served()["ok"]
+    assert str(snap) not in (tmp_path / "out" / "r2d2_Modelfile").read_text(encoding="utf-8")
     calls.clear()
     assert C.ensure_r2d2(log=lambda *_: None) is None and not calls
-    models[C.R2D2]["modelfile"] = "FROM /blobs/sha256-q4\n"           # other weights under the name: fails the check
-    assert RP.r2d2_cpeg(log=lambda *_: None) == 0 and C.r2d2_served()["ok"]
+    models[C.R2D2]["digest"] = "other"                                  # another model under the name: rebuilt
+    assert not C.r2d2_served()["ok"] and RP.r2d2_cpeg(log=lambda *_: None) == 0 and C.r2d2_served()["ok"]
