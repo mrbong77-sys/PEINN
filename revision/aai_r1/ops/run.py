@@ -173,6 +173,8 @@ def steps(check: bool) -> list:
                lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"})),
               ("r2d2-probe", "R2D2 served as now vs its own template and Q8_0 on 30 non-benchmark prompts (DESIGN.md 25)",
                run("r2d2-probe")),
+              ("ollama-list", "the models Ollama holds and the R2D2 / zephyr builds (Eugene 17:51 KST, DESIGN.md 25)",
+               run("ollama-list")),
               ("matrix-gemma3", "the matrix on gemma3 first (does not depend on the zephyr review, DESIGN.md 25)",
                lambda: step("matrix", False, env_add={"V21R_BASES": "gemma3"})),
               ("biomon-check", "cheap-monitor bioweapons prompt on 3 items per group first (pre-test, DESIGN.md 26)",
