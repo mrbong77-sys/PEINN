@@ -25,8 +25,8 @@ RECIPE = (("orbench_80k", 0, 3000), ("falsereject_train", 0, 5000), ("phtest_har
           ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 3000), ("wildguardmix_adv_harmful", 1, 1500),
           # DESIGN.md 15: plain (vanilla) requests, harmful and harmful-looking benign, as in CPEG's WildGuardMix patch
           # DESIGN.md 17: the same seed-42 orders taken further (the first rows are the ones of DESIGN.md 15)
-          ("wildjailbreak_van_benign", 0, 5000), ("wildguardmix_van_benign", 0, 2000),
-          ("wildjailbreak_van_harmful", 1, 5000), ("wildguardmix_van_harmful", 1, 2000),
+          ("wildjailbreak_van_benign", 0, 12000), ("wildguardmix_van_benign", 0, 4000),       # DESIGN.md 23
+          ("wildjailbreak_van_harmful", 1, 12000), ("wildguardmix_van_harmful", 1, 4000),
           ("orbench_hard", 0, 1500))
 CHECK_ROWS = 20
 
