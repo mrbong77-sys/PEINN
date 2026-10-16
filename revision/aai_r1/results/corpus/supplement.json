@@ -1,0 +1,65 @@
+{
+ "recipe": [
+  [
+   "orbench_80k",
+   0,
+   3000
+  ],
+  [
+   "falsereject_train",
+   0,
+   2000
+  ],
+  [
+   "phtest_harmless",
+   0,
+   500
+  ],
+  [
+   "coconot_contrast",
+   0,
+   1000
+  ],
+  [
+   "wildjailbreak_adv_benign",
+   0,
+   1000
+  ],
+  [
+   "wildguardmix_adv_benign",
+   0,
+   500
+  ],
+  [
+   "orbench_toxic",
+   1,
+   1500
+  ],
+  [
+   "wildjailbreak_adv_harmful",
+   1,
+   1000
+  ],
+  [
+   "wildguardmix_adv_harmful",
+   1,
+   500
+  ]
+ ],
+ "rows": 9534,
+ "by_source": {
+  "supp:coconot_contrast": 379,
+  "supp:falsereject_train": 2000,
+  "supp:orbench_80k": 3000,
+  "supp:orbench_toxic": 655,
+  "supp:phtest_harmless": 500,
+  "supp:wildguardmix_adv_benign": 500,
+  "supp:wildguardmix_adv_harmful": 500,
+  "supp:wildjailbreak_adv_benign": 1000,
+  "supp:wildjailbreak_adv_harmful": 1000
+ },
+ "by_label": {
+  "benign": 7379,
+  "harmful": 2155
+ }
+}
