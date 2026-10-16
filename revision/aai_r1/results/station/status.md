@@ -1,9 +1,9 @@
 # 위성(station) 상태: 임무 실행 중
 
-- 시각 2026-10-16 13:57:58 (UTC 2026-10-16 04:57:58), 비컨 #89 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
+- 시각 2026-10-16 14:08:00 (UTC 2026-10-16 05:08:00), 비컨 #90 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/station.json`)
 - 임무: ops.run
-- 실행 코드: 107082f v2.1 심사 대응 runner: 실행 중 (attempt 23)
-- GPU: 2848 MiB, 32607 MiB, 16 %, 37
+- 실행 코드: e9ebfce v2.1 심사 대응 runner: 실행 중 (attempt 23)
+- GPU: 14523 MiB, 32607 MiB, 96 %, 70
 - 마지막으로 처리한 명령: 20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)
 - 사유: 정기 보고
 - 최근 임무: ops.run → 코드 0 (2026-10-15 15:21:55 UTC)
