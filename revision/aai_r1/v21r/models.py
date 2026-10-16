@@ -20,6 +20,10 @@ SEED = 42
 EMO, SEM, PRI = slice(0, 32), slice(32, 416), slice(416, 800)
 HEAD_HP = dict(epochs=60, lr=1e-3, batch=128, wd=1e-4, i_weight=2.5)      # train_neutro_head.py defaults (v4 head)
 CAL_HP = dict(epochs=80, batch=64, lr=1e-3, wd=1e-2, focal_gamma=2.0, warmup=5, patience=12)   # ee_threshold_finder
+# DESIGN.md 4 (corrected 2026-10-16, results/diag/gate_diag.md 2): the shipped head was trained on every axis (its
+# report: n_sup 1,880 = the whole held-out file on T, I and F), so an unlabelled axis's placeholder 0 is a negative
+# target. neg_weight 1.0 reproduces that; the 2-of-3 mask with neg_weight 0 left F almost without negatives.
+SHIPPED_NEG_W = 1.0
 SBERT_HP = dict(model="sentence-transformers/all-MiniLM-L6-v2", epochs=3, lr=2e-5, batch=32, max_len=256)
 
 
@@ -59,6 +63,12 @@ def three_class(T, I, F) -> np.ndarray:
     y[I >= 0.5] = 1
     y[(F >= 0.5) & (F >= I)] = 2
     return y
+
+
+def head_weights(d: pd.DataFrame, neg_w: float) -> np.ndarray:
+    """Per-element loss weights: 1 where the axis is labelled, neg_w where it holds the placeholder 0."""
+    M = d[["mask_T", "mask_I", "mask_F"]].to_numpy(dtype="float32")
+    return M + (1 - M) * neg_w
 
 
 # ---- heads on frozen features -------------------------------------------------------------------------
@@ -291,8 +301,9 @@ def train_all(check: bool = False, log=print) -> int:
     F = D.load_features(check)
     rec = D.record_texts(check)
     meta = shipped_meta()
-    neg_w = float(meta.get("neg_weight") or 0.0)
-    log(f"shipped head recipe: {json.dumps({k: v for k, v in meta.items() if k != 'arch'})}; neg_weight {neg_w}")
+    neg_w = SHIPPED_NEG_W
+    log(f"shipped head recipe: {json.dumps({k: v for k, v in meta.items() if k != 'arch'})}; trained on every axis "
+        f"(neg_weight {neg_w}, DESIGN.md 4)")
     tr, va, te = (sp[sp.split == s].reset_index(drop=True) for s in ("train", "val", "test"))
     if check:
         tr = tr if len(tr) else sp
@@ -304,7 +315,7 @@ def train_all(check: bool = False, log=print) -> int:
     Hx, Cx = F["head_x"], F["cal_x"]
     rtr, rva = D.rows_of(F, tr.sha), D.rows_of(F, va.sha)
     Y = lambda d: d[["T", "I", "F"]].to_numpy(dtype="float32")                       # noqa: E731
-    W = lambda d: (lambda M: M + (1 - M) * neg_w)(d[["mask_T", "mask_I", "mask_F"]].to_numpy(dtype="float32"))  # noqa: E731
+    W = lambda d: head_weights(d, neg_w)                                              # noqa: E731
     hp = dict(HEAD_HP, epochs=3) if check else HEAD_HP
     chp = dict(CAL_HP, epochs=3) if check else CAL_HP
     md = D.wdir(check) / "models"

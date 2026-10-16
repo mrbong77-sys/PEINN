@@ -1,6 +1,14 @@
 {
- "id": "20261015T235926Z-restart",
- "action": "restart",
- "note": "stop the matrix after gemma4 (Eugene 2026-10-16 08:57 KST: no more GPU before the diagnosis); rerun on bab679d: nemo-doc-early, gate-diag, then hold at gate-review. Finished generations stay in the cache.",
- "issued_utc": "2026-10-15 23:59:26"
+ "id": "20261016T000838Z-rerun",
+ "action": "rerun",
+ "steps": [
+  "split",
+  "train",
+  "thresholds",
+  "routes",
+  "gate-diag-check",
+  "gate-diag"
+ ],
+ "note": "gate fix (DESIGN.md 11, Eugene 2026-10-16 09:06 KST 'drop and retrain'): head trained on every axis like the shipped head, trick_safe and benign_harm_discuss out of the corpus; redo split, train, thresholds, routes and the diagnosis, then hold again at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 00:08:38"
 }

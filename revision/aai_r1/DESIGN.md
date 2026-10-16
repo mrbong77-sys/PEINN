@@ -38,7 +38,7 @@
 
 | 기호 | 변형 | 학습 | 라우팅 |
 |---|---|---|---|
-| A0 | 전체 PEINN | 헤드: 원 레시피(마스크 soft BCE, I 가중 2.5, Adam 1e-3, 60에폭, val 손실 최소). 에너지: 원 레시피(focal BCE, 80에폭), 라벨 F ≥ 0.5 | 5계층 게이트(극단 에너지 먼저) |
+| A0 | 전체 PEINN | 헤드: 원 레시피(세 축 모두 지도하는 soft BCE: 라벨 없는 축의 자리표시 0도 음성으로 학습, 투고본 체크포인트 `n_sup` 1,880 = held-out 전부; I 가중 2.5, Adam 1e-3, 60에폭, val 손실 최소). 에너지: 원 레시피(focal BCE, 80에폭), 라벨 F ≥ 0.5 | 5계층 게이트(극단 에너지 먼저) |
 | A1 | I 채널 없음 | T·F 두 출력 헤드 | Deliberation 없음 |
 | A2 | softmax 3범주(안전/모호/유해) | 같은 특징·같은 용량, 교차 엔트로피. 라벨: F ≥ 0.5이고 F ≥ I면 유해, 아니면 I ≥ 0.5면 모호, 나머지 안전 | p(유해)를 F, p(모호)를 I 자리에 |
 | A3 | 불확실성 라우팅 | 이진 유해 분류기(F ≥ 0.5) | \|p − 0.5\| ≤ δ이면 Deliberation (δ는 val에서 적합) |
@@ -126,3 +126,8 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   4. XSTest 문장마다 학습 이웃 5개를 찾고(mpnet 코사인), 그 출처와 에너지 라벨을 셉니다.
 - **단계 순서:** matrix → nemo-doc → gate-diag-check(check 캐시 사전 시험) → gate-diag → **gate-review**(`REVIEWED_GATE`가 참이 될 때까지 멈춤) → a8-check → a8 → cost → analyze → release.
   - A8 목표 응답도 같은 교사 라벨을 쓰므로 진단 뒤로 미룹니다.
+- **진단 결과와 결정 (2026-10-16 09:00–09:06 KST, `results/diag/gate_diag.md`):**
+  - 원인 ①(구현 오류): 헤드를 2-of-3 마스크(neg_weight 0)로 학습해 F가 음성을 거의 보지 못했습니다. 투고본처럼 세 축 모두 지도하도록 고칩니다(`models.SHIPPED_NEG_W` = 1.0). A1, A6p, A6e, A7도 같습니다.
+  - 원인 ②: 격리 에너지가 XSTest형 표현에 높게 반응합니다. 차단된 안전 문장의 학습 이웃 44%가 trick_safe입니다.
+  - 결정(교수님, 결정 카드 "빼고 재학습"): XSTest 안전 문항의 범주를 참고해 만든 합성 출처 trick_safe, benign_harm_discuss를 코퍼스에서 뺍니다(`data.EXCLUDE_SOURCES`). 분할 뒤에 빼므로 다른 행의 분할은 바뀌지 않습니다. 평가 벤치 격리는 벤치를 보고 설계한 학습 출처까지 포함합니다.
+  - 다시 돌리는 단계: split → train → thresholds → routes → gate-diag-check → gate-diag. 그다음 gate-review에서 다시 멈추고, 교수님 확인 뒤에만 행렬을 재개합니다. 이미 생성한 qwen, gemma4 답변은 다시 채점만 합니다.

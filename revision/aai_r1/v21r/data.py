@@ -18,6 +18,12 @@ DRIVER = Path(__file__).with_name("peaos_driver.py")
 SIDE = Path(__file__).with_name("peinn_side.py")
 NEAR_COS = 0.92                    # DESIGN.md 3: MiniLM cosine to any routing text at or above this -> excluded
 SPLIT_SEED = 42
+# DESIGN.md 11: synthetic sources written to the categories of XSTest's safe prompts (no item copied) to lower XSTest
+# over-refusal (src/scripts/gen_trick_safe_corpus.py, label_ee_3class.py 100-146). Dropped from the corpus when
+# EXCLUDE_SOURCES names them; dropped after the split so no other row changes split. The professor chose to drop
+# both (2026-10-16 09:06 KST decision card: evaluation-bench isolation also covers sources designed from a bench).
+XSTEST_TYPE_SOURCES = ("trick_safe", "benign_harm_discuss")
+EXCLUDE_SOURCES: tuple = XSTEST_TYPE_SOURCES
 
 
 def wdir(check: bool) -> Path:
@@ -232,6 +238,13 @@ def drop_table(df: pd.DataFrame) -> dict:
     return {f"{s}|{w}": int(n) for (s, w), n in df[df["drop"] != ""].groupby(["source", "drop"]).size().items()}
 
 
+def exclude_sources(df: pd.DataFrame, kept: pd.DataFrame, names) -> pd.DataFrame:
+    """Drop the named sources after the split (df's 'drop' marks them 'xstest_type'); other rows keep their split."""
+    off = kept.source.isin(tuple(names))
+    df.loc[df.sha.isin(set(kept.sha[off])), "drop"] = "xstest_type"
+    return kept[~off].copy()
+
+
 def split(check: bool = False, log=print) -> int:
     d = wdir(check)
     df = corpus_frame(check)
@@ -249,11 +262,13 @@ def split(check: bool = False, log=print) -> int:
     df = df.drop_duplicates("sha")
     kept = df[df["drop"] == ""].copy()
     kept["split"] = assign_split(kept)
+    kept = exclude_sources(df, kept, EXCLUDE_SOURCES)
     kept.to_csv(d / "corpus_split.csv", index=False, encoding="utf-8")
     def tab(g):
         return {f"{s}|{p}": int(n) for (s, p), n in g.groupby(["source", "polar"]).size().items()}
     st = {"rows": int(len(df)), "kept": int(len(kept)), "near_cos": NEAR_COS,
-          "dropped": {"guard": int((df["drop"] == "guard").sum()), "embedding": int((df["drop"] == "embedding").sum())},
+          "dropped": {"guard": int((df["drop"] == "guard").sum()), "embedding": int((df["drop"] == "embedding").sum()),
+                      "xstest_type": int((df["drop"] == "xstest_type").sum())},
           "dropped_by_source": drop_table(df),
           "guard_reasons": {str(k): int(v) for k, v in au.why.value_counts().items()} if len(au) else {},
           "split": kept.split.value_counts().to_dict(), "by_source_polar": tab(kept),
@@ -264,7 +279,8 @@ def split(check: bool = False, log=print) -> int:
     L = ["# 코퍼스 격리 검사 (DESIGN.md 3)", "",
          f"- 대상 행 {st['rows']:,}, 남긴 행 {st['kept']:,}",
          f"- 가드 탈락 {st['dropped']['guard']:,} (정확 일치·5-gram 포함률 > 0.5), 임베딩 탈락 {st['dropped']['embedding']:,} "
-         f"(MiniLM 코사인 ≥ {NEAR_COS})",
+         f"(MiniLM 코사인 ≥ {NEAR_COS}), XSTest 유형 합성 출처 탈락 {st['dropped']['xstest_type']:,} "
+         f"({', '.join(EXCLUDE_SOURCES) or '없음'}, DESIGN.md 11)",
          f"- 분할: {st['split']}", "", "## 출처별 탈락", ""]
     L += [f"- {k}: {v}" for k, v in sorted(st["dropped_by_source"].items())] or ["- 없음"]
     (o / "corpus_audit.md").write_text("\n".join(L) + "\n", encoding="utf-8")

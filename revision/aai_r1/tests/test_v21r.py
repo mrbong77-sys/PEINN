@@ -320,3 +320,22 @@ def test_auroc_rank_form():
     from v21r import gate_diag as G
     assert G.auroc([0, 0, 1, 1], [0.1, 0.2, 0.8, 0.9]) == 1.0
     assert G.auroc([0, 1], [0.5, 0.5]) == 0.5 and G.auroc([1, 1], [0.1, 0.2]) is None
+
+
+def test_exclude_sources_drops_after_the_split_and_keeps_other_splits():
+    df = pd.DataFrame({"sha": list("abcdef"), "source": ["trick_safe", "x", "benign_harm_discuss", "x", "y", "y"],
+                       "drop": ""})
+    kept = df.copy()
+    kept["split"] = ["train", "val", "test", "train", "val", "test"]
+    out = D.exclude_sources(df, kept, D.XSTEST_TYPE_SOURCES)
+    assert list(out.sha) == ["b", "d", "e", "f"] and list(out.split) == ["val", "train", "val", "test"]
+    assert list(df["drop"]) == ["xstest_type", "", "xstest_type", "", "", ""]
+    assert set(D.EXCLUDE_SOURCES) == {"trick_safe", "benign_harm_discuss"}
+
+
+def test_head_weights_train_every_axis_like_the_shipped_head():
+    from v21r import models as M
+    d = pd.DataFrame({"mask_T": [1, 0], "mask_I": [0, 1], "mask_F": [1, 0]})
+    assert M.SHIPPED_NEG_W == 1.0
+    assert (M.head_weights(d, M.SHIPPED_NEG_W) == 1.0).all()
+    assert M.head_weights(d, 0.0).tolist() == [[1, 0, 1], [0, 1, 0]]
