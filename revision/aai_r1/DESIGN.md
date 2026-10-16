@@ -274,6 +274,7 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 위성의 Ollama는 이 safetensors를 직접 가져오지 못합니다("unsupported MLX architecture: MistralForCausalLM", 00:25 KST). 그래서 H02는 같은 체크포인트를 F16으로 변환한 mradermacher GGUF(`zephyr_7b_r2d2.f16.gguf`, 메타데이터 `general.source.url` = cais/zephyr_7b_r2d2)를 씁니다.
   - 띄우기 전에 텐서를 하나씩 대조합니다(`v21r/wcheck.py`, `results/diag/r2d2_weights_check.json`). 체크포인트의 모든 텐서가 같은 모양으로 있어야 하고, 값은 bf16을 float16으로 바꾼 값과 같아야 합니다. llama.cpp가 순서를 바꾸는 attn_q·attn_k는 같은 순서 바꿈을 적용해 비교합니다. 하나라도 다르면 멈춥니다.
   - 사전 확인(컨테이너에서 범위 요청으로, 1층 q·k·v·norm): 순서 바꿈을 적용한 q 16,777,216개와 k 4,194,304개, 그대로인 v 4,194,304개, F32 norm 4,096개가 모두 같았습니다. 텐서 수는 291개(=3 + 32층×9)입니다.
+  - 위성 결과(00:3x KST): 텐서 291개, 값 7,241,732,096개가 모두 같았습니다(F16 226개, F32 65개, `results/diag/r2d2_weights_check.json`). 이 모델(HarmBench 프롬프트)의 제출본 답 평균 유사도는 0.506으로, 비교한 빌드 중 가장 높았습니다. 12문항 중 2문항은 첫 40자가 같았습니다. CPEG Q8_0(GGUF 템플릿)은 0.465였습니다(`results/diag/r2d2_fingerprint.json`).
   - `r2d2-cpeg`는 다음을 모두 확인할 때만 통과합니다. 대조를 통과하고 이 코드가 만든 모델(digest 기록과 일치)이어야 하고, 양자화 수준이 F16이어야 하고, 템플릿이 HarmBench 프롬프트와 같아야 합니다.
   - CPEG의 Q8_0은 `r2d2-fingerprint`의 비교 대상으로만 남깁니다.
   - Vanilla(H01)는 제출본과 같은 `zephyr:7b`를 유지합니다.
