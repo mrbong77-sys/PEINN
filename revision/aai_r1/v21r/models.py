@@ -311,6 +311,7 @@ FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, accum=1, max_len=256,
 # DESIGN.md 18: the head's F separates less than the energy (test AUROC 0.914 vs 0.962 on adversarial pairs, XSTest 0.885 vs
 # 0.962); the small MiniLM head is trained longer at the learning rate usual for it
 FT_HEAD_HP = dict(FT_HP, epochs=5, lr_enc=4e-5)
+OOD_ON = True                # DESIGN.md 20: variant A0ftM
 FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
           "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
 
@@ -351,11 +352,14 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             h = self.enc.config.hidden_size
             self.out = calibrator(32 + h) if energy_kind else mlp(32 + h + 384, 3, sigmoid=True)
 
-        def forward(self, ids, att, x):
+        def embed(self, ids, att):
             h = self.enc(input_ids=ids, attention_mask=att).last_hidden_state
             m = att.unsqueeze(-1).float()
             e = (h * m).sum(1) / m.sum(1).clamp_min(1e-9)
-            e = nn.functional.normalize(e, dim=1)              # both sentence-transformers models end in Normalize
+            return nn.functional.normalize(e, dim=1)           # both sentence-transformers models end in Normalize
+
+        def forward(self, ids, att, x):
+            e = self.embed(ids, att)
             z = torch.cat([x[:, :32], e], 1) if energy_kind else torch.cat([x[:, :32], e, x[:, 32:]], 1)
             return self.out(z)
 
@@ -452,10 +456,48 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             best, best_state = sc, {k: v.detach().cpu().clone() for k, v in net.state_dict().items()}
     net.load_state_dict(best_state)
 
-    def infer(texts: list[str], X) -> np.ndarray:
-        df = pd.DataFrame({"text": texts, "F": 0.0, "T": 0.0, "I": 0.0, "mask_T": 1.0, "mask_I": 1.0, "mask_F": 1.0})
-        return predict(df, X)
+    def infer(texts: list[str], X, emb: bool = False) -> np.ndarray:
+        """Outputs, or with emb the fine-tuned encoder's pooled, normalised representation (DESIGN.md 20)."""
+        if not emb:
+            df = pd.DataFrame({"text": texts, "F": 0.0, "T": 0.0, "I": 0.0, "mask_T": 1.0, "mask_I": 1.0, "mask_F": 1.0})
+            return predict(df, X)
+        out = []
+        net.eval()
+        with torch.no_grad():
+            for s in range(0, len(texts), 64):
+                enc = tok(texts[s:s + 64], truncation=True, max_length=hp["max_len"], padding=True, return_tensors="pt")
+                with torch.autocast("cuda", dtype=torch.bfloat16, enabled=amp):
+                    e = net.embed(enc["input_ids"].to(dev), enc["attention_mask"].to(dev))
+                out.append(e.float().cpu().numpy())
+        return np.concatenate(out) if out else np.zeros((0, net.enc.config.hidden_size), dtype="float32")
     return infer, best
+
+
+# ---- OOD by Mahalanobis distance (DESIGN.md 20; AdaptiveGuard, Yang et al. 2025, arXiv 2509.16861 sec. III-B) ----
+
+OOD_Q = 0.99                 # tau: the 99th percentile of the training rows' distances (fixed before any result)
+OOD_RIDGE = 1e-3             # shrinkage of the shared covariance, relative to its mean variance
+
+
+def mahalanobis_fit(Z: np.ndarray, y: np.ndarray, q: float = OOD_Q, ridge: float = OOD_RIDGE) -> dict:
+    """Class means (benign, harmful), the shared within-class covariance and tau from the training rows."""
+    Z = np.asarray(Z, dtype=np.float64)
+    y = np.asarray(y, dtype=bool)
+    mu = np.stack([Z[~y].mean(0), Z[y].mean(0)])
+    R = Z - mu[y.astype(int)]
+    S = R.T @ R / max(1, len(Z) - 2)
+    S += ridge * float(np.trace(S)) / len(S) * np.eye(len(S))
+    P = np.linalg.inv(S)
+    m = {"mu": mu, "P": P}
+    m["tau"] = float(np.quantile(mahalanobis_min(m, Z), q))
+    return m
+
+
+def mahalanobis_min(m: dict, Z: np.ndarray) -> np.ndarray:
+    """d_min(x) = min over the two classes of sqrt((f - mu_c)^T S^-1 (f - mu_c))."""
+    Z = np.asarray(Z, dtype=np.float64)
+    d = [np.sqrt(np.maximum(np.einsum("ij,jk,ik->i", Z - mu, m["P"], Z - mu), 0.0)) for mu in m["mu"]]
+    return np.minimum(d[0], d[1])
 
 
 # ---- step T ------------------------------------------------------------------------------------------------
@@ -568,6 +610,15 @@ def train_all(check: bool = False, log=print) -> int:
         p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
+        if OOD_ON:
+            log("== A0ftM: A0ft with I raised to 1 for inputs out of the training distribution (DESIGN.md 20)")
+            md_ = mahalanobis_fit(e_inf(trs.text.astype(str).tolist(), None, emb=True), trs.F.to_numpy() >= 0.5)
+            dm = mahalanobis_min(md_, e_inf(uni.text.astype(str).tolist(), None, emb=True))
+            ood = (dm > md_["tau"]).astype(float)
+            save("A0ftM", E_=E_ft, T=p[:, 0], I=np.maximum(p[:, 1], ood), F=p[:, 2])
+            report["A0ftM_ood"] = {"tau": round(md_["tau"], 4), "q": OOD_Q,
+                                   "share": {str(k): round(float(ood[(uni.part == k).to_numpy()].mean()), 4)
+                                             for k in sorted(uni.part.unique())}}
 
     # reference: the shipped (bench-contaminated) system, never used for fitting or reported as a result
     save("SHIPPED", T=F["tif"][ru, 0], I=F["tif"][ru, 1], F=F["tif"][ru, 2])

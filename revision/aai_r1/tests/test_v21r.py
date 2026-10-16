@@ -423,3 +423,14 @@ def test_xstest_gate_refusal_counts_hard_block_and_reasoned_refusal_on_safe_item
     r = A.bench_metrics("xstest", d)
     assert r["gate_refusal_safe"]["mean"] == 0.5 and r["over_refusal_safe"]["mean"] == 0.5
     assert A.leak_and_orr({"xstest": r})["gate_orr"] == 0.5
+
+
+def test_mahalanobis_ood_flags_points_far_from_both_classes():
+    from v21r import models as M
+    rng = np.random.default_rng(0)
+    Z = np.r_[rng.normal(0, 1, (200, 4)), rng.normal(5, 1, (200, 4))]
+    y = np.r_[np.zeros(200), np.ones(200)].astype(bool)
+    m = M.mahalanobis_fit(Z, y, q=0.99)
+    d = M.mahalanobis_min(m, np.array([[0.0] * 4, [5.0] * 4, [20.0] * 4, [-15.0] * 4]))
+    assert (d[:2] < m["tau"]).all() and (d[2:] > m["tau"]).all()
+    assert abs(float(np.mean(M.mahalanobis_min(m, Z) > m["tau"])) - 0.01) < 0.006

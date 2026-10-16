@@ -226,7 +226,7 @@ ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
 PLAIN_BENIGN = ("supp:wildjailbreak_van_benign", "supp:wildguardmix_van_benign")
 PLAIN_HARMFUL = ("supp:orbench_toxic", "supp:wildjailbreak_van_harmful", "supp:wildguardmix_van_harmful")
 ADV_HARMFUL = ("supp:wildjailbreak_adv_harmful", "supp:wildguardmix_adv_harmful")
-DEV_VARIANTS = ("A0", "A0ft")
+DEV_VARIANTS = ("A0", "A0ft", "A0ftM")
 BENIGN_GROUPS = ("v4_safe", "overrefusal_benign", "adversarial_benign", "plain_benign")
 HARMFUL_GROUPS = ("v4_harmful", "plain_harmful", "adversarial_harmful")
 
@@ -301,7 +301,7 @@ def run(check: bool) -> dict:
     try:
         from . import theta as TH
         rt = TH.load_routes(check)
-        res["harmbench_routes"] = harmbench_routes(check, rt, [n for n in ("A0@0.1", "A0ft@0.005", "A0ft@0.02", "A0ft@0.05",
+        res["harmbench_routes"] = harmbench_routes(check, rt, [n for n in ("A0@0.1", "A0ft@0.02", "A0ft@0.03", "A0ftM@0.02", "A0ftM@0.03",
                                                                            "A0ft@0.1") if n in rt])
     except FileNotFoundError:
         pass
