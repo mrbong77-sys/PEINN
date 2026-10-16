@@ -18,6 +18,10 @@
   0.2,
   0.3
  ],
+ "main": {
+  "variant": "A0ftM",
+  "cap": "0.03"
+ },
  "cost": {
   "safe->1-pass": 0.0,
   "safe->reasoning": 0.2,
