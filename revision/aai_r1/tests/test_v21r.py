@@ -395,3 +395,20 @@ def test_row_weights_are_sqrt_inverse_source_frequency_with_mean_one():
     assert abs(w[-1] / w[0] - 3.0) < 1e-5                           # sqrt(90 / 10)
     va = pd.DataFrame({"source": ["small", "unseen"]})
     assert M.row_weights(tr, va)[1] == M.row_weights(tr, va)[0]      # a source absent from train takes the largest weight
+
+
+def test_parity_with_llama_guard_needs_every_group():
+    from v21r import gate_diag as G
+    guard = {"v4_safe": {"refusal": 0.05}, "adversarial_benign": {"refusal": 0.10}, "v4_harmful": {"refusal": 0.80}}
+    dev = {"A0": {"v4_safe": {"refusal": 0.04}, "adversarial_benign": {"refusal": 0.20}, "v4_harmful": {"refusal": 0.90}},
+           "A0ft": {"v4_safe": {"refusal": 0.05}, "adversarial_benign": {"refusal": 0.10}, "v4_harmful": {"refusal": 0.80}}}
+    p = G.parity(dev, guard)
+    assert p["A0"]["all"] is False and p["A0"]["groups"]["adversarial_benign"] is False
+    assert p["A0ft"]["all"] is True
+
+
+def test_dev_guard_cache_skips_a_cut_line(tmp_path, monkeypatch):
+    from v21r import devguard as G
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    G.cache_file(True).write_text('{"sha": "a", "unsafe": true}\n{"sha": "b", "uns', encoding="utf-8")
+    assert G.load(True) == {"a": True}

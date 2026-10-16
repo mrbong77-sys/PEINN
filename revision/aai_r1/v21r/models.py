@@ -151,9 +151,9 @@ def predict(model, X, kind: str) -> np.ndarray:
 
 # ---- energy calibrator ----------------------------------------------------------------------------------
 
-def calibrator():
+def calibrator(in_dim: int = 800):
     import torch.nn as nn
-    return nn.Sequential(nn.Linear(800, 64), nn.ReLU(), nn.Dropout(0.2), nn.Linear(64, 32), nn.ReLU(),
+    return nn.Sequential(nn.Linear(in_dim, 64), nn.ReLU(), nn.Dropout(0.2), nn.Linear(64, 32), nn.ReLU(),
                          nn.Linear(32, 1), nn.Sigmoid())
 
 
@@ -307,9 +307,13 @@ def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, l
 # ---- FT: PEINN with its sentence encoders fine-tuned (DESIGN.md 13) ------------------------------------------
 
 FT_ON = True
-FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, max_len=256)
+FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, accum=1, max_len=256, amp=False)
 FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
           "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
+# DESIGN.md 14: the energy encoder at CPEG's size and recipe (PEINN_v2 peinn2/c/ftenc.py: DeBERTa-v3-large, max 512
+# tokens, lr 1e-5, batch 8 x 4, 2 epochs), bf16 autocast
+FT_LARGE = dict(enc="microsoft/deberta-v3-large", epochs=2, lr_enc=1e-5, lr_out=1e-3, batch=8, accum=4, max_len=512,
+                amp=True)
 
 
 def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print):
@@ -323,14 +327,16 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     from transformers import AutoModel, AutoTokenizer
     _seed()
     dev = _dev()
-    tok = AutoTokenizer.from_pretrained(FT_ENC[kind])
+    name = hp.get("enc") or FT_ENC[kind]
+    tok = AutoTokenizer.from_pretrained(name)
     energy_kind = kind == "energy"
 
     class Net(nn.Module):
         def __init__(self):
             super().__init__()
-            self.enc = AutoModel.from_pretrained(FT_ENC[kind])
-            self.out = calibrator() if energy_kind else mlp(800, 3, sigmoid=True)
+            self.enc = AutoModel.from_pretrained(name)
+            h = self.enc.config.hidden_size
+            self.out = calibrator(32 + h) if energy_kind else mlp(32 + h + 384, 3, sigmoid=True)
 
         def forward(self, ids, att, x):
             h = self.enc(input_ids=ids, attention_mask=att).last_hidden_state
@@ -381,19 +387,31 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
         net.eval()
         with torch.no_grad():
             for ids, att, x, _, _ in batches(df, X, False):
-                out.append(net(ids, att, x).cpu().numpy())
+                out.append(fwd(ids, att, x).cpu().numpy())
         return np.concatenate(out) if out else np.zeros((0, 1 if energy_kind else 3), dtype="float32")
+
+    amp = bool(hp.get("amp")) and dev.type == "cuda"
+    acc = int(hp.get("accum") or 1)
+
+    def fwd(ids, att, x):
+        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=amp):
+            h = net(ids, att, x)
+        return h.float()
 
     best, best_state = None, None
     for ep in range(hp["epochs"]):
         net.train()
+        opt.zero_grad()
         for i, (ids, att, x, y, w) in enumerate(batches(tr, Xtr, True)):
-            l_ = loss(net(ids, att, x), y, w)
-            opt.zero_grad()
-            l_.backward()
-            opt.step()
+            l_ = loss(fwd(ids, att, x), y, w)
+            (l_ / acc).backward()
+            if (i + 1) % acc == 0:
+                opt.step()
+                opt.zero_grad()
             if i % 200 == 0:
                 log(f"    {kind} epoch {ep + 1} batch {i} loss {float(l_):.4f}")
+        opt.step()
+        opt.zero_grad()
         pv = predict(va, Xva)
         if energy_kind:
             sc = _auroc((va.F.to_numpy() >= 0.5).astype(int), pv.ravel())
@@ -518,6 +536,11 @@ def train_all(check: bool = False, log=print) -> int:
         p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
+        log("== A0ftL: A0ft with the energy encoder at CPEG's size (DeBERTa-v3-large, DESIGN.md 14)")
+        lhp = dict(FT_LARGE, epochs=1, max_len=128) if check else FT_LARGE
+        l_inf, l_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, lhp, log)
+        save("A0ftL", E_=l_inf(uni.text.tolist(), Cx[ru][:, :32]).ravel() * 10.0, T=p[:, 0], I=p[:, 1], F=p[:, 2])
+        report["A0ftL_energy_val_auroc"] = l_auc
 
     # reference: the shipped (bench-contaminated) system, never used for fitting or reported as a result
     save("SHIPPED", T=F["tif"][ru, 0], I=F["tif"][ru, 1], F=F["tif"][ru, 2])

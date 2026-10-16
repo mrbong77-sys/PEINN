@@ -10,12 +10,12 @@ from __future__ import annotations
 
 import sys
 
-from . import a8, analyze, data, gate_diag, matrix, models, nemo_doc, release, supplement, theta
+from . import a8, analyze, data, devguard, gate_diag, matrix, models, nemo_doc, release, supplement, theta
 
 STEPS = {
     "record": data.record, "supplement": supplement.supplement, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
-    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "gate-diag": gate_diag.gate_diag, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
+    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "gate-diag": gate_diag.gate_diag, "dev-guard": devguard.dev_guard, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
 }
 
 

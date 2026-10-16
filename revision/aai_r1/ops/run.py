@@ -78,6 +78,9 @@ def steps(check: bool) -> list:
         # DESIGN.md 11 (Eugene 2026-10-16 08:57 KST): the matrix stopped after gemma4; diagnose the gate and the NeMo
         # rails on qwen and gemma4 first, and hold until the direction is confirmed
         s += [("nemo-doc-early", "NeMo rail verdicts on the bases answered so far (CPU)", run("nemo-doc")),
+              ("dev-guard-check", "Llama Guard input verdicts on 40 check rows (pre-test)", lambda: step("dev-guard", True)),
+              ("dev-guard", "Llama Guard input verdicts on the corpus test split (dev reference, DESIGN.md 14)",
+               run("dev-guard")),
               ("gate-diag-check", "gate diagnosis on the check cache first (pre-test, CPU)", lambda: step("gate-diag", True)),
               ("gate-diag", "gate diagnosis: why the isolated gate blocks XSTest safe texts (CPU, counts only)",
                run("gate-diag")),

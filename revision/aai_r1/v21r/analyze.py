@@ -245,6 +245,9 @@ def analyze(check: bool = False, log=print) -> int:
     return 0 if C.publish([f, md], "v21r A: benchmark results, curves, calibration and I-construct analyses") else 1
 
 
+PREVIEW_NEEDS_DEV_PARITY = True      # DESIGN.md 14: the evaluation benches are scored only after the dev target is met
+
+
 def finished_bases(check: bool) -> tuple:
     """Bases whose matrix step finished (results/matrix/BASE.json written after generate and judge)."""
     return tuple(b for b in MX.bases(check) if (D.odir(check) / "matrix" / f"{b}.json").exists())
@@ -270,11 +273,21 @@ def _cell(f, r):
 def preview(check: bool = False, log=print) -> int:
     """DESIGN.md 11: benchmark metrics of the current gate on the bases already answered (CPU, no model call), so the
     gate is reviewed on real answers before the rest of the matrix spends GPU time."""
+    gd = D.odir(check) / "diag" / "gate_diag.json"
+    par = (C.jload(gd).get("dev_parity") or {}) if gd.exists() else {}
+    if PREVIEW_NEEDS_DEV_PARITY and not check and not any(x.get("all") for x in par.values()):
+        o = D.odir(check) / "analysis_preview"
+        md = o / "preview.md"
+        o.mkdir(parents=True, exist_ok=True)
+        md.write_text("# 미리보기 보류 (DESIGN.md 14)\n\n검증 자료(test 분할)에서 Llama Guard 동등에 이른 변형이 없어 평가 벤치를 "
+                      f"채점하지 않았습니다. 동등 판정: {json.dumps(par, ensure_ascii=False)}\n", encoding="utf-8")
+        log(md.read_text(encoding="utf-8"))
+        return 0 if C.publish([md], "v21r A-preview: held (no variant on par with Llama Guard on the test split yet)") else 1
     done = finished_bases(check)
     th = C.jload(D.odir(check) / "thresholds.json")
     ev = evaluate(check, log, only=done)
     main = str(th["main_cap"])
-    rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v in ("A0", "A0ft")]
+    rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v in ("A0", "A0ft", "A0ftL")]
     rows += ["SHIPPED", "A0paper", "A4a", "A4b", "A4c", "A4d"]
     L = ["# 게이트 수정 뒤 미리보기 (DESIGN.md 11)", "",
          f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main}. 모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]
