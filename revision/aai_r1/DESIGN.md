@@ -167,5 +167,5 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 평가 벤치 재채점(`preview`)은 동등에 이른 변형이 있을 때에만 합니다(`analyze.PREVIEW_NEEDS_DEV_PARITY`).
 - **1차 반복 후보 (한 번에 학습):**
   - A0ft: mpnet·MiniLM 미세 조정(13절).
-  - A0ftL: 에너지 인코더를 CPEG 크기·레시피로 바꿈(DeBERTa-v3-large, 최대 512 토큰, lr 1e-5, 배치 8 × 4, 2에폭, bf16). 헤드는 A0ft와 같습니다.
+  - 에너지 인코더는 바꾸지 않습니다(교수님 지시 2026-10-16 10:21 KST). DeBERTa로 바꾼 변형은 빼고, mpnet·MiniLM은 그대로 두고 미세 조정만 합니다.
 - **사전 테스트:** `supp-check`(check 캐시에서 새 학습 코드 포함 전 사슬)와 `dev-guard-check`(40행)를 먼저 돌립니다.

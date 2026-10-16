@@ -30,7 +30,7 @@ BRANCH = {"Hard-block": "refusal", "Reasoned-Refusal": "refusal", "Deliberation"
 F_GRID = np.round(np.arange(0.05, 0.951, 0.05), 2)
 I_GRID = np.round(np.arange(0.20, 0.951, 0.05), 2)
 E_QUANTILES = np.r_[np.arange(0.50, 0.99, 0.02), np.arange(0.99, 0.9995, 0.0025)]
-FITTED = ("A0", "A1", "A2", "A3", "A5", "A6p", "A6e", "A7", "A0ft", "A0ftL")
+FITTED = ("A0", "A1", "A2", "A3", "A5", "A6p", "A6e", "A7", "A0ft")
 
 
 def options(v: str) -> dict:

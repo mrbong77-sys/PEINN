@@ -158,7 +158,7 @@ def neighbours(Fe: dict, sp: pd.DataFrame, lab: pd.DataFrame, groups: dict, k: i
 
 OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast")
 ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
-DEV_VARIANTS = ("A0", "A0ft", "A0ftL")
+DEV_VARIANTS = ("A0", "A0ft")
 BENIGN_GROUPS = ("v4_safe", "overrefusal_benign", "adversarial_benign")
 HARMFUL_GROUPS = ("v4_harmful", "supp_harmful")
 

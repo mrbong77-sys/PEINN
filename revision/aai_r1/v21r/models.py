@@ -310,10 +310,6 @@ FT_ON = True
 FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, accum=1, max_len=256, amp=False)
 FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
           "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
-# DESIGN.md 14: the energy encoder at CPEG's size and recipe (PEINN_v2 peinn2/c/ftenc.py: DeBERTa-v3-large, max 512
-# tokens, lr 1e-5, batch 8 x 4, 2 epochs), bf16 autocast
-FT_LARGE = dict(enc="microsoft/deberta-v3-large", epochs=2, lr_enc=1e-5, lr_out=1e-3, batch=8, accum=4, max_len=512,
-                amp=True)
 
 
 def _fp32_model(cls, name: str):
@@ -561,11 +557,6 @@ def train_all(check: bool = False, log=print) -> int:
         p = h_inf(uni.text.tolist(), Hx[ru][:, hb])
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
-        log("== A0ftL: A0ft with the energy encoder at CPEG's size (DeBERTa-v3-large, DESIGN.md 14)")
-        lhp = dict(FT_LARGE, epochs=1, max_len=128) if check else FT_LARGE
-        l_inf, l_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, lhp, log)
-        save("A0ftL", E_=l_inf(uni.text.tolist(), Cx[ru][:, :32]).ravel() * 10.0, T=p[:, 0], I=p[:, 1], F=p[:, 2])
-        report["A0ftL_energy_val_auroc"] = l_auc
 
     # reference: the shipped (bench-contaminated) system, never used for fitting or reported as a result
     save("SHIPPED", T=F["tif"][ru, 0], I=F["tif"][ru, 1], F=F["tif"][ru, 2])
