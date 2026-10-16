@@ -1,6 +1,7 @@
 {
- "id": "20261016T104500Z-update",
- "action": "update",
- "note": "DESIGN.md 29: NeMo provider fixed, NeMo pre-test and rerun; applies at the next step boundary (after matrix-gemma3).",
- "issued_utc": "2026-10-16 10:45:00"
+ "id": "20261016T150000Z-rerun",
+ "action": "rerun",
+ "steps": ["r2d2-cpeg", "matrix-zephyr-check2"],
+ "note": "DESIGN.md 25: R2D2 = CPEG's weights with the GGUF's own template; stop check2 (wrong template), rebuild R2D2, redo the zephyr pre-test.",
+ "issued_utc": "2026-10-16 15:00:00"
 }
