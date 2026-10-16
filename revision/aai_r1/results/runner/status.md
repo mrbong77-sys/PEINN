@@ -1,12 +1,12 @@
-# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
+# v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-16 23:13:31 (UTC 2026-10-16 14:13:31), 시도 30, 비컨 #177 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 1f0215c v2.1 심사 대응 runner: 실행 중 (attempt 30)
-- 현재 단계: biomon-check (0.0분째)
+- 시각 2026-10-16 23:15:35 (UTC 2026-10-16 14:15:35), 시도 31, 비컨 #178 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a4d9d38 v21r biomon: HarmBench chem-bio items from the harness CSV (the Hub copy is gated)
+- 현재 단계: 없음
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 12113 MiB, 32607 MiB, 0 %, 48
-- 다음 동작: 새 코드나 명령을 기다림
-- 사유: 코드 1
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 12091 MiB, 32607 MiB, 2 %, 44
+- 다음 동작: 단계 진행
+- 사유: 시작
 - 마지막으로 처리한 명령: 20261016T104500Z-update update (대기 끝, 재시도, 2026-10-16 14:13:27 UTC)
 - 남은 단계: biomon-check; biomon; nemo-orr; nemo-audit; nemo-reset-check; matrix-nemo-check; nemo-fair-review; r2d2-cpeg; r2d2-fingerprint; matrix-zephyr-check2; zephyr-review; nemo-fair-review-zephyr; nemo-reset; matrix; nemo-doc; nemo-orr-all; nemo-audit-all; a8-check; a8; cost; analyze; release
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3
@@ -42,39 +42,4 @@
 
 [v21r] ===== biomon-check: cheap-monitor bioweapons prompt on 3 items per group first (pre-test, DESIGN.md 26) =====
 [ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r biomon --check
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "D:\Projects\PEINN\revision\aai_r1\v21r\__main__.py", line 56, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "D:\Projects\PEINN\revision\aai_r1\v21r\__main__.py", line 52, in main
-    return STEPS[step](check)
-           ~~~~~~~~~~~^^^^^^^
-  File "D:\Projects\PEINN\revision\aai_r1\v21r\biomon.py", line 190, in biomon
-    df = inputs(items(check))
-                ~~~~~^^^^^^^
-  File "D:\Projects\PEINN\revision\aai_r1\v21r\biomon.py", line 94, in items
-    rows = L["harmbench"]()
-  File "D:\Projects\PEINN\revision\aai_r1\v21r\biomon.py", line 62, in _harmbench
-    for r in load_dataset("walledai/HarmBench", cfg)["train"]:
-             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\bojung\miniconda3\Lib\site-packages\datasets\load.py", line 1696, in load_dataset
-    builder_instance = load_dataset_builder(
-        path=path,
-    ...<10 lines>...
-        **config_kwargs,
-    )
-  File "C:\Users\bojung\miniconda3\Lib\site-packages\datasets\load.py", line 1323, in load_dataset_builder
-    dataset_module = dataset_module_factory(
-        path,
-    ...<5 lines>...
-        cache_dir=cache_dir,
-    )
-  File "C:\Users\bojung\miniconda3\Lib\site-packages\datasets\load.py", line 1209, in dataset_module_factory
-    raise e1 from None
-  File "C:\Users\bojung\miniconda3\Lib\site-packages\datasets\load.py", line 1197, in dataset_module_factory
-    raise DatasetNotFoundError(message) from e
-datasets.exceptions.DatasetNotFoundError: Dataset 'walledai/HarmBench' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/walledai/HarmBench to ask for access.
-[v21r] biomon-check failed (code 1); fix it and run the same command again
 ```
