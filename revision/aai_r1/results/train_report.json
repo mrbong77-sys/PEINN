@@ -47,5 +47,8 @@
   "harmful": 4256
  },
  "A3_val_loss": 0.30402472615242004,
- "A7_val_loss": 0.2862089755452525
+ "A7_val_loss": 0.28620893162611516,
+ "A0ft_energy_val_auroc": 0.9784029079677925,
+ "A0ft_head_val_loss": 0.28128163660791494,
+ "A0ftL_energy_val_auroc": 0.9891147515238367
 }
