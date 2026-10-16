@@ -1,6 +1,6 @@
 {
- "id": "20261016T085500Z-restart",
- "action": "restart",
- "note": "Eugene 17:51 KST: ollama list now. Stops the gemma3 matrix (answers are kept in the generation store), runs ollama-list, resumes gemma3, then biomon.",
- "issued_utc": "2026-10-16 08:55:00"
+ "id": "20261016T091500Z-update",
+ "action": "update",
+ "note": "DESIGN.md 25: r2d2-fingerprint after biomon; applies at the next step boundary (after matrix-gemma3).",
+ "issued_utc": "2026-10-16 09:15:00"
 }

@@ -22,6 +22,7 @@ import json
 import re
 import subprocess
 
+import numpy as np
 import pandas as pd
 
 from . import common as C
@@ -131,3 +132,46 @@ def r2d2_diag(check: bool = False, log=print) -> int:
     if check:
         return 0
     return 0 if C.publish([f], "v21r R2D2 diagnosis: what the harness sent in the pre-test, the probe's answers") else 1
+
+
+# ---- which build was the submitted R2D2? (Eugene 2026-10-16 17:48 KST: find the original model) ------------------
+FP_CANDIDATES = ("zephyr-r2d2:latest",                                   # RichardErkhov Q4_0 + zephyr:7b template (today)
+                 "hf.co/RichardErkhov/cais_-_zephyr_7b_r2d2-gguf:Q8_0",
+                 "hf.co/RichardErkhov/cais_-_zephyr_7b_r2d2-gguf:Q4_K_M",
+                 "zephyr-r2d2:7b-q8_0",                                  # CPEG: mradermacher Q8_0 + zephyr template
+                 "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q4_K_M",
+                 "hf.co/mradermacher/zephyr_7b_r2d2-i1-GGUF:i1-Q4_K_M",
+                 "zephyr:7b")                                            # the base model (negative control)
+
+
+def r2d2_fingerprint(check: bool = False, log=print) -> int:
+    """DESIGN.md 25: the submitted H02 answers (results/per_item/xstest_per_item.csv, run 1, safe prompts, kept in full)
+    against greedy answers of each public R2D2 build to the same prompt (no system prompt, as the submitted records).
+    Identifies the weights only; nothing is scored or fitted. First 120 characters compared (difflib ratio, exact start)."""
+    import difflib
+    sub = pd.read_csv(C.peinn() / "results" / "per_item" / "xstest_per_item.csv", low_memory=False)
+    s = sub[(sub.arm_id == C.ARMS["zephyr"]["R2D2"]) & (sub.expected_label == "safe") & sub.run_id.str.contains("_r01_")]
+    s = pd.concat([s[s.over_refusal == 0].head(8), s[s.over_refusal == 1].head(4)]).head(4 if check else 12)
+    norm = lambda x: " ".join(str(x).split())[:120]                             # noqa: E731
+    res = {}
+    for m in FP_CANDIDATES[:2] if check else FP_CANDIDATES:
+        try:
+            C.pull_missing([m], log=log)
+        except SystemExit as e:
+            res[m] = {"error": str(e)}
+            continue
+        rows = []
+        for p, ref in zip(s.prompt_text.astype(str), s.response_p1.astype(str)):
+            r = json.loads(C._ollama("/api/chat", {"model": m, "messages": [{"role": "user", "content": p}], "stream": False,
+                                                   "options": {"temperature": 0, "seed": 42, "num_predict": 60}}, timeout=600))
+            a = r["message"]["content"]
+            rows.append({"ratio": round(difflib.SequenceMatcher(None, norm(a), norm(ref)).ratio(), 3),
+                         "same_start": norm(a)[:40] == norm(ref)[:40], "answer": norm(a)[:80], "submitted": norm(ref)[:80]})
+        res[m] = {"mean_ratio": round(float(np.mean([r["ratio"] for r in rows])), 3),
+                  "same_start": int(sum(r["same_start"] for r in rows)), "n": len(rows), "rows": rows}
+        log(f"{m}: mean ratio {res[m]['mean_ratio']}, same start {res[m]['same_start']}/{len(rows)}")
+        C.unload([m])
+    f = C.jdump(res, D.odir(check) / "diag" / "r2d2_fingerprint.json")
+    if check:
+        return 0
+    return 0 if C.publish([f], "v21r R2D2 fingerprint: submitted H02 answers vs the public R2D2 builds (greedy, 12 safe prompts)") else 1

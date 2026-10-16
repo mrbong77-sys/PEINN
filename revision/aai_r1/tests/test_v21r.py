@@ -563,3 +563,29 @@ def test_biomon_counts_flags_per_system_group_and_condition(tmp_path, monkeypatc
     assert r["Vanilla"]["wildchat|suffix"]["unparsed"] == 1 and r["Vanilla"]["bio|raw"]["flagged"] == 1
     assert r["NeMo"]["orbench|suffix"]["rate"] == 1.0 and r["NeMo"]["orbench|raw"]["rate"] == 0.0
     assert "생물무기" in (C.OUT / "biomon" / "summary.md").read_text()
+
+
+def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, monkeypatch):
+    from v21r import r2d2_probe as RP
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    pi = tmp_path / "peinn" / "results" / "per_item"
+    pi.mkdir(parents=True)
+    pd.DataFrame({"arm_id": "H02", "expected_label": "safe", "run_id": [f"xs_H02_r01_{i}" for i in range(6)],
+                  "over_refusal": [0, 0, 0, 0, 1, 1], "prompt_text": [f"q{i}" for i in range(6)],
+                  "response_p1": [f"submitted answer number {i} with some words" for i in range(6)]}
+                 ).to_csv(pi / "xstest_per_item.csv", index=False)
+    monkeypatch.setattr(C, "peinn", lambda: tmp_path / "peinn")
+    monkeypatch.setattr(C, "pull_missing", lambda *a, **k: 0)
+    monkeypatch.setattr(C, "unload", lambda *a, **k: 0)
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+
+    def fake(path, body=None, timeout=60):
+        q = body["messages"][0]["content"]
+        a = f"submitted answer number {q[1:]} with some words" if body["model"] == RP.FP_CANDIDATES[0] else "Sorry, I can't do that."
+        return json.dumps({"message": {"content": a}})
+    monkeypatch.setattr(C, "_ollama", fake)
+    assert RP.r2d2_fingerprint(log=lambda *_: None) == 0
+    r = json.loads((C.OUT / "diag" / "r2d2_fingerprint.json").read_text())
+    assert r[RP.FP_CANDIDATES[0]]["mean_ratio"] == 1.0 and r[RP.FP_CANDIDATES[0]]["same_start"] == 6
+    assert r["zephyr:7b"]["same_start"] == 0

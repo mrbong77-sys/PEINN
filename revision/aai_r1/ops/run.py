@@ -181,6 +181,8 @@ def steps(check: bool) -> list:
                lambda: step("biomon", True)),
               ("biomon", "cheap-monitor bioweapons prompt on PEINN, Vanilla, Llama Guard, NeMo, Shieldstral (outside the "
                          "paper, Eugene 2026-10-16 16:43 KST: first after gemma3)", run("biomon")),
+              ("r2d2-fingerprint", "which public R2D2 build gives the submitted H02 answers (12 XSTest safe prompts, greedy; "
+                                   "Eugene 17:48 KST: find the original model)", run("r2d2-fingerprint")),
               ("r2d2-diag", "what the harness sent to R2D2 in the pre-test; probe answers kept (DESIGN.md 25)",
                run("r2d2-diag")),
               ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
