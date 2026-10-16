@@ -1,43 +1,57 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-16 17:53:46 (UTC 2026-10-16 08:53:46), 시도 28, 비컨 #140 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 6ad2a51 v2.1 심사 대응 runner: 명령 처리 (attempt 28)
-- 현재 단계: 없음
+- 시각 2026-10-16 17:57:50 (UTC 2026-10-16 08:57:50), 시도 28, 비컨 #141 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 7f10b67 v21r diag: ollama list and the R2D2 / zephyr builds on the satellite
+- 현재 단계: matrix-gemma3 (4.0분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 11911 MiB, 32607 MiB, 1 %, 56
-- 다음 동작: 단계 진행
-- 사유: 시작
-- 마지막으로 처리한 명령: 20261016T085500Z-restart restart (자식 종료 후 재실행, 2026-10-16 08:53:42 UTC)
-- 남은 단계: ollama-list; matrix-gemma3; biomon-check; biomon; r2d2-diag; zephyr-review; matrix; nemo-doc; a8-check; a8; cost; analyze; release
-- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 12681 MiB, 32607 MiB, 93 %, 66
+- 다음 동작: 다음 단계가 시작되면 멈추고 새 코드로 다시 실행
+- 사유: 안전 업데이트 대기
+- 마지막으로 처리한 명령: 20261016T091500Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-16 08:57:50 UTC)
+- 남은 단계: matrix-gemma3; biomon-check; biomon; r2d2-diag; zephyr-review; matrix; nemo-doc; a8-check; a8; cost; analyze; release
+- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list
 
 ## 마지막 로그
 
 ```
-[v21r] skip record (routing texts of the benches with a mock LLM): finished 2026-10-16 00:34:51
-[v21r] skip supp-check (supplement, audit, features, split, train, thresholds, routes on the check cache (pre-test)): finished 2026-10-16 14:50:44
-[v21r] skip supplement (public over-refusal and adversarial training sets (DESIGN.md 12)): finished 2026-10-16 13:48:36
-[v21r] skip audit (isolation audit of the v4 corpus (guard + recorded texts)): finished 2026-10-16 13:48:41
-[v21r] skip unload-1 (free the GPU (any Ollama model)): finished 2026-10-16 09:35:42
-[v21r] skip features (frozen v2.1 features of the corpus and the routing texts): finished 2026-10-16 13:58:34
-[v21r] skip split (embedding near-duplicates out, train / val / test split): finished 2026-10-16 13:58:38
-[v21r] skip train (variants A0-A7 and the energy calibrator on the isolated corpus): finished 2026-10-16 15:11:08
-[v21r] skip thresholds (thresholds of every variant on val, pushed before any answer): finished 2026-10-16 15:27:38
-[v21r] skip routes (route tables of every variant and operating point): finished 2026-10-16 15:27:40
-[v21r] skip nemo (NeMo Guardrails answers three probe prompts on every base): finished 2026-10-16 00:50:22
-[v21r] skip approval (the professor's go for the full matrix): finished 2026-10-16 00:50:22
-[v21r] skip nemo-doc-early (NeMo rail verdicts on the bases answered so far (CPU)): finished 2026-10-16 09:00:27
-[v21r] skip dev-guard-check (Llama Guard input verdicts on 40 check rows (pre-test)): finished 2026-10-16 14:35:29
-[v21r] skip dev-guard (Llama Guard input verdicts on the corpus test split (dev reference, DESIGN.md 14)): finished 2026-10-16 14:38:28
-[v21r] skip gate-diag-check (gate diagnosis on the check cache first (pre-test, CPU)): finished 2026-10-16 15:27:41
-[v21r] skip gate-diag (gate diagnosis: why the isolated gate blocks XSTest safe texts (CPU, counts only)): finished 2026-10-16 15:27:44
-[v21r] skip preview-check (the preview on the check cache first (pre-test, CPU)): finished 2026-10-16 15:27:44
-[v21r] skip preview (benchmark metrics of the fixed gate on qwen and gemma4, re-scored (CPU, no model call)): finished 2026-10-16 15:28:17
-[v21r] skip gate-review (hold until the diagnosis is reviewed and the direction confirmed): finished 2026-10-16 15:28:17
-[v21r] skip main-check (A0ftM@0.03 still meets UCR < 5 % and gate ORR < 5 % after the saved retrain (DESIGN.md 24)): finished 2026-10-16 15:28:18
-[v21r] skip matrix-zephyr-check (zephyr with R2D2, NeMo and Llama Guard on the check benches first (pre-test; R2D2 has not run yet)): finished 2026-10-16 15:44:15
-[v21r] skip r2d2-probe (R2D2 served as now vs its own template and Q8_0 on 30 non-benchmark prompts (DESIGN.md 25)): finished 2026-10-16 16:05:46
-
-[v21r] ===== ollama-list: the models Ollama holds and the R2D2 / zephyr builds (Eugene 17:51 KST, DESIGN.md 25) =====
-[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r ollama-list
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 254.22it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 311.87it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 300.04it/s]
+2026-10-16 17:57:41,426 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 281.14it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 253.00it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 241.25it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 334.18it/s]
+2026-10-16 17:57:44,575 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 17:57:44,576 [bench.pea_eval.taxonomy] INFO:   [H13] 20/40 (arm 50% · 전체 50% · 0.26 req/s · arm ETA 76s)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 268.56it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 301.92it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 219.97it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 324.16it/s]
+2026-10-16 17:57:45,857 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 281.91it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 300.86it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 272.16it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 356.69it/s]
+2026-10-16 17:57:46,968 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 254.17it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 286.09it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 296.84it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 338.71it/s]
+2026-10-16 17:57:47,563 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 235.91it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 307.10it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 119.17it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 246.54it/s]
+2026-10-16 17:57:48,692 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 291.31it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 300.67it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 249.30it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 346.18it/s]
+2026-10-16 17:57:49,262 [httpx] INFO: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-10-16 17:57:49,263 [bench.pea_eval.taxonomy] INFO:   [H13] 25/40 (arm 62% · 전체 52% · 0.31 req/s · arm ETA 48s)
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 140.40it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 319.57it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 220.00it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 233.78it/s]
 ```
