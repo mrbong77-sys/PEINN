@@ -10,24 +10,24 @@
    "refusal": 0.6511
   },
   "overrefusal_benign": {
-   "rows": 588,
-   "refusal": 0.0765
+   "rows": 1172,
+   "refusal": 0.122
   },
   "adversarial_benign": {
-   "rows": 150,
-   "refusal": 0.04
+   "rows": 450,
+   "refusal": 0.02
   },
   "plain_benign": {
    "rows": 698,
-   "refusal": 0.043
+   "refusal": 0.0573
   },
   "plain_harmful": {
    "rows": 763,
-   "refusal": 0.7903
+   "refusal": 0.7798
   },
   "adversarial_harmful": {
-   "rows": 150,
-   "refusal": 0.4733
+   "rows": 450,
+   "refusal": 0.4978
   }
  }
 }
