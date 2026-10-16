@@ -15,7 +15,7 @@ from . import a8, analyze, biomon, data, ollama_list, devguard, gate_diag, matri
 STEPS = {
     "record": data.record, "supplement": supplement.supplement, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
-    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "nemo-orr": nemo_doc.nemo_orr, "gate-diag": gate_diag.gate_diag, "dev-guard": devguard.dev_guard, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
+    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "nemo-orr": nemo_doc.nemo_orr, "nemo-audit": nemo_doc.nemo_audit, "gate-diag": gate_diag.gate_diag, "dev-guard": devguard.dev_guard, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
     "r2d2-probe": r2d2_probe.r2d2_probe, "r2d2-diag": r2d2_probe.r2d2_diag, "biomon": biomon.biomon, "ollama-list": ollama_list.ollama_list, "r2d2-fingerprint": r2d2_probe.r2d2_fingerprint, "r2d2-cpeg": r2d2_probe.r2d2_cpeg,
 }
 

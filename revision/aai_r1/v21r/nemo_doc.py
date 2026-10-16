@@ -11,7 +11,9 @@ no benchmark text), and the NeMo arm's fixed-refusal rows per bench in the judge
 from __future__ import annotations
 
 import collections
+import json
 import re
+from pathlib import Path
 
 from . import common as C
 from . import data as D
@@ -201,3 +203,95 @@ def nemo_orr(check: bool = False, log=print) -> int:
     if check:
         return 0
     return 0 if C.publish([f, g], "v21r R2: which XSTest safe prompts NeMo refuses, and by which rail (counts)") else 1
+
+
+# ---- is the NeMo arm set up as NeMo Guardrails intends? (Eugene 2026-10-16 18:17 KST) ---------------------------
+# Code reading of PEINN's copy of the PEAOS wrapper (pea_eval/evaluators/harmbench_eval.py, PEAOSLocalLLM) and of
+# nemoguardrails 0.21.0: NeMo binds temperature (lowest_temperature), max_tokens and stop sequences to every rail call,
+# the wrapper's _acall(prompt, *args, **kwargs) forwards only the prompt; the general (completion) prompt set builds the
+# dialog prompt from the colang history, which has no SystemMessage events. This step checks both on the satellite's own
+# files and measures what reached the answers.
+LEAK = re.compile(r"(?:^|\n)\s*(?:user|bot) (?:intent|message|action)\s*:|(?:^|\n)\s*(?:user|bot) \"|\nUser:", re.I)
+CONT = re.compile(r"bot message\s*:.*?\n\s*user\b", re.I | re.S)          # the reply goes on past the bot message
+
+
+def _source_facts() -> dict:
+    import importlib.util
+    out = {}
+    f = C.peaos() / "pea_eval" / "evaluators" / "harmbench_eval.py"
+    if f.exists():
+        s = f.read_text(encoding="utf-8", errors="replace")
+        i = s.find("class PEAOSLocalLLM")
+        cls = s[i:s.find("register_llm_provider", i)] if i >= 0 else ""
+        acall = re.search(r"async def _acall\(self[^)]*\)[^:]*:\s*\n(.*?)\n\s*def ", cls, re.S)
+        out["wrapper"] = {"file": str(f), "found": bool(cls),
+                          "acall_body": acall.group(1).strip()[:400] if acall else "",
+                          "forwards_kwargs": bool(acall and "kwargs" in acall.group(1)),
+                          "passes_stop": bool(re.search(r"stop\s*=", cls)),
+                          "fixed_max_tokens": sorted(set(re.findall(r"return (\d+)", cls)))}
+    spec = importlib.util.find_spec("nemoguardrails")
+    if spec and spec.origin:
+        root = Path(spec.origin).parent
+        u = (root / "actions" / "llm" / "utils.py").read_text(encoding="utf-8", errors="replace")
+        h = u[u.find("def get_colang_history"):][:6000]
+        g = (root / "actions" / "llm" / "generation.py").read_text(encoding="utf-8", errors="replace")
+        out["nemoguardrails"] = {"path": str(root), "colang_history_uses_system_message": "SystemMessage" in h,
+                                 "rail_calls_with_temperature": len(re.findall(r"lowest_temperature", g)),
+                                 "rail_calls_with_stop": len(re.findall(r"stop=\[", g))}
+    return out
+
+
+def nemo_audit(check: bool = False, log=print) -> int:
+    """Per base: NeMo vs Vanilla on the same benches (system prompt present, answer length, NeMo dialog-format text
+    left in the answer, internal-error rows and how they were scored); the dialog log's continuations past the bot
+    message. No model call. -> results/nemo/nemo_audit.json"""
+    import numpy as np
+    import pandas as pd
+    res = {"source": _source_facts()}
+    log(f"source: {json.dumps(res['source'], ensure_ascii=False)[:600]}")
+    for b in M.bases(check):
+        try:
+            df = M.collect(check, b)
+        except Exception as e:                                      # noqa: BLE001
+            res[b] = {"error": f"{type(e).__name__}: {e}"[:300]}
+            continue
+        if not len(df):
+            res[b] = {"error": "no answers"}
+            continue
+        arms = C.ARMS[b]
+        o = df[df.tag == "others"]
+        rb = {}
+        for bench, g in o.groupby("bench"):
+            row = {}
+            for k in ("NeMo", "Vanilla"):
+                x = g[g.arm_id == arms[k]]
+                if not len(x):
+                    continue
+                ans = x.get("response_p1", x.filter(regex="^response").iloc[:, 0]).fillna("").astype(str)
+                sysp = x.get("prompt_text", pd.Series("", index=x.index)).fillna("").astype(str).str.extract(
+                    r"^\[S(?:YSTEM|ystem)\]\n(.*?)\n\n\[U", flags=re.S, expand=False).fillna("")
+                ln = ans.str.len()
+                ie = ans.str.lower().str.contains("internal error|\\[nemo blocked|\\[nemo error", regex=True)
+                r = {"rows": int(len(x)), "system_prompt_nonempty": int((sysp.str.strip() != "").sum()),
+                     "chars_median": float(np.median(ln)), "chars_p90": float(np.percentile(ln, 90)),
+                     "chars_ge_900": int((ln >= 900).sum()), "format_leak": int(ans.str.contains(LEAK).sum()),
+                     "internal_error": int(ie.sum())}
+                if ie.any():
+                    cols = [c for c in ("verdict", "over_refusal", "unsafe_compliance", "error") if c in x]
+                    r["internal_error_scored"] = {c: x.loc[ie, c].astype(str).value_counts().to_dict() for c in cols}
+                if k == "NeMo":
+                    r["format_leak_examples"] = [a[:160] for a in ans[ans.str.contains(LEAK)].head(3)]
+                row[k] = r
+            rb[bench] = row
+        _, rows = calls(check, b)
+        dl = [r for r in rows if r["task"] == "dialog"]
+        res[b] = {"benches": rb, "dialog_calls": len(dl),
+                  "dialog_reply_continues": sum(1 for r in dl if CONT.search(r["text"] or ""))}
+        log(f"NeMo audit {b}: " + json.dumps({k: {a: {m: v[m] for m in ('format_leak', 'chars_median', 'internal_error')}
+                                                   for a, v in r.items()} for k, r in rb.items()})[:900])
+    o = D.odir(check) / "nemo"
+    o.mkdir(parents=True, exist_ok=True)
+    f = C.jdump(res, o / "nemo_audit.json")
+    if check:
+        return 0
+    return 0 if C.publish([f], "v21r R2: NeMo arm set-up audit (wrapper, rails parameters, answers vs Vanilla; counts)") else 1

@@ -186,6 +186,8 @@ def steps(check: bool) -> list:
                          "paper, Eugene 2026-10-16 16:43 KST: first after gemma3)", run("biomon")),
               ("nemo-orr", "which XSTest safe prompts NeMo refuses and by which rail, on the bases answered so far (CPU; "
                            "Eugene 2026-10-16 18:11 KST)", run("nemo-orr")),
+              ("nemo-audit", "NeMo arm set-up audit: wrapper parameters, system prompt, answer format vs Vanilla (CPU; "
+                             "Eugene 2026-10-16 18:17 KST)", run("nemo-audit")),
               ("r2d2-cpeg", "R2D2 served as CPEG served it; the zephyr pre-test cache dropped (Eugene 17:56 KST, DESIGN.md 25)",
                run("r2d2-cpeg")),
               ("r2d2-fingerprint", "how close each R2D2 build Ollama holds comes to the submitted H02 answers (12 XSTest "

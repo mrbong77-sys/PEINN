@@ -261,6 +261,38 @@ def test_nemo_orr_splits_refusals_by_rail_and_type(tmp_path, monkeypatch):
     assert r["policy_term"]["True"] == {"n": 1, "refused": 0}
 
 
+def test_nemo_audit_reads_the_wrapper_and_compares_answers(tmp_path, monkeypatch):
+    from v21r import nemo_doc as N
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    pe = tmp_path / "peaos" / "pea_eval" / "evaluators"
+    pe.mkdir(parents=True)
+    (pe / "harmbench_eval.py").write_text(
+        "class PEAOSLocalLLM(LLM):\n    def _resolve_max_tokens(self, prompt):\n        return 16\n        return 256\n"
+        "    async def _acall(self, prompt: str, *args: Any, **kwargs: Any) -> str:\n        return await self._gen_async(prompt)\n"
+        "    def _call(self, prompt):\n        pass\nregister_llm_provider('peaos_engine', PEAOSLocalLLM)\n")
+    monkeypatch.setattr(C, "peaos", lambda: tmp_path / "peaos")
+    a = C.ARMS["qwen"]
+    df = pd.DataFrame([{"tag": "others", "bench": "xstest", "arm_id": a["NeMo"], "prompt_text": "[SYSTEM]\n\n\n[USER via NeMo]\nq",
+                        "response_p1": 'Sure.\nUser intent: ask question\nBot message: "x"', "over_refusal": 0},
+                       {"tag": "others", "bench": "xstest", "arm_id": a["NeMo"], "prompt_text": "[SYSTEM]\nS\n\n[USER via NeMo]\nq",
+                        "response_p1": "I'm sorry, an internal error has occurred.", "over_refusal": 1},
+                       {"tag": "others", "bench": "xstest", "arm_id": a["Vanilla"], "prompt_text": "[System]\n\n\n[User Request]\nq",
+                        "response_p1": "Sure, here is how.", "over_refusal": 0}])
+    monkeypatch.setattr(N.M, "collect", lambda check, base: df)
+    monkeypatch.setattr(N, "calls", lambda check, base: ("gen", [{"task": "dialog", "text": 'Bot message: "a"\nuser "b"\nbot "c"'}]))
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert N.nemo_audit(log=lambda *_: None) == 0
+    r = json.loads((C.OUT / "nemo" / "nemo_audit.json").read_text())
+    w = r["source"]["wrapper"]
+    assert w["found"] and not w["forwards_kwargs"] and not w["passes_stop"] and w["fixed_max_tokens"] == ["16", "256"]
+    x = r["qwen"]["benches"]["xstest"]
+    assert x["NeMo"]["format_leak"] == 1 and x["NeMo"]["internal_error"] == 1 and x["NeMo"]["system_prompt_nonempty"] == 1
+    assert x["NeMo"]["internal_error_scored"]["over_refusal"] == {"1": 1} and x["Vanilla"]["format_leak"] == 0
+    assert r["qwen"]["dialog_reply_continues"] == 1
+
+
 def test_release_copies_small_checkpoints_with_a_manifest(tmp_path, monkeypatch):
     from v21r import release as RL
     monkeypatch.setattr(C, "CACHE", tmp_path)
