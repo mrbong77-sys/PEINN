@@ -482,3 +482,31 @@ def test_zephyr_review_needs_every_arm_and_tier_without_errors(monkeypatch):
     assert R.zephyr_review() == 1
     monkeypatch.setattr(MX, "collect", lambda check, base: df[df.arm_id != C.ARMS["zephyr"]["NeMo"]].reset_index(drop=True))
     assert R.zephyr_review() == 1
+
+
+def test_r2d2_probe_counts_refusals_per_config_and_group(tmp_path, monkeypatch):
+    from v21r import r2d2_probe as RP
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    sup = pd.DataFrame({"text": [f"benign {i}" for i in range(12)] + [f"harmful {i}" for i in range(12)],
+                        "source": ["supp:orbench_80k"] * 12 + ["supp:wildjailbreak_van_harmful"] * 12})
+    f = D.supplement_file(False)
+    f.parent.mkdir(parents=True, exist_ok=True)
+    sup.to_csv(f, index=False)
+    monkeypatch.setattr(RP.subprocess, "run", lambda *a, **k: type("R", (), {"returncode": 0})())
+    monkeypatch.setattr(C, "pull_missing", lambda *a, **k: 0)
+
+    def fake(path, body=None, timeout=60):
+        if "keep_alive" in body:
+            return "{}"
+        text = body["messages"][0]["content"] if path == "/api/chat" else body["prompt"]
+        served = body["model"] == C.R2D2
+        a = "Sorry, I can't do that." if served or "harmful" in text else ("" if "benign 3" in text else "Sure, here.")
+        return json.dumps({"message": {"content": a}} if path == "/api/chat" else {"response": a})
+    monkeypatch.setattr(C, "_ollama", fake)
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert RP.r2d2_probe(log=lambda *_: None) == 0
+    r = json.loads((C.OUT / "diag" / "r2d2_probe.json").read_text())["configs"]
+    assert r["served"]["plain_benign"] == {"n": 10, "refusal": 10, "empty": 0}
+    assert r["raw_q4"]["plain_benign"]["refusal"] == 0 and r["raw_q4"]["wj_harmful"]["refusal"] == 10
+    assert r["raw_q8"]["orbench_benign"] == {"n": 10, "refusal": 0, "empty": 1}

@@ -171,6 +171,10 @@ def steps(check: bool) -> list:
               ("matrix-zephyr-check", "zephyr with R2D2, NeMo and Llama Guard on the check benches first (pre-test; "
                                       "R2D2 has not run yet)",
                lambda: step("matrix", True, env_add={"V21R_BASES": "zephyr"})),
+              ("r2d2-probe", "R2D2 served as now vs its own template and Q8_0 on 30 non-benchmark prompts (DESIGN.md 25)",
+               run("r2d2-probe")),
+              ("matrix-gemma3", "the matrix on gemma3 first (does not depend on the zephyr review, DESIGN.md 25)",
+               lambda: step("matrix", False, env_add={"V21R_BASES": "gemma3"})),
               ("zephyr-review", "the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)",
                zephyr_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
