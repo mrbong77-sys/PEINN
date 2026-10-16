@@ -48,22 +48,22 @@
   [
    "wildjailbreak_van_benign",
    0,
-   5000
+   12000
   ],
   [
    "wildguardmix_van_benign",
    0,
-   2000
+   4000
   ],
   [
    "wildjailbreak_van_harmful",
    1,
-   5000
+   12000
   ],
   [
    "wildguardmix_van_harmful",
    1,
-   2000
+   4000
   ],
   [
    "orbench_hard",
@@ -71,7 +71,7 @@
    1500
   ]
  ],
- "rows": 35380,
+ "rows": 53380,
  "by_source": {
   "supp:coconot_contrast": 379,
   "supp:falsereject_train": 5000,
@@ -81,15 +81,15 @@
   "supp:phtest_harmless": 2073,
   "supp:wildguardmix_adv_benign": 1500,
   "supp:wildguardmix_adv_harmful": 1500,
-  "supp:wildguardmix_van_benign": 2000,
-  "supp:wildguardmix_van_harmful": 2000,
+  "supp:wildguardmix_van_benign": 4000,
+  "supp:wildguardmix_van_harmful": 4000,
   "supp:wildjailbreak_adv_benign": 3000,
   "supp:wildjailbreak_adv_harmful": 3000,
-  "supp:wildjailbreak_van_benign": 5000,
-  "supp:wildjailbreak_van_harmful": 5000
+  "supp:wildjailbreak_van_benign": 12000,
+  "supp:wildjailbreak_van_harmful": 12000
  },
  "by_label": {
-  "benign": 23225,
-  "harmful": 12155
+  "benign": 32225,
+  "harmful": 21155
  }
 }
