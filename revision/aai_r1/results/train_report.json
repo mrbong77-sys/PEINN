@@ -2,110 +2,110 @@
  "neg_weight": 1.0,
  "row_weight": "sqrt_inverse_source_frequency",
  "row_weight_by_source": {
-  "alpaca": 1.465,
-  "beavertails": 1.466,
-  "classical_dilemma": 4.142,
-  "daily_dilemmas": 1.464,
-  "dolly": 1.465,
-  "hh_rlhf_harmless": 1.465,
-  "hh_rlhf_helpful": 1.465,
-  "hh_rlhf_redteam": 1.464,
-  "jailbreak": 1.709,
-  "moralchoice_highamb": 1.588,
-  "narrative": 1.196,
-  "supp:coconot_contrast": 2.197,
-  "supp:falsereject_train": 0.604,
-  "supp:orbench_80k": 0.779,
-  "supp:orbench_hard": 1.197,
-  "supp:orbench_toxic": 1.671,
-  "supp:phtest_harmless": 0.938,
-  "supp:wildguardmix_adv_benign": 1.102,
-  "supp:wildguardmix_adv_harmful": 1.102,
-  "supp:wildguardmix_van_benign": 0.956,
-  "supp:wildguardmix_van_harmful": 0.959,
-  "supp:wildjailbreak_adv_benign": 0.779,
-  "supp:wildjailbreak_adv_harmful": 0.779,
-  "supp:wildjailbreak_van_benign": 0.604,
-  "supp:wildjailbreak_van_harmful": 0.604,
-  "syn_advbenign": 2.42,
-  "syn_benignsensitive": 1.688,
-  "syn_cad": 1.508,
-  "syn_intent": 1.464,
-  "syn_subtleharm": 2.155,
-  "toxicchat_safe": 1.569
+  "alpaca": 1.829,
+  "beavertails": 1.831,
+  "classical_dilemma": 5.17,
+  "daily_dilemmas": 1.828,
+  "dolly": 1.829,
+  "hh_rlhf_harmless": 1.829,
+  "hh_rlhf_helpful": 1.829,
+  "hh_rlhf_redteam": 1.828,
+  "jailbreak": 2.134,
+  "moralchoice_highamb": 1.983,
+  "narrative": 1.493,
+  "supp:coconot_contrast": 2.743,
+  "supp:falsereject_train": 0.754,
+  "supp:orbench_80k": 0.973,
+  "supp:orbench_hard": 1.494,
+  "supp:orbench_toxic": 2.086,
+  "supp:phtest_harmless": 1.171,
+  "supp:wildguardmix_adv_benign": 1.376,
+  "supp:wildguardmix_adv_harmful": 1.376,
+  "supp:wildguardmix_van_benign": 0.845,
+  "supp:wildguardmix_van_harmful": 0.845,
+  "supp:wildjailbreak_adv_benign": 0.973,
+  "supp:wildjailbreak_adv_harmful": 0.973,
+  "supp:wildjailbreak_van_benign": 0.487,
+  "supp:wildjailbreak_van_harmful": 0.487,
+  "syn_advbenign": 3.021,
+  "syn_benignsensitive": 2.107,
+  "syn_cad": 1.883,
+  "syn_intent": 1.828,
+  "syn_subtleharm": 2.69,
+  "toxicchat_safe": 1.959
  },
  "n": {
-  "train": 38199,
-  "val": 4410,
-  "test": 4415,
+  "train": 52569,
+  "val": 6206,
+  "test": 6211,
   "bench": 1521
  },
- "calibrator_val_auroc": 0.9658576981807617,
- "A0_val_loss": 0.31209173798561096,
- "A6p_val_loss": 0.2953265309333801,
- "A6e_val_loss": 0.30651381611824036,
- "A1_val_loss": 0.35022562742233276,
- "A2_val_loss": 0.37561506032943726,
+ "calibrator_val_auroc": 0.9734651420890428,
+ "A0_val_loss": 0.2850550413131714,
+ "A6p_val_loss": 0.2777441740036011,
+ "A6e_val_loss": 0.28873056173324585,
+ "A1_val_loss": 0.3233188986778259,
+ "A2_val_loss": 0.35456132888793945,
  "A2_class_counts_train": {
-  "safe": 24548,
+  "safe": 31730,
   "ambiguous": 1409,
-  "harmful": 12242
+  "harmful": 19430
  },
- "A3_val_loss": 0.33733469247817993,
- "A7_val_loss": 0.2308834826938709,
+ "A3_val_loss": 0.30288267135620117,
+ "A7_val_loss": 0.2293140624445189,
  "A0ft_energy_epochs": [
   {
    "epoch": 1,
-   "val": 0.9836,
-   "val_F_auroc": 0.9836
+   "val": 0.9899,
+   "val_F_auroc": 0.9899
   },
   {
    "epoch": 2,
-   "val": 0.9858,
-   "val_F_auroc": 0.9858
+   "val": 0.9925,
+   "val_F_auroc": 0.9925
   },
   {
    "epoch": 3,
-   "val": 0.9873,
-   "val_F_auroc": 0.9873
+   "val": 0.9923,
+   "val_F_auroc": 0.9923
   }
  ],
  "A0ft_head_epochs": [
   {
    "epoch": 1,
-   "val": 0.2489,
-   "val_F_auroc": 0.9664
+   "val": 0.2318,
+   "val_F_auroc": 0.9783
   },
   {
    "epoch": 2,
-   "val": 0.2413,
-   "val_F_auroc": 0.9729
+   "val": 0.2329,
+   "val_F_auroc": 0.9831
   },
   {
    "epoch": 3,
-   "val": 0.2563,
-   "val_F_auroc": 0.9744
+   "val": 0.2402,
+   "val_F_auroc": 0.9852
   },
   {
    "epoch": 4,
-   "val": 0.2889,
-   "val_F_auroc": 0.9763
+   "val": 0.2703,
+   "val_F_auroc": 0.986
   },
   {
    "epoch": 5,
-   "val": 0.3041,
-   "val_F_auroc": 0.9769
+   "val": 0.2778,
+   "val_F_auroc": 0.9864
   }
  ],
- "A0ft_energy_val_auroc": 0.9873205169588407,
- "A0ft_head_val_loss": 0.2413194334912164,
+ "A0ft_energy_val_auroc": 0.9924698555453858,
+ "A0ft_head_val_loss": 0.2317750578905778,
  "A0ftM_ood": {
-  "tau": 48.9456,
+  "tau": 52.8082,
   "q": 0.99,
   "share": {
-   "bench": 0.0256,
-   "test": 0.0202,
-   "val": 0.0184
+   "bench": 0.0184,
+   "test": 0.0158,
+   "val": 0.0168
   }
  }
 }
