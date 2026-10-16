@@ -339,3 +339,25 @@ def test_head_weights_train_every_axis_like_the_shipped_head():
     assert M.SHIPPED_NEG_W == 1.0
     assert (M.head_weights(d, M.SHIPPED_NEG_W) == 1.0).all()
     assert M.head_weights(d, 0.0).tolist() == [[1, 0, 1], [0, 1, 0]]
+
+
+def test_preview_scores_only_finished_bases(tmp_path, monkeypatch):
+    out = tmp_path / "res"
+    (out / "matrix").mkdir(parents=True)
+    (out / "matrix" / "qwen.json").write_text("{}", encoding="utf-8")
+    C.jdump({"main_cap": 0.1, "variants": {"A0": {"0.05": {}, "0.1": {}}, "A1": {"0.05": {}, "0.1": {}}}},
+            out / "thresholds.json")
+    monkeypatch.setattr(D, "odir", lambda check: out)
+    monkeypatch.setattr(A.MX, "bases", lambda check: ("zephyr", "qwen", "gemma4", "gemma3"))
+    seen = {}
+    s = {"summary": {"ucr": 0.1, "orr": 0.2, "ucr_parts": []}, "harmbench": {"asr": {"mean": 0.05}}}
+
+    def fake(check, log=print, only=None):
+        seen["only"] = only
+        return {"bases": {b: {"variants": {"A0@0.05": s, "A0@0.1": s, "A1@0.1": s, "A1@0.05": s}, "defences": {"NeMo": s}}
+                          for b in only}}
+    monkeypatch.setattr(A, "evaluate", fake)
+    assert A.preview(True, log=lambda *_: None) == 0
+    assert seen["only"] == ("qwen",)
+    md = (out / "analysis_preview" / "preview.md").read_text(encoding="utf-8")
+    assert "| A1@0.1 | 0.100 | 0.200 | 0.050 |" in md and "A1@0.05" not in md and "| NeMo |" in md

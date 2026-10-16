@@ -15,7 +15,7 @@ from . import a8, analyze, data, gate_diag, matrix, models, nemo_doc, release, t
 STEPS = {
     "record": data.record, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
-    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "gate-diag": gate_diag.gate_diag, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "release": release.release,
+    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "gate-diag": gate_diag.gate_diag, "a8": a8.a8, "cost": matrix.cost, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release,
 }
 
 

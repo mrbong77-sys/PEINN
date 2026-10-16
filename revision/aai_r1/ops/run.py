@@ -68,6 +68,9 @@ def steps(check: bool) -> list:
               ("gate-diag-check", "gate diagnosis on the check cache first (pre-test, CPU)", lambda: step("gate-diag", True)),
               ("gate-diag", "gate diagnosis: why the isolated gate blocks XSTest safe texts (CPU, counts only)",
                run("gate-diag")),
+              ("preview-check", "the preview on the check cache first (pre-test, CPU)", lambda: step("preview", True)),
+              ("preview", "benchmark metrics of the fixed gate on qwen and gemma4, re-scored (CPU, no model call)",
+               run("preview")),
               ("gate-review", "hold until the diagnosis is reviewed and the direction confirmed", gate_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]

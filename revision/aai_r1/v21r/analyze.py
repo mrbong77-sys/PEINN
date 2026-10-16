@@ -90,11 +90,11 @@ def defence_rows(df: pd.DataFrame, bench: str, arm: str) -> pd.DataFrame:
     return d
 
 
-def evaluate(check: bool, log=print) -> dict:
+def evaluate(check: bool, log=print, only=None) -> dict:
     rt = TH.load_routes(check)
     names = [c for c in rt.columns if c not in ("sha", "bench")]
     out = {"bases": {}}
-    for b in MX.bases(check):
+    for b in (MX.bases(check) if only is None else only):
         df = MX.collect(check, b)
         if not len(df):
             continue
@@ -243,6 +243,59 @@ def analyze(check: bool = False, log=print) -> int:
     if check:
         return 0
     return 0 if C.publish([f, md], "v21r A: benchmark results, curves, calibration and I-construct analyses") else 1
+
+
+def finished_bases(check: bool) -> tuple:
+    """Bases whose matrix step finished (results/matrix/BASE.json written after generate and judge)."""
+    return tuple(b for b in MX.bases(check) if (D.odir(check) / "matrix" / f"{b}.json").exists())
+
+
+PREVIEW_COLS = (("UCR", lambda r: r["summary"]["ucr"]), ("ORR", lambda r: r["summary"]["orr"]),
+                ("HarmBench ASR", lambda r: r["harmbench"]["asr"]["mean"]),
+                ("Taxonomy unsafe", lambda r: r["taxonomy"]["unsafe_rate"]["mean"]),
+                ("XSTest unsafe compl.", lambda r: r["xstest"]["unsafe_compliance"]["mean"]),
+                ("Ethics align.", lambda r: r["ethics"]["alignment_mfq_wvs"]["mean"]),
+                ("MORABLES acc.", lambda r: r["morables"]["accuracy"]["mean"]),
+                ("GGB", lambda r: r["ggb"]["score"]["mean"]))
+
+
+def _cell(f, r):
+    try:
+        x = f(r)
+    except (KeyError, TypeError):
+        return ""
+    return "" if x is None else f"{x:.3f}"
+
+
+def preview(check: bool = False, log=print) -> int:
+    """DESIGN.md 11: benchmark metrics of the current gate on the bases already answered (CPU, no model call), so the
+    gate is reviewed on real answers before the rest of the matrix spends GPU time."""
+    done = finished_bases(check)
+    th = C.jload(D.odir(check) / "thresholds.json")
+    ev = evaluate(check, log, only=done)
+    main = str(th["main_cap"])
+    rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v == "A0"]
+    rows += ["SHIPPED", "A0paper", "A4a", "A4b", "A4c", "A4d"]
+    L = ["# 게이트 수정 뒤 미리보기 (DESIGN.md 11)", "",
+         f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main}. 모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]
+    for b, res in ev["bases"].items():
+        L += [f"## {C.BASES[b]}", "", "| 체계 | " + " | ".join(c for c, _ in PREVIEW_COLS) + " |",
+              "|---|" + "---|" * len(PREVIEW_COLS)]
+        for n in rows:
+            if n in res["variants"]:
+                L.append(f"| {n} | " + " | ".join(_cell(f, res["variants"][n]) for _, f in PREVIEW_COLS) + " |")
+        for n, r in res["defences"].items():
+            L.append(f"| {n} | " + " | ".join(_cell(f, r) for _, f in PREVIEW_COLS) + " |")
+        L.append("")
+    o = D.odir(check) / "analysis_preview"
+    f = C.jdump({"bases_done": done, "main_cap": th["main_cap"], "benchmarks": ev, "curves": curves(ev, th)},
+                o / "preview.json")
+    md = o / "preview.md"
+    md.write_text("\n".join(L) + "\n", encoding="utf-8")
+    log("\n".join(L))
+    if check:
+        return 0
+    return 0 if C.publish([f, md], "v21r A-preview: benchmark metrics of the fixed gate on the bases answered so far") else 1
 
 
 def render(res: dict) -> str:

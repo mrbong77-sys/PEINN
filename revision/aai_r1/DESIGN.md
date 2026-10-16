@@ -131,3 +131,5 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - 원인 ②: 격리 에너지가 XSTest형 표현에 높게 반응합니다. 차단된 안전 문장의 학습 이웃 44%가 trick_safe입니다.
   - 결정(교수님, 결정 카드 "빼고 재학습"): XSTest 안전 문항의 범주를 참고해 만든 합성 출처 trick_safe, benign_harm_discuss를 코퍼스에서 뺍니다(`data.EXCLUDE_SOURCES`). 분할 뒤에 빼므로 다른 행의 분할은 바뀌지 않습니다. 평가 벤치 격리는 벤치를 보고 설계한 학습 출처까지 포함합니다.
   - 다시 돌리는 단계: split → train → thresholds → routes → gate-diag-check → gate-diag. 그다음 gate-review에서 다시 멈추고, 교수님 확인 뒤에만 행렬을 재개합니다. 이미 생성한 qwen, gemma4 답변은 다시 채점만 합니다.
+- **재진단 결과 (09:13 KST):** A0 F의 XSTest AUROC 0.73 → 0.82(투고본 0.84), 안전 문장 F 중앙값 0.86 → 0.11. 교정기 val AUROC 0.970. 주 운영점 val: 유해 Hard-block 96.0%, 안전 9.9%. XSTest 안전 문장 차단 55/108은 대부분 극단 에너지(51) 조건입니다. 같은 조건에서 투고본 헤드·교정기(SHIPPED, XSTest 학습)도 XSTest 191문장 중 119개를 거절 경로로 보냅니다.
+- **미리보기 `preview` (CPU):** 행렬이 끝난 기반 모델(qwen, gemma4)의 답을 새 게이트로 다시 채점해 벤치 지표를 냅니다(`results/analysis_preview/`). 생성 답변은 강제 계층별이라 게이트와 무관하므로 그대로 씁니다. 순서: gate-diag → preview-check → preview → gate-review.
