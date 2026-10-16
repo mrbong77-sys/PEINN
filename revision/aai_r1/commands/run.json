@@ -1,6 +1,6 @@
 {
- "id": "20261016T090500Z-update",
+ "id": "20261016T092000Z-update",
  "action": "update",
- "note": "DESIGN.md 25: R2D2 served as CPEG (r2d2-cpeg), zephyr pre-test again; applies at the next step boundary (after matrix-gemma3).",
- "issued_utc": "2026-10-16 09:05:00"
+ "note": "DESIGN.md 25, 27: R2D2 as CPEG and nemo-orr; applies at the next step boundary (after matrix-gemma3).",
+ "issued_utc": "2026-10-16 09:20:00"
 }

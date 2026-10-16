@@ -184,6 +184,8 @@ def steps(check: bool) -> list:
                lambda: step("biomon", True)),
               ("biomon", "cheap-monitor bioweapons prompt on PEINN, Vanilla, Llama Guard, NeMo, Shieldstral (outside the "
                          "paper, Eugene 2026-10-16 16:43 KST: first after gemma3)", run("biomon")),
+              ("nemo-orr", "which XSTest safe prompts NeMo refuses and by which rail, on the bases answered so far (CPU; "
+                           "Eugene 2026-10-16 18:11 KST)", run("nemo-orr")),
               ("r2d2-cpeg", "R2D2 served as CPEG served it; the zephyr pre-test cache dropped (Eugene 17:56 KST, DESIGN.md 25)",
                run("r2d2-cpeg")),
               ("r2d2-fingerprint", "how close each R2D2 build Ollama holds comes to the submitted H02 answers (12 XSTest "
@@ -194,6 +196,7 @@ def steps(check: bool) -> list:
                zephyr_review)]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
+    s += [("nemo-orr-all", "NeMo's XSTest safe refusals by type and rail on every base (CPU)", run("nemo-orr"))]
     if not check:
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))

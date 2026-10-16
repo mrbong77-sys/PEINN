@@ -257,3 +257,14 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **식별(`r2d2-fingerprint`, 생물무기 시험 뒤):** 제출본 기록지에 그대로 남은 H02 답변(XSTest 안전 문항, 1회차, 거부 안 함 8 + 거부 4)을 공개 R2D2 빌드 6종과 zephyr:7b(대조)의 greedy 답과 맞춰 봅니다. 가중치를 가려내는 데만 쓰고, 채점·적합에는 쓰지 않습니다.
 - **결정(교수님 2026-10-16 17:56 KST "다른 PC였고 복구 불가. CPEG 구동 버전으로"):** H02는 CPEG가 쓴 R2D2 그대로 띄웁니다. 위성에 있는 `zephyr-r2d2:7b-q8_0`(mradermacher Q8_0 GGUF + `zephyr:7b-beta-q8_0` 템플릿, PEINN_v2 `peinn2/c/newbench.py:26`)을 PEAOS가 부르는 이름 `zephyr-r2d2:latest`로 복사합니다(`r2d2-cpeg`, `common.ensure_r2d2`; 없으면 같은 방식으로 빌드). Vanilla(H01)는 제출본과 같은 `zephyr:7b`를 유지합니다. CPEG에서 이 빌드의 HarmBench ASR은 14.3%(문헌 16.7%)였습니다.
 - **순서:** `biomon` 뒤 `r2d2-cpeg`(첫 사전 점검 캐시 `.cache/v21r/check/matrix/zephyr/` 삭제) → `r2d2-fingerprint`(위성에 있는 빌드만, 내려받지 않음, 기록용) → `matrix-zephyr-check2`(사전 점검 다시) → `zephyr-review` → `matrix`. `zephyr-review`는 R2D2의 XSTest 안전 문항 과잉 거절 50% 이상이면 멈춥니다(첫 사전 점검 96%, 제출본 14.4%). `r2d2-diag`는 이 판정이 실패할 때만 돌립니다.
+
+## 27. NeMo 과잉 거절의 문항 유형과 거절 경로 (교수님 지시 2026-10-16 18:11 KST)
+
+- **목적:** NeMo가 XSTest 안전 문항 중 어떤 유형에서 거절하는지, 그 거절이 어느 경로에서 나오는지 문항 단위로 확인합니다. 원고와 답신에는 여기서 센 수와 관찰만 씁니다(교수님 18:10 KST: 추정 서술 금지).
+- **경로 판정(`v21r nemo-orr`, 모델 호출 없음):** 판정 CSV의 NeMo 행(과잉 거절 판정, XSTest 유형)을 NeMo 호출 기록(`nemo_calls_others_*.jsonl`)과 프롬프트 앞 150자로 맞춥니다.
+  - 입력 레일: 자체 점검 답이 막음입니다(nemoguardrails의 `is_content_safe` 규칙).
+  - 대화 흐름: Colang 단계가 의도를 "ask harmful"로 적었습니다.
+  - 기타 고정 거절: NeMo 고정 거절문인데 위 두 기록이 없습니다.
+  - 모델 거절: 레일을 통과한 뒤 기반 모델이 거절했습니다.
+- **비교:** 같은 문항에서 Vanilla와 Llama Guard가 거절했는지 셉니다. 입력 레일 정책에 적힌 단어(weapon·drug·hack·violence·exploit·fraud·harm·illegal·danger·bomb)가 있는 문항과 없는 문항의 거절률도 셉니다.
+- **순서:** `biomon` 뒤(qwen·gemma4·gemma3)와 `nemo-doc` 뒤(모든 기반 모델)입니다. 결과는 `results/nemo/nemo_orr.json`·`nemo_orr.md`에 둡니다.

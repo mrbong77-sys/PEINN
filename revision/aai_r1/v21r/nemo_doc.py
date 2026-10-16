@@ -102,3 +102,102 @@ def nemo_doc(check: bool = False, log=print) -> int:
     if check:
         return 0
     return 0 if C.publish([f], "v21r R2: NeMo rail verdicts per base (why the NeMo arms answer or refuse)") else 1
+
+
+# ---- which XSTest safe prompts NeMo refuses, and by which rail (Eugene 2026-10-16 18:11 KST) --------------------
+# The input rail asks the base model "Should the user message be blocked (Yes or No)?" under a policy that lists these
+# words (pea_eval/nemo_config/config.yml); the Colang flow refuses when the dialog step names the intent "ask harmful".
+POLICY_TERMS = re.compile(r"\b(?:weapon|drug|hack|violen|exploit|fraud|harm|illegal|danger|bomb)", re.I)
+
+
+def _norm(s) -> str:
+    s = str(s)
+    if "[User Request]" in s:
+        s = s.split("[User Request]", 1)[1]
+    return " ".join(s.split())[:150].strip('"')
+
+
+def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
+    """Every XSTest safe row of the NeMo arm with its judged over-refusal, its XSTest type and what each rail did to it
+    (matched on the first 150 characters of the prompt; the log keeps 160). Vanilla and Llama Guard rows of the same
+    prompts give each item's refusal by the bare base model and by the other guard."""
+    import pandas as pd
+    df = M.collect(check, base)
+    x = df[(df.tag == "others") & (df.bench == "xstest") & (df.expected_label == "safe")].copy()
+    x["key"] = x.prompt_text.map(_norm)
+    arms = C.ARMS[base]
+    n = x[x.arm_id == arms["NeMo"]].copy()
+    for k in ("Vanilla", "LlamaGuard"):
+        m = x[x.arm_id == arms[k]].groupby("key").over_refusal.max()
+        n[f"{k.lower()}_refused"] = n.key.map(m)
+    _, rows = calls(check, base)
+    rows = [r for r in rows if r.get("bench") == "xstest"]
+    last = {}
+    for r in rows:                                                  # the last call per task and subject
+        last[(r["task"], _norm(r["subj"]))] = r["text"] or ""
+    n["input"] = n.key.map(lambda k: verdict(last[("self_check_input", k)]) if ("self_check_input", k) in last else "none")
+    n["dialog_harmful"] = n.key.map(lambda k: "ask harmful" in last.get(("dialog", k), ""))
+    txt = n.filter(regex="^response").astype(str).agg(" ".join, axis=1)
+    n["fixed_refusal"] = txt.str.contains(REFUSAL, regex=False)
+    n["policy_term"] = n.key.str.contains(POLICY_TERMS)
+    n["source"] = "answered"
+    r = pd.to_numeric(n.over_refusal, errors="coerce").fillna(0) > 0
+    n.loc[r, "source"] = "model_refusal"                             # the base model's own refusal under NeMo's instruction
+    n.loc[r & n.fixed_refusal, "source"] = "fixed_other"             # NeMo's fixed refusal with no input or dialog record
+    n.loc[r & n.dialog_harmful, "source"] = "dialog_flow"
+    n.loc[r & (n.input != "allow") & (n.input != "none"), "source"] = "input_rail"
+    return n
+
+
+def nemo_orr(check: bool = False, log=print) -> int:
+    """Counts per XSTest type: NeMo refusals by source, against Vanilla and Llama Guard on the same prompts, and the
+    refusal rate with and without a policy word. No model call. -> results/nemo/nemo_orr.json and nemo_orr.md"""
+    import pandas as pd
+    res, md = {}, ["# NeMo의 XSTest 안전 문항 과잉 거절: 문항 유형과 거절 경로", "",
+                   "판정 CSV와 NeMo 호출 기록에서 셌습니다(모델 호출 없음). 경로: 입력 레일(자체 점검이 막음), "
+                   "대화 흐름(Colang 의도 'ask harmful'), 모델 거절(레일 통과 뒤 기반 모델이 거절), 기타 고정 거절(기록 대조 안 됨).", ""]
+    for b in M.bases(check):
+        try:
+            n = refusal_sources(check, b)
+        except Exception as e:                                      # noqa: BLE001
+            res[b] = {"error": f"{type(e).__name__}: {e}"[:300]}
+            continue
+        if not len(n):
+            res[b] = {"error": "no NeMo XSTest safe rows"}
+            continue
+        ref = n.source != "answered"
+        by = {}
+        for t, g in n.groupby("prompt_type"):
+            gr = g[g.source != "answered"]
+            by[t] = {"n": len(g), "refused": int(len(gr)), "sources": gr.source.value_counts().to_dict(),
+                     "vanilla_refused": int((pd.to_numeric(g.vanilla_refused, errors="coerce") > 0).sum()),
+                     "llamaguard_refused": int((pd.to_numeric(g.llamaguard_refused, errors="coerce") > 0).sum()),
+                     "examples": [str(k)[:100] for k in gr.key.head(3)]}
+        pt = {str(v): {"n": int(len(g)), "refused": int((g.source != "answered").sum())} for v, g in n.groupby("policy_term")}
+        res[b] = {"n": len(n), "refused": int(ref.sum()), "sources": n[ref].source.value_counts().to_dict(),
+                  "refused_also_by_vanilla": int((ref & (pd.to_numeric(n.vanilla_refused, errors="coerce") > 0)).sum()),
+                  "unmatched_log": int((n.input == "none").sum()), "policy_term": pt, "by_type": by}
+        log(f"NeMo {b}: refused {res[b]['refused']}/{len(n)} {res[b]['sources']} policy_term {pt}")
+        md += [f"## {C.BASES[b]}", "", f"거절 {res[b]['refused']}/{len(n)}, 경로 {res[b]['sources']}, "
+               f"그중 Vanilla도 거절 {res[b]['refused_also_by_vanilla']}, 기록 대조 실패 {res[b]['unmatched_log']}. "
+               f"정책 단어(weapon·drug·hack·violence·exploit·fraud·harm·illegal·danger·bomb) 있음 "
+               f"{pt.get('True', {}).get('refused', 0)}/{pt.get('True', {}).get('n', 0)}, 없음 "
+               f"{pt.get('False', {}).get('refused', 0)}/{pt.get('False', {}).get('n', 0)}.", "",
+               "| 유형 | 문항 | NeMo 거절 | 입력 레일 | 대화 흐름 | 모델 거절 | Vanilla 거절 | Llama Guard 거절 |", "|---|---|---|---|---|---|---|---|"]
+        for t, v in sorted(by.items(), key=lambda kv: -kv[1]["refused"]):
+            s = v["sources"]
+            md.append(f"| {t} | {v['n']} | {v['refused']} | {s.get('input_rail', 0)} | {s.get('dialog_flow', 0)} | "
+                      f"{s.get('model_refusal', 0)} | {v['vanilla_refused']} | {v['llamaguard_refused']} |")
+        md += ["", "거절된 예(유형별 최대 3개, 100자):", ""]
+        for t, v in by.items():
+            for e in v["examples"]:
+                md.append(f"- {t}: {e}")
+        md.append("")
+    o = D.odir(check) / "nemo"
+    o.mkdir(parents=True, exist_ok=True)
+    f = C.jdump(res, o / "nemo_orr.json")
+    g = o / "nemo_orr.md"
+    g.write_text("\n".join(md) + "\n", encoding="utf-8")
+    if check:
+        return 0
+    return 0 if C.publish([f, g], "v21r R2: which XSTest safe prompts NeMo refuses, and by which rail (counts)") else 1
