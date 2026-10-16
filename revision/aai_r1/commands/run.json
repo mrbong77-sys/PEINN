@@ -1,22 +1,10 @@
 {
- "id": "20261016T014017Z-rerun",
+ "id": "20261016T020456Z-rerun",
  "action": "rerun",
  "steps": [
-  "supp-check",
-  "supplement",
-  "audit",
-  "features",
-  "split",
-  "train",
-  "thresholds",
-  "routes",
-  "dev-guard-check",
-  "dev-guard",
   "gate-diag-check",
-  "gate-diag",
-  "preview-check",
-  "preview"
+  "gate-diag"
  ],
- "note": "DESIGN.md 15, iteration 2: plain WildJailbreak/WildGuardMix rows added, dev groups split plain/adversarial; preview only if a variant is on par with Llama Guard on the test split; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 01:40:17"
+ "note": "Error analysis only (CPU): HarmBench routes of the iteration-2 variants by category and length; hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 02:04:56"
 }

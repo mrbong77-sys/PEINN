@@ -19,6 +19,7 @@ Counts and statistics only (no text) -> results/diag/gate_diag.json and gate_dia
 from __future__ import annotations
 
 import collections
+import json
 import traceback
 
 import numpy as np
@@ -80,6 +81,27 @@ def xstest_labels(check: bool) -> pd.DataFrame:
             if len(x):
                 return x.reset_index(drop=True)
     return pd.DataFrame(columns=["sha", "expected_label"])
+
+
+def harmbench_routes(check: bool, rt: pd.DataFrame, names) -> dict:
+    """Error analysis only (never fitting): routes of the HarmBench routing texts by category, semantic category and
+    prompt length, for the named variants."""
+    for b in MX.bases(check):
+        df = MX.collect(check, b)
+        if not (len(df) and "bench" in df and (df.bench == "harmbench").any()):
+            continue
+        x = df[(df.bench == "harmbench") & df.get("neutro_posture", pd.Series(dtype=object)).notna()]
+        x = x.assign(sha=D.posture_sha(x["neutro_posture"]), chars=x.get("prompt_p1", x.get("behavior", "")).astype(str).str.len())
+        x = x.drop_duplicates("sha")[["sha", "category", "semantic_category", "chars"]]
+        x["length"] = pd.cut(x.chars, [0, 300, 1000, 10 ** 7], labels=["<300", "300-1000", ">1000"]).astype(str)
+        m = x.merge(rt, on="sha", how="inner")
+        out = {"base": b, "texts": int(len(m))}
+        for n in names:
+            if n in m:
+                out[n] = {k: {str(a): {str(r): int(c) for r, c in g_[n].value_counts().items()} for a, g_ in m.groupby(k)}
+                          for k in ("category", "semantic_category", "length")}
+        return out
+    return {}
 
 
 def symptom(lab: pd.DataFrame, th: dict, a0: dict, shp: dict) -> dict:
@@ -234,6 +256,13 @@ def run(check: bool) -> dict:
         res["dev_curve"] = {c: dev_by_variant(check, sp, tha, c) for c in caps}
         res["dev_parity_points"] = [f"{v}@{c}" for c, d in res["dev_curve"].items()
                                     for v, x in parity(d, res["dev_guard"]).items() if x["all"]]
+    try:
+        from . import theta as TH
+        rt = TH.load_routes(check)
+        res["harmbench_routes"] = harmbench_routes(check, rt, [n for n in ("A0@0.1", "A0ft@0.005", "A0ft@0.02", "A0ft@0.05",
+                                                                           "A0ft@0.1") if n in rt])
+    except FileNotFoundError:
+        pass
     if len(lab):
         a0, shp = on(a0sig, "bench", lab.sha), on(shsig, "bench", lab.sha)
         res["xstest"] = symptom(lab, th, a0, shp)
@@ -287,6 +316,13 @@ def render(r: dict) -> str:
             for c, d in (r.get("dev_curve") or {}).items():
                 for v, g in d.items():
                     L.append(f"| {c} | {v} | " + " | ".join(f"{g[k]['refusal']:.3f}" if k in g else "" for k in gg) + " |")
+    hr = r.get("harmbench_routes") or {}
+    if hr:
+        L += ["", f"## 6. HarmBench 경로 (오류 분석 전용, 적합에 쓰지 않음; 문장 {hr['texts']}, {hr['base']} 기록)", ""]
+        for n, by in hr.items():
+            if isinstance(by, dict):
+                for k, v in by.items():
+                    L.append(f"- {n} {k}: " + "; ".join(f"{a} {json.dumps(c, ensure_ascii=False)}" for a, c in v.items()))
     if "error" in r:
         L += ["", "## 오류", "", "```", r["error"], "```"]
     return "\n".join(L) + "\n"
