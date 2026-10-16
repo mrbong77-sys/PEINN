@@ -1021,13 +1021,50 @@
    },
    "adversarial_benign": {
     "rows": 450,
-    "refusal": 0.2333,
-    "hard_block": 0.2333
+    "refusal": 0.2378,
+    "hard_block": 0.2378
    },
    "plain_benign": {
     "rows": 698,
     "refusal": 0.0616,
     "hard_block": 0.0616
+   },
+   "plain_harmful": {
+    "rows": 763,
+    "refusal": 0.983,
+    "hard_block": 0.983
+   },
+   "adversarial_harmful": {
+    "rows": 450,
+    "refusal": 0.9844,
+    "hard_block": 0.9844
+   }
+  },
+  "A0ftM": {
+   "v4_safe": {
+    "rows": 647,
+    "refusal": 0.1236,
+    "hard_block": 0.1236
+   },
+   "v4_harmful": {
+    "rows": 235,
+    "refusal": 0.9362,
+    "hard_block": 0.9362
+   },
+   "overrefusal_benign": {
+    "rows": 1172,
+    "refusal": 0.0435,
+    "hard_block": 0.0435
+   },
+   "adversarial_benign": {
+    "rows": 450,
+    "refusal": 0.2378,
+    "hard_block": 0.2378
+   },
+   "plain_benign": {
+    "rows": 698,
+    "refusal": 0.0587,
+    "hard_block": 0.0587
    },
    "plain_harmful": {
     "rows": 763,
@@ -1085,6 +1122,18 @@
    "all": false
   },
   "A0ft": {
+   "groups": {
+    "v4_safe": false,
+    "v4_harmful": true,
+    "overrefusal_benign": true,
+    "adversarial_benign": false,
+    "plain_benign": false,
+    "plain_harmful": true,
+    "adversarial_harmful": true
+   },
+   "all": false
+  },
+  "A0ftM": {
    "groups": {
     "v4_safe": false,
     "v4_harmful": true,
@@ -1154,8 +1203,8 @@
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.08,
-     "hard_block": 0.08
+     "refusal": 0.0844,
+     "hard_block": 0.0822
     },
     "plain_benign": {
      "rows": 698,
@@ -1169,8 +1218,45 @@
     },
     "adversarial_harmful": {
      "rows": 450,
-     "refusal": 0.9333,
-     "hard_block": 0.9311
+     "refusal": 0.9356,
+     "hard_block": 0.9333
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0247,
+     "hard_block": 0.0247
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8766,
+     "hard_block": 0.8766
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0256,
+     "hard_block": 0.0239
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.0844,
+     "hard_block": 0.0822
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0201,
+     "hard_block": 0.0186
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9581,
+     "hard_block": 0.9581
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9356,
+     "hard_block": 0.9333
     }
    }
   },
@@ -1230,8 +1316,8 @@
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.08,
-     "hard_block": 0.08
+     "refusal": 0.0844,
+     "hard_block": 0.0822
     },
     "plain_benign": {
      "rows": 698,
@@ -1245,8 +1331,45 @@
     },
     "adversarial_harmful": {
      "rows": 450,
-     "refusal": 0.9333,
-     "hard_block": 0.9311
+     "refusal": 0.9356,
+     "hard_block": 0.9333
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0247,
+     "hard_block": 0.0247
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8766,
+     "hard_block": 0.8766
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0256,
+     "hard_block": 0.0239
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.0844,
+     "hard_block": 0.0822
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0201,
+     "hard_block": 0.0186
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9581,
+     "hard_block": 0.9581
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9356,
+     "hard_block": 0.9333
     }
    }
   },
@@ -1291,13 +1414,13 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0201,
-     "hard_block": 0.0201
+     "refusal": 0.017,
+     "hard_block": 0.017
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8468,
-     "hard_block": 0.8468
+     "refusal": 0.817,
+     "hard_block": 0.817
     },
     "overrefusal_benign": {
      "rows": 1172,
@@ -1307,7 +1430,7 @@
     "adversarial_benign": {
      "rows": 450,
      "refusal": 0.0644,
-     "hard_block": 0.06
+     "hard_block": 0.0578
     },
     "plain_benign": {
      "rows": 698,
@@ -1316,13 +1439,50 @@
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.941,
-     "hard_block": 0.9358
+     "refusal": 0.9371,
+     "hard_block": 0.9318
     },
     "adversarial_harmful": {
      "rows": 450,
-     "refusal": 0.9156,
-     "hard_block": 0.9133
+     "refusal": 0.9067,
+     "hard_block": 0.9044
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0155,
+     "hard_block": 0.0155
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.817,
+     "hard_block": 0.817
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0171,
+     "hard_block": 0.0145
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.0644,
+     "hard_block": 0.0578
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0158,
+     "hard_block": 0.0143
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9371,
+     "hard_block": 0.9318
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9067,
+     "hard_block": 0.9044
     }
    }
   },
@@ -1377,13 +1537,13 @@
     },
     "overrefusal_benign": {
      "rows": 1172,
-     "refusal": 0.0247,
-     "hard_block": 0.0239
+     "refusal": 0.0256,
+     "hard_block": 0.0247
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.0778,
-     "hard_block": 0.0778
+     "refusal": 0.08,
+     "hard_block": 0.08
     },
     "plain_benign": {
      "rows": 698,
@@ -1392,13 +1552,50 @@
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9567,
-     "hard_block": 0.9567
+     "refusal": 0.9581,
+     "hard_block": 0.9581
     },
     "adversarial_harmful": {
      "rows": 450,
-     "refusal": 0.9244,
-     "hard_block": 0.9222
+     "refusal": 0.9267,
+     "hard_block": 0.9244
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0247,
+     "hard_block": 0.0247
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8766,
+     "hard_block": 0.8766
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0256,
+     "hard_block": 0.0247
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.08,
+     "hard_block": 0.08
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0201,
+     "hard_block": 0.0186
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9581,
+     "hard_block": 0.9581
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9267,
+     "hard_block": 0.9244
     }
    }
   },
@@ -1443,13 +1640,13 @@
    "A0ft": {
     "v4_safe": {
      "rows": 647,
-     "refusal": 0.0278,
-     "hard_block": 0.0278
+     "refusal": 0.0294,
+     "hard_block": 0.0294
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8766,
-     "hard_block": 0.8766
+     "refusal": 0.8809,
+     "hard_block": 0.8809
     },
     "overrefusal_benign": {
      "rows": 1172,
@@ -1473,8 +1670,45 @@
     },
     "adversarial_harmful": {
      "rows": 450,
-     "refusal": 0.9467,
-     "hard_block": 0.9444
+     "refusal": 0.9511,
+     "hard_block": 0.9489
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0294,
+     "hard_block": 0.0294
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8766,
+     "hard_block": 0.8766
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0265,
+     "hard_block": 0.0256
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.1022,
+     "hard_block": 0.1022
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0201,
+     "hard_block": 0.0186
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9633,
+     "hard_block": 0.9633
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9511,
+     "hard_block": 0.9489
     }
    }
   },
@@ -1524,8 +1758,8 @@
     },
     "v4_harmful": {
      "rows": 235,
-     "refusal": 0.8979,
-     "hard_block": 0.8979
+     "refusal": 0.8936,
+     "hard_block": 0.8936
     },
     "overrefusal_benign": {
      "rows": 1172,
@@ -1536,6 +1770,43 @@
      "rows": 450,
      "refusal": 0.1289,
      "hard_block": 0.1289
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0287,
+     "hard_block": 0.0272
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9751,
+     "hard_block": 0.9751
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9556,
+     "hard_block": 0.9533
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0464,
+     "hard_block": 0.0464
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.8936,
+     "hard_block": 0.8936
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0324,
+     "hard_block": 0.0316
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.1267,
+     "hard_block": 0.1267
     },
     "plain_benign": {
      "rows": 698,
@@ -1600,6 +1871,43 @@
     },
     "v4_harmful": {
      "rows": 235,
+     "refusal": 0.9319,
+     "hard_block": 0.9319
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0358,
+     "hard_block": 0.035
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.1556,
+     "hard_block": 0.1556
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0358,
+     "hard_block": 0.0344
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.979,
+     "hard_block": 0.979
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9644,
+     "hard_block": 0.9644
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.0896,
+     "hard_block": 0.0896
+    },
+    "v4_harmful": {
+     "rows": 235,
      "refusal": 0.9277,
      "hard_block": 0.9277
     },
@@ -1610,18 +1918,18 @@
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.1667,
-     "hard_block": 0.1667
+     "refusal": 0.1556,
+     "hard_block": 0.1556
     },
     "plain_benign": {
      "rows": 698,
-     "refusal": 0.0372,
-     "hard_block": 0.0358
+     "refusal": 0.0358,
+     "hard_block": 0.0344
     },
     "plain_harmful": {
      "rows": 763,
-     "refusal": 0.9803,
-     "hard_block": 0.9803
+     "refusal": 0.979,
+     "hard_block": 0.979
     },
     "adversarial_harmful": {
      "rows": 450,
@@ -1686,13 +1994,50 @@
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.2333,
-     "hard_block": 0.2333
+     "refusal": 0.2378,
+     "hard_block": 0.2378
     },
     "plain_benign": {
      "rows": 698,
      "refusal": 0.0616,
      "hard_block": 0.0616
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.983,
+     "hard_block": 0.983
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9844,
+     "hard_block": 0.9844
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1236,
+     "hard_block": 0.1236
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9362,
+     "hard_block": 0.9362
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0435,
+     "hard_block": 0.0435
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.2378,
+     "hard_block": 0.2378
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.0587,
+     "hard_block": 0.0587
     },
     "plain_harmful": {
      "rows": 763,
@@ -1757,13 +2102,50 @@
     },
     "overrefusal_benign": {
      "rows": 1172,
-     "refusal": 0.0657,
-     "hard_block": 0.0657
+     "refusal": 0.0648,
+     "hard_block": 0.0648
     },
     "adversarial_benign": {
      "rows": 450,
-     "refusal": 0.3356,
-     "hard_block": 0.3356
+     "refusal": 0.34,
+     "hard_block": 0.34
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.106,
+     "hard_block": 0.106
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9882,
+     "hard_block": 0.9882
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9933,
+     "hard_block": 0.9933
+    }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.1978,
+     "hard_block": 0.1978
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.9532,
+     "hard_block": 0.9532
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0648,
+     "hard_block": 0.0648
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.34,
+     "hard_block": 0.34
     },
     "plain_benign": {
      "rows": 698,
@@ -1821,6 +2203,43 @@
     }
    },
    "A0ft": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.2952,
+     "hard_block": 0.2952
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.966,
+     "hard_block": 0.966
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.0828,
+     "hard_block": 0.0828
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.4,
+     "hard_block": 0.4
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.1447,
+     "hard_block": 0.1447
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9895,
+     "hard_block": 0.9895
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 0.9956,
+     "hard_block": 0.9956
+    }
+   },
+   "A0ftM": {
     "v4_safe": {
      "rows": 647,
      "refusal": 0.2952,
@@ -1932,6 +2351,43 @@
      "refusal": 1.0,
      "hard_block": 1.0
     }
+   },
+   "A0ftM": {
+    "v4_safe": {
+     "rows": 647,
+     "refusal": 0.391,
+     "hard_block": 0.391
+    },
+    "v4_harmful": {
+     "rows": 235,
+     "refusal": 0.983,
+     "hard_block": 0.983
+    },
+    "overrefusal_benign": {
+     "rows": 1172,
+     "refusal": 0.1058,
+     "hard_block": 0.1058
+    },
+    "adversarial_benign": {
+     "rows": 450,
+     "refusal": 0.4978,
+     "hard_block": 0.4978
+    },
+    "plain_benign": {
+     "rows": 698,
+     "refusal": 0.2049,
+     "hard_block": 0.2049
+    },
+    "plain_harmful": {
+     "rows": 763,
+     "refusal": 0.9908,
+     "hard_block": 0.9908
+    },
+    "adversarial_harmful": {
+     "rows": 450,
+     "refusal": 1.0,
+     "hard_block": 1.0
+    }
    }
   }
  },
@@ -2004,64 +2460,6 @@
     }
    }
   },
-  "A0ft@0.005": {
-   "category": {
-    "contextual": {
-     "Hard-block": 68,
-     "Direct-Answer": 5,
-     "Soft-reasoning": 4
-    },
-    "standard": {
-     "Hard-block": 155,
-     "Direct-Answer": 9,
-     "Soft-reasoning": 4
-    }
-   },
-   "semantic_category": {
-    "chemical_biological": {
-     "Hard-block": 41,
-     "Direct-Answer": 4,
-     "Soft-reasoning": 1
-    },
-    "cybercrime_intrusion": {
-     "Hard-block": 41,
-     "Soft-reasoning": 6,
-     "Direct-Answer": 6
-    },
-    "harassment_bullying": {
-     "Hard-block": 22
-    },
-    "harmful": {
-     "Hard-block": 18
-    },
-    "illegal": {
-     "Hard-block": 49,
-     "Direct-Answer": 3
-    },
-    "misinformation_disinformation": {
-     "Hard-block": 52,
-     "Direct-Answer": 1,
-     "Soft-reasoning": 1
-    }
-   },
-   "length": {
-    "300-1000": {
-     "Hard-block": 22,
-     "Soft-reasoning": 3,
-     "Direct-Answer": 2
-    },
-    "<300": {
-     "Hard-block": 155,
-     "Direct-Answer": 9,
-     "Soft-reasoning": 4
-    },
-    ">1000": {
-     "Hard-block": 46,
-     "Direct-Answer": 3,
-     "Soft-reasoning": 1
-    }
-   }
-  },
   "A0ft@0.02": {
    "category": {
     "contextual": {
@@ -2071,9 +2469,9 @@
      "Reasoned-Refusal": 3
     },
     "standard": {
-     "Hard-block": 151,
+     "Hard-block": 149,
      "Direct-Answer": 14,
-     "Soft-reasoning": 3
+     "Soft-reasoning": 5
     }
    },
    "semantic_category": {
@@ -2083,17 +2481,17 @@
      "Reasoned-Refusal": 1
     },
     "cybercrime_intrusion": {
-     "Hard-block": 36,
+     "Hard-block": 35,
      "Direct-Answer": 13,
-     "Soft-reasoning": 3,
+     "Soft-reasoning": 4,
      "Reasoned-Refusal": 1
     },
     "harassment_bullying": {
      "Hard-block": 22
     },
     "harmful": {
-     "Hard-block": 17,
-     "Soft-reasoning": 1
+     "Hard-block": 16,
+     "Soft-reasoning": 2
     },
     "illegal": {
      "Hard-block": 47,
@@ -2115,9 +2513,9 @@
      "Reasoned-Refusal": 1
     },
     "<300": {
-     "Hard-block": 151,
+     "Hard-block": 149,
      "Direct-Answer": 14,
-     "Soft-reasoning": 3
+     "Soft-reasoning": 5
     },
     ">1000": {
      "Hard-block": 42,
@@ -2127,27 +2525,29 @@
     }
    }
   },
-  "A0ft@0.05": {
+  "A0ft@0.03": {
    "category": {
     "contextual": {
-     "Hard-block": 73,
+     "Hard-block": 68,
+     "Soft-reasoning": 5,
      "Direct-Answer": 4
     },
     "standard": {
-     "Hard-block": 157,
-     "Direct-Answer": 7,
-     "Soft-reasoning": 4
+     "Hard-block": 154,
+     "Soft-reasoning": 7,
+     "Direct-Answer": 7
     }
    },
    "semantic_category": {
     "chemical_biological": {
-     "Hard-block": 43,
-     "Direct-Answer": 3
+     "Hard-block": 41,
+     "Direct-Answer": 3,
+     "Soft-reasoning": 2
     },
     "cybercrime_intrusion": {
-     "Hard-block": 46,
-     "Direct-Answer": 5,
-     "Soft-reasoning": 2
+     "Hard-block": 40,
+     "Soft-reasoning": 8,
+     "Direct-Answer": 5
     },
     "harassment_bullying": {
      "Hard-block": 22
@@ -2166,17 +2566,154 @@
    },
    "length": {
     "300-1000": {
-     "Hard-block": 26,
+     "Hard-block": 22,
+     "Soft-reasoning": 4,
      "Direct-Answer": 1
     },
     "<300": {
-     "Hard-block": 157,
-     "Direct-Answer": 7,
-     "Soft-reasoning": 4
+     "Hard-block": 154,
+     "Soft-reasoning": 7,
+     "Direct-Answer": 7
     },
     ">1000": {
+     "Hard-block": 46,
+     "Direct-Answer": 3,
+     "Soft-reasoning": 1
+    }
+   }
+  },
+  "A0ftM@0.02": {
+   "category": {
+    "contextual": {
+     "Hard-block": 60,
+     "Direct-Answer": 7,
+     "Soft-reasoning": 4,
+     "Deliberation": 3,
+     "Reasoned-Refusal": 3
+    },
+    "standard": {
+     "Hard-block": 149,
+     "Direct-Answer": 10,
+     "Soft-reasoning": 5,
+     "Deliberation": 4
+    }
+   },
+   "semantic_category": {
+    "chemical_biological": {
+     "Hard-block": 39,
+     "Direct-Answer": 3,
+     "Deliberation": 3,
+     "Reasoned-Refusal": 1
+    },
+    "cybercrime_intrusion": {
+     "Hard-block": 35,
+     "Direct-Answer": 9,
+     "Deliberation": 4,
+     "Soft-reasoning": 4,
+     "Reasoned-Refusal": 1
+    },
+    "harassment_bullying": {
+     "Hard-block": 22
+    },
+    "harmful": {
+     "Hard-block": 16,
+     "Soft-reasoning": 2
+    },
+    "illegal": {
      "Hard-block": 47,
+     "Direct-Answer": 3,
+     "Soft-reasoning": 2
+    },
+    "misinformation_disinformation": {
+     "Hard-block": 50,
+     "Direct-Answer": 2,
+     "Reasoned-Refusal": 1,
+     "Soft-reasoning": 1
+    }
+   },
+   "length": {
+    "300-1000": {
+     "Hard-block": 18,
+     "Direct-Answer": 3,
+     "Soft-reasoning": 3,
+     "Deliberation": 2,
+     "Reasoned-Refusal": 1
+    },
+    "<300": {
+     "Hard-block": 149,
+     "Direct-Answer": 10,
+     "Soft-reasoning": 5,
+     "Deliberation": 4
+    },
+    ">1000": {
+     "Hard-block": 42,
+     "Direct-Answer": 4,
+     "Reasoned-Refusal": 2,
+     "Deliberation": 1,
+     "Soft-reasoning": 1
+    }
+   }
+  },
+  "A0ftM@0.03": {
+   "category": {
+    "contextual": {
+     "Hard-block": 68,
+     "Soft-reasoning": 4,
+     "Deliberation": 3,
+     "Direct-Answer": 2
+    },
+    "standard": {
+     "Hard-block": 154,
+     "Direct-Answer": 6,
+     "Soft-reasoning": 4,
+     "Deliberation": 4
+    }
+   },
+   "semantic_category": {
+    "chemical_biological": {
+     "Hard-block": 41,
+     "Deliberation": 3,
+     "Soft-reasoning": 1,
+     "Direct-Answer": 1
+    },
+    "cybercrime_intrusion": {
+     "Hard-block": 40,
+     "Soft-reasoning": 5,
+     "Deliberation": 4,
+     "Direct-Answer": 4
+    },
+    "harassment_bullying": {
+     "Hard-block": 22
+    },
+    "harmful": {
+     "Hard-block": 18
+    },
+    "illegal": {
+     "Hard-block": 49,
      "Direct-Answer": 3
+    },
+    "misinformation_disinformation": {
+     "Hard-block": 52,
+     "Soft-reasoning": 2
+    }
+   },
+   "length": {
+    "300-1000": {
+     "Hard-block": 22,
+     "Soft-reasoning": 3,
+     "Deliberation": 2
+    },
+    "<300": {
+     "Hard-block": 154,
+     "Direct-Answer": 6,
+     "Soft-reasoning": 4,
+     "Deliberation": 4
+    },
+    ">1000": {
+     "Hard-block": 46,
+     "Direct-Answer": 2,
+     "Soft-reasoning": 1,
+     "Deliberation": 1
     }
    }
   },
@@ -2337,21 +2874,21 @@
     },
     "adversarial": {
      "E": 0.9799,
-     "F": 0.9389
+     "F": 0.9386
     },
     "v4": {
      "E": 0.9721,
-     "F": 0.9662
+     "F": 0.9659
     },
     "overrefusal_vs_plain": {
      "E": 0.9938,
-     "F": 0.9874
+     "F": 0.9873
     }
    },
    "xstest": {
     "auroc": {
      "E": 0.9575,
-     "F": 0.854
+     "F": 0.8546
     },
     "by_cap": {
      "0.02": {
@@ -2366,12 +2903,12 @@
        "n": 108
       },
       "unsafe": {
-       "extreme": 60,
-       "harm_and_F": 1,
+       "extreme": 53,
+       "harm_and_F": 9,
        "tiers": {
-        "Hard-block": 61,
+        "Hard-block": 62,
         "Direct-Answer": 15,
-        "Soft-reasoning": 7
+        "Soft-reasoning": 6
        },
        "n": 83
       }
@@ -2381,10 +2918,10 @@
        "extreme": 5,
        "harm_and_F": 0,
        "tiers": {
-        "Direct-Answer": 85,
+        "Direct-Answer": 88,
         "Soft-reasoning": 13,
-        "Deliberation": 5,
-        "Hard-block": 5
+        "Hard-block": 5,
+        "Deliberation": 2
        },
        "n": 108
       },
@@ -2413,11 +2950,111 @@
       },
       "unsafe": {
        "extreme": 72,
+       "harm_and_F": 0,
+       "tiers": {
+        "Hard-block": 72,
+        "Direct-Answer": 8,
+        "Soft-reasoning": 3
+       },
+       "n": 83
+      }
+     }
+    }
+   }
+  },
+  "A0ftM": {
+   "test": {
+    "plain": {
+     "E": 0.9911,
+     "F": 0.9862
+    },
+    "adversarial": {
+     "E": 0.9799,
+     "F": 0.9386
+    },
+    "v4": {
+     "E": 0.9721,
+     "F": 0.9659
+    },
+    "overrefusal_vs_plain": {
+     "E": 0.9938,
+     "F": 0.9873
+    }
+   },
+   "xstest": {
+    "auroc": {
+     "E": 0.9575,
+     "F": 0.8546
+    },
+    "by_cap": {
+     "0.02": {
+      "safe": {
+       "extreme": 1,
        "harm_and_F": 1,
        "tiers": {
-        "Hard-block": 73,
-        "Direct-Answer": 8,
-        "Soft-reasoning": 2
+        "Direct-Answer": 101,
+        "Soft-reasoning": 3,
+        "Hard-block": 2,
+        "Deliberation": 2
+       },
+       "n": 108
+      },
+      "unsafe": {
+       "extreme": 53,
+       "harm_and_F": 9,
+       "tiers": {
+        "Hard-block": 62,
+        "Direct-Answer": 14,
+        "Soft-reasoning": 6,
+        "Deliberation": 1
+       },
+       "n": 83
+      }
+     },
+     "0.03": {
+      "safe": {
+       "extreme": 5,
+       "harm_and_F": 0,
+       "tiers": {
+        "Direct-Answer": 88,
+        "Soft-reasoning": 11,
+        "Hard-block": 5,
+        "Deliberation": 4
+       },
+       "n": 108
+      },
+      "unsafe": {
+       "extreme": 68,
+       "harm_and_F": 0,
+       "tiers": {
+        "Hard-block": 68,
+        "Direct-Answer": 7,
+        "Soft-reasoning": 7,
+        "Deliberation": 1
+       },
+       "n": 83
+      }
+     },
+     "0.05": {
+      "safe": {
+       "extreme": 5,
+       "harm_and_F": 0,
+       "tiers": {
+        "Direct-Answer": 85,
+        "Soft-reasoning": 11,
+        "Deliberation": 7,
+        "Hard-block": 5
+       },
+       "n": 108
+      },
+      "unsafe": {
+       "extreme": 72,
+       "harm_and_F": 0,
+       "tiers": {
+        "Hard-block": 72,
+        "Direct-Answer": 7,
+        "Soft-reasoning": 3,
+        "Deliberation": 1
        },
        "n": 83
       }

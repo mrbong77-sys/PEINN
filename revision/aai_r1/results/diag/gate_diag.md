@@ -101,36 +101,48 @@
 | 변형 | v4_safe | v4_harmful | overrefusal_benign | adversarial_benign | plain_benign | plain_harmful | adversarial_harmful |
 |---|---|---|---|---|---|---|---|
 | A0 | 0.076 (n 647) | 0.860 (n 235) | 0.074 (n 1172) | 0.260 (n 450) | 0.073 (n 698) | 0.941 (n 763) | 0.920 (n 450) |
-| A0ft | 0.124 (n 647) | 0.936 (n 235) | 0.044 (n 1172) | 0.233 (n 450) | 0.062 (n 698) | 0.983 (n 763) | 0.984 (n 450) |
+| A0ft | 0.124 (n 647) | 0.936 (n 235) | 0.044 (n 1172) | 0.238 (n 450) | 0.062 (n 698) | 0.983 (n 763) | 0.984 (n 450) |
+| A0ftM | 0.124 (n 647) | 0.936 (n 235) | 0.043 (n 1172) | 0.238 (n 450) | 0.059 (n 698) | 0.983 (n 763) | 0.984 (n 450) |
 | Llama Guard 3 (입력) | 0.018 (n 647) | 0.651 (n 235) | 0.122 (n 1172) | 0.020 (n 450) | 0.057 (n 698) | 0.780 (n 763) | 0.498 (n 450) |
 
-- Llama Guard 동등(무해는 거절이 같거나 적고, 유해는 같거나 많음): A0 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'plain_benign': False, 'plain_harmful': True, 'adversarial_harmful': True}, A0ft 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'plain_benign': False, 'plain_harmful': True, 'adversarial_harmful': True}
+- Llama Guard 동등(무해는 거절이 같거나 적고, 유해는 같거나 많음): A0 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'plain_benign': False, 'plain_harmful': True, 'adversarial_harmful': True}, A0ft 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'plain_benign': False, 'plain_harmful': True, 'adversarial_harmful': True}, A0ftM 아니오 {'v4_safe': False, 'v4_harmful': True, 'overrefusal_benign': True, 'adversarial_benign': False, 'plain_benign': False, 'plain_harmful': True, 'adversarial_harmful': True}
 - 곡선 전체에서 동등인 운영점: 없음
 
 | 운영점 | 변형 | v4_safe | v4_harmful | overrefusal_benign | adversarial_benign | plain_benign | plain_harmful | adversarial_harmful |
 |---|---|---|---|---|---|---|---|---|
 | 0.005 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.005 | A0ft | 0.025 | 0.877 | 0.026 | 0.080 | 0.020 | 0.958 | 0.933 |
+| 0.005 | A0ft | 0.025 | 0.877 | 0.026 | 0.084 | 0.020 | 0.958 | 0.936 |
+| 0.005 | A0ftM | 0.025 | 0.877 | 0.026 | 0.084 | 0.020 | 0.958 | 0.936 |
 | 0.01 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.01 | A0ft | 0.025 | 0.877 | 0.026 | 0.080 | 0.020 | 0.958 | 0.933 |
+| 0.01 | A0ft | 0.025 | 0.877 | 0.026 | 0.084 | 0.020 | 0.958 | 0.936 |
+| 0.01 | A0ftM | 0.025 | 0.877 | 0.026 | 0.084 | 0.020 | 0.958 | 0.936 |
 | 0.02 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.02 | A0ft | 0.020 | 0.847 | 0.017 | 0.064 | 0.016 | 0.941 | 0.916 |
+| 0.02 | A0ft | 0.017 | 0.817 | 0.017 | 0.064 | 0.016 | 0.937 | 0.907 |
+| 0.02 | A0ftM | 0.015 | 0.817 | 0.017 | 0.064 | 0.016 | 0.937 | 0.907 |
 | 0.03 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.03 | A0ft | 0.025 | 0.877 | 0.025 | 0.078 | 0.020 | 0.957 | 0.924 |
+| 0.03 | A0ft | 0.025 | 0.877 | 0.026 | 0.080 | 0.020 | 0.958 | 0.927 |
+| 0.03 | A0ftM | 0.025 | 0.877 | 0.026 | 0.080 | 0.020 | 0.958 | 0.927 |
 | 0.04 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.04 | A0ft | 0.028 | 0.877 | 0.027 | 0.107 | 0.021 | 0.963 | 0.947 |
+| 0.04 | A0ft | 0.029 | 0.881 | 0.027 | 0.107 | 0.021 | 0.963 | 0.951 |
+| 0.04 | A0ftM | 0.029 | 0.877 | 0.026 | 0.102 | 0.020 | 0.963 | 0.951 |
 | 0.05 | A0 | 0.037 | 0.770 | 0.041 | 0.153 | 0.039 | 0.885 | 0.856 |
-| 0.05 | A0ft | 0.046 | 0.898 | 0.032 | 0.129 | 0.029 | 0.975 | 0.956 |
+| 0.05 | A0ft | 0.046 | 0.894 | 0.032 | 0.129 | 0.029 | 0.975 | 0.956 |
+| 0.05 | A0ftM | 0.046 | 0.894 | 0.032 | 0.127 | 0.029 | 0.975 | 0.956 |
 | 0.07 | A0 | 0.057 | 0.821 | 0.055 | 0.180 | 0.057 | 0.920 | 0.847 |
-| 0.07 | A0ft | 0.091 | 0.928 | 0.036 | 0.167 | 0.037 | 0.980 | 0.964 |
+| 0.07 | A0ft | 0.091 | 0.932 | 0.036 | 0.156 | 0.036 | 0.979 | 0.964 |
+| 0.07 | A0ftM | 0.090 | 0.928 | 0.036 | 0.156 | 0.036 | 0.979 | 0.964 |
 | 0.1 | A0 | 0.076 | 0.860 | 0.074 | 0.260 | 0.073 | 0.941 | 0.920 |
-| 0.1 | A0ft | 0.124 | 0.936 | 0.044 | 0.233 | 0.062 | 0.983 | 0.984 |
+| 0.1 | A0ft | 0.124 | 0.936 | 0.044 | 0.238 | 0.062 | 0.983 | 0.984 |
+| 0.1 | A0ftM | 0.124 | 0.936 | 0.043 | 0.238 | 0.059 | 0.983 | 0.984 |
 | 0.15 | A0 | 0.101 | 0.915 | 0.114 | 0.398 | 0.105 | 0.954 | 0.962 |
-| 0.15 | A0ft | 0.198 | 0.953 | 0.066 | 0.336 | 0.106 | 0.988 | 0.993 |
+| 0.15 | A0ft | 0.198 | 0.953 | 0.065 | 0.340 | 0.106 | 0.988 | 0.993 |
+| 0.15 | A0ftM | 0.198 | 0.953 | 0.065 | 0.340 | 0.106 | 0.988 | 0.993 |
 | 0.2 | A0 | 0.130 | 0.915 | 0.159 | 0.467 | 0.128 | 0.966 | 0.973 |
 | 0.2 | A0ft | 0.295 | 0.966 | 0.083 | 0.400 | 0.145 | 0.990 | 0.996 |
+| 0.2 | A0ftM | 0.295 | 0.966 | 0.083 | 0.400 | 0.145 | 0.990 | 0.996 |
 | 0.3 | A0 | 0.229 | 0.953 | 0.259 | 0.536 | 0.218 | 0.980 | 0.978 |
 | 0.3 | A0ft | 0.391 | 0.983 | 0.106 | 0.498 | 0.205 | 0.991 | 1.000 |
+| 0.3 | A0ftM | 0.391 | 0.983 | 0.106 | 0.498 | 0.205 | 0.991 | 1.000 |
 
 ## 7. 신호별 판별력 (test 분할 AUROC; XSTest는 오류 분석 전용)
 
@@ -139,26 +151,34 @@
   - 0.02: safe n 108 극단 E 2 harm E∧F 3 계층 {"Direct-Answer": 102, "Hard-block": 5, "Soft-reasoning": 1}; unsafe n 83 극단 E 49 harm E∧F 9 계층 {"Hard-block": 58, "Direct-Answer": 18, "Soft-reasoning": 7}
   - 0.03: safe n 108 극단 E 2 harm E∧F 3 계층 {"Direct-Answer": 102, "Hard-block": 5, "Soft-reasoning": 1}; unsafe n 83 극단 E 49 harm E∧F 9 계층 {"Hard-block": 58, "Direct-Answer": 18, "Soft-reasoning": 7}
   - 0.05: safe n 108 극단 E 2 harm E∧F 3 계층 {"Direct-Answer": 102, "Hard-block": 5, "Soft-reasoning": 1}; unsafe n 83 극단 E 49 harm E∧F 9 계층 {"Hard-block": 58, "Direct-Answer": 18, "Soft-reasoning": 7}
-- A0ft test: plain E 0.9911 F 0.9862; adversarial E 0.9799 F 0.9389; v4 E 0.9721 F 0.9662; overrefusal_vs_plain E 0.9938 F 0.9874
-- A0ft XSTest AUROC: {"E": 0.9575, "F": 0.854}
-  - 0.02: safe n 108 극단 E 1 harm E∧F 1 계층 {"Direct-Answer": 103, "Soft-reasoning": 3, "Hard-block": 2}; unsafe n 83 극단 E 60 harm E∧F 1 계층 {"Hard-block": 61, "Direct-Answer": 15, "Soft-reasoning": 7}
-  - 0.03: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 85, "Soft-reasoning": 13, "Deliberation": 5, "Hard-block": 5}; unsafe n 83 극단 E 68 harm E∧F 0 계층 {"Hard-block": 68, "Direct-Answer": 8, "Soft-reasoning": 7}
-  - 0.05: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 88, "Soft-reasoning": 13, "Hard-block": 5, "Deliberation": 2}; unsafe n 83 극단 E 72 harm E∧F 1 계층 {"Hard-block": 73, "Direct-Answer": 8, "Soft-reasoning": 2}
+- A0ft test: plain E 0.9911 F 0.9862; adversarial E 0.9799 F 0.9386; v4 E 0.9721 F 0.9659; overrefusal_vs_plain E 0.9938 F 0.9873
+- A0ft XSTest AUROC: {"E": 0.9575, "F": 0.8546}
+  - 0.02: safe n 108 극단 E 1 harm E∧F 1 계층 {"Direct-Answer": 103, "Soft-reasoning": 3, "Hard-block": 2}; unsafe n 83 극단 E 53 harm E∧F 9 계층 {"Hard-block": 62, "Direct-Answer": 15, "Soft-reasoning": 6}
+  - 0.03: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 88, "Soft-reasoning": 13, "Hard-block": 5, "Deliberation": 2}; unsafe n 83 극단 E 68 harm E∧F 0 계층 {"Hard-block": 68, "Direct-Answer": 8, "Soft-reasoning": 7}
+  - 0.05: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 88, "Soft-reasoning": 13, "Hard-block": 5, "Deliberation": 2}; unsafe n 83 극단 E 72 harm E∧F 0 계층 {"Hard-block": 72, "Direct-Answer": 8, "Soft-reasoning": 3}
+- A0ftM test: plain E 0.9911 F 0.9862; adversarial E 0.9799 F 0.9386; v4 E 0.9721 F 0.9659; overrefusal_vs_plain E 0.9938 F 0.9873
+- A0ftM XSTest AUROC: {"E": 0.9575, "F": 0.8546}
+  - 0.02: safe n 108 극단 E 1 harm E∧F 1 계층 {"Direct-Answer": 101, "Soft-reasoning": 3, "Hard-block": 2, "Deliberation": 2}; unsafe n 83 극단 E 53 harm E∧F 9 계층 {"Hard-block": 62, "Direct-Answer": 14, "Soft-reasoning": 6, "Deliberation": 1}
+  - 0.03: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 88, "Soft-reasoning": 11, "Hard-block": 5, "Deliberation": 4}; unsafe n 83 극단 E 68 harm E∧F 0 계층 {"Hard-block": 68, "Direct-Answer": 7, "Soft-reasoning": 7, "Deliberation": 1}
+  - 0.05: safe n 108 극단 E 5 harm E∧F 0 계층 {"Direct-Answer": 85, "Soft-reasoning": 11, "Deliberation": 7, "Hard-block": 5}; unsafe n 83 극단 E 72 harm E∧F 0 계층 {"Hard-block": 72, "Direct-Answer": 7, "Soft-reasoning": 3, "Deliberation": 1}
 
 ## 6. HarmBench 경로 (오류 분석 전용, 적합에 쓰지 않음; 문장 245, qwen 기록)
 
 - A0@0.1 category: contextual {"Hard-block": 70, "Direct-Answer": 5, "Reasoned-Refusal": 1, "Soft-reasoning": 1}; standard {"Hard-block": 149, "Direct-Answer": 10, "Soft-reasoning": 8, "Reasoned-Refusal": 1}
 - A0@0.1 semantic_category: chemical_biological {"Hard-block": 38, "Direct-Answer": 5, "Reasoned-Refusal": 2, "Soft-reasoning": 1}; cybercrime_intrusion {"Hard-block": 44, "Direct-Answer": 6, "Soft-reasoning": 3}; harassment_bullying {"Hard-block": 21, "Soft-reasoning": 1}; harmful {"Hard-block": 17, "Soft-reasoning": 1}; illegal {"Hard-block": 48, "Direct-Answer": 3, "Soft-reasoning": 1}; misinformation_disinformation {"Hard-block": 51, "Soft-reasoning": 2, "Direct-Answer": 1}
 - A0@0.1 length: 300-1000 {"Hard-block": 24, "Direct-Answer": 2, "Reasoned-Refusal": 1}; <300 {"Hard-block": 149, "Direct-Answer": 10, "Soft-reasoning": 8, "Reasoned-Refusal": 1}; >1000 {"Hard-block": 46, "Direct-Answer": 3, "Soft-reasoning": 1}
-- A0ft@0.005 category: contextual {"Hard-block": 68, "Direct-Answer": 5, "Soft-reasoning": 4}; standard {"Hard-block": 155, "Direct-Answer": 9, "Soft-reasoning": 4}
-- A0ft@0.005 semantic_category: chemical_biological {"Hard-block": 41, "Direct-Answer": 4, "Soft-reasoning": 1}; cybercrime_intrusion {"Hard-block": 41, "Soft-reasoning": 6, "Direct-Answer": 6}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 49, "Direct-Answer": 3}; misinformation_disinformation {"Hard-block": 52, "Direct-Answer": 1, "Soft-reasoning": 1}
-- A0ft@0.005 length: 300-1000 {"Hard-block": 22, "Soft-reasoning": 3, "Direct-Answer": 2}; <300 {"Hard-block": 155, "Direct-Answer": 9, "Soft-reasoning": 4}; >1000 {"Hard-block": 46, "Direct-Answer": 3, "Soft-reasoning": 1}
-- A0ft@0.02 category: contextual {"Hard-block": 60, "Direct-Answer": 10, "Soft-reasoning": 4, "Reasoned-Refusal": 3}; standard {"Hard-block": 151, "Direct-Answer": 14, "Soft-reasoning": 3}
-- A0ft@0.02 semantic_category: chemical_biological {"Hard-block": 39, "Direct-Answer": 6, "Reasoned-Refusal": 1}; cybercrime_intrusion {"Hard-block": 36, "Direct-Answer": 13, "Soft-reasoning": 3, "Reasoned-Refusal": 1}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 17, "Soft-reasoning": 1}; illegal {"Hard-block": 47, "Direct-Answer": 3, "Soft-reasoning": 2}; misinformation_disinformation {"Hard-block": 50, "Direct-Answer": 2, "Reasoned-Refusal": 1, "Soft-reasoning": 1}
-- A0ft@0.02 length: 300-1000 {"Hard-block": 18, "Direct-Answer": 5, "Soft-reasoning": 3, "Reasoned-Refusal": 1}; <300 {"Hard-block": 151, "Direct-Answer": 14, "Soft-reasoning": 3}; >1000 {"Hard-block": 42, "Direct-Answer": 5, "Reasoned-Refusal": 2, "Soft-reasoning": 1}
-- A0ft@0.05 category: contextual {"Hard-block": 73, "Direct-Answer": 4}; standard {"Hard-block": 157, "Direct-Answer": 7, "Soft-reasoning": 4}
-- A0ft@0.05 semantic_category: chemical_biological {"Hard-block": 43, "Direct-Answer": 3}; cybercrime_intrusion {"Hard-block": 46, "Direct-Answer": 5, "Soft-reasoning": 2}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 49, "Direct-Answer": 3}; misinformation_disinformation {"Hard-block": 52, "Soft-reasoning": 2}
-- A0ft@0.05 length: 300-1000 {"Hard-block": 26, "Direct-Answer": 1}; <300 {"Hard-block": 157, "Direct-Answer": 7, "Soft-reasoning": 4}; >1000 {"Hard-block": 47, "Direct-Answer": 3}
+- A0ft@0.02 category: contextual {"Hard-block": 60, "Direct-Answer": 10, "Soft-reasoning": 4, "Reasoned-Refusal": 3}; standard {"Hard-block": 149, "Direct-Answer": 14, "Soft-reasoning": 5}
+- A0ft@0.02 semantic_category: chemical_biological {"Hard-block": 39, "Direct-Answer": 6, "Reasoned-Refusal": 1}; cybercrime_intrusion {"Hard-block": 35, "Direct-Answer": 13, "Soft-reasoning": 4, "Reasoned-Refusal": 1}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 16, "Soft-reasoning": 2}; illegal {"Hard-block": 47, "Direct-Answer": 3, "Soft-reasoning": 2}; misinformation_disinformation {"Hard-block": 50, "Direct-Answer": 2, "Reasoned-Refusal": 1, "Soft-reasoning": 1}
+- A0ft@0.02 length: 300-1000 {"Hard-block": 18, "Direct-Answer": 5, "Soft-reasoning": 3, "Reasoned-Refusal": 1}; <300 {"Hard-block": 149, "Direct-Answer": 14, "Soft-reasoning": 5}; >1000 {"Hard-block": 42, "Direct-Answer": 5, "Reasoned-Refusal": 2, "Soft-reasoning": 1}
+- A0ft@0.03 category: contextual {"Hard-block": 68, "Soft-reasoning": 5, "Direct-Answer": 4}; standard {"Hard-block": 154, "Soft-reasoning": 7, "Direct-Answer": 7}
+- A0ft@0.03 semantic_category: chemical_biological {"Hard-block": 41, "Direct-Answer": 3, "Soft-reasoning": 2}; cybercrime_intrusion {"Hard-block": 40, "Soft-reasoning": 8, "Direct-Answer": 5}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 49, "Direct-Answer": 3}; misinformation_disinformation {"Hard-block": 52, "Soft-reasoning": 2}
+- A0ft@0.03 length: 300-1000 {"Hard-block": 22, "Soft-reasoning": 4, "Direct-Answer": 1}; <300 {"Hard-block": 154, "Soft-reasoning": 7, "Direct-Answer": 7}; >1000 {"Hard-block": 46, "Direct-Answer": 3, "Soft-reasoning": 1}
+- A0ftM@0.02 category: contextual {"Hard-block": 60, "Direct-Answer": 7, "Soft-reasoning": 4, "Deliberation": 3, "Reasoned-Refusal": 3}; standard {"Hard-block": 149, "Direct-Answer": 10, "Soft-reasoning": 5, "Deliberation": 4}
+- A0ftM@0.02 semantic_category: chemical_biological {"Hard-block": 39, "Direct-Answer": 3, "Deliberation": 3, "Reasoned-Refusal": 1}; cybercrime_intrusion {"Hard-block": 35, "Direct-Answer": 9, "Deliberation": 4, "Soft-reasoning": 4, "Reasoned-Refusal": 1}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 16, "Soft-reasoning": 2}; illegal {"Hard-block": 47, "Direct-Answer": 3, "Soft-reasoning": 2}; misinformation_disinformation {"Hard-block": 50, "Direct-Answer": 2, "Reasoned-Refusal": 1, "Soft-reasoning": 1}
+- A0ftM@0.02 length: 300-1000 {"Hard-block": 18, "Direct-Answer": 3, "Soft-reasoning": 3, "Deliberation": 2, "Reasoned-Refusal": 1}; <300 {"Hard-block": 149, "Direct-Answer": 10, "Soft-reasoning": 5, "Deliberation": 4}; >1000 {"Hard-block": 42, "Direct-Answer": 4, "Reasoned-Refusal": 2, "Deliberation": 1, "Soft-reasoning": 1}
+- A0ftM@0.03 category: contextual {"Hard-block": 68, "Soft-reasoning": 4, "Deliberation": 3, "Direct-Answer": 2}; standard {"Hard-block": 154, "Direct-Answer": 6, "Soft-reasoning": 4, "Deliberation": 4}
+- A0ftM@0.03 semantic_category: chemical_biological {"Hard-block": 41, "Deliberation": 3, "Soft-reasoning": 1, "Direct-Answer": 1}; cybercrime_intrusion {"Hard-block": 40, "Soft-reasoning": 5, "Deliberation": 4, "Direct-Answer": 4}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 49, "Direct-Answer": 3}; misinformation_disinformation {"Hard-block": 52, "Soft-reasoning": 2}
+- A0ftM@0.03 length: 300-1000 {"Hard-block": 22, "Soft-reasoning": 3, "Deliberation": 2}; <300 {"Hard-block": 154, "Direct-Answer": 6, "Soft-reasoning": 4, "Deliberation": 4}; >1000 {"Hard-block": 46, "Direct-Answer": 2, "Soft-reasoning": 1, "Deliberation": 1}
 - A0ft@0.1 category: contextual {"Hard-block": 75, "Soft-reasoning": 2}; standard {"Hard-block": 162, "Soft-reasoning": 3, "Direct-Answer": 3}
 - A0ft@0.1 semantic_category: chemical_biological {"Hard-block": 44, "Soft-reasoning": 2}; cybercrime_intrusion {"Hard-block": 50, "Soft-reasoning": 2, "Direct-Answer": 1}; harassment_bullying {"Hard-block": 22}; harmful {"Hard-block": 18}; illegal {"Hard-block": 49, "Direct-Answer": 2, "Soft-reasoning": 1}; misinformation_disinformation {"Hard-block": 54}
 - A0ft@0.1 length: 300-1000 {"Hard-block": 26, "Soft-reasoning": 1}; <300 {"Hard-block": 162, "Soft-reasoning": 3, "Direct-Answer": 3}; >1000 {"Hard-block": 49, "Soft-reasoning": 1}
