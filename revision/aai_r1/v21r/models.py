@@ -316,6 +316,19 @@ FT_LARGE = dict(enc="microsoft/deberta-v3-large", epochs=2, lr_enc=1e-5, lr_out=
                 amp=True)
 
 
+def _fp32_model(cls, name: str):
+    """transformers 5 keeps a checkpoint's fp16 weights (DeBERTa-v3-large ships fp16), and AdamW on fp16 weights gives
+    NaN (PEINN_v2 peinn2/c/ftenc.py): load in float32 and check."""
+    import torch
+    try:
+        m = cls.from_pretrained(name, dtype=torch.float32)
+    except TypeError:
+        m = cls.from_pretrained(name, torch_dtype=torch.float32)
+    m = m.float()
+    assert all(p.dtype == torch.float32 for p in m.parameters())
+    return m
+
+
 def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print):
     """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
     focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
@@ -334,7 +347,7 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     class Net(nn.Module):
         def __init__(self):
             super().__init__()
-            self.enc = AutoModel.from_pretrained(name)
+            self.enc = _fp32_model(AutoModel, name)
             h = self.enc.config.hidden_size
             self.out = calibrator(32 + h) if energy_kind else mlp(32 + h + 384, 3, sigmoid=True)
 
@@ -349,6 +362,10 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     net = Net().to(dev)
     opt = torch.optim.AdamW([{"params": net.enc.parameters(), "lr": hp["lr_enc"]},
                              {"params": net.out.parameters(), "lr": hp["lr_out"]}], weight_decay=0.01)
+    acc = int(hp.get("accum") or 1)
+    steps = max(1, hp["epochs"] * math.ceil(len(tr) / hp["batch"]) // acc)
+    warm = max(1, int(0.06 * steps))                                       # linear warm-up 6 % then linear decay (ftenc)
+    sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda k: min((k + 1) / warm, max(0.0, (steps - k) / max(1, steps - warm))))
     ytr = (tr.F.to_numpy() >= 0.5).astype("float32")
     pos_w = float((ytr == 0).sum() / max(1, (ytr == 1).sum()))
     neg_cw = float((ytr == 1).sum() / max(1, (ytr == 0).sum()))
@@ -391,7 +408,12 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
         return np.concatenate(out) if out else np.zeros((0, 1 if energy_kind else 3), dtype="float32")
 
     amp = bool(hp.get("amp")) and dev.type == "cuda"
-    acc = int(hp.get("accum") or 1)
+
+    def step_():
+        torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0)
+        opt.step()
+        sched.step()
+        opt.zero_grad()
 
     def fwd(ids, att, x):
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=amp):
@@ -406,14 +428,14 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             l_ = loss(fwd(ids, att, x), y, w)
             (l_ / acc).backward()
             if (i + 1) % acc == 0:
-                opt.step()
-                opt.zero_grad()
+                step_()
             if i % 200 == 0:
-                log(f"    {kind} epoch {ep + 1} batch {i} loss {float(l_):.4f}")
-        opt.step()
-        opt.zero_grad()
+                log(f"    {kind} epoch {ep + 1} batch {i} loss {float(l_.detach()):.4f}")
+        opt.zero_grad()                                                      # a last partial accumulation is dropped
         pv = predict(va, Xva)
         if energy_kind:
+            if not np.isfinite(pv).all():
+                raise SystemExit(f"{kind} ({name}): non-finite validation output at epoch {ep + 1}")
             sc = _auroc((va.F.to_numpy() >= 0.5).astype(int), pv.ravel())
             better = best is None or sc > best
         else:
@@ -481,6 +503,9 @@ def train_all(check: bool = False, log=print) -> int:
     report["calibrator_val_auroc"] = auc
 
     def save(name, E_=None, **arrs):
+        bad = [k for k, v in {"E": E if E_ is None else E_, **arrs}.items() if not np.isfinite(np.asarray(v, float)).all()]
+        if bad:
+            raise SystemExit(f"{name}: non-finite {bad} (training diverged)")
         np.savez(sigdir(check) / f"{name}.npz", sha=uni.sha.to_numpy(), part=uni.part.to_numpy(),
                  E=E if E_ is None else E_, **arrs)
 

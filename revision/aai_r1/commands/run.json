@@ -1,5 +1,5 @@
 {
- "id": "20261016T010759Z-rerun",
+ "id": "20261016T011422Z-rerun",
  "action": "rerun",
  "steps": [
   "supp-check",
@@ -11,6 +11,6 @@
   "preview-check",
   "preview"
  ],
- "note": "DESIGN.md 14 (Eugene 2026-10-16 10:02 KST: on par with Llama Guard on ORR and ASR): A0ft and A0ftL (fine-tuned encoders, DeBERTa-v3-large energy), Llama Guard dev reference on the test split, preview only after dev parity; hold at gate-review. No matrix.",
- "issued_utc": "2026-10-16 01:07:59"
+ "note": "DESIGN.md 14, second try: encoders loaded in float32 (DeBERTa-v3-large ships fp16 -> NaN), warm-up, clipping and NaN guards; same chain, hold at gate-review. No matrix.",
+ "issued_utc": "2026-10-16 01:14:22"
 }
