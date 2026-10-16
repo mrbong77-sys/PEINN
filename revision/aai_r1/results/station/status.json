@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 100,
+ "seq": 101,
  "mission": "ops.run",
- "time_utc": "2026-10-16 06:48:27",
- "time_local": "2026-10-16 15:48:27",
- "code": "ce3b8bd v2.1 심사 대응 runner: 실패 후 대기 (attempt 26)",
- "gpu": "25397 MiB, 32607 MiB, 0 %, 43",
+ "time_utc": "2026-10-16 06:58:32",
+ "time_local": "2026-10-16 15:58:32",
+ "code": "4b39001 station: 임무 실행 중",
+ "gpu": "1468 MiB, 32607 MiB, 0 %, 45",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
