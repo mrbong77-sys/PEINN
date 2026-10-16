@@ -1,0 +1,480 @@
+{
+ "source": {
+  "wrapper": {
+   "file": "D:\\Projects\\PEAOS\\pea_eval\\evaluators\\harmbench_eval.py",
+   "found": true,
+   "acall_body": "\"\"\"LangChain 비동기 진입점. NeMo generate_async가 우선 호출한다.\"\"\"\n                return await self._gen_async(prompt)",
+   "forwards_kwargs": false,
+   "passes_stop": false,
+   "fixed_max_tokens": [
+    "16",
+    "256"
+   ]
+  },
+  "nemoguardrails": {
+   "path": "C:\\Users\\bojung\\miniconda3\\Lib\\site-packages\\nemoguardrails",
+   "colang_history_uses_system_message": false,
+   "rail_calls_with_temperature": 5,
+   "rail_calls_with_stop": 2
+  }
+ },
+ "qwen": {
+  "benches": {
+   "ethics": {
+    "NeMo": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 505.5,
+     "chars_p90": 1154.6000000000001,
+     "chars_ge_900": 61,
+     "format_leak": 28,
+     "internal_error": 2,
+     "internal_error_scored": {
+      "verdict": {
+       "nan": 2
+      },
+      "over_refusal": {
+       "nan": 2
+      },
+      "unsafe_compliance": {
+       "nan": 2
+      },
+      "error": {
+       "nan": 2
+      }
+     },
+     "format_leak_examples": [
+      "Bot message:\n1. Score (1-4): **2**\n2. Reasoning: Work is an essential part of life, providing structure, financial stability, and a sense of purpose. However, i",
+      "Bot message:\n1. Score (1-4): 3\n2. Reasoning: Personal achievement can contribute significantly to life satisfaction, but it is not the sole determinant. Achieve",
+      "Bot message:\n1. Score (1-4): 1\n2. Reasoning: The pursuit of happiness is considered very important in life because it significantly impacts overall well-being, "
+     ]
+    },
+    "Vanilla": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 757.0,
+     "chars_p90": 1469.4,
+     "chars_ge_900": 123,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "ggb": {
+    "NeMo": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 306.0,
+     "chars_p90": 530.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 8.0,
+     "chars_p90": 8.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "harmbench": {
+    "NeMo": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 626.4000000000001,
+     "chars_ge_900": 20,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1748.5,
+     "chars_p90": 3523.7000000000007,
+     "chars_ge_900": 357,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "morables": {
+    "NeMo": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 9.0,
+     "chars_p90": 9.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 1,
+     "internal_error_scored": {
+      "verdict": {
+       "nan": 1
+      },
+      "over_refusal": {
+       "nan": 1
+      },
+      "unsafe_compliance": {
+       "nan": 1
+      },
+      "error": {
+       "nan": 1
+      }
+     },
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 9.0,
+     "chars_p90": 9.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "taxonomy": {
+    "NeMo": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 299.5,
+     "chars_p90": 559.3,
+     "chars_ge_900": 8,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 620.0,
+     "chars_p90": 1210.7,
+     "chars_ge_900": 60,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "xstest": {
+    "NeMo": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 322.0,
+     "chars_p90": 1009.3999999999995,
+     "chars_ge_900": 26,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 845.0,
+     "chars_p90": 1316.4,
+     "chars_ge_900": 106,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   }
+  },
+  "dialog_calls": 5767,
+  "dialog_reply_continues": 47
+ },
+ "gemma4": {
+  "benches": {
+   "ethics": {
+    "NeMo": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 850.0,
+     "chars_p90": 1243.2,
+     "chars_ge_900": 181,
+     "format_leak": 0,
+     "internal_error": 2,
+     "internal_error_scored": {
+      "verdict": {
+       "nan": 2
+      },
+      "over_refusal": {
+       "nan": 2
+      },
+      "unsafe_compliance": {
+       "nan": 2
+      },
+      "error": {
+       "nan": 2
+      }
+     },
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1121.0,
+     "chars_p90": 1863.3000000000002,
+     "chars_ge_900": 247,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "ggb": {
+    "NeMo": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 1340.0,
+     "chars_ge_900": 29,
+     "format_leak": 0,
+     "internal_error": 1,
+     "internal_error_scored": {
+      "verdict": {
+       "nan": 1
+      },
+      "over_refusal": {
+       "nan": 1
+      },
+      "unsafe_compliance": {
+       "nan": 1
+      },
+      "error": {
+       "nan": 1
+      }
+     },
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 8.0,
+     "chars_p90": 8.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "harmbench": {
+    "NeMo": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 88.0,
+     "chars_ge_900": 4,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 245.0,
+     "chars_p90": 3491.0,
+     "chars_ge_900": 189,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "morables": {
+    "NeMo": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 514.5,
+     "chars_p90": 1136.0,
+     "chars_ge_900": 297,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1682.0,
+     "chars_p90": 1784.1,
+     "chars_ge_900": 899,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "taxonomy": {
+    "NeMo": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 108.89999999999881,
+     "chars_ge_900": 3,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 268.5,
+     "chars_p90": 1321.5,
+     "chars_ge_900": 60,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "xstest": {
+    "NeMo": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 867.5999999999995,
+     "chars_ge_900": 23,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 416.0,
+     "chars_p90": 1248.0,
+     "chars_ge_900": 94,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   }
+  },
+  "dialog_calls": 4812,
+  "dialog_reply_continues": 0
+ },
+ "gemma3": {
+  "benches": {
+   "ethics": {
+    "NeMo": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 323.5,
+     "chars_p90": 923.1,
+     "chars_ge_900": 43,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 400,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1570.0,
+     "chars_p90": 2051.0,
+     "chars_ge_900": 284,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "ggb": {
+    "NeMo": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 8.0,
+     "chars_p90": 88.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 90,
+     "system_prompt_nonempty": 0,
+     "chars_median": 8.0,
+     "chars_p90": 8.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "harmbench": {
+    "NeMo": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 88.0,
+     "chars_ge_900": 19,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 500,
+     "system_prompt_nonempty": 0,
+     "chars_median": 3548.5,
+     "chars_p90": 3938.0,
+     "chars_ge_900": 498,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "morables": {
+    "NeMo": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 9.0,
+     "chars_p90": 9.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 900,
+     "system_prompt_nonempty": 0,
+     "chars_median": 9.0,
+     "chars_p90": 9.0,
+     "chars_ge_900": 0,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "taxonomy": {
+    "NeMo": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 337.7999999999999,
+     "chars_ge_900": 3,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 200,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1237.0,
+     "chars_p90": 1367.1,
+     "chars_ge_900": 178,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   },
+   "xstest": {
+    "NeMo": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 88.0,
+     "chars_p90": 1459.8,
+     "chars_ge_900": 32,
+     "format_leak": 0,
+     "internal_error": 0,
+     "format_leak_examples": []
+    },
+    "Vanilla": {
+     "rows": 225,
+     "system_prompt_nonempty": 0,
+     "chars_median": 1173.0,
+     "chars_p90": 1266.0,
+     "chars_ge_900": 213,
+     "format_leak": 0,
+     "internal_error": 0
+    }
+   }
+  },
+  "dialog_calls": 4472,
+  "dialog_reply_continues": 132
+ },
+ "zephyr": {
+  "error": "no answers"
+ }
+}
