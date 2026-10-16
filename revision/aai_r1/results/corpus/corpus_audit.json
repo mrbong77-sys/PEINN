@@ -1,9 +1,9 @@
 {
- "rows": 22045,
- "kept": 21208,
+ "rows": 28033,
+ "kept": 27195,
  "near_cos": 0.92,
  "dropped": {
-  "guard": 6,
+  "guard": 7,
   "embedding": 0,
   "xstest_type": 831
  },
@@ -12,16 +12,18 @@
   "benign_harm_discuss|xstest_type": 322,
   "supp:coconot_contrast|guard": 2,
   "supp:orbench_toxic|guard": 3,
+  "supp:wildjailbreak_van_benign|guard": 1,
   "trick_safe|xstest_type": 509
  },
  "guard_reasons": {
-  "": 22039,
-  "near-dup": 6
+  "": 28038,
+  "near-dup": 6,
+  "exact-collision": 1
  },
  "split": {
-  "train": 17548,
-  "test": 1835,
-  "val": 1825
+  "train": 22338,
+  "test": 2434,
+  "val": 2423
  },
  "by_source_polar": {
   "alpaca|F": 2,
@@ -53,8 +55,12 @@
   "supp:phtest_harmless|T": 500,
   "supp:wildguardmix_adv_benign|T": 500,
   "supp:wildguardmix_adv_harmful|F": 500,
+  "supp:wildguardmix_van_benign|T": 997,
+  "supp:wildguardmix_van_harmful|F": 991,
   "supp:wildjailbreak_adv_benign|T": 1000,
   "supp:wildjailbreak_adv_harmful|F": 1000,
+  "supp:wildjailbreak_van_benign|T": 1999,
+  "supp:wildjailbreak_van_harmful|F": 2000,
   "syn_advbenign|F": 44,
   "syn_advbenign|T": 250,
   "syn_benignsensitive|F": 26,
@@ -556,6 +562,7 @@
   "917d2fe451beaa9fad71d95114984d973647434d",
   "918787f5fcbc5b8289aaeb0574b58e0bcbfba6c5",
   "91d8c8c9375ee33a5efef24b7791a7863a2b76d8",
+  "91edb76f7f3ce0d9379e1b78808b9d016fc845a3",
   "92507beab32026bca298c9b9f9eacf83db16f13b",
   "925d2636c1ee11e79b67aee112d8180fe881e3d9",
   "925f528934cd8449ca71c9d3a4a0919ad5ef1cd8",
