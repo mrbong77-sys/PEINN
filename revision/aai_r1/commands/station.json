@@ -1,9 +1,6 @@
 {
- "id": "20261017T054600Z-launch",
- "action": "launch",
- "steps": [],
- "note": "GGB export only (CPU, DESIGN.md 32; Eugene's card 14:44 KST). Earlier steps are done and skipped; RUN_A8 is off, so the mission ends after ggb-export. A8 is queued again for tonight afterwards.",
- "issued_utc": "2026-10-17 05:46:00",
- "module": "ops.run",
- "args": []
+ "id": "20261017T060000Z-stop",
+ "action": "stop",
+ "note": "GGB export done; end the station. A8 is queued again for tonight.",
+ "issued_utc": "2026-10-17 06:00:00"
 }
