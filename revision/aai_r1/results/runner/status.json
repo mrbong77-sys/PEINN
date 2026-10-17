@@ -1,20 +1,20 @@
 {
- "verdict": "실패 후 대기",
- "seq": 284,
+ "verdict": "실행 중",
+ "seq": 285,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:40:25",
- "time_utc": "2026-10-17 04:40:25",
- "attempt": 43,
- "code": "c73c194 v21r M: 'others' answers and scores before and after the repeat-guard rerun (counts)",
- "step": "a8-check",
- "step_min": 0.1,
+ "time_local": "2026-10-17 13:44:30",
+ "time_utc": "2026-10-17 04:44:30",
+ "attempt": 44,
+ "code": "d41ab04 v21r R2: nemo-orr-detail, the logged calls of the XSTest prompts whose NeMo fixed refusal no rail event explains",
+ "step": null,
+ "step_min": null,
  "since_output_min": 0.0,
- "gpu": "1594 MiB, 32607 MiB, 1 %, 52",
- "next": "새 코드나 명령을 기다림",
- "reason": "코드 1",
- "ack": "20261017T061500Z-update update (대기 끝, 재시도, 2026-10-17 04:40:12 UTC)",
+ "gpu": "1608 MiB, 32607 MiB, 1 %, 52",
+ "next": "단계 진행",
+ "reason": "시작",
+ "ack": "20261017T064000Z-update update (대기 끝, 재시도, 2026-10-17 04:44:29 UTC)",
  "done": [
   "record",
   "nemo",
@@ -71,6 +71,7 @@
   "repeat-diff-means"
  ],
  "left": [
+  "nemo-orr-detail",
   "a8-check"
  ]
 }
