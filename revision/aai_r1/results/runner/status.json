@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 295,
+ "verdict": "완료",
+ "seq": 296,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 14:27:43",
- "time_utc": "2026-10-17 05:27:43",
+ "time_local": "2026-10-17 14:29:35",
+ "time_utc": "2026-10-17 05:29:35",
  "attempt": 48,
- "code": "057ba53 v21r A8: q4_K_M with llama.cpp's llama-quantize before the Ollama import (Eugene's card 14:24 KST)",
- "step": null,
- "step_min": null,
+ "code": "9720411 v2.1 심사 대응 runner: 실행 중 (attempt 48)",
+ "step": "a8-check",
+ "step_min": 1.9,
  "since_output_min": 0.0,
- "gpu": "2642 MiB, 32607 MiB, 23 %, 46",
- "next": "단계 진행",
- "reason": "시작",
+ "gpu": "25727 MiB, 32607 MiB, 0 %, 44",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)",
  "done": [
   "record",
@@ -71,9 +71,8 @@
   "repeat-diff-means",
   "nemo-orr-detail",
   "nemo-orr-dialog",
-  "nemo-orr-totals"
- ],
- "left": [
+  "nemo-orr-totals",
   "a8-check"
- ]
+ ],
+ "left": []
 }
