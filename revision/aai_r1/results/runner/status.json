@@ -1,20 +1,20 @@
 {
- "verdict": "실패 후 대기",
- "seq": 288,
+ "verdict": "실행 중",
+ "seq": 289,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:47:00",
- "time_utc": "2026-10-17 04:47:00",
- "attempt": 45,
- "code": "dafcd17 v21r R2: which XSTest safe prompts NeMo refuses, and by which rail (counts)",
- "step": "a8-check",
- "step_min": 0.1,
- "since_output_min": 0.1,
- "gpu": "1629 MiB, 32607 MiB, 0 %, 52",
- "next": "새 코드나 명령을 기다림",
- "reason": "코드 1",
- "ack": "20261017T065500Z-update update (대기 끝, 재시도, 2026-10-17 04:46:46 UTC)",
+ "time_local": "2026-10-17 13:51:05",
+ "time_utc": "2026-10-17 04:51:05",
+ "attempt": 46,
+ "code": "e8035ee v21r R2: nemo-orr-totals, NeMo fixed refusals against input blocks and 'ask harmful' dialogs over all XSTest row",
+ "step": null,
+ "step_min": null,
+ "since_output_min": 0.0,
+ "gpu": "1628 MiB, 32607 MiB, 0 %, 51",
+ "next": "단계 진행",
+ "reason": "시작",
+ "ack": "20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)",
  "done": [
   "record",
   "nemo",
@@ -73,6 +73,7 @@
   "nemo-orr-dialog"
  ],
  "left": [
+  "nemo-orr-totals",
   "a8-check"
  ]
 }
