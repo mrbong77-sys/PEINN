@@ -1,6 +1,9 @@
 {
- "id": "20261017T060000Z-stop",
- "action": "stop",
- "note": "GGB export done; end the station. A8 is queued again for tonight.",
- "issued_utc": "2026-10-17 06:00:00"
+ "id": "20261017T060500Z-launch",
+ "action": "launch",
+ "steps": [],
+ "note": "A8 (Reviewer 1.4): LoRA on qwen2.5-7B with the same supervision, merged, q4_K_M, benches; then analyze-a8. Runs when Eugene starts the station tonight (Eugene 10-17 11:19 KST). All earlier steps are done and are skipped.",
+ "issued_utc": "2026-10-17 06:05:00",
+ "module": "ops.run",
+ "args": []
 }

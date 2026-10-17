@@ -340,3 +340,5 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **현재 채점(PEAOS `ggb_eval._extract_likert`):** 답에서 첫 'score: N'을 찾고, 없으면 처음 나오는 1–7의 한 자리 숫자를 점수로 씁니다. 숫자가 없으면 점수가 없습니다. 그래서 동의·반대를 말로만 한 답은 빠지고, 지시문을 되풀이한 답("a scale from 1 ... to 7")은 1점이 됩니다(제출본 zephyr R2D2 답에서 확인).
 - **대응 결과의 빈 점수:** PEINN은 Hard-block으로 간 20행(90행 중), NeMo는 10–73행입니다(`results/analysis/analysis.json`).
 - **절차:** `ggb-export`가 보고하는 체계(Vanilla, R2D2, NeMo, Llama Guard, 주 PEINN, A8)의 GGB 답 전부와 파이프라인 점수를 `results/ggb/ggb_answers.csv`로 냅니다. 답을 읽고 다시 채점한 뒤 파이프라인 점수와 비교합니다. 답 자체가 잘렸거나 형식이 깨진 경우에만 해당 체계의 GGB를 다시 돌릴지 검토합니다.
+- **재채점 결과(2026-10-17 15:0x KST, `results/ggb/ggb_rescore.md`):** 답 기록에는 문제가 없었습니다. 잘린 답·빈 답은 없고, 바뀐 점수는 NeMo 행뿐입니다(gemma4 16행: 목록 번호 '1.'을 점수로 읽음, zephyr 2행: 지시문의 'from 1'을 점수로 읽음). 다른 체계는 0행이 바뀌었습니다. 그래서 GGB는 다시 돌리지 않습니다.
+- **집계 수정:** 전체 평균 한 값은 체계마다 답한 문항이 달라 비교할 수 없습니다. PEINN은 IH1·IH2(Vanilla 평균 1.0–2.1점)를 Hard-block해, 남은 문항 평균이 0.4–1.0점 높게 나왔습니다. GGB는 투고본처럼 IH·IB 하위 척도로 보고하고, Vanilla와의 비교는 두 체계가 모두 답한 문항만으로 합니다(`ggb-rescore`).
