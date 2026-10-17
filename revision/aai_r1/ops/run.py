@@ -22,7 +22,7 @@ TARGET = 0.05                       # DESIGN.md 16: UCR < 5 % on every base and 
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
 RUN_A8 = True                       # Eugene 10-17 14:55 KST: bench export done (7c79350); A8 runs tonight
 RUN_CAP = True                      # Eugene's card 10-17 15:19 KST: Ethics/MORABLES/GGB first answers at 768 tokens, after A8
-CAP_FIRST = False                   # True runs the 768-token rerun before A8 (A8 targets resume from targets.jsonl)
+CAP_FIRST = True                    # Eugene card 10-17 18:09 KST "재생성 먼저"; True runs the 768-token rerun before A8 (A8 targets resume from targets.jsonl)
 
 STATE = paths.CACHE / "run_state.json"
 STATE_CHECK = paths.CACHE / "check_state.json"

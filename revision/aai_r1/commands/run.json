@@ -1,6 +1,6 @@
 {
- "id": "20261017T071000Z-update",
- "action": "update",
- "note": "nemo-orr-totals (CPU): the dialog log has no user turn, so NeMo's fixed refusals are set against input blocks and 'ask harmful' dialogs over all XSTest rows. Applies at the next step boundary.",
- "issued_utc": "2026-10-17 07:10:00"
+ "id": "20261017T091200Z-restart",
+ "action": "restart",
+ "note": "Eugene card 10-17 18:09 KST: the 768-token rerun before A8 (CAP_FIRST). A8 targets resume from targets.jsonl (f7cb025).",
+ "issued_utc": "2026-10-17 09:12:00"
 }
