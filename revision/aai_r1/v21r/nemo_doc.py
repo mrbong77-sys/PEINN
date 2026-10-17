@@ -138,6 +138,18 @@ def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
     for r in rows:                                                  # the last call per task and subject
         last[(r["task"], _norm(r["subj"]))] = r["text"] or ""
     n["input"] = n.key.map(lambda k: verdict(last[("self_check_input", k)]) if ("self_check_input", k) in last else "none")
+    # the output self-check names only the bot message: it is tied to its prompt through the dialog call whose reply
+    # holds that message (first 60 characters); unmatched output checks leave the row as before
+    dl = [(" ".join(str(r.get("text") or "").split()), _norm(r["subj"])) for r in rows if r["task"] == "dialog"]
+    out = {}
+    for r in rows:
+        if r["task"] != "self_check_output":
+            continue
+        head = " ".join(str(r.get("subj") or "").split())[:60]
+        user = next((u for t, u in dl if head and head in t), None)
+        if user is not None:
+            out[user] = verdict(r.get("text") or "")
+    n["output"] = n.key.map(lambda k: out.get(k, "none"))
     n["dialog_harmful"] = n.key.map(lambda k: "ask harmful" in last.get(("dialog", k), ""))
     txt = n.filter(regex="^response").astype(str).agg(" ".join, axis=1)
     n["fixed_refusal"] = txt.str.contains(REFUSAL, regex=False)
@@ -145,7 +157,8 @@ def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
     n["source"] = "answered"
     r = pd.to_numeric(n.over_refusal, errors="coerce").fillna(0) > 0
     n.loc[r, "source"] = "model_refusal"                             # the base model's own refusal under NeMo's instruction
-    n.loc[r & n.fixed_refusal, "source"] = "fixed_other"             # NeMo's fixed refusal with no input or dialog record
+    n.loc[r & n.fixed_refusal, "source"] = "fixed_other"             # NeMo's fixed refusal with no rail record
+    n.loc[r & n.fixed_refusal & (n.output != "allow") & (n.output != "none"), "source"] = "output_rail"
     n.loc[r & n.dialog_harmful, "source"] = "dialog_flow"
     n.loc[r & (n.input != "allow") & (n.input != "none"), "source"] = "input_rail"
     return n
@@ -157,7 +170,8 @@ def nemo_orr(check: bool = False, log=print) -> int:
     import pandas as pd
     res, md = {}, ["# NeMo의 XSTest 안전 문항 과잉 거절: 문항 유형과 거절 경로", "",
                    "판정 CSV와 NeMo 호출 기록에서 셌습니다(모델 호출 없음). 경로: 입력 레일(자체 점검이 막음), "
-                   "대화 흐름(Colang 의도 'ask harmful'), 모델 거절(레일 통과 뒤 기반 모델이 거절), 기타 고정 거절(기록 대조 안 됨).", ""]
+                   "대화 흐름(Colang 의도 'ask harmful'), 출력 레일(자체 점검이 답을 막음; 답 앞 60자로 대화 기록과 대조), "
+                   "모델 거절(레일 통과 뒤 기반 모델이 거절), 기타 고정 거절(기록 대조 안 됨).", ""]
     for b in M.bases(check):
         try:
             n = refusal_sources(check, b)
@@ -185,11 +199,13 @@ def nemo_orr(check: bool = False, log=print) -> int:
                f"정책 단어(weapon·drug·hack·violence·exploit·fraud·harm·illegal·danger·bomb) 있음 "
                f"{pt.get('True', {}).get('refused', 0)}/{pt.get('True', {}).get('n', 0)}, 없음 "
                f"{pt.get('False', {}).get('refused', 0)}/{pt.get('False', {}).get('n', 0)}.", "",
-               "| 유형 | 문항 | NeMo 거절 | 입력 레일 | 대화 흐름 | 모델 거절 | Vanilla 거절 | Llama Guard 거절 |", "|---|---|---|---|---|---|---|---|"]
+               "| 유형 | 문항 | NeMo 거절 | 입력 레일 | 대화 흐름 | 출력 레일 | 기타 고정 | 모델 거절 | Vanilla 거절 | Llama Guard 거절 |",
+               "|---|---|---|---|---|---|---|---|---|---|"]
         for t, v in sorted(by.items(), key=lambda kv: -kv[1]["refused"]):
             s = v["sources"]
             md.append(f"| {t} | {v['n']} | {v['refused']} | {s.get('input_rail', 0)} | {s.get('dialog_flow', 0)} | "
-                      f"{s.get('model_refusal', 0)} | {v['vanilla_refused']} | {v['llamaguard_refused']} |")
+                      f"{s.get('output_rail', 0)} | {s.get('fixed_other', 0)} | {s.get('model_refusal', 0)} | "
+                      f"{v['vanilla_refused']} | {v['llamaguard_refused']} |")
         md += ["", "거절된 예(유형별 최대 3개, 100자):", ""]
         for t, v in by.items():
             for e in v["examples"]:
