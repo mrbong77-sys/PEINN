@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 283,
+ "verdict": "실패 후 대기",
+ "seq": 284,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:40:12",
- "time_utc": "2026-10-17 04:40:12",
+ "time_local": "2026-10-17 13:40:25",
+ "time_utc": "2026-10-17 04:40:25",
  "attempt": 43,
- "code": "adb3ae1 v21r: NeMo refusals per prompt across runs; repeat-diff means; fixed string hash seed for PEAOS children (DESIGN",
- "step": null,
- "step_min": null,
+ "code": "c73c194 v21r M: 'others' answers and scores before and after the repeat-guard rerun (counts)",
+ "step": "a8-check",
+ "step_min": 0.1,
  "since_output_min": 0.0,
- "gpu": "1637 MiB, 32607 MiB, 2 %, 52",
- "next": "단계 진행",
- "reason": "시작",
+ "gpu": "1594 MiB, 32607 MiB, 1 %, 52",
+ "next": "새 코드나 명령을 기다림",
+ "reason": "코드 1",
  "ack": "20261017T061500Z-update update (대기 끝, 재시도, 2026-10-17 04:40:12 UTC)",
  "done": [
   "record",
@@ -66,11 +66,11 @@
   "release",
   "cost-gate",
   "analyze-cost",
-  "repeat-diff"
+  "repeat-diff",
+  "nemo-orr-final",
+  "repeat-diff-means"
  ],
  "left": [
-  "nemo-orr-final",
-  "repeat-diff-means",
   "a8-check"
  ]
 }
