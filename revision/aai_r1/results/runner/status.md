@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 21:32:46 (UTC 2026-10-17 12:32:46), 시도 2, 비컨 #327 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 61800f5 station: 임무 실행 중
-- 현재 단계: a8 (34.7분째)
-- 마지막 출력 후: 1.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6670 MiB, 32607 MiB, 91 %, 67
+- 시각 2026-10-17 21:42:51 (UTC 2026-10-17 12:42:51), 시도 2, 비컨 #328 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 4c9979c station: 임무 실행 중
+- 현재 단계: a8 (44.8분째)
+- 마지막 출력 후: 1.5분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6682 MiB, 32607 MiB, 91 %, 68
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-  morables qwen: 3600 rows, systems {'Vanilla': 900, 'NeMo': 900, 'LlamaGuard': 900, 'PEINN': 900}, 0.6 MiB
-  harmbench gemma4: 2000 rows, systems {'Vanilla': 500, 'NeMo': 500, 'LlamaGuard': 500, 'PEINN': 500}, 0.7 MiB
-  xstest gemma4: 900 rows, systems {'Vanilla': 225, 'NeMo': 225, 'LlamaGuard': 225, 'PEINN': 225}, 0.3 MiB
   taxonomy gemma4: 800 rows, systems {'Vanilla': 200, 'NeMo': 200, 'LlamaGuard': 200, 'PEINN': 200}, 0.2 MiB
   ethics gemma4: 1600 rows, systems {'Vanilla': 400, 'NeMo': 400, 'LlamaGuard': 400, 'PEINN': 400}, 0.8 MiB
   morables gemma4: 3600 rows, systems {'Vanilla': 900, 'NeMo': 900, 'LlamaGuard': 900, 'PEINN': 900}, 1.9 MiB
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 55902
   1600/55902
   1800/55902
   2000/55902
+  2200/55902
+  2400/55902
+  2600/55902
 ```
