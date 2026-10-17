@@ -1,13 +1,13 @@
 {
- "verdict": "대기",
- "seq": 244,
+ "verdict": "종료",
+ "seq": 245,
  "mission": null,
- "time_utc": "2026-10-17 06:01:55",
- "time_local": "2026-10-17 15:01:55",
- "code": "939652e v2.1 심사 대응 runner: 완료 (attempt 1)",
- "gpu": "2608 MiB, 32607 MiB, 17 %, 42",
- "ack": "20261017T060000Z-launch-export launch (임무 시작 ops.run, 2026-10-17 05:59:53 UTC)",
- "reason": "ops.run 종료(코드 0)",
+ "time_utc": "2026-10-17 06:03:58",
+ "time_local": "2026-10-17 15:03:58",
+ "code": "6baec11 station: 대기",
+ "gpu": "2483 MiB, 32607 MiB, 14 %, 38",
+ "ack": "20261017T061500Z-stop stop (위성 종료, 2026-10-17 06:03:58 UTC)",
+ "reason": "명령",
  "history": [
   {
    "module": "ops.run",
