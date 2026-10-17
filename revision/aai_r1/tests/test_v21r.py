@@ -1235,3 +1235,33 @@ def test_a8_kept_targets_drops_a_cut_last_line(tmp_path):
     f.write_text('{"sha": "a"}\n{"sha"\n{"sha": "c"}\n', encoding="utf-8")
     with pytest.raises(json.JSONDecodeError):
         A8.kept_targets(f, log=lambda *_: None)
+
+
+def test_a8_targets_skip_items_at_ollamas_repeat_limit(tmp_path, monkeypatch):
+    import io
+    import urllib.error
+    from v21r import a8 as A8
+    items = pd.DataFrame({"sha": ["a", "b", "c"], "split": "train", "cls": ["safe", "safe", "harm"], "text": ["x", "loop", "h"]})
+    monkeypatch.setattr(A8, "wdir", lambda check: tmp_path)
+    monkeypatch.setattr(A8, "plan", lambda x, check: items)
+    monkeypatch.setattr(A8.D, "load_split", lambda check: None)
+    monkeypatch.setattr(A8, "tier_prompts", lambda: {"refusal": "No.", "deliberation": "d"})
+    monkeypatch.setattr(C, "pull_missing", lambda *a, **k: 0)
+
+    def fake(path, body, timeout=60):
+        if body["messages"][-1]["content"] == "loop":
+            raise urllib.error.HTTPError("u", 500, "x", {}, io.BytesIO(b'{"error":"prediction aborted, token repeat limit reached"}'))
+        return json.dumps({"message": {"content": "answer"}, "eval_count": 3})
+    monkeypatch.setattr(C, "_ollama", fake)
+    assert A8.targets(False, log=lambda *_: None) == 0
+    assert sorted(r["sha"] for r in C.jsonl(tmp_path / "targets.jsonl")) == ["a", "c"]
+    assert [r["sha"] for r in C.jsonl(tmp_path / "targets_skipped.jsonl")] == ["b"]
+    seen = []
+    assert A8.targets(False, log=seen.append) == 0 and any("0 to do" in x for x in seen)
+
+    def other(path, body, timeout=60):
+        raise urllib.error.HTTPError("u", 500, "x", {}, io.BytesIO(b'{"error":"model runner has unexpectedly stopped"}'))
+    (tmp_path / "targets.jsonl").unlink()
+    (tmp_path / "targets_skipped.jsonl").unlink()
+    monkeypatch.setattr(C, "_ollama", other)
+    assert A8.targets(False, log=lambda *_: None) == 1                     # any other 500 still stops the step

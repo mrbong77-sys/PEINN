@@ -18,6 +18,7 @@ import json
 import os
 import re
 import subprocess
+import urllib.error
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -96,10 +97,15 @@ def kept_targets(out: Path, log=print) -> set[str]:
     return {r["sha"] for r in rows}
 
 
+REPEAT_LIMIT = "Ollama repeat limit"
+
+
 def targets(check: bool, log=print) -> int:
+    """Items whose teacher answer hits Ollama's token repeat limit (HTTP 500 "token repeat limit reached", DESIGN.md 30)
+    get no target: a looping answer is no supervision. They are listed in targets_skipped.jsonl and counted in a8.json."""
     w = wdir(check)
-    out = w / "targets.jsonl"
-    have = kept_targets(out, log)
+    out, skip = w / "targets.jsonl", w / "targets_skipped.jsonl"
+    have = kept_targets(out, log) | {r["sha"] for r in C.jsonl(skip)}
     tp = tier_prompts()
     items = plan(D.load_split(check), check)
     todo = items[~items.sha.isin(have)]
@@ -113,12 +119,21 @@ def targets(check: bool, log=print) -> int:
         try:
             r = json.loads(C._ollama("/api/chat", rq, timeout=900))
             return row, (r.get("message") or {}).get("content", ""), r.get("eval_count")
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", "replace")
+            return row, None, REPEAT_LIMIT if "repeat limit" in body else f"HTTPError {e.code}: {body}"[:200]
         except Exception as e:  # noqa: BLE001
             return row, None, f"{type(e).__name__}: {e}"[:200]
 
-    bad = 0
+    bad = skipped = 0
     with open(out, "a", encoding="utf-8") as fh, ThreadPoolExecutor(4) as ex:
         for i, (row, t, info) in enumerate(ex.map(one, [r for _, r in todo.iterrows()])):
+            if info == REPEAT_LIMIT:
+                skipped += 1
+                log(f"  skipped {row['sha'][:10]} ({row['cls']}): {REPEAT_LIMIT}")
+                with open(skip, "a", encoding="utf-8") as sf:
+                    sf.write(json.dumps({"sha": row["sha"], "split": row["split"], "cls": row["cls"], "reason": REPEAT_LIMIT}) + "\n")
+                continue
             if not t or not t.strip():
                 bad += 1
                 log(f"  no target for {row['sha'][:10]} ({row['cls']}): {info}")
@@ -128,6 +143,7 @@ def targets(check: bool, log=print) -> int:
             if (i + 1) % 200 == 0:
                 fh.flush()
                 log(f"  {i + 1}/{len(todo)}")
+    log(f"A8 targets: {skipped} skipped now ({REPEAT_LIMIT}), {len(C.jsonl(skip))} in all")
     if bad:
         log(f"stop: {bad} items without a target (rerun to retry them)")
         return 1
@@ -321,9 +337,11 @@ def summary(check: bool) -> dict:
     tr.pop("loss_curve", None)
     calls = {f.stem[len("calls_"):]: C.jload(f) for f in sorted(d.glob("calls_*.json"))}
     tg = pd.DataFrame(C.jsonl(w / "targets.jsonl")) if (w / "targets.jsonl").exists() else pd.DataFrame()
+    sk = pd.DataFrame(C.jsonl(w / "targets_skipped.jsonl"))
     return {"hf_model": HF_MODEL[check], "served": SERVED[check], "train": tr, "calls": calls,
             "ollama": C.jload(w / "ollama.json") if (w / "ollama.json").exists() else None,
-            "targets": {f"{s}|{c}": int(n) for (s, c), n in tg.groupby(["split", "cls"]).size().items()} if len(tg) else {}}
+            "targets": {f"{s}|{c}": int(n) for (s, c), n in tg.groupby(["split", "cls"]).size().items()} if len(tg) else {},
+            "targets_skipped": {f"{s}|{c}": int(n) for (s, c), n in sk.groupby(["split", "cls"]).size().items()} if len(sk) else {}}
 
 
 def a8(check: bool = False, log=print) -> int:
