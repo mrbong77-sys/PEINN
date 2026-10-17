@@ -78,14 +78,14 @@
    "gen_reused": 2515
   },
   "others_gen": {
-   "gen_live": 15349,
-   "gen_reused": 2015
+   "gen_reused": 17254,
+   "gen_live": 110
   },
   "others_judge": {
-   "gen_reused": 17263,
-   "judge_live": 468,
-   "judge_reused": 15,
-   "gen_live": 98
+   "gen_reused": 17328,
+   "judge_reused": 369,
+   "judge_live": 115,
+   "gen_live": 36
   },
   "rr_gen": {
    "gen_reused": 2515,
@@ -104,8 +104,6 @@
    "judge_live": 91
   }
  },
- "internal_error_rows": {
-  "H03": 1
- },
+ "internal_error_rows": {},
  "error_rows": {}
 }
