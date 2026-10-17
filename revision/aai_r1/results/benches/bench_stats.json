@@ -51,16 +51,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 69.75,
-     "ci95": 3.54,
-     "sd_runs": 2.85,
+     "mean": 69.3,
+     "ci95": 3.57,
+     "sd_runs": 2.87,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 82.72,
-     "ci95": 2.3,
-     "sd_runs": 1.85,
+     "mean": 82.57,
+     "ci95": 1.72,
+     "sd_runs": 1.39,
      "runs": 5,
      "n": 5
     },
@@ -71,7 +71,7 @@
     "pipeline": {
      "mfa": 92.0,
      "wvs": 79.0,
-     "rqi": 69.75
+     "rqi": 69.3
     }
    },
    "morables": {
@@ -162,27 +162,27 @@
      "n": 150
     },
     "rqi": {
-     "mean": 66.1,
-     "ci95": 5.61,
-     "sd_runs": 4.52,
+     "mean": 69.5,
+     "ci95": 3.03,
+     "sd_runs": 2.44,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 52.8,
-     "ci95": 4.63,
-     "sd_runs": 3.73,
+     "mean": 53.94,
+     "ci95": 3.72,
+     "sd_runs": 3.0,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 53,
     "unrated_wvs": 24,
     "rescored_changed": 21,
-    "rqi_floored_nemo": 0,
+    "rqi_floored_nemo": 2,
     "pipeline": {
      "mfa": 46.04,
      "wvs": 45.6,
-     "rqi": 66.1
+     "rqi": 70.2
     }
    },
    "morables": {
@@ -202,7 +202,7 @@
     },
     "gap": 3.26,
     "rows": 900,
-    "no_stated_answer": 3,
+    "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
@@ -266,41 +266,41 @@
    },
    "ethics": {
     "mfa": {
-     "mean": 92.4,
+     "mean": 92.0,
      "ci95": 0.0,
      "sd_runs": 0.0,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 87.27,
-     "ci95": 6.1,
-     "sd_runs": 4.91,
+     "mean": 88.53,
+     "ci95": 4.12,
+     "sd_runs": 3.32,
      "runs": 5,
      "n": 150
     },
     "rqi": {
-     "mean": 70.85,
-     "ci95": 2.82,
-     "sd_runs": 2.27,
+     "mean": 67.8,
+     "ci95": 4.74,
+     "sd_runs": 3.82,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 83.51,
-     "ci95": 2.72,
-     "sd_runs": 2.19,
+     "mean": 82.78,
+     "ci95": 2.64,
+     "sd_runs": 2.13,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 0,
     "unrated_wvs": 0,
-    "rescored_changed": 31,
+    "rescored_changed": 35,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 92.4,
-     "wvs": 82.0,
-     "rqi": 70.85
+     "mfa": 92.0,
+     "wvs": 83.8,
+     "rqi": 67.8
     }
    },
    "morables": {
@@ -377,41 +377,41 @@
    },
    "ethics": {
     "mfa": {
-     "mean": 92.4,
+     "mean": 92.0,
      "ci95": 0.0,
      "sd_runs": 0.0,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 87.27,
-     "ci95": 6.1,
-     "sd_runs": 4.91,
+     "mean": 88.53,
+     "ci95": 4.12,
+     "sd_runs": 3.32,
      "runs": 5,
      "n": 150
     },
     "rqi": {
-     "mean": 73.3,
-     "ci95": 2.17,
-     "sd_runs": 1.74,
+     "mean": 70.9,
+     "ci95": 4.35,
+     "sd_runs": 3.5,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.32,
-     "ci95": 2.16,
-     "sd_runs": 1.74,
+     "mean": 83.81,
+     "ci95": 2.55,
+     "sd_runs": 2.06,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 0,
     "unrated_wvs": 0,
-    "rescored_changed": 31,
+    "rescored_changed": 35,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 92.4,
-     "wvs": 82.0,
-     "rqi": 73.3
+     "mfa": 92.0,
+     "wvs": 83.8,
+     "rqi": 70.9
     }
    },
    "morables": {
@@ -504,16 +504,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 70.95,
-     "ci95": 4.59,
-     "sd_runs": 3.7,
+     "mean": 72.35,
+     "ci95": 4.69,
+     "sd_runs": 3.78,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.12,
-     "ci95": 1.36,
-     "sd_runs": 1.09,
+     "mean": 84.59,
+     "ci95": 1.5,
+     "sd_runs": 1.2,
      "runs": 5,
      "n": 5
     },
@@ -524,7 +524,7 @@
     "pipeline": {
      "mfa": 81.95,
      "wvs": 78.47,
-     "rqi": 70.95
+     "rqi": 72.35
     }
    },
    "morables": {
@@ -615,27 +615,27 @@
      "n": 150
     },
     "rqi": {
-     "mean": 68.8,
-     "ci95": 8.33,
-     "sd_runs": 6.71,
+     "mean": 69.4,
+     "ci95": 4.8,
+     "sd_runs": 3.86,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 60.9,
-     "ci95": 3.98,
-     "sd_runs": 3.21,
+     "mean": 61.1,
+     "ci95": 3.08,
+     "sd_runs": 2.48,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 81,
     "unrated_wvs": 37,
     "rescored_changed": 23,
-    "rqi_floored_nemo": 3,
+    "rqi_floored_nemo": 4,
     "pipeline": {
      "mfa": 41.35,
      "wvs": 74.67,
-     "rqi": 69.0
+     "rqi": 70.75
     }
    },
    "morables": {
@@ -733,16 +733,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 72.65,
-     "ci95": 4.86,
-     "sd_runs": 3.91,
+     "mean": 72.5,
+     "ci95": 7.76,
+     "sd_runs": 6.25,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.51,
-     "ci95": 1.7,
-     "sd_runs": 1.37,
+     "mean": 84.46,
+     "ci95": 3.13,
+     "sd_runs": 2.52,
      "runs": 5,
      "n": 5
     },
@@ -753,29 +753,29 @@
     "pipeline": {
      "mfa": 81.95,
      "wvs": 79.53,
-     "rqi": 72.65
+     "rqi": 72.5
     }
    },
    "morables": {
     "clean": {
-     "mean": 47.11,
-     "ci95": 14.78,
-     "sd_runs": 11.9,
+     "mean": 49.33,
+     "ci95": 12.24,
+     "sd_runs": 9.86,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 44.74,
-     "ci95": 13.6,
-     "sd_runs": 10.96,
+     "mean": 49.04,
+     "ci95": 14.0,
+     "sd_runs": 11.28,
      "runs": 5,
      "n": 675
     },
-    "gap": 2.37,
+    "gap": 0.29,
     "rows": 900,
-    "no_stated_answer": 432,
+    "no_stated_answer": 6,
     "refused": 37,
-    "letter_without_stated_answer": 432
+    "letter_without_stated_answer": 6
    },
    "ucr_composite": 1.33,
    "ggb": {
@@ -844,16 +844,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 73.5,
-     "ci95": 2.53,
-     "sd_runs": 2.04,
+     "mean": 75.05,
+     "ci95": 3.76,
+     "sd_runs": 3.03,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.79,
-     "ci95": 1.01,
-     "sd_runs": 0.81,
+     "mean": 85.31,
+     "ci95": 1.89,
+     "sd_runs": 1.53,
      "runs": 5,
      "n": 5
     },
@@ -864,29 +864,29 @@
     "pipeline": {
      "mfa": 81.95,
      "wvs": 79.53,
-     "rqi": 73.5
+     "rqi": 75.05
     }
    },
    "morables": {
     "clean": {
-     "mean": 50.22,
-     "ci95": 15.43,
-     "sd_runs": 12.43,
+     "mean": 52.89,
+     "ci95": 13.14,
+     "sd_runs": 10.59,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 46.81,
-     "ci95": 13.95,
-     "sd_runs": 11.24,
+     "mean": 52.3,
+     "ci95": 14.49,
+     "sd_runs": 11.67,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.41,
+    "gap": 0.59,
     "rows": 900,
-    "no_stated_answer": 471,
+    "no_stated_answer": 4,
     "refused": 0,
-    "letter_without_stated_answer": 471
+    "letter_without_stated_answer": 4
    },
    "ucr_composite": 13.33,
    "ggb": {
@@ -957,16 +957,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 73.0,
-     "ci95": 3.16,
-     "sd_runs": 2.54,
+     "mean": 71.8,
+     "ci95": 3.52,
+     "sd_runs": 2.84,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 85.33,
-     "ci95": 0.96,
-     "sd_runs": 0.77,
+     "mean": 84.93,
+     "ci95": 1.2,
+     "sd_runs": 0.97,
      "runs": 5,
      "n": 5
     },
@@ -977,7 +977,7 @@
     "pipeline": {
      "mfa": 82.99,
      "wvs": 87.53,
-     "rqi": 73.0
+     "rqi": 71.8
     }
    },
    "morables": {
@@ -1068,27 +1068,27 @@
      "n": 150
     },
     "rqi": {
-     "mean": 55.45,
-     "ci95": 6.57,
-     "sd_runs": 5.3,
+     "mean": 55.2,
+     "ci95": 6.7,
+     "sd_runs": 5.4,
      "runs": 5,
-     "n": 100
+     "n": 99
     },
     "composite": {
-     "mean": 34.71,
-     "ci95": 3.55,
-     "sd_runs": 2.86,
+     "mean": 34.62,
+     "ci95": 3.07,
+     "sd_runs": 2.47,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 150,
     "unrated_wvs": 69,
     "rescored_changed": 0,
-    "rqi_floored_nemo": 8,
+    "rqi_floored_nemo": 12,
     "pipeline": {
      "mfa": 0.0,
      "wvs": 48.13,
-     "rqi": 56.5
+     "rqi": 57.12
     }
    },
    "morables": {
@@ -1186,16 +1186,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 70.8,
-     "ci95": 5.13,
-     "sd_runs": 4.13,
+     "mean": 73.55,
+     "ci95": 5.76,
+     "sd_runs": 4.64,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.58,
-     "ci95": 1.65,
-     "sd_runs": 1.33,
+     "mean": 85.49,
+     "ci95": 1.92,
+     "sd_runs": 1.54,
      "runs": 5,
      "n": 5
     },
@@ -1206,7 +1206,7 @@
     "pipeline": {
      "mfa": 82.93,
      "wvs": 88.6,
-     "rqi": 70.8
+     "rqi": 73.55
     }
    },
    "morables": {
@@ -1297,16 +1297,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 71.8,
-     "ci95": 3.21,
-     "sd_runs": 2.59,
+     "mean": 74.25,
+     "ci95": 4.44,
+     "sd_runs": 3.58,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.91,
-     "ci95": 1.06,
-     "sd_runs": 0.86,
+     "mean": 85.73,
+     "ci95": 1.52,
+     "sd_runs": 1.22,
      "runs": 5,
      "n": 5
     },
@@ -1317,7 +1317,7 @@
     "pipeline": {
      "mfa": 82.93,
      "wvs": 88.6,
-     "rqi": 71.8
+     "rqi": 74.25
     }
    },
    "morables": {
@@ -1410,16 +1410,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 63.8,
-     "ci95": 7.16,
-     "sd_runs": 5.76,
+     "mean": 64.1,
+     "ci95": 5.42,
+     "sd_runs": 4.37,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 59.2,
-     "ci95": 3.1,
-     "sd_runs": 2.5,
+     "mean": 59.3,
+     "ci95": 2.33,
+     "sd_runs": 1.87,
      "runs": 5,
      "n": 5
     },
@@ -1430,7 +1430,7 @@
     "pipeline": {
      "mfa": 71.39,
      "wvs": 27.8,
-     "rqi": 63.8
+     "rqi": 64.1
     }
    },
    "morables": {
@@ -1521,27 +1521,27 @@
      "n": 150
     },
     "rqi": {
-     "mean": 36.0,
-     "ci95": 5.66,
-     "sd_runs": 4.56,
+     "mean": 33.35,
+     "ci95": 5.41,
+     "sd_runs": 4.36,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 19.56,
-     "ci95": 4.85,
-     "sd_runs": 3.9,
+     "mean": 18.67,
+     "ci95": 4.2,
+     "sd_runs": 3.38,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 150,
     "unrated_wvs": 38,
     "rescored_changed": 21,
-    "rqi_floored_nemo": 5,
+    "rqi_floored_nemo": 4,
     "pipeline": {
      "mfa": 0.0,
      "wvs": 19.53,
-     "rqi": 37.55
+     "rqi": 34.5
     }
    },
    "morables": {
@@ -1639,16 +1639,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 66.95,
-     "ci95": 5.96,
-     "sd_runs": 4.8,
+     "mean": 68.6,
+     "ci95": 5.47,
+     "sd_runs": 4.41,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 60.25,
-     "ci95": 2.56,
-     "sd_runs": 2.06,
+     "mean": 60.8,
+     "ci95": 2.44,
+     "sd_runs": 1.96,
      "runs": 5,
      "n": 5
     },
@@ -1659,7 +1659,7 @@
     "pipeline": {
      "mfa": 70.93,
      "wvs": 28.27,
-     "rqi": 66.95
+     "rqi": 68.6
     }
    },
    "morables": {
@@ -1750,45 +1750,45 @@
      "n": 150
     },
     "rqi": {
-     "mean": 60.9,
-     "ci95": 2.16,
-     "sd_runs": 1.74,
+     "mean": 62.27,
+     "ci95": 4.61,
+     "sd_runs": 3.71,
      "runs": 5,
-     "n": 100
+     "n": 99
     },
     "composite": {
-     "mean": 55.98,
-     "ci95": 4.87,
-     "sd_runs": 3.92,
+     "mean": 56.44,
+     "ci95": 5.1,
+     "sd_runs": 4.11,
      "runs": 5,
      "n": 5
     },
     "unrated_mfq": 0,
     "unrated_wvs": 90,
     "rescored_changed": 58,
-    "rqi_floored_nemo": 0,
+    "rqi_floored_nemo": 1,
     "pipeline": {
      "mfa": 81.04,
      "wvs": 56.27,
-     "rqi": 60.9
+     "rqi": 62.27
     }
    },
    "morables": {
     "clean": {
-     "mean": 29.78,
-     "ci95": 13.03,
-     "sd_runs": 10.49,
+     "mean": 30.22,
+     "ci95": 13.32,
+     "sd_runs": 10.73,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 26.22,
-     "ci95": 11.5,
-     "sd_runs": 9.26,
+     "mean": 26.37,
+     "ci95": 11.64,
+     "sd_runs": 9.38,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.56,
+    "gap": 3.85,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
@@ -1861,16 +1861,16 @@
      "n": 150
     },
     "rqi": {
-     "mean": 70.3,
-     "ci95": 1.99,
-     "sd_runs": 1.6,
+     "mean": 68.55,
+     "ci95": 4.34,
+     "sd_runs": 3.5,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 61.37,
-     "ci95": 1.17,
-     "sd_runs": 0.95,
+     "mean": 60.78,
+     "ci95": 2.15,
+     "sd_runs": 1.73,
      "runs": 5,
      "n": 5
     },
@@ -1881,7 +1881,7 @@
     "pipeline": {
      "mfa": 70.93,
      "wvs": 28.27,
-     "rqi": 70.3
+     "rqi": 68.55
     }
    },
    "morables": {
