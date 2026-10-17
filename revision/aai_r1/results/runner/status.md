@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 17:54:44 (UTC 2026-10-17 08:54:44), 시도 1, 비컨 #304 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: a1f8cdd station: 임무 실행 중
-- 현재 단계: a8 (30.1분째)
-- 마지막 출력 후: 1.2분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7187 MiB, 32607 MiB, 92 %, 68
+- 시각 2026-10-17 18:04:50 (UTC 2026-10-17 09:04:50), 시도 1, 비컨 #305 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 4c54a55 station: 임무 실행 중
+- 현재 단계: a8 (40.2분째)
+- 마지막 출력 후: 1.5분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7186 MiB, 32607 MiB, 91 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip matrix-repeat (the 'others' tag again with the Ollama repeat guard; stored answers reused (DESIGN.md 30)): finished 2026-10-17 11:18:09
-[v21r] skip repeat-review (error rows before and after, calls the repeat guard answered (DESIGN.md 30)): finished 2026-10-17 11:18:22
-[v21r] skip nemo-doc (NeMo rail verdicts per base from the driver's call log (R2)): finished 2026-10-17 10:04:11
 [v21r] skip nemo-orr-all (NeMo's XSTest safe refusals by type and rail on every base (CPU)): finished 2026-10-17 11:18:27
 [v21r] skip nemo-audit-all (NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)): finished 2026-10-17 11:18:33
 [v21r] skip cost (route cost per tier (gate time, calls, tokens)): finished 2026-10-17 13:21:39
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 58775
   1400/58775
   1600/58775
   1800/58775
+  2000/58775
+  2200/58775
+  2400/58775
 ```
