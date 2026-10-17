@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 210,
+ "seq": 211,
  "mission": "ops.run",
- "time_utc": "2026-10-17 01:14:03",
- "time_local": "2026-10-17 10:14:03",
- "code": "96b2c69 v2.1 심사 대응 runner: 실행 중 (attempt 37)",
- "gpu": "26050 MiB, 32607 MiB, 62 %, 48",
+ "time_utc": "2026-10-17 01:24:05",
+ "time_local": "2026-10-17 10:24:05",
+ "code": "8acc7d5 v2.1 심사 대응 runner: 실행 중 (attempt 37)",
+ "gpu": "26095 MiB, 32607 MiB, 9 %, 57",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
