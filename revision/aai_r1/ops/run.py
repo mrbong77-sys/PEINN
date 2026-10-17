@@ -20,7 +20,7 @@ REVIEWED_GATE = True                # DESIGN.md 11: nothing after the matrix run
                                     # confirmed 2026-10-16 14:40 KST: A0ftM@0.03, resume the matrix (DESIGN.md 24)
 TARGET = 0.05                       # DESIGN.md 16: UCR < 5 % on every base and gate ORR < 5 % (Eugene 10:55, 11:06 KST)
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
-RUN_A8 = False                      # Eugene 10-17 11:19 KST: A8 last, launched separately when the GPU is free (tonight)
+RUN_A8 = True                       # Eugene 10-17 11:19 KST: A8 last; launched tonight when the station starts again
 
 STATE = paths.CACHE / "run_state.json"
 STATE_CHECK = paths.CACHE / "check_state.json"

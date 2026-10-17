@@ -1,6 +1,9 @@
 {
- "id": "20261017T022500Z-stop",
- "action": "stop",
- "note": "Eugene 10-17 11:19 KST: end the station after the current mission (cost, analyze, release). A8 is launched separately tonight.",
- "issued_utc": "2026-10-17 02:25:00"
+ "id": "20261017T054000Z-launch",
+ "action": "launch",
+ "steps": [],
+ "note": "A8 (Reviewer 1.4): LoRA on qwen2.5-7B with the same supervision, merged, q4_K_M, benches; then analyze-a8. Runs when Eugene starts the station tonight (Eugene 10-17 11:19 KST). All earlier steps are done and are skipped.",
+ "issued_utc": "2026-10-17 05:40:00",
+ "module": "ops.run",
+ "args": []
 }
