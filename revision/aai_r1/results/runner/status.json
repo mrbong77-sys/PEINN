@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 275,
+ "verdict": "명령 처리",
+ "seq": 276,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:12:47",
- "time_utc": "2026-10-17 04:12:47",
- "attempt": 39,
- "code": "9302d60 station: 임무 실행 중",
- "step": "cost",
- "step_min": 111.1,
- "since_output_min": 0.0,
- "gpu": "9098 MiB, 32607 MiB, 94 %, 66",
- "next": "단계 진행",
- "reason": "정기 보고",
+ "time_local": "2026-10-17 13:21:45",
+ "time_utc": "2026-10-17 04:21:45",
+ "attempt": 40,
+ "code": "bc8e66a v21r K: route cost per tier (gate time, generation calls, tokens, Ollama durations)",
+ "step": "analyze",
+ "step_min": 0.1,
+ "since_output_min": 0.1,
+ "gpu": "8269 MiB, 32607 MiB, 0 %, 54",
+ "next": "끌어온 코드로 다시 실행",
+ "reason": "명령 20261017T030000Z-update (update, 단계 경계)",
  "ack": "20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)",
  "done": [
   "record",
@@ -60,10 +60,10 @@
   "matrix-repeat",
   "repeat-review",
   "nemo-orr-all",
-  "nemo-audit-all"
+  "nemo-audit-all",
+  "cost"
  ],
  "left": [
-  "cost",
   "analyze",
   "release"
  ]
