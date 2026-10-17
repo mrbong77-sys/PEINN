@@ -1,0 +1,433 @@
+{
+ "gate": {
+  "gpu": {
+   "device": "cuda",
+   "threads": 20,
+   "n": 200,
+   "p50_ms": 48.45,
+   "p95_ms": 49.35,
+   "mean_ms": 48.07,
+   "gpu_peak_GB": 0.672,
+   "process_peak_GB": 1.801
+  },
+  "ft_gpu": {
+   "device": "cuda",
+   "threads": 20,
+   "n": 200,
+   "p50_ms": 20.34,
+   "p95_ms": 22.28,
+   "mean_ms": 20.41
+  },
+  "cpu1": null,
+  "ft_cpu1": {
+   "device": "cuda",
+   "threads": 1,
+   "n": 200,
+   "p50_ms": 20.45,
+   "p95_ms": 22.4,
+   "mean_ms": 20.44
+  }
+ },
+ "tiers": {
+  "qwen|Direct-Answer": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 110.4,
+    "output_tokens": 201.7,
+    "ollama_s": 0.81,
+    "load_s": 0.01,
+    "wall_s": 3.403
+   },
+   "deployed": {
+    "calls": 1.0,
+    "prompt_tokens": 110.4,
+    "output_tokens": 201.7,
+    "ollama_s": 0.81,
+    "load_s": 0.01,
+    "wall_s": 3.403
+   }
+  },
+  "qwen|Hard-block": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 110.4,
+    "output_tokens": 201.7,
+    "ollama_s": 0.809,
+    "load_s": 0.01,
+    "wall_s": 3.141
+   },
+   "deployed": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "ollama_s": 0,
+    "load_s": 0,
+    "wall_s": 0
+   }
+  },
+  "qwen|Reasoned-Refusal": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 231.1,
+    "output_tokens": 272.2,
+    "ollama_s": 1.162,
+    "load_s": 0.02,
+    "wall_s": 4.506
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 231.1,
+    "output_tokens": 272.2,
+    "ollama_s": 1.162,
+    "load_s": 0.02,
+    "wall_s": 4.506
+   }
+  },
+  "qwen|Deliberation": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 211.1,
+    "output_tokens": 305.3,
+    "ollama_s": 1.258,
+    "load_s": 0.02,
+    "wall_s": 4.888
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 211.1,
+    "output_tokens": 305.3,
+    "ollama_s": 1.258,
+    "load_s": 0.02,
+    "wall_s": 4.888
+   }
+  },
+  "qwen|Soft-reasoning": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 211.1,
+    "output_tokens": 305.3,
+    "ollama_s": 1.248,
+    "load_s": 0.02,
+    "wall_s": 4.915
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 211.1,
+    "output_tokens": 305.3,
+    "ollama_s": 1.248,
+    "load_s": 0.02,
+    "wall_s": 4.915
+   }
+  },
+  "gemma4|Direct-Answer": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 98.3,
+    "output_tokens": 239.3,
+    "ollama_s": 1.17,
+    "load_s": 0.01,
+    "wall_s": 2.635
+   },
+   "deployed": {
+    "calls": 1.0,
+    "prompt_tokens": 98.3,
+    "output_tokens": 239.3,
+    "ollama_s": 1.17,
+    "load_s": 0.01,
+    "wall_s": 2.635
+   }
+  },
+  "gemma4|Hard-block": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 98.3,
+    "output_tokens": 239.3,
+    "ollama_s": 1.166,
+    "load_s": 0.01,
+    "wall_s": 2.626
+   },
+   "deployed": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "ollama_s": 0,
+    "load_s": 0,
+    "wall_s": 0
+   }
+  },
+  "gemma4|Reasoned-Refusal": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 221.1,
+    "output_tokens": 454.7,
+    "ollama_s": 2.22,
+    "load_s": 0.019,
+    "wall_s": 4.732
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 221.1,
+    "output_tokens": 454.7,
+    "ollama_s": 2.22,
+    "load_s": 0.019,
+    "wall_s": 4.732
+   }
+  },
+  "gemma4|Deliberation": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 201.1,
+    "output_tokens": 432.5,
+    "ollama_s": 2.14,
+    "load_s": 0.019,
+    "wall_s": 5.816
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 201.1,
+    "output_tokens": 432.5,
+    "ollama_s": 2.14,
+    "load_s": 0.019,
+    "wall_s": 5.816
+   }
+  },
+  "gemma4|Soft-reasoning": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 201.1,
+    "output_tokens": 432.5,
+    "ollama_s": 2.142,
+    "load_s": 0.019,
+    "wall_s": 5.842
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 201.1,
+    "output_tokens": 432.5,
+    "ollama_s": 2.142,
+    "load_s": 0.019,
+    "wall_s": 5.842
+   }
+  },
+  "gemma3|Direct-Answer": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 92.3,
+    "output_tokens": 254.0,
+    "ollama_s": 1.851,
+    "load_s": 0.01,
+    "wall_s": 3.88
+   },
+   "deployed": {
+    "calls": 1.0,
+    "prompt_tokens": 92.3,
+    "output_tokens": 254.0,
+    "ollama_s": 1.851,
+    "load_s": 0.01,
+    "wall_s": 3.88
+   }
+  },
+  "gemma3|Hard-block": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 92.3,
+    "output_tokens": 254.0,
+    "ollama_s": 1.849,
+    "load_s": 0.01,
+    "wall_s": 3.701
+   },
+   "deployed": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "ollama_s": 0,
+    "load_s": 0,
+    "wall_s": 0
+   }
+  },
+  "gemma3|Reasoned-Refusal": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 215.1,
+    "output_tokens": 373.4,
+    "ollama_s": 2.762,
+    "load_s": 0.021,
+    "wall_s": 5.954
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 215.1,
+    "output_tokens": 373.4,
+    "ollama_s": 2.762,
+    "load_s": 0.021,
+    "wall_s": 5.954
+   }
+  },
+  "gemma3|Deliberation": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 195.1,
+    "output_tokens": 507.9,
+    "ollama_s": 3.738,
+    "load_s": 0.021,
+    "wall_s": 11.029
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 195.1,
+    "output_tokens": 507.9,
+    "ollama_s": 3.738,
+    "load_s": 0.021,
+    "wall_s": 11.029
+   }
+  },
+  "gemma3|Soft-reasoning": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 195.1,
+    "output_tokens": 507.9,
+    "ollama_s": 3.701,
+    "load_s": 0.021,
+    "wall_s": 10.844
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 195.1,
+    "output_tokens": 507.9,
+    "ollama_s": 3.701,
+    "load_s": 0.021,
+    "wall_s": 10.844
+   }
+  },
+  "zephyr|Direct-Answer": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 113.7,
+    "output_tokens": 216.3,
+    "ollama_s": 0.802,
+    "load_s": 0.01,
+    "wall_s": 3.287
+   },
+   "deployed": {
+    "calls": 1.0,
+    "prompt_tokens": 113.7,
+    "output_tokens": 216.3,
+    "ollama_s": 0.802,
+    "load_s": 0.01,
+    "wall_s": 3.287
+   }
+  },
+  "zephyr|Hard-block": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 1.0,
+    "prompt_tokens": 113.7,
+    "output_tokens": 216.3,
+    "ollama_s": 0.789,
+    "load_s": 0.01,
+    "wall_s": 3.148
+   },
+   "deployed": {
+    "calls": 0,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "ollama_s": 0,
+    "load_s": 0,
+    "wall_s": 0
+   }
+  },
+  "zephyr|Reasoned-Refusal": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 261.4,
+    "output_tokens": 409.8,
+    "ollama_s": 1.509,
+    "load_s": 0.02,
+    "wall_s": 7.074
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 261.4,
+    "output_tokens": 409.8,
+    "ollama_s": 1.509,
+    "load_s": 0.02,
+    "wall_s": 7.074
+   }
+  },
+  "zephyr|Deliberation": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 241.4,
+    "output_tokens": 427.1,
+    "ollama_s": 1.567,
+    "load_s": 0.02,
+    "wall_s": 7.494
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 241.4,
+    "output_tokens": 427.1,
+    "ollama_s": 1.567,
+    "load_s": 0.02,
+    "wall_s": 7.494
+   }
+  },
+  "zephyr|Soft-reasoning": {
+   "requests": 95,
+   "replay_errors": 0,
+   "harness": {
+    "calls": 2.0,
+    "prompt_tokens": 241.4,
+    "output_tokens": 427.1,
+    "ollama_s": 1.58,
+    "load_s": 0.02,
+    "wall_s": 7.502
+   },
+   "deployed": {
+    "calls": 2.0,
+    "prompt_tokens": 241.4,
+    "output_tokens": 427.1,
+    "ollama_s": 1.58,
+    "load_s": 0.02,
+    "wall_s": 7.502
+   }
+  }
+ }
+}
