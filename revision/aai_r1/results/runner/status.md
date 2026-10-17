@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 22:13:08 (UTC 2026-10-17 13:13:08), 시도 2, 비컨 #331 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: ecf95a2 station: 임무 실행 중
-- 현재 단계: a8 (75.1분째)
-- 마지막 출력 후: 1.4분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6682 MiB, 32607 MiB, 89 %, 69
+- 시각 2026-10-17 22:23:13 (UTC 2026-10-17 13:23:13), 시도 2, 비컨 #332 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 1b390c7 station: 임무 실행 중
+- 현재 단계: a8 (85.2분째)
+- 마지막 출력 후: 1.8분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6682 MiB, 32607 MiB, 92 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-  xstest zephyr: 1125 rows, systems {'Vanilla': 225, 'R2D2': 225, 'NeMo': 225, 'LlamaGuard': 225, 'PEINN': 225}, 0.3 MiB
-  taxonomy zephyr: 1000 rows, systems {'Vanilla': 200, 'R2D2': 200, 'NeMo': 200, 'LlamaGuard': 200, 'PEINN': 200}, 0.4 MiB
-  ethics zephyr: 2000 rows, systems {'Vanilla': 400, 'R2D2': 400, 'NeMo': 400, 'LlamaGuard': 400, 'PEINN': 400}, 0.7 MiB
   morables zephyr: 4500 rows, systems {'Vanilla': 900, 'R2D2': 900, 'NeMo': 900, 'LlamaGuard': 900, 'PEINN': 900}, 0.8 MiB
 [git] pushed to main
 
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 55902
   4000/55902
   4200/55902
   4400/55902
+  4600/55902
+  4800/55902
+  5000/55902
 ```
