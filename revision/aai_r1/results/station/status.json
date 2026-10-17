@@ -1,13 +1,13 @@
 {
- "verdict": "대기",
- "seq": 238,
- "mission": null,
- "time_utc": "2026-10-17 05:45:11",
- "time_local": "2026-10-17 14:45:11",
- "code": "41bd2a9 station: 종료",
- "gpu": "2818 MiB, 32607 MiB, 3 %, 46",
- "ack": "20261017T022500Z-stop stop (위성 종료, 2026-10-17 05:33:14 UTC)",
- "reason": "시작",
+ "verdict": "임무 실행 중",
+ "seq": 239,
+ "mission": "ops.run",
+ "time_utc": "2026-10-17 05:47:15",
+ "time_local": "2026-10-17 14:47:15",
+ "code": "e811572 station: 대기",
+ "gpu": "2706 MiB, 32607 MiB, 3 %, 43",
+ "ack": "20261017T054600Z-launch launch (임무 시작 ops.run, 2026-10-17 05:47:15 UTC)",
+ "reason": "ops.run 시작",
  "history": [
   {
    "module": "ops.run",
