@@ -20,30 +20,72 @@ from . import theta as TH
 COLS = ["base", "system", "arm_id", "tier", "item_id", "subscale", "rep", "score", "prompt_p2", "response_p1", "response_p2"]
 
 
-def answers(check: bool, base: str, routes: pd.DataFrame) -> pd.DataFrame:
-    df = MX.collect(check, base)
-    if not len(df) or "ggb" not in set(df.bench):
-        return pd.DataFrame(columns=COLS)
+def reported(check: bool, base: str, bench: str, routes: pd.DataFrame, df: pd.DataFrame | None = None) -> pd.DataFrame:
+    """The rows behind the reported numbers of one bench: each defence arm, the main PEINN variant as assembled by the
+    routes (one tier's row per unit), and A8 on qwen when present; with base, system and tier columns."""
+    df = MX.collect(check, base) if df is None else df
+    if not len(df) or bench not in set(df.bench):
+        return pd.DataFrame()
     parts = []
     for name in ("Vanilla", "R2D2", "NeMo", "LlamaGuard"):
         arm = C.ARMS[base].get(name)
         if arm:
-            d = A.defence_rows(df, "ggb", arm)
+            d = A.defence_rows(df, bench, arm)
             parts.append(d.assign(system=name, tier=""))
     main = f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}"
-    pick, _ = A.assemble(df, "ggb", dict(zip(routes.sha, routes[main])))
+    pick, _ = A.assemble(df, bench, dict(zip(routes.sha, routes[main])))
     parts.append(pick.assign(system="PEINN"))
     if base == "qwen":
         from . import a8 as A8
         da = A8.collect(check)
         if len(da):
-            parts.append(A.units(da[da.arm_id == A8.ARM], "ggb").assign(system="A8", tier=""))
+            da = da[da.bench == bench] if "bench" in da else da
+            parts.append(A.units(da[da.arm_id == A8.ARM], bench).assign(system="A8", tier=""))
     x = pd.concat(parts, ignore_index=True)
     x["base"] = base
+    return x
+
+
+def answers(check: bool, base: str, routes: pd.DataFrame) -> pd.DataFrame:
+    x = reported(check, base, "ggb", routes)
+    if not len(x):
+        return pd.DataFrame(columns=COLS)
     for c in COLS:
         if c not in x:
             x[c] = ""
     return x[COLS]
+
+
+# Columns left out of the bench export: router internals and timings (the routes and analysis carry them).
+DROP = re.compile(r"^(neutro_|ee_|nla_)|^(thought_block|latency_sec|prompt_p1|llm_backend|rag_enabled|analysis_group)$")
+
+
+def bench_export(check: bool = False, log=print) -> int:
+    """Eugene 2026-10-17 14:55 KST: every bench's reported rows pushed, so scoring and statistics can be checked from
+    the records. Per bench and base: answers, judge verdicts and rationales, scores. HarmBench and Taxonomy answers
+    hold harmful text, as the submitted data_v21 CSVs do; the repository stays private. -> results/benches/*.csv.gz"""
+    routes = TH.load_routes(check)
+    o = D.odir(check) / "benches"
+    o.mkdir(parents=True, exist_ok=True)
+    files = []
+    for b in MX.bases(check):
+        df = MX.collect(check, b)
+        for bench in D.runs(check):
+            if bench == "ggb":
+                continue
+            x = reported(check, b, bench, routes, df)
+            if not len(x):
+                continue
+            x = x[[c for c in x.columns if not DROP.match(c)]]
+            if "prompt_p2" in x:
+                x["prompt_p2"] = x.prompt_p2.astype(str).str[:1500]
+            f = o / f"{bench}_{b}.csv.gz"
+            x.to_csv(f, index=False, encoding="utf-8", compression="gzip")
+            files.append(f)
+            log(f"  {bench} {b}: {len(x)} rows, systems {x.system.value_counts().to_dict()}, {f.stat().st_size / 2**20:.1f} MiB")
+    if check:
+        return 0
+    return 0 if C.publish(files, "v21r: every bench's reported rows (answers, verdicts, scores) for checking") else 1
 
 
 def ggb_export(check: bool = False, log=print) -> int:

@@ -342,3 +342,8 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **절차:** `ggb-export`가 보고하는 체계(Vanilla, R2D2, NeMo, Llama Guard, 주 PEINN, A8)의 GGB 답 전부와 파이프라인 점수를 `results/ggb/ggb_answers.csv`로 냅니다. 답을 읽고 다시 채점한 뒤 파이프라인 점수와 비교합니다. 답 자체가 잘렸거나 형식이 깨진 경우에만 해당 체계의 GGB를 다시 돌릴지 검토합니다.
 - **재채점 결과(2026-10-17 15:0x KST, `results/ggb/ggb_rescore.md`):** 답 기록에는 문제가 없었습니다. 잘린 답·빈 답은 없고, 바뀐 점수는 NeMo 행뿐입니다(gemma4 16행: 목록 번호 '1.'을 점수로 읽음, zephyr 2행: 지시문의 'from 1'을 점수로 읽음). 다른 체계는 0행이 바뀌었습니다. 그래서 GGB는 다시 돌리지 않습니다.
 - **집계 수정:** 전체 평균 한 값은 체계마다 답한 문항이 달라 비교할 수 없습니다. PEINN은 IH1·IH2(Vanilla 평균 1.0–2.1점)를 Hard-block해, 남은 문항 평균이 0.4–1.0점 높게 나왔습니다. GGB는 투고본처럼 IH·IB 하위 척도로 보고하고, Vanilla와의 비교는 두 체계가 모두 답한 문항만으로 합니다(`ggb-rescore`).
+
+## 33. 전체 벤치 기록 점검 (교수님 지시 2026-10-17 14:55 KST "다른 벤치 결과도 다 푸시해서 채점 및 통계상의 오류 바로 잡자")
+
+- `bench-export`가 HarmBench, Taxonomy, XSTest, Ethics, MORABLES의 보고 대상 행(Vanilla, R2D2, NeMo, Llama Guard, 주 PEINN 조립 행, A8)을 답·판정·근거·점수와 함께 `results/benches/{bench}_{base}.csv.gz`로 냅니다. 라우터 내부 값과 시간은 뺍니다. HarmBench·Taxonomy 답에는 유해 문장이 있으며, 투고본 `data_v21` CSV와 같이 비공개 저장소에만 둡니다.
+- 점검 항목: 판정 파싱 실패(parse_error)와 오류 행이 분모에서 어떻게 빠지는지, 행·실행 수, 집계 단위(문항·실행), 체계마다 다른 문항 구성, GGB와 같은 추출 오류.

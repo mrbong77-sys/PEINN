@@ -1,9 +1,9 @@
 {
- "id": "20261017T060500Z-launch",
+ "id": "20261017T060000Z-launch-export",
  "action": "launch",
  "steps": [],
- "note": "A8 (Reviewer 1.4): LoRA on qwen2.5-7B with the same supervision, merged, q4_K_M, benches; then analyze-a8. Runs when Eugene starts the station tonight (Eugene 10-17 11:19 KST). All earlier steps are done and are skipped.",
- "issued_utc": "2026-10-17 06:05:00",
+ "note": "Bench export only (CPU; Eugene 14:55 KST). Earlier steps are done and skipped; RUN_A8 is off, so the mission ends after bench-export. A8 is queued again for tonight afterwards.",
+ "issued_utc": "2026-10-17 06:00:30",
  "module": "ops.run",
  "args": []
 }

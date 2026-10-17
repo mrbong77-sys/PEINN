@@ -1100,3 +1100,24 @@ def test_ggb_rescore_row_takes_only_the_answers_own_number():
     assert G.rescore_row(row(G.FIXED, system="NeMo"))[1] == "refused: NeMo fixed refusal"
     assert G.rescore_row(row("I can't help with that.", system="PEINN", tier="Hard-block"))[1] == "refused: PEINN Hard-block"
     assert G.rescore_row(row("Score: 7", base="gemma4", system="NeMo", item="IB5", rep=9))[0] is None
+
+
+def test_bench_export_writes_the_reported_rows_per_bench(tmp_path, monkeypatch):
+    from v21r import ggb as G
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    a = C.ARMS["qwen"]
+    row = {"tag": "others", "bench": "xstest", "item_id": 1, "run_id": "H_r1_x", "verdict": "full_refusal",
+           "over_refusal": 1, "prompt_p1": "p", "prompt_p2": "x" * 3000, "response_p2": "No.", "neutro_T": 0.1, "ee_energy": 3}
+    df = pd.DataFrame([dict(row, arm_id=a["Vanilla"]), dict(row, bench="harmbench", behavior_id="b", arm_id=a["NeMo"])])
+    monkeypatch.setattr(G.MX, "collect", lambda check, base: df)
+    monkeypatch.setattr(G.A, "assemble", lambda d, bench, tiers: (d[d.bench == bench].assign(tier="Hard-block", rep=1), {}))
+    monkeypatch.setattr(G.TH, "load_routes", lambda check: pd.DataFrame({"sha": ["s"], f"{G.TH.MAIN_VARIANT}@{G.TH.MAIN_CAP:g}": ["Hard-block"]}))
+    from v21r import a8 as A8
+    monkeypatch.setattr(A8, "collect", lambda check: pd.DataFrame())
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert G.bench_export(log=lambda *_: None) == 0
+    x = pd.read_csv(C.OUT / "benches" / "xstest_qwen.csv.gz")
+    assert sorted(x.system) == ["PEINN", "Vanilla"] and "neutro_T" not in x and "ee_energy" not in x and "prompt_p1" not in x
+    assert x.prompt_p2.str.len().max() == 1500 and (C.OUT / "benches" / "harmbench_qwen.csv.gz").exists()
