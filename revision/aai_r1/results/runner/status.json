@@ -1,19 +1,19 @@
 {
- "verdict": "명령 처리",
- "seq": 276,
+ "verdict": "실행 중",
+ "seq": 277,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:21:45",
- "time_utc": "2026-10-17 04:21:45",
+ "time_local": "2026-10-17 13:21:49",
+ "time_utc": "2026-10-17 04:21:49",
  "attempt": 40,
- "code": "bc8e66a v21r K: route cost per tier (gate time, generation calls, tokens, Ollama durations)",
- "step": "analyze",
- "step_min": 0.1,
- "since_output_min": 0.1,
- "gpu": "8269 MiB, 32607 MiB, 0 %, 54",
- "next": "끌어온 코드로 다시 실행",
- "reason": "명령 20261017T030000Z-update (update, 단계 경계)",
+ "code": "b6703af v2.1 심사 대응 runner: 명령 처리 (attempt 40)",
+ "step": null,
+ "step_min": null,
+ "since_output_min": 0.0,
+ "gpu": "8269 MiB, 32607 MiB, 0 %, 53",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)",
  "done": [
   "record",
@@ -65,6 +65,7 @@
  ],
  "left": [
   "analyze",
-  "release"
+  "release",
+  "a8-check"
  ]
 }
