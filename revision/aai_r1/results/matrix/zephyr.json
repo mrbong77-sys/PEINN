@@ -57,51 +57,47 @@
  },
  "calls": {
   "da_gen": {
-   "gen_live": 2515
+   "gen_live": 1390
   },
   "da_judge": {
-   "gen_reused": 2515,
-   "judge_live": 167
+   "gen_reused": 1390,
+   "judge_live": 20
   },
   "de_gen": {
-   "gen_reused": 2515,
-   "gen_live": 2315
+   "gen_reused": 2780
   },
   "de_judge": {
-   "gen_reused": 4830,
-   "judge_live": 159
+   "gen_reused": 2780,
+   "judge_live": 20
   },
   "hb_gen": {
-   "gen_reused": 2515
+   "gen_reused": 1390
   },
   "hb_judge": {
-   "gen_reused": 2515
+   "gen_reused": 1390
   },
   "others_gen": {
-   "gen_reused": 17254,
-   "gen_live": 110
+   "gen_reused": 8964,
+   "gen_live": 1390
   },
   "others_judge": {
-   "gen_reused": 17328,
-   "judge_reused": 369,
-   "judge_live": 115,
-   "gen_live": 36
+   "gen_reused": 10354,
+   "judge_reused": 20,
+   "judge_live": 59
   },
   "rr_gen": {
-   "gen_reused": 2515,
-   "gen_live": 2315
+   "gen_reused": 2780
   },
   "rr_judge": {
-   "gen_reused": 4830,
-   "judge_live": 159
+   "gen_reused": 2780,
+   "judge_live": 20
   },
   "sr_gen": {
-   "gen_reused": 4830
+   "gen_reused": 2780
   },
   "sr_judge": {
-   "gen_reused": 4830,
-   "judge_reused": 71,
-   "judge_live": 91
+   "gen_reused": 2780,
+   "judge_reused": 20
   }
  },
  "internal_error_rows": {},
