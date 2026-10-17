@@ -1,20 +1,20 @@
 {
- "verdict": "실패 후 대기",
- "seq": 280,
+ "verdict": "실행 중",
+ "seq": 281,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:29:49",
- "time_utc": "2026-10-17 04:29:49",
- "attempt": 41,
- "code": "7140566 v21r A: benchmark results, curves, calibration and I-construct analyses",
- "step": "a8-check",
- "step_min": 0.1,
- "since_output_min": 0.1,
- "gpu": "1596 MiB, 32607 MiB, 1 %, 45",
- "next": "새 코드나 명령을 기다림",
- "reason": "코드 1",
- "ack": "20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)",
+ "time_local": "2026-10-17 13:31:54",
+ "time_utc": "2026-10-17 04:31:54",
+ "attempt": 42,
+ "code": "adb995c v21r M: repeat-diff, the 'others' answers and scores before and after the repeat-guard rerun (qwen NeMo XSTest U",
+ "step": "repeat-diff",
+ "step_min": -0.0,
+ "since_output_min": -0.0,
+ "gpu": "1612 MiB, 32607 MiB, 4 %, 47",
+ "next": "단계 진행",
+ "reason": "시작",
+ "ack": "20261017T045500Z-update update (대기 끝, 재시도, 2026-10-17 04:31:53 UTC)",
  "done": [
   "record",
   "nemo",
@@ -68,6 +68,7 @@
   "analyze-cost"
  ],
  "left": [
+  "repeat-diff",
   "a8-check"
  ]
 }
