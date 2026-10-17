@@ -1046,6 +1046,9 @@ def test_nemo_orr_assigns_fixed_refusals_per_prompt_across_runs(tmp_path, monkey
     r = json.loads((C.OUT / "nemo" / "nemo_orr.json").read_text())["qwen"]
     assert r["refused"] == 4 and r["sources"] == {"input_rail": 2, "dialog_flow": 1, "fixed_other": 1}
     assert r["unmatched_log"] == 0
+    assert r["log_subj_unmatched"] == {}
+    c = r["fixed_other_calls"][p]
+    assert c["fixed"] == 1 and c["calls"][1] == "self_check_input: Yes" and len(c["calls"]) == 9
 
 
 def test_child_fixes_the_string_hash_seed(tmp_path):
