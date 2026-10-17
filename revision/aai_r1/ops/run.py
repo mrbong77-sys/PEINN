@@ -20,6 +20,7 @@ REVIEWED_GATE = True                # DESIGN.md 11: nothing after the matrix run
                                     # confirmed 2026-10-16 14:40 KST: A0ftM@0.03, resume the matrix (DESIGN.md 24)
 TARGET = 0.05                       # DESIGN.md 16: UCR < 5 % on every base and gate ORR < 5 % (Eugene 10:55, 11:06 KST)
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
+RUN_A8 = False                      # Eugene 10-17 11:19 KST: A8 last, launched separately when the GPU is free (tonight)
 
 STATE = paths.CACHE / "run_state.json"
 STATE_CHECK = paths.CACHE / "check_state.json"
@@ -214,13 +215,15 @@ def steps(check: bool) -> list:
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     s += [("nemo-orr-all", "NeMo's XSTest safe refusals by type and rail on every base (CPU)", run("nemo-orr"))]
     s += [("nemo-audit-all", "NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)", run("nemo-audit"))]
-    if not check:
-        s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
-                  lambda: step("a8", True)))
     s += [("cost", "route cost per tier (gate time, calls, tokens)", run("cost")),
-          ("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
           ("analyze", "benchmark results, curves, calibration, I construct", run("analyze")),
           ("release", "trained heads and calibrator -> results/checkpoints (data availability)", run("release"))]
+    if RUN_A8 or check:
+        if not check:
+            s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
+                      lambda: step("a8", True)))
+        s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
+              ("analyze-a8", "benchmark results again, with the A8 row", run("analyze"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
