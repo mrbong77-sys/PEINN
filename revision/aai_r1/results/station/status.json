@@ -1,13 +1,13 @@
 {
- "verdict": "대기",
- "seq": 240,
+ "verdict": "종료",
+ "seq": 241,
  "mission": null,
- "time_utc": "2026-10-17 05:49:17",
- "time_local": "2026-10-17 14:49:17",
- "code": "a8adfe8 v2.1 심사 대응 runner: 완료 (attempt 1)",
- "gpu": "2718 MiB, 32607 MiB, 8 %, 39",
- "ack": "20261017T054600Z-launch launch (임무 시작 ops.run, 2026-10-17 05:47:15 UTC)",
- "reason": "ops.run 종료(코드 0)",
+ "time_utc": "2026-10-17 05:51:20",
+ "time_local": "2026-10-17 14:51:20",
+ "code": "ffec55d station: 대기",
+ "gpu": "2604 MiB, 32607 MiB, 4 %, 36",
+ "ack": "20261017T060000Z-stop stop (위성 종료, 2026-10-17 05:51:20 UTC)",
+ "reason": "명령",
  "history": [
   {
    "module": "ops.run",
