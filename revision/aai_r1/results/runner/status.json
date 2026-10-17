@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 279,
+ "verdict": "실패 후 대기",
+ "seq": 280,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:27:16",
- "time_utc": "2026-10-17 04:27:16",
+ "time_local": "2026-10-17 13:29:49",
+ "time_utc": "2026-10-17 04:29:49",
  "attempt": 41,
- "code": "015e7ca v21r K: time the gate on one CPU thread with CUDA_VISIBLE_DEVICES=-1 (Windows dropped the empty value; the first",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "1619 MiB, 32607 MiB, 6 %, 47",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "7140566 v21r A: benchmark results, curves, calibration and I-construct analyses",
+ "step": "a8-check",
+ "step_min": 0.1,
+ "since_output_min": 0.1,
+ "gpu": "1596 MiB, 32607 MiB, 1 %, 45",
+ "next": "새 코드나 명령을 기다림",
+ "reason": "코드 1",
  "ack": "20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)",
  "done": [
   "record",
@@ -63,11 +63,11 @@
   "nemo-audit-all",
   "cost",
   "analyze",
-  "release"
+  "release",
+  "cost-gate",
+  "analyze-cost"
  ],
  "left": [
-  "cost-gate",
-  "analyze-cost",
   "a8-check"
  ]
 }
