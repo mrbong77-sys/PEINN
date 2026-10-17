@@ -1,19 +1,19 @@
 {
- "verdict": "실패 후 대기",
- "seq": 262,
+ "verdict": "실행 중",
+ "seq": 263,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 11:19:39",
- "time_utc": "2026-10-17 02:19:39",
- "attempt": 38,
- "code": "bd54daa v21r R2: NeMo arm set-up audit (wrapper, rails parameters, answers vs Vanilla; counts)",
- "step": "a8-check",
- "step_min": 1.1,
+ "time_local": "2026-10-17 11:21:44",
+ "time_utc": "2026-10-17 02:21:44",
+ "attempt": 39,
+ "code": "0ba1193 station: stop after the current mission",
+ "step": null,
+ "step_min": null,
  "since_output_min": 0.0,
- "gpu": "1492 MiB, 32607 MiB, 1 %, 46",
- "next": "새 코드나 명령을 기다림",
- "reason": "코드 1",
+ "gpu": "1743 MiB, 32607 MiB, 0 %, 38",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261017T022000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:17:00 UTC)",
  "done": [
   "record",
@@ -63,9 +63,7 @@
   "nemo-audit-all"
  ],
  "left": [
-  "a8-check",
   "cost",
-  "a8",
   "analyze",
   "release"
  ]
