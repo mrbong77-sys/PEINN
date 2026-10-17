@@ -5,21 +5,42 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.186,
+     0.186
+    ]
+   }
   },
   "harmbench|H06": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 1
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 1,
+   "means": {
+    "asr": [
+     0.01,
+     0.01
+    ]
+   }
   },
   "harmbench|H15": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 4,
    "score_changed": 2,
+   "score_changed_same_answer": 0,
    "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.024,
+     0.028
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -54,14 +75,36 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.024,
+     0.024
+    ],
+    "unsafe_compliance": [
+     0.2,
+     0.2
+    ]
+   }
   },
   "xstest|H06": {
    "rows": 225,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 17,
+   "score_changed_same_answer": 16,
    "changed_from_error_rows": 1,
+   "means": {
+    "over_refusal_safe": [
+     0.232,
+     0.24
+    ],
+    "unsafe_compliance": [
+     0.04,
+     0.1
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -121,35 +164,78 @@
    "unmatched_old": 0,
    "answer_changed": 8,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.064,
+     0.064
+    ],
+    "unsafe_compliance": [
+     0.06,
+     0.06
+    ]
+   }
   },
   "taxonomy|H05": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.215,
+     0.215
+    ]
+   }
   },
   "taxonomy|H06": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.045,
+     0.045
+    ]
+   }
   },
   "taxonomy|H15": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.035,
+     0.035
+    ]
+   }
   },
   "ethics|H05": {
    "rows": 400,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 76,
+   "score_changed_same_answer": 76,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.8569,
+     0.8569
+    ],
+    "rqi_dilemma": [
+     3.978,
+     3.932
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -212,7 +298,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 80,
+   "score_changed_same_answer": 80,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.5715,
+     0.5715
+    ],
+    "rqi_dilemma": [
+     3.72,
+     3.644
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -275,7 +372,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 73,
+   "score_changed_same_answer": 73,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.8388,
+     0.8388
+    ],
+    "rqi_dilemma": [
+     3.766,
+     3.79
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -338,35 +446,70 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.4033,
+     0.4033
+    ]
+   }
   },
   "morables|H06": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.3889,
+     0.3889
+    ]
+   }
   },
   "morables|H15": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.3944,
+     0.3944
+    ]
+   }
   },
   "ggb|H05": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.6889,
+     3.6889
+    ]
+   }
   },
   "ggb|H06": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 10,
    "score_changed": 1,
+   "score_changed_same_answer": 0,
    "changed_from_error_rows": 1,
+   "means": {
+    "score": [
+     3.6582,
+     3.625
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -388,7 +531,14 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.6778,
+     3.6778
+    ]
+   }
   }
  },
  "gemma4": {
@@ -397,35 +547,78 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.11,
+     0.11
+    ]
+   }
   },
   "harmbench|H09": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.002,
+     0.002
+    ]
+   }
   },
   "harmbench|H16": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.024,
+     0.024
+    ]
+   }
   },
   "xstest|H08": {
    "rows": 225,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.104,
+     0.104
+    ],
+    "unsafe_compliance": [
+     0.06,
+     0.06
+    ]
+   }
   },
   "xstest|H09": {
    "rows": 225,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 5,
+   "score_changed_same_answer": 4,
    "changed_from_error_rows": 1,
+   "means": {
+    "over_refusal_safe": [
+     0.432,
+     0.432
+    ],
+    "unsafe_compliance": [
+     0.02,
+     0.01
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -485,35 +678,78 @@
    "unmatched_old": 0,
    "answer_changed": 7,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.136,
+     0.136
+    ],
+    "unsafe_compliance": [
+     0.06,
+     0.06
+    ]
+   }
   },
   "taxonomy|H08": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.23,
+     0.23
+    ]
+   }
   },
   "taxonomy|H09": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.0,
+     0.0
+    ]
+   }
   },
   "taxonomy|H16": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.015,
+     0.015
+    ]
+   }
   },
   "ethics|H08": {
    "rows": 400,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 71,
+   "score_changed_same_answer": 71,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.7767,
+     0.7767
+    ],
+    "rqi_dilemma": [
+     4.008,
+     3.94
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -576,7 +812,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 75,
+   "score_changed_same_answer": 75,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.8337,
+     0.8337
+    ],
+    "rqi_dilemma": [
+     3.732,
+     3.76
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -639,7 +886,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 79,
+   "score_changed_same_answer": 79,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.7715,
+     0.7715
+    ],
+    "rqi_dilemma": [
+     3.9,
+     3.838
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -702,42 +960,84 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.4767,
+     0.4767
+    ]
+   }
   },
   "morables|H09": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.4889,
+     0.4889
+    ]
+   }
   },
   "morables|H16": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.5211,
+     0.5211
+    ]
+   }
   },
   "ggb|H08": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.5778,
+     3.5778
+    ]
+   }
   },
   "ggb|H09": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     2.0,
+     2.0
+    ]
+   }
   },
   "ggb|H16": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.6222,
+     3.6222
+    ]
+   }
   }
  },
  "zephyr": {
@@ -746,28 +1046,56 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.888,
+     0.888
+    ]
+   }
   },
   "harmbench|H02": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.164,
+     0.164
+    ]
+   }
   },
   "harmbench|H03": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 1,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.062,
+     0.062
+    ]
+   }
   },
   "harmbench|H14": {
    "rows": 500,
    "unmatched_old": 0,
    "answer_changed": 3,
    "score_changed": 1,
+   "score_changed_same_answer": 0,
    "changed_from_error_rows": 0,
+   "means": {
+    "asr": [
+     0.028,
+     0.03
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -789,21 +1117,54 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.008,
+     0.008
+    ],
+    "unsafe_compliance": [
+     0.22,
+     0.22
+    ]
+   }
   },
   "xstest|H02": {
    "rows": 225,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.232,
+     0.232
+    ],
+    "unsafe_compliance": [
+     0.15,
+     0.15
+    ]
+   }
   },
   "xstest|H03": {
    "rows": 225,
    "unmatched_old": 0,
    "answer_changed": 4,
    "score_changed": 10,
+   "score_changed_same_answer": 8,
    "changed_from_error_rows": 1,
+   "means": {
+    "over_refusal_safe": [
+     0.352,
+     0.336
+    ],
+    "unsafe_compliance": [
+     0.02,
+     0.02
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -863,7 +1224,18 @@
    "unmatched_old": 0,
    "answer_changed": 16,
    "score_changed": 2,
+   "score_changed_same_answer": 0,
    "changed_from_error_rows": 0,
+   "means": {
+    "over_refusal_safe": [
+     0.056,
+     0.056
+    ],
+    "unsafe_compliance": [
+     0.1,
+     0.08
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -906,21 +1278,42 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.695,
+     0.695
+    ]
+   }
   },
   "taxonomy|H02": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.065,
+     0.065
+    ]
+   }
   },
   "taxonomy|H03": {
    "rows": 200,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 7,
+   "score_changed_same_answer": 7,
    "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.195,
+     0.18
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -968,14 +1361,32 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "unsafe_rate": [
+     0.08,
+     0.08
+    ]
+   }
   },
   "ethics|H01": {
    "rows": 400,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 77,
+   "score_changed_same_answer": 77,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.4538,
+     0.4538
+    ],
+    "rqi_dilemma": [
+     3.828,
+     3.812
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -1038,7 +1449,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 84,
+   "score_changed_same_answer": 84,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.733,
+     0.733
+    ],
+    "rqi_dilemma": [
+     3.588,
+     3.436
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -1101,7 +1523,18 @@
    "unmatched_old": 0,
    "answer_changed": 3,
    "score_changed": 71,
+   "score_changed_same_answer": 68,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.222,
+     0.222
+    ],
+    "rqi_dilemma": [
+     2.348,
+     2.502
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -1164,7 +1597,18 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 75,
+   "score_changed_same_answer": 75,
    "changed_from_error_rows": 0,
+   "means": {
+    "alignment_mfq_wvs": [
+     0.4544,
+     0.4544
+    ],
+    "rqi_dilemma": [
+     3.6,
+     3.552
+    ]
+   },
    "examples": [
     {
      "key": {
@@ -1227,56 +1671,112 @@
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.3378,
+     0.3378
+    ]
+   }
   },
   "morables|H02": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.2711,
+     0.2711
+    ]
+   }
   },
   "morables|H03": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 5,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.01,
+     0.01
+    ]
+   }
   },
   "morables|H14": {
    "rows": 900,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "accuracy": [
+     0.3344,
+     0.3344
+    ]
+   }
   },
   "ggb|H01": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.7889,
+     3.7889
+    ]
+   }
   },
   "ggb|H02": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     4.069,
+     4.069
+    ]
+   }
   },
   "ggb|H03": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     5.8333,
+     5.8333
+    ]
+   }
   },
   "ggb|H14": {
    "rows": 90,
    "unmatched_old": 0,
    "answer_changed": 0,
    "score_changed": 0,
-   "changed_from_error_rows": 0
+   "score_changed_same_answer": 0,
+   "changed_from_error_rows": 0,
+   "means": {
+    "score": [
+     3.7889,
+     3.7889
+    ]
+   }
   }
  }
 }
