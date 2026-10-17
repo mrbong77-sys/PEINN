@@ -1,0 +1,111 @@
+{
+ "rows": {
+  "da|ethics|H04": 400,
+  "da|ggb|H04": 90,
+  "da|harmbench|H04": 500,
+  "da|morables|H04": 900,
+  "da|taxonomy|H04": 200,
+  "da|xstest|H04": 225,
+  "de|ethics|H04": 400,
+  "de|ggb|H04": 90,
+  "de|harmbench|H04": 500,
+  "de|morables|H04": 900,
+  "de|taxonomy|H04": 200,
+  "de|xstest|H04": 225,
+  "hb|ethics|H04": 400,
+  "hb|ggb|H04": 90,
+  "hb|harmbench|H04": 500,
+  "hb|morables|H04": 900,
+  "hb|taxonomy|H04": 200,
+  "hb|xstest|H04": 225,
+  "others|ethics|H01": 400,
+  "others|ethics|H02": 400,
+  "others|ethics|H03": 400,
+  "others|ethics|H14": 400,
+  "others|ggb|H01": 90,
+  "others|ggb|H02": 90,
+  "others|ggb|H03": 90,
+  "others|ggb|H14": 90,
+  "others|harmbench|H01": 500,
+  "others|harmbench|H02": 500,
+  "others|harmbench|H03": 500,
+  "others|harmbench|H14": 500,
+  "others|morables|H01": 900,
+  "others|morables|H02": 900,
+  "others|morables|H03": 900,
+  "others|morables|H14": 900,
+  "others|taxonomy|H01": 200,
+  "others|taxonomy|H02": 200,
+  "others|taxonomy|H03": 200,
+  "others|taxonomy|H14": 200,
+  "others|xstest|H01": 225,
+  "others|xstest|H02": 225,
+  "others|xstest|H03": 225,
+  "others|xstest|H14": 225,
+  "rr|ethics|H04": 400,
+  "rr|ggb|H04": 90,
+  "rr|harmbench|H04": 500,
+  "rr|morables|H04": 900,
+  "rr|taxonomy|H04": 200,
+  "rr|xstest|H04": 225,
+  "sr|ethics|H04": 400,
+  "sr|ggb|H04": 90,
+  "sr|harmbench|H04": 500,
+  "sr|morables|H04": 900,
+  "sr|taxonomy|H04": 200,
+  "sr|xstest|H04": 225
+ },
+ "calls": {
+  "da_gen": {
+   "gen_live": 2515
+  },
+  "da_judge": {
+   "gen_reused": 2515,
+   "judge_live": 167
+  },
+  "de_gen": {
+   "gen_reused": 2515,
+   "gen_live": 2315
+  },
+  "de_judge": {
+   "gen_reused": 4830,
+   "judge_live": 159
+  },
+  "hb_gen": {
+   "gen_reused": 2515
+  },
+  "hb_judge": {
+   "gen_reused": 2515
+  },
+  "others_gen": {
+   "gen_live": 15349,
+   "gen_reused": 2015
+  },
+  "others_judge": {
+   "gen_reused": 17263,
+   "judge_live": 468,
+   "judge_reused": 15,
+   "gen_live": 98
+  },
+  "rr_gen": {
+   "gen_reused": 2515,
+   "gen_live": 2315
+  },
+  "rr_judge": {
+   "gen_reused": 4830,
+   "judge_live": 159
+  },
+  "sr_gen": {
+   "gen_reused": 4830
+  },
+  "sr_judge": {
+   "gen_reused": 4830,
+   "judge_reused": 71,
+   "judge_live": 91
+  }
+ },
+ "internal_error_rows": {
+  "H03": 1
+ },
+ "error_rows": {}
+}
