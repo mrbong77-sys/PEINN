@@ -1,13 +1,13 @@
 {
- "verdict": "임무 실행 중",
- "seq": 243,
- "mission": "ops.run",
- "time_utc": "2026-10-17 05:59:53",
- "time_local": "2026-10-17 14:59:53",
- "code": "e2e4ff1 station: 대기",
- "gpu": "2610 MiB, 32607 MiB, 16 %, 38",
+ "verdict": "대기",
+ "seq": 244,
+ "mission": null,
+ "time_utc": "2026-10-17 06:01:55",
+ "time_local": "2026-10-17 15:01:55",
+ "code": "939652e v2.1 심사 대응 runner: 완료 (attempt 1)",
+ "gpu": "2608 MiB, 32607 MiB, 17 %, 42",
  "ack": "20261017T060000Z-launch-export launch (임무 시작 ops.run, 2026-10-17 05:59:53 UTC)",
- "reason": "ops.run 시작",
+ "reason": "ops.run 종료(코드 0)",
  "history": [
   {
    "module": "ops.run",
@@ -23,6 +23,11 @@
    "module": "ops.run",
    "rc": 0,
    "end_utc": "2026-10-17 05:49:17"
+  },
+  {
+   "module": "ops.run",
+   "rc": 0,
+   "end_utc": "2026-10-17 06:01:55"
   }
  ],
  "beacon_min": 10.0,
