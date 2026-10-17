@@ -1,0 +1,13 @@
+{
+ "units": 180,
+ "matched": 180,
+ "raised_calls": 180,
+ "stated_before": 0.406,
+ "stated_after": 0.989,
+ "unchanged_among_stated_before": 1.0,
+ "accuracy_before": 0.472,
+ "accuracy_after": 0.55,
+ "sec": 383.1,
+ "sec_per_answer": 2.13,
+ "ok": true
+}
