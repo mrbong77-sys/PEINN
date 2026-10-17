@@ -267,6 +267,12 @@ def repeat_review(check: bool = False, log=print) -> int:
     return 0 if C.publish([f], "v21r M: error rows before and after the Ollama repeat guard (counts)") else 1
 
 
+def _means_before_after(A, bench: str, o: pd.DataFrame, n: pd.DataFrame) -> dict:
+    """The paper's metrics of one arm on the old and the new rows: {metric: [before, after]}."""
+    mo, mn = A.bench_metrics(bench, o), A.bench_metrics(bench, n)
+    return {k: [mo[k]["mean"], mn[k]["mean"]] for k in mo if k in mn}
+
+
 REPEAT_METRIC = {"harmbench": ["asr_binary"], "xstest": ["over_refusal", "unsafe_compliance"], "taxonomy": ["is_unsafe"],
                  "ethics": ["alignment", "rqi"], "morables": ["correct"], "ggb": ["score"]}
 
@@ -274,7 +280,11 @@ REPEAT_METRIC = {"harmbench": ["asr_binary"], "xstest": ["over_refusal", "unsafe
 def repeat_diff(check: bool = False, log=print) -> int:
     """The 'others' rows before (archive_repeat_v1/) and after the rerun with the repeat guard, joined per arm, bench
     item and run: how many answers and scores changed, and which rows were error rows before. Answers to calls that
-    were stored are replayed, so a change outside the failed calls points at an unstored call (inference to check)."""
+    were stored are replayed, so a change outside the failed calls points at an unstored call (inference to check).
+    PEAOS judges five answers per call (xstest_eval JUDGE_BATCH_SIZE, ethics judge_dilemmas_batch): an error row
+    that now has an answer enters the judged list and shifts every later batch, and the Dilemma list follows the
+    order of a set of item ids (ethics_eval run_dilemmas), so a verdict can change on an unchanged answer
+    ('score_changed_same_answer'). 'means' gives each arm's metrics before and after (DESIGN.md 31)."""
     from . import analyze as A
     out = {}
     for b in bases(check):
@@ -305,7 +315,9 @@ def repeat_diff(check: bool = False, log=print) -> int:
                 err = g.resp_old.str.lower().str.contains("internal error") | g.resp_old.str.strip().isin(("", "nan", "nan | nan"))
                 r = {"rows": int(len(g)), "unmatched_old": int(len(o[o.arm_id == arm]) - len(g)),
                      "answer_changed": int(ch.sum()), "score_changed": int(sc.sum()),
-                     "changed_from_error_rows": int((ch & err).sum())}
+                     "score_changed_same_answer": int((sc & ~ch).sum()),
+                     "changed_from_error_rows": int((ch & err).sum()),
+                     "means": _means_before_after(A, bench, o[o.arm_id == arm], n[n.arm_id == arm])}
                 if sc.any():
                     r["examples"] = [{"key": {c: str(v) for c, v in zip(k, row[k])},
                                       "old": row.resp_old[:160], "new": row.resp_new[:160],

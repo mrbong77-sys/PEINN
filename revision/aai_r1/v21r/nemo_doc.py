@@ -134,33 +134,45 @@ def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
         n[f"{k.lower()}_refused"] = n.key.map(m)
     _, rows = calls(check, base)
     rows = [r for r in rows if r.get("bench") == "xstest"]
-    last = {}
-    for r in rows:                                                  # the last call per task and subject
-        last[(r["task"], _norm(r["subj"]))] = r["text"] or ""
-    n["input"] = n.key.map(lambda k: verdict(last[("self_check_input", k)]) if ("self_check_input", k) in last else "none")
-    # the output self-check names only the bot message: it is tied to its prompt through the dialog call whose reply
-    # holds that message (first 60 characters); unmatched output checks leave the row as before
-    dl = [(" ".join(str(r.get("text") or "").split()), _norm(r["subj"])) for r in rows if r["task"] == "dialog"]
-    out = {}
+    # The log has no run index and a prompt runs five times, so the rails are counted per prompt and NeMo's fixed
+    # refusals of that prompt are assigned to them in order: input self-check blocks, then dialog flows that end in
+    # 'bot refuse to respond' (intent 'ask harmful', or that next step chosen by the model), then output self-check
+    # blocks; any fixed refusal left over is 'fixed_other'. Each event yields exactly NeMo's fixed refusal text.
+    ev = {k: collections.Counter() for k in ("input", "dialog", "output", "input_calls")}
+    dl = []
     for r in rows:
-        if r["task"] != "self_check_output":
+        k, t = _norm(r["subj"]), str(r.get("text") or "")
+        if r["task"] == "self_check_input":
+            ev["input_calls"][k] += 1
+            ev["input"][k] += verdict(t) != "allow"
+        elif r["task"] == "dialog":
+            dl.append((" ".join(t.split()), k))
+            if "ask harmful" in t or "refuse to respond" in t:
+                ev["dialog"][k] += 1
+    for r in rows:                      # the output self-check names the bot message: tied to its prompt through the
+        if r["task"] != "self_check_output" or verdict(r.get("text") or "") == "allow":    # dialog reply holding it
             continue
         head = " ".join(str(r.get("subj") or "").split())[:60]
         user = next((u for t, u in dl if head and head in t), None)
         if user is not None:
-            out[user] = verdict(r.get("text") or "")
-    n["output"] = n.key.map(lambda k: out.get(k, "none"))
-    n["dialog_harmful"] = n.key.map(lambda k: "ask harmful" in last.get(("dialog", k), ""))
+            ev["output"][user] += 1
+    n["input"] = n.key.map(lambda k: ev["input"][k])
+    n["input_calls"] = n.key.map(lambda k: ev["input_calls"][k])
+    n["output"] = n.key.map(lambda k: ev["output"][k])
+    n["dialog_harmful"] = n.key.map(lambda k: ev["dialog"][k])
     txt = n.filter(regex="^response").astype(str).agg(" ".join, axis=1)
     n["fixed_refusal"] = txt.str.contains(REFUSAL, regex=False)
     n["policy_term"] = n.key.str.contains(POLICY_TERMS)
     n["source"] = "answered"
     r = pd.to_numeric(n.over_refusal, errors="coerce").fillna(0) > 0
     n.loc[r, "source"] = "model_refusal"                             # the base model's own refusal under NeMo's instruction
-    n.loc[r & n.fixed_refusal, "source"] = "fixed_other"             # NeMo's fixed refusal with no rail record
-    n.loc[r & n.fixed_refusal & (n.output != "allow") & (n.output != "none"), "source"] = "output_rail"
-    n.loc[r & n.dialog_harmful, "source"] = "dialog_flow"
-    n.loc[r & (n.input != "allow") & (n.input != "none"), "source"] = "input_rail"
+    for k, g in n[r & n.fixed_refusal].groupby("key"):
+        left = {"input_rail": ev["input"][k], "dialog_flow": ev["dialog"][k], "output_rail": ev["output"][k]}
+        for idx in g.index:
+            src = next((s for s in ("input_rail", "dialog_flow", "output_rail") if left[s] > 0), "fixed_other")
+            if src != "fixed_other":
+                left[src] -= 1
+            n.loc[idx, "source"] = src
     return n
 
 
@@ -170,8 +182,8 @@ def nemo_orr(check: bool = False, log=print) -> int:
     import pandas as pd
     res, md = {}, ["# NeMo의 XSTest 안전 문항 과잉 거절: 문항 유형과 거절 경로", "",
                    "판정 CSV와 NeMo 호출 기록에서 셌습니다(모델 호출 없음). 경로: 입력 레일(자체 점검이 막음), "
-                   "대화 흐름(Colang 의도 'ask harmful'), 출력 레일(자체 점검이 답을 막음; 답 앞 60자로 대화 기록과 대조), "
-                   "모델 거절(레일 통과 뒤 기반 모델이 거절), 기타 고정 거절(기록 대조 안 됨).", ""]
+                   "대화 흐름(의도 'ask harmful' 또는 모델이 고른 다음 단계 'bot refuse to respond'), 출력 레일(자체 점검이 답을 막음; 답 앞 60자로 대화 기록과 대조), "
+                   "모델 거절(레일 통과 뒤 기반 모델이 거절), 기타 고정 거절(기록 대조 안 됨). 기록에 회차가 없어 문항마다 레일 사건 수를 세고 고정 거절에 입력 → 대화 → 출력 순으로 배정했습니다.", ""]
     for b in M.bases(check):
         try:
             n = refusal_sources(check, b)
@@ -192,7 +204,7 @@ def nemo_orr(check: bool = False, log=print) -> int:
         pt = {str(v): {"n": int(len(g)), "refused": int((g.source != "answered").sum())} for v, g in n.groupby("policy_term")}
         res[b] = {"n": len(n), "refused": int(ref.sum()), "sources": n[ref].source.value_counts().to_dict(),
                   "refused_also_by_vanilla": int((ref & (pd.to_numeric(n.vanilla_refused, errors="coerce") > 0)).sum()),
-                  "unmatched_log": int((n.input == "none").sum()), "policy_term": pt, "by_type": by}
+                  "unmatched_log": int((n.input_calls == 0).sum()), "policy_term": pt, "by_type": by}
         log(f"NeMo {b}: refused {res[b]['refused']}/{len(n)} {res[b]['sources']} policy_term {pt}")
         md += [f"## {C.BASES[b]}", "", f"거절 {res[b]['refused']}/{len(n)}, 경로 {res[b]['sources']}, "
                f"그중 Vanilla도 거절 {res[b]['refused_also_by_vanilla']}, 기록 대조 실패 {res[b]['unmatched_log']}. "

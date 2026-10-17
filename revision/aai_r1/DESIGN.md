@@ -326,3 +326,10 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **수정(`peaos_patches.repeat_guard`, 드라이버가 모든 실행에 적용):** 스트리밍하지 않은 `/api/chat`·`/api/generate` 호출이 이 500을 받으면, 같은 요청 본문을 스트리밍으로 다시 보냅니다. 같은 조각(앞뒤 공백 제거)이 30번을 넘게 이어지면 멈추고, 그때까지의 답을 200으로 돌려줍니다(done false, done_reason "repeat_guard"). 0.34.0까지의 동작과 같습니다. 다른 500은 건드리지 않습니다. 호출마다 `repeat_guard.jsonl`에 남깁니다.
 - **해당 문항만 다시(`repeat-reset` → `matrix-repeat` → `repeat-review`, 행렬 뒤):** 'others' 묶음에 오류 행(internal error, 빈 답, error 열)이 있는 기반 모델만 그 묶음을 따로 치워 두고(`archive_repeat_v1/`) 다시 돌립니다. 저장된 답과 채점은 그대로 다시 쓰이고, 실패했던 호출과 그 뒤를 잇는 호출만 실제로 부릅니다. PEINN 층 묶음은 건드리지 않습니다. 오류 행 수(전·후)와 반복 한도 처리 호출 수는 `results/matrix/repeat_fix.json`에 둡니다.
 - **행렬 단계:** 모든 벤치가 끝난 묶음은 드라이버를 띄우지 않고 넘어갑니다(`matrix.matrix`).
+
+## 31. 재실행 전후 채점 차이: judge의 다섯 문항 묶음 (2026-10-17 확인)
+
+- **관찰(`results/matrix/repeat_diff.json`, 375e4df):** 반복 한도 재실행에서 답이 바뀐 행은 적었지만 채점은 더 많이 바뀌었습니다. qwen NeMo(H06) XSTest는 225행 중 답 1행(오류 행 1)이 바뀌었고 판정은 17행이 바뀌었습니다. Ethics는 모든 기반 모델·팔에서 답이 0–3행 바뀌었는데 Dilemma 100행 중 71–84행의 RQI가 바뀌었습니다.
+- **원인(PEAOS 코드):** judge는 다섯 답을 한 호출로 채점합니다(`xstest_eval.JUDGE_BATCH_SIZE = 5`, `ethics_eval.judge_dilemmas_batch` batch_size 5). (1) XSTest: 오류 행은 judge 목록에서 빠지므로(`xstest_eval.py:164–196`), 오류 행이 답을 얻으면 그 뒤의 묶음 경계가 모두 밀립니다. 묶음 내용이 바뀐 호출은 judge 저장소에 없어 다시 채점되고, 같은 답도 다른 묶음에서는 판정이 달라질 수 있습니다. (2) Ethics: Dilemma 문항은 id의 집합(set)으로 뽑고 그 순서대로 결과를 냅니다(`ethics_eval.py` run_dilemmas). 문자열 해시는 프로세스마다 달라, 실행마다 묶음 구성이 달라집니다.
+- **수정:** 드라이버 자식 프로세스의 `PYTHONHASHSEED`를 0으로 고정합니다(`common.child`). 이후 실행(A8)은 Dilemma 묶음 구성이 실행마다 같습니다. 이미 채점한 행렬은 다시 채점하지 않습니다.
+- **기록:** `repeat-diff-means` 단계가 팔마다 논문 지표의 전후 평균과 "답은 같고 판정만 바뀐 행" 수를 남깁니다(`means`, `score_changed_same_answer`).

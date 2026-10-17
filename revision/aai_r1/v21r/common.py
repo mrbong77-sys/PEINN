@@ -126,8 +126,10 @@ def jsonl(f: Path) -> list[dict]:
 
 
 def child(cmd: list[str], cwd: Path, env: dict | None = None) -> int:
-    """Run a helper in another checkout (PEAOS or PEINN) with UTF-8 pipes (Windows cp949, CLAUDE.md)."""
-    e = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1", **(env or {}))
+    """Run a helper in another checkout (PEAOS or PEINN) with UTF-8 pipes (Windows cp949, CLAUDE.md). The string hash
+    seed is fixed: PEAOS orders the Ethics Dilemma items by a set of ids, and that order makes the judge's batches
+    (DESIGN.md 31)."""
+    e = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1", PYTHONHASHSEED="0", **(env or {}))
     print(f"[v21r] $ {' '.join(str(c) for c in cmd)}  (cwd {cwd})", flush=True)
     return subprocess.run([str(c) for c in cmd], cwd=str(cwd), env=e).returncode
 

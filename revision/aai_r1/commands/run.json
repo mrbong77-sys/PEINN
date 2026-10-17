@@ -1,6 +1,6 @@
 {
- "id": "20261017T045500Z-update",
+ "id": "20261017T061500Z-update",
  "action": "update",
- "note": "repeat-diff (CPU): 'others' answers and scores before and after the repeat-guard rerun, before the A8 pre-test. Applies at the next step boundary.",
- "issued_utc": "2026-10-17 04:55:00"
+ "note": "nemo-orr-final and repeat-diff-means (CPU) before the A8 pre-test: NeMo refusal paths per prompt; each arm's metrics before and after the rerun (judge batches, DESIGN.md 31). Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 06:15:00"
 }

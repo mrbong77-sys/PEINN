@@ -222,6 +222,10 @@ def steps(check: bool) -> list:
         s += [("repeat-diff", "'others' answers and scores before and after the repeat-guard rerun (CPU)", run("repeat-diff")),
               ("cost-gate", "gate time again on one CPU thread (the first run used the GPU; DESIGN.md 9)", run("cost-gate")),
               ("analyze-cost", "benchmark results again, with the CPU gate time", run("analyze"))]
+    if not check:                       # DESIGN.md 27, 31: per-prompt NeMo refusal paths; judge-batch effect on means
+        s += [("nemo-orr-final", "NeMo's XSTest safe refusals by rail, counted per prompt across runs (CPU)", run("nemo-orr")),
+              ("repeat-diff-means", "each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)",
+               run("repeat-diff"))]
     if not check:                       # the 0.5B pre-test runs now; the 7B run waits for RUN_A8 (tonight)
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))
