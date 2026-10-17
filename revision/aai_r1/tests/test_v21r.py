@@ -1222,3 +1222,16 @@ def test_cap_reset_sets_the_three_benches_aside_once(tmp_path, monkeypatch):
     assert sorted(C.jload(d / "archive_cap384" / "done_da_gen.json")) == ["ethics", "ggb", "harmbench", "morables", "xstest"]
     C.jdump({"ethics": {"total": 2}}, d / "done_others_gen.json")             # the rerun's own entry
     assert MX.cap_reset(log=lambda *_: None) == 0 and "ethics" in C.jload(d / "done_others_gen.json")
+
+
+def test_a8_kept_targets_drops_a_cut_last_line(tmp_path):
+    import pytest
+    from v21r import a8 as A8
+    f = tmp_path / "targets.jsonl"
+    assert A8.kept_targets(f, log=lambda *_: None) == set()
+    f.write_text('{"sha": "a", "target": "x"}\n{"sha": "b", "targ', encoding="utf-8")
+    assert A8.kept_targets(f, log=lambda *_: None) == {"a"}
+    assert f.read_text(encoding="utf-8") == '{"sha": "a", "target": "x"}\n'
+    f.write_text('{"sha": "a"}\n{"sha"\n{"sha": "c"}\n', encoding="utf-8")
+    with pytest.raises(json.JSONDecodeError):
+        A8.kept_targets(f, log=lambda *_: None)

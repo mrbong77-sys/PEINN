@@ -74,10 +74,32 @@ def request(row, tp: dict) -> dict | None:
     return {"model": BASE, "messages": msgs, "stream": False, "options": dict(GEN_OPTS)}
 
 
+def kept_targets(out: Path, log=print) -> set[str]:
+    """Shas already in targets.jsonl. A killed run can leave a cut last line; it is dropped from the file so the next
+    append starts on a clean line, and that item is generated again."""
+    if not out.exists():
+        return set()
+    lines = out.read_text(encoding="utf-8").split("\n")
+    rows, cut = [], 0
+    for i, x in enumerate(lines):
+        if not x.strip():
+            continue
+        try:
+            rows.append(json.loads(x))
+        except json.JSONDecodeError:
+            if any(y.strip() for y in lines[i + 1:]):
+                raise                                      # damage in the middle is not a cut tail: stop
+            cut = 1
+    if cut or (lines and lines[-1].strip()):
+        out.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+        log(f"A8 targets: dropped {cut} cut line(s) at the end of {out.name}")
+    return {r["sha"] for r in rows}
+
+
 def targets(check: bool, log=print) -> int:
     w = wdir(check)
     out = w / "targets.jsonl"
-    have = {r["sha"] for r in C.jsonl(out)} if out.exists() else set()
+    have = kept_targets(out, log)
     tp = tier_prompts()
     items = plan(D.load_split(check), check)
     todo = items[~items.sha.isin(have)]

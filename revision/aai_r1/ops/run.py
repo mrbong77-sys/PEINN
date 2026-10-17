@@ -22,6 +22,7 @@ TARGET = 0.05                       # DESIGN.md 16: UCR < 5 % on every base and 
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
 RUN_A8 = True                       # Eugene 10-17 14:55 KST: bench export done (7c79350); A8 runs tonight
 RUN_CAP = True                      # Eugene's card 10-17 15:19 KST: Ethics/MORABLES/GGB first answers at 768 tokens, after A8
+CAP_FIRST = False                   # True runs the 768-token rerun before A8 (A8 targets resume from targets.jsonl)
 
 STATE = paths.CACHE / "run_state.json"
 STATE_CHECK = paths.CACHE / "check_state.json"
@@ -242,15 +243,16 @@ def steps(check: bool) -> list:
                   run("bench-export")))
         s.append(("bench-stats", "every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)",
                   run("bench-stats")))
+    a8, cap = [], []
     if RUN_A8 or check:
-        s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
+        a8 = [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
               ("analyze-a8", "benchmark results again, with the A8 row", run("analyze")),
               ("ggb-export-a8", "GGB answers again, with the A8 rows (CPU, DESIGN.md 32)", run("ggb-export")),
               ("ggb-rescore-a8", "GGB re-scored from the answer text, with A8 (CPU, DESIGN.md 32)", run("ggb-rescore")),
               ("bench-export-a8", "every other bench's reported rows again, with A8 (CPU)", run("bench-export")),
               ("bench-stats-a8", "every bench's statistics again, with A8 (CPU, DESIGN.md 34)", run("bench-stats"))]
     if RUN_CAP and not check:           # DESIGN.md 35: pre-test, then the three benches again on every base
-        s += [("cap-check", "768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)",
+        cap = [("cap-check", "768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)",
                run("cap-check")),
               ("cap-reset", "Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)", run("cap-reset")),
               ("matrix-cap768", "Ethics, MORABLES and GGB again on every base; unchanged calls come from the stores", run("matrix")),
@@ -259,6 +261,7 @@ def steps(check: bool) -> list:
               ("ggb-rescore-cap768", "GGB re-scored again (CPU)", run("ggb-rescore")),
               ("bench-export-cap768", "every other bench's reported rows again (CPU)", run("bench-export")),
               ("bench-stats-cap768", "every bench's statistics again (CPU, DESIGN.md 34)", run("bench-stats"))]
+    s += cap + a8 if CAP_FIRST else a8 + cap
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
