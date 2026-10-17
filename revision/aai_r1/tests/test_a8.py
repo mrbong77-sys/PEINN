@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -213,3 +214,75 @@ def test_gguf_qwen2_check_catches_a_changed_tensor(tmp_path):
     del a
     r = G.check(tmp_path / "m", out, log=lambda *_: None)
     assert not r["ok"] and r["unequal"] == ["blk.0.ffn_up.weight"]
+
+
+def _zip_with(names):
+    import io
+    import zipfile
+    b = io.BytesIO()
+    with zipfile.ZipFile(b, "w") as z:
+        for n in names:
+            z.writestr(n, b"MZ")
+    return b.getvalue()
+
+
+class _Resp:
+    def __init__(self, data):
+        import io
+        self.f = io.BytesIO(data)
+
+    def read(self, n=-1):
+        return self.f.read(n)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+
+def test_llama_quantize_fetches_the_windows_cpu_build_and_checks_its_digest(tmp_path, monkeypatch):
+    import hashlib
+    monkeypatch.setattr(A8.C, "CACHE", tmp_path)
+    z = _zip_with(["llama-quantize.exe", "ggml.dll"])
+    good = "sha256:" + hashlib.sha256(z).hexdigest()
+    rel = {"tag_name": "b9999", "prerelease": True, "assets": [
+        {"name": "llama-b9999-bin-win-cuda-12.4-x64.zip", "browser_download_url": "u/cuda"},
+        {"name": "llama-b9999-bin-win-cpu-x64.zip", "browser_download_url": "u/cpu", "size": len(z), "digest": good}]}
+    rels = [{"tag_name": "v0.7.0", "assets": [{"name": "nightly-tag.txt", "browser_download_url": "u/txt"}]}, rel,
+            {"tag_name": "b9998", "assets": [{"name": "llama-b9998-bin-win-cpu-x64.zip", "browser_download_url": "u/old"}]}]
+    urls = []
+
+    def get(url, timeout=120):
+        urls.append(url)
+        return _Resp(json.dumps(rels).encode() if url == A8.LLAMA_API else z)
+    monkeypatch.setattr(A8, "_get", get)
+    exe, info = A8.llama_quantize(log=lambda *_: None)
+    assert urls == [A8.LLAMA_API, "u/cpu"]
+    assert exe.name == "llama-quantize.exe" and exe.exists() and info["tag"] == "b9999" and info["github_digest"] == good
+    assert A8.llama_quantize(log=lambda *_: None)[0] == exe and len(urls) == 2          # cached
+    (tmp_path / "llama.cpp" / "tool.json").unlink()
+    rel["assets"][1]["digest"] = "sha256:" + "0" * 64
+    with pytest.raises(SystemExit):
+        A8.llama_quantize(log=lambda *_: None)
+
+
+def test_quantize_keeps_only_a_q4_k_m_file(tmp_path, monkeypatch):
+    import struct
+    from v21r import gguf_qwen2 as G
+    monkeypatch.setattr(A8.C, "CACHE", tmp_path)
+    monkeypatch.setattr(A8, "llama_quantize", lambda log=print: (Path("llama-quantize.exe"), {"tag": "b1"}))
+    f16 = tmp_path / "m.f16.gguf"
+    f16.write_bytes(b"")
+
+    def fake(ftype):
+        def run(cmd, *a, **k):
+            assert cmd[1:] == [str(f16), cmd[2], "Q4_K_M"]
+            Path(cmd[2]).write_bytes(b"GGUF" + struct.pack("<IQQ", 3, 0, 1) + G._kv("general.file_type", G.T_U32, ftype))
+            return type("R", (), {"returncode": 0})()
+        return run
+    monkeypatch.setattr(A8.subprocess, "run", fake(7))
+    assert A8.quantize(True, f16, log=lambda *_: None) is None
+    monkeypatch.setattr(A8.subprocess, "run", fake(A8.GGUF_Q4_K_M))
+    q, r = A8.quantize(True, f16, log=lambda *_: None)
+    assert q.name == "merged.q4_k_m.gguf" and r["file_type"] == 15 and r["tool"] == {"tag": "b1"}

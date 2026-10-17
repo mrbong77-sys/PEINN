@@ -6,7 +6,7 @@
    Hard-block refusal, dilemma -> the model's own answer under the Deliberation prompt, safe -> its own plain answer
    (PEAOS prompt_builder, PEAOS_EE_ENGINE=neutro_v21; Ollama qwen2.5:7b-instruct, temperature 0.3, top-p 0.95, seed 42).
 2. train: a8_train.py (LoRA, merged) on Qwen/Qwen2.5-7B-Instruct.
-3. ollama: the merged model written as an F16 GGUF (gguf_qwen2), quantised by Ollama to q4_K_M (the quantisation of qwen2.5:7b-instruct) with that model's template.
+3. ollama: the merged model written as an F16 GGUF (gguf_qwen2), quantised to q4_K_M by llama.cpp's llama-quantize (the quantisation of qwen2.5:7b-instruct) with that model's template.
 4. bench: the submitted benches and run protocol on arm H05 (qwen Vanilla, the bare prompt) with its model replaced by
    the LoRA model (peaos_driver_a8.py), generate then judge.
 --check: Qwen2.5-0.5B-Instruct, 8 items per class, GGB + XSTest once (the whole path, small).
@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -151,6 +152,84 @@ def gguf(check: bool, log=print) -> tuple[Path, dict] | None:
     return out, r
 
 
+LLAMA_API = "https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=30"   # the b-builds are pre-releases;
+# /releases/latest is v0.7.0 with no binaries (checked 2026-10-17)
+LLAMA_ASSET = re.compile(r"^llama-(b\d+)-bin-win-cpu-x64\.zip$")
+LLAMA_EXE = "llama-quantize.exe"
+GGUF_Q4_K_M = 15                                        # llama_ftype LLAMA_FTYPE_MOSTLY_Q4_K_M
+
+
+def _get(url: str, timeout: float = 120):
+    import urllib.request
+    req = urllib.request.Request(url, headers={"User-Agent": "v21r", "Accept": "application/vnd.github+json"})
+    return urllib.request.urlopen(req, timeout=timeout)
+
+
+def llama_quantize(log=print) -> tuple[Path, dict]:
+    """llama.cpp's llama-quantize from the latest release (Windows CPU build) in the cache, with its tag and sha256.
+    Ollama no longer quantises at import: a GGUF must arrive quantised, and a safetensors folder only goes to int4,
+    int8, nvfp4, mxfp4 or mxfp8 (a8-check, 2026-10-17). Eugene's card 10-17: use llama.cpp's own tool."""
+    import hashlib
+    import zipfile
+    d = C.CACHE / "llama.cpp"
+    info_f = d / "tool.json"
+    if info_f.exists():
+        info = C.jload(info_f)
+        if Path(info["exe"]).exists():
+            return Path(info["exe"]), info
+    with _get(LLAMA_API, 60) as r:
+        rels = json.loads(r.read().decode("utf-8"))
+    found = [(x, a) for x in rels if not x.get("draft") for a in x.get("assets", []) if LLAMA_ASSET.match(a["name"])]
+    if not found:
+        raise SystemExit(f"llama.cpp: no Windows CPU zip in the last {len(rels)} releases ({[x.get('tag_name') for x in rels][:5]})")
+    rel, a = found[0]                                                          # newest release that has the build
+    d.mkdir(parents=True, exist_ok=True)
+    z = d / a["name"]
+    h = hashlib.sha256()
+    log(f"  llama.cpp {rel['tag_name']}: {a['name']} ({a.get('size', 0) / 2**20:.0f} MiB)")
+    with _get(a["browser_download_url"]) as r, open(z, "wb") as f:
+        while chunk := r.read(1 << 20):
+            h.update(chunk)
+            f.write(chunk)
+    sha = h.hexdigest()
+    if a.get("digest") and a["digest"] != f"sha256:{sha}":
+        z.unlink()
+        raise SystemExit(f"llama.cpp zip sha256 {sha} != GitHub's {a['digest']}")
+    out = d / rel["tag_name"]
+    with zipfile.ZipFile(z) as zf:
+        zf.extractall(out)
+    exe = next(iter(sorted(out.rglob(LLAMA_EXE))), None)
+    if exe is None:
+        raise SystemExit(f"{LLAMA_EXE} not in {a['name']}")
+    info = {"tag": rel["tag_name"], "asset": a["name"], "sha256": sha, "github_digest": a.get("digest"), "exe": str(exe)}
+    C.jdump(info, info_f)
+    return exe, info
+
+
+def quantize(check: bool, f16: Path, log=print) -> tuple[Path, dict] | None:
+    """F16 GGUF -> q4_K_M GGUF with llama-quantize; the file type in the result is checked."""
+    from . import wcheck as W
+    w = wdir(check)
+    q, rep = w / "merged.q4_k_m.gguf", w / "quantize.json"
+    if q.exists() and rep.exists():
+        return q, C.jload(rep)
+    exe, info = llama_quantize(log)
+    tmp = q.with_suffix(".part.gguf")
+    cmd = [str(exe), str(f16), str(tmp), QUANT.upper()]
+    log("[v21r] $ " + " ".join(cmd))
+    if subprocess.run(cmd).returncode or not tmp.exists():
+        log("stop: llama-quantize failed")
+        return None
+    meta, _ = W.read_gguf(tmp)
+    if meta.get("general.file_type") != GGUF_Q4_K_M:
+        log(f"stop: quantised file type {meta.get('general.file_type')}, wanted {GGUF_Q4_K_M} (Q4_K_M)")
+        return None
+    tmp.replace(q)
+    r = {"tool": info, "file_type": meta.get("general.file_type"), "bytes": q.stat().st_size}
+    C.jdump(r, rep)
+    return q, r
+
+
 def ollama(check: bool, log=print) -> int:
     w = wdir(check)
     done = w / "ollama.json"
@@ -160,11 +239,14 @@ def ollama(check: bool, log=print) -> int:
     g = gguf(check, log)
     if g is None:
         return 1
+    qz = quantize(check, g[0], log)
+    if qz is None:
+        return 1
     f = w / "Modelfile"
     with open(f, "w", encoding="utf-8", newline="\n") as h:
-        h.write(modelfile(check, g[0]))
-    log(f"[v21r] $ ollama create {SERVED[check]} -q {QUANT} -f {f}")
-    if subprocess.run(["ollama", "create", SERVED[check], "-q", QUANT, "-f", str(f)]).returncode:
+        h.write(modelfile(check, qz[0]))
+    log(f"[v21r] $ ollama create {SERVED[check]} -f {f}")
+    if subprocess.run(["ollama", "create", SERVED[check], "-f", str(f)]).returncode:
         return 1
     tags = {m["name"]: m for m in json.loads(C._ollama("/api/tags"))["models"]}
     m = tags.get(SERVED[check]) or {}
@@ -173,7 +255,7 @@ def ollama(check: bool, log=print) -> int:
                                  timeout=600))
     ans = (smoke.get("message") or {}).get("content", "")
     C.jdump({"model": SERVED[check], "digest": m.get("digest"), "size": m.get("size"), "quant": QUANT,
-             "details": m.get("details"), "gguf_f16": g[1], "smoke": ans[:200]}, done)
+             "details": m.get("details"), "gguf_f16": g[1], "quantize": qz[1], "smoke": ans[:200]}, done)
     log(f"A8 smoke: {ans[:120]!r}")
     if not ans.strip():
         done.unlink()
