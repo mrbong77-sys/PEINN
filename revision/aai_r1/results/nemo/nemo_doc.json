@@ -1,10 +1,10 @@
 {
  "qwen": {
-  "log_phase": "judge",
+  "log_phase": "gen",
   "calls": {
    "self_check_input": 2515,
-   "dialog": 5767,
-   "self_check_output": 1918
+   "dialog": 5779,
+   "self_check_output": 1923
   },
   "versions": {
    "nemoguardrails": "0.21.0",
@@ -108,18 +108,18 @@
   "self_check_input": {
    "calls": 2515,
    "verdicts": {
-    "block_yes": 537,
-    "allow": 1926,
-    "block_unparsed": 52
+    "block_yes": 534,
+    "allow": 1928,
+    "block_unparsed": 53
    },
    "errors": 0,
    "empty": 0,
    "texts": 1578,
-   "texts_blocked": 342,
+   "texts_blocked": 340,
    "by_bench": {
     "ethics": {
-     "allow": 344,
-     "block_unparsed": 52,
+     "block_unparsed": 53,
+     "allow": 343,
      "block_yes": 4
     },
     "ggb": {
@@ -127,8 +127,8 @@
      "block_yes": 10
     },
     "harmbench": {
-     "block_yes": 324,
-     "allow": 176
+     "block_yes": 321,
+     "allow": 179
     },
     "morables": {
      "allow": 900
@@ -144,50 +144,37 @@
    },
    "unparsed_top": [
     [
-     "Score (0-5): 5\nReasoning: The user messa",
-     28
-    ],
-    [
-     "Score (0-5): 5\n\nReasoning: The user mess",
-     17
-    ],
-    [
-     "Score (0-5): 3\n\nReasoning: The user mess",
-     5
-    ],
-    [
-     "Score (0-5): 3\n\nReasoning: The user's me",
-     2
+     "Score (0",
+     53
     ]
    ]
   },
   "self_check_output": {
-   "calls": 1918,
+   "calls": 1923,
    "verdicts": {
-    "allow": 1915,
-    "block_yes": 3
+    "allow": 1919,
+    "block_yes": 4
    },
    "errors": 0,
    "empty": 0,
-   "texts": 753,
-   "texts_blocked": 3,
+   "texts": 963,
+   "texts_blocked": 4,
    "by_bench": {
     "ethics": {
-     "allow": 337
+     "allow": 338
     },
     "ggb": {
      "allow": 80
     },
     "harmbench": {
-     "allow": 174,
-     "block_yes": 2
+     "allow": 179
     },
     "morables": {
-     "allow": 899
+     "allow": 900
     },
     "taxonomy": {
-     "allow": 277,
-     "block_yes": 1
+     "allow": 274,
+     "block_yes": 4
     },
     "xstest": {
      "allow": 148
@@ -196,30 +183,30 @@
    "unparsed_top": []
   },
   "dialog": {
-   "calls": 5767,
+   "calls": 5779,
    "ask_harmful": 0,
-   "refuse": 11
+   "refuse": 7
   },
   "rows": {
    "ethics": {
     "rows": 400,
-    "fixed_refusal": 61,
-    "internal_error": 2
+    "fixed_refusal": 62,
+    "internal_error": 0
    },
    "ggb": {
     "rows": 90,
     "fixed_refusal": 10,
-    "internal_error": 0
+    "internal_error": 1
    },
    "harmbench": {
     "rows": 500,
-    "fixed_refusal": 327,
-    "internal_error": 0
+    "fixed_refusal": 321,
+    "internal_error": 1
    },
    "morables": {
     "rows": 900,
     "fixed_refusal": 0,
-    "internal_error": 1
+    "internal_error": 2
    },
    "taxonomy": {
     "rows": 200,
@@ -229,7 +216,7 @@
    "xstest": {
     "rows": 225,
     "fixed_refusal": 77,
-    "internal_error": 0
+    "internal_error": 1
    }
   }
  },
@@ -237,7 +224,7 @@
   "log_phase": "gen",
   "calls": {
    "self_check_input": 2515,
-   "dialog": 4812,
+   "dialog": 4810,
    "self_check_output": 1469
   },
   "versions": {
@@ -306,25 +293,25 @@
   "self_check_input": {
    "calls": 2515,
    "verdicts": {
-    "block_yes": 632,
-    "allow": 1815,
-    "block_unparsed": 68
+    "allow": 1813,
+    "block_yes": 633,
+    "block_unparsed": 69
    },
    "errors": 0,
    "empty": 0,
    "texts": 1578,
-   "texts_blocked": 431,
+   "texts_blocked": 432,
    "by_bench": {
     "ethics": {
-     "allow": 338,
-     "block_unparsed": 62
+     "allow": 337,
+     "block_unparsed": 63
     },
     "ggb": {
      "allow": 90
     },
     "harmbench": {
-     "block_yes": 397,
-     "allow": 103
+     "allow": 102,
+     "block_yes": 398
     },
     "morables": {
      "allow": 894,
@@ -341,24 +328,12 @@
    },
    "unparsed_top": [
     [
-     "Score (0-5): 0\nReasoning: The user is as",
-     47
+     "Score (0",
+     63
     ],
     [
-     "The user message is a request to analyze",
+     "The user message",
      6
-    ],
-    [
-     "Score (0-5): 5\nReasoning: The user is as",
-     5
-    ],
-    [
-     "Score (0-5): 1\nReasoning: The user is as",
-     5
-    ],
-    [
-     "Score (0-5): 3\nReasoning: The user is as",
-     5
     ]
    ]
   },
@@ -369,17 +344,17 @@
    },
    "errors": 0,
    "empty": 0,
-   "texts": 899,
+   "texts": 1155,
    "texts_blocked": 0,
    "by_bench": {
     "ethics": {
-     "allow": 324
+     "allow": 323
     },
     "ggb": {
      "allow": 30
     },
     "harmbench": {
-     "allow": 22
+     "allow": 23
     },
     "morables": {
      "allow": 894
@@ -394,24 +369,24 @@
    "unparsed_top": []
   },
   "dialog": {
-   "calls": 4812,
-   "ask_harmful": 293,
-   "refuse": 71
+   "calls": 4810,
+   "ask_harmful": 291,
+   "refuse": 73
   },
   "rows": {
    "ethics": {
     "rows": 400,
-    "fixed_refusal": 76,
-    "internal_error": 2
+    "fixed_refusal": 77,
+    "internal_error": 0
    },
    "ggb": {
     "rows": 90,
     "fixed_refusal": 60,
-    "internal_error": 1
+    "internal_error": 0
    },
    "harmbench": {
     "rows": 500,
-    "fixed_refusal": 479,
+    "fixed_refusal": 478,
     "internal_error": 0
    },
    "morables": {
@@ -426,14 +401,18 @@
    },
    "xstest": {
     "rows": 225,
-    "fixed_refusal": 141,
-    "internal_error": 0
+    "fixed_refusal": 142,
+    "internal_error": 1
    }
   }
  },
  "gemma3": {
-  "log_phase": "",
-  "calls": {},
+  "log_phase": "gen",
+  "calls": {
+   "self_check_input": 2515,
+   "dialog": 4477,
+   "self_check_output": 1446
+  },
   "versions": {
    "nemoguardrails": "0.21.0",
    "langchain": "1.2.15",
@@ -460,11 +439,130 @@
     "text": "",
     "error": "Client error '404 Not Found' for url 'http://localhost:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
    }
-  ]
+  ],
+  "self_check_input": {
+   "calls": 2515,
+   "verdicts": {
+    "block_yes": 813,
+    "allow": 1552,
+    "block_unparsed": 150
+   },
+   "errors": 0,
+   "empty": 0,
+   "texts": 1578,
+   "texts_blocked": 524,
+   "by_bench": {
+    "ethics": {
+     "block_unparsed": 150,
+     "allow": 250
+    },
+    "ggb": {
+     "block_yes": 20,
+     "allow": 70
+    },
+    "harmbench": {
+     "block_yes": 453,
+     "allow": 47
+    },
+    "morables": {
+     "allow": 900
+    },
+    "taxonomy": {
+     "block_yes": 232,
+     "allow": 168
+    },
+    "xstest": {
+     "allow": 117,
+     "block_yes": 108
+    }
+   },
+   "unparsed_top": [
+    [
+     "Score (0",
+     150
+    ]
+   ]
+  },
+  "self_check_output": {
+   "calls": 1446,
+   "verdicts": {
+    "allow": 1443,
+    "block_yes": 3
+   },
+   "errors": 0,
+   "empty": 0,
+   "texts": 410,
+   "texts_blocked": 3,
+   "by_bench": {
+    "ethics": {
+     "allow": 227
+    },
+    "ggb": {
+     "allow": 60
+    },
+    "harmbench": {
+     "allow": 32,
+     "block_yes": 1
+    },
+    "morables": {
+     "allow": 900
+    },
+    "taxonomy": {
+     "allow": 133,
+     "block_yes": 1
+    },
+    "xstest": {
+     "allow": 91,
+     "block_yes": 1
+    }
+   },
+   "unparsed_top": []
+  },
+  "dialog": {
+   "calls": 4477,
+   "ask_harmful": 87,
+   "refuse": 34
+  },
+  "rows": {
+   "ethics": {
+    "rows": 400,
+    "fixed_refusal": 187,
+    "internal_error": 0
+   },
+   "ggb": {
+    "rows": 90,
+    "fixed_refusal": 30,
+    "internal_error": 0
+   },
+   "harmbench": {
+    "rows": 500,
+    "fixed_refusal": 482,
+    "internal_error": 0
+   },
+   "morables": {
+    "rows": 900,
+    "fixed_refusal": 0,
+    "internal_error": 0
+   },
+   "taxonomy": {
+    "rows": 200,
+    "fixed_refusal": 164,
+    "internal_error": 0
+   },
+   "xstest": {
+    "rows": 225,
+    "fixed_refusal": 155,
+    "internal_error": 0
+   }
+  }
  },
  "zephyr": {
-  "log_phase": "",
-  "calls": {},
+  "log_phase": "gen",
+  "calls": {
+   "self_check_input": 2515,
+   "dialog": 2884,
+   "self_check_output": 956
+  },
   "versions": {
    "nemoguardrails": "0.21.0",
    "langchain": "1.2.15",
@@ -491,7 +589,166 @@
     "text": "",
     "error": "Client error '404 Not Found' for url 'http://localhost:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
    }
-  ]
+  ],
+  "self_check_input": {
+   "calls": 2515,
+   "verdicts": {
+    "block_yes": 632,
+    "allow": 964,
+    "block_unparsed": 919
+   },
+   "errors": 0,
+   "empty": 0,
+   "texts": 1578,
+   "texts_blocked": 1010,
+   "by_bench": {
+    "ethics": {
+     "block_unparsed": 160,
+     "allow": 240
+    },
+    "ggb": {
+     "block_yes": 30,
+     "allow": 60
+    },
+    "harmbench": {
+     "block_yes": 361,
+     "allow": 105,
+     "block_unparsed": 34
+    },
+    "morables": {
+     "block_unparsed": 695,
+     "allow": 205
+    },
+    "taxonomy": {
+     "block_yes": 141,
+     "allow": 235,
+     "block_unparsed": 24
+    },
+    "xstest": {
+     "allow": 119,
+     "block_yes": 100,
+     "block_unparsed": 6
+    }
+   },
+   "unparsed_top": [
+    [
+     "Question: Does",
+     284
+    ],
+    [
+     "Question: Is",
+     174
+    ],
+    [
+     "Score (0",
+     150
+    ],
+    [
+     "Answer:",
+     105
+    ],
+    [
+     "Question: What",
+     52
+    ],
+    [
+     "Based on the",
+     50
+    ],
+    [
+     "Question: Which",
+     44
+    ],
+    [
+     "The user message",
+     30
+    ]
+   ]
+  },
+  "self_check_output": {
+   "calls": 956,
+   "verdicts": {
+    "allow": 948,
+    "block_yes": 6,
+    "block_unparsed": 2
+   },
+   "errors": 0,
+   "empty": 0,
+   "texts": 827,
+   "texts_blocked": 8,
+   "by_bench": {
+    "ethics": {
+     "allow": 238,
+     "block_unparsed": 1
+    },
+    "ggb": {
+     "allow": 58
+    },
+    "harmbench": {
+     "allow": 103,
+     "block_yes": 1,
+     "block_unparsed": 1
+    },
+    "morables": {
+     "allow": 205
+    },
+    "taxonomy": {
+     "allow": 227,
+     "block_yes": 4
+    },
+    "xstest": {
+     "allow": 117,
+     "block_yes": 1
+    }
+   },
+   "unparsed_top": [
+    [
+     "Bot response:",
+     1
+    ],
+    [
+     "The bot response",
+     1
+    ]
+   ]
+  },
+  "dialog": {
+   "calls": 2884,
+   "ask_harmful": 126,
+   "refuse": 127
+  },
+  "rows": {
+   "ethics": {
+    "rows": 400,
+    "fixed_refusal": 162,
+    "internal_error": 0
+   },
+   "ggb": {
+    "rows": 90,
+    "fixed_refusal": 32,
+    "internal_error": 0
+   },
+   "harmbench": {
+    "rows": 500,
+    "fixed_refusal": 398,
+    "internal_error": 0
+   },
+   "morables": {
+    "rows": 900,
+    "fixed_refusal": 695,
+    "internal_error": 0
+   },
+   "taxonomy": {
+    "rows": 200,
+    "fixed_refusal": 103,
+    "internal_error": 0
+   },
+   "xstest": {
+    "rows": 225,
+    "fixed_refusal": 108,
+    "internal_error": 1
+   }
+  }
  },
  "config_sha256": {
   "actions.py": "a1a159f6c3d5a5f15252ab20afab8174c028cf1599c76f3d7712c57e0886d190",
