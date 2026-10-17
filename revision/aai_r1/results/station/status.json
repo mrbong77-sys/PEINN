@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 213,
+ "seq": 214,
  "mission": "ops.run",
- "time_utc": "2026-10-17 01:44:11",
- "time_local": "2026-10-17 10:44:11",
- "code": "d0830fc v2.1 심사 대응 runner: 실행 중 (attempt 37)",
- "gpu": "25958 MiB, 32607 MiB, 97 %, 69",
+ "time_utc": "2026-10-17 01:54:13",
+ "time_local": "2026-10-17 10:54:13",
+ "code": "5d9c0e5 v21r M: response matrix and other arms on gemma4:e4b (counts)",
+ "gpu": "8887 MiB, 32607 MiB, 3 %, 39",
  "ack": "20261015T153149Z-launch launch (임무 시작 ops.run, 2026-10-15 15:34:05 UTC)",
  "reason": "정기 보고",
  "history": [
