@@ -57,14 +57,14 @@
   "hb_gen": {},
   "hb_judge": {},
   "others_gen": {
-   "gen_reused": 8456,
-   "gen_live": 10261
+   "gen_reused": 18679,
+   "gen_live": 38
   },
   "others_judge": {
-   "gen_reused": 18668,
-   "judge_reused": 185,
-   "judge_live": 190,
-   "gen_live": 38
+   "gen_reused": 18678,
+   "judge_reused": 259,
+   "judge_live": 116,
+   "gen_live": 33
   },
   "rr_gen": {},
   "rr_judge": {},
@@ -72,7 +72,7 @@
   "sr_judge": {}
  },
  "internal_error_rows": {
-  "H06": 5
+  "H06": 3
  },
  "error_rows": {}
 }
