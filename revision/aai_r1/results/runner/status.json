@@ -1,19 +1,19 @@
 {
- "verdict": "완료",
- "seq": 296,
+ "verdict": "실행 중",
+ "seq": 297,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 14:29:35",
- "time_utc": "2026-10-17 05:29:35",
- "attempt": 48,
- "code": "9720411 v2.1 심사 대응 runner: 실행 중 (attempt 48)",
- "step": "a8-check",
- "step_min": 1.9,
+ "time_local": "2026-10-17 14:47:17",
+ "time_utc": "2026-10-17 05:47:17",
+ "attempt": 1,
+ "code": "8536739 station: 임무 실행 중",
+ "step": null,
+ "step_min": null,
  "since_output_min": 0.0,
- "gpu": "25727 MiB, 32607 MiB, 0 %, 44",
- "next": "없음(모든 단계 끝)",
- "reason": "",
+ "gpu": "2728 MiB, 32607 MiB, 4 %, 43",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)",
  "done": [
   "record",
@@ -74,5 +74,7 @@
   "nemo-orr-totals",
   "a8-check"
  ],
- "left": []
+ "left": [
+  "ggb-export"
+ ]
 }
