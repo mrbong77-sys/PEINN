@@ -227,6 +227,8 @@ def steps(check: bool) -> list:
               ("repeat-diff-means", "each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)",
                run("repeat-diff")),
               ("nemo-orr-detail", "the logged NeMo calls of the XSTest safe prompts no rail event explains (CPU)",
+               run("nemo-orr")),
+              ("nemo-orr-dialog", "NeMo dialog calls whose user turn matches no XSTest safe prompt: examples (CPU)",
                run("nemo-orr"))]
     if not check:                       # the 0.5B pre-test runs now; the 7B run waits for RUN_A8 (tonight)
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",

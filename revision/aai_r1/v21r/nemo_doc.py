@@ -176,6 +176,8 @@ def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
             n.loc[idx, "source"] = src
     keys = set(n.key)                   # DESIGN.md 27: what the log holds for the prompts no rail event explains
     n.attrs["log_subj_unmatched"] = dict(collections.Counter(r["task"] for r in rows if _norm(r["subj"]) not in keys))
+    n.attrs["dialog_unmatched_examples"] = [{"subj": str(r["subj"])[:160], "text": " ".join(str(r.get("text") or "").split())[:200]}
+                                            for r in rows if r["task"] == "dialog" and _norm(r["subj"]) not in keys][:6]
     n.attrs["fixed_other_calls"] = {str(k)[:100]: {"fixed": int(len(g)), "calls": bykey[k][:12]}
                                     for k, g in list(n[n.source == "fixed_other"].groupby("key"))[:8]}
     return n
@@ -211,7 +213,8 @@ def nemo_orr(check: bool = False, log=print) -> int:
                   "refused_also_by_vanilla": int((ref & (pd.to_numeric(n.vanilla_refused, errors="coerce") > 0)).sum()),
                   "unmatched_log": int((n.input_calls == 0).sum()), "policy_term": pt, "by_type": by,
                   "log_subj_unmatched": n.attrs.get("log_subj_unmatched", {}),
-                  "fixed_other_calls": n.attrs.get("fixed_other_calls", {})}
+                  "fixed_other_calls": n.attrs.get("fixed_other_calls", {}),
+                  "dialog_unmatched_examples": n.attrs.get("dialog_unmatched_examples", [])}
         log(f"NeMo {b}: refused {res[b]['refused']}/{len(n)} {res[b]['sources']} policy_term {pt}")
         md += [f"## {C.BASES[b]}", "", f"거절 {res[b]['refused']}/{len(n)}, 경로 {res[b]['sources']}, "
                f"그중 Vanilla도 거절 {res[b]['refused_also_by_vanilla']}, 기록 대조 실패 {res[b]['unmatched_log']}. "

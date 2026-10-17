@@ -1,6 +1,6 @@
 {
- "id": "20261017T064000Z-update",
+ "id": "20261017T065500Z-update",
  "action": "update",
- "note": "nemo-orr-detail (CPU): the logged NeMo calls of the XSTest safe prompts whose fixed refusal no rail event explains (gemma4 32, gemma3 36). Applies at the next step boundary.",
- "issued_utc": "2026-10-17 06:40:00"
+ "note": "nemo-orr-dialog (CPU): examples of the NeMo dialog calls whose user turn matches no XSTest safe prompt (all 309 on gemma4). Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 06:55:00"
 }
