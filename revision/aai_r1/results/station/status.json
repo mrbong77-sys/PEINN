@@ -1,13 +1,13 @@
 {
- "verdict": "임무 실행 중",
- "seq": 239,
- "mission": "ops.run",
- "time_utc": "2026-10-17 05:47:15",
- "time_local": "2026-10-17 14:47:15",
- "code": "e811572 station: 대기",
- "gpu": "2706 MiB, 32607 MiB, 3 %, 43",
+ "verdict": "대기",
+ "seq": 240,
+ "mission": null,
+ "time_utc": "2026-10-17 05:49:17",
+ "time_local": "2026-10-17 14:49:17",
+ "code": "a8adfe8 v2.1 심사 대응 runner: 완료 (attempt 1)",
+ "gpu": "2718 MiB, 32607 MiB, 8 %, 39",
  "ack": "20261017T054600Z-launch launch (임무 시작 ops.run, 2026-10-17 05:47:15 UTC)",
- "reason": "ops.run 시작",
+ "reason": "ops.run 종료(코드 0)",
  "history": [
   {
    "module": "ops.run",
@@ -18,6 +18,11 @@
    "module": "ops.run",
    "rc": 0,
    "end_utc": "2026-10-17 05:31:11"
+  },
+  {
+   "module": "ops.run",
+   "rc": 0,
+   "end_utc": "2026-10-17 05:49:17"
   }
  ],
  "beacon_min": 10.0,
