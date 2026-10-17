@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 287,
+ "verdict": "실패 후 대기",
+ "seq": 288,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:46:47",
- "time_utc": "2026-10-17 04:46:47",
+ "time_local": "2026-10-17 13:47:00",
+ "time_utc": "2026-10-17 04:47:00",
  "attempt": 45,
- "code": "da556bf v21r R2: nemo-orr-dialog, examples of NeMo dialog calls that match no XSTest safe prompt",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "1629 MiB, 32607 MiB, 1 %, 52",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "dafcd17 v21r R2: which XSTest safe prompts NeMo refuses, and by which rail (counts)",
+ "step": "a8-check",
+ "step_min": 0.1,
+ "since_output_min": 0.1,
+ "gpu": "1629 MiB, 32607 MiB, 0 %, 52",
+ "next": "새 코드나 명령을 기다림",
+ "reason": "코드 1",
  "ack": "20261017T065500Z-update update (대기 끝, 재시도, 2026-10-17 04:46:46 UTC)",
  "done": [
   "record",
@@ -69,10 +69,10 @@
   "repeat-diff",
   "nemo-orr-final",
   "repeat-diff-means",
-  "nemo-orr-detail"
+  "nemo-orr-detail",
+  "nemo-orr-dialog"
  ],
  "left": [
-  "nemo-orr-dialog",
   "a8-check"
  ]
 }
