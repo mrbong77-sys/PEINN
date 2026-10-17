@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 255,
+ "seq": 256,
  "mission": "ops.run",
- "time_utc": "2026-10-17 09:44:46",
- "time_local": "2026-10-17 18:44:46",
- "code": "95c5aa3 v21r M: response matrix and other arms on qwen2.5:7b-instruct (counts)",
- "gpu": "7731 MiB, 32607 MiB, 84 %, 56",
+ "time_utc": "2026-10-17 09:54:49",
+ "time_local": "2026-10-17 18:54:49",
+ "code": "2a905b6 v2.1 심사 대응 runner: 실행 중 (attempt 2)",
+ "gpu": "7714 MiB, 32607 MiB, 85 %, 59",
  "ack": "20261017T063000Z-launch launch (임무 시작 ops.run, 2026-10-17 08:24:26 UTC)",
  "reason": "정기 보고",
  "history": [
