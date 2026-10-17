@@ -649,6 +649,51 @@ def repeat_guard(log: Path | None = None, limit: int = 30) -> None:
           f"(log {log})", flush=True)
 
 
+ANSWER_CAP = {"from": 384, "to": 768, "log": None, "count": 0}
+
+
+def answer_cap(log: Path | None = None) -> None:
+    """DESIGN.md 35 (Eugene's card 2026-10-17 15:19 KST): in Ethics, MORABLES and GGB the first answer of the plain arms
+    (Vanilla, R2D2, the PEINN arm's pass 1, A8) is capped at 384 tokens (EthicsEvaluator._evaluate_single_item), while
+    Llama Guard's base answer (prompt_builder.build_llm_request) and NeMo's answer (nemo_fair) get 768. Inside
+    _evaluate_single_item a call with options {temperature 0.3, max_tokens 384} gets 768, the cap of every other arm and
+    bench; pass-2 calls carry their own caps and are left alone. The source is checked first, so a PEAOS that no longer
+    has the 384 call stops here instead of running unchanged. Every raised call is logged (model)."""
+    import contextvars
+    import inspect
+    from pea_eval.evaluators import ethics_eval as ET
+    from pea_eval.evaluators import llm_client as L
+    ANSWER_CAP["log"] = log
+    if getattr(L.EvalLLMClient.call, "_v21r_cap", False):
+        return
+    src = inspect.getsource(ET.EthicsEvaluator._evaluate_single_item)
+    if f'"max_tokens": {ANSWER_CAP["from"]}' not in src:
+        raise SystemExit(f"answer_cap: no 'max_tokens': {ANSWER_CAP['from']} call in _evaluate_single_item; PEAOS changed")
+    inside = contextvars.ContextVar("v21r_single_item", default=False)
+    single, call = ET.EthicsEvaluator._evaluate_single_item, L.EvalLLMClient.call
+
+    async def single_item(self, *a, **k):
+        tok = inside.set(True)
+        try:
+            return await single(self, *a, **k)
+        finally:
+            inside.reset(tok)
+
+    async def capped(self, *a, **k):
+        o = k.get("options")
+        if inside.get() and isinstance(o, dict) and o.get("max_tokens") == ANSWER_CAP["from"] and o.get("temperature") == 0.3:
+            k["options"] = {**o, "max_tokens": ANSWER_CAP["to"]}
+            ANSWER_CAP["count"] += 1
+            if ANSWER_CAP["log"]:
+                _append(ANSWER_CAP["log"], {"model": k.get("model_override", ""), "from": ANSWER_CAP["from"],
+                                            "to": ANSWER_CAP["to"]})
+        return await call(self, *a, **k)
+    capped._v21r_cap = True
+    ET.EthicsEvaluator._evaluate_single_item, L.EvalLLMClient.call = single_item, capped
+    print(f"[v21r] answer cap: first answers in Ethics/MORABLES/GGB at {ANSWER_CAP['to']} tokens, not "
+          f"{ANSWER_CAP['from']} (log {log})", flush=True)
+
+
 def patch_shieldstral(out: Path) -> int:
     """docs/76: S03 (gemma4:e4b + Shieldstral-1.0-3B) exactly as PEAOS scripts/run_shieldstral_bench.py sets it up
     (moderate instruct, tau 0.5, self-test must pass)."""

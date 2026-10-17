@@ -246,6 +246,90 @@ def repeat_reset(check: bool = False, log=print) -> int:
     return 0
 
 
+# ---- DESIGN.md 35: first answers of Ethics, MORABLES and GGB at 768 tokens (Eugene's card 2026-10-17 15:19 KST) -----
+
+CAP_BENCHES = ("ethics", "morables", "ggb")
+_STATED = r"answer\s*(?:is|:|=|-)?\s*\(?\*{0,2}\s*[A-G]\b"
+
+
+def cap_check(check: bool = False, log=print) -> int:
+    """Pre-test before the rerun: gemma4's Vanilla arm on MORABLES, run 1 (180 units), with the 768-token cap in a
+    folder of its own (no stored answers, so every call is live). Passes when every first answer was raised to 768 and
+    at least 90% of the answers now state a final answer; reports that share before and after, how many of the answers
+    that already stated one come back word for word (the seed is the same), and the seconds per answer.
+    -> results/matrix/cap_check.json"""
+    b = "gemma4"
+    d = D.wdir(check) / "cap_check" / b
+    d.mkdir(parents=True, exist_ok=True)
+    t = {"tag": "others", "arms": C.ARMS[b]["Vanilla"], "force": None}
+    import time
+    t0 = time.time()
+    rc = _drive(d, t, "gen", {"morables": 1})
+    sec = time.time() - t0
+    fs = sorted((d / "peaos_out" / "others" / "morables").glob("morables_batch_*.csv"))
+    if rc or not fs:
+        log(f"stop: cap check rc={rc}, csv {len(fs)}")
+        return rc or 1
+    new = pd.read_csv(fs[-1], low_memory=False)
+    raised = sum(1 for _ in open(d / "answer_cap_others_gen.jsonl", encoding="utf-8")) if (d / "answer_cap_others_gen.jsonl").exists() else 0
+    old = collect(check, b)
+    old = old[(old.tag == "others") & (old.bench == "morables") & (old.arm_id == t["arms"]) & old.run_id.astype(str).str.contains("_r01_")]
+    k = ["item_id", "variant"]
+    m = new.merge(old, on=k, suffixes=("_new", "_old"))
+    st = lambda s: s.fillna("").astype(str).str.contains(_STATED, case=False, regex=True)    # noqa: E731
+    so, sn = st(m.response_p2_old), st(m.response_p2_new)
+    same = (m.response_p2_old.astype(str) == m.response_p2_new.astype(str))[so]
+    rep = {"units": int(len(new)), "matched": int(len(m)), "raised_calls": raised,
+           "stated_before": round(float(so.mean()), 3), "stated_after": round(float(sn.mean()), 3),
+           "unchanged_among_stated_before": round(float(same.mean()), 3) if len(same) else None,
+           "accuracy_before": round(float(m.correct_old.mean()), 3), "accuracy_after": round(float(m.correct_new.mean()), 3),
+           "sec": round(sec, 1), "sec_per_answer": round(sec / max(1, len(new)), 2)}
+    rep["ok"] = bool(raised >= len(new) > 0 and rep["stated_after"] >= 0.9 and len(m) == len(new))
+    f = C.jdump(rep, D.odir(check) / "matrix" / "cap_check.json")
+    log(json.dumps(rep))
+    if not rep["ok"]:
+        log("stop: the 768-token cap did not give final answers on the pre-test; the rerun waits")
+    if not check and not C.publish([f], "v21r: 768-token first answers, pre-test on gemma4 MORABLES run 1 (DESIGN.md 35)"):
+        return 1
+    return 0 if rep["ok"] else 1
+
+
+def cap_reset(check: bool = False, log=print) -> int:
+    """Sets Ethics, MORABLES and GGB aside in every tag of every base (their done entries in both phases and their
+    answers into archive_cap384/), once per base (marker file), so the matrix answers those three benches again with
+    the 768-token cap. Llama Guard, NeMo and every call whose key did not change come back from the stores; the plain
+    arms' first answers (new key) and whatever depends on them run live."""
+    import shutil
+    for b in bases(check):
+        d = mdir(check, b)
+        mark = d / "cap768.reset"
+        if mark.exists():
+            log(f"  {b}: already reset ({mark.read_text(encoding='utf-8').strip()})")
+            continue
+        arch = d / "archive_cap384"
+        moved, dropped = [], []
+        for t in tags(b):
+            for phase in ("gen", "judge"):
+                f = d / f"done_{t['tag']}_{phase}.json"
+                if f.exists():
+                    done = C.jload(f)
+                    gone = [x for x in CAP_BENCHES if x in done]
+                    if gone:
+                        arch.mkdir(exist_ok=True)
+                        shutil.copy2(f, arch / f.name)
+                        C.jdump({k: v for k, v in done.items() if k not in CAP_BENCHES}, f)
+                        dropped.append(f"{t['tag']}_{phase}:{','.join(gone)}")
+            for x in CAP_BENCHES:
+                src = d / "peaos_out" / t["tag"] / x
+                if src.exists():
+                    (arch / t["tag"]).mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(src), str(arch / t["tag"] / x))
+                    moved.append(f"{t['tag']}/{x}")
+        mark.write_text(f"done entries dropped {dropped}; answers moved {moved}\n", encoding="utf-8")
+        log(f"  {b}: {len(dropped)} done files trimmed, {len(moved)} answer folders moved to {arch.name}")
+    return 0
+
+
 def repeat_review(check: bool = False, log=print) -> int:
     """After the 'others' tag ran again: error rows per arm before and after, and the calls the repeat guard answered."""
     f = D.odir(check) / "matrix" / "repeat_fix.json"

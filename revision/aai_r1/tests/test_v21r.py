@@ -1099,7 +1099,8 @@ def test_ggb_rescore_row_takes_only_the_answers_own_number():
     assert G.rescore_row(row('"Read the statement ... on a scale from 1 (strongly disagree) to 7"'))[0] is None
     assert G.rescore_row(row(G.FIXED, system="NeMo"))[1] == "refused: NeMo fixed refusal"
     assert G.rescore_row(row("I can't help with that.", system="PEINN", tier="Hard-block"))[1] == "refused: PEINN Hard-block"
-    assert G.rescore_row(row("Score: 7", base="gemma4", system="NeMo", item="IB5", rep=9))[0] is None
+    assert G.rescore_row(row("Utilitarian score: 7 ... I cannot assign a single numerical score", base="gemma4", system="NeMo", item="IB5", rep=9))[0] is None
+    assert G.rescore_row(row("Score: 7", base="gemma4", system="NeMo", item="IB5", rep=9))[0] == 7   # answer changed
 
 
 def test_bench_export_writes_the_reported_rows_per_bench(tmp_path, monkeypatch):
@@ -1167,3 +1168,57 @@ def test_bench_stats_uses_the_submitted_definitions(tmp_path, monkeypatch):
     assert m["clean"]["mean"] == 100.0 and m["perturbed"]["mean"] == 0.0 and m["gap"] == 100.0
     assert m["no_stated_answer"] == 2 and m["letter_without_stated_answer"] == 2
     assert "| qwen | Vanilla |" in (o / "bench_stats.md").read_text(encoding="utf-8")
+
+
+def test_answer_cap_raises_only_the_first_answer_inside_a_single_item(tmp_path, monkeypatch):
+    import asyncio
+    import sys
+    import types
+    from v21r import peaos_patches as P
+    seen = []
+
+    class Client:
+        async def call(self, backend="", system_prompt="", user_prompt="", model_override="", max_tokens=None, stop=None, options=None):
+            seen.append(dict(options or {}))
+
+    class Ev:
+        def __init__(self):
+            self.client = Client()
+
+        async def _evaluate_single_item(self, *a, **k):
+            await self.client.call(backend="local", options={"temperature": 0.3, "max_tokens": 384})
+            await self.client.call(backend="local", options={"temperature": 0.3, "max_tokens": 512})
+    Ev._evaluate_single_item.__doc__ = None
+    pkg = types.ModuleType("pea_eval"); ev = types.ModuleType("pea_eval.evaluators")
+    et = types.ModuleType("pea_eval.evaluators.ethics_eval"); lc = types.ModuleType("pea_eval.evaluators.llm_client")
+    et.EthicsEvaluator, lc.EvalLLMClient = Ev, Client
+    ev.ethics_eval, ev.llm_client = et, lc
+    for n, m in (("pea_eval", pkg), ("pea_eval.evaluators", ev), ("pea_eval.evaluators.ethics_eval", et),
+                 ("pea_eval.evaluators.llm_client", lc)):
+        monkeypatch.setitem(sys.modules, n, m)
+    monkeypatch.setattr(P.inspect if hasattr(P, "inspect") else __import__("inspect"), "getsource",
+                        lambda f: '"max_tokens": 384')
+    P.answer_cap(tmp_path / "cap.jsonl")
+    asyncio.run(Ev()._evaluate_single_item())
+    asyncio.run(Client().call(options={"temperature": 0.3, "max_tokens": 384}))          # outside: left alone
+    assert [o["max_tokens"] for o in seen] == [768, 512, 384]
+    assert len((tmp_path / "cap.jsonl").read_text(encoding="utf-8").strip().split("\n")) == 1
+
+
+def test_cap_reset_sets_the_three_benches_aside_once(tmp_path, monkeypatch):
+    from v21r import matrix as MX
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    d = MX.mdir(False, "qwen")
+    for t in MX.tags("qwen"):
+        for phase in ("gen", "judge"):
+            C.jdump({b: {"total": 1} for b in ("harmbench", "ethics", "morables", "ggb", "xstest")}, d / f"done_{t['tag']}_{phase}.json")
+        for b in ("ethics", "harmbench"):
+            (d / "peaos_out" / t["tag"] / b).mkdir(parents=True)
+    assert MX.cap_reset(log=lambda *_: None) == 0
+    done = C.jload(d / "done_others_judge.json")
+    assert sorted(done) == ["harmbench", "xstest"]
+    assert (d / "archive_cap384" / "others" / "ethics").exists() and (d / "peaos_out" / "others" / "harmbench").exists()
+    assert sorted(C.jload(d / "archive_cap384" / "done_da_gen.json")) == ["ethics", "ggb", "harmbench", "morables", "xstest"]
+    C.jdump({"ethics": {"total": 2}}, d / "done_others_gen.json")             # the rerun's own entry
+    assert MX.cap_reset(log=lambda *_: None) == 0 and "ethics" in C.jload(d / "done_others_gen.json")

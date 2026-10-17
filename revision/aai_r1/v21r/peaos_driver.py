@@ -296,6 +296,7 @@ def main(argv=None) -> int:
             return 2
     routes = Forced(a.force) if a.force else {}
     E.patch("run", a.out, routes, a.morables, a.judge)
+    E.answer_cap(a.out / f"answer_cap_{a.tag}_{a.phase}.jsonl")                # DESIGN.md 35
     from pea_eval.evaluators import llm_client as L
     cap = [] if a.capture else None
     seeds(E, L, a.judge, a.out, a.tag, a.phase, cap)
