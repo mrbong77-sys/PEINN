@@ -4,28 +4,36 @@
    "device": "cuda",
    "threads": 20,
    "n": 200,
-   "p50_ms": 48.45,
-   "p95_ms": 49.35,
-   "mean_ms": 48.07,
+   "p50_ms": 38.92,
+   "p95_ms": 50.01,
+   "mean_ms": 38.24,
    "gpu_peak_GB": 0.672,
-   "process_peak_GB": 1.801
+   "process_peak_GB": 1.824
   },
   "ft_gpu": {
    "device": "cuda",
    "threads": 20,
    "n": 200,
-   "p50_ms": 20.34,
-   "p95_ms": 22.28,
-   "mean_ms": 20.41
+   "p50_ms": 9.71,
+   "p95_ms": 10.69,
+   "mean_ms": 9.69
   },
-  "cpu1": null,
-  "ft_cpu1": {
-   "device": "cuda",
+  "cpu1": {
+   "device": "cpu",
    "threads": 1,
    "n": 200,
-   "p50_ms": 20.45,
-   "p95_ms": 22.4,
-   "mean_ms": 20.44
+   "p50_ms": 76.66,
+   "p95_ms": 95.16,
+   "mean_ms": 77.39,
+   "process_peak_GB": 1.504
+  },
+  "ft_cpu1": {
+   "device": "cpu",
+   "threads": 1,
+   "n": 200,
+   "p50_ms": 49.27,
+   "p95_ms": 65.55,
+   "mean_ms": 50.25
   }
  },
  "tiers": {
