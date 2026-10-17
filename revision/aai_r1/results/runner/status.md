@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 21:12:35 (UTC 2026-10-17 12:12:35), 시도 2, 비컨 #325 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 38b5ded station: 임무 실행 중
-- 현재 단계: a8 (14.5분째)
-- 마지막 출력 후: 0.7분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6680 MiB, 32607 MiB, 87 %, 68
+- 시각 2026-10-17 21:22:41 (UTC 2026-10-17 12:22:41), 시도 2, 비컨 #326 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: d815b02 station: 임무 실행 중
+- 현재 단계: a8 (24.6분째)
+- 마지막 출력 후: 0.8분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6680 MiB, 32607 MiB, 89 %, 68
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] ===== bench-export-cap768: every other bench's reported rows again (CPU) =====
-[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r bench-export
-  harmbench qwen: 2000 rows, systems {'Vanilla': 500, 'NeMo': 500, 'LlamaGuard': 500, 'PEINN': 500}, 0.9 MiB
   xstest qwen: 900 rows, systems {'Vanilla': 225, 'NeMo': 225, 'LlamaGuard': 225, 'PEINN': 225}, 0.3 MiB
   taxonomy qwen: 800 rows, systems {'Vanilla': 200, 'NeMo': 200, 'LlamaGuard': 200, 'PEINN': 200}, 0.3 MiB
   ethics qwen: 1600 rows, systems {'Vanilla': 400, 'NeMo': 400, 'LlamaGuard': 400, 'PEINN': 400}, 0.5 MiB
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 55902
   400/55902
   600/55902
   800/55902
+  1000/55902
+  1200/55902
+  1400/55902
 ```
