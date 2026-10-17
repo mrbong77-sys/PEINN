@@ -318,3 +318,10 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
   - `nemo-fair-review`가 다음을 확인합니다. 모든 NeMo 호출에 온도가 실렸는지, 자체 점검 온도가 0.05 이하인지, 모든 점검 벤치에 NeMo 답이 있는지, 빈 답·내부 오류가 5% 이하인지입니다. zephyr 사전 점검에서도 같은 확인을 합니다. 정지 문자열은 요구하지 않고 세기만 합니다. nemoguardrails 0.21은 이 설정의 Colang 1.0 대화 호출(의도·다음 단계·봇 메시지)에 정지 문자열을 붙이지 않습니다(첫 사전 점검 23:40 KST: 대화 호출 120건 중 0건).
 - **본 실행:** `nemo-reset`이 qwen·gemma4·gemma3 전체 캐시의 others 태그를 `archive_nemo_wrapper_v1/`로 한 번만 옮깁니다(표지 파일). 이어서 `matrix`가 그 태그를 다시 돌리고 zephyr 전체를 돌립니다. NeMo 호출은 키가 바뀌어(options 포함) 새로 생성되고, Vanilla·R2D2·Llama Guard는 저장소에서 다시 씁니다. 끝나면 `nemo-doc`, `nemo-orr-all`, `nemo-audit-all`로 거절 경로와 설정을 다시 셉니다.
 - **원고:** NeMo 구성 서술에 "레일 호출은 NeMo가 정한 매개변수, 본 답은 다른 팔과 같은 온도·상한"이라고 적습니다. 설정 파일 사본의 `parameters` 줄도 실제 실행과 맞춥니다.
+
+## 30. Ollama 반복 한도 오류의 원인 수정 (교수님 결정 2026-10-17 09:49 KST, 카드 "원인 수정")
+
+- **현상:** 위성의 Ollama(0.34.1 이후)는 같은 토큰이 100번 이어지면 답 대신 HTTP 500 "prediction aborted, token repeat limit reached"를 냅니다. 0.34.0까지는 30번에서 멈추고 그때까지의 답을 돌려줬습니다(ollama PR #18374, MOME에서 확인한 것과 같은 현상). zephyr:7b가 NeMo 경로에서 반복에 빠진 호출은 PEAOS의 세 번 재시도 뒤에도 실패해 NeMo "internal error" 행이 되었습니다. 생성 단계에서 실패한 호출은 저장되지 않으므로, 채점 단계에서 다시 불려 다시 실패했습니다(07:44, 09:47 KST 로그). 실패는 `guard_calls`의 복구도 불러, judge를 내리게 만들 수 있었습니다.
+- **수정(`peaos_patches.repeat_guard`, 드라이버가 모든 실행에 적용):** 스트리밍하지 않은 `/api/chat`·`/api/generate` 호출이 이 500을 받으면, 같은 요청 본문을 스트리밍으로 다시 보냅니다. 같은 조각(앞뒤 공백 제거)이 30번을 넘게 이어지면 멈추고, 그때까지의 답을 200으로 돌려줍니다(done false, done_reason "repeat_guard"). 0.34.0까지의 동작과 같습니다. 다른 500은 건드리지 않습니다. 호출마다 `repeat_guard.jsonl`에 남깁니다.
+- **해당 문항만 다시(`repeat-reset` → `matrix-repeat` → `repeat-review`, 행렬 뒤):** 'others' 묶음에 오류 행(internal error, 빈 답, error 열)이 있는 기반 모델만 그 묶음을 따로 치워 두고(`archive_repeat_v1/`) 다시 돌립니다. 저장된 답과 채점은 그대로 다시 쓰이고, 실패했던 호출과 그 뒤를 잇는 호출만 실제로 부릅니다. PEINN 층 묶음은 건드리지 않습니다. 오류 행 수(전·후)와 반복 한도 처리 호출 수는 `results/matrix/repeat_fix.json`에 둡니다.
+- **행렬 단계:** 모든 벤치가 끝난 묶음은 드라이버를 띄우지 않고 넘어갑니다(`matrix.matrix`).

@@ -153,6 +153,10 @@ def matrix(check: bool = False, log=print) -> int:
         d = mdir(check, b)
         for phase in ("gen", "judge"):
             for t in tags(b):
+                df = d / f"done_{t['tag']}_{phase}.json"
+                if df.exists() and set(runs) <= set(C.jload(df)):               # every bench done: no driver start
+                    log(f"== {b} {t['tag']} [{phase}] done")
+                    continue
                 log(f"== {b} {t['tag']} [{phase}] arms {t['arms']} force {t['force']}")
                 rc = _drive(d, t, phase, runs)
                 if rc:
@@ -191,6 +195,76 @@ def nemo_reset(check: bool = False, log=print) -> int:
         mark.write_text(f"{len(moved)} moved: {', '.join(moved)}\n", encoding="utf-8")
         log(f"  {b}: {len(moved)} moved to {arch.name}")
     return 0
+
+
+# ---- DESIGN.md 30: calls Ollama cut with HTTP 500 (token repeat limit) answered again --------------------------------
+
+def _error_rows(df: pd.DataFrame) -> dict:
+    """Rows of the 'others' tag per arm whose answer is an internal error, empty, or carries an error field."""
+    o = df[df.tag == "others"] if len(df) else df
+    if not len(o):
+        return {}
+    resp = o.filter(regex="^response").fillna("").astype(str)
+    bad = resp.agg(" ".join, axis=1).str.lower().str.contains("internal error")
+    bad |= resp.apply(lambda c: c.str.strip().isin(("", "nan"))).all(axis=1)
+    if "error" in o:
+        bad |= o["error"].fillna("").astype(str).str.strip() != ""
+    return {a: int(n) for a, n in o[bad.to_numpy()].groupby("arm_id").size().items()}
+
+
+def repeat_reset(check: bool = False, log=print) -> int:
+    """Bases whose 'others' tag has error rows get that tag set aside (done files, answers, call logs into
+    archive_repeat_v1/, once per base), so the matrix answers it again with peaos_patches.repeat_guard: every call is
+    served from the generation and judge stores except the ones that failed (failed calls were never stored).
+    The PEINN tiers are not touched. Counts before are kept in results/matrix/repeat_fix.json."""
+    import shutil
+    f = D.odir(check) / "matrix" / "repeat_fix.json"
+    rec = C.jload(f) if f.exists() else {}
+    for b in bases(check):
+        d = mdir(check, b)
+        mark = d / "repeat_fix.reset"
+        if mark.exists():
+            log(f"  {b}: already reset ({mark.read_text(encoding='utf-8').strip()})")
+            continue
+        before = _error_rows(collect(check, b))
+        rec.setdefault(b, {})["before"] = before
+        if not sum(before.values()):
+            mark.write_text("no error rows: nothing set aside\n", encoding="utf-8")
+            log(f"  {b}: no error rows")
+            continue
+        arch = d / "archive_repeat_v1"
+        moved = []
+        for x in [*d.glob("done_others_*.json"), *d.glob("nemo_calls_others_*.jsonl"), *d.glob("calls_others_*.json"),
+                  d / "peaos_out" / "others"]:
+            if x.exists():
+                arch.mkdir(exist_ok=True)
+                shutil.move(str(x), str(arch / x.name))
+                moved.append(x.name)
+        mark.write_text(f"error rows {before}; {len(moved)} moved: {', '.join(moved)}\n", encoding="utf-8")
+        log(f"  {b}: error rows {before}; {len(moved)} moved to {arch.name}")
+    C.jdump(rec, f)
+    return 0
+
+
+def repeat_review(check: bool = False, log=print) -> int:
+    """After the 'others' tag ran again: error rows per arm before and after, and the calls the repeat guard answered."""
+    f = D.odir(check) / "matrix" / "repeat_fix.json"
+    rec = C.jload(f) if f.exists() else {}
+    for b in bases(check):
+        d = mdir(check, b)
+        g = d / "repeat_guard.jsonl"
+        rows = C.jsonl(g) if g.exists() else []
+        r = rec.setdefault(b, {})
+        r["after"] = _error_rows(collect(check, b))
+        r["guard_calls"] = len(rows)
+        r["guard_stopped"] = sum(1 for x in rows if x.get("repeat_stop"))
+        r["guard_models"] = sorted({x.get("model") for x in rows if x.get("model")})
+        log(f"  {b}: error rows before {r.get('before')} after {r['after']}; repeat guard {len(rows)} calls "
+            f"({r['guard_stopped']} cut)")
+    C.jdump(rec, f)
+    if check:
+        return 0
+    return 0 if C.publish([f], "v21r M: error rows before and after the Ollama repeat guard (counts)") else 1
 
 
 def nemo_fair_review(check: bool = True, log=print) -> int:

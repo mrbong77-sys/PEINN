@@ -281,6 +281,7 @@ def main(argv=None) -> int:
     E.quiet_noise()
     E.langchain_shim()
     E.nemo_fair()
+    E.repeat_guard(a.out / "repeat_guard.jsonl")                              # DESIGN.md 30
     if a.mode == "nemo-probe":
         E.patch("run", a.out, {}, a.morables, a.judge)
         return asyncio.run(E.nemo_probe(a.out, a.model))

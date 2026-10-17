@@ -884,3 +884,74 @@ def test_phase_cache_judge_keeps_the_judge_loaded(tmp_path):
         asyncio.run(c.warmup_model(m))
         asyncio.run(c.unload_model(m))
     assert seen == [("warm", "qwen3:32b")]
+
+
+def _ollama_mock(pieces, stop_after=None):
+    """Ollama >= 0.34.1: a non-streamed call that loops answers 500; streamed, it sends piece by piece."""
+    import httpx
+    seen = []
+
+    def handler(request):
+        body = json.loads(request.content)
+        seen.append(body.get("stream"))
+        if not body.get("stream"):
+            return httpx.Response(500, json={"error": "prediction aborted, token repeat limit reached"})
+        lines = [json.dumps({"model": body["model"], "created_at": "t", "message": {"role": "assistant", "content": p},
+                             "done": False}) for p in pieces]
+        lines.append(json.dumps({"model": body["model"], "created_at": "t", "message": {"role": "assistant", "content": ""},
+                                 "done": True, "done_reason": "stop"}))
+        return httpx.Response(200, content=("\n".join(lines) + "\n").encode())
+    return httpx.MockTransport(handler), seen
+
+
+def test_repeat_guard_answers_a_looping_call_with_the_text_so_far(tmp_path):
+    import asyncio
+    import httpx
+    from v21r import peaos_patches as P
+    P.repeat_guard(tmp_path / "rg.jsonl")
+    tr, seen = _ollama_mock(["Sure", ",", " here", *([" ha"] * 60)])
+    body = {"model": "zephyr:7b", "messages": [{"role": "user", "content": "q"}], "stream": False,
+            "options": {"temperature": 0.3, "seed": 42}}
+
+    async def go():
+        async with httpx.AsyncClient(transport=tr, base_url="http://x") as c:
+            return await c.post("/api/chat", json=body)
+    r = asyncio.run(go())
+    j = r.json()
+    assert r.status_code == 200 and seen == [False, True]
+    assert j["message"]["content"] == "Sure, here" + " ha" * 31 and j["done"] is False and j["done_reason"] == "repeat_guard"
+    with httpx.Client(transport=_ollama_mock(["a", "b"])[0], base_url="http://x") as c:     # no loop: the whole answer
+        j2 = c.post("/api/chat", json=body).json()
+    assert j2["message"]["content"] == "ab" and j2["done"] is True
+    rows = C.jsonl(tmp_path / "rg.jsonl")
+    assert [x["repeat_stop"] for x in rows] == [True, False] and rows[0]["model"] == "zephyr:7b"
+
+    def other(request):                                                     # any other 500 is left as it is
+        return httpx.Response(500, json={"error": "model not found"})
+    with httpx.Client(transport=httpx.MockTransport(other), base_url="http://x") as c:
+        assert c.post("/api/chat", json=body).status_code == 500
+
+
+def test_repeat_reset_sets_aside_only_bases_with_error_rows(tmp_path, monkeypatch):
+    from v21r import matrix as MX
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setenv("V21R_BASES", "qwen,gemma3")
+    rows = {"qwen": ["ok", "I'm sorry, an internal error has occurred."], "gemma3": ["ok", "fine"]}
+    for b, answers in rows.items():
+        d = MX.mdir(False, b)
+        x = d / "peaos_out" / "others" / "xstest"
+        x.mkdir(parents=True)
+        pd.DataFrame({"arm_id": ["H06", "H06"], "response_p1": answers, "prompt_text": ["a", "b"]}).to_csv(
+            x / "xstest_batch_1runs_20261017_000000.csv", index=False)
+        (d / "done_others_gen.json").write_text("{}")
+        (d / "nemo_calls_others_gen.jsonl").write_text("")
+        (d / "gen_cache.jsonl").write_text("")
+    assert MX.repeat_reset(False, log=lambda *_: None) == 0
+    q, g = MX.mdir(False, "qwen"), MX.mdir(False, "gemma3")
+    assert not (q / "done_others_gen.json").exists() and (q / "archive_repeat_v1" / "others").exists()
+    assert (q / "gen_cache.jsonl").exists() and (g / "done_others_gen.json").exists()
+    rec = C.jload(tmp_path / "out" / "matrix" / "repeat_fix.json")
+    assert rec["qwen"]["before"] == {"H06": 1} and rec["gemma3"]["before"] == {}
+    assert MX.repeat_reset(False, log=lambda *_: None) == 0                       # once per base
+    assert (q / "archive_repeat_v1").exists() and len(list((q / "archive_repeat_v1").iterdir())) == 3

@@ -517,6 +517,138 @@ def nemo_fair() -> None:
           f"<= {NEMO_GEN_MAX_TOKENS} tokens", flush=True)
 
 
+REPEAT = {"limit": 30, "log": None, "count": 0}
+
+
+class _RepeatCut:
+    """Joins Ollama's streamed pieces the way stream=false does and stops once the same (whitespace-trimmed) piece has
+    repeated more than `limit` times in a row (the guard of Ollama <= 0.34.0)."""
+
+    def __init__(self, path: str, limit: int):
+        self.chat, self.limit = path.endswith("/api/chat"), limit
+        self.text, self.think, self.last, self.prev, self.rep = [], [], {}, None, 0
+        self.stopped = self.done = False
+
+    def feed(self, ln: str) -> bool:
+        """Takes one stream line; True when the stream should end here."""
+        if not ln.strip():
+            return False
+        j = json.loads(ln)
+        if j.get("error"):
+            self.stopped = True
+            return True
+        self.last = j
+        m = j.get("message") or {}
+        piece = m.get("content", "") if self.chat else j.get("response", "")
+        self.think.append(m.get("thinking", "") if self.chat else j.get("thinking", ""))
+        if piece:
+            cur = piece.strip()
+            self.rep = self.rep + 1 if cur == self.prev else 0
+            self.prev = cur
+            if self.rep > self.limit:
+                self.stopped = True
+                return True
+            self.text.append(piece)
+        if j.get("done"):
+            self.done = True
+            return True
+        return False
+
+
+def _repeat_body(body: dict, cut: "_RepeatCut") -> dict:
+    content, thinking = "".join(cut.text), "".join(cut.think)
+    out = {"model": body.get("model"), "created_at": cut.last.get("created_at", ""), "done": not cut.stopped,
+           "done_reason": "repeat_guard" if cut.stopped else cut.last.get("done_reason", "stop")}
+    if cut.chat:
+        out["message"] = {"role": "assistant", "content": content, **({"thinking": thinking} if thinking else {})}
+    else:
+        out["response"] = content
+        if thinking:
+            out["thinking"] = thinking
+    return out
+
+
+def _repeat_hit(request, resp) -> dict | None:
+    path = request.url.path
+    if resp.status_code != 500 or not (path.endswith("/api/chat") or path.endswith("/api/generate")):
+        return None
+    try:
+        if "repeat limit" not in resp.text:
+            return None
+        body = json.loads(request.content or b"{}")
+    except Exception:  # noqa: BLE001
+        return None
+    return None if body.get("stream") else body
+
+
+def _repeat_record(body: dict, path: str, cut: "_RepeatCut") -> None:
+    content, stopped = "".join(cut.text), cut.stopped
+    REPEAT["count"] += 1
+    msgs = body.get("messages") or [{"content": body.get("prompt", "")}]
+    rec = {"t": time.strftime("%Y-%m-%d %H:%M:%S"), "model": body.get("model"), "path": path, "chars": len(content),
+           "repeat_stop": stopped, "prompt_sha": sha(json.dumps(msgs, ensure_ascii=False, sort_keys=True)),
+           "options": body.get("options")}
+    print(f"[repeat-guard #{REPEAT['count']}] {body.get('model')}: Ollama's repeat limit -> streamed again, "
+          f"stopped {stopped}, {len(content)} chars kept", flush=True)
+    if REPEAT["log"]:
+        with open(REPEAT["log"], "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
+def repeat_guard(log: Path | None = None, limit: int = 30) -> None:
+    """DESIGN.md 30 (Eugene 2026-10-17 09:49 KST): Ollama >= 0.34.1 answers HTTP 500 "token repeat limit reached" where
+    <= 0.34.0 stopped after 30 repeats of one piece and returned the text so far. When a non-streamed /api/chat or
+    /api/generate call gets that 500, the same request body is sent again streamed, the old guard is applied here, and
+    the caller receives a 200 with the text so far (done false, done_reason "repeat_guard"). Every such call is logged."""
+    import httpx
+    REPEAT["log"], REPEAT["limit"] = log, limit
+    if getattr(httpx.AsyncClient.send, "_v21r_repeat", False):
+        return
+    a_send, s_send = httpx.AsyncClient.send, httpx.Client.send
+
+    async def asend(self, request, *a, **k):
+        resp = await a_send(self, request, *a, **k)
+        if k.get("stream"):
+            return resp
+        body = _repeat_hit(request, resp)
+        if body is None:
+            return resp
+        req = self.build_request("POST", request.url, json={**body, "stream": True}, headers={"Content-Type": "application/json"})
+        r2 = await a_send(self, req, stream=True)
+        cut = _RepeatCut(request.url.path, REPEAT["limit"])
+        try:
+            async for ln in r2.aiter_lines():
+                if cut.feed(ln):
+                    break
+        finally:
+            await r2.aclose()
+        _repeat_record(body, request.url.path, cut)
+        return httpx.Response(200, json=_repeat_body(body, cut), request=request)
+
+    def ssend(self, request, *a, **k):
+        resp = s_send(self, request, *a, **k)
+        if k.get("stream"):
+            return resp
+        body = _repeat_hit(request, resp)
+        if body is None:
+            return resp
+        req = self.build_request("POST", request.url, json={**body, "stream": True}, headers={"Content-Type": "application/json"})
+        r2 = s_send(self, req, stream=True)
+        cut = _RepeatCut(request.url.path, REPEAT["limit"])
+        try:
+            for ln in r2.iter_lines():
+                if cut.feed(ln):
+                    break
+        finally:
+            r2.close()
+        _repeat_record(body, request.url.path, cut)
+        return httpx.Response(200, json=_repeat_body(body, cut), request=request)
+    asend._v21r_repeat = ssend._v21r_repeat = True
+    httpx.AsyncClient.send, httpx.Client.send = asend, ssend
+    print(f"[v21r] Ollama repeat guard: a 'token repeat limit' 500 is streamed again and cut after {limit} repeats "
+          f"(log {log})", flush=True)
+
+
 def patch_shieldstral(out: Path) -> int:
     """docs/76: S03 (gemma4:e4b + Shieldstral-1.0-3B) exactly as PEAOS scripts/run_shieldstral_bench.py sets it up
     (moderate instruct, tau 0.5, self-test must pass)."""

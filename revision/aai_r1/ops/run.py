@@ -207,6 +207,10 @@ def steps(check: bool) -> list:
               ("nemo-reset", "the 'others' tag of qwen, gemma4 and gemma3 set aside so NeMo runs again (DESIGN.md 29)",
                lambda: step("nemo-reset", False, env_add={"V21R_BASES": "qwen,gemma4,gemma3"}))]
     s += [("matrix", "PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base", run("matrix"))]
+    s += [("repeat-reset", "bases with error rows in the 'others' tag: that tag set aside (DESIGN.md 30)", run("repeat-reset")),
+          ("matrix-repeat", "the 'others' tag again with the Ollama repeat guard; stored answers reused (DESIGN.md 30)",
+           run("matrix")),
+          ("repeat-review", "error rows before and after, calls the repeat guard answered (DESIGN.md 30)", run("repeat-review"))]
     s += [("nemo-doc", "NeMo rail verdicts per base from the driver's call log (R2)", run("nemo-doc"))]
     s += [("nemo-orr-all", "NeMo's XSTest safe refusals by type and rail on every base (CPU)", run("nemo-orr"))]
     s += [("nemo-audit-all", "NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)", run("nemo-audit"))]
