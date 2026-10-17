@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 17:44:39 (UTC 2026-10-17 08:44:39), 시도 1, 비컨 #303 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: a657352 station: 임무 실행 중
-- 현재 단계: a8 (20.1분째)
-- 마지막 출력 후: 0.8분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7165 MiB, 32607 MiB, 91 %, 69
+- 시각 2026-10-17 17:54:44 (UTC 2026-10-17 08:54:44), 시도 1, 비컨 #304 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a1f8cdd station: 임무 실행 중
+- 현재 단계: a8 (30.1분째)
+- 마지막 출력 후: 1.2분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7187 MiB, 32607 MiB, 92 %, 68
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip nemo-reset (the 'others' tag of qwen, gemma4 and gemma3 set aside so NeMo runs again (DESIGN.md 29)): finished 2026-10-17 00:52:25
-[v21r] skip matrix (PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base): finished 2026-10-17 10:04:06
-[v21r] skip repeat-reset (bases with error rows in the 'others' tag: that tag set aside (DESIGN.md 30)): finished 2026-10-17 10:04:19
 [v21r] skip matrix-repeat (the 'others' tag again with the Ollama repeat guard; stored answers reused (DESIGN.md 30)): finished 2026-10-17 11:18:09
 [v21r] skip repeat-review (error rows before and after, calls the repeat guard answered (DESIGN.md 30)): finished 2026-10-17 11:18:22
 [v21r] skip nemo-doc (NeMo rail verdicts per base from the driver's call log (R2)): finished 2026-10-17 10:04:11
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 58775
   800/58775
   1000/58775
   1200/58775
+  1400/58775
+  1600/58775
+  1800/58775
 ```
