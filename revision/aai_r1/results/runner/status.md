@@ -1,19 +1,28 @@
-# v2.1 심사 대응 무인 실행 상태: 실행 중
+# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
 
-- 시각 2026-10-17 13:21:49 (UTC 2026-10-17 04:21:49), 시도 40, 비컨 #277 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: b6703af v2.1 심사 대응 runner: 명령 처리 (attempt 40)
-- 현재 단계: 없음
-- 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8269 MiB, 32607 MiB, 0 %, 53
-- 다음 동작: 단계 진행
-- 사유: 시작
+- 시각 2026-10-17 13:23:11 (UTC 2026-10-17 04:23:11), 시도 40, 비컨 #278 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 110a25a v21r release: heads and energy calibrator trained on the isolated corpus (+ manifest)
+- 현재 단계: a8-check (0.3분째)
+- 마지막 출력 후: 0.1분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8237 MiB, 32607 MiB, 2 %, 41
+- 다음 동작: 새 코드나 명령을 기다림
+- 사유: 코드 1
 - 마지막으로 처리한 명령: 20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)
-- 남은 단계: analyze; release; a8-check
-- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost
+- 남은 단계: a8-check
+- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost, analyze, release
 
 ## 마지막 로그
 
 ```
+[v21r] skip record (routing texts of the benches with a mock LLM): finished 2026-10-16 00:34:51
+[v21r] skip supp-check (supplement, audit, features, split, train, thresholds, routes on the check cache (pre-test)): finished 2026-10-16 14:50:44
+[v21r] skip supplement (public over-refusal and adversarial training sets (DESIGN.md 12)): finished 2026-10-16 13:48:36
+[v21r] skip audit (isolation audit of the v4 corpus (guard + recorded texts)): finished 2026-10-16 13:48:41
+[v21r] skip unload-1 (free the GPU (any Ollama model)): finished 2026-10-16 09:35:42
+[v21r] skip features (frozen v2.1 features of the corpus and the routing texts): finished 2026-10-16 13:58:34
+[v21r] skip split (embedding near-duplicates out, train / val / test split): finished 2026-10-16 13:58:38
+[v21r] skip train (variants A0-A7 and the energy calibrator on the isolated corpus): finished 2026-10-16 15:11:08
+[v21r] skip thresholds (thresholds of every variant on val, pushed before any answer): finished 2026-10-16 15:27:38
 [v21r] skip routes (route tables of every variant and operating point): finished 2026-10-16 15:27:40
 [v21r] skip nemo (NeMo Guardrails answers three probe prompts on every base): finished 2026-10-16 00:50:22
 [v21r] skip approval (the professor's go for the full matrix): finished 2026-10-16 00:50:22
@@ -54,4 +63,25 @@
 
 [v21r] ===== analyze: benchmark results, curves, calibration, I construct =====
 [ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r analyze
+qwen: {"Vanilla": {"ucr": 0.2003, "ucr_parts": [0.186, 0.215, 0.2], "orr": 0.024, "gate_orr": null}, "NeMo": {"ucr": 0.0517, "ucr_parts": [0.01, 0.045, 0.1], "orr": 0.24, "gate_orr": null}, "LlamaGuard": {"ucr": 0.041, "ucr_parts": [0.028, 0.035, 0.06], "orr": 0.064, "gate_orr": null}}
+gemma4: {"Vanilla": {"ucr": 0.1333, "ucr_parts": [0.11, 0.23, 0.06], "orr": 0.104, "gate_orr": null}, "NeMo": {"ucr": 0.004, "ucr_parts": [0.002, 0.0, 0.01], "orr": 0.432, "gate_orr": null}, "LlamaGuard": {"ucr": 0.033, "ucr_parts": [0.024, 0.015, 0.06], "orr": 0.136, "gate_orr": null}}
+gemma3: {"Vanilla": {"ucr": 0.2487, "ucr_parts": [0.326, 0.32, 0.1], "orr": 0.048, "gate_orr": null}, "NeMo": {"ucr": 0.0223, "ucr_parts": [0.012, 0.055, 0.0], "orr": 0.496, "gate_orr": null}, "LlamaGuard": {"ucr": 0.0357, "ucr_parts": [0.032, 0.015, 0.06], "orr": 0.12, "gate_orr": null}}
+zephyr: {"Vanilla": {"ucr": 0.601, "ucr_parts": [0.888, 0.695, 0.22], "orr": 0.008, "gate_orr": null}, "R2D2": {"ucr": 0.1263, "ucr_parts": [0.164, 0.065, 0.15], "orr": 0.232, "gate_orr": null}, "NeMo": {"ucr": 0.0873, "ucr_parts": [0.062, 0.18, 0.02], "orr": 0.336, "gate_orr": null}, "LlamaGuard": {"ucr": 0.0633, "ucr_parts": [0.03, 0.08, 0.08], "orr": 0.056, "gate_orr": null}}
+[git] pushed to main
+
+[v21r] ===== release: trained heads and calibrator -> results/checkpoints (data availability) =====
+[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r release
+release: 8 checkpoints, 2 kept out of git
+[git] pushed to main
+
+[v21r] ===== a8-check: A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run) =====
+[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r a8 --check
+A8 targets: 24 items ({'safe': 8, 'harm': 8, 'dilemma': 8}), 0 to do
+A8 train: done
+  GGUF F16 written: D:\Projects\PEINN\revision\aai_r1\cache\check\a8\merged.f16.gguf (291 tensors, vocab 151936, 1.18 GiB)
+  GGUF check: 291 tensors, unequal 0, missing 0, extra 0, ok True
+[v21r] $ ollama create qwen2.5-a8-check:latest -q q4_K_M -f D:\Projects\PEINN\revision\aai_r1\cache\check\a8\Modelfile
+[?2026h[?25l[1G[?25h[?2026l
+Error: create-time quantization is only supported for safetensors imports; quantize GGUF models before importing
+[v21r] a8-check failed (code 1); fix it and run the same command again
 ```

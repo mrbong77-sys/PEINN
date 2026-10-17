@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 277,
+ "verdict": "실패 후 대기",
+ "seq": 278,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 13:21:49",
- "time_utc": "2026-10-17 04:21:49",
+ "time_local": "2026-10-17 13:23:11",
+ "time_utc": "2026-10-17 04:23:11",
  "attempt": 40,
- "code": "b6703af v2.1 심사 대응 runner: 명령 처리 (attempt 40)",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "8269 MiB, 32607 MiB, 0 %, 53",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "110a25a v21r release: heads and energy calibrator trained on the isolated corpus (+ manifest)",
+ "step": "a8-check",
+ "step_min": 0.3,
+ "since_output_min": 0.1,
+ "gpu": "8237 MiB, 32607 MiB, 2 %, 41",
+ "next": "새 코드나 명령을 기다림",
+ "reason": "코드 1",
  "ack": "20261017T030000Z-update update (수신, 다음 단계 경계에서 적용, 2026-10-17 02:31:49 UTC)",
  "done": [
   "record",
@@ -61,11 +61,11 @@
   "repeat-review",
   "nemo-orr-all",
   "nemo-audit-all",
-  "cost"
+  "cost",
+  "analyze",
+  "release"
  ],
  "left": [
-  "analyze",
-  "release",
   "a8-check"
  ]
 }
