@@ -1,19 +1,19 @@
 {
- "verdict": "명령 처리",
- "seq": 306,
+ "verdict": "실행 중",
+ "seq": 307,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 18:10:54",
- "time_utc": "2026-10-17 09:10:54",
+ "time_local": "2026-10-17 18:10:58",
+ "time_utc": "2026-10-17 09:10:58",
  "attempt": 2,
- "code": "9ace9ae v2.1 심사 대응 runner: 실행 중 (attempt 1)",
- "step": "a8",
- "step_min": 46.3,
- "since_output_min": 1.4,
- "gpu": "7240 MiB, 32607 MiB, 92 %, 68",
- "next": "끌어온 코드로 다시 실행",
- "reason": "명령 20261017T091200Z-restart (restart)",
+ "code": "3b2ef21 v2.1 심사 대응 runner: 명령 처리 (attempt 2)",
+ "step": null,
+ "step_min": null,
+ "since_output_min": 0.0,
+ "gpu": "7240 MiB, 32607 MiB, 1 %, 57",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)",
  "done": [
   "record",
@@ -78,12 +78,6 @@
   "bench-stats"
  ],
  "left": [
-  "a8",
-  "analyze-a8",
-  "ggb-export-a8",
-  "ggb-rescore-a8",
-  "bench-export-a8",
-  "bench-stats-a8",
   "cap-check",
   "cap-reset",
   "matrix-cap768",
@@ -91,6 +85,12 @@
   "ggb-export-cap768",
   "ggb-rescore-cap768",
   "bench-export-cap768",
-  "bench-stats-cap768"
+  "bench-stats-cap768",
+  "a8",
+  "analyze-a8",
+  "ggb-export-a8",
+  "ggb-rescore-a8",
+  "bench-export-a8",
+  "bench-stats-a8"
  ]
 }
