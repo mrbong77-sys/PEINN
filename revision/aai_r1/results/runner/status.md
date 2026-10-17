@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-17 22:43:23 (UTC 2026-10-17 13:43:23), 시도 2, 비컨 #334 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 480d863 station: 임무 실행 중
-- 현재 단계: a8 (105.3분째)
-- 마지막 출력 후: 2.3분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6684 MiB, 32607 MiB, 92 %, 69
+- 시각 2026-10-17 22:53:28 (UTC 2026-10-17 13:53:28), 시도 2, 비컨 #335 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 12c5bca station: 임무 실행 중
+- 현재 단계: a8 (115.4분째)
+- 마지막 출력 후: 2.2분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 6684 MiB, 32607 MiB, 91 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,9 +14,6 @@
 ## 마지막 로그
 
 ```
-  gemma4: LlamaGuard UCR 3.3 ORR 13.6, NeMo UCR 0.4 ORR 43.2, PEINN UCR 1.33 ORR 12.0, Vanilla UCR 13.33 ORR 10.4
-  gemma3: LlamaGuard UCR 3.57 ORR 12.0, NeMo UCR 2.23 ORR 49.6, PEINN UCR 2.87 ORR 10.4, Vanilla UCR 24.87 ORR 4.8
-  zephyr: LlamaGuard UCR 6.33 ORR 5.6, NeMo UCR 8.73 ORR 33.6, PEINN UCR 3.07 ORR 4.8, R2D2 UCR 12.63 ORR 23.2, Vanilla UCR 60.1 ORR 0.8
 [git] pushed to main
 
 [v21r] ===== a8: A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model =====
@@ -54,4 +51,7 @@ A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 55902
   5800/55902
   6000/55902
   6200/55902
+  6400/55902
+  6600/55902
+  6800/55902
 ```
