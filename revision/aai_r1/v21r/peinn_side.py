@@ -90,7 +90,7 @@ class Features:
 
 def gate_time(texts: list[str], out: Path) -> int:
     """Wall time per text of the whole input gate (emotion trunk, MiniLM, principle anchors, mpnet, head, energy),
-    after five warm-up texts, on whatever device torch sees (CUDA_VISIBLE_DEVICES='' for CPU)."""
+    after five warm-up texts, on whatever device torch sees (CUDA_VISIBLE_DEVICES=-1 and V21R_CPU_THREADS for the CPU run)."""
     import statistics
     import torch
     f = Features(out.with_suffix(".unused.npz"))
@@ -132,9 +132,9 @@ def main(argv=None) -> int:
     os.environ.setdefault("PEINN_NEUTRO_HEAD", "ee_neutro_head_v4.pt")
     texts = json.loads(a.texts.read_text(encoding="utf-8"))
     if a.mode == "gate-time":
-        if os.environ.get("CUDA_VISIBLE_DEVICES") == "":
+        if os.environ.get("V21R_CPU_THREADS"):
             import torch
-            torch.set_num_threads(int(os.environ.get("OMP_NUM_THREADS", "1")))
+            torch.set_num_threads(int(os.environ["V21R_CPU_THREADS"]))
         return gate_time(texts, a.out)
     return Features(a.out).run(texts)
 

@@ -6,6 +6,7 @@ Signals for the val/test splits and every recorded routing text are written to .
 from __future__ import annotations
 
 import json
+import os
 import math
 import random
 from pathlib import Path
@@ -532,6 +533,8 @@ def ft_gate_time(texts: list[str], out: Path, check: bool = False) -> int:
     import statistics
     import time
     import torch
+    if os.environ.get("V21R_CPU_THREADS"):
+        torch.set_num_threads(int(os.environ["V21R_CPU_THREADS"]))
     md = D.wdir(check) / "models"
     nets = {k: ft_load(md / f"A0ft_{k}.pt") for k in ("energy", "head")}
     ood = torch.load(md / "A0ftM_ood.pt", map_location="cpu")

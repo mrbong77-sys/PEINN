@@ -317,6 +317,9 @@ def nemo_fair_review(check: bool = True, log=print) -> int:
 
 # ---- K: route cost ------------------------------------------------------------------------------------
 
+# one CPU thread and no GPU: "-1" because Windows drops an empty variable from a child's environment
+CPU1_ENV = {"CUDA_VISIBLE_DEVICES": "-1", "V21R_CPU_THREADS": "1", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+
 def gate_time(check: bool, log=print) -> dict:
     """Gate compute per text (features + head + energy) on the GPU and on one CPU thread; ft_* is what the main
     variant A0ftM adds (its fine-tuned encoder passes and the Mahalanobis distance, DESIGN.md 24)."""
@@ -328,16 +331,38 @@ def gate_time(check: bool, log=print) -> dict:
     src = C.peinn() / "src"
     D._ensure_peinn_checkpoints(src)
     out = {}
-    for dev, env in (("gpu", {}), ("cpu1", {"CUDA_VISIBLE_DEVICES": "", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"})):
-        f = d / f"gate_{dev}.json"
-        C.child([C.PY, D.SIDE, "gate-time", "--texts", tf, "--out", f], src,
-                env={"PEINN_NEUTRO_HEAD": "ee_neutro_head_v4.pt", **env})
-        out[dev] = C.jload(f) if f.exists() else None
-        g = d / f"ft_gate_{dev}.json"
-        C.child([C.PY, "-m", "v21r", "ft-gate-time", "--texts", tf, "--out", g, *(["--check"] if check else [])], C.ROOT,
-                env=env)
-        out[f"ft_{dev}"] = C.jload(g) if g.exists() else None
+    for dev, env in (("gpu", {}), ("cpu1", CPU1_ENV)):
+        want = "cpu" if dev == "cpu1" else "cuda"
+        for key, cmd, cwd, extra in (
+                (dev, [C.PY, D.SIDE, "gate-time", "--texts", tf], src, {"PEINN_NEUTRO_HEAD": "ee_neutro_head_v4.pt"}),
+                (f"ft_{dev}", [C.PY, "-m", "v21r", "ft-gate-time", "--texts", tf, *(["--check"] if check else [])],
+                 C.ROOT, {})):
+            f = d / f"{'gate' if key == dev else 'ft_gate'}_{dev}.json"
+            f.unlink(missing_ok=True)
+            rc = C.child([*cmd, "--out", f], cwd, env={**extra, **env})
+            r = C.jload(f) if f.exists() else {"error": f"rc {rc}, no result"}
+            if r.get("device") not in (None, want):
+                r["error"] = f"ran on {r.get('device')}, wanted {want}"
+            out[key] = r
+            log(f"gate time {key}: {r}")
     return out
+
+
+def cost_gate(check: bool = False, log=print) -> int:
+    """K, gate part again: the CPU run of the first cost step ran on the GPU (an empty CUDA_VISIBLE_DEVICES is
+    dropped on Windows) or gave no result; route_cost.json keeps the tiers and gets the new gate block."""
+    f = D.odir(check) / "route_cost.json"
+    res = C.jload(f) if f.exists() else {"tiers": {}}
+    res["gate"] = gate_time(check, log)
+    bad = {k: v["error"] for k, v in res["gate"].items() if "error" in v}
+    C.jdump(res, f)
+    if check:
+        return 1 if bad else 0
+    ok = C.publish([f], "v21r K: gate time per text on the GPU and on one CPU thread")
+    if bad:
+        log(f"stop: gate time {bad}")
+        return 1
+    return 0 if ok else 1
 
 
 def cost(check: bool = False, log=print) -> int:

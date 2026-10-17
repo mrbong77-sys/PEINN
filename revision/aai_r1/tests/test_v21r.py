@@ -959,3 +959,38 @@ def test_repeat_reset_sets_aside_only_bases_with_error_rows(tmp_path, monkeypatc
     assert rec["qwen"]["before"] == {"H06": 1} and rec["gemma3"]["before"] == {}
     assert MX.repeat_reset(False, log=lambda *_: None) == 0                       # once per base
     assert (q / "archive_repeat_v1").exists() and len(list((q / "archive_repeat_v1").iterdir())) == 3
+
+
+def test_cost_gate_runs_the_cpu_timing_on_the_cpu(tmp_path, monkeypatch):
+    """The CPU timing asks for no GPU with "-1" (Windows drops an empty variable) and one thread; a run that comes
+    back on the GPU, or with no result, is an error and stops the step."""
+    from pathlib import Path
+    from v21r import matrix as MX
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(D, "record_texts", lambda check: pd.DataFrame({"text": ["a", "b"]}))
+    monkeypatch.setattr(D, "_ensure_peinn_checkpoints", lambda src: None)
+    seen = []
+
+    def child(cmd, cwd, env=None):
+        env = env or {}
+        seen.append(env)
+        out = Path(cmd[cmd.index("--out") + 1])
+        cpu = env.get("CUDA_VISIBLE_DEVICES") == "-1"
+        out.write_text(json.dumps({"device": "cpu" if cpu else "cuda", "threads": 1 if cpu else 20}))
+        return 0
+    monkeypatch.setattr(C, "child", child)
+    (D.odir(True)).mkdir(parents=True, exist_ok=True)
+    C.jdump({"gate": {"cpu1": None}, "tiers": {"qwen|Hard-block": {"requests": 1}}}, D.odir(True) / "route_cost.json")
+    assert MX.cost_gate(check=True, log=lambda *_: None) == 0
+    r = C.jload(D.odir(True) / "route_cost.json")
+    assert r["tiers"] == {"qwen|Hard-block": {"requests": 1}}
+    assert r["gate"]["cpu1"]["device"] == "cpu" and r["gate"]["ft_cpu1"]["device"] == "cpu"
+    assert [e.get("V21R_CPU_THREADS") for e in seen] == [None, None, "1", "1"]
+
+    def gpu_only(cmd, cwd, env=None):
+        out = Path(cmd[cmd.index("--out") + 1])
+        out.write_text(json.dumps({"device": "cuda"}))
+        return 0
+    monkeypatch.setattr(C, "child", gpu_only)
+    assert MX.cost_gate(check=True, log=lambda *_: None) == 1
+    assert "wanted cpu" in C.jload(D.odir(True) / "route_cost.json")["gate"]["cpu1"]["error"]
