@@ -239,7 +239,9 @@ def steps(check: bool) -> list:
         s.append(("ggb-export", "every GGB answer of the reported systems with the pipeline's score (CPU)", run("ggb-export")))
     if RUN_A8 or check:
         s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
-              ("analyze-a8", "benchmark results again, with the A8 row", run("analyze"))]
+              ("analyze-a8", "benchmark results again, with the A8 row", run("analyze")),
+              ("ggb-export-a8", "GGB answers again, with the A8 rows (CPU, DESIGN.md 32)", run("ggb-export")),
+              ("ggb-rescore-a8", "GGB re-scored from the answer text, with A8 (CPU, DESIGN.md 32)", run("ggb-rescore"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
