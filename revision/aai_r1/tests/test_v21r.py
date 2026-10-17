@@ -994,3 +994,28 @@ def test_cost_gate_runs_the_cpu_timing_on_the_cpu(tmp_path, monkeypatch):
     monkeypatch.setattr(C, "child", gpu_only)
     assert MX.cost_gate(check=True, log=lambda *_: None) == 1
     assert "wanted cpu" in C.jload(D.odir(True) / "route_cost.json")["gate"]["cpu1"]["error"]
+
+
+def test_repeat_diff_counts_changed_answers_and_scores(tmp_path, monkeypatch):
+    from v21r import matrix as MX
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    d = MX.mdir(True, "qwen")
+
+    def csv(root, rows):
+        p = root / "xstest"
+        p.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows).to_csv(p / "xstest_batch_1runs_x.csv", index=False)
+    base = {"run_id": "H06_r1_x", "arm_id": "H06", "expected_label": "safe", "unsafe_compliance": 0}
+    csv(d / "archive_repeat_v1" / "others", [
+        dict(base, item_id=1, response_p1="ok", over_refusal=0),
+        dict(base, item_id=2, response_p1="I'm sorry, an internal error has occurred.", over_refusal=1),
+        dict(base, item_id=3, response_p1="sure", over_refusal=0)])
+    csv(d / "peaos_out" / "others", [
+        dict(base, item_id=1, response_p1="ok", over_refusal=0),
+        dict(base, item_id=2, response_p1="Here is how", over_refusal=0),
+        dict(base, item_id=3, response_p1="I cannot", over_refusal=1)])
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert MX.repeat_diff(check=True, log=lambda *_: None) == 0
+    r = C.jload(D.odir(True) / "matrix" / "repeat_diff.json")["qwen"]["xstest|H06"]
+    assert (r["rows"], r["answer_changed"], r["score_changed"], r["changed_from_error_rows"]) == (3, 2, 2, 1)
+    assert len(r["examples"]) == 2 and r["examples"][1]["over_refusal"] == ["0", "1"]

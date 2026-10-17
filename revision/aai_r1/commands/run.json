@@ -1,6 +1,6 @@
 {
- "id": "20261017T030000Z-update",
+ "id": "20261017T045500Z-update",
  "action": "update",
- "note": "A8 pre-test again after release: the merged model is written as an F16 GGUF and Ollama quantises that to q4_K_M (DESIGN.md 10). The 7B A8 stays off (RUN_A8). Applies at the next step boundary.",
- "issued_utc": "2026-10-17 03:00:00"
+ "note": "repeat-diff (CPU): 'others' answers and scores before and after the repeat-guard rerun, before the A8 pre-test. Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 04:55:00"
 }

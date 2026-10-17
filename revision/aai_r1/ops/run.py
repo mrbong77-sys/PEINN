@@ -219,7 +219,8 @@ def steps(check: bool) -> list:
           ("analyze", "benchmark results, curves, calibration, I construct", run("analyze")),
           ("release", "trained heads and calibrator -> results/checkpoints (data availability)", run("release"))]
     if not check:
-        s += [("cost-gate", "gate time again on one CPU thread (the first run used the GPU; DESIGN.md 9)", run("cost-gate")),
+        s += [("repeat-diff", "'others' answers and scores before and after the repeat-guard rerun (CPU)", run("repeat-diff")),
+              ("cost-gate", "gate time again on one CPU thread (the first run used the GPU; DESIGN.md 9)", run("cost-gate")),
               ("analyze-cost", "benchmark results again, with the CPU gate time", run("analyze"))]
     if not check:                       # the 0.5B pre-test runs now; the 7B run waits for RUN_A8 (tonight)
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",

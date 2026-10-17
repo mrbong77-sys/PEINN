@@ -267,6 +267,60 @@ def repeat_review(check: bool = False, log=print) -> int:
     return 0 if C.publish([f], "v21r M: error rows before and after the Ollama repeat guard (counts)") else 1
 
 
+REPEAT_METRIC = {"harmbench": ["asr_binary"], "xstest": ["over_refusal", "unsafe_compliance"], "taxonomy": ["is_unsafe"],
+                 "ethics": ["alignment", "rqi"], "morables": ["correct"], "ggb": ["score"]}
+
+
+def repeat_diff(check: bool = False, log=print) -> int:
+    """The 'others' rows before (archive_repeat_v1/) and after the rerun with the repeat guard, joined per arm, bench
+    item and run: how many answers and scores changed, and which rows were error rows before. Answers to calls that
+    were stored are replayed, so a change outside the failed calls points at an unstored call (inference to check)."""
+    from . import analyze as A
+    out = {}
+    for b in bases(check):
+        d = mdir(check, b)
+        old_root = d / "archive_repeat_v1" / "others"
+        if not old_root.exists():
+            continue
+        res = {}
+        for bench, cols in REPEAT_METRIC.items():
+            fo = sorted((old_root / bench).glob(f"{bench}_batch_*.csv"))
+            fn = sorted((d / "peaos_out" / "others" / bench).glob(f"{bench}_batch_*.csv"))
+            if not fo or not fn:
+                continue
+            o, n = (pd.read_csv(x[-1], low_memory=False) for x in (fo, fn))
+            for x in (o, n):
+                x["rep"] = A.rep(x)
+                x["resp"] = x.filter(regex="^response").fillna("").astype(str).agg(" | ".join, axis=1)
+            k = ["arm_id", *A.KEYS[bench], "rep"]
+            o, n = o.drop_duplicates(k), n.drop_duplicates(k)
+            m = o.merge(n, on=k, suffixes=("_old", "_new"))
+            for arm, g in m.groupby("arm_id"):
+                ch = g.resp_old != g.resp_new
+                sc = pd.Series(False, index=g.index)
+                for c in cols:
+                    if f"{c}_old" in g:
+                        a, z = pd.to_numeric(g[f"{c}_old"], errors="coerce"), pd.to_numeric(g[f"{c}_new"], errors="coerce")
+                        sc |= ~((a == z) | (a.isna() & z.isna()))
+                err = g.resp_old.str.lower().str.contains("internal error") | g.resp_old.str.strip().isin(("", "nan", "nan | nan"))
+                r = {"rows": int(len(g)), "unmatched_old": int(len(o[o.arm_id == arm]) - len(g)),
+                     "answer_changed": int(ch.sum()), "score_changed": int(sc.sum()),
+                     "changed_from_error_rows": int((ch & err).sum())}
+                if sc.any():
+                    r["examples"] = [{"key": {c: str(v) for c, v in zip(k, row[k])},
+                                      "old": row.resp_old[:160], "new": row.resp_new[:160],
+                                      **{c: [str(row.get(f"{c}_old")), str(row.get(f"{c}_new"))] for c in cols}}
+                                     for _, row in g[sc].head(3).iterrows()]
+                res[f"{bench}|{arm}"] = r
+        out[b] = res
+        log(f"  {b}: " + ", ".join(f"{k} {v['answer_changed']}/{v['rows']} answers, {v['score_changed']} scores"
+                                   for k, v in res.items() if v["answer_changed"]))
+    f = C.jdump(out, D.odir(check) / "matrix" / "repeat_diff.json")
+    if check:
+        return 0
+    return 0 if C.publish([f], "v21r M: 'others' answers and scores before and after the repeat-guard rerun (counts)") else 1
+
+
 def nemo_fair_review(check: bool = True, log=print) -> int:
     """The NeMo arm on the pre-test after nemo_reset: every rail call carries a temperature (forwarded), the input and
     output self-checks run at NeMo's near-zero temperature, and NeMo answered every
