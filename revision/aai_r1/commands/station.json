@@ -1,9 +1,6 @@
 {
- "id": "20261017T060000Z-launch-export",
- "action": "launch",
- "steps": [],
- "note": "Bench export only (CPU; Eugene 14:55 KST). Earlier steps are done and skipped; RUN_A8 is off, so the mission ends after bench-export. A8 is queued again for tonight afterwards.",
- "issued_utc": "2026-10-17 06:00:30",
- "module": "ops.run",
- "args": []
+ "id": "20261017T061500Z-stop",
+ "action": "stop",
+ "note": "Bench export done; end the station. A8 is queued again for tonight.",
+ "issued_utc": "2026-10-17 06:15:00"
 }
