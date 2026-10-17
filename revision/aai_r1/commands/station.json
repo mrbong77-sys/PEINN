@@ -1,9 +1,6 @@
 {
- "id": "20261015T153149Z-launch",
- "action": "launch",
- "steps": [],
- "note": "v2.1 revision: full run (all steps, 4 base models; estimate 30.4 h, results/estimate_before_M.json)",
- "issued_utc": "2026-10-15 15:31:49",
- "module": "ops.run",
- "args": []
+ "id": "20261017T022500Z-stop",
+ "action": "stop",
+ "note": "Eugene 10-17 11:19 KST: end the station after the current mission (cost, analyze, release). A8 is launched separately tonight.",
+ "issued_utc": "2026-10-17 02:25:00"
 }
