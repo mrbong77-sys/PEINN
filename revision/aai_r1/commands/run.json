@@ -1,6 +1,6 @@
 {
- "id": "20261017T022000Z-update",
+ "id": "20261017T030000Z-update",
  "action": "update",
- "note": "Route cost before A8 (the paper's own results first; A8's scope is pending Eugene's decision). Applies at the next step boundary.",
- "issued_utc": "2026-10-17 02:20:00"
+ "note": "A8 pre-test again after release: the merged model is written as an F16 GGUF and Ollama quantises that to q4_K_M (DESIGN.md 10). The 7B A8 stays off (RUN_A8). Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 03:00:00"
 }

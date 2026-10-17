@@ -6,7 +6,7 @@
    Hard-block refusal, dilemma -> the model's own answer under the Deliberation prompt, safe -> its own plain answer
    (PEAOS prompt_builder, PEAOS_EE_ENGINE=neutro_v21; Ollama qwen2.5:7b-instruct, temperature 0.3, top-p 0.95, seed 42).
 2. train: a8_train.py (LoRA, merged) on Qwen/Qwen2.5-7B-Instruct.
-3. ollama: the merged model quantised to q4_K_M (the quantisation of qwen2.5:7b-instruct) with that model's template.
+3. ollama: the merged model written as an F16 GGUF (gguf_qwen2), quantised by Ollama to q4_K_M (the quantisation of qwen2.5:7b-instruct) with that model's template.
 4. bench: the submitted benches and run protocol on arm H05 (qwen Vanilla, the bare prompt) with its model replaced by
    the LoRA model (peaos_driver_a8.py), generate then judge.
 --check: Qwen2.5-0.5B-Instruct, 8 items per class, GGB + XSTest once (the whole path, small).
@@ -127,12 +127,28 @@ def train(check: bool, log=print) -> int:
     return subprocess.run(cmd, env=env).returncode
 
 
-def modelfile(check: bool) -> str:
-    """FROM the merged folder, with the template, stop words and parameters of qwen2.5:7b-instruct."""
+def modelfile(check: bool, weights: Path) -> str:
+    """FROM the merged model's F16 GGUF, with the template, stop words and parameters of qwen2.5:7b-instruct."""
     r = subprocess.run(["ollama", "show", BASE, "--modelfile"], capture_output=True, encoding="utf-8", errors="replace")
     if r.returncode or "TEMPLATE" not in r.stdout:
         raise SystemExit(f"ollama show {BASE} --modelfile failed: {r.stderr[-300:]}")
-    return C.modelfile_with_weights(r.stdout, str((wdir(check) / "merged").resolve()))
+    return C.modelfile_with_weights(r.stdout, str(Path(weights).resolve()))
+
+
+def gguf(check: bool, log=print) -> tuple[Path, dict] | None:
+    """The merged folder as an F16 GGUF (Ollama no longer quantises safetensors to q4_K_M), checked tensor by tensor."""
+    w = wdir(check)
+    out, rep = w / "merged.f16.gguf", w / "gguf.json"
+    if out.exists() and rep.exists() and C.jload(rep).get("check", {}).get("ok"):
+        return out, C.jload(rep)
+    from . import gguf_qwen2 as G
+    r = {"write": G.write(w / "merged", out, SERVED[check].split(":")[0], log=log)}
+    r["check"] = G.check(w / "merged", out, log=log)
+    C.jdump(r, rep)
+    if not r["check"]["ok"]:
+        log("stop: the F16 GGUF does not match the merged checkpoint")
+        return None
+    return out, r
 
 
 def ollama(check: bool, log=print) -> int:
@@ -141,8 +157,12 @@ def ollama(check: bool, log=print) -> int:
     if done.exists():
         log("A8 ollama: done")
         return 0
+    g = gguf(check, log)
+    if g is None:
+        return 1
     f = w / "Modelfile"
-    f.write_text(modelfile(check), encoding="utf-8")
+    with open(f, "w", encoding="utf-8", newline="\n") as h:
+        h.write(modelfile(check, g[0]))
     log(f"[v21r] $ ollama create {SERVED[check]} -q {QUANT} -f {f}")
     if subprocess.run(["ollama", "create", SERVED[check], "-q", QUANT, "-f", str(f)]).returncode:
         return 1
@@ -153,7 +173,7 @@ def ollama(check: bool, log=print) -> int:
                                  timeout=600))
     ans = (smoke.get("message") or {}).get("content", "")
     C.jdump({"model": SERVED[check], "digest": m.get("digest"), "size": m.get("size"), "quant": QUANT,
-             "details": m.get("details"), "smoke": ans[:200]}, done)
+             "details": m.get("details"), "gguf_f16": g[1], "smoke": ans[:200]}, done)
     log(f"A8 smoke: {ans[:120]!r}")
     if not ans.strip():
         done.unlink()

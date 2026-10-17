@@ -123,3 +123,93 @@ def test_train_runs_and_lowers_the_loss_on_a_tiny_model():
     assert rep["val_loss_after"] < rep["val_loss_before"]
     assert all(isinstance(m, torch.nn.Linear) for n, m in model.named_modules() if n.endswith("q_proj"))
     json.dumps({k: v for k, v in rep.items() if k != "adapters"})
+
+
+def _tiny_qwen2(d, tied=True):
+    """A one-layer Qwen2 checkpoint in bf16 safetensors with a 6-token BPE vocabulary and two added tokens."""
+    import json as _j
+    import struct
+    d.mkdir(parents=True, exist_ok=True)
+    rng = np.random.default_rng(0)
+    H, F, V = 8, 16, 10
+    shapes = {"model.embed_tokens.weight": (V, H), "model.norm.weight": (H,),
+              "model.layers.0.self_attn.q_proj.weight": (H, H), "model.layers.0.self_attn.q_proj.bias": (H,),
+              "model.layers.0.self_attn.k_proj.weight": (4, H), "model.layers.0.self_attn.k_proj.bias": (4,),
+              "model.layers.0.self_attn.v_proj.weight": (4, H), "model.layers.0.self_attn.v_proj.bias": (4,),
+              "model.layers.0.self_attn.o_proj.weight": (H, H), "model.layers.0.mlp.gate_proj.weight": (F, H),
+              "model.layers.0.mlp.up_proj.weight": (F, H), "model.layers.0.mlp.down_proj.weight": (H, F),
+              "model.layers.0.input_layernorm.weight": (H,), "model.layers.0.post_attention_layernorm.weight": (H,)}
+    if not tied:
+        shapes["lm_head.weight"] = (V, H)
+    head, blob, vals = {}, b"", {}
+    for k, s in shapes.items():
+        x = rng.normal(0, 1, s).astype(np.float32)
+        u = (x.view(np.uint32) >> 16).astype(np.uint16)
+        vals[k] = (u.astype(np.uint32) << 16).view(np.float32)
+        head[k] = {"dtype": "BF16", "shape": list(s), "data_offsets": [len(blob), len(blob) + u.nbytes]}
+        blob += u.tobytes()
+    hj = _j.dumps(head).encode()
+    (d / "model.safetensors").write_bytes(struct.pack("<Q", len(hj)) + hj + blob)
+    (d / "config.json").write_text(_j.dumps({"model_type": "qwen2", "num_hidden_layers": 1, "max_position_embeddings": 64,
+                                             "hidden_size": H, "intermediate_size": F, "num_attention_heads": 2,
+                                             "num_key_value_heads": 1, "rope_theta": 1e6, "rms_norm_eps": 1e-6,
+                                             "tie_word_embeddings": tied}))
+    vocab = {"a": 0, "b": 1, "ab": 2, "c": 3, "abc": 4, "Ġ": 5}
+    added = [{"id": 6, "content": "<|endoftext|>", "special": True}, {"id": 7, "content": "<|im_end|>", "special": True},
+             {"id": 8, "content": "<|fim_pad|>", "special": False}]
+    (d / "tokenizer.json").write_text(_j.dumps({"model": {"type": "BPE", "vocab": vocab, "merges": [["a", "b"], "ab c"]},
+                                                "added_tokens": added}))
+    (d / "tokenizer_config.json").write_text(_j.dumps({"eos_token": "<|im_end|>", "pad_token": "<|endoftext|>",
+                                                       "bos_token": None, "chat_template": "{{ x }}"}))
+    return vals
+
+
+@pytest.mark.parametrize("tied", [True, False])
+def test_gguf_qwen2_writes_what_llama_cpp_writes(tmp_path, tied):
+    import struct
+    from v21r import gguf_qwen2 as G
+    from v21r import wcheck as W
+    vals = _tiny_qwen2(tmp_path / "m", tied)
+    out = tmp_path / "m.f16.gguf"
+    rep = G.write(tmp_path / "m", out, "tiny", log=lambda *_: None)
+    assert rep["tensors"] == 15 and rep["vocab"] == 10
+    assert G.check(tmp_path / "m", out, log=lambda *_: None)["ok"]
+    with open(out, "rb") as h:
+        h.read(4)
+        _, nt, nk = struct.unpack("<IQQ", h.read(20))
+        kv = {}
+        for _ in range(nk):
+            k = W._str(h)
+            (t,) = struct.unpack("<I", h.read(4))
+            kv[k] = W._val(h, t)
+    assert kv["general.architecture"] == "qwen2" and kv["general.file_type"] == 1
+    assert kv["qwen2.attention.head_count_kv"] == 1 and kv["qwen2.context_length"] == 64
+    assert kv["tokenizer.ggml.tokens"] == ["a", "b", "ab", "c", "abc", "Ġ", "<|endoftext|>", "<|im_end|>", "<|fim_pad|>",
+                                           "[PAD9]"]
+    assert kv["tokenizer.ggml.token_type"] == [1, 1, 1, 1, 1, 1, 3, 3, 3, 5]     # <|..|> looks special; padding unused
+    assert kv["tokenizer.ggml.merges"] == ["a b", "ab c"]
+    assert (kv["tokenizer.ggml.eos_token_id"], kv["tokenizer.ggml.padding_token_id"],
+            kv["tokenizer.ggml.bos_token_id"], kv["tokenizer.ggml.add_bos_token"]) == (7, 6, 6, False)
+    _, g = W.read_gguf(out)
+    assert g["blk.0.attn_q.weight"][1] == W.GGUF_F16 and g["blk.0.attn_q.bias"][1] == W.GGUF_F32
+    assert g["blk.0.attn_k.weight"][0] == (4, 8) and g["blk.0.ffn_down.weight"][0] == (8, 16)
+    want = vals["model.embed_tokens.weight"] if tied else vals["lm_head.weight"]
+    assert np.array_equal(W.gguf_tensor(out, g["output.weight"]), want.astype(np.float16).astype(np.float32))
+    assert np.array_equal(W.gguf_tensor(out, g["blk.0.attn_q.weight"]),        # no llama q/k permutation for Qwen2
+                          vals["model.layers.0.self_attn.q_proj.weight"].astype(np.float16).astype(np.float32))
+
+
+def test_gguf_qwen2_check_catches_a_changed_tensor(tmp_path):
+    from v21r import gguf_qwen2 as G
+    from v21r import wcheck as W
+    _tiny_qwen2(tmp_path / "m")
+    out = tmp_path / "m.gguf"
+    G.write(tmp_path / "m", out, "tiny", log=lambda *_: None)
+    _, g = W.read_gguf(out)
+    shape, t, off = g["blk.0.ffn_up.weight"]
+    a = np.memmap(out, dtype=np.float16, mode="r+", offset=off, shape=shape)
+    a[0, 0] += 1
+    a.flush()
+    del a
+    r = G.check(tmp_path / "m", out, log=lambda *_: None)
+    assert not r["ok"] and r["unequal"] == ["blk.0.ffn_up.weight"]
