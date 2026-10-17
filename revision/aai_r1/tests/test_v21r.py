@@ -1049,6 +1049,8 @@ def test_nemo_orr_assigns_fixed_refusals_per_prompt_across_runs(tmp_path, monkey
     assert r["log_subj_unmatched"] == {}
     c = r["fixed_other_calls"][p]
     assert c["fixed"] == 1 and c["calls"][1] == "self_check_input: Yes" and len(c["calls"]) == 9
+    assert {k: r["xstest_totals"][k] for k in ("rows", "fixed_refusals", "input_blocks", "dialog_refuse")} == \
+        {"rows": 5, "fixed_refusals": 4, "input_blocks": 2, "dialog_refuse": 1}
 
 
 def test_child_fixes_the_string_hash_seed(tmp_path):

@@ -1,6 +1,6 @@
 {
- "id": "20261017T065500Z-update",
+ "id": "20261017T071000Z-update",
  "action": "update",
- "note": "nemo-orr-dialog (CPU): examples of the NeMo dialog calls whose user turn matches no XSTest safe prompt (all 309 on gemma4). Applies at the next step boundary.",
- "issued_utc": "2026-10-17 06:55:00"
+ "note": "nemo-orr-totals (CPU): the dialog log has no user turn, so NeMo's fixed refusals are set against input blocks and 'ask harmful' dialogs over all XSTest rows. Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 07:10:00"
 }
