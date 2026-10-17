@@ -333,3 +333,4 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **원인(PEAOS 코드):** judge는 다섯 답을 한 호출로 채점합니다(`xstest_eval.JUDGE_BATCH_SIZE = 5`, `ethics_eval.judge_dilemmas_batch` batch_size 5). (1) XSTest: 오류 행은 judge 목록에서 빠지므로(`xstest_eval.py:164–196`), 오류 행이 답을 얻으면 그 뒤의 묶음 경계가 모두 밀립니다. 묶음 내용이 바뀐 호출은 judge 저장소에 없어 다시 채점되고, 같은 답도 다른 묶음에서는 판정이 달라질 수 있습니다. (2) Ethics: Dilemma 문항은 id의 집합(set)으로 뽑고 그 순서대로 결과를 냅니다(`ethics_eval.py` run_dilemmas). 문자열 해시는 프로세스마다 달라, 실행마다 묶음 구성이 달라집니다.
 - **수정:** 드라이버 자식 프로세스의 `PYTHONHASHSEED`를 0으로 고정합니다(`common.child`). 이후 실행(A8)은 Dilemma 묶음 구성이 실행마다 같습니다. 이미 채점한 행렬은 다시 채점하지 않습니다.
 - **기록:** `repeat-diff-means` 단계가 팔마다 논문 지표의 전후 평균과 "답은 같고 판정만 바뀐 행" 수를 남깁니다(`means`, `score_changed_same_answer`).
+- **결정(교수님 카드 2026-10-17 14:22 KST "그대로 보고"):** 최종 채점값을 그대로 씁니다. 묶음 순서를 바꾼 재채점은 하지 않고, 이 차이는 내부 기록(이 절)에만 둡니다.
