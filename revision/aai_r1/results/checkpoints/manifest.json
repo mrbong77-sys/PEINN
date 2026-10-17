@@ -1,0 +1,66 @@
+{
+ "files": [
+  {
+   "file": "A0.pt",
+   "bytes": 446489,
+   "sha256": "fd33536dc8b0ad81990bcd9329c5c5aed39bd2c81ca7ccab61dea850a7f51a32",
+   "variant": "PEINN head (T/I/F, 800-d)"
+  },
+  {
+   "file": "A0ftM_ood.pt",
+   "bytes": 2367349,
+   "sha256": "bd629ca0ced2fd5f1dd6e6abf58ec473a6107945b7f1f52d1701ef22c356239b",
+   "variant": "Mahalanobis OOD of A0ftM (class means, precision, tau)"
+  },
+  {
+   "file": "A1.pt",
+   "bytes": 446233,
+   "sha256": "5272c63d586bdafd3da78c3206d371b2782cd39b073374acb9a9688cccf8d453",
+   "variant": "no I channel"
+  },
+  {
+   "file": "A2.pt",
+   "bytes": 446489,
+   "sha256": "bc52925ab677206e05f5cfc357e17d2622583493d748decb78a99b4c6ea93a22",
+   "variant": "softmax head"
+  },
+  {
+   "file": "A3.pt",
+   "bytes": 445913,
+   "sha256": "ed496e1df79b252c6a2395b6364658a4b027fabef862eaab90ece816eb6bc98d",
+   "variant": "binary harm classifier (uncertainty routing)"
+  },
+  {
+   "file": "A6e.pt",
+   "bytes": 430181,
+   "sha256": "5bf14bb28f48c34fbf3244b8f1301e5317f77ea0352af24066500716a09cea1d",
+   "variant": "no emotion feature"
+  },
+  {
+   "file": "A6p.pt",
+   "bytes": 249957,
+   "sha256": "b100b637ddb3cdf6982384a06780ef0e0514cc03d20cbfc01ad184054fc6cbaf",
+   "variant": "no principle anchors"
+  },
+  {
+   "file": "calibrator.pt",
+   "bytes": 216569,
+   "sha256": "1f60b357f0e16e78ea616dcc6a288c853e95ca7069bb633a12bbb5747663e322",
+   "variant": "energy calibrator (affect 32 + mpnet 768)"
+  }
+ ],
+ "kept_out": [
+  {
+   "file": "A0ft_energy.pt",
+   "bytes": 438225905,
+   "sha256": "a3927ff4c1ff0e06fdd8312d6356c98038cc3f626f42671c1bff3d76ebfd521d",
+   "variant": "fine-tuned mpnet energy calibrator (A0ft, A0ftM)"
+  },
+  {
+   "file": "A0ft_head.pt",
+   "bytes": 91332299,
+   "sha256": "27ccc93336c110b232234d0e745b0ecbe13e4f5753f42efa35c970ba67c0bd04",
+   "variant": "fine-tuned MiniLM T/I/F head (A0ft, A0ftM)"
+  }
+ ]
+}
