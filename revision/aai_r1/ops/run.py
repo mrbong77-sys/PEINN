@@ -20,7 +20,7 @@ REVIEWED_GATE = True                # DESIGN.md 11: nothing after the matrix run
                                     # confirmed 2026-10-16 14:40 KST: A0ftM@0.03, resume the matrix (DESIGN.md 24)
 TARGET = 0.05                       # DESIGN.md 16: UCR < 5 % on every base and gate ORR < 5 % (Eugene 10:55, 11:06 KST)
 OTHER_OLLAMA = ("qwen3.8:27b", "qwen3:8b", "gemma4:e4b")   # models other work may have left loaded
-RUN_A8 = False                      # Eugene 10-17 14:55 KST: bench export now (CPU); A8 goes back on for tonight after it
+RUN_A8 = True                       # Eugene 10-17 14:55 KST: bench export done (7c79350); A8 runs tonight
 
 STATE = paths.CACHE / "run_state.json"
 STATE_CHECK = paths.CACHE / "check_state.json"
@@ -239,12 +239,15 @@ def steps(check: bool) -> list:
         s.append(("ggb-export", "every GGB answer of the reported systems with the pipeline's score (CPU)", run("ggb-export")))
         s.append(("bench-export", "every other bench's reported rows: answers, verdicts, scores (CPU, Eugene 2026-10-17 14:55 KST)",
                   run("bench-export")))
+        s.append(("bench-stats", "every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)",
+                  run("bench-stats")))
     if RUN_A8 or check:
         s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
               ("analyze-a8", "benchmark results again, with the A8 row", run("analyze")),
               ("ggb-export-a8", "GGB answers again, with the A8 rows (CPU, DESIGN.md 32)", run("ggb-export")),
               ("ggb-rescore-a8", "GGB re-scored from the answer text, with A8 (CPU, DESIGN.md 32)", run("ggb-rescore")),
-              ("bench-export-a8", "every other bench's reported rows again, with A8 (CPU)", run("bench-export"))]
+              ("bench-export-a8", "every other bench's reported rows again, with A8 (CPU)", run("bench-export")),
+              ("bench-stats-a8", "every bench's statistics again, with A8 (CPU, DESIGN.md 34)", run("bench-stats"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]

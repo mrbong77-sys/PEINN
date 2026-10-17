@@ -1,0 +1,1925 @@
+{
+ "qwen": {
+  "LlamaGuard": {
+   "harmbench": {
+    "asr": {
+     "mean": 2.8,
+     "ci95": 1.68,
+     "sd_runs": 2.35,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 3.5,
+     "ci95": 3.54,
+     "sd_runs": 2.85,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 6.4,
+     "ci95": 2.72,
+     "sd_runs": 2.19,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 6.0,
+     "ci95": 5.19,
+     "sd_runs": 4.18,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 92.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 86.4,
+     "ci95": 6.76,
+     "sd_runs": 5.44,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 69.75,
+     "ci95": 3.54,
+     "sd_runs": 2.85,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 82.72,
+     "ci95": 2.3,
+     "sd_runs": 1.85,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 31,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 92.0,
+     "wvs": 79.0,
+     "rqi": 69.75
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 42.22,
+     "ci95": 10.32,
+     "sd_runs": 8.31,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 38.52,
+     "ci95": 10.7,
+     "sd_runs": 8.62,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 3.7,
+    "rows": 900,
+    "no_stated_answer": 5,
+    "refused": 0,
+    "letter_without_stated_answer": 5
+   },
+   "ucr_composite": 4.1,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 5.82,
+     "n": 50,
+     "shift_vs_vanilla": -0.02,
+     "shared_items": 5
+    }
+   }
+  },
+  "NeMo": {
+   "harmbench": {
+    "asr": {
+     "mean": 1.0,
+     "ci95": 1.01,
+     "sd_runs": 1.41,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 4.5,
+     "ci95": 5.55,
+     "sd_runs": 4.47,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 24.0,
+     "ci95": 9.29,
+     "sd_runs": 7.48,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 10.0,
+     "ci95": 9.81,
+     "sd_runs": 7.91,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 46.04,
+     "ci95": 2.02,
+     "sd_runs": 1.62,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 46.27,
+     "ci95": 10.07,
+     "sd_runs": 8.12,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 66.1,
+     "ci95": 5.61,
+     "sd_runs": 4.52,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 52.8,
+     "ci95": 4.63,
+     "sd_runs": 3.73,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 53,
+    "unrated_wvs": 24,
+    "rescored_changed": 21,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 46.04,
+     "wvs": 45.6,
+     "rqi": 66.1
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 41.33,
+     "ci95": 13.88,
+     "sd_runs": 11.18,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 38.07,
+     "ci95": 11.08,
+     "sd_runs": 8.93,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 3.26,
+    "rows": 900,
+    "no_stated_answer": 3,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 5.17,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 30,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 3
+    },
+    "impartial_beneficence": {
+     "mean": 5.2,
+     "n": 50,
+     "shift_vs_vanilla": -0.64,
+     "shared_items": 5
+    }
+   }
+  },
+  "PEINN": {
+   "harmbench": {
+    "asr": {
+     "mean": 1.0,
+     "ci95": 1.22,
+     "sd_runs": 1.7,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 1.5,
+     "ci95": 2.78,
+     "sd_runs": 2.24,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 6.4,
+     "ci95": 7.53,
+     "sd_runs": 6.07,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 8.0,
+     "ci95": 9.41,
+     "sd_runs": 7.58,
+     "runs": 5,
+     "n": 100
+    },
+    "gate_orr": {
+     "mean": 4.0,
+     "ci95": 6.08,
+     "sd_runs": 4.9,
+     "runs": 5,
+     "n": 125
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 92.4,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 87.27,
+     "ci95": 6.1,
+     "sd_runs": 4.91,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 70.85,
+     "ci95": 2.82,
+     "sd_runs": 2.27,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 83.51,
+     "ci95": 2.72,
+     "sd_runs": 2.19,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 31,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 92.4,
+     "wvs": 82.0,
+     "rqi": 70.85
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 39.56,
+     "ci95": 12.09,
+     "sd_runs": 9.74,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 36.89,
+     "ci95": 10.63,
+     "sd_runs": 8.57,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 2.67,
+    "rows": 900,
+    "no_stated_answer": 6,
+    "refused": 37,
+    "letter_without_stated_answer": 6
+   },
+   "ucr_composite": 3.5,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 20,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 2
+    },
+    "impartial_beneficence": {
+     "mean": 5.28,
+     "n": 50,
+     "shift_vs_vanilla": -0.56,
+     "shared_items": 5
+    }
+   }
+  },
+  "Vanilla": {
+   "harmbench": {
+    "asr": {
+     "mean": 18.6,
+     "ci95": 3.31,
+     "sd_runs": 4.62,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 21.5,
+     "ci95": 6.44,
+     "sd_runs": 5.18,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 2.4,
+     "ci95": 2.72,
+     "sd_runs": 2.19,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 20.0,
+     "ci95": 11.61,
+     "sd_runs": 9.35,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 92.4,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 87.27,
+     "ci95": 6.1,
+     "sd_runs": 4.91,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 73.3,
+     "ci95": 2.17,
+     "sd_runs": 1.74,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.32,
+     "ci95": 2.16,
+     "sd_runs": 1.74,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 31,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 92.4,
+     "wvs": 82.0,
+     "rqi": 73.3
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 42.22,
+     "ci95": 11.04,
+     "sd_runs": 8.89,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 39.7,
+     "ci95": 10.64,
+     "sd_runs": 8.57,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 2.52,
+    "rows": 900,
+    "no_stated_answer": 7,
+    "refused": 0,
+    "letter_without_stated_answer": 7
+   },
+   "ucr_composite": 20.03,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 5.84,
+     "n": 50,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 5
+    }
+   }
+  }
+ },
+ "gemma4": {
+  "LlamaGuard": {
+   "harmbench": {
+    "asr": {
+     "mean": 2.4,
+     "ci95": 1.31,
+     "sd_runs": 1.84,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 1.5,
+     "ci95": 2.78,
+     "sd_runs": 2.24,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 13.6,
+     "ci95": 5.66,
+     "sd_runs": 4.56,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 6.0,
+     "ci95": 5.19,
+     "sd_runs": 4.18,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 81.95,
+     "ci95": 0.38,
+     "sd_runs": 0.31,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 99.47,
+     "ci95": 1.48,
+     "sd_runs": 1.19,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 70.95,
+     "ci95": 4.59,
+     "sd_runs": 3.7,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.12,
+     "ci95": 1.36,
+     "sd_runs": 1.09,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 81.95,
+     "wvs": 78.47,
+     "rqi": 70.95
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 53.33,
+     "ci95": 16.55,
+     "sd_runs": 13.33,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 51.7,
+     "ci95": 11.86,
+     "sd_runs": 9.55,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 1.63,
+    "rows": 900,
+    "no_stated_answer": 7,
+    "refused": 0,
+    "letter_without_stated_answer": 7
+   },
+   "ucr_composite": 3.3,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 2.275,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 4.7,
+     "n": 50,
+     "shift_vs_vanilla": 0.08,
+     "shared_items": 5
+    }
+   }
+  },
+  "NeMo": {
+   "harmbench": {
+    "asr": {
+     "mean": 0.2,
+     "ci95": 0.45,
+     "sd_runs": 0.63,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 0.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 43.2,
+     "ci95": 7.37,
+     "sd_runs": 5.93,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 1.0,
+     "ci95": 2.78,
+     "sd_runs": 2.24,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 38.56,
+     "ci95": 5.16,
+     "sd_runs": 4.15,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 75.33,
+     "ci95": 3.7,
+     "sd_runs": 2.98,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 68.8,
+     "ci95": 8.33,
+     "sd_runs": 6.71,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 60.9,
+     "ci95": 3.98,
+     "sd_runs": 3.21,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 81,
+    "unrated_wvs": 37,
+    "rescored_changed": 23,
+    "rqi_floored_nemo": 3,
+    "pipeline": {
+     "mfa": 41.35,
+     "wvs": 74.67,
+     "rqi": 69.0
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 50.67,
+     "ci95": 17.6,
+     "sd_runs": 14.18,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 48.3,
+     "ci95": 11.18,
+     "sd_runs": 9.0,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 2.37,
+    "rows": 900,
+    "no_stated_answer": 506,
+    "refused": 6,
+    "letter_without_stated_answer": 504
+   },
+   "ucr_composite": 0.4,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": null,
+     "n": 0,
+     "shift_vs_vanilla": null,
+     "shared_items": 0
+    },
+    "impartial_beneficence": {
+     "mean": 6.0,
+     "n": 1,
+     "shift_vs_vanilla": 0.8,
+     "shared_items": 1
+    }
+   }
+  },
+  "PEINN": {
+   "harmbench": {
+    "asr": {
+     "mean": 1.0,
+     "ci95": 0.75,
+     "sd_runs": 1.05,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 1.0,
+     "ci95": 1.7,
+     "sd_runs": 1.37,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 12.0,
+     "ci95": 9.93,
+     "sd_runs": 8.0,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 2.0,
+     "ci95": 3.4,
+     "sd_runs": 2.74,
+     "runs": 5,
+     "n": 100
+    },
+    "gate_orr": {
+     "mean": 4.0,
+     "ci95": 6.08,
+     "sd_runs": 4.9,
+     "runs": 5,
+     "n": 125
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 81.95,
+     "ci95": 0.59,
+     "sd_runs": 0.48,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 98.93,
+     "ci95": 1.81,
+     "sd_runs": 1.46,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 72.65,
+     "ci95": 4.86,
+     "sd_runs": 3.91,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.51,
+     "ci95": 1.7,
+     "sd_runs": 1.37,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 81.95,
+     "wvs": 79.53,
+     "rqi": 72.65
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 47.11,
+     "ci95": 14.78,
+     "sd_runs": 11.9,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 44.74,
+     "ci95": 13.6,
+     "sd_runs": 10.96,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 2.37,
+    "rows": 900,
+    "no_stated_answer": 432,
+    "refused": 37,
+    "letter_without_stated_answer": 432
+   },
+   "ucr_composite": 1.33,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 2.45,
+     "n": 20,
+     "shift_vs_vanilla": -0.2,
+     "shared_items": 2
+    },
+    "impartial_beneficence": {
+     "mean": 4.76,
+     "n": 50,
+     "shift_vs_vanilla": 0.14,
+     "shared_items": 5
+    }
+   }
+  },
+  "Vanilla": {
+   "harmbench": {
+    "asr": {
+     "mean": 11.0,
+     "ci95": 3.03,
+     "sd_runs": 4.24,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 23.0,
+     "ci95": 4.6,
+     "sd_runs": 3.71,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 10.4,
+     "ci95": 9.02,
+     "sd_runs": 7.27,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 6.0,
+     "ci95": 2.78,
+     "sd_runs": 2.24,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 81.95,
+     "ci95": 0.59,
+     "sd_runs": 0.48,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 98.93,
+     "ci95": 1.81,
+     "sd_runs": 1.46,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 73.5,
+     "ci95": 2.53,
+     "sd_runs": 2.04,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.79,
+     "ci95": 1.01,
+     "sd_runs": 0.81,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 81.95,
+     "wvs": 79.53,
+     "rqi": 73.5
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 50.22,
+     "ci95": 15.43,
+     "sd_runs": 12.43,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 46.81,
+     "ci95": 13.95,
+     "sd_runs": 11.24,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 3.41,
+    "rows": 900,
+    "no_stated_answer": 471,
+    "refused": 0,
+    "letter_without_stated_answer": 471
+   },
+   "ucr_composite": 13.33,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 2.275,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 4.62,
+     "n": 50,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 5
+    }
+   }
+  }
+ },
+ "gemma3": {
+  "LlamaGuard": {
+   "harmbench": {
+    "asr": {
+     "mean": 3.2,
+     "ci95": 1.93,
+     "sd_runs": 2.7,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 1.5,
+     "ci95": 2.78,
+     "sd_runs": 2.24,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 12.0,
+     "ci95": 4.97,
+     "sd_runs": 4.0,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 6.0,
+     "ci95": 8.09,
+     "sd_runs": 6.52,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 82.99,
+     "ci95": 0.52,
+     "sd_runs": 0.42,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 100.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 73.0,
+     "ci95": 3.16,
+     "sd_runs": 2.54,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 85.33,
+     "ci95": 0.96,
+     "sd_runs": 0.77,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 44,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 82.99,
+     "wvs": 87.53,
+     "rqi": 73.0
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 57.33,
+     "ci95": 12.4,
+     "sd_runs": 9.99,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 52.89,
+     "ci95": 11.72,
+     "sd_runs": 9.44,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 4.44,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 3.57,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.75,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 4.46,
+     "n": 50,
+     "shift_vs_vanilla": 0.04,
+     "shared_items": 5
+    }
+   }
+  },
+  "NeMo": {
+   "harmbench": {
+    "asr": {
+     "mean": 1.2,
+     "ci95": 1.0,
+     "sd_runs": 1.4,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 5.5,
+     "ci95": 4.05,
+     "sd_runs": 3.26,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 49.6,
+     "ci95": 9.68,
+     "sd_runs": 7.8,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 0.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 0.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 48.67,
+     "ci95": 7.96,
+     "sd_runs": 6.41,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 55.45,
+     "ci95": 6.57,
+     "sd_runs": 5.3,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 34.71,
+     "ci95": 3.55,
+     "sd_runs": 2.86,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 150,
+    "unrated_wvs": 69,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 8,
+    "pipeline": {
+     "mfa": 0.0,
+     "wvs": 48.13,
+     "rqi": 56.5
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 52.0,
+     "ci95": 12.12,
+     "sd_runs": 9.76,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 50.07,
+     "ci95": 9.41,
+     "sd_runs": 7.58,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 1.93,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 2.23,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 10,
+     "shift_vs_vanilla": -1.0,
+     "shared_items": 1
+    },
+    "impartial_beneficence": {
+     "mean": 5.8,
+     "n": 50,
+     "shift_vs_vanilla": 1.38,
+     "shared_items": 5
+    }
+   }
+  },
+  "PEINN": {
+   "harmbench": {
+    "asr": {
+     "mean": 1.6,
+     "ci95": 1.13,
+     "sd_runs": 1.58,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 2.0,
+     "ci95": 2.6,
+     "sd_runs": 2.09,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 10.4,
+     "ci95": 7.53,
+     "sd_runs": 6.07,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 5.0,
+     "ci95": 4.39,
+     "sd_runs": 3.54,
+     "runs": 5,
+     "n": 100
+    },
+    "gate_orr": {
+     "mean": 4.0,
+     "ci95": 6.08,
+     "sd_runs": 4.9,
+     "runs": 5,
+     "n": 125
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 82.93,
+     "ci95": 0.37,
+     "sd_runs": 0.3,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 100.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 70.8,
+     "ci95": 5.13,
+     "sd_runs": 4.13,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.58,
+     "ci95": 1.65,
+     "sd_runs": 1.33,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 45,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 82.93,
+     "wvs": 88.6,
+     "rqi": 70.8
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 53.33,
+     "ci95": 11.21,
+     "sd_runs": 9.03,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 50.37,
+     "ci95": 11.13,
+     "sd_runs": 8.97,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 2.96,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 37,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 2.87,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.5,
+     "n": 20,
+     "shift_vs_vanilla": -0.5,
+     "shared_items": 2
+    },
+    "impartial_beneficence": {
+     "mean": 4.78,
+     "n": 50,
+     "shift_vs_vanilla": 0.36,
+     "shared_items": 5
+    }
+   }
+  },
+  "Vanilla": {
+   "harmbench": {
+    "asr": {
+     "mean": 32.6,
+     "ci95": 5.72,
+     "sd_runs": 8.0,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 32.0,
+     "ci95": 2.6,
+     "sd_runs": 2.09,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 4.8,
+     "ci95": 5.44,
+     "sd_runs": 4.38,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 10.0,
+     "ci95": 4.39,
+     "sd_runs": 3.54,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 82.93,
+     "ci95": 0.37,
+     "sd_runs": 0.3,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 100.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 71.8,
+     "ci95": 3.21,
+     "sd_runs": 2.59,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 84.91,
+     "ci95": 1.06,
+     "sd_runs": 0.86,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 45,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 82.93,
+     "wvs": 88.6,
+     "rqi": 71.8
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 57.33,
+     "ci95": 12.4,
+     "sd_runs": 9.99,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 53.19,
+     "ci95": 12.24,
+     "sd_runs": 9.86,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 4.14,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 24.87,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.75,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 4.42,
+     "n": 50,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 5
+    }
+   }
+  }
+ },
+ "zephyr": {
+  "LlamaGuard": {
+   "harmbench": {
+    "asr": {
+     "mean": 3.0,
+     "ci95": 1.94,
+     "sd_runs": 2.71,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 8.0,
+     "ci95": 4.05,
+     "sd_runs": 3.26,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 5.6,
+     "ci95": 2.72,
+     "sd_runs": 2.19,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 8.0,
+     "ci95": 8.33,
+     "sd_runs": 6.71,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 71.39,
+     "ci95": 0.53,
+     "sd_runs": 0.43,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 42.4,
+     "ci95": 4.19,
+     "sd_runs": 3.38,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 63.8,
+     "ci95": 7.16,
+     "sd_runs": 5.76,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 59.2,
+     "ci95": 3.1,
+     "sd_runs": 2.5,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 71.39,
+     "wvs": 27.8,
+     "rqi": 63.8
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 37.33,
+     "ci95": 11.1,
+     "sd_runs": 8.94,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 32.15,
+     "ci95": 8.47,
+     "sd_runs": 6.82,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 5.18,
+    "rows": 900,
+    "no_stated_answer": 1,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 6.33,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.45,
+     "n": 40,
+     "shift_vs_vanilla": -0.025,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 5.66,
+     "n": 50,
+     "shift_vs_vanilla": 0.02,
+     "shared_items": 5
+    }
+   }
+  },
+  "NeMo": {
+   "harmbench": {
+    "asr": {
+     "mean": 6.2,
+     "ci95": 2.18,
+     "sd_runs": 3.05,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 18.0,
+     "ci95": 5.1,
+     "sd_runs": 4.11,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 33.6,
+     "ci95": 11.43,
+     "sd_runs": 9.21,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 2.0,
+     "ci95": 3.4,
+     "sd_runs": 2.74,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 0.0,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 22.67,
+     "ci95": 11.89,
+     "sd_runs": 9.57,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 36.0,
+     "ci95": 5.66,
+     "sd_runs": 4.56,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 19.56,
+     "ci95": 4.85,
+     "sd_runs": 3.9,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 150,
+    "unrated_wvs": 38,
+    "rescored_changed": 21,
+    "rqi_floored_nemo": 5,
+    "pipeline": {
+     "mfa": 0.0,
+     "wvs": 19.53,
+     "rqi": 37.55
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 0.44,
+     "ci95": 1.23,
+     "sd_runs": 0.99,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 1.19,
+     "ci95": 0.82,
+     "sd_runs": 0.66,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": -0.75,
+    "rows": 900,
+    "no_stated_answer": 173,
+    "refused": 695,
+    "letter_without_stated_answer": 7
+   },
+   "ucr_composite": 8.73,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 1,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 1
+    },
+    "impartial_beneficence": {
+     "mean": 6.8,
+     "n": 15,
+     "shift_vs_vanilla": -0.05,
+     "shared_items": 4
+    }
+   }
+  },
+  "PEINN": {
+   "harmbench": {
+    "asr": {
+     "mean": 3.2,
+     "ci95": 1.54,
+     "sd_runs": 2.15,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 2.0,
+     "ci95": 2.6,
+     "sd_runs": 2.09,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 4.8,
+     "ci95": 8.16,
+     "sd_runs": 6.57,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 4.0,
+     "ci95": 6.8,
+     "sd_runs": 5.48,
+     "runs": 5,
+     "n": 100
+    },
+    "gate_orr": {
+     "mean": 4.0,
+     "ci95": 6.08,
+     "sd_runs": 4.9,
+     "runs": 5,
+     "n": 125
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 70.93,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 42.87,
+     "ci95": 2.96,
+     "sd_runs": 2.39,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 66.95,
+     "ci95": 5.96,
+     "sd_runs": 4.8,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 60.25,
+     "ci95": 2.56,
+     "sd_runs": 2.06,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 70.93,
+     "wvs": 28.27,
+     "rqi": 66.95
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 35.56,
+     "ci95": 7.3,
+     "sd_runs": 5.88,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 31.11,
+     "ci95": 7.5,
+     "sd_runs": 6.04,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 4.45,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 37,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 3.07,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.95,
+     "n": 20,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 2
+    },
+    "impartial_beneficence": {
+     "mean": 5.96,
+     "n": 50,
+     "shift_vs_vanilla": 0.32,
+     "shared_items": 5
+    }
+   }
+  },
+  "R2D2": {
+   "harmbench": {
+    "asr": {
+     "mean": 16.4,
+     "ci95": 3.0,
+     "sd_runs": 4.2,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 6.5,
+     "ci95": 6.44,
+     "sd_runs": 5.18,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 23.2,
+     "ci95": 17.7,
+     "sd_runs": 14.25,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 15.0,
+     "ci95": 7.6,
+     "sd_runs": 6.12,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 81.04,
+     "ci95": 4.36,
+     "sd_runs": 3.51,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 26.0,
+     "ci95": 17.98,
+     "sd_runs": 14.49,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 60.9,
+     "ci95": 2.16,
+     "sd_runs": 1.74,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 55.98,
+     "ci95": 4.87,
+     "sd_runs": 3.92,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 90,
+    "rescored_changed": 58,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 81.04,
+     "wvs": 56.27,
+     "rqi": 60.9
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 29.78,
+     "ci95": 13.03,
+     "sd_runs": 10.49,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 26.22,
+     "ci95": 11.5,
+     "sd_runs": 9.26,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 3.56,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 12.63,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.162,
+     "n": 37,
+     "shift_vs_vanilla": -0.325,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 6.22,
+     "n": 50,
+     "shift_vs_vanilla": 0.58,
+     "shared_items": 5
+    }
+   }
+  },
+  "Vanilla": {
+   "harmbench": {
+    "asr": {
+     "mean": 88.8,
+     "ci95": 3.52,
+     "sd_runs": 4.92,
+     "runs": 10,
+     "n": 500
+    }
+   },
+   "taxonomy": {
+    "unsafe_rate": {
+     "mean": 69.5,
+     "ci95": 4.05,
+     "sd_runs": 3.26,
+     "runs": 5,
+     "n": 200
+    }
+   },
+   "xstest": {
+    "orr": {
+     "mean": 0.8,
+     "ci95": 2.22,
+     "sd_runs": 1.79,
+     "runs": 5,
+     "n": 125
+    },
+    "ucr": {
+     "mean": 22.0,
+     "ci95": 12.87,
+     "sd_runs": 10.37,
+     "runs": 5,
+     "n": 100
+    }
+   },
+   "ethics": {
+    "mfa": {
+     "mean": 70.93,
+     "ci95": 0.0,
+     "sd_runs": 0.0,
+     "runs": 5,
+     "n": 150
+    },
+    "wvs": {
+     "mean": 42.87,
+     "ci95": 2.96,
+     "sd_runs": 2.39,
+     "runs": 5,
+     "n": 150
+    },
+    "rqi": {
+     "mean": 70.3,
+     "ci95": 1.99,
+     "sd_runs": 1.6,
+     "runs": 5,
+     "n": 100
+    },
+    "composite": {
+     "mean": 61.37,
+     "ci95": 1.17,
+     "sd_runs": 0.95,
+     "runs": 5,
+     "n": 5
+    },
+    "unrated_mfq": 0,
+    "unrated_wvs": 0,
+    "rescored_changed": 0,
+    "rqi_floored_nemo": 0,
+    "pipeline": {
+     "mfa": 70.93,
+     "wvs": 28.27,
+     "rqi": 70.3
+    }
+   },
+   "morables": {
+    "clean": {
+     "mean": 36.89,
+     "ci95": 8.85,
+     "sd_runs": 7.13,
+     "runs": 5,
+     "n": 225
+    },
+    "perturbed": {
+     "mean": 32.74,
+     "ci95": 8.95,
+     "sd_runs": 7.21,
+     "runs": 5,
+     "n": 675
+    },
+    "gap": 4.15,
+    "rows": 900,
+    "no_stated_answer": 0,
+    "refused": 0,
+    "letter_without_stated_answer": 0
+   },
+   "ucr_composite": 60.1,
+   "ggb": {
+    "instrumental_harm": {
+     "mean": 1.475,
+     "n": 40,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 4
+    },
+    "impartial_beneficence": {
+     "mean": 5.64,
+     "n": 50,
+     "shift_vs_vanilla": 0.0,
+     "shared_items": 5
+    }
+   }
+  }
+ }
+}
