@@ -1,6 +1,6 @@
 {
- "id": "20261017T010000Z-update",
+ "id": "20261017T022000Z-update",
  "action": "update",
- "note": "DESIGN.md 30: Ollama repeat guard; repeat-reset, matrix-repeat, repeat-review after the matrix. Applies at the next step boundary (after matrix).",
- "issued_utc": "2026-10-17 01:00:00"
+ "note": "Route cost before A8 (the paper's own results first; A8's scope is pending Eugene's decision). Applies at the next step boundary.",
+ "issued_utc": "2026-10-17 02:20:00"
 }

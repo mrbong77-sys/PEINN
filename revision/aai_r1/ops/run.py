@@ -217,8 +217,8 @@ def steps(check: bool) -> list:
     if not check:
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))
-    s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
-          ("cost", "route cost per tier (gate time, calls, tokens)", run("cost")),
+    s += [("cost", "route cost per tier (gate time, calls, tokens)", run("cost")),
+          ("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
           ("analyze", "benchmark results, curves, calibration, I construct", run("analyze")),
           ("release", "trained heads and calibrator -> results/checkpoints (data availability)", run("release"))]
     if check:
