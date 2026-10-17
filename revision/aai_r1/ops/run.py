@@ -235,6 +235,8 @@ def steps(check: bool) -> list:
     if not check:                       # the 0.5B pre-test runs now; the 7B run waits for RUN_A8 (tonight)
         s.append(("a8-check", "A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)",
                   lambda: step("a8", True)))
+    if not check:                       # DESIGN.md 32: GGB answers for re-scoring (Eugene 2026-10-17 14:40 KST), before A8
+        s.append(("ggb-export", "every GGB answer of the reported systems with the pipeline's score (CPU)", run("ggb-export")))
     if RUN_A8 or check:
         s += [("a8", "A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model", run("a8")),
               ("analyze-a8", "benchmark results again, with the A8 row", run("analyze"))]

@@ -1064,3 +1064,24 @@ def test_child_fixes_the_string_hash_seed(tmp_path):
         assert C.child([sys.executable, "-c", code], tmp_path) == 0
         outs.append(f.read_text())
     assert outs[0] == outs[1] == outs[2]
+
+
+def test_ggb_export_writes_every_reported_system(tmp_path, monkeypatch):
+    from v21r import ggb as G
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setenv("V21R_BASES", "qwen")
+    a = C.ARMS["qwen"]
+    row = {"tag": "others", "bench": "ggb", "item_id": "IH1", "subscale": "instrumental_harm", "run_id": "ggb_x_r01_IH1",
+           "score": 3, "prompt_p2": "Statement: ...", "response_p1": "", "response_p2": "score: 3"}
+    df = pd.DataFrame([dict(row, arm_id=a[k]) for k in ("Vanilla", "NeMo", "LlamaGuard")])
+    monkeypatch.setattr(G.MX, "collect", lambda check, base: df)
+    monkeypatch.setattr(G.A, "assemble", lambda d, bench, tiers: (pd.DataFrame([dict(row, arm_id="P", tier="Direct-Answer", rep=1)]), {}))
+    monkeypatch.setattr(G.TH, "load_routes", lambda check: pd.DataFrame({"sha": ["s"], f"{G.TH.MAIN_VARIANT}@{G.TH.MAIN_CAP:g}": ["Direct-Answer"]}))
+    from v21r import a8 as A8
+    monkeypatch.setattr(A8, "collect", lambda check: pd.DataFrame())
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    assert G.ggb_export(log=lambda *_: None) == 0
+    out = pd.read_csv(C.OUT / "ggb" / "ggb_answers.csv")
+    assert sorted(out.system) == ["LlamaGuard", "NeMo", "PEINN", "Vanilla"] and list(out.columns) == G.COLS
+    assert out[out.system == "PEINN"].tier.iloc[0] == "Direct-Answer"
