@@ -1,12 +1,12 @@
 # v2.1 심사 대응 무인 실행 상태: 실패 후 대기
 
-- 시각 2026-10-17 13:51:17 (UTC 2026-10-17 04:51:17), 시도 46, 비컨 #290 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 49dd0f9 v21r R2: which XSTest safe prompts NeMo refuses, and by which rail (counts)
-- 현재 단계: a8-check (0.1분째)
-- 마지막 출력 후: 0.1분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1621 MiB, 32607 MiB, 0 %, 51
-- 다음 동작: 새 코드나 명령을 기다림
-- 사유: 코드 1
+- 시각 2026-10-17 14:01:23 (UTC 2026-10-17 05:01:23), 시도 46, 비컨 #291 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 4adbf3c station: 임무 실행 중
+- 현재 단계: a8-check (10.2분째)
+- 마지막 출력 후: 10.2분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1613 MiB, 32607 MiB, 0 %, 46
+- 다음 동작: 새 코드나 명령이 오면 즉시 재시도. 없으면 20분 뒤 자동 재시도
+- 사유: 대기 10분째
 - 마지막으로 처리한 명령: 20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)
 - 남은 단계: a8-check
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost, analyze, release, cost-gate, analyze-cost, repeat-diff, nemo-orr-final, repeat-diff-means, nemo-orr-detail, nemo-orr-dialog, nemo-orr-totals
