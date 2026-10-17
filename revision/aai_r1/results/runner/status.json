@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 299,
+ "verdict": "완료",
+ "seq": 300,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-17 14:59:55",
- "time_utc": "2026-10-17 05:59:55",
+ "time_local": "2026-10-17 15:00:18",
+ "time_utc": "2026-10-17 06:00:18",
  "attempt": 1,
- "code": "73f29a2 station: 임무 실행 중",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "2610 MiB, 32607 MiB, 18 %, 38",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "7c79350 v21r: every bench's reported rows (answers, verdicts, scores) for checking",
+ "step": "bench-export",
+ "step_min": 0.4,
+ "since_output_min": 0.1,
+ "gpu": "2608 MiB, 32607 MiB, 3 %, 39",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261017T071000Z-update update (대기 끝, 재시도, 2026-10-17 04:51:04 UTC)",
  "done": [
   "record",
@@ -73,9 +73,8 @@
   "nemo-orr-dialog",
   "nemo-orr-totals",
   "a8-check",
-  "ggb-export"
- ],
- "left": [
+  "ggb-export",
   "bench-export"
- ]
+ ],
+ "left": []
 }
