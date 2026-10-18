@@ -1,6 +1,6 @@
 {
- "id": "20261017T091200Z-restart",
- "action": "restart",
- "note": "Eugene card 10-17 18:09 KST: the 768-token rerun before A8 (CAP_FIRST). A8 targets resume from targets.jsonl (f7cb025).",
- "issued_utc": "2026-10-17 09:12:00"
+ "id": "20261018T052500Z-update",
+ "action": "update",
+ "note": "Eugene 2026-10-18 KST: add ethics-diag-check and ethics-diag after the A8 steps (526a30a, DESIGN.md 36). Safe update: applied at the next step boundary, so A8 is not cut.",
+ "issued_utc": "2026-10-18 05:25:00"
 }
