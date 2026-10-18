@@ -1,19 +1,19 @@
 {
- "verdict": "완료",
- "seq": 455,
+ "verdict": "실행 중",
+ "seq": 456,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-18 18:17:00",
- "time_utc": "2026-10-18 09:17:00",
- "attempt": 4,
- "code": "650c724 v21r: R2D2 WVS and NeMo MFQ reproduced; design or harness (DESIGN.md 36)",
- "step": "ethics-diag",
- "step_min": 10.8,
- "since_output_min": 0.2,
- "gpu": "1281 MiB, 32607 MiB, 0 %, 47",
- "next": "없음(모든 단계 끝)",
- "reason": "",
+ "time_local": "2026-10-18 19:46:01",
+ "time_utc": "2026-10-18 10:46:01",
+ "attempt": 1,
+ "code": "4f3663c station: 임무 실행 중",
+ "step": null,
+ "step_min": null,
+ "since_output_min": 0.0,
+ "gpu": "1712 MiB, 32607 MiB, 7 %, 55",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -93,5 +93,10 @@
   "ethics-diag-check",
   "ethics-diag"
  ],
- "left": []
+ "left": [
+  "finish-check",
+  "forced-export",
+  "gate-mem",
+  "gate-retrain"
+ ]
 }
