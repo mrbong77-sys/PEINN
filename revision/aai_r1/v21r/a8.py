@@ -161,7 +161,7 @@ def train(check: bool, log=print) -> int:
     env.update(PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
     hp = {"batch": 2, "accum": 2} if check else {}
     cmd = [C.PY, "-u", str(TRAIN), "--data", str(w / "targets.jsonl"), "--out", str(w / "merged"), "--report", str(rep),
-           "--model", HF_MODEL[check], "--hp", json.dumps(hp)]
+           "--model", HF_MODEL[check], "--hp", json.dumps(hp), "--ckpt", str(w / "train_ckpt")]
     log("[v21r] $ " + " ".join(cmd))
     return subprocess.run(cmd, env=env).returncode
 

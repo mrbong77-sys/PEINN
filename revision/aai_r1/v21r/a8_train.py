@@ -4,8 +4,10 @@
 
 targets.jsonl rows: {"sha", "split" (train | val), "cls", "text", "target"}. The loss is on the answer tokens only; the
 prompt is the bare request in the model's own chat template (as the Vanilla arm sends it). LoRA (rank 16, alpha 32,
-dropout 0.05) on every attention and MLP projection, AdamW 1e-4, one epoch, batch 4 x 4 accumulation, cosine with 3%
-warm-up, max 1,024 tokens, seed 42. The adapters are merged into the base weights and the merged model is saved
+dropout 0.05) on every attention and MLP projection, AdamW 1e-4, one epoch, batch 2 x 8 accumulation (16 per step, as
+the planned 4 x 4; DESIGN.md 10.8), cosine with 3% warm-up, max 1,024 tokens, seed 42. On CUDA the process may use at
+most MEM_FRAC of the GPU, so the allocator frees its cache instead of spilling into shared system memory (Windows), and
+the run saves its state every CKPT_EVERY steps to --ckpt and resumes from it. The adapters are merged into the base weights and the merged model is saved
 (safetensors) for Ollama; the adapters alone go to adapter.safetensors. Hand-written LoRA (no peft dependency).
 """
 from __future__ import annotations
@@ -18,11 +20,15 @@ import random
 import time
 from pathlib import Path
 
-import torch
+# read at the first CUDA allocation: smaller cached blocks and early collection against fragmentation (DESIGN.md 10.8)
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:512,garbage_collection_threshold:0.8")
+import torch  # noqa: E402
 from torch import nn
 
 SEED = 42
-HP = dict(r=16, alpha=32, dropout=0.05, lr=1e-4, epochs=1, batch=4, accum=4, warmup=0.03, max_len=1024)
+HP = dict(r=16, alpha=32, dropout=0.05, lr=1e-4, epochs=1, batch=2, accum=8, warmup=0.03, max_len=1024)
+MEM_FRAC = 0.92     # of the GPU's memory; above it the allocator frees its cache (or fails) instead of spilling to host
+CKPT_EVERY = 100    # optimizer steps between saved states
 CUT = 512   # a8.GEN_OPTS num_predict: a target of this many tokens was cut by the cap and has no end of its own
 TARGETS = ("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj")
 
@@ -135,7 +141,39 @@ def seed_all(s: int = SEED) -> None:
     torch.backends.cudnn.benchmark = False
 
 
-def train(model, tok, data: list[dict], hp: dict, dev, log=print) -> dict:
+def save_state(ckpt: Path, model, opt, sched, k: int, curve: list, hp: dict) -> None:
+    """Adapters, optimizer, schedule, step and RNG states, written atomically (a cut write leaves the last state)."""
+    st = {"k": k, "curve": curve, "hp": hp, "opt": opt.state_dict(), "sched": sched.state_dict(),
+          "lora": {n: p.detach().cpu() for n, p in model.named_parameters() if p.requires_grad},
+          "rng": torch.get_rng_state(), "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []}
+    ckpt.mkdir(parents=True, exist_ok=True)
+    tmp = ckpt / "state.pt.tmp"
+    torch.save(st, tmp)
+    os.replace(tmp, ckpt / "state.pt")
+
+
+def load_state(ckpt: Path | None, model, opt, sched, hp: dict) -> tuple[int, list]:
+    """The saved step and loss curve, with adapters, optimizer, schedule and RNG restored; (0, []) when none."""
+    f = ckpt / "state.pt" if ckpt else None
+    if not f or not f.exists():
+        return 0, []
+    st = torch.load(f, map_location="cpu", weights_only=False)
+    if st.get("hp") not in (None, hp):
+        raise ValueError(f"{f}: saved with other hyperparameters {st['hp']}")
+    have = dict(model.named_parameters())
+    with torch.no_grad():
+        for n, v in st["lora"].items():
+            have[n].copy_(v.to(have[n].device))
+    opt.load_state_dict(st["opt"])
+    sched.load_state_dict(st["sched"])
+    torch.set_rng_state(st["rng"])
+    if st["cuda_rng"] and torch.cuda.is_available():
+        torch.cuda.set_rng_state_all(st["cuda_rng"])
+    return st["k"], st["curve"]
+
+
+def train(model, tok, data: list[dict], hp: dict, dev, log=print, ckpt: Path | None = None,
+          every: int = CKPT_EVERY) -> dict:
     seed_all()
     tail = suffix_len(tok)
     if not 0 < tail <= 8:
@@ -155,13 +193,22 @@ def train(model, tok, data: list[dict], hp: dict, dev, log=print) -> dict:
     sched = torch.optim.lr_scheduler.LambdaLR(
         opt, lambda s: (s + 1) / warm if s < warm else 0.5 * (1 + math.cos(math.pi * (s - warm) / max(1, steps - warm))))
     model.train()
-    curve, t0, k = [], time.time(), 0
+    k, curve = load_state(ckpt, model, opt, sched, hp)
+    rep["resumed_at"] = k
+    if k:
+        log(f"resumed at step {k}/{steps} ({ckpt / 'state.pt'})")
+    per = math.ceil(len(tr) / hp["batch"] / hp["accum"])               # optimizer steps per epoch
+    t0 = tl = time.time()
+    cuda = dev.type == "cuda"
     for ep in range(hp["epochs"]):
         order = list(range(len(tr)))
         random.Random(SEED + ep).shuffle(order)
         rows = [tr[i] for i in order]
         run = 0.0
+        skip = max(0, k - ep * per) * hp["accum"]                     # micro-batches already trained in this epoch
         for i, (ids, lab, att) in enumerate(batches(rows, hp["batch"], pad)):
+            if i < skip:
+                continue
             out = model(input_ids=ids.to(dev), attention_mask=att.to(dev), labels=lab.to(dev))
             (out.loss / hp["accum"]).backward()
             run += float(out.loss.detach()) / hp["accum"]
@@ -174,7 +221,14 @@ def train(model, tok, data: list[dict], hp: dict, dev, log=print) -> dict:
                 curve.append(round(run, 4))
                 run = 0.0
                 if k % 20 == 0 or k == steps:
-                    log(f"step {k}/{steps} loss {curve[-1]} ({time.time() - t0:.0f} s)")
+                    mem = (f", {(time.time() - tl) / 20:.1f} s/step, peak reserved "
+                           f"{torch.cuda.max_memory_reserved() / 2**30:.1f} GiB") if cuda else ""
+                    log(f"step {k}/{steps} loss {curve[-1]} ({time.time() - t0:.0f} s{mem})")
+                    tl = time.time()
+                    if cuda:
+                        torch.cuda.reset_peak_memory_stats()
+                if ckpt and (k % every == 0) and k < steps:
+                    save_state(ckpt, model, opt, sched, k, curve, hp)
     rep.update(steps=k, loss_curve=curve, train_sec=round(time.time() - t0, 1),
                val_loss_after=mean_loss(model, va, hp["batch"], pad, dev))
     rep["adapters"] = merge(model, names)
@@ -188,6 +242,7 @@ def main(argv=None) -> int:
     ap.add_argument("--report", type=Path, required=True)
     ap.add_argument("--model", required=True)
     ap.add_argument("--hp", default="{}", help="JSON overrides of HP (the check run)")
+    ap.add_argument("--ckpt", type=Path, default=None, help="saved training state (resumed when present)")
     a = ap.parse_args(argv)
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     from huggingface_hub import snapshot_download
@@ -196,12 +251,14 @@ def main(argv=None) -> int:
     hp = dict(HP, **json.loads(a.hp))
     src = snapshot_download(a.model, allow_patterns=["*.json", "*.safetensors", "*.txt", "*.model", "merges.txt"])
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if dev.type == "cuda":
+        torch.cuda.set_per_process_memory_fraction(MEM_FRAC)
     tok = AutoTokenizer.from_pretrained(src)
     model = AutoModelForCausalLM.from_pretrained(src, torch_dtype=torch.bfloat16).to(dev)
     model.config.use_cache = False
     model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     data = [json.loads(x) for x in a.data.read_text(encoding="utf-8").split("\n") if x.strip()]
-    rep = train(model, tok, data, hp, dev)
+    rep = train(model, tok, data, hp, dev, ckpt=a.ckpt)
     ad = rep.pop("adapters")
     a.out.mkdir(parents=True, exist_ok=True)
     model.config.use_cache = True

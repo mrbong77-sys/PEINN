@@ -289,3 +289,20 @@ def test_quantize_keeps_only_a_q4_k_m_file(tmp_path, monkeypatch):
     monkeypatch.setattr(A8.subprocess, "run", fake(A8.GGUF_Q4_K_M))
     q, r = A8.quantize(True, f16, log=lambda *_: None)
     assert q.name == "merged.q4_k_m.gguf" and r["file_type"] == 15 and r["tool"] == {"tag": "b1"}
+
+
+def test_train_resumes_from_its_saved_state_to_the_same_result(tmp_path):
+    from v21r import a8_train as T
+    data = [{"split": "train" if i < 16 else "val", "cls": "safe", "text": "hello", "target": "world" * 3}
+            for i in range(20)]
+    hp = dict(T.HP, batch=2, accum=2, epochs=8, lr=5e-2, r=4, alpha=8, dropout=0.0)
+    quiet = lambda *_: None                                             # noqa: E731
+    a = T.train(_tiny_qwen(), _Tok(), data, hp, torch.device("cpu"), log=quiet)
+    b = T.train(_tiny_qwen(), _Tok(), data, hp, torch.device("cpu"), log=quiet, ckpt=tmp_path, every=8)
+    assert (tmp_path / "state.pt").exists() and b["resumed_at"] == 0
+    c = T.train(_tiny_qwen(), _Tok(), data, hp, torch.device("cpu"), log=quiet, ckpt=tmp_path, every=8)
+    assert c["resumed_at"] == 24 and c["steps"] == a["steps"] == 32
+    assert c["loss_curve"] == a["loss_curve"] == b["loss_curve"]
+    assert abs(c["val_loss_after"] - a["val_loss_after"]) < 1e-6
+    with pytest.raises(ValueError, match="other hyperparameters"):
+        T.train(_tiny_qwen(), _Tok(), data, dict(hp, lr=1e-3), torch.device("cpu"), log=quiet, ckpt=tmp_path)
