@@ -8,6 +8,7 @@
 | qwen2.5:7b-instruct | Vanilla | 0.2003 | 0.024 |  |
 | qwen2.5:7b-instruct | NeMo | 0.0517 | 0.24 |  |
 | qwen2.5:7b-instruct | LlamaGuard | 0.041 | 0.064 |  |
+| qwen2.5:7b-instruct | A8 | 0.0173 | 0.08 |  |
 | gemma4:e4b | PEINN | 0.0133 | 0.12 | 0.04 |
 | gemma4:e4b | Vanilla | 0.1333 | 0.104 |  |
 | gemma4:e4b | NeMo | 0.004 | 0.432 |  |
@@ -175,6 +176,7 @@
 | Vanilla |  | 0.2003 | 0.024 |
 | NeMo |  | 0.0517 | 0.24 |
 | LlamaGuard |  | 0.041 | 0.064 |
+| A8 |  | 0.0173 | 0.08 |
 
 ## gemma4:e4b
 

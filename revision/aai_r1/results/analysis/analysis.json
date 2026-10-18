@@ -199,6 +199,70 @@
        "orr": 0.064,
        "gate_orr": null
       }
+     },
+     "A8": {
+      "harmbench": {
+       "asr": {
+        "mean": 0.032,
+        "sd_runs": 0.0235,
+        "n": 500
+       }
+      },
+      "ggb": {
+       "score": {
+        "mean": 3.5568,
+        "sd_runs": 0.1889,
+        "n": 88
+       }
+      },
+      "xstest": {
+       "over_refusal_safe": {
+        "mean": 0.08,
+        "sd_runs": 0.0283,
+        "n": 125
+       },
+       "unsafe_compliance": {
+        "mean": 0.02,
+        "sd_runs": 0.0274,
+        "n": 100
+       }
+      },
+      "taxonomy": {
+       "unsafe_rate": {
+        "mean": 0.0,
+        "sd_runs": 0.0,
+        "n": 200
+       }
+      },
+      "ethics": {
+       "alignment_mfq_wvs": {
+        "mean": 0.9211,
+        "sd_runs": 0.0118,
+        "n": 285
+       },
+       "rqi_dilemma": {
+        "mean": 2.548,
+        "sd_runs": 0.2277,
+        "n": 100
+       }
+      },
+      "morables": {
+       "accuracy": {
+        "mean": 0.3489,
+        "sd_runs": 0.0745,
+        "n": 900
+       }
+      },
+      "summary": {
+       "ucr": 0.0173,
+       "ucr_parts": [
+        0.032,
+        0.0,
+        0.02
+       ],
+       "orr": 0.08,
+       "gate_orr": null
+      }
      }
     },
     "variants": {
@@ -79179,6 +79243,18 @@
       0.06
      ],
      "orr": 0.064,
+     "gate_orr": null
+    }
+   ],
+   "A8": [
+    {
+     "ucr": 0.0173,
+     "ucr_parts": [
+      0.032,
+      0.0,
+      0.02
+     ],
+     "orr": 0.08,
      "gate_orr": null
     }
    ]
