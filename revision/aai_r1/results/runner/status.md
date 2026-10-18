@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 15:04:26 (UTC 2026-10-18 06:04:26), 시도 4, 비컨 #435 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 43b7bce station: 임무 실행 중
-- 현재 단계: a8 (40.4분째)
-- 마지막 출력 후: 1.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 24001 MiB, 32607 MiB, 88 %, 70
+- 시각 2026-10-18 15:14:31 (UTC 2026-10-18 06:14:31), 시도 4, 비컨 #436 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 3db35a2 station: 임무 실행 중
+- 현재 단계: a8 (50.5분째)
+- 마지막 출력 후: 0.9분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25804 MiB, 32607 MiB, 94 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,16 +14,6 @@
 ## 마지막 로그
 
 ```
-
-[v21r] ===== a8: A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model =====
-[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r a8
-A8 targets: 58775 items ({'safe': 35467, 'harm': 21843, 'dilemma': 1465}), 0 to do
-A8 targets: 0 skipped now (Ollama repeat limit), 3 in all
-[v21r] $ C:\Users\bojung\miniconda3\python.exe -u D:\Projects\PEINN\revision\aai_r1\v21r\a8_train.py --data D:\Projects\PEINN\revision\aai_r1\cache\full\a8\targets.jsonl --out D:\Projects\PEINN\revision\aai_r1\cache\full\a8\merged --report D:\Projects\PEINN\revision\aai_r1\cache\full\a8\train.json --model Qwen/Qwen2.5-7B-Instruct --hp {} --ckpt D:\Projects\PEINN\revision\aai_r1\cache\full\a8\train
-Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 23161.32it/s]
-[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
-Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 2/339 [00:00<00:35,  9.55it/s]Loading weights:   3%|▎         | 10/339 [00:00<00:11, 28.90it/s]Loading weights:   5%|▌         | 17/339 [00:00<00:12, 24.88it/s]Loading weights:   6%|▋         | 22/339 [00:00<00:10, 29.76it/s]Loading weights:   9%|▊         | 29/339 [00:00<00:08, 35.35it/s]Loading weigh
-step 20/3286 loss 1.1068 (60 s, 3.0 s/step, peak reserved 24.4 GiB)
 step 40/3286 loss 0.2586 (121 s, 3.0 s/step, peak reserved 24.1 GiB)
 step 60/3286 loss 0.2346 (180 s, 2.9 s/step, peak reserved 24.1 GiB)
 step 80/3286 loss 0.2859 (242 s, 3.1 s/step, peak reserved 24.1 GiB)
@@ -54,4 +44,14 @@ step 560/3286 loss 0.2619 (1777 s, 3.0 s/step, peak reserved 24.2 GiB)
 step 580/3286 loss 0.2501 (1838 s, 3.0 s/step, peak reserved 24.2 GiB)
 step 600/3286 loss 0.2845 (1899 s, 3.0 s/step, peak reserved 24.3 GiB)
 step 620/3286 loss 0.1876 (1961 s, 3.1 s/step, peak reserved 24.1 GiB)
+step 640/3286 loss 0.1438 (2022 s, 3.0 s/step, peak reserved 24.1 GiB)
+step 660/3286 loss 0.3374 (2081 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 680/3286 loss 0.299 (2143 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 700/3286 loss 0.2866 (2203 s, 3.0 s/step, peak reserved 24.0 GiB)
+step 720/3286 loss 0.2651 (2265 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 740/3286 loss 0.187 (2326 s, 3.0 s/step, peak reserved 24.1 GiB)
+step 760/3286 loss 0.2629 (2385 s, 3.0 s/step, peak reserved 24.1 GiB)
+step 780/3286 loss 0.2363 (2445 s, 3.0 s/step, peak reserved 24.4 GiB)
+step 800/3286 loss 0.3216 (2508 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 820/3286 loss 0.2688 (2570 s, 3.1 s/step, peak reserved 24.2 GiB)
 ```
