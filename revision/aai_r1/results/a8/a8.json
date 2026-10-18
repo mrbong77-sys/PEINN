@@ -1,0 +1,110 @@
+{
+ "hf_model": "Qwen/Qwen2.5-7B-Instruct",
+ "served": "qwen2.5-a8:latest",
+ "train": {
+  "hp": {
+   "r": 16,
+   "alpha": 32,
+   "dropout": 0.05,
+   "lr": 0.0001,
+   "epochs": 1,
+   "batch": 2,
+   "accum": 8,
+   "warmup": 0.03,
+   "max_len": 1024
+  },
+  "wrapped": 196,
+  "trainable": 40370176,
+  "n": {
+   "train": 52566,
+   "val": 6206
+  },
+  "cut_no_end_loss": 16496,
+  "template_tail": 2,
+  "val_loss_before": 0.47314901299992196,
+  "resumed_at": 0,
+  "steps": 3286,
+  "train_sec": 10135.0,
+  "val_loss_after": 0.2825453977550894,
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "snapshot": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "device": "cuda",
+  "counts": {
+   "harm": 19503,
+   "dilemma": 1336,
+   "safe": 31727
+  }
+ },
+ "calls": {
+  "a8_gen": {
+   "gen_live": 2515
+  },
+  "a8_judge": {
+   "gen_reused": 2515,
+   "judge_live": 60
+  }
+ },
+ "ollama": {
+  "model": "qwen2.5-a8:latest",
+  "digest": "1058e59ba82fc444fc7c623d129a160b7ab81a9fc1b050c5798e9c1a995accd0",
+  "size": 4683086320,
+  "quant": "q4_K_M",
+  "details": {
+   "parent_model": "merged.q4_k_m.gguf",
+   "format": "gguf",
+   "family": "qwen2",
+   "families": [
+    "qwen2"
+   ],
+   "parameter_size": "7.6B",
+   "quantization_level": "Q4_K_M",
+   "context_length": 32768,
+   "embedding_length": 3584,
+   "runner": "llamacpp"
+  },
+  "gguf_f16": {
+   "write": {
+    "tensors": 339,
+    "vocab": 152064,
+    "merges": 151387,
+    "special": {
+     "eos": 151645,
+     "pad": 151643,
+     "bos": 151643,
+     "add_bos": false
+    },
+    "bytes": 15237852960
+   },
+   "check": {
+    "tensors": 339,
+    "unequal": [],
+    "missing": [],
+    "extra": [],
+    "ok": true
+   }
+  },
+  "quantize": {
+   "tool": {
+    "tag": "b11706",
+    "asset": "llama-b11706-bin-win-cpu-x64.zip",
+    "sha256": "f426ae6d20afeb6970f51cc182dedc3b21cf23ec278192da1af262de43be6115",
+    "github_digest": "sha256:f426ae6d20afeb6970f51cc182dedc3b21cf23ec278192da1af262de43be6115",
+    "exe": "D:\\Projects\\PEINN\\revision\\aai_r1\\cache\\llama.cpp\\b11706\\llama-quantize.exe"
+   },
+   "file_type": 15,
+   "bytes": 4683073312
+  },
+  "smoke": "The capital of France is Paris."
+ },
+ "targets": {
+  "train|dilemma": 1336,
+  "train|harm": 19503,
+  "train|safe": 31727,
+  "val|dilemma": 129,
+  "val|harm": 2340,
+  "val|safe": 3737
+ },
+ "targets_skipped": {
+  "train|safe": 3
+ }
+}
