@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 17:25:40 (UTC 2026-10-18 08:25:40), 시도 4, 비컨 #449 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: b84ff6f station: 임무 실행 중
-- 현재 단계: a8 (181.6분째)
-- 마지막 출력 후: 6.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25800 MiB, 32607 MiB, 0 %, 56
+- 시각 2026-10-18 17:35:46 (UTC 2026-10-18 08:35:46), 시도 4, 비컨 #450 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a9b4175 station: 임무 실행 중
+- 현재 단계: a8 (191.7분째)
+- 마지막 출력 후: -0.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1517 MiB, 32607 MiB, 1 %, 35
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,44 +14,44 @@
 ## 마지막 로그
 
 ```
-step 2520/3286 loss 0.1816 (7845 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2540/3286 loss 0.25 (7907 s, 3.1 s/step, peak reserved 24.2 GiB)
-step 2560/3286 loss 0.225 (7967 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2580/3286 loss 0.1891 (8026 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2600/3286 loss 0.2089 (8086 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2620/3286 loss 0.236 (8147 s, 3.0 s/step, peak reserved 24.5 GiB)
-step 2640/3286 loss 0.2962 (8207 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2660/3286 loss 0.275 (8268 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2680/3286 loss 0.243 (8326 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 2700/3286 loss 0.2541 (8384 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 2720/3286 loss 0.2491 (8446 s, 3.1 s/step, peak reserved 24.2 GiB)
-step 2740/3286 loss 0.2611 (8506 s, 3.0 s/step, peak reserved 24.4 GiB)
-step 2760/3286 loss 0.2237 (8565 s, 3.0 s/step, peak reserved 24.4 GiB)
-step 2780/3286 loss 0.2072 (8624 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 2800/3286 loss 0.2615 (8684 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2820/3286 loss 0.2665 (8744 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2840/3286 loss 0.2521 (8805 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2860/3286 loss 0.1273 (8865 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2880/3286 loss 0.2352 (8925 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2900/3286 loss 0.2747 (8985 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2920/3286 loss 0.2396 (9046 s, 3.0 s/step, peak reserved 24.3 GiB)
-step 2940/3286 loss 0.2305 (9106 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2960/3286 loss 0.3016 (9167 s, 3.1 s/step, peak reserved 24.2 GiB)
-step 2980/3286 loss 0.2508 (9225 s, 2.9 s/step, peak reserved 24.3 GiB)
-step 3000/3286 loss 0.1854 (9282 s, 2.9 s/step, peak reserved 24.1 GiB)
-step 3020/3286 loss 0.2365 (9340 s, 2.9 s/step, peak reserved 24.1 GiB)
-step 3040/3286 loss 0.2972 (9401 s, 3.0 s/step, peak reserved 24.0 GiB)
-step 3060/3286 loss 0.2516 (9460 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 3080/3286 loss 0.2543 (9520 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 3100/3286 loss 0.2484 (9581 s, 3.0 s/step, peak reserved 24.5 GiB)
-step 3120/3286 loss 0.2849 (9639 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 3140/3286 loss 0.254 (9699 s, 3.0 s/step, peak reserved 24.0 GiB)
-step 3160/3286 loss 0.2381 (9757 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 3180/3286 loss 0.2726 (9817 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 3200/3286 loss 0.162 (9876 s, 3.0 s/step, peak reserved 24.3 GiB)
-step 3220/3286 loss 0.2834 (9938 s, 3.1 s/step, peak reserved 24.3 GiB)
-step 3240/3286 loss 0.2962 (9999 s, 3.1 s/step, peak reserved 24.1 GiB)
-step 3260/3286 loss 0.1522 (10059 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 3280/3286 loss 0.1839 (10118 s, 2.9 s/step, peak reserved 24.3 GiB)
-step 3286/3286 loss 0.0999 (10135 s, 0.9 s/step, peak reserved 24.1 GiB)
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   25 MB/s   4m48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   26 MB/s   4m43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  63% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   27 MB/s   4m25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 3291abe70f16:  64% ▕███████████       ▏  12 GB/ 20 GB   28 MB/s   4m18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
 ```
