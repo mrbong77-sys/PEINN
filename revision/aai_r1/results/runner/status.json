@@ -1,19 +1,19 @@
 {
  "verdict": "실행 중",
- "seq": 456,
+ "seq": 457,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-18 19:46:01",
- "time_utc": "2026-10-18 10:46:01",
+ "time_local": "2026-10-18 19:56:06",
+ "time_utc": "2026-10-18 10:56:06",
  "attempt": 1,
- "code": "4f3663c station: 임무 실행 중",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "1712 MiB, 32607 MiB, 7 %, 55",
+ "code": "115346e station: 임무 실행 중",
+ "step": "gate-retrain",
+ "step_min": 7.3,
+ "since_output_min": 0.1,
+ "gpu": "14602 MiB, 32607 MiB, 96 %, 70",
  "next": "단계 진행",
- "reason": "시작",
+ "reason": "정기 보고",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -91,12 +91,12 @@
   "bench-export-a8",
   "bench-stats-a8",
   "ethics-diag-check",
-  "ethics-diag"
- ],
- "left": [
+  "ethics-diag",
   "finish-check",
   "forced-export",
-  "gate-mem",
+  "gate-mem"
+ ],
+ "left": [
   "gate-retrain"
  ]
 }
