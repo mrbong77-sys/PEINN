@@ -1,11 +1,11 @@
 {
  "verdict": "대기",
- "seq": 403,
+ "seq": 404,
  "mission": null,
- "time_utc": "2026-10-18 10:27:46",
- "time_local": "2026-10-18 19:27:46",
- "code": "0394993 station: 대기",
- "gpu": "1660 MiB, 32607 MiB, 1 %, 46",
+ "time_utc": "2026-10-18 10:37:52",
+ "time_local": "2026-10-18 19:37:52",
+ "code": "730532f station: 대기",
+ "gpu": "1718 MiB, 32607 MiB, 2 %, 52",
  "ack": "20261017T063000Z-launch launch (임무 시작 ops.run, 2026-10-17 08:24:26 UTC)",
  "reason": "정기 보고",
  "history": [
