@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 13:25:23 (UTC 2026-10-18 04:25:23), 시도 3, 비컨 #423 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 474cd5b station: 임무 실행 중
-- 현재 단계: a8 (60.5분째)
-- 마지막 출력 후: 5.2분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 32027 MiB, 32607 MiB, 98 %, 47
+- 시각 2026-10-18 13:35:28 (UTC 2026-10-18 04:35:28), 시도 3, 비컨 #424 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 5cf7836 station: 임무 실행 중
+- 현재 단계: a8 (70.6분째)
+- 마지막 출력 후: 7.6분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 32020 MiB, 32607 MiB, 100 %, 44
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,7 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip bench-export (every other bench's reported rows: answers, verdicts, scores (CPU, Eugene 2026-10-17 14:55 KST)): finished 2026-10-17 15:00:09
 [v21r] skip bench-stats (every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)): finished 2026-10-17 17:24:35
 [v21r] skip cap-check (768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)): finished 2026-10-17 18:17:25
 [v21r] skip cap-reset (Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)): finished 2026-10-17 18:17:25
@@ -54,4 +53,5 @@ step 240/3286 loss 0.2744 (1701 s)
 step 260/3286 loss 0.2886 (1859 s)
 step 280/3286 loss 0.3251 (2030 s)
 step 300/3286 loss 0.3003 (2208 s)
+step 320/3286 loss 0.2758 (2668 s)
 ```
