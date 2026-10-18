@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 14:44:15 (UTC 2026-10-18 05:44:15), 시도 4, 비컨 #433 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 156f1fa station: 임무 실행 중
-- 현재 단계: a8 (20.2분째)
-- 마지막 출력 후: 0.2분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25865 MiB, 32607 MiB, 96 %, 71
+- 시각 2026-10-18 14:54:21 (UTC 2026-10-18 05:54:21), 시도 4, 비컨 #434 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 731a7e6 station: 임무 실행 중
+- 현재 단계: a8 (30.3분째)
+- 마지막 출력 후: -0.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25632 MiB, 32607 MiB, 96 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,15 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip analyze-cost (benchmark results again, with the CPU gate time): finished 2026-10-17 13:29:43
-[v21r] skip nemo-orr-final (NeMo's XSTest safe refusals by rail, counted per prompt across runs (CPU)): finished 2026-10-17 13:40:17
-[v21r] skip repeat-diff-means (each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)): finished 2026-10-17 13:40:21
-[v21r] skip nemo-orr-detail (the logged NeMo calls of the XSTest safe prompts no rail event explains (CPU)): finished 2026-10-17 13:44:36
-[v21r] skip nemo-orr-dialog (NeMo dialog calls whose user turn matches no XSTest safe prompt: examples (CPU)): finished 2026-10-17 13:46:53
-[v21r] skip nemo-orr-totals (NeMo on all XSTest rows: fixed refusals against input blocks and 'ask harmful' dialogs (CPU)): finished 2026-10-17 13:51:12
-[v21r] skip a8-check (A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)): finished 2026-10-17 14:29:34
-[v21r] skip ggb-export (every GGB answer of the reported systems with the pipeline's score (CPU)): finished 2026-10-17 14:47:23
-[v21r] skip bench-export (every other bench's reported rows: answers, verdicts, scores (CPU, Eugene 2026-10-17 14:55 KST)): finished 2026-10-17 15:00:09
 [v21r] skip bench-stats (every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)): finished 2026-10-17 17:24:35
 [v21r] skip cap-check (768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)): finished 2026-10-17 18:17:25
 [v21r] skip cap-reset (Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)): finished 2026-10-17 18:17:25
@@ -54,4 +45,13 @@ step 200/3286 loss 0.2631 (611 s, 3.0 s/step, peak reserved 24.5 GiB)
 step 220/3286 loss 0.2437 (670 s, 2.9 s/step, peak reserved 24.3 GiB)
 step 240/3286 loss 0.2107 (732 s, 3.1 s/step, peak reserved 24.2 GiB)
 step 260/3286 loss 0.2657 (794 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 280/3286 loss 0.2859 (858 s, 3.2 s/step, peak reserved 24.3 GiB)
+step 300/3286 loss 0.2704 (919 s, 3.0 s/step, peak reserved 24.3 GiB)
+step 320/3286 loss 0.2763 (980 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 340/3286 loss 0.3143 (1040 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 360/3286 loss 0.2909 (1101 s, 3.1 s/step, peak reserved 24.4 GiB)
+step 380/3286 loss 0.2662 (1176 s, 3.8 s/step, peak reserved 24.2 GiB)
+step 400/3286 loss 0.2104 (1258 s, 4.1 s/step, peak reserved 24.1 GiB)
+step 420/3286 loss 0.2742 (1341 s, 4.2 s/step, peak reserved 24.2 GiB)
+step 440/3286 loss 0.2651 (1414 s, 3.7 s/step, peak reserved 24.2 GiB)
 ```
