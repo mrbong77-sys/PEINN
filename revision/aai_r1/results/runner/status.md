@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 13:45:33 (UTC 2026-10-18 04:45:33), 시도 3, 비컨 #425 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 12f8707 station: 임무 실행 중
-- 현재 단계: a8 (80.7분째)
-- 마지막 출력 후: 5.8분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 32038 MiB, 32607 MiB, 99 %, 47
+- 시각 2026-10-18 13:55:39 (UTC 2026-10-18 04:55:39), 시도 3, 비컨 #426 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: aa28226 station: 임무 실행 중
+- 현재 단계: a8 (90.8분째)
+- 마지막 출력 후: 4.3분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 31960 MiB, 32607 MiB, 97 %, 46
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,7 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip cap-check (768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)): finished 2026-10-17 18:17:25
 [v21r] skip cap-reset (Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)): finished 2026-10-17 18:17:25
 [v21r] skip matrix-cap768 (Ethics, MORABLES and GGB again on every base; unchanged calls come from the stores): finished 2026-10-17 20:56:36
 [v21r] skip analyze-cap768 (benchmark results again after the 768-token rerun): finished 2026-10-17 20:57:39
@@ -54,4 +53,5 @@ step 280/3286 loss 0.3251 (2030 s)
 step 300/3286 loss 0.3003 (2208 s)
 step 320/3286 loss 0.2758 (2668 s)
 step 340/3286 loss 0.3048 (3384 s)
+step 360/3286 loss 0.2819 (4078 s)
 ```
