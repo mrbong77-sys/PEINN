@@ -1,0 +1,21 @@
+PEINN & 2.7 & 8.4 & 78.4 & 44.4 \\
+\midrule
+Fine-tuned encoders, no OOD term & 2.7 & 8.8 & 78.3 & 44.1 \\
+Frozen encoders & 5.3 & 9.2 & 76.4 & 43.2 \\
+No $I$ channel & 7.1 & 8.0 & 78.6 & 46.3 \\
+Softmax head & 5.5 & 8.4 & 76.7 & 41.2 \\
+Uncertainty routing & 5.4 & 9.4 & 76.4 & 43.2 \\
+No emotion energy & 10.2 & 13.8 & 79.0 & 38.8 \\
+No principle anchors & 7.2 & 7.4 & 79.8 & 41.8 \\
+No emotion feature & 6.0 & 9.0 & 76.6 & 44.0 \\
+Fine-tuned MiniLM classifier & 6.5 & 7.4 & 79.6 & 46.4 \\
+Energy only (no head) & 3.3 & 8.4 & 78.2 & 44.3 \\
+\midrule
+Always Direct & 29.3 & 4.4 & 78.9 & 47.3 \\
+Always Deliberation & 17.0 & 8.8 & 80.0 & 47.3 \\
+Block + Direct & 3.0 & 8.4 & 78.2 & 44.3 \\
+Block + Deliberation & 1.5 & 12.4 & 79.3 & 44.3 \\
+\midrule
+Vanilla (no defense) & 29.6 & 4.6 & 78.9 & 47.3 \\
+NeMo Guardrails & 4.1 & 37.6 & 42.1 & 36.1 \\
+Llama Guard 3 & 4.3 & 9.4 & 77.8 & 47.6 \\
