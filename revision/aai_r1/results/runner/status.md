@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 16:15:03 (UTC 2026-10-18 07:15:03), 시도 4, 비컨 #442 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 5b54e95 station: 임무 실행 중
-- 현재 단계: a8 (111.0분째)
-- 마지막 출력 후: 0.5분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 24767 MiB, 32607 MiB, 96 %, 70
+- 시각 2026-10-18 16:25:08 (UTC 2026-10-18 07:25:08), 시도 4, 비컨 #443 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a0c60b0 station: 임무 실행 중
+- 현재 단계: a8 (121.1분째)
+- 마지막 출력 후: 0.1분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 24553 MiB, 32607 MiB, 96 %, 69
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,16 +14,6 @@
 ## 마지막 로그
 
 ```
-step 1220/3286 loss 0.3214 (3773 s, 3.1 s/step, peak reserved 24.2 GiB)
-step 1240/3286 loss 0.2536 (3833 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 1260/3286 loss 0.2694 (3892 s, 2.9 s/step, peak reserved 24.2 GiB)
-step 1280/3286 loss 0.2836 (3952 s, 3.0 s/step, peak reserved 24.4 GiB)
-step 1300/3286 loss 0.221 (4013 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 1320/3286 loss 0.1582 (4072 s, 3.0 s/step, peak reserved 24.4 GiB)
-step 1340/3286 loss 0.2845 (4133 s, 3.0 s/step, peak reserved 24.5 GiB)
-step 1360/3286 loss 0.2803 (4194 s, 3.1 s/step, peak reserved 24.2 GiB)
-step 1380/3286 loss 0.2914 (4258 s, 3.2 s/step, peak reserved 24.4 GiB)
-step 1400/3286 loss 0.2363 (4323 s, 3.3 s/step, peak reserved 24.3 GiB)
 step 1420/3286 loss 0.2519 (4385 s, 3.1 s/step, peak reserved 24.1 GiB)
 step 1440/3286 loss 0.276 (4465 s, 4.0 s/step, peak reserved 24.2 GiB)
 step 1460/3286 loss 0.2624 (4543 s, 3.9 s/step, peak reserved 24.3 GiB)
@@ -54,4 +44,14 @@ step 1940/3286 loss 0.2048 (6038 s, 3.0 s/step, peak reserved 24.3 GiB)
 step 1960/3286 loss 0.2588 (6101 s, 3.1 s/step, peak reserved 24.3 GiB)
 step 1980/3286 loss 0.2574 (6164 s, 3.2 s/step, peak reserved 24.2 GiB)
 step 2000/3286 loss 0.2161 (6226 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 2020/3286 loss 0.1999 (6289 s, 3.2 s/step, peak reserved 24.3 GiB)
+step 2040/3286 loss 0.2899 (6351 s, 3.1 s/step, peak reserved 24.5 GiB)
+step 2060/3286 loss 0.1833 (6412 s, 3.1 s/step, peak reserved 24.1 GiB)
+step 2080/3286 loss 0.2717 (6476 s, 3.2 s/step, peak reserved 24.1 GiB)
+step 2100/3286 loss 0.2313 (6540 s, 3.2 s/step, peak reserved 24.3 GiB)
+step 2120/3286 loss 0.2484 (6603 s, 3.2 s/step, peak reserved 24.1 GiB)
+step 2140/3286 loss 0.1131 (6664 s, 3.0 s/step, peak reserved 24.1 GiB)
+step 2160/3286 loss 0.2829 (6727 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 2180/3286 loss 0.2341 (6791 s, 3.2 s/step, peak reserved 24.5 GiB)
+step 2200/3286 loss 0.2614 (6854 s, 3.2 s/step, peak reserved 24.5 GiB)
 ```
