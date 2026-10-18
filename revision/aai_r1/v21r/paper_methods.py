@@ -91,7 +91,57 @@ def paper_methods(check: bool = False, log=print) -> int:
     C.jdump(out, o / "methods.json")
     log(f"  test {test}\n  routes {routes}\n  harmbench {harm}")
     figures(u, th, harm, o)
+    calibration(check, o)
+    route_cost(check, o)
     return 0
+
+
+def _r3(x: float) -> str:
+    """Three decimals, half up (the stored values have four)."""
+    from decimal import ROUND_HALF_UP, Decimal
+    return str(Decimal(str(x)).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP))
+
+
+def calibration(check: bool, o) -> None:
+    """ECE and Brier of the main variant's T, I, F on the test split, and F against XSTest's human labels
+    (analysis.json); ten-bin reliability diagrams."""
+    a = C.jload(D.odir(check) / "analysis" / "analysis.json")
+    c, x = a["calibration"][TH.MAIN_VARIANT], a["xstest_F"][TH.MAIN_VARIANT]
+    rows = [(f"${k}$", "test split, teacher label", c[k]["binary"]) for k in ("T", "I", "F")]
+    rows.append(("$F$", "XSTest, human label", x))
+    (o / "tab_calibration.tex").write_text("\n".join(f"{a_} & {b} & {r['n']:,} & {_r3(r['ece'])} & {_r3(r['brier'])} \\\\".replace(f"{r['n']:,}", f"{r['n']:,}".replace(",", "{,}"))
+                                                     for a_, b, r in rows) + "\n", encoding="utf-8")
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig, axes = plt.subplots(1, 4, figsize=(12, 3.1))
+    for ax, (lab, src, r) in zip(axes, rows):
+        rel = r.get("reliability") or []
+        ax.plot([0, 1], [0, 1], color="#999", lw=0.8, ls="--")
+        ax.plot([q["conf"] for q in rel], [q["acc"] for q in rel], marker="o", ms=3.5, color="#009e73", lw=1)
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.set_xlabel(f"Predicted {lab}")
+        ax.set_title(f"{lab}, {src} (ECE {_r3(r["ece"])})", fontsize=8.5)
+    axes[0].set_ylabel("Observed share of positives")
+    fig.tight_layout()
+    fig.savefig(o / "calibration.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def route_cost(check: bool, o) -> None:
+    """Generation calls, input and output tokens and Ollama generation seconds per request for each route and base
+    (route_cost.json tiers, deployed accounting: a Hard-block calls nothing)."""
+    t = C.jload(D.odir(check) / "route_cost.json")["tiers"]
+    bases = ("zephyr", "qwen", "gemma4", "gemma3")
+    body = []
+    for tier in TIERS:
+        r = [t[f"{b}|{tier}"]["deployed"] for b in bases]
+        calls = {int(x["calls"]) for x in r}
+        cells = [LABEL[tier], "/".join(str(c) for c in sorted(calls))]
+        cells += [f"{x['prompt_tokens'] + x['output_tokens']:.0f}" for x in r] + [f"{x['ollama_s']:.2f}" for x in r]
+        body.append(" & ".join(cells) + " \\\\")
+    (o / "tab_route_cost.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
 
 
 def figures(u: pd.DataFrame, th: dict, harm: dict, o) -> None:

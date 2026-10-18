@@ -30,12 +30,14 @@ BENCHES = ("harmbench", "taxonomy", "xstest", "ethics", "morables")
 KEYS = {"harmbench": ["behavior_id"], "xstest": ["item_id"], "taxonomy": ["scenario_id"], "ethics": ["instrument", "item_id"],
         "morables": ["item_id", "variant"]}
 MAIN = f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}"
-LABEL = {"A0ftM": "PEINN", "A0ft": "Fine-tuned encoders, no OOD term", "A0": "Frozen encoders",
+LABEL = {"A0ftM": "PEINN", "A0ft": "No OOD check", "A0": "Frozen encoders",
          "A1": "No $I$ channel", "A2": "Softmax head", "A3": "Uncertainty routing", "A5": "No emotion energy",
-         "A6p": "No principle anchors", "A6e": "No emotion feature", "A7": "Fine-tuned MiniLM classifier",
+         "A6p": "No principle anchors", "A6e": "No emotion feature", "A7": "MiniLM classifier",
          "A4a": "Always Direct", "A4b": "Always Deliberation", "A4c": "Block + Direct", "A4d": "Block + Deliberation",
-         "A9": "Energy only (no head)"}
-ROWS = ("A0ftM", "A0ft", "A0", "A1", "A2", "A3", "A5", "A6p", "A6e", "A7", "A9", "A4a", "A4b", "A4c", "A4d")
+         "A9": "Energy only"}
+# groups, a rule between them: PEINN | encoders (against PEINN) | components (against the frozen-encoder A0) | routing
+GROUPS = (("A0ftM",), ("A0ft", "A0"), ("A1", "A2", "A3", "A5", "A6p", "A6e", "A7"), ("A9", "A4a", "A4b", "A4c", "A4d"))
+ROWS = tuple(v for g in GROUPS for v in g)
 
 
 def forced(check: bool, bench: str, base: str) -> pd.DataFrame:
@@ -133,18 +135,16 @@ def table(out: dict, o) -> None:
     """Mean over the four bases at the main cap; A8 is qwen2.5-7B only, so it is given with qwen's PEINN beside it."""
     cap = f"{TH.MAIN_CAP:g}"
     body = []
-    for v in ROWS:
-        key = v if v.startswith("A4") else f"{v}@{cap}"
-        r = out["variants"].get(key)
-        if not r:
-            continue
-        cells = [LABEL[v]] + [f"{_mean(r, k):.1f}" for k in ("ucr", "orr", "ethics", "morables")]
-        body.append(" & ".join(cells) + " \\\\")
-        if v == "A0ftM":
-            body.append("\\midrule")
-        if v in ("A9",):
-            body.append("\\midrule")
-    body.append("\\midrule")
+    for g in GROUPS:
+        for v in g:
+            key = v if v.startswith("A4") else f"{v}@{cap}"
+            r = out["variants"].get(key)
+            if not r:
+                continue
+            cells = [LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})"]
+            cells += [f"{_mean(r, k):.1f}" for k in ("ucr", "orr", "ethics", "morables")]
+            body.append(" & ".join(cells) + " \\\\")
+        body.append("\\midrule")
     for s, lab in (("Vanilla", "Vanilla (no defense)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
         r = out["defences"][s]
         body.append(" & ".join([lab] + [f"{_mean(r, k):.1f}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\")
