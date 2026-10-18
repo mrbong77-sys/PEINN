@@ -1,0 +1,34 @@
+{
+ "device": "NVIDIA GeForce RTX 5090",
+ "n_train": 52569,
+ "n_val": 6206,
+ "epochs": {
+  "energy": 3,
+  "head": 5
+ },
+ "sec": {
+  "energy_mpnet": 604.5,
+  "head_minilm": 201.2,
+  "mahalanobis": 80.5,
+  "thresholds_val": 7.5
+ },
+ "sec_total": 893.6,
+ "gpu_peak_GB": 9.273,
+ "energy_val_auroc": 0.9924698555453858,
+ "energy_val_auroc_released": 0.9924698555453858,
+ "head_val_loss": 0.22998625192394212,
+ "head_val_loss_released": 0.23177505282710995,
+ "ood_tau": 52.8082,
+ "ood_tau_released": 52.8082,
+ "same_weights": {
+  "energy": {
+   "equal": true,
+   "max_abs_diff": 0.0
+  },
+  "head": {
+   "equal": false,
+   "max_abs_diff": 0.11103640496730804
+  }
+ },
+ "not_timed": "feature extraction of the corpus (emotion and principle blocks, cached); per text it costs one gate pass (route_cost.json gate)"
+}
