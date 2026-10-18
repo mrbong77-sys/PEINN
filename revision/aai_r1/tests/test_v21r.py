@@ -1283,3 +1283,25 @@ def test_a8_peek_counts_cut_and_refusing_targets_without_touching_the_file(tmp_p
     out = json.loads((tmp_path / "out" / "a8" / "targets_peek.json").read_text(encoding="utf-8"))
     assert out["rows"] == 4 and out["classes"]["safe"]["opens_with_refusal"] == 1
     assert out["classes"]["dilemma"]["at_cap"] == 1 and set(out["examples"]) == {"safe", "dilemma"}
+
+
+def test_a8_train_cut_targets_carry_no_end_of_turn_loss():
+    from v21r import a8_train as T
+
+    class Tok:                                           # one id per character; the template wraps turns in [ ]
+        def encode(self, s, add_special_tokens=False):
+            return [ord(c) for c in s]
+
+        def apply_chat_template(self, msgs, add_generation_prompt=False, tokenize=True):
+            s = "".join(f"[{m['role'][0]}:{m['content']}]\n" for m in msgs) + ("[a:" if add_generation_prompt else "")
+            if not add_generation_prompt and msgs[-1]["role"] == "assistant":
+                s = s[:-2] + "]\n"
+            return self.encode(s)
+    tok = Tok()
+    assert T.suffix_len(tok) == 2                                         # "]" and "\n"
+    ids, lab = T.encode(tok, "hi", "abc", 100)
+    assert lab[-5:] == [ord(c) for c in "abc]\n"]
+    ids, lab = T.encode(tok, "hi", "abc", 100, cut=True, tail=2)
+    assert lab[-5:] == [ord("a"), ord("b"), ord("c"), -100, -100] and len(ids) == len(lab)
+    ids, lab = T.encode(tok, "hi", "abc", 8, cut=True, tail=2)
+    assert len(ids) == len(lab) == 8

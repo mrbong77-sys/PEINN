@@ -105,6 +105,9 @@ class _Tok:
             ids += [2 if m["role"] == "user" else 3] + [4 + (ord(ch) % 50) for ch in m["content"]] + [1]
         return ids + ([3] if add_generation_prompt else [])
 
+    def encode(self, s, add_special_tokens=False):
+        return [4 + (ord(ch) % 50) for ch in s]
+
 
 def test_encode_masks_the_prompt():
     from v21r import a8_train as T

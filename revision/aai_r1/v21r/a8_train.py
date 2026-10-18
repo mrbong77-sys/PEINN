@@ -23,6 +23,7 @@ from torch import nn
 
 SEED = 42
 HP = dict(r=16, alpha=32, dropout=0.05, lr=1e-4, epochs=1, batch=4, accum=4, warmup=0.03, max_len=1024)
+CUT = 512   # a8.GEN_OPTS num_predict: a target of this many tokens was cut by the cap and has no end of its own
 TARGETS = ("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj")
 
 
@@ -73,8 +74,22 @@ def merge(model: nn.Module, names: list[str]) -> dict:
     return ad
 
 
-def encode(tok, text: str, target: str, max_len: int) -> tuple[list[int], list[int]]:
-    """Token ids of prompt + answer in the chat template; labels -100 on the prompt (and nothing past max_len)."""
+def suffix_len(tok) -> int:
+    """Tokens the chat template puts after the answer (Qwen: <|im_end|> and a newline)."""
+    msgs = [{"role": "user", "content": "q"}]
+    p = _ids(tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=True))
+    full = _ids(tok.apply_chat_template(msgs + [{"role": "assistant", "content": "x"}], tokenize=True))
+    return len(full) - len(p) - len(tok.encode("x", add_special_tokens=False))
+
+
+def _ids(x) -> list[int]:
+    return list(x["input_ids"] if isinstance(x, dict) or hasattr(x, "keys") else x)
+
+
+def encode(tok, text: str, target: str, max_len: int, cut: bool = False, tail: int = 0) -> tuple[list[int], list[int]]:
+    """Token ids of prompt + answer in the chat template; labels -100 on the prompt (and nothing past max_len).
+    cut (DESIGN.md 10.7): the answer was stopped by the generation cap, so the template's end-of-turn tokens after it
+    (`tail` of them) carry no loss: the model learns the answer text, not to stop mid-sentence."""
     msgs = [{"role": "user", "content": text}]
     p = tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=True)
     full = tok.apply_chat_template(msgs + [{"role": "assistant", "content": target}], tokenize=True)
@@ -82,9 +97,10 @@ def encode(tok, text: str, target: str, max_len: int) -> tuple[list[int], list[i
     full = list(full["input_ids"] if isinstance(full, dict) or hasattr(full, "keys") else full)
     if full[:len(p)] != p:                                      # the template must extend the prompt
         raise ValueError("chat template: the answer does not extend the prompt tokens")
-    ids = full[:max_len]
-    labels = [-100] * min(len(p), len(ids)) + ids[len(p):]
-    return ids, labels
+    labels = [-100] * len(p) + full[len(p):]
+    if cut and tail:
+        labels[-tail:] = [-100] * tail
+    return full[:max_len], labels[:max_len]
 
 
 def batches(rows: list, size: int, pad: int):
@@ -121,13 +137,18 @@ def seed_all(s: int = SEED) -> None:
 
 def train(model, tok, data: list[dict], hp: dict, dev, log=print) -> dict:
     seed_all()
-    tr = [encode(tok, d["text"], d["target"], hp["max_len"]) for d in data if d["split"] == "train"]
-    va = [encode(tok, d["text"], d["target"], hp["max_len"]) for d in data if d["split"] == "val"]
+    tail = suffix_len(tok)
+    if not 0 < tail <= 8:
+        raise ValueError(f"chat template: {tail} tokens after the answer (expected a short end-of-turn)")
+    cut = lambda d: (d.get("tokens") or 0) >= CUT                     # noqa: E731
+    tr = [encode(tok, d["text"], d["target"], hp["max_len"], cut(d), tail) for d in data if d["split"] == "train"]
+    va = [encode(tok, d["text"], d["target"], hp["max_len"], cut(d), tail) for d in data if d["split"] == "val"]
     pad = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     names = wrap(model, hp["r"], hp["alpha"], hp["dropout"])
     params = [p for p in model.parameters() if p.requires_grad]
     rep = {"hp": hp, "wrapped": len(names), "trainable": sum(p.numel() for p in params),
-           "n": {"train": len(tr), "val": len(va)}, "val_loss_before": mean_loss(model, va, hp["batch"], pad, dev)}
+           "n": {"train": len(tr), "val": len(va)}, "cut_no_end_loss": sum(map(cut, data)), "template_tail": tail,
+           "val_loss_before": mean_loss(model, va, hp["batch"], pad, dev)}
     opt = torch.optim.AdamW(params, lr=hp["lr"], weight_decay=0.0)
     steps = math.ceil(len(tr) / hp["batch"] / hp["accum"]) * hp["epochs"]
     warm = max(1, int(round(steps * hp["warmup"])))
