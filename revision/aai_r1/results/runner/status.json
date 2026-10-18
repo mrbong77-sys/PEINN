@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 457,
+ "verdict": "완료",
+ "seq": 458,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-18 19:56:06",
- "time_utc": "2026-10-18 10:56:06",
+ "time_local": "2026-10-18 20:03:50",
+ "time_utc": "2026-10-18 11:03:50",
  "attempt": 1,
- "code": "115346e station: 임무 실행 중",
+ "code": "8de0ad5 v21r: A0ftM gate retrained from the same corpus, time and memory (DESIGN.md 37)",
  "step": "gate-retrain",
- "step_min": 7.3,
+ "step_min": 15.1,
  "since_output_min": 0.1,
- "gpu": "14602 MiB, 32607 MiB, 96 %, 70",
- "next": "단계 진행",
- "reason": "정기 보고",
+ "gpu": "1704 MiB, 32607 MiB, 5 %, 45",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -94,9 +94,8 @@
   "ethics-diag",
   "finish-check",
   "forced-export",
-  "gate-mem"
- ],
- "left": [
+  "gate-mem",
   "gate-retrain"
- ]
+ ],
+ "left": []
 }
