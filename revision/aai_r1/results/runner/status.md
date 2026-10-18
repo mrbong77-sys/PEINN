@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 17:15:35 (UTC 2026-10-18 08:15:35), 시도 4, 비컨 #448 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 412f13e station: 임무 실행 중
-- 현재 단계: a8 (171.5분째)
-- 마지막 출력 후: 0.2분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25832 MiB, 32607 MiB, 88 %, 70
+- 시각 2026-10-18 17:25:40 (UTC 2026-10-18 08:25:40), 시도 4, 비컨 #449 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: b84ff6f station: 임무 실행 중
+- 현재 단계: a8 (181.6분째)
+- 마지막 출력 후: 6.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25800 MiB, 32607 MiB, 0 %, 56
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,11 +14,6 @@
 ## 마지막 로그
 
 ```
-step 2420/3286 loss 0.2742 (7546 s, 3.2 s/step, peak reserved 24.2 GiB)
-step 2440/3286 loss 0.2445 (7606 s, 3.0 s/step, peak reserved 24.1 GiB)
-step 2460/3286 loss 0.2108 (7665 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2480/3286 loss 0.2133 (7725 s, 3.0 s/step, peak reserved 24.2 GiB)
-step 2500/3286 loss 0.2721 (7785 s, 3.0 s/step, peak reserved 24.2 GiB)
 step 2520/3286 loss 0.1816 (7845 s, 3.0 s/step, peak reserved 24.1 GiB)
 step 2540/3286 loss 0.25 (7907 s, 3.1 s/step, peak reserved 24.2 GiB)
 step 2560/3286 loss 0.225 (7967 s, 3.0 s/step, peak reserved 24.2 GiB)
@@ -54,4 +49,9 @@ step 3140/3286 loss 0.254 (9699 s, 3.0 s/step, peak reserved 24.0 GiB)
 step 3160/3286 loss 0.2381 (9757 s, 2.9 s/step, peak reserved 24.2 GiB)
 step 3180/3286 loss 0.2726 (9817 s, 3.0 s/step, peak reserved 24.2 GiB)
 step 3200/3286 loss 0.162 (9876 s, 3.0 s/step, peak reserved 24.3 GiB)
+step 3220/3286 loss 0.2834 (9938 s, 3.1 s/step, peak reserved 24.3 GiB)
+step 3240/3286 loss 0.2962 (9999 s, 3.1 s/step, peak reserved 24.1 GiB)
+step 3260/3286 loss 0.1522 (10059 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 3280/3286 loss 0.1839 (10118 s, 2.9 s/step, peak reserved 24.3 GiB)
+step 3286/3286 loss 0.0999 (10135 s, 0.9 s/step, peak reserved 24.1 GiB)
 ```
