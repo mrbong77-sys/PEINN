@@ -52,44 +52,44 @@
   "XSTest": {
    "units": 225,
    "texts": 191,
-   "Hard-block": 38.2,
+   "Hard-block": 38.222222,
    "Reasoned-Refusal": 0.0,
    "Deliberation": 0.0,
-   "Soft-reasoning": 1.8,
+   "Soft-reasoning": 1.777778,
    "Direct-Answer": 60.0
   },
   "GGB": {
    "units": 90,
    "texts": 9,
-   "Hard-block": 22.2,
+   "Hard-block": 22.222222,
    "Reasoned-Refusal": 0.0,
    "Deliberation": 0.0,
-   "Soft-reasoning": 44.4,
-   "Direct-Answer": 33.3
+   "Soft-reasoning": 44.444444,
+   "Direct-Answer": 33.333333
   },
   "Ethics": {
    "units": 400,
    "texts": 116,
-   "Hard-block": 0.8,
+   "Hard-block": 0.75,
    "Reasoned-Refusal": 0.0,
-   "Deliberation": 9.8,
+   "Deliberation": 9.75,
    "Soft-reasoning": 0.0,
    "Direct-Answer": 89.5
   },
   "MORABLES": {
    "units": 900,
    "texts": 764,
-   "Hard-block": 4.1,
+   "Hard-block": 4.111111,
    "Reasoned-Refusal": 0.0,
    "Deliberation": 0.0,
-   "Soft-reasoning": 3.7,
-   "Direct-Answer": 92.2
+   "Soft-reasoning": 3.666667,
+   "Direct-Answer": 92.222222
   }
  },
  "harmbench_energy": {
   "units": 500,
-  "mean": 8.89,
-  "sd": 1.35,
+  "mean": 8.89331,
+  "sd": 1.347999,
   "at_or_above_harm": 97.2,
   "at_or_above_extreme": 94.4
  },

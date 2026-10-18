@@ -4,8 +4,8 @@
    "harmbench": {
     "asr": {
      "mean": 3.2,
-     "ci95": 1.68,
-     "sd_runs": 2.35,
+     "ci95": 1.679238,
+     "sd_runs": 2.347576,
      "runs": 10,
      "n": 500
     }
@@ -22,45 +22,45 @@
    "xstest": {
     "orr": {
      "mean": 8.0,
-     "ci95": 3.51,
-     "sd_runs": 2.83,
+     "ci95": 3.511393,
+     "sd_runs": 2.828427,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 2.0,
-     "ci95": 3.4,
-     "sd_runs": 2.74,
+     "ci95": 3.399892,
+     "sd_runs": 2.738613,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 89.09,
-     "ci95": 1.69,
-     "sd_runs": 1.36,
+     "mean": 89.093333,
+     "ci95": 1.685631,
+     "sd_runs": 1.357776,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 58.47,
-     "ci95": 2.24,
-     "sd_runs": 1.8,
+     "mean": 58.466667,
+     "ci95": 2.239995,
+     "sd_runs": 1.804316,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 38.7,
-     "ci95": 7.07,
-     "sd_runs": 5.69,
+     "ci95": 7.068587,
+     "sd_runs": 5.693747,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 62.09,
-     "ci95": 2.67,
-     "sd_runs": 2.15,
+     "mean": 62.086667,
+     "ci95": 2.666701,
+     "sd_runs": 2.148027,
      "runs": 5,
      "n": 5
     },
@@ -69,33 +69,33 @@
     "rescored_changed": 133,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 89.09,
+     "mfa": 89.093333,
      "wvs": 89.6,
      "rqi": 38.7
     }
    },
    "morables": {
     "clean": {
-     "mean": 37.78,
-     "ci95": 13.23,
-     "sd_runs": 10.66,
+     "mean": 37.777778,
+     "ci95": 13.230793,
+     "sd_runs": 10.657403,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 33.93,
-     "ci95": 8.05,
-     "sd_runs": 6.49,
+     "mean": 33.925926,
+     "ci95": 8.053754,
+     "sd_runs": 6.487299,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.85,
+    "gap": 3.851852,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 1.73,
+   "ucr_composite": 1.733333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.0,
@@ -115,8 +115,8 @@
    "harmbench": {
     "asr": {
      "mean": 2.8,
-     "ci95": 1.68,
-     "sd_runs": 2.35,
+     "ci95": 1.679238,
+     "sd_runs": 2.347576,
      "runs": 10,
      "n": 500
     }
@@ -124,8 +124,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 3.5,
-     "ci95": 3.54,
-     "sd_runs": 2.85,
+     "ci95": 3.53872,
+     "sd_runs": 2.850439,
      "runs": 5,
      "n": 200
     }
@@ -133,15 +133,15 @@
    "xstest": {
     "orr": {
      "mean": 6.4,
-     "ci95": 2.72,
-     "sd_runs": 2.19,
+     "ci95": 2.719913,
+     "sd_runs": 2.19089,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 6.0,
-     "ci95": 5.19,
-     "sd_runs": 4.18,
+     "ci95": 5.19342,
+     "sd_runs": 4.1833,
      "runs": 5,
      "n": 100
     }
@@ -156,22 +156,22 @@
     },
     "wvs": {
      "mean": 86.4,
-     "ci95": 6.76,
-     "sd_runs": 5.44,
+     "ci95": 6.758102,
+     "sd_runs": 5.443651,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 69.3,
-     "ci95": 3.57,
-     "sd_runs": 2.87,
+     "ci95": 3.568537,
+     "sd_runs": 2.874456,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 82.57,
-     "ci95": 1.72,
-     "sd_runs": 1.39,
+     "mean": 82.566667,
+     "ci95": 1.723498,
+     "sd_runs": 1.388278,
      "runs": 5,
      "n": 5
     },
@@ -187,20 +187,20 @@
    },
    "morables": {
     "clean": {
-     "mean": 42.22,
-     "ci95": 10.32,
-     "sd_runs": 8.31,
+     "mean": 42.222222,
+     "ci95": 10.322525,
+     "sd_runs": 8.314794,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 38.52,
-     "ci95": 10.7,
-     "sd_runs": 8.62,
+     "mean": 38.518519,
+     "ci95": 10.704597,
+     "sd_runs": 8.622553,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.7,
+    "gap": 3.703703,
     "rows": 900,
     "no_stated_answer": 5,
     "refused": 0,
@@ -226,8 +226,8 @@
    "harmbench": {
     "asr": {
      "mean": 1.0,
-     "ci95": 1.01,
-     "sd_runs": 1.41,
+     "ci95": 1.011597,
+     "sd_runs": 1.414214,
      "runs": 10,
      "n": 500
     }
@@ -235,8 +235,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 4.5,
-     "ci95": 5.55,
-     "sd_runs": 4.47,
+     "ci95": 5.552,
+     "sd_runs": 4.472136,
      "runs": 5,
      "n": 200
     }
@@ -244,15 +244,15 @@
    "xstest": {
     "orr": {
      "mean": 24.0,
-     "ci95": 9.29,
-     "sd_runs": 7.48,
+     "ci95": 9.290273,
+     "sd_runs": 7.483315,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 10.0,
-     "ci95": 9.81,
-     "sd_runs": 7.91,
+     "ci95": 9.814642,
+     "sd_runs": 7.905694,
      "runs": 5,
      "n": 100
     }
@@ -260,29 +260,29 @@
    "ethics": {
     "mfa": {
      "mean": 46.04,
-     "ci95": 2.02,
-     "sd_runs": 1.62,
+     "ci95": 2.015953,
+     "sd_runs": 1.62385,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 46.27,
-     "ci95": 10.07,
-     "sd_runs": 8.12,
+     "mean": 46.266667,
+     "ci95": 10.074666,
+     "sd_runs": 8.115144,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 69.5,
-     "ci95": 3.03,
-     "sd_runs": 2.44,
+     "ci95": 3.033026,
+     "sd_runs": 2.443103,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 53.94,
-     "ci95": 3.72,
-     "sd_runs": 3.0,
+     "mean": 53.935556,
+     "ci95": 3.722186,
+     "sd_runs": 2.998221,
      "runs": 5,
      "n": 5
     },
@@ -298,26 +298,26 @@
    },
    "morables": {
     "clean": {
-     "mean": 41.33,
-     "ci95": 13.88,
-     "sd_runs": 11.18,
+     "mean": 41.333333,
+     "ci95": 13.876572,
+     "sd_runs": 11.177579,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 38.07,
-     "ci95": 11.08,
-     "sd_runs": 8.93,
+     "mean": 38.074074,
+     "ci95": 11.084944,
+     "sd_runs": 8.928922,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.26,
+    "gap": 3.259259,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 5.17,
+   "ucr_composite": 5.166667,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.0,
@@ -337,8 +337,8 @@
    "harmbench": {
     "asr": {
      "mean": 1.0,
-     "ci95": 1.22,
-     "sd_runs": 1.7,
+     "ci95": 1.215788,
+     "sd_runs": 1.699673,
      "runs": 10,
      "n": 500
     }
@@ -346,8 +346,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 1.5,
-     "ci95": 2.78,
-     "sd_runs": 2.24,
+     "ci95": 2.776,
+     "sd_runs": 2.236068,
      "runs": 5,
      "n": 200
     }
@@ -355,22 +355,22 @@
    "xstest": {
     "orr": {
      "mean": 6.4,
-     "ci95": 7.53,
-     "sd_runs": 6.07,
+     "ci95": 7.531099,
+     "sd_runs": 6.0663,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 8.0,
-     "ci95": 9.41,
-     "sd_runs": 7.58,
+     "ci95": 9.413874,
+     "sd_runs": 7.582875,
      "runs": 5,
      "n": 100
     },
     "gate_orr": {
      "mean": 4.0,
-     "ci95": 6.08,
-     "sd_runs": 4.9,
+     "ci95": 6.081911,
+     "sd_runs": 4.898979,
      "runs": 5,
      "n": 125
     }
@@ -384,23 +384,23 @@
      "n": 150
     },
     "wvs": {
-     "mean": 88.53,
-     "ci95": 4.12,
-     "sd_runs": 3.32,
+     "mean": 88.533333,
+     "ci95": 4.123707,
+     "sd_runs": 3.321646,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 67.8,
-     "ci95": 4.74,
-     "sd_runs": 3.82,
+     "ci95": 4.744646,
+     "sd_runs": 3.821812,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 82.78,
-     "ci95": 2.64,
-     "sd_runs": 2.13,
+     "mean": 82.777778,
+     "ci95": 2.639972,
+     "sd_runs": 2.126497,
      "runs": 5,
      "n": 5
     },
@@ -416,20 +416,20 @@
    },
    "morables": {
     "clean": {
-     "mean": 39.56,
-     "ci95": 12.09,
-     "sd_runs": 9.74,
+     "mean": 39.555556,
+     "ci95": 12.088504,
+     "sd_runs": 9.73729,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 36.89,
-     "ci95": 10.63,
-     "sd_runs": 8.57,
+     "mean": 36.888889,
+     "ci95": 10.633259,
+     "sd_runs": 8.56509,
      "runs": 5,
      "n": 675
     },
-    "gap": 2.67,
+    "gap": 2.666667,
     "rows": 900,
     "no_stated_answer": 6,
     "refused": 37,
@@ -455,8 +455,8 @@
    "harmbench": {
     "asr": {
      "mean": 18.6,
-     "ci95": 3.31,
-     "sd_runs": 4.62,
+     "ci95": 3.307302,
+     "sd_runs": 4.623611,
      "runs": 10,
      "n": 500
     }
@@ -464,8 +464,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 21.5,
-     "ci95": 6.44,
-     "sd_runs": 5.18,
+     "ci95": 6.435891,
+     "sd_runs": 5.18411,
      "runs": 5,
      "n": 200
     }
@@ -473,15 +473,15 @@
    "xstest": {
     "orr": {
      "mean": 2.4,
-     "ci95": 2.72,
-     "sd_runs": 2.19,
+     "ci95": 2.719913,
+     "sd_runs": 2.19089,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 20.0,
-     "ci95": 11.61,
-     "sd_runs": 9.35,
+     "ci95": 11.612841,
+     "sd_runs": 9.354143,
      "runs": 5,
      "n": 100
     }
@@ -495,23 +495,23 @@
      "n": 150
     },
     "wvs": {
-     "mean": 88.53,
-     "ci95": 4.12,
-     "sd_runs": 3.32,
+     "mean": 88.533333,
+     "ci95": 4.123707,
+     "sd_runs": 3.321646,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 70.9,
-     "ci95": 4.35,
-     "sd_runs": 3.5,
+     "ci95": 4.348451,
+     "sd_runs": 3.502678,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 83.81,
-     "ci95": 2.55,
-     "sd_runs": 2.06,
+     "mean": 83.811111,
+     "ci95": 2.552995,
+     "sd_runs": 2.056437,
      "runs": 5,
      "n": 5
     },
@@ -527,26 +527,26 @@
    },
    "morables": {
     "clean": {
-     "mean": 42.22,
-     "ci95": 11.04,
-     "sd_runs": 8.89,
+     "mean": 42.222222,
+     "ci95": 11.035244,
+     "sd_runs": 8.888889,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 39.7,
-     "ci95": 10.64,
-     "sd_runs": 8.57,
+     "mean": 39.703704,
+     "ci95": 10.637235,
+     "sd_runs": 8.568293,
      "runs": 5,
      "n": 675
     },
-    "gap": 2.52,
+    "gap": 2.518518,
     "rows": 900,
     "no_stated_answer": 7,
     "refused": 0,
     "letter_without_stated_answer": 7
    },
-   "ucr_composite": 20.03,
+   "ucr_composite": 20.033333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.0,
@@ -568,8 +568,8 @@
    "harmbench": {
     "asr": {
      "mean": 2.4,
-     "ci95": 1.31,
-     "sd_runs": 1.84,
+     "ci95": 1.314644,
+     "sd_runs": 1.837873,
      "runs": 10,
      "n": 500
     }
@@ -577,8 +577,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 1.5,
-     "ci95": 2.78,
-     "sd_runs": 2.24,
+     "ci95": 2.776,
+     "sd_runs": 2.236068,
      "runs": 5,
      "n": 200
     }
@@ -586,45 +586,45 @@
    "xstest": {
     "orr": {
      "mean": 13.6,
-     "ci95": 5.66,
-     "sd_runs": 4.56,
+     "ci95": 5.661951,
+     "sd_runs": 4.560702,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 6.0,
-     "ci95": 5.19,
-     "sd_runs": 4.18,
+     "ci95": 5.19342,
+     "sd_runs": 4.1833,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 81.95,
-     "ci95": 0.38,
-     "sd_runs": 0.31,
+     "mean": 81.946667,
+     "ci95": 0.381076,
+     "sd_runs": 0.306956,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 99.47,
-     "ci95": 1.48,
-     "sd_runs": 1.19,
+     "mean": 99.466667,
+     "ci95": 1.480533,
+     "sd_runs": 1.19257,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 72.35,
-     "ci95": 4.69,
-     "sd_runs": 3.78,
+     "ci95": 4.68951,
+     "sd_runs": 3.7774,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.59,
-     "ci95": 1.5,
-     "sd_runs": 1.2,
+     "mean": 84.587778,
+     "ci95": 1.495537,
+     "sd_runs": 1.204655,
      "runs": 5,
      "n": 5
     },
@@ -633,27 +633,27 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 81.95,
-     "wvs": 78.47,
+     "mfa": 81.946667,
+     "wvs": 78.466667,
      "rqi": 72.35
     }
    },
    "morables": {
     "clean": {
-     "mean": 53.33,
-     "ci95": 16.55,
-     "sd_runs": 13.33,
+     "mean": 53.333333,
+     "ci95": 16.552866,
+     "sd_runs": 13.333333,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 51.7,
-     "ci95": 11.86,
-     "sd_runs": 9.55,
+     "mean": 51.703704,
+     "ci95": 11.8554,
+     "sd_runs": 9.549524,
      "runs": 5,
      "n": 675
     },
-    "gap": 1.63,
+    "gap": 1.629629,
     "rows": 900,
     "no_stated_answer": 7,
     "refused": 0,
@@ -679,8 +679,8 @@
    "harmbench": {
     "asr": {
      "mean": 0.2,
-     "ci95": 0.45,
-     "sd_runs": 0.63,
+     "ci95": 0.4524,
+     "sd_runs": 0.632456,
      "runs": 10,
      "n": 500
     }
@@ -697,15 +697,15 @@
    "xstest": {
     "orr": {
      "mean": 43.2,
-     "ci95": 7.37,
-     "sd_runs": 5.93,
+     "ci95": 7.36556,
+     "sd_runs": 5.932959,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 1.0,
-     "ci95": 2.78,
-     "sd_runs": 2.24,
+     "ci95": 2.776,
+     "sd_runs": 2.236068,
      "runs": 5,
      "n": 100
     }
@@ -713,29 +713,29 @@
    "ethics": {
     "mfa": {
      "mean": 38.56,
-     "ci95": 5.16,
-     "sd_runs": 4.15,
+     "ci95": 5.156556,
+     "sd_runs": 4.153606,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 75.33,
-     "ci95": 3.7,
-     "sd_runs": 2.98,
+     "mean": 75.333333,
+     "ci95": 3.701333,
+     "sd_runs": 2.981424,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 69.4,
-     "ci95": 4.8,
-     "sd_runs": 3.86,
+     "ci95": 4.796138,
+     "sd_runs": 3.863289,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 61.1,
-     "ci95": 3.08,
-     "sd_runs": 2.48,
+     "mean": 61.097778,
+     "ci95": 3.075818,
+     "sd_runs": 2.477571,
      "runs": 5,
      "n": 5
     },
@@ -744,27 +744,27 @@
     "rescored_changed": 23,
     "rqi_floored_nemo": 4,
     "pipeline": {
-     "mfa": 41.35,
-     "wvs": 74.67,
+     "mfa": 41.346667,
+     "wvs": 74.666667,
      "rqi": 70.75
     }
    },
    "morables": {
     "clean": {
-     "mean": 50.67,
-     "ci95": 17.6,
-     "sd_runs": 14.18,
+     "mean": 50.666667,
+     "ci95": 17.600263,
+     "sd_runs": 14.177011,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 48.3,
-     "ci95": 11.18,
-     "sd_runs": 9.0,
+     "mean": 48.296296,
+     "ci95": 11.176117,
+     "sd_runs": 9.002362,
      "runs": 5,
      "n": 675
     },
-    "gap": 2.37,
+    "gap": 2.370371,
     "rows": 900,
     "no_stated_answer": 506,
     "refused": 6,
@@ -790,8 +790,8 @@
    "harmbench": {
     "asr": {
      "mean": 1.0,
-     "ci95": 0.75,
-     "sd_runs": 1.05,
+     "ci95": 0.754,
+     "sd_runs": 1.054093,
      "runs": 10,
      "n": 500
     }
@@ -799,8 +799,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 1.0,
-     "ci95": 1.7,
-     "sd_runs": 1.37,
+     "ci95": 1.699946,
+     "sd_runs": 1.369306,
      "runs": 5,
      "n": 200
     }
@@ -808,52 +808,52 @@
    "xstest": {
     "orr": {
      "mean": 12.0,
-     "ci95": 9.93,
+     "ci95": 9.93172,
      "sd_runs": 8.0,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 2.0,
-     "ci95": 3.4,
-     "sd_runs": 2.74,
+     "ci95": 3.399892,
+     "sd_runs": 2.738613,
      "runs": 5,
      "n": 100
     },
     "gate_orr": {
      "mean": 4.0,
-     "ci95": 6.08,
-     "sd_runs": 4.9,
+     "ci95": 6.081911,
+     "sd_runs": 4.898979,
      "runs": 5,
      "n": 125
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 81.95,
-     "ci95": 0.59,
-     "sd_runs": 0.48,
+     "mean": 81.946667,
+     "ci95": 0.592213,
+     "sd_runs": 0.477028,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 98.93,
-     "ci95": 1.81,
-     "sd_runs": 1.46,
+     "mean": 98.933333,
+     "ci95": 1.813276,
+     "sd_runs": 1.460593,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 72.5,
-     "ci95": 7.76,
-     "sd_runs": 6.25,
+     "ci95": 7.762259,
+     "sd_runs": 6.2525,
      "runs": 5,
      "n": 100
     },
     "composite": {
      "mean": 84.46,
-     "ci95": 3.13,
-     "sd_runs": 2.52,
+     "ci95": 3.132228,
+     "sd_runs": 2.52301,
      "runs": 5,
      "n": 5
     },
@@ -862,33 +862,33 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 81.95,
-     "wvs": 79.53,
+     "mfa": 81.946667,
+     "wvs": 79.533333,
      "rqi": 72.5
     }
    },
    "morables": {
     "clean": {
-     "mean": 49.33,
-     "ci95": 12.24,
-     "sd_runs": 9.86,
+     "mean": 49.333333,
+     "ci95": 12.244895,
+     "sd_runs": 9.863263,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 49.04,
-     "ci95": 14.0,
-     "sd_runs": 11.28,
+     "mean": 49.037037,
+     "ci95": 13.997926,
+     "sd_runs": 11.27533,
      "runs": 5,
      "n": 675
     },
-    "gap": 0.29,
+    "gap": 0.296296,
     "rows": 900,
     "no_stated_answer": 6,
     "refused": 37,
     "letter_without_stated_answer": 6
    },
-   "ucr_composite": 1.33,
+   "ucr_composite": 1.333333,
    "ggb": {
     "instrumental_harm": {
      "mean": 2.45,
@@ -908,8 +908,8 @@
    "harmbench": {
     "asr": {
      "mean": 11.0,
-     "ci95": 3.03,
-     "sd_runs": 4.24,
+     "ci95": 3.034791,
+     "sd_runs": 4.242641,
      "runs": 10,
      "n": 500
     }
@@ -917,8 +917,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 23.0,
-     "ci95": 4.6,
-     "sd_runs": 3.71,
+     "ci95": 4.603475,
+     "sd_runs": 3.708099,
      "runs": 5,
      "n": 200
     }
@@ -926,45 +926,45 @@
    "xstest": {
     "orr": {
      "mean": 10.4,
-     "ci95": 9.02,
-     "sd_runs": 7.27,
+     "ci95": 9.020932,
+     "sd_runs": 7.266361,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 6.0,
-     "ci95": 2.78,
-     "sd_runs": 2.24,
+     "ci95": 2.776,
+     "sd_runs": 2.236068,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 81.95,
-     "ci95": 0.59,
-     "sd_runs": 0.48,
+     "mean": 81.946667,
+     "ci95": 0.592213,
+     "sd_runs": 0.477028,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 98.93,
-     "ci95": 1.81,
-     "sd_runs": 1.46,
+     "mean": 98.933333,
+     "ci95": 1.813276,
+     "sd_runs": 1.460593,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 75.05,
-     "ci95": 3.76,
-     "sd_runs": 3.03,
+     "ci95": 3.759149,
+     "sd_runs": 3.027994,
      "runs": 5,
      "n": 100
     },
     "composite": {
      "mean": 85.31,
-     "ci95": 1.89,
-     "sd_runs": 1.53,
+     "ci95": 1.893591,
+     "sd_runs": 1.525288,
      "runs": 5,
      "n": 5
     },
@@ -973,33 +973,33 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 81.95,
-     "wvs": 79.53,
+     "mfa": 81.946667,
+     "wvs": 79.533333,
      "rqi": 75.05
     }
    },
    "morables": {
     "clean": {
-     "mean": 52.89,
-     "ci95": 13.14,
-     "sd_runs": 10.59,
+     "mean": 52.888889,
+     "ci95": 13.144222,
+     "sd_runs": 10.58767,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 52.3,
-     "ci95": 14.49,
-     "sd_runs": 11.67,
+     "mean": 52.296296,
+     "ci95": 14.49069,
+     "sd_runs": 11.67225,
      "runs": 5,
      "n": 675
     },
-    "gap": 0.59,
+    "gap": 0.592593,
     "rows": 900,
     "no_stated_answer": 4,
     "refused": 0,
     "letter_without_stated_answer": 4
    },
-   "ucr_composite": 13.33,
+   "ucr_composite": 13.333333,
    "ggb": {
     "instrumental_harm": {
      "mean": 2.275,
@@ -1021,8 +1021,8 @@
    "harmbench": {
     "asr": {
      "mean": 3.2,
-     "ci95": 1.93,
-     "sd_runs": 2.7,
+     "ci95": 1.931182,
+     "sd_runs": 2.699794,
      "runs": 10,
      "n": 500
     }
@@ -1030,8 +1030,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 1.5,
-     "ci95": 2.78,
-     "sd_runs": 2.24,
+     "ci95": 2.776,
+     "sd_runs": 2.236068,
      "runs": 5,
      "n": 200
     }
@@ -1039,24 +1039,24 @@
    "xstest": {
     "orr": {
      "mean": 12.0,
-     "ci95": 4.97,
+     "ci95": 4.96586,
      "sd_runs": 4.0,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 6.0,
-     "ci95": 8.09,
-     "sd_runs": 6.52,
+     "ci95": 8.093361,
+     "sd_runs": 6.519202,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 82.99,
-     "ci95": 0.52,
-     "sd_runs": 0.42,
+     "mean": 82.986667,
+     "ci95": 0.518187,
+     "sd_runs": 0.417399,
      "runs": 5,
      "n": 150
     },
@@ -1069,15 +1069,15 @@
     },
     "rqi": {
      "mean": 71.8,
-     "ci95": 3.52,
-     "sd_runs": 2.84,
+     "ci95": 3.520981,
+     "sd_runs": 2.836151,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 84.93,
-     "ci95": 1.2,
-     "sd_runs": 0.97,
+     "mean": 84.928889,
+     "ci95": 1.201364,
+     "sd_runs": 0.967699,
      "runs": 5,
      "n": 5
     },
@@ -1086,33 +1086,33 @@
     "rescored_changed": 44,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 82.99,
-     "wvs": 87.53,
+     "mfa": 82.986667,
+     "wvs": 87.533333,
      "rqi": 71.8
     }
    },
    "morables": {
     "clean": {
-     "mean": 57.33,
-     "ci95": 12.4,
-     "sd_runs": 9.99,
+     "mean": 57.333333,
+     "ci95": 12.399313,
+     "sd_runs": 9.987647,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 52.89,
-     "ci95": 11.72,
-     "sd_runs": 9.44,
+     "mean": 52.888889,
+     "ci95": 11.715476,
+     "sd_runs": 9.436816,
      "runs": 5,
      "n": 675
     },
-    "gap": 4.44,
+    "gap": 4.444444,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 3.57,
+   "ucr_composite": 3.566667,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.75,
@@ -1132,8 +1132,8 @@
    "harmbench": {
     "asr": {
      "mean": 1.2,
-     "ci95": 1.0,
-     "sd_runs": 1.4,
+     "ci95": 1.000294,
+     "sd_runs": 1.398412,
      "runs": 10,
      "n": 500
     }
@@ -1141,8 +1141,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 5.5,
-     "ci95": 4.05,
-     "sd_runs": 3.26,
+     "ci95": 4.046681,
+     "sd_runs": 3.259601,
      "runs": 5,
      "n": 200
     }
@@ -1150,8 +1150,8 @@
    "xstest": {
     "orr": {
      "mean": 49.6,
-     "ci95": 9.68,
-     "sd_runs": 7.8,
+     "ci95": 9.680243,
+     "sd_runs": 7.797435,
      "runs": 5,
      "n": 125
     },
@@ -1172,23 +1172,23 @@
      "n": 150
     },
     "wvs": {
-     "mean": 48.67,
-     "ci95": 7.96,
-     "sd_runs": 6.41,
+     "mean": 48.666667,
+     "ci95": 7.960018,
+     "sd_runs": 6.411795,
      "runs": 5,
      "n": 150
     },
     "rqi": {
-     "mean": 55.2,
-     "ci95": 6.7,
-     "sd_runs": 5.4,
+     "mean": 55.20202,
+     "ci95": 6.703774,
+     "sd_runs": 5.39989,
      "runs": 5,
      "n": 99
     },
     "composite": {
-     "mean": 34.62,
-     "ci95": 3.07,
-     "sd_runs": 2.47,
+     "mean": 34.622896,
+     "ci95": 3.066969,
+     "sd_runs": 2.470443,
      "runs": 5,
      "n": 5
     },
@@ -1198,32 +1198,32 @@
     "rqi_floored_nemo": 12,
     "pipeline": {
      "mfa": 0.0,
-     "wvs": 48.13,
-     "rqi": 57.12
+     "wvs": 48.133333,
+     "rqi": 57.121212
     }
    },
    "morables": {
     "clean": {
      "mean": 52.0,
-     "ci95": 12.12,
-     "sd_runs": 9.76,
+     "ci95": 12.119944,
+     "sd_runs": 9.762615,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 50.07,
-     "ci95": 9.41,
-     "sd_runs": 7.58,
+     "mean": 50.074074,
+     "ci95": 9.414155,
+     "sd_runs": 7.583102,
      "runs": 5,
      "n": 675
     },
-    "gap": 1.93,
+    "gap": 1.925926,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 2.23,
+   "ucr_composite": 2.233333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.0,
@@ -1243,8 +1243,8 @@
    "harmbench": {
     "asr": {
      "mean": 1.6,
-     "ci95": 1.13,
-     "sd_runs": 1.58,
+     "ci95": 1.128484,
+     "sd_runs": 1.577621,
      "runs": 10,
      "n": 500
     }
@@ -1252,8 +1252,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 2.0,
-     "ci95": 2.6,
-     "sd_runs": 2.09,
+     "ci95": 2.59671,
+     "sd_runs": 2.09165,
      "runs": 5,
      "n": 200
     }
@@ -1261,31 +1261,31 @@
    "xstest": {
     "orr": {
      "mean": 10.4,
-     "ci95": 7.53,
-     "sd_runs": 6.07,
+     "ci95": 7.531099,
+     "sd_runs": 6.0663,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 5.0,
-     "ci95": 4.39,
-     "sd_runs": 3.54,
+     "ci95": 4.389241,
+     "sd_runs": 3.535534,
      "runs": 5,
      "n": 100
     },
     "gate_orr": {
      "mean": 4.0,
-     "ci95": 6.08,
-     "sd_runs": 4.9,
+     "ci95": 6.081911,
+     "sd_runs": 4.898979,
      "runs": 5,
      "n": 125
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 82.93,
-     "ci95": 0.37,
-     "sd_runs": 0.3,
+     "mean": 82.933333,
+     "ci95": 0.370133,
+     "sd_runs": 0.298142,
      "runs": 5,
      "n": 150
     },
@@ -1298,15 +1298,15 @@
     },
     "rqi": {
      "mean": 73.55,
-     "ci95": 5.76,
-     "sd_runs": 4.64,
+     "ci95": 5.76229,
+     "sd_runs": 4.641525,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 85.49,
-     "ci95": 1.92,
-     "sd_runs": 1.54,
+     "mean": 85.494444,
+     "ci95": 1.916549,
+     "sd_runs": 1.54378,
      "runs": 5,
      "n": 5
     },
@@ -1315,33 +1315,33 @@
     "rescored_changed": 45,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 82.93,
+     "mfa": 82.933333,
      "wvs": 88.6,
      "rqi": 73.55
     }
    },
    "morables": {
     "clean": {
-     "mean": 53.33,
-     "ci95": 11.21,
-     "sd_runs": 9.03,
+     "mean": 53.333333,
+     "ci95": 11.206343,
+     "sd_runs": 9.026709,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 50.37,
-     "ci95": 11.13,
-     "sd_runs": 8.97,
+     "mean": 50.37037,
+     "ci95": 11.130624,
+     "sd_runs": 8.965717,
      "runs": 5,
      "n": 675
     },
-    "gap": 2.96,
+    "gap": 2.962963,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 37,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 2.87,
+   "ucr_composite": 2.866667,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.5,
@@ -1361,8 +1361,8 @@
    "harmbench": {
     "asr": {
      "mean": 32.6,
-     "ci95": 5.72,
-     "sd_runs": 8.0,
+     "ci95": 5.724444,
+     "sd_runs": 8.002777,
      "runs": 10,
      "n": 500
     }
@@ -1370,8 +1370,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 32.0,
-     "ci95": 2.6,
-     "sd_runs": 2.09,
+     "ci95": 2.59671,
+     "sd_runs": 2.09165,
      "runs": 5,
      "n": 200
     }
@@ -1379,24 +1379,24 @@
    "xstest": {
     "orr": {
      "mean": 4.8,
-     "ci95": 5.44,
-     "sd_runs": 4.38,
+     "ci95": 5.439827,
+     "sd_runs": 4.38178,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 10.0,
-     "ci95": 4.39,
-     "sd_runs": 3.54,
+     "ci95": 4.389241,
+     "sd_runs": 3.535534,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 82.93,
-     "ci95": 0.37,
-     "sd_runs": 0.3,
+     "mean": 82.933333,
+     "ci95": 0.370133,
+     "sd_runs": 0.298142,
      "runs": 5,
      "n": 150
     },
@@ -1409,15 +1409,15 @@
     },
     "rqi": {
      "mean": 74.25,
-     "ci95": 4.44,
-     "sd_runs": 3.58,
+     "ci95": 4.443768,
+     "sd_runs": 3.579455,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 85.73,
-     "ci95": 1.52,
-     "sd_runs": 1.22,
+     "mean": 85.727778,
+     "ci95": 1.519617,
+     "sd_runs": 1.224052,
      "runs": 5,
      "n": 5
     },
@@ -1426,33 +1426,33 @@
     "rescored_changed": 45,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 82.93,
+     "mfa": 82.933333,
      "wvs": 88.6,
      "rqi": 74.25
     }
    },
    "morables": {
     "clean": {
-     "mean": 57.33,
-     "ci95": 12.4,
-     "sd_runs": 9.99,
+     "mean": 57.333333,
+     "ci95": 12.399313,
+     "sd_runs": 9.987647,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 53.19,
-     "ci95": 12.24,
-     "sd_runs": 9.86,
+     "mean": 53.185185,
+     "ci95": 12.241441,
+     "sd_runs": 9.860481,
      "runs": 5,
      "n": 675
     },
-    "gap": 4.14,
+    "gap": 4.148148,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 24.87,
+   "ucr_composite": 24.866667,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.75,
@@ -1474,8 +1474,8 @@
    "harmbench": {
     "asr": {
      "mean": 3.0,
-     "ci95": 1.94,
-     "sd_runs": 2.71,
+     "ci95": 1.937061,
+     "sd_runs": 2.708013,
      "runs": 10,
      "n": 500
     }
@@ -1483,8 +1483,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 8.0,
-     "ci95": 4.05,
-     "sd_runs": 3.26,
+     "ci95": 4.046681,
+     "sd_runs": 3.259601,
      "runs": 5,
      "n": 200
     }
@@ -1492,45 +1492,45 @@
    "xstest": {
     "orr": {
      "mean": 5.6,
-     "ci95": 2.72,
-     "sd_runs": 2.19,
+     "ci95": 2.719913,
+     "sd_runs": 2.19089,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 8.0,
-     "ci95": 8.33,
-     "sd_runs": 6.71,
+     "ci95": 8.328,
+     "sd_runs": 6.708204,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 71.39,
-     "ci95": 0.53,
-     "sd_runs": 0.43,
+     "mean": 71.386667,
+     "ci95": 0.531241,
+     "sd_runs": 0.427915,
      "runs": 5,
      "n": 150
     },
     "wvs": {
      "mean": 42.4,
-     "ci95": 4.19,
-     "sd_runs": 3.38,
+     "ci95": 4.19371,
+     "sd_runs": 3.378034,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 64.1,
-     "ci95": 5.42,
-     "sd_runs": 4.37,
+     "ci95": 5.422978,
+     "sd_runs": 4.368209,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 59.3,
-     "ci95": 2.33,
-     "sd_runs": 1.87,
+     "mean": 59.295556,
+     "ci95": 2.325042,
+     "sd_runs": 1.872821,
      "runs": 5,
      "n": 5
     },
@@ -1539,33 +1539,33 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 71.39,
+     "mfa": 71.386667,
      "wvs": 27.8,
      "rqi": 64.1
     }
    },
    "morables": {
     "clean": {
-     "mean": 37.33,
-     "ci95": 11.1,
-     "sd_runs": 8.94,
+     "mean": 37.333333,
+     "ci95": 11.104,
+     "sd_runs": 8.944272,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 32.15,
-     "ci95": 8.47,
-     "sd_runs": 6.82,
+     "mean": 32.148148,
+     "ci95": 8.468346,
+     "sd_runs": 6.821253,
      "runs": 5,
      "n": 675
     },
-    "gap": 5.18,
+    "gap": 5.185185,
     "rows": 900,
     "no_stated_answer": 1,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 6.33,
+   "ucr_composite": 6.333333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.45,
@@ -1585,8 +1585,8 @@
    "harmbench": {
     "asr": {
      "mean": 6.2,
-     "ci95": 2.18,
-     "sd_runs": 3.05,
+     "ci95": 2.18009,
+     "sd_runs": 3.047768,
      "runs": 10,
      "n": 500
     }
@@ -1594,8 +1594,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 18.0,
-     "ci95": 5.1,
-     "sd_runs": 4.11,
+     "ci95": 5.099838,
+     "sd_runs": 4.107919,
      "runs": 5,
      "n": 200
     }
@@ -1603,15 +1603,15 @@
    "xstest": {
     "orr": {
      "mean": 33.6,
-     "ci95": 11.43,
-     "sd_runs": 9.21,
+     "ci95": 11.432268,
+     "sd_runs": 9.208692,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 2.0,
-     "ci95": 3.4,
-     "sd_runs": 2.74,
+     "ci95": 3.399892,
+     "sd_runs": 2.738613,
      "runs": 5,
      "n": 100
     }
@@ -1625,23 +1625,23 @@
      "n": 150
     },
     "wvs": {
-     "mean": 22.67,
-     "ci95": 11.89,
-     "sd_runs": 9.57,
+     "mean": 22.666667,
+     "ci95": 11.886122,
+     "sd_runs": 9.574271,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 33.35,
-     "ci95": 5.41,
-     "sd_runs": 4.36,
+     "ci95": 5.41409,
+     "sd_runs": 4.361049,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 18.67,
-     "ci95": 4.2,
-     "sd_runs": 3.38,
+     "mean": 18.672222,
+     "ci95": 4.197664,
+     "sd_runs": 3.381219,
      "runs": 5,
      "n": 5
     },
@@ -1651,32 +1651,32 @@
     "rqi_floored_nemo": 4,
     "pipeline": {
      "mfa": 0.0,
-     "wvs": 19.53,
+     "wvs": 19.533333,
      "rqi": 34.5
     }
    },
    "morables": {
     "clean": {
-     "mean": 0.44,
-     "ci95": 1.23,
-     "sd_runs": 0.99,
+     "mean": 0.444444,
+     "ci95": 1.233778,
+     "sd_runs": 0.993808,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 1.19,
-     "ci95": 0.82,
-     "sd_runs": 0.66,
+     "mean": 1.185185,
+     "ci95": 0.822519,
+     "sd_runs": 0.662539,
      "runs": 5,
      "n": 675
     },
-    "gap": -0.75,
+    "gap": -0.740741,
     "rows": 900,
     "no_stated_answer": 173,
     "refused": 695,
     "letter_without_stated_answer": 7
    },
-   "ucr_composite": 8.73,
+   "ucr_composite": 8.733333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.0,
@@ -1696,8 +1696,8 @@
    "harmbench": {
     "asr": {
      "mean": 3.2,
-     "ci95": 1.54,
-     "sd_runs": 2.15,
+     "ci95": 1.537864,
+     "sd_runs": 2.149935,
      "runs": 10,
      "n": 500
     }
@@ -1705,8 +1705,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 2.0,
-     "ci95": 2.6,
-     "sd_runs": 2.09,
+     "ci95": 2.59671,
+     "sd_runs": 2.09165,
      "runs": 5,
      "n": 200
     }
@@ -1714,52 +1714,52 @@
    "xstest": {
     "orr": {
      "mean": 4.8,
-     "ci95": 8.16,
-     "sd_runs": 6.57,
+     "ci95": 8.15974,
+     "sd_runs": 6.572671,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 4.0,
-     "ci95": 6.8,
-     "sd_runs": 5.48,
+     "ci95": 6.799784,
+     "sd_runs": 5.477226,
      "runs": 5,
      "n": 100
     },
     "gate_orr": {
      "mean": 4.0,
-     "ci95": 6.08,
-     "sd_runs": 4.9,
+     "ci95": 6.081911,
+     "sd_runs": 4.898979,
      "runs": 5,
      "n": 125
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 70.93,
+     "mean": 70.933333,
      "ci95": 0.0,
      "sd_runs": 0.0,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 42.87,
-     "ci95": 2.96,
-     "sd_runs": 2.39,
+     "mean": 42.866667,
+     "ci95": 2.963957,
+     "sd_runs": 2.387467,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 68.6,
-     "ci95": 5.47,
-     "sd_runs": 4.41,
+     "ci95": 5.471608,
+     "sd_runs": 4.40738,
      "runs": 5,
      "n": 100
     },
     "composite": {
      "mean": 60.8,
-     "ci95": 2.44,
-     "sd_runs": 1.96,
+     "ci95": 2.436223,
+     "sd_runs": 1.962378,
      "runs": 5,
      "n": 5
     },
@@ -1768,33 +1768,33 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 70.93,
-     "wvs": 28.27,
+     "mfa": 70.933333,
+     "wvs": 28.266667,
      "rqi": 68.6
     }
    },
    "morables": {
     "clean": {
-     "mean": 35.56,
-     "ci95": 7.3,
-     "sd_runs": 5.88,
+     "mean": 35.555556,
+     "ci95": 7.299128,
+     "sd_runs": 5.879447,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 31.11,
-     "ci95": 7.5,
-     "sd_runs": 6.04,
+     "mean": 31.111111,
+     "ci95": 7.499141,
+     "sd_runs": 6.040558,
      "runs": 5,
      "n": 675
     },
-    "gap": 4.45,
+    "gap": 4.444445,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 37,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 3.07,
+   "ucr_composite": 3.066667,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.95,
@@ -1814,8 +1814,8 @@
    "harmbench": {
     "asr": {
      "mean": 16.4,
-     "ci95": 3.0,
-     "sd_runs": 4.2,
+     "ci95": 3.000882,
+     "sd_runs": 4.195235,
      "runs": 10,
      "n": 500
     }
@@ -1823,8 +1823,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 6.5,
-     "ci95": 6.44,
-     "sd_runs": 5.18,
+     "ci95": 6.435891,
+     "sd_runs": 5.18411,
      "runs": 5,
      "n": 200
     }
@@ -1832,15 +1832,15 @@
    "xstest": {
     "orr": {
      "mean": 23.2,
-     "ci95": 17.7,
-     "sd_runs": 14.25,
+     "ci95": 17.696864,
+     "sd_runs": 14.254824,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 15.0,
-     "ci95": 7.6,
-     "sd_runs": 6.12,
+     "ci95": 7.602389,
+     "sd_runs": 6.123724,
      "runs": 5,
      "n": 100
     }
@@ -1848,29 +1848,29 @@
    "ethics": {
     "mfa": {
      "mean": 81.04,
-     "ci95": 4.36,
-     "sd_runs": 3.51,
+     "ci95": 4.361295,
+     "sd_runs": 3.513023,
      "runs": 5,
      "n": 150
     },
     "wvs": {
      "mean": 26.0,
-     "ci95": 17.98,
-     "sd_runs": 14.49,
+     "ci95": 17.983396,
+     "sd_runs": 14.485625,
      "runs": 5,
      "n": 150
     },
     "rqi": {
-     "mean": 62.27,
-     "ci95": 4.61,
-     "sd_runs": 3.71,
+     "mean": 62.272727,
+     "ci95": 4.606265,
+     "sd_runs": 3.710347,
      "runs": 5,
      "n": 99
     },
     "composite": {
-     "mean": 56.44,
-     "ci95": 5.1,
-     "sd_runs": 4.11,
+     "mean": 56.437576,
+     "ci95": 5.102773,
+     "sd_runs": 4.110284,
      "runs": 5,
      "n": 5
     },
@@ -1880,32 +1880,32 @@
     "rqi_floored_nemo": 1,
     "pipeline": {
      "mfa": 81.04,
-     "wvs": 56.27,
-     "rqi": 62.27
+     "wvs": 56.266667,
+     "rqi": 62.272727
     }
    },
    "morables": {
     "clean": {
-     "mean": 30.22,
-     "ci95": 13.32,
-     "sd_runs": 10.73,
+     "mean": 30.222222,
+     "ci95": 13.316801,
+     "sd_runs": 10.726683,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 26.37,
-     "ci95": 11.64,
-     "sd_runs": 9.38,
+     "mean": 26.37037,
+     "ci95": 11.643068,
+     "sd_runs": 9.378492,
      "runs": 5,
      "n": 675
     },
-    "gap": 3.85,
+    "gap": 3.851852,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,
     "letter_without_stated_answer": 0
    },
-   "ucr_composite": 12.63,
+   "ucr_composite": 12.633333,
    "ggb": {
     "instrumental_harm": {
      "mean": 1.162,
@@ -1925,8 +1925,8 @@
    "harmbench": {
     "asr": {
      "mean": 88.8,
-     "ci95": 3.52,
-     "sd_runs": 4.92,
+     "ci95": 3.51723,
+     "sd_runs": 4.91709,
      "runs": 10,
      "n": 500
     }
@@ -1934,8 +1934,8 @@
    "taxonomy": {
     "unsafe_rate": {
      "mean": 69.5,
-     "ci95": 4.05,
-     "sd_runs": 3.26,
+     "ci95": 4.046681,
+     "sd_runs": 3.259601,
      "runs": 5,
      "n": 200
     }
@@ -1943,45 +1943,45 @@
    "xstest": {
     "orr": {
      "mean": 0.8,
-     "ci95": 2.22,
-     "sd_runs": 1.79,
+     "ci95": 2.2208,
+     "sd_runs": 1.788854,
      "runs": 5,
      "n": 125
     },
     "ucr": {
      "mean": 22.0,
-     "ci95": 12.87,
-     "sd_runs": 10.37,
+     "ci95": 12.871782,
+     "sd_runs": 10.368221,
      "runs": 5,
      "n": 100
     }
    },
    "ethics": {
     "mfa": {
-     "mean": 70.93,
+     "mean": 70.933333,
      "ci95": 0.0,
      "sd_runs": 0.0,
      "runs": 5,
      "n": 150
     },
     "wvs": {
-     "mean": 42.87,
-     "ci95": 2.96,
-     "sd_runs": 2.39,
+     "mean": 42.866667,
+     "ci95": 2.963957,
+     "sd_runs": 2.387467,
      "runs": 5,
      "n": 150
     },
     "rqi": {
      "mean": 68.55,
-     "ci95": 4.34,
-     "sd_runs": 3.5,
+     "ci95": 4.341801,
+     "sd_runs": 3.49732,
      "runs": 5,
      "n": 100
     },
     "composite": {
-     "mean": 60.78,
-     "ci95": 2.15,
-     "sd_runs": 1.73,
+     "mean": 60.783333,
+     "ci95": 2.148205,
+     "sd_runs": 1.730379,
      "runs": 5,
      "n": 5
     },
@@ -1990,27 +1990,27 @@
     "rescored_changed": 0,
     "rqi_floored_nemo": 0,
     "pipeline": {
-     "mfa": 70.93,
-     "wvs": 28.27,
+     "mfa": 70.933333,
+     "wvs": 28.266667,
      "rqi": 68.55
     }
    },
    "morables": {
     "clean": {
-     "mean": 36.89,
-     "ci95": 8.85,
-     "sd_runs": 7.13,
+     "mean": 36.888889,
+     "ci95": 8.854021,
+     "sd_runs": 7.131914,
      "runs": 5,
      "n": 225
     },
     "perturbed": {
-     "mean": 32.74,
-     "ci95": 8.95,
-     "sd_runs": 7.21,
+     "mean": 32.740741,
+     "ci95": 8.949024,
+     "sd_runs": 7.208439,
      "runs": 5,
      "n": 675
     },
-    "gap": 4.15,
+    "gap": 4.148148,
     "rows": 900,
     "no_stated_answer": 0,
     "refused": 0,

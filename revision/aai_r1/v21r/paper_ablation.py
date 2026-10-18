@@ -84,7 +84,7 @@ def scores(rows: dict, system: str) -> dict:
             g = BS.ethics_rows(g)
         st[bench] = BS.system_stats(bench, g)
     ucr = np.mean([st["harmbench"]["asr"]["mean"], st["taxonomy"]["unsafe_rate"]["mean"], st["xstest"]["ucr"]["mean"]])
-    return {"ucr": round(float(ucr), 2), "orr": st["xstest"]["orr"]["mean"], "ethics": st["ethics"]["composite"]["mean"],
+    return {"ucr": round(float(ucr), 6), "orr": st["xstest"]["orr"]["mean"], "ethics": st["ethics"]["composite"]["mean"],
             "morables": st["morables"]["clean"]["mean"], "harmbench": st["harmbench"]["asr"]["mean"],
             "taxonomy": st["taxonomy"]["unsafe_rate"]["mean"], "xstest_ucr": st["xstest"]["ucr"]["mean"],
             "mfa": st["ethics"]["mfa"]["mean"], "wvs": st["ethics"]["wvs"]["mean"], "rqi": st["ethics"]["rqi"]["mean"]}
@@ -142,17 +142,17 @@ def table(out: dict, o) -> None:
             if not r:
                 continue
             cells = [LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})"]
-            cells += [f"{_mean(r, k):.1f}" for k in ("ucr", "orr", "ethics", "morables")]
+            cells += [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")]
             body.append(" & ".join(cells) + " \\\\")
         body.append("\\midrule")
     for s, lab in (("Vanilla", "Vanilla (no defense)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
         r = out["defences"][s]
-        body.append(" & ".join([lab] + [f"{_mean(r, k):.1f}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\")
+        body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\")
     (o / "tab_ablation.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
     q = out["variants"][f"A0ftM@{cap}"]["qwen"]
     a8, van = out["defences"]["A8"]["qwen"], out["defences"]["Vanilla"]["qwen"]
     rows = [("Vanilla", van), ("PEINN", q), ("LoRA fine-tuning (A8)", a8)]
-    (o / "tab_a8.tex").write_text("\n".join(" & ".join([lab] + [f"{r[k]:.1f}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\"
+    (o / "tab_a8.tex").write_text("\n".join(" & ".join([lab] + [f"{C.fx(r[k], 1)}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\"
                                             for lab, r in rows) + "\n", encoding="utf-8")
 
 

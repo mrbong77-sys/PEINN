@@ -15,11 +15,12 @@ import shutil
 from . import common as C
 from . import data as D
 
-VARIANT = {"A0": "PEINN head (T/I/F, 800-d)", "calibrator": "energy calibrator (affect 32 + mpnet 768)",
+VARIANT = {"A0": "frozen-encoder head (ablation A0; T/I/F, 800-d)", "calibrator": "energy calibrator on frozen mpnet (ablation A0)",
            "A1": "no I channel", "A2": "softmax head", "A3": "binary harm classifier (uncertainty routing)",
            "A6p": "no principle anchors", "A6e": "no emotion feature",
-           "A0ft_energy": "fine-tuned mpnet energy calibrator (A0ft, A0ftM)", "A0ft_head": "fine-tuned MiniLM T/I/F head (A0ft, A0ftM)",
-           "A0ftM_ood": "Mahalanobis OOD of A0ftM (class means, precision, tau)"}
+           "A0ft_energy": "PEINN energy calibrator with its fine-tuned mpnet (A0ftM; also A0ft)",
+           "A0ft_head": "PEINN T/I/F head with its fine-tuned MiniLM (A0ftM; also A0ft)",
+           "A0ftM_ood": "PEINN out-of-distribution statistics (A0ftM: class means, precision, tau)"}
 LIMIT = 5_000_000
 
 

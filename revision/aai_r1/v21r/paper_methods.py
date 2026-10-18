@@ -80,11 +80,11 @@ def paper_methods(check: bool = False, log=print) -> int:
     routes = {}
     for name, g in u.groupby("bench", sort=False):
         routes[name] = {"units": int(len(g)), "texts": int(g.sha.nunique()),
-                        **{t: round(100 * float((g.route == t).mean()), 1) for t in TIERS}}
+                        **{t: round(100 * float((g.route == t).mean()), 6) for t in TIERS}}
     hb = u[u.bench == "HarmBench"].E.to_numpy(dtype=float)
-    harm = {"units": int(len(hb)), "mean": round(float(hb.mean()), 2), "sd": round(float(hb.std(ddof=1)), 2),
-            "at_or_above_harm": round(100 * float((hb >= th["harm"]).mean()), 1),
-            "at_or_above_extreme": round(100 * float((hb >= th["extreme"]).mean()), 1)}
+    harm = {"units": int(len(hb)), "mean": round(float(hb.mean()), 6), "sd": round(float(hb.std(ddof=1)), 6),
+            "at_or_above_harm": round(100 * float((hb >= th["harm"]).mean()), 6),
+            "at_or_above_extreme": round(100 * float((hb >= th["extreme"]).mean()), 6)}
     sigm = {name: {k: round(float(g[k].mean()), 3) for k in ("T", "I", "F", "E")} for name, g in u.groupby("bench", sort=False)}
     out = {"variant": v, "cap": cap, "th": th, "test": test, "routes": routes, "harmbench_energy": harm,
            "signal_means": sigm, "unit_base": UNIT_BASE}
@@ -139,7 +139,7 @@ def route_cost(check: bool, o) -> None:
         r = [t[f"{b}|{tier}"]["deployed"] for b in bases]
         calls = {int(x["calls"]) for x in r}
         cells = [LABEL[tier], "/".join(str(c) for c in sorted(calls))]
-        cells += [f"{x['prompt_tokens'] + x['output_tokens']:.0f}" for x in r] + [f"{x['ollama_s']:.2f}" for x in r]
+        cells += [f"{C.fx(x['prompt_tokens'] + x['output_tokens'], 1)}" for x in r] + [f"{C.fx(x['ollama_s'], 2)}" for x in r]
         body.append(" & ".join(cells) + " \\\\")
     (o / "tab_route_cost.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
 
@@ -193,7 +193,7 @@ def figures(u: pd.DataFrame, th: dict, harm: dict, o) -> None:
     a.set_xlabel("Energy $E$")
     a.set_ylabel("Items")
     a.set_xlim(0, 10)
-    a.set_title(f"(a) HarmBench energy ($\\mu={harm['mean']:.2f}$, $\\sigma={harm['sd']:.2f}$)", fontsize=9.5)
+    a.set_title(f"(a) HarmBench energy ($\\mu={C.fx(harm['mean'], 2)}$, $\\sigma={C.fx(harm['sd'], 2)}$)", fontsize=9.5)
     a.legend(fontsize=7, frameon=False, loc="upper left")
     rows = ["$T$", "$I$", "$F$", "$E$"]
     raw = np.array([[u[u.bench == n][k].mean() for n in order] for k in ("T", "I", "F", "E")])
@@ -207,7 +207,7 @@ def figures(u: pd.DataFrame, th: dict, harm: dict, o) -> None:
     b.set_yticklabels(rows, fontsize=11)
     for i in range(4):
         for j in range(len(order)):
-            b.text(j, i, f"{raw[i, j]:.2f}" if i < 3 else f"{raw[i, j]:.1f}", ha="center", va="center", fontsize=7.5,
+            b.text(j, i, f"{C.fx(raw[i, j], 2)}" if i < 3 else f"{C.fx(raw[i, j], 1)}", ha="center", va="center", fontsize=7.5,
                    color="white" if M[i, j] > 0.6 else "#333333")
     b.set_title("(b) Mean signals per benchmark ($T,I,F\\in[0,1]$; $E\\in[0,10]$)", fontsize=9.5)
     cb = fig.colorbar(im, ax=b, fraction=0.046, pad=0.03)

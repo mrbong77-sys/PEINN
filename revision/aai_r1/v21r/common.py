@@ -50,6 +50,16 @@ TIERS = ("Hard-block", "Reasoned-Refusal", "Deliberation", "Soft-reasoning", "Di
 LOCKED = {"extreme": 9.4, "harm": 8.5, "F": 0.15, "I": 0.45, "Fref": 0.30, "soft": 8.5, "Fblk": 0.45}
 
 
+
+def fx(x, d: int = 1, sign: bool = False) -> str:
+    """x printed with d decimals, rounding half up from x's value at 6 decimals (Python's own rounding goes to even and
+    works on the binary value, so an exact 68.55 would print 68.5). Every number the paper prints goes through this."""
+    from decimal import ROUND_HALF_UP, Decimal
+    q = Decimal(repr(round(float(x), 6))).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP)
+    if q == 0:
+        q = abs(q)
+    return (f"{q:+}" if sign else f"{q}")
+
 def sha(text: str) -> str:
     """The key the PEAOS driver's lookup router uses (sha1 of the routing text)."""
     return hashlib.sha1(text.encode("utf-8")).hexdigest()
