@@ -1,12 +1,12 @@
-# v2.1 심사 대응 무인 실행 상태: 실패 후 대기
+# v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 12:24:46 (UTC 2026-10-18 03:24:46), 시도 2, 비컨 #416 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: e8424c6 v2.1 심사 대응 runner: 실행 중 (attempt 2)
-- 현재 단계: a8 (926.7분째)
-- 마지막 출력 후: 0.1분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8583 MiB, 32607 MiB, 6 %, 56
-- 다음 동작: 새 코드나 명령을 기다림
-- 사유: 코드 1
+- 시각 2026-10-18 12:24:50 (UTC 2026-10-18 03:24:50), 시도 3, 비컨 #417 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: f57591d v2.1 심사 대응 runner: 실패 후 대기 (attempt 2)
+- 현재 단계: 없음
+- 마지막 출력 후: 0.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 8582 MiB, 32607 MiB, 6 %, 55
+- 다음 동작: 단계 진행
+- 사유: 시작
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
 - 남은 단계: a8; analyze-a8; ggb-export-a8; ggb-rescore-a8; bench-export-a8; bench-stats-a8
 - 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost, analyze, release, cost-gate, analyze-cost, repeat-diff, nemo-orr-final, repeat-diff-means, nemo-orr-detail, nemo-orr-dialog, nemo-orr-totals, a8-check, ggb-export, bench-export, bench-stats, cap-check, cap-reset, matrix-cap768, analyze-cap768, ggb-export-cap768, ggb-rescore-cap768, bench-export-cap768, bench-stats-cap768
@@ -14,154 +14,44 @@
 ## 마지막 로그
 
 ```
-  26600/55902
-  26800/55902
-  27000/55902
-  27200/55902
-  27400/55902
-  27600/55902
-  27800/55902
-  28000/55902
-  28200/55902
-  28400/55902
-  28600/55902
-  28800/55902
-  29000/55902
-  29200/55902
-  29400/55902
-  29600/55902
-  29800/55902
-  30000/55902
-  30200/55902
-  30400/55902
-  30600/55902
-  30800/55902
-  31000/55902
-  31200/55902
-  31400/55902
-  31600/55902
-  31800/55902
-  32000/55902
-  32200/55902
-  32400/55902
-  32600/55902
-  32800/55902
-  33000/55902
-  33200/55902
-  33400/55902
-  33600/55902
-  33800/55902
-  34000/55902
-  34200/55902
-  34400/55902
-  34600/55902
-  34800/55902
-  35000/55902
-  35200/55902
-  35400/55902
-  35600/55902
-  35800/55902
-  36000/55902
-  36200/55902
-  36400/55902
-  36600/55902
-  36800/55902
-  37000/55902
-  37200/55902
-  37400/55902
-  37600/55902
-  37800/55902
-  38000/55902
-  38200/55902
-  38400/55902
-  38600/55902
-  38800/55902
-  39000/55902
-  39200/55902
-  39400/55902
-  39600/55902
-  no target for ced63f3969 (safe): HTTPError: HTTP Error 500: Internal Server Error
-  39800/55902
-  40000/55902
-  40200/55902
-  40400/55902
-  40600/55902
-  40800/55902
-  41000/55902
-  41200/55902
-  41400/55902
-  41600/55902
-  41800/55902
-  42000/55902
-  42200/55902
-  42400/55902
-  42600/55902
-  42800/55902
-  43000/55902
-  43200/55902
-  43400/55902
-  43600/55902
-  43800/55902
-  44000/55902
-  44200/55902
-  44400/55902
-  44600/55902
-  44800/55902
-  45000/55902
-  45200/55902
-  45400/55902
-  45600/55902
-  45800/55902
-  46000/55902
-  46200/55902
-  46400/55902
-  46600/55902
-  46800/55902
-  47000/55902
-  47200/55902
-  47400/55902
-  47600/55902
-  47800/55902
-  48000/55902
-  48200/55902
-  48400/55902
-  48600/55902
-  48800/55902
-  49000/55902
-  49200/55902
-  49400/55902
-  49600/55902
-  49800/55902
-  50000/55902
-  50200/55902
-  50400/55902
-  50600/55902
-  50800/55902
-  51000/55902
-  51200/55902
-  51400/55902
-  51600/55902
-  51800/55902
-  52000/55902
-  52200/55902
-  52400/55902
-  52600/55902
-  52800/55902
-  53000/55902
-  53200/55902
-  53400/55902
-  53600/55902
-  53800/55902
-  54000/55902
-  54200/55902
-  54400/55902
-  54600/55902
-  54800/55902
-  55000/55902
-  55200/55902
-  55400/55902
-  55600/55902
-  55800/55902
-stop: 5 items without a target (rerun to retry them)
-[v21r] a8 failed (code 1); fix it and run the same command again
+[v21r] skip nemo-fair-review (NeMo calls carry NeMo's parameters; NeMo answered every check bench (DESIGN.md 29)): finished 2026-10-16 23:42:50
+[v21r] skip r2d2-cpeg (R2D2 from the canonical checkpoint, unquantized, HarmBench prompt; the zephyr pre-test cache dropped (DESIGN.md 25)): finished 2026-10-17 00:36:42
+[v21r] skip r2d2-fingerprint (how close each R2D2 build Ollama holds comes to the submitted H02 answers (12 XSTest safe prompts, greedy; record only)): finished 2026-10-17 00:37:26
+[v21r] skip matrix-zephyr-check2 (the zephyr pre-test again with CPEG's R2D2 (check benches)): finished 2026-10-17 00:52:24
+[v21r] skip zephyr-review (the zephyr pre-test's answers: every arm and tier, no errors, few empty (DESIGN.md 24)): finished 2026-10-17 00:52:24
+[v21r] skip nemo-fair-review-zephyr (the same NeMo checks on the zephyr pre-test (DESIGN.md 29)): finished 2026-10-17 00:52:25
+[v21r] skip nemo-reset (the 'others' tag of qwen, gemma4 and gemma3 set aside so NeMo runs again (DESIGN.md 29)): finished 2026-10-17 00:52:25
+[v21r] skip matrix (PEINN forced to each tier + Vanilla, R2D2, NeMo, Llama Guard; generate then judge per base): finished 2026-10-17 10:04:06
+[v21r] skip repeat-reset (bases with error rows in the 'others' tag: that tag set aside (DESIGN.md 30)): finished 2026-10-17 10:04:19
+[v21r] skip matrix-repeat (the 'others' tag again with the Ollama repeat guard; stored answers reused (DESIGN.md 30)): finished 2026-10-17 11:18:09
+[v21r] skip repeat-review (error rows before and after, calls the repeat guard answered (DESIGN.md 30)): finished 2026-10-17 11:18:22
+[v21r] skip nemo-doc (NeMo rail verdicts per base from the driver's call log (R2)): finished 2026-10-17 10:04:11
+[v21r] skip nemo-orr-all (NeMo's XSTest safe refusals by type and rail on every base (CPU)): finished 2026-10-17 11:18:27
+[v21r] skip nemo-audit-all (NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)): finished 2026-10-17 11:18:33
+[v21r] skip cost (route cost per tier (gate time, calls, tokens)): finished 2026-10-17 13:21:39
+[v21r] skip analyze (benchmark results, curves, calibration, I construct): finished 2026-10-17 13:22:49
+[v21r] skip release (trained heads and calibrator -> results/checkpoints (data availability)): finished 2026-10-17 13:22:54
+[v21r] skip repeat-diff ('others' answers and scores before and after the repeat-guard rerun (CPU)): finished 2026-10-17 13:31:59
+[v21r] skip cost-gate (gate time again on one CPU thread (the first run used the GPU; DESIGN.md 9)): finished 2026-10-17 13:28:39
+[v21r] skip analyze-cost (benchmark results again, with the CPU gate time): finished 2026-10-17 13:29:43
+[v21r] skip nemo-orr-final (NeMo's XSTest safe refusals by rail, counted per prompt across runs (CPU)): finished 2026-10-17 13:40:17
+[v21r] skip repeat-diff-means (each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)): finished 2026-10-17 13:40:21
+[v21r] skip nemo-orr-detail (the logged NeMo calls of the XSTest safe prompts no rail event explains (CPU)): finished 2026-10-17 13:44:36
+[v21r] skip nemo-orr-dialog (NeMo dialog calls whose user turn matches no XSTest safe prompt: examples (CPU)): finished 2026-10-17 13:46:53
+[v21r] skip nemo-orr-totals (NeMo on all XSTest rows: fixed refusals against input blocks and 'ask harmful' dialogs (CPU)): finished 2026-10-17 13:51:12
+[v21r] skip a8-check (A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)): finished 2026-10-17 14:29:34
+[v21r] skip ggb-export (every GGB answer of the reported systems with the pipeline's score (CPU)): finished 2026-10-17 14:47:23
+[v21r] skip bench-export (every other bench's reported rows: answers, verdicts, scores (CPU, Eugene 2026-10-17 14:55 KST)): finished 2026-10-17 15:00:09
+[v21r] skip bench-stats (every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)): finished 2026-10-17 17:24:35
+[v21r] skip cap-check (768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)): finished 2026-10-17 18:17:25
+[v21r] skip cap-reset (Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)): finished 2026-10-17 18:17:25
+[v21r] skip matrix-cap768 (Ethics, MORABLES and GGB again on every base; unchanged calls come from the stores): finished 2026-10-17 20:56:36
+[v21r] skip analyze-cap768 (benchmark results again after the 768-token rerun): finished 2026-10-17 20:57:39
+[v21r] skip ggb-export-cap768 (GGB answers again (CPU)): finished 2026-10-17 20:57:43
+[v21r] skip ggb-rescore-cap768 (GGB re-scored again (CPU)): finished 2026-10-17 20:57:47
+[v21r] skip bench-export-cap768 (every other bench's reported rows again (CPU)): finished 2026-10-17 20:57:57
+[v21r] skip bench-stats-cap768 (every bench's statistics again (CPU, DESIGN.md 34)): finished 2026-10-17 20:58:03
+
+[v21r] ===== a8: A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model =====
+[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r a8
 ```
