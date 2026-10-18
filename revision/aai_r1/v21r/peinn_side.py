@@ -88,21 +88,53 @@ class Features:
         return 0
 
 
-def gate_time(texts: list[str], out: Path) -> int:
+def _ft_pass(ft_root: Path, ft_models: Path):
+    """DESIGN.md 37: A0ftM's fine-tuned mpnet energy and MiniLM head passes and the Mahalanobis distance, on the real
+    emotion and principle blocks of the shipped feature path (v21r.models.ft_gate_time uses zeros for them)."""
+    import torch
+    sys.path.insert(0, str(ft_root))
+    from v21r import models as VM
+    nets = {k: VM.ft_load(ft_models / f"A0ft_{k}.pt") for k in ("energy", "head")}
+    ood = torch.load(ft_models / "A0ftM_ood.pt", map_location="cpu")
+    dev = VM._dev()
+    mu, P = ood["mu"].to(dev), ood["P"].to(dev)
+
+    def run(t: str, hx: np.ndarray) -> None:
+        emo = torch.tensor(hx[:32], device=dev).unsqueeze(0)
+        pri = torch.tensor(hx[416:800], device=dev).unsqueeze(0)
+        with torch.no_grad():
+            for k, (net, tok, ck) in nets.items():
+                enc = tok([t], truncation=True, max_length=ck["max_len"], return_tensors="pt")
+                e = net.embed(enc["input_ids"].to(dev), enc["attention_mask"].to(dev))
+                net.out(torch.cat([emo, e], 1) if k == "energy" else torch.cat([emo, e, pri], 1))
+                if k == "energy":
+                    r = e - mu
+                    torch.einsum("ij,jk,ik->i", r, P, r).min()
+    return run
+
+
+def gate_time(texts: list[str], out: Path, ft_root: Path | None = None, ft_models: Path | None = None) -> int:
     """Wall time per text of the whole input gate (emotion trunk, MiniLM, principle anchors, mpnet, head, energy),
-    after five warm-up texts, on whatever device torch sees (CUDA_VISIBLE_DEVICES=-1 and V21R_CPU_THREADS for the CPU run)."""
+    after five warm-up texts, on whatever device torch sees (CUDA_VISIBLE_DEVICES=-1 and V21R_CPU_THREADS for the CPU run).
+    ft_models: A0ftM's fine-tuned passes run as well, in the same process (DESIGN.md 37)."""
     import statistics
     import torch
     f = Features(out.with_suffix(".unused.npz"))
     dev = "cuda" if torch.cuda.is_available() else "cpu"
+    ft = _ft_pass(ft_root, ft_models) if ft_models else None
+
+    def one(t: str) -> None:
+        hx = f.one(t)[0]
+        if ft:
+            ft(t, hx)
     for t in texts[:5]:
-        f.one(t)
+        one(t)
     ms = []
     for t in texts:
         if dev == "cuda":
             torch.cuda.synchronize()
         t0 = time.perf_counter()
-        f.one(t)
+        one(t)
         if dev == "cuda":
             torch.cuda.synchronize()
         ms.append((time.perf_counter() - t0) * 1000)
@@ -127,6 +159,8 @@ def main(argv=None) -> int:
     ap.add_argument("mode", choices=["features", "gate-time"])
     ap.add_argument("--texts", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--ft-root", type=Path)
+    ap.add_argument("--ft-models", type=Path)
     a = ap.parse_args(argv)
     sys.path.insert(0, os.getcwd())
     os.environ.setdefault("PEINN_NEUTRO_HEAD", "ee_neutro_head_v4.pt")
@@ -135,7 +169,7 @@ def main(argv=None) -> int:
         if os.environ.get("V21R_CPU_THREADS"):
             import torch
             torch.set_num_threads(int(os.environ["V21R_CPU_THREADS"]))
-        return gate_time(texts, a.out)
+        return gate_time(texts, a.out, a.ft_root, a.ft_models)
     return Features(a.out).run(texts)
 
 

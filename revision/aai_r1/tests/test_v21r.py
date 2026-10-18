@@ -1366,3 +1366,35 @@ def test_ethics_diag_reproduces_r2d2_and_nemo_from_the_records(tmp_path, monkeyp
     assert n["items"] == 1 and n["logged"] == 1 and n["replay_same_reply"] == 1 and n["replay_blocked"] == 1
     assert n["no_format_yes_no"] == 1 and n["no_format_blocked"] == 0 and n["verdict"] == "design"
     assert ED.no_format(mfq) == "How relevant is harm?" and res["parser_on"]["Score (0"] == "block"
+
+
+def test_forced_export_writes_every_tier_routes_signals_and_labels(tmp_path, monkeypatch):
+    """DESIGN.md 37: what the manuscript needs from the cache, read from the full cache, written under the run's dir."""
+    from v21r import finish as FI
+    from v21r import matrix as MX
+    from v21r import models as M
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    h1 = "1" * 40
+    rows = [{"tag": t, "bench": "xstest", "item_id": 1, "run_id": "x_r1_y", "neutro_posture": f"v3:{tier}|{h1}",
+             "over_refusal": 0, "arm_id": "H07", "latency_sec": 1.0, "prompt_p2": "p" * 2000}
+            for tier, t in MX.FORCED.items()] + [{"tag": "others", "bench": "xstest", "item_id": 1, "run_id": "x_r1_y",
+                                                  "neutro_posture": "", "arm_id": "H05"}]
+    seen = []
+    monkeypatch.setattr(MX, "collect", lambda check, b: (seen.append(check), pd.DataFrame(rows))[1])
+    monkeypatch.setattr(TH, "load_routes", lambda check: pd.DataFrame({"sha": [h1], "bench": ["xstest"], "A0ftM@0.03": ["Hard-block"]}))
+    sig = {"sha": np.array([h1]), "part": np.array(["bench"]), "T": np.r_[.1], "I": np.r_[.2], "F": np.r_[.9], "E": np.r_[8.]}
+    monkeypatch.setattr(M, "load_signals", lambda check, v: sig if v in ("A0ftM", "SHIPPED") else (_ for _ in ()).throw(FileNotFoundError(v)))
+    monkeypatch.setattr(D, "load_split", lambda check: pd.DataFrame({"sha": ["a", "b", "c"], "split": ["train", "val", "test"],
+                                                                     "source": ["s"] * 3, "T": [1, 0, 0], "I": [0] * 3, "F": [0, 1, 1],
+                                                                     "text": ["x", "y", "z"]}))
+    assert FI.forced_export(True) == 0
+    assert seen and not any(seen)                                    # read from the full cache
+    o = D.odir(True) / "forced"
+    x = pd.read_csv(o / "xstest_qwen.csv.gz", dtype={"sha": str})
+    assert sorted(x.tier) == sorted(MX.FORCED) and set(x.sha) == {h1}
+    assert "latency_sec" not in x and "neutro_posture" not in x and x.prompt_p2.str.len().max() == 1500
+    assert sorted(pd.read_csv(o / "split_labels.csv.gz").split) == ["test", "val"]
+    assert "text" not in pd.read_csv(o / "split_labels.csv.gz")
+    assert (o / "signals_A0ftM.csv.gz").exists() and not (o / "signals_A0.csv.gz").exists()
+    assert pd.read_csv(o / "routes.csv.gz")["A0ftM@0.03"].tolist() == ["Hard-block"]

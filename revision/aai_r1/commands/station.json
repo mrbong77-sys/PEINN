@@ -1,9 +1,9 @@
 {
- "id": "20261017T063000Z-launch",
+ "id": "20261018T105500Z-launch",
  "action": "launch",
  "steps": [],
- "note": "A8 (Reviewer 1.4): LoRA on qwen2.5-7B with the same supervision, merged, q4_K_M via llama-quantize, benches; then analyze-a8, GGB export/re-score and bench export/statistics with A8. Runs when Eugene starts the station tonight. All earlier steps are done and are skipped.",
- "issued_utc": "2026-10-17 06:30:00",
+ "note": "DESIGN.md 37 (Eugene 10-18 19:39 KST): finish-check, forced-export, gate-mem, gate-retrain. All earlier steps are done and are skipped. No Ollama.",
+ "issued_utc": "2026-10-18 10:55:00",
  "module": "ops.run",
  "args": []
 }

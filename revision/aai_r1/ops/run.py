@@ -141,6 +141,15 @@ def supp_check() -> int:
     return 0
 
 
+def finish_check() -> int:
+    """DESIGN.md 37 pre-test: the three steps on the check cache (qwen, small); any failure stops the rest."""
+    for k in ("forced-export", "gate-mem", "gate-retrain"):
+        rc = step(k, True)
+        if rc:
+            return rc
+    return 0
+
+
 def steps(check: bool) -> list:
     c = check
     run = lambda k: (lambda: step(k, c))                            # noqa: E731
@@ -267,6 +276,15 @@ def steps(check: bool) -> list:
                lambda: step("ethics-diag", True)),
               ("ethics-diag", "R2D2 WVS (replay, greedy, HF bf16 checkpoint) and NeMo MFQ self-check (replay, without "
                               "the answer format): design or harness", run("ethics-diag"))]
+        # DESIGN.md 37 (Eugene 2026-10-18 19:39 KST "위성 먼저 사용 끝내"): what the manuscript still needs from the cache
+        s += [("finish-check", "forced export, gate memory and gate retraining on the check cache first (pre-test)",
+               finish_check),
+              ("forced-export", "forced-tag rows, route tables, signals, val/test labels -> results/forced (CPU)",
+               run("forced-export")),
+              ("gate-mem", "A0ftM's whole input gate in one process: time and peak memory, GPU and one CPU thread",
+               run("gate-mem")),
+              ("gate-retrain", "A0ftM's gate trained again from the same corpus into a scratch folder: time, memory",
+               run("gate-retrain"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
