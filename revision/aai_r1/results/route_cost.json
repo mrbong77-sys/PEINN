@@ -437,5 +437,27 @@
     "wall_s": 7.502
    }
   }
+ },
+ "gate_main": {
+  "what": "shipped feature path + A0ftM fine-tuned passes + Mahalanobis in one process; the shipped frozen mpnet pass and head also run, so an upper bound for A0ftM",
+  "gpu": {
+   "device": "cuda",
+   "threads": 20,
+   "n": 200,
+   "p50_ms": 40.23,
+   "p95_ms": 69.67,
+   "mean_ms": 46.13,
+   "gpu_peak_GB": 1.184,
+   "process_peak_GB": 2.449
+  },
+  "cpu1": {
+   "device": "cpu",
+   "threads": 1,
+   "n": 200,
+   "p50_ms": 130.36,
+   "p95_ms": 169.65,
+   "mean_ms": 132.24,
+   "process_peak_GB": 2.575
+  }
  }
 }
