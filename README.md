@@ -4,6 +4,10 @@
 *"PEINN: Neutrosophic-Affective Routing for Inference-Time Artificial Moral Agents"*
 (Bongjin Jung, Joongho Chang — submitted to *__*, __).
 
+> **Revised version (2026-10, AAI manuscript 269417082, round 1):** the code, checkpoints and results of the revised
+> paper are in [`revision/aai_r1/`](revision/aai_r1/README.md). The rest of this package is the submitted version,
+> kept unchanged.
+
 PEINN is a **deterministic, inference-time routing module** that gates a
 *frozen* base language model without retraining it and without loading a second LLM. It fuses two
 learned signals through a complementary **AND-gate**:

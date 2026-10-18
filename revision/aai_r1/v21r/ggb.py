@@ -58,12 +58,45 @@ def answers(check: bool, base: str, routes: pd.DataFrame) -> pd.DataFrame:
 
 # Columns left out of the bench export: router internals and timings (the routes and analysis carry them).
 DROP = re.compile(r"^(neutro_|ee_|nla_)|^(thought_block|latency_sec|prompt_p1|llm_backend|rag_enabled|analysis_group)$")
+# The repository is public (Eugene 2026-10-18 21:48 KST, card "원문만 지우고 릴리스"): the prompts and answers of the
+# three safety benches are not re-hosted. Their text columns become a SHA-256 of the text, so a row can still be matched
+# to the private records; ids, verdicts, scores and the routing-text sha stay. No statistic reads these columns.
+SAFETY = ("harmbench", "taxonomy", "xstest")
+TEXT = re.compile(r"^(behavior|prompt_text|prompt_p2|response_p1|response_p2|judge_rationale|judge_raw|judge_hsl_reason|"
+                  r"judge_mda_reason|turn_\d+_(prompt|response))$")
+
+
+def redact(x: pd.DataFrame, bench: str) -> pd.DataFrame:
+    if bench not in SAFETY:
+        return x
+    import hashlib
+    x = x.copy()
+    for c in [c for c in x.columns if TEXT.match(c)]:
+        x[c] = x[c].map(lambda t: "" if not isinstance(t, str) or not t else "sha256:" + hashlib.sha256(t.encode("utf-8")).hexdigest())
+    return x
+
+
+def redact_public(check: bool = False, log=print) -> int:
+    """Apply redact() to the bench and forced-tag files already in results/ (one-off before the public release)."""
+    files = []
+    for part in ("benches", "forced"):
+        for f in sorted((D.odir(check) / part).glob("*_*.csv.gz")):
+            bench = f.name.split("_")[0]
+            if bench not in SAFETY:
+                continue
+            x = pd.read_csv(f, low_memory=False, dtype={"sha": str})
+            redact(x, bench).to_csv(f, index=False, encoding="utf-8", compression="gzip")
+            files.append(f)
+            log(f"  {part}/{f.name}: {len(x)} rows, text columns hashed")
+    if check:
+        return 0
+    return 0 if C.publish(files, "v21r: safety-bench prompts and answers replaced by their SHA-256 for the public release") else 1
 
 
 def bench_export(check: bool = False, log=print) -> int:
     """Eugene 2026-10-17 14:55 KST: every bench's reported rows pushed, so scoring and statistics can be checked from
-    the records. Per bench and base: answers, judge verdicts and rationales, scores. HarmBench and Taxonomy answers
-    hold harmful text, as the submitted data_v21 CSVs do; the repository stays private. -> results/benches/*.csv.gz"""
+    the records. Per bench and base: answers, judge verdicts and rationales, scores. The prompts and answers of
+    HarmBench, Taxonomy and XSTest are replaced by their SHA-256 (redact), since the repository is public. -> results/benches/*.csv.gz"""
     routes = TH.load_routes(check)
     o = D.odir(check) / "benches"
     o.mkdir(parents=True, exist_ok=True)
@@ -79,6 +112,7 @@ def bench_export(check: bool = False, log=print) -> int:
             x = x[[c for c in x.columns if not DROP.match(c)]]
             if "prompt_p2" in x:
                 x["prompt_p2"] = x.prompt_p2.astype(str).str[:1500]
+            x = redact(x, bench)
             f = o / f"{bench}_{b}.csv.gz"
             x.to_csv(f, index=False, encoding="utf-8", compression="gzip")
             files.append(f)

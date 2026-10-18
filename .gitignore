@@ -27,3 +27,5 @@ src/pea_eval/output/
 !checkpoints/*.json
 !checkpoints/*.md
 !checkpoints/MANIFEST.sha256
+# PEINN's final head and calibrator are released as byte parts; the joined .pt (python -m v21r assemble) stays local
+revision/aai_r1/results/checkpoints/final/*.pt

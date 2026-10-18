@@ -373,19 +373,38 @@ def test_nemo_fair_review_needs_forwarded_parameters(monkeypatch):
     assert MX.nemo_fair_review(log=lambda *_: None) == 1
 
 
-def test_release_copies_small_checkpoints_with_a_manifest(tmp_path, monkeypatch):
+def test_release_splits_large_checkpoints_and_assemble_restores_them(tmp_path, monkeypatch):
     from v21r import release as RL
     monkeypatch.setattr(C, "CACHE", tmp_path)
     md = D.wdir(True) / "models"
     md.mkdir(parents=True)
     (md / "A0.pt").write_bytes(b"x" * 10)
-    (md / "big.pt").write_bytes(b"x" * 10)
+    big = bytes(range(256)) * 3
+    (md / "big.pt").write_bytes(big)
     monkeypatch.setattr(RL, "LIMIT", 15)
-    (md / "big.pt").write_bytes(b"x" * 20)
+    monkeypatch.setattr(RL, "PART", 100)
     assert RL.release(check=True, log=lambda *_: None) == 0
-    man = json.loads((D.odir(True) / "checkpoints" / "manifest.json").read_text())
-    assert [r["file"] for r in man["files"]] == ["A0.pt"] and man["files"][0]["variant"].startswith("PEINN head")
-    assert [r["file"] for r in man["kept_out"]] == ["big.pt"] and (D.odir(True) / "checkpoints" / "A0.pt").exists()
+    o = D.odir(True) / "checkpoints"
+    man = json.loads((o / "manifest.json").read_text())
+    assert [r["file"] for r in man["files"]] == ["A0.pt"] and man["files"][0]["variant"].startswith("frozen-encoder head")
+    assert [r["file"] for r in man["split"]] == ["big.pt"] and len(man["split"][0]["parts"]) == 8
+    assert all(p["bytes"] <= 100 for p in man["split"][0]["parts"]) and (o / "A0.pt").exists()
+    assert RL.assemble(check=True, log=lambda *_: None) == 0 and (o / "final" / "big.pt").read_bytes() == big
+    (o / "final" / "big.pt.part03").write_bytes(b"y" * 100)
+    assert RL.assemble(check=True, log=lambda *_: None) == 1
+
+
+def test_release_refuses_a_final_checkpoint_that_is_not_the_reported_one(tmp_path, monkeypatch):
+    from v21r import release as RL
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    md = D.wdir(False) / "models"
+    md.mkdir(parents=True)
+    monkeypatch.setattr(RL, "LIMIT", 15)
+    (md / "A0ft_head.pt").write_bytes(b"retrained" * 5)
+    (md / "A0ft_energy.pt").write_bytes(b"retrained" * 5)
+    assert RL.release(check=False, log=lambda *_: None) == 1
+    assert not list((D.odir(False) / "checkpoints" / "final").glob("*.part*"))
 
 
 def _diag_fixture(tmp_path, monkeypatch):
@@ -1121,7 +1140,7 @@ def test_bench_export_writes_the_reported_rows_per_bench(tmp_path, monkeypatch):
     assert G.bench_export(log=lambda *_: None) == 0
     x = pd.read_csv(C.OUT / "benches" / "xstest_qwen.csv.gz")
     assert sorted(x.system) == ["PEINN", "Vanilla"] and "neutro_T" not in x and "ee_energy" not in x and "prompt_p1" not in x
-    assert x.prompt_p2.str.len().max() == 1500 and (C.OUT / "benches" / "harmbench_qwen.csv.gz").exists()
+    assert x.prompt_p2.str.startswith("sha256:").all() and (C.OUT / "benches" / "harmbench_qwen.csv.gz").exists()   # safety bench: hashed
 
 
 def test_bench_stats_own_score_skips_list_numbers_and_template_echoes():
@@ -1393,7 +1412,7 @@ def test_forced_export_writes_every_tier_routes_signals_and_labels(tmp_path, mon
     o = D.odir(True) / "forced"
     x = pd.read_csv(o / "xstest_qwen.csv.gz", dtype={"sha": str})
     assert sorted(x.tier) == sorted(MX.FORCED) and set(x.sha) == {h1}
-    assert "latency_sec" not in x and "neutro_posture" not in x and x.prompt_p2.str.len().max() == 1500
+    assert "latency_sec" not in x and "neutro_posture" not in x and x.prompt_p2.str.startswith("sha256:").all()
     assert sorted(pd.read_csv(o / "split_labels.csv.gz").split) == ["test", "val"]
     assert "text" not in pd.read_csv(o / "split_labels.csv.gz")
     assert (o / "signals_A0ftM.csv.gz").exists() and not (o / "signals_A0.csv.gz").exists()

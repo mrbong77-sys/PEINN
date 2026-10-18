@@ -412,3 +412,9 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - 그래서 `bench_stats`와 `paper-*` 생성기는 값을 소수 6자리로 저장하고, 표·그림·로그에서만 `fx`로 줄입니다. 경로별 비용 표의 토큰은 저장값이 소수 1자리 평균의 합이므로 소수 1자리로 씁니다.
 - 바뀐 값: Ethics RQI(68.5→68.6 등)·MFA(82.0→81.9), MORABLES 차이(+4.2→+4.1, −0.8→−0.7, +4.5→+4.4), XSTest NeMo 통합 UCR 3.2→3.3, 신뢰구간 세 개, GGB 2.27→2.28. 기록과 채점은 그대로입니다.
 - 체크포인트 manifest의 표기를 바로잡았습니다: `A0.pt`·`calibrator.pt`는 ablation A0(동결 encoder), PEINN(A0ftM)은 `A0ft_head.pt`·`A0ft_energy.pt`(git 밖, 보관 공개본에 포함)와 `A0ftM_ood.pt`.
+
+## 39. 공개 릴리스 준비 (교수님 지시 2026-10-18 21:45 KST, 카드 "원문만 지우고 릴리스" 21:48 KST)
+
+- 이 저장소는 공개입니다. `benches/`·`forced/`의 HarmBench·Taxonomy·XSTest 질문·답변·판정 근거 원문 열을 원문의 SHA-256(`sha256:…`)으로 바꿨습니다(`redact-public`, 이후 `bench-export`·`forced-export`에도 적용). id·판정·점수·라우팅 텍스트 sha는 남습니다. 바꾼 뒤 `bench-stats`·`paper-*`를 다시 돌려 모든 json·표·그림이 바이트 단위로 같음을 확인했습니다. 이전 커밋 이력에는 원문이 남아 있습니다(이력 정리는 하지 않음).
+- PEINN 최종 가중치 `A0ft_head.pt`·`A0ft_energy.pt`는 45 MiB 이하 조각으로 `results/checkpoints/final/`에 올립니다(`release`, 교수님 PC). 보고한 결과를 낸 파일의 SHA-256(FINAL)과 다르면 멈춥니다(gate-retrain 사본 차단). `assemble`이 조각을 합치고 SHA-256을 확인합니다. Git LFS를 쓰지 않아 GitHub 보관본과 Zenodo에 그대로 들어갑니다.
+- 제출본 재현 패키지(저장소 루트의 src·checkpoints·docs)는 그대로 둡니다(교수님 지시). 루트 README에 수정본 안내 세 줄, CITATION 2.2.0.

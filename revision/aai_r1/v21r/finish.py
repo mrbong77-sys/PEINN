@@ -27,7 +27,7 @@ from . import data as D
 from . import matrix as MX
 from . import models as M
 from . import theta as TH
-from .ggb import DROP
+from .ggb import DROP, redact
 
 
 def forced_export(check: bool = False, log=print) -> int:
@@ -47,6 +47,7 @@ def forced_export(check: bool = False, log=print) -> int:
             x = x[[c for c in x.columns if not DROP.match(c)]]
             if "prompt_p2" in x:
                 x["prompt_p2"] = x.prompt_p2.astype(str).str[:1500]
+            x = redact(x, bench)
             f = o / f"{bench}_{b}.csv.gz"
             x.to_csv(f, index=False, encoding="utf-8", compression="gzip")
             files.append(f)
