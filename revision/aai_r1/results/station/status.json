@@ -1,11 +1,11 @@
 {
  "verdict": "임무 실행 중",
- "seq": 347,
+ "seq": 348,
  "mission": "ops.run",
- "time_utc": "2026-10-18 01:09:02",
- "time_local": "2026-10-18 10:09:02",
- "code": "98cbbaa v2.1 심사 대응 runner: 실행 중 (attempt 2)",
- "gpu": "7376 MiB, 32607 MiB, 91 %, 68",
+ "time_utc": "2026-10-18 01:19:05",
+ "time_local": "2026-10-18 10:19:05",
+ "code": "2504495 v21r A8: look at the targets written so far (read-only)",
+ "gpu": "7255 MiB, 32607 MiB, 92 %, 67",
  "ack": "20261017T063000Z-launch launch (임무 시작 ops.run, 2026-10-17 08:24:26 UTC)",
  "reason": "정기 보고",
  "history": [
