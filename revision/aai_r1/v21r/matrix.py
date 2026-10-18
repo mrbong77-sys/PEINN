@@ -404,7 +404,8 @@ def repeat_diff(check: bool = False, log=print) -> int:
                      "means": _means_before_after(A, bench, o[o.arm_id == arm], n[n.arm_id == arm])}
                 if sc.any():
                     r["examples"] = [{"key": {c: str(v) for c, v in zip(k, row[k])},
-                                      "old": row.resp_old[:160], "new": row.resp_new[:160],
+                                      "old": C.htext(row.resp_old[:160]) if bench in C.SAFETY else row.resp_old[:160],
+                                      "new": C.htext(row.resp_new[:160]) if bench in C.SAFETY else row.resp_new[:160],
                                       **{c: [str(row.get(f"{c}_old")), str(row.get(f"{c}_new"))] for c in cols}}
                                      for _, row in g[sc].head(3).iterrows()]
                 res[f"{bench}|{arm}"] = r

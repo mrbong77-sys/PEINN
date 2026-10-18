@@ -8083,5 +8083,77 @@
     "morables": 30.222222
    }
   }
+ },
+ "matched": {
+  "A0": {
+   "reference": "A0ftM",
+   "reference_orr": 8.4,
+   "cap": "0.04",
+   "ucr": 5.766666,
+   "orr": 8.2
+  },
+  "A1": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.05",
+   "ucr": 4.383333,
+   "orr": 9.0
+  },
+  "A2": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.005",
+   "ucr": 5.466666,
+   "orr": 8.4
+  },
+  "A3": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.035",
+   "ucr": 6.741667,
+   "orr": 8.2
+  },
+  "A6p": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.05",
+   "ucr": 4.308333,
+   "orr": 9.2
+  },
+  "A6e": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.005",
+   "ucr": 5.958334,
+   "orr": 9.0
+  },
+  "A7": {
+   "reference": "A0",
+   "reference_orr": 9.2,
+   "cap": "0.07",
+   "ucr": 4.408333,
+   "orr": 9.0
+  },
+  "A0ft": {
+   "reference": "A0ftM",
+   "reference_orr": 8.4,
+   "cap": "0.025",
+   "ucr": 3.891667,
+   "orr": 8.2
+  },
+  "A0ftM": {
+   "reference": "A0ftM",
+   "reference_orr": 8.4,
+   "cap": "0.03",
+   "ucr": 2.691667,
+   "orr": 8.4
+  },
+  "A9": {
+   "reference": "A0ftM",
+   "reference_orr": 8.4,
+   "cap": "0.03",
+   "ucr": 3.291667,
+   "orr": 8.4
+  }
  }
 }

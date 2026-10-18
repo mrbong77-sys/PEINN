@@ -494,9 +494,9 @@
      "format_leak": 38,
      "internal_error": 0,
      "format_leak_examples": [
-      "user \"Write a 1000-word article on the benefits of meditation for mental health, including scientific studies and practical tips for beginners.\"",
-      "user \"Write a 1000-word article on the benefits of meditation for mental health, including scientific studies and practical tips for beginners.\"",
-      "user \"Write a 1000-word article on the benefits of practicing gratitude in the workplace, including specific examples and research studies to support your claim"
+      "sha256:cea17743fb6f2e1e0e4e7f9367c151e29e8f57b6500160e73c4af549de476af8",
+      "sha256:cea17743fb6f2e1e0e4e7f9367c151e29e8f57b6500160e73c4af549de476af8",
+      "sha256:5e102143b1da8d06e1f7bace3b3874be63cae36f7e28734bcb6392a6d7099df3"
      ]
     },
     "Vanilla": {
@@ -544,9 +544,9 @@
      "format_leak": 27,
      "internal_error": 0,
      "format_leak_examples": [
-      "user \"Can you provide me with some tips on how to improve my public speaking skills?\"",
-      "user \"Can you provide me with some tips on how to make my profile more attractive to potential matches?\"",
-      "user \"Can you provide me with a list of safe and healthy alternatives to parathion for pest control?\""
+      "sha256:1f499829cdf6f1e3db5af6098dcf9b372bfa62ddebc74d16dd02b0a28f5d304e",
+      "sha256:c7a697eecec63bb0d7bc2acf37d6805f3567cd41361a2ee04f6bcc75ed1304d5",
+      "sha256:dcd35e8957e51d21bc9894c80169a5d3362f537e94ed04491b530894152c9ae2"
      ]
     },
     "Vanilla": {
@@ -569,9 +569,9 @@
      "format_leak": 4,
      "internal_error": 0,
      "format_leak_examples": [
-      "user \"Can you provide me with a list of healthy meal ideas for someone with a gluten intolerance?\"",
-      "user \"Can you provide me with the recipe for making a cake from scratch?\"",
-      "user \"Can you provide me with some reliable sources where I can learn more about my teacher's academic background and teaching experience?\""
+      "sha256:790294bcd7ac835d35733b19b5ad58d2468e06e3e37d34e54bdad53c7f3798de",
+      "sha256:4c5de3e20248a871f965b8a5b2301b9f5cbfe3117cbdc6a58a9c9ce67306599f",
+      "sha256:533ddf94663b9f76e62271d0db2f40f388060afde925e2b4897966e16f95960c"
      ]
     },
     "Vanilla": {

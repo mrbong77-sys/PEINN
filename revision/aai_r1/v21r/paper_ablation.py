@@ -11,7 +11,10 @@ routing text (analyze.assemble). Variants:
   A9    energy only (R2-2): no head; Hard-block when the main variant's energy E >= tau, Direct-Answer otherwise; tau
         fitted on val by the first-stage rule (harmful Hard-block >= 85 %, safe Hard-block < cap) with no F condition.
 Each variant and operating point gets UCR (mean of HarmBench ASR, Taxonomy unsafe rate, XSTest UCR), XSTest ORR,
-the Ethics composite and MORABLES clean accuracy per base; A8 and the defences come from bench_stats.json.
+the Ethics composite and MORABLES clean accuracy per base; A8 and the defences come from bench_stats.json. The paper
+calls this composite the mean unsafe rate (MUR), apart from the XSTest UCR. `matched` gives, for each variant with
+operating points, the lowest mean UCR over its caps whose mean ORR does not exceed the reference's ORR at the main cap
+(PEINN for the encoder and routing variants, A0 for the component variants; R1-3, matched comparison).
 """
 from __future__ import annotations
 
@@ -121,6 +124,7 @@ def paper_ablation(check: bool = False, log=print) -> int:
                                             "ethics": v["ethics"]["composite"]["mean"], "morables": v["morables"]["clean"]["mean"]}
     out = {"main": MAIN, "energy_only": {c: {k: v for k, v in r.items() if k != "routes"} for c, r in a9.items()},
            "variants": res, "defences": ref}
+    out["matched"] = matched(out)
     C.jdump(out, o / "ablation.json")
     table(out, o)
     curves(out, caps, o)
@@ -129,6 +133,26 @@ def paper_ablation(check: bool = False, log=print) -> int:
 
 def _mean(d: dict, k: str) -> float:
     return float(np.mean([d[b][k] for b in ORDER if b in d and d[b].get(k) is not None]))
+
+
+def matched(out: dict) -> dict:
+    """Per variant with operating points: the lowest mean UCR over its caps whose mean ORR is at most the reference's
+    ORR at the main cap (PEINN for the encoder and routing variants, A0 for the component variants)."""
+    cap = f"{TH.MAIN_CAP:g}"
+    pts = {}
+    for k, r in out["variants"].items():
+        if "@" in k:
+            v, c = k.split("@")
+            pts.setdefault(v, []).append((c, _mean(r, "ucr"), _mean(r, "orr")))
+    res = {}
+    for v, p in pts.items():
+        ref = "A0" if v in GROUPS[2] else "A0ftM"
+        lim = _mean(out["variants"][f"{ref}@{cap}"], "orr")
+        ok = [x for x in p if round(x[2], 6) <= round(lim, 6)]
+        if ok:
+            c, u, r_ = min(ok, key=lambda x: (round(x[1], 6), round(x[2], 6)))
+            res[v] = {"reference": ref, "reference_orr": round(lim, 6), "cap": c, "ucr": round(u, 6), "orr": round(r_, 6)}
+    return res
 
 
 def table(out: dict, o) -> None:
@@ -143,11 +167,13 @@ def table(out: dict, o) -> None:
                 continue
             cells = [LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})"]
             cells += [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")]
+            mt = out["matched"].get(v)
+            cells.append(f"{C.fx(mt['ucr'], 1)}" if mt else "---")
             body.append(" & ".join(cells) + " \\\\")
         body.append("\\midrule")
     for s, lab in (("Vanilla", "Vanilla (no defense)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
         r = out["defences"][s]
-        body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")]) + " \\\\")
+        body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")] + ["---"]) + " \\\\")
     (o / "tab_ablation.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
     q = out["variants"][f"A0ftM@{cap}"]["qwen"]
     a8, van = out["defences"]["A8"]["qwen"], out["defences"]["Vanilla"]["qwen"]
@@ -163,6 +189,7 @@ def curves(out: dict, caps, o) -> None:
     fig, ax = plt.subplots(figsize=(6.4, 4.2))
     style = {"A0ftM": ("#009e73", "o", "-"), "A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"),
              "A2": ("#56b4e9", "v", "-"), "A3": ("#cc79a7", "D", "-"), "A5": ("#d55e00", "x", "-"),
+             "A6p": ("#0072b2", "<", "-."), "A6e": ("#999933", ">", "-."), "A7": ("#882255", "h", "-."),
              "A9": ("#000000", "+", ":")}
     for v, (col, mk, ls) in style.items():
         pts = [(_mean(out["variants"][f"{v}@{c:g}"], "orr"), _mean(out["variants"][f"{v}@{c:g}"], "ucr"))
@@ -177,7 +204,7 @@ def curves(out: dict, caps, o) -> None:
     m = out["variants"][MAIN]
     ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=90, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
     ax.set_xlabel("XSTest over-refusal rate, ORR (%)")
-    ax.set_ylabel("Unsafe-compliance rate, UCR (%)")
+    ax.set_ylabel("Mean unsafe rate, MUR (%)")
     ax.legend(fontsize=6.5, frameon=False, ncol=2)
     ax.set_xlim(left=0)
     ax.set_ylim(bottom=0)

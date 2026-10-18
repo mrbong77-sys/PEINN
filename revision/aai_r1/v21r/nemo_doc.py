@@ -176,9 +176,9 @@ def refusal_sources(check: bool, base: str) -> "pd.DataFrame":
             n.loc[idx, "source"] = src
     keys = set(n.key)                   # DESIGN.md 27: what the log holds for the prompts no rail event explains
     n.attrs["log_subj_unmatched"] = dict(collections.Counter(r["task"] for r in rows if _norm(r["subj"]) not in keys))
-    n.attrs["dialog_unmatched_examples"] = [{"subj": str(r["subj"])[:160], "text": " ".join(str(r.get("text") or "").split())[:200]}
+    n.attrs["dialog_unmatched_examples"] = [{"subj": C.htext(str(r["subj"])[:160]), "text": C.htext(" ".join(str(r.get("text") or "").split())[:200])}
                                             for r in rows if r["task"] == "dialog" and _norm(r["subj"]) not in keys][:6]
-    n.attrs["fixed_other_calls"] = {str(k)[:100]: {"fixed": int(len(g)), "calls": bykey[k][:12]}
+    n.attrs["fixed_other_calls"] = {C.htext(str(k)[:100]): {"fixed": int(len(g)), "calls": bykey[k][:12]}
                                     for k, g in list(n[n.source == "fixed_other"].groupby("key"))[:8]}
     return n
 
@@ -225,7 +225,7 @@ def nemo_orr(check: bool = False, log=print) -> int:
             by[t] = {"n": len(g), "refused": int(len(gr)), "sources": gr.source.value_counts().to_dict(),
                      "vanilla_refused": int((pd.to_numeric(g.vanilla_refused, errors="coerce") > 0).sum()),
                      "llamaguard_refused": int((pd.to_numeric(g.llamaguard_refused, errors="coerce") > 0).sum()),
-                     "examples": [str(k)[:100] for k in gr.key.head(3)]}
+                     "examples": [C.htext(str(k)[:100]) for k in gr.key.head(3)]}
         pt = {str(v): {"n": int(len(g)), "refused": int((g.source != "answered").sum())} for v, g in n.groupby("policy_term")}
         res[b] = {"n": len(n), "refused": int(ref.sum()), "sources": n[ref].source.value_counts().to_dict(),
                   "refused_also_by_vanilla": int((ref & (pd.to_numeric(n.vanilla_refused, errors="coerce") > 0)).sum()),
@@ -337,7 +337,8 @@ def nemo_audit(check: bool = False, log=print) -> int:
                     cols = [c for c in ("verdict", "over_refusal", "unsafe_compliance", "error") if c in x]
                     r["internal_error_scored"] = {c: x.loc[ie, c].astype(str).value_counts().to_dict() for c in cols}
                 if k == "NeMo":
-                    r["format_leak_examples"] = [a[:160] for a in ans[ans.str.contains(LEAK)].head(3)]
+                    r["format_leak_examples"] = [C.htext(a[:160]) if bench in C.SAFETY else a[:160]
+                                                 for a in ans[ans.str.contains(LEAK)].head(3)]
                 row[k] = r
             rb[bench] = row
         _, rows = calls(check, b)

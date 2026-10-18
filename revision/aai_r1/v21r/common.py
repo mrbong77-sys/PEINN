@@ -109,6 +109,17 @@ def teacher_class(T, I, F) -> np.ndarray:
 
 # ---- io ----------------------------------------------------------------------------------------------
 
+SAFETY = ("harmbench", "taxonomy", "xstest")      # benches whose prompts and answers are not re-hosted (DESIGN.md 39)
+
+
+def htext(t) -> str:
+    """A safety-bench text as it appears in the public results: 'sha256:<hex>' of the stored string ('' stays '';
+    a value already hashed stays as it is)."""
+    if not isinstance(t, str) or not t or t.startswith("sha256:"):
+        return t if isinstance(t, str) else ""
+    return "sha256:" + hashlib.sha256(t.encode("utf-8")).hexdigest()
+
+
 def jdump(obj, f: Path) -> Path:
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(obj, indent=1, ensure_ascii=False, default=_np) + "\n", encoding="utf-8")

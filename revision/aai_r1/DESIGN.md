@@ -418,3 +418,9 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - 이 저장소는 공개입니다. `benches/`·`forced/`의 HarmBench·Taxonomy·XSTest 질문·답변·판정 근거 원문 열을 원문의 SHA-256(`sha256:…`)으로 바꿨습니다(`redact-public`, 이후 `bench-export`·`forced-export`에도 적용). id·판정·점수·라우팅 텍스트 sha는 남습니다. 바꾼 뒤 `bench-stats`·`paper-*`를 다시 돌려 모든 json·표·그림이 바이트 단위로 같음을 확인했습니다. 이전 커밋 이력에는 원문이 남아 있습니다(이력 정리는 하지 않음).
 - PEINN 최종 가중치 `A0ft_head.pt`·`A0ft_energy.pt`는 45 MiB 이하 조각으로 `results/checkpoints/final/`에 올립니다(`release`, 교수님 PC). 보고한 결과를 낸 파일의 SHA-256(FINAL)과 다르면 멈춥니다(gate-retrain 사본 차단). `assemble`이 조각을 합치고 SHA-256을 확인합니다. Git LFS를 쓰지 않아 GitHub 보관본과 Zenodo에 그대로 들어갑니다.
 - 제출본 재현 패키지(저장소 루트의 src·checkpoints·docs)는 그대로 둡니다(교수님 지시). 루트 README에 수정본 안내 세 줄, CITATION 2.2.0.
+
+## 40. 릴리스 뒤 전수 검수 반영 (2026-10-18 22:50 KST, 교수님 지시 "전수 검수")
+
+- **같은 ORR 비교(R1-3):** `paper-ablation`이 `matched`를 냅니다. 각 변형의 운영점(상한 0.5–30%, 14개) 중 평균 ORR이 기준의 주 운영점 ORR 이하인 것의 최저 평균 UCR입니다. 기준은 encoder·라우팅 변형은 PEINN(8.4%), 구성요소 변형은 A0(9.2%)입니다. 표 12의 마지막 열입니다. 결과: A1 4.4, A2 5.5, A3 6.7, A6p 4.3, A6e 6.0, A7 4.4 (A0 5.3), A0ft 3.9, A0 5.8, A9 3.3 (PEINN 2.7). 동결 encoder에서 I를 뺀 A1은 같은 ORR에서 A0보다 낮고 Ethics·MORABLES도 높습니다. 원고와 답변서에 그대로 적었습니다.
+- 원고는 이 합성 지표를 MUR(mean unsafe rate)로 부릅니다(XSTest UCR과 구별). 곡선 그림의 축 이름도 바꾸고 A6p·A6e·A7 곡선을 더했습니다. 코드의 키 `ucr`는 그대로입니다.
+- **공개본 누락분:** `nemo/nemo_orr.json`·`.md`(거절된 XSTest 질문 예, 고정 거절 키, 대화 기록 줄), `nemo/nemo_audit.json`(HarmBench·Taxonomy·XSTest의 NeMo 답 예), `matrix/repeat_diff.json`(세 벤치 답 예)에 원문이 남아 있었습니다. `redact-public`이 이 요약들도 해시하고(`ggb.redact_summaries`), 작성 코드도 처음부터 해시합니다(`common.htext`, 이미 해시된 값은 그대로). 개수·점수는 바뀌지 않습니다. v2.2.0 릴리스 보관본에는 원문이 들어 있습니다.

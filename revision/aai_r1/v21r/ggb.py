@@ -69,10 +69,9 @@ TEXT = re.compile(r"^(behavior|prompt_text|prompt_p2|response_p1|response_p2|jud
 def redact(x: pd.DataFrame, bench: str) -> pd.DataFrame:
     if bench not in SAFETY:
         return x
-    import hashlib
     x = x.copy()
     for c in [c for c in x.columns if TEXT.match(c)]:
-        x[c] = x[c].map(lambda t: "" if not isinstance(t, str) or not t else "sha256:" + hashlib.sha256(t.encode("utf-8")).hexdigest())
+        x[c] = x[c].map(C.htext)
     return x
 
 
@@ -88,9 +87,63 @@ def redact_public(check: bool = False, log=print) -> int:
             redact(x, bench).to_csv(f, index=False, encoding="utf-8", compression="gzip")
             files.append(f)
             log(f"  {part}/{f.name}: {len(x)} rows, text columns hashed")
+    files += redact_summaries(check, log)
     if check:
         return 0
     return 0 if C.publish(files, "v21r: safety-bench prompts and answers replaced by their SHA-256 for the public release") else 1
+
+
+def redact_summaries(check: bool = False, log=print) -> list:
+    """The summaries that quote safety-bench text: NeMo's refused XSTest prompts and unmatched dialog-rail log lines
+    and the prompts keying NeMo's unmatched fixed refusals (nemo_orr.json/.md), NeMo's answers with dialog-format leaks on HarmBench, Taxonomy and XSTest (nemo_audit.json),
+    and the old/new answers of the repeat check on those benches (matrix/repeat_diff.json). Each quoted string becomes
+    the SHA-256 of the stored (possibly truncated) string; counts are unchanged. Idempotent."""
+    o, files = D.odir(check), []
+    f = o / "nemo" / "nemo_orr.json"
+    if f.exists():
+        r = C.jload(f)
+        for b in r.values():
+            for v in b.get("by_type", {}).values():
+                v["examples"] = [e if e.startswith("sha256:") else C.htext(e) for e in v.get("examples", [])]
+            if "fixed_other_calls" in b:
+                b["fixed_other_calls"] = {C.htext(k): v for k, v in b["fixed_other_calls"].items()}
+            for e in b.get("dialog_unmatched_examples", []):
+                for k in ("subj", "text"):
+                    if isinstance(e.get(k), str) and not e[k].startswith("sha256:"):
+                        e[k] = C.htext(e[k])
+        C.jdump(r, f)
+        g = o / "nemo" / "nemo_orr.md"
+        if g.exists():
+            md = g.read_text(encoding="utf-8").split("\n")
+            md = [re.sub(r"^(- [a-z_]+: )(?!sha256:)(.+)$", lambda m: m.group(1) + C.htext(m.group(2)), x) for x in md]
+            g.write_text("\n".join(md), encoding="utf-8")
+            files.append(g)
+        files.append(f)
+    f = o / "nemo" / "nemo_audit.json"
+    if f.exists():
+        r = C.jload(f)
+        for b in r.values():
+            for bench, arms in (b.get("benches", {}) if isinstance(b, dict) else {}).items():
+                if bench in SAFETY:
+                    for a in arms.values():
+                        if "format_leak_examples" in a:
+                            a["format_leak_examples"] = [e if e.startswith("sha256:") else C.htext(e) for e in a["format_leak_examples"]]
+        C.jdump(r, f)
+        files.append(f)
+    f = o / "matrix" / "repeat_diff.json"
+    if f.exists():
+        r = C.jload(f)
+        for b in r.values():
+            for key, v in b.items():
+                if key.split("|")[0] in SAFETY:
+                    for e in v.get("examples", []):
+                        for k in ("old", "new"):
+                            if isinstance(e.get(k), str) and not e[k].startswith("sha256:"):
+                                e[k] = C.htext(e[k])
+        C.jdump(r, f)
+        files.append(f)
+    log(f"  summaries: {len(files)} files with safety-bench text hashed")
+    return files
 
 
 def bench_export(check: bool = False, log=print) -> int:
