@@ -12,7 +12,7 @@ routing text (analyze.assemble). Variants:
         fitted on val by the first-stage rule (harmful Hard-block >= 85 %, safe Hard-block < cap) with no F condition.
 Each variant and operating point gets UCR (mean of HarmBench ASR, Taxonomy unsafe rate, XSTest UCR), XSTest ORR,
 the Ethics composite and MORABLES clean accuracy per base; A8 and the defences come from bench_stats.json. The paper
-calls this composite the mean unsafe rate (MUR), apart from the XSTest UCR. `matched` gives, for each variant with
+calls this composite the average attack success rate (ASR_avg), apart from the XSTest UCR. `matched` gives, for each variant with
 operating points, the lowest mean UCR over its caps whose mean ORR does not exceed the reference's ORR at the main cap
 (PEINN for the encoder and routing variants, A0 for the component variants; R1-3, matched comparison).
 """
@@ -204,7 +204,7 @@ def curves(out: dict, caps, o) -> None:
     m = out["variants"][MAIN]
     ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=90, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
     ax.set_xlabel("XSTest over-refusal rate, ORR (%)")
-    ax.set_ylabel("Mean unsafe rate, MUR (%)")
+    ax.set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)")
     ax.legend(fontsize=6.5, frameon=False, ncol=2)
     ax.set_xlim(left=0)
     ax.set_ylim(bottom=0)
