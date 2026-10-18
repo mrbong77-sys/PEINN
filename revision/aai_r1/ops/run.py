@@ -262,6 +262,11 @@ def steps(check: bool) -> list:
               ("bench-export-cap768", "every other bench's reported rows again (CPU)", run("bench-export")),
               ("bench-stats-cap768", "every bench's statistics again (CPU, DESIGN.md 34)", run("bench-stats"))]
     s += cap + a8 if CAP_FIRST else a8 + cap
+    if not check:                       # DESIGN.md 36 (Eugene 2026-10-18): R2D2 WVS and NeMo MFQ reproduced, design or harness
+        s += [("ethics-diag-check", "R2D2 WVS and NeMo MFQ reproduction on 3 items each first (pre-test, DESIGN.md 36)",
+               lambda: step("ethics-diag", True)),
+              ("ethics-diag", "R2D2 WVS (replay, greedy, HF bf16 checkpoint) and NeMo MFQ self-check (replay, without "
+                              "the answer format): design or harness", run("ethics-diag"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]

@@ -375,3 +375,16 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - 순서(교수님 카드 2026-10-17 18:09 KST "재생성 먼저"): A8 목표 응답이 10분에 600문항이라(58,775문항) 재생성을 A8 앞으로 옮겼습니다(`CAP_FIRST`, 696bd7e). A8 목표 응답은 `targets.jsonl`에서 이어 갑니다(잘린 끝 줄은 버림, f7cb025).
 - 결과(2026-10-17 20:57 KST, 5a4d2b2): 사전 점검은 최종 답 표명 40.6% → 98.9%, 이전에 답을 밝혔던 문항은 100% 같은 답, 답당 2.13초(39fb8e8). 재생성은 기반 모델마다 1차 답 1,390건(Vanilla는 같은 요청이라 DA 답을 재사용; zephyr는 R2D2 1,390건 추가), 걸린 시간 qwen 25분, gemma4 60분, gemma3 34분, zephyr 40분. gemma4 MORABLES 최종 답 없음 Vanilla 471 → 4행, PEINN 432 → 6행; clean 정답률 Vanilla 50.2 → 52.9, PEINN 47.1 → 49.3.
 - 내부 기록: qwen Ethics Vanilla·PEINN 답 392/400행이 384토큰 안에서도 이전과 다릅니다(같은 실행의 qwen MORABLES는 900행 모두 같음; gemma4·gemma3의 바뀐 답은 모두 잘린 답의 연장). 원인 미확인(추론: Ollama 동시 호출 묶음의 수치 차이). gemma4 NeMo GGB IB2 1회차 1행이 NeMo 내부 오류이며, 이전 답도 자기 점수가 없어 통계는 같습니다.
+
+## 36. R2D2 WVS·NeMo MFQ 문제의 재현과 원인 판별 (교수님 지시 2026-10-18 KST "재현 후 그것들의 설계 문제가 확실한지 확인 후 논문 풋노트로, 사소한 수치 차이는 무시")
+
+- **R2D2(H02) WVS:** 150행 중 90행이 자기 점수를 밝히지 않습니다(`bench_stats.own_score`; 거부형 "I do not have the capability to evaluate ..." 53, 진술 되풀이 13, 양식 베끼기 24). 같은 문항에서 Vanilla(zephyr:7b)는 0행입니다.
+  - 기각한 가설: R2D2 템플릿(`{{ .Prompt }}`만 있음)이 시스템 프롬프트를 버린다는 것. Ollama는 이 템플릿에서 system 메시지를 실제로 버리지만(`template/template.go` 레거시 경로), Ethics 1차 답의 시스템 프롬프트는 비어 있습니다(`MODULE_CONTEXTS["ethics"] = ""`, `nemo_audit.json` system_prompt_nonempty 0). 답 양식은 사용자 문항 안에 있습니다.
+  - 재현(`ethics-diag`): 기록된 요청을 (1) 실행 그대로(온도 0.3, seed 42 + 그 문항의 k번째 회차, 768토큰) 다시 보내 같은 답이 나오는지, (2) 온도 0, (3) `cais/zephyr_7b_r2d2`@214e3d4e를 transformers bf16로 HarmBench 프롬프트 문자열과 greedy로 돌립니다(Ollama·GGUF·F16을 모두 뺀 정본 런타임).
+  - 판정 규칙(실행 전 기록): (3)에서 문항의 30% 이상이 점수 없음이고 Vanilla 0%면 R2D2 자체의 행동(설계), (3)이 10% 이하인데 (2)가 30% 이상이면 우리 서빙 문제, 그 밖은 불분명으로 보고합니다.
+- **NeMo MFQ:** 입력 자체 점검이 MFQ 문항을 막습니다(고정 거절 qwen 53, gemma4 63, gemma3 150, zephyr 150행/150). `nemo_doc.json`에서 기반 모델의 점검 답이 "Score (0"으로 시작하는 경우가 qwen 53, gemma4 63, gemma3 150, zephyr 150건입니다. 점검 프롬프트 안에 인용된 문항의 답 양식을 모델이 따라 쓰고, nemoguardrails 0.21의 `is_content_safe`는 yes/no/safe/unsafe가 아닌 답을 모두 차단으로 읽습니다(`nemoguardrails/llm/output_parsers.py` 0.21.0 `return [False]`, 자체 점검 동작의 기본 파서 `library/self_check/input_check/actions.py:86`).
+  - 재현: 기반 모델마다 MFQ 문항의 점검 프롬프트를 라이브러리가 렌더링하는 그대로(`LLMTaskManager.render_task_prompt`) 기록된 온도·`max_tokens`로 다시 보내 기록과 같은 답·판정인지 봅니다. 대조로 답 양식 줄('Score ('가 있는 줄부터)을 뺀 문항을 보내 yes/no 답이 돌아오는지 봅니다.
+  - 판정 규칙: 기록과 같은 판정이 90% 이상, yes/no가 아닌 답은 라이브러리가 모두 차단, 양식을 빼면 80% 이상이 yes/no이면 NeMo의 설계(자체 점검을 보호 대상 모델이 하고, 읽지 못한 답은 차단)로 봅니다.
+- **사소해서 넘기는 것:** gemma4 NeMo GGB 1행의 내부 오류(이전 답도 점수 없음, 통계 동일, 35절).
+- **원고:** 설계로 판정된 것만, 확인한 수치와 관찰로 각주에 씁니다. 우리 쪽 문제로 나오면 고치고 해당 팔만 다시 돌립니다.
+- **순서:** A8 단계 묶음 뒤 `ethics-diag-check`(문항 3개씩, HF 64토큰) → `ethics-diag`. GPU는 기반 모델별 짧은 점검 호출, R2D2 약 200회 생성, HF 51회 생성입니다. 결과는 수와 짧은 발췌만 `results/diag/ethics_diag.json`에 둡니다.

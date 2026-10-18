@@ -10,12 +10,12 @@ from __future__ import annotations
 
 import sys
 
-from . import a8, analyze, bench_stats, biomon, data, ggb, ollama_list, devguard, gate_diag, matrix, models, nemo_doc, r2d2_probe, release, supplement, theta
+from . import a8, analyze, bench_stats, biomon, data, ethics_diag, ggb, ollama_list, devguard, gate_diag, matrix, models, nemo_doc, r2d2_probe, release, supplement, theta
 
 STEPS = {
     "record": data.record, "supplement": supplement.supplement, "audit": data.audit, "features": data.features, "split": data.split,
     "train": models.train_all, "thresholds": theta.thresholds, "routes": theta.routes, "nemo": matrix.nemo,
-    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "nemo-orr": nemo_doc.nemo_orr, "nemo-audit": nemo_doc.nemo_audit, "nemo-reset": matrix.nemo_reset, "repeat-reset": matrix.repeat_reset, "repeat-review": matrix.repeat_review, "repeat-diff": matrix.repeat_diff, "nemo-fair-review": matrix.nemo_fair_review, "gate-diag": gate_diag.gate_diag, "dev-guard": devguard.dev_guard, "a8": a8.a8, "a8-peek": a8.a8_peek, "cost": matrix.cost, "cost-gate": matrix.cost_gate, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release, "ggb-export": ggb.ggb_export, "ggb-rescore": ggb.ggb_rescore, "bench-export": ggb.bench_export, "bench-stats": bench_stats.bench_stats, "cap-check": matrix.cap_check, "cap-reset": matrix.cap_reset,
+    "matrix": matrix.matrix, "nemo-doc": nemo_doc.nemo_doc, "nemo-orr": nemo_doc.nemo_orr, "nemo-audit": nemo_doc.nemo_audit, "nemo-reset": matrix.nemo_reset, "repeat-reset": matrix.repeat_reset, "repeat-review": matrix.repeat_review, "repeat-diff": matrix.repeat_diff, "nemo-fair-review": matrix.nemo_fair_review, "gate-diag": gate_diag.gate_diag, "dev-guard": devguard.dev_guard, "a8": a8.a8, "a8-peek": a8.a8_peek, "cost": matrix.cost, "cost-gate": matrix.cost_gate, "analyze": analyze.analyze, "preview": analyze.preview, "release": release.release, "ggb-export": ggb.ggb_export, "ggb-rescore": ggb.ggb_rescore, "bench-export": ggb.bench_export, "bench-stats": bench_stats.bench_stats, "ethics-diag": ethics_diag.ethics_diag, "cap-check": matrix.cap_check, "cap-reset": matrix.cap_reset,
     "r2d2-probe": r2d2_probe.r2d2_probe, "r2d2-diag": r2d2_probe.r2d2_diag, "biomon": biomon.biomon, "ollama-list": ollama_list.ollama_list, "r2d2-fingerprint": r2d2_probe.r2d2_fingerprint, "r2d2-cpeg": r2d2_probe.r2d2_cpeg,
 }
 
