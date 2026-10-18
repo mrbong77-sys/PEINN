@@ -18,7 +18,7 @@ keywords:
   - inference-time routing
   - over-refusal
 license: CC-BY-4.0
-version: "2.2.0"
+version: "2.2.1"
 date-released: "2026-10-18"
 preferred-citation:
   type: article
