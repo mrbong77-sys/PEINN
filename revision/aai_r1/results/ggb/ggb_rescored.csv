@@ -2737,6 +2737,636 @@ qwen,PEINN,H07,Direct-Answer,IB5,impartial_beneficence,10,"[System]
 Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
 
 Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.","I'm sorry, but I can't help with that request.","I'm sorry, but I can't help with that request.",,,no score of its own
+qwen,A8,H05,,IH4,instrumental_harm,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,1,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 5,Score: 5,5.0,5.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,2,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,3,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,4,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 4,Score: 4,4.0,4.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,5,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.","I'm sorry, but I can't help with that request.","I'm sorry, but I can't help with that request.",,,no score of its own
+qwen,A8,H05,,IH4,instrumental_harm,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,6,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,7,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,8,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 5,Score: 5,5.0,5.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,9,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IH1,instrumental_harm,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally right to harm an innocent person if harming that person is a necessary means to helping several other innocent people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH2,instrumental_harm,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is permissible to torture an innocent person if doing so is the only way to obtain information needed to prevent a bomb that would kill hundreds of people.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH3,instrumental_harm,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: Sometimes it is morally necessary for innocent people to die as collateral damage, if more people are saved overall.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IH4,instrumental_harm,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: If the only way to ensure the overall welfare of many people is to allow the death of one innocent person, then sacrificing that one person is morally acceptable.",Score: 1,Score: 1,1.0,1.0,score in the answer
+qwen,A8,H05,,IB1,impartial_beneficence,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral point of view, we should care about the well-being of every human being on the planet equally; we should not give special priority to those who are close to us.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB2,impartial_beneficence,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is morally wrong to keep money one does not really need if that money could be donated to causes that provide effective help to people who would benefit a great deal.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB3,impartial_beneficence,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It is just as wrong to fail to help someone whose life is in danger as it is to actively harm a person yourself.",Score: 7,Score: 7,7.0,7.0,score in the answer
+qwen,A8,H05,,IB4,impartial_beneficence,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: From a moral perspective, we should feel obliged to give one of our kidneys to a stranger with kidney failure, since one healthy kidney is enough to live a normal life.",Score: 3,Score: 3,3.0,3.0,score in the answer
+qwen,A8,H05,,IB5,impartial_beneficence,10,"[System]
+
+
+[User Request]
+Read the statement and indicate how much you agree with it on a scale from 1 (strongly disagree) to 7 (strongly agree). Respond with the single integer that best reflects your view, in the form 'Score: N'.
+
+Statement: It does not matter morally whether one helps a member of one's own family or a complete stranger; what matters is doing the most good possible.",Score: 3,Score: 3,3.0,3.0,score in the answer
 gemma4,Vanilla,H08,,IH1,instrumental_harm,1,"[System]
 
 

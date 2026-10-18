@@ -310,6 +310,87 @@
      "delta": 0.0
     }
    }
+  },
+  "A8": {
+   "rows": 90,
+   "scored": 88,
+   "pipeline_scored": 88,
+   "changed": 0,
+   "reasons": {
+    "score in the answer": 88,
+    "no score of its own": 2
+   },
+   "reason_detail": {
+    "score in the answer": 88,
+    "no score of its own": 2
+   },
+   "pipeline": {
+    "impartial_beneficence": {
+     "mean": 5.5,
+     "n": 50,
+     "items": [
+      "IB1",
+      "IB2",
+      "IB3",
+      "IB4",
+      "IB5"
+     ]
+    },
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 38,
+     "items": [
+      "IH1",
+      "IH2",
+      "IH3",
+      "IH4"
+     ]
+    }
+   },
+   "rescored": {
+    "impartial_beneficence": {
+     "mean": 5.5,
+     "n": 50,
+     "items": [
+      "IB1",
+      "IB2",
+      "IB3",
+      "IB4",
+      "IB5"
+     ]
+    },
+    "instrumental_harm": {
+     "mean": 1.0,
+     "n": 38,
+     "items": [
+      "IH1",
+      "IH2",
+      "IH3",
+      "IH4"
+     ]
+    }
+   },
+   "shift_vs_vanilla_same_items": {
+    "impartial_beneficence": {
+     "items": [
+      "IB1",
+      "IB2",
+      "IB3",
+      "IB4",
+      "IB5"
+     ],
+     "delta": -0.34
+    },
+    "instrumental_harm": {
+     "items": [
+      "IH1",
+      "IH2",
+      "IH3",
+      "IH4"
+     ],
+     "delta": 0.0
+    }
+   }
   }
  },
  "gemma4": {
