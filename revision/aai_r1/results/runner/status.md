@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 14:34:08 (UTC 2026-10-18 05:34:08), 시도 4, 비컨 #432 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 0bf3206 station: 임무 실행 중
-- 현재 단계: a8 (10.1분째)
-- 마지막 출력 후: 0.4분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25554 MiB, 32607 MiB, 74 %, 71
+- 시각 2026-10-18 14:44:15 (UTC 2026-10-18 05:44:15), 시도 4, 비컨 #433 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 156f1fa station: 임무 실행 중
+- 현재 단계: a8 (20.2분째)
+- 마지막 출력 후: 0.2분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25865 MiB, 32607 MiB, 96 %, 71
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,16 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip matrix-repeat (the 'others' tag again with the Ollama repeat guard; stored answers reused (DESIGN.md 30)): finished 2026-10-17 11:18:09
-[v21r] skip repeat-review (error rows before and after, calls the repeat guard answered (DESIGN.md 30)): finished 2026-10-17 11:18:22
-[v21r] skip nemo-doc (NeMo rail verdicts per base from the driver's call log (R2)): finished 2026-10-17 10:04:11
-[v21r] skip nemo-orr-all (NeMo's XSTest safe refusals by type and rail on every base (CPU)): finished 2026-10-17 11:18:27
-[v21r] skip nemo-audit-all (NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)): finished 2026-10-17 11:18:33
-[v21r] skip cost (route cost per tier (gate time, calls, tokens)): finished 2026-10-17 13:21:39
-[v21r] skip analyze (benchmark results, curves, calibration, I construct): finished 2026-10-17 13:22:49
-[v21r] skip release (trained heads and calibrator -> results/checkpoints (data availability)): finished 2026-10-17 13:22:54
-[v21r] skip repeat-diff ('others' answers and scores before and after the repeat-guard rerun (CPU)): finished 2026-10-17 13:31:59
-[v21r] skip cost-gate (gate time again on one CPU thread (the first run used the GPU; DESIGN.md 9)): finished 2026-10-17 13:28:39
 [v21r] skip analyze-cost (benchmark results again, with the CPU gate time): finished 2026-10-17 13:29:43
 [v21r] skip nemo-orr-final (NeMo's XSTest safe refusals by rail, counted per prompt across runs (CPU)): finished 2026-10-17 13:40:17
 [v21r] skip repeat-diff-means (each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)): finished 2026-10-17 13:40:21
@@ -54,4 +44,14 @@ A8 targets: 0 skipped now (Ollama repeat limit), 3 in all
 step 20/3286 loss 1.1068 (60 s, 3.0 s/step, peak reserved 24.4 GiB)
 step 40/3286 loss 0.2586 (121 s, 3.0 s/step, peak reserved 24.1 GiB)
 step 60/3286 loss 0.2346 (180 s, 2.9 s/step, peak reserved 24.1 GiB)
+step 80/3286 loss 0.2859 (242 s, 3.1 s/step, peak reserved 24.1 GiB)
+step 100/3286 loss 0.2606 (307 s, 3.3 s/step, peak reserved 24.1 GiB)
+step 120/3286 loss 0.3185 (369 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 140/3286 loss 0.3179 (430 s, 3.1 s/step, peak reserved 24.3 GiB)
+step 160/3286 loss 0.2794 (491 s, 3.1 s/step, peak reserved 24.1 GiB)
+step 180/3286 loss 0.2254 (550 s, 3.0 s/step, peak reserved 24.1 GiB)
+step 200/3286 loss 0.2631 (611 s, 3.0 s/step, peak reserved 24.5 GiB)
+step 220/3286 loss 0.2437 (670 s, 2.9 s/step, peak reserved 24.3 GiB)
+step 240/3286 loss 0.2107 (732 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 260/3286 loss 0.2657 (794 s, 3.1 s/step, peak reserved 24.2 GiB)
 ```
