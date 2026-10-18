@@ -49,18 +49,83 @@
    "variant": "energy calibrator on frozen mpnet (ablation A0)"
   }
  ],
- "kept_out": [
+ "split": [
   {
    "file": "A0ft_energy.pt",
    "bytes": 438225905,
    "sha256": "a3927ff4c1ff0e06fdd8312d6356c98038cc3f626f42671c1bff3d76ebfd521d",
-   "variant": "PEINN energy calibrator with its fine-tuned mpnet (A0ftM; also A0ft)"
+   "variant": "PEINN energy calibrator with its fine-tuned mpnet (A0ftM; also A0ft)",
+   "parts": [
+    {
+     "file": "A0ft_energy.pt.part00",
+     "bytes": 47185920,
+     "sha256": "02b84e742e1fe2c00517ee8de02616da3b2a0b59bf3a8f50a05335caa207b06e"
+    },
+    {
+     "file": "A0ft_energy.pt.part01",
+     "bytes": 47185920,
+     "sha256": "40c23cf7d173379e40a963a624f5b5f5de654c186493e5a8e5f5f07e262a44c9"
+    },
+    {
+     "file": "A0ft_energy.pt.part02",
+     "bytes": 47185920,
+     "sha256": "9f4e45d282b2002e767123619404a8f66ee5a1c4ef9fd57bb4e92c04b06e0e13"
+    },
+    {
+     "file": "A0ft_energy.pt.part03",
+     "bytes": 47185920,
+     "sha256": "ce85c74c8caa76b8f54dbe048e431995e4795dd6bbeb1dfaef1190166a6b4567"
+    },
+    {
+     "file": "A0ft_energy.pt.part04",
+     "bytes": 47185920,
+     "sha256": "2df28727c235fd18206455576a414195774139e15694810281422b4f833fa044"
+    },
+    {
+     "file": "A0ft_energy.pt.part05",
+     "bytes": 47185920,
+     "sha256": "35e8c14c8bf7ed9aec6b02421c0f318f1430a5d0ac831157104cb2aad90d804f"
+    },
+    {
+     "file": "A0ft_energy.pt.part06",
+     "bytes": 47185920,
+     "sha256": "caefcb7a9734e9117edb80154ecb67eb6469036d5086ca04beebf00e4736c9f3"
+    },
+    {
+     "file": "A0ft_energy.pt.part07",
+     "bytes": 47185920,
+     "sha256": "bc0ca73e2820745a47d2f1d5ec33c17b09d4abfdbd3db5fe7a316b6bce7df8e4"
+    },
+    {
+     "file": "A0ft_energy.pt.part08",
+     "bytes": 47185920,
+     "sha256": "ca4dd900858bedb4e747c809aee28f7eb5c9e532ac376e75d135f876c5837bd2"
+    },
+    {
+     "file": "A0ft_energy.pt.part09",
+     "bytes": 13552625,
+     "sha256": "d3d08fee56c7a2fd78aae30c1fb031f68262a6318907e03e5b6f1cbad81f40a1"
+    }
+   ]
   },
   {
    "file": "A0ft_head.pt",
    "bytes": 91332299,
    "sha256": "27ccc93336c110b232234d0e745b0ecbe13e4f5753f42efa35c970ba67c0bd04",
-   "variant": "PEINN T/I/F head with its fine-tuned MiniLM (A0ftM; also A0ft)"
+   "variant": "PEINN T/I/F head with its fine-tuned MiniLM (A0ftM; also A0ft)",
+   "parts": [
+    {
+     "file": "A0ft_head.pt.part00",
+     "bytes": 47185920,
+     "sha256": "f26677102a1db1fb927d3c621e3ef4017307a69215e29d620c65ee556757415b"
+    },
+    {
+     "file": "A0ft_head.pt.part01",
+     "bytes": 44146379,
+     "sha256": "4c0d7005c20ea58d39b89477ce476c9c96997f0e898518b90e69380aba8d3edb"
+    }
+   ]
   }
- ]
+ ],
+ "kept_out": []
 }
