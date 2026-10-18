@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 14:54:21 (UTC 2026-10-18 05:54:21), 시도 4, 비컨 #434 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 731a7e6 station: 임무 실행 중
-- 현재 단계: a8 (30.3분째)
-- 마지막 출력 후: -0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 25632 MiB, 32607 MiB, 96 %, 69
+- 시각 2026-10-18 15:04:26 (UTC 2026-10-18 06:04:26), 시도 4, 비컨 #435 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 43b7bce station: 임무 실행 중
+- 현재 단계: a8 (40.4분째)
+- 마지막 출력 후: 1.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 24001 MiB, 32607 MiB, 88 %, 70
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,15 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip bench-stats (every bench's statistics from the records, submitted definitions (CPU, DESIGN.md 34)): finished 2026-10-17 17:24:35
-[v21r] skip cap-check (768-token first answers: pre-test on gemma4 MORABLES run 1 (stops the rest if it fails)): finished 2026-10-17 18:17:25
-[v21r] skip cap-reset (Ethics, MORABLES and GGB set aside in every tag (answers kept in archive_cap384/)): finished 2026-10-17 18:17:25
-[v21r] skip matrix-cap768 (Ethics, MORABLES and GGB again on every base; unchanged calls come from the stores): finished 2026-10-17 20:56:36
-[v21r] skip analyze-cap768 (benchmark results again after the 768-token rerun): finished 2026-10-17 20:57:39
-[v21r] skip ggb-export-cap768 (GGB answers again (CPU)): finished 2026-10-17 20:57:43
-[v21r] skip ggb-rescore-cap768 (GGB re-scored again (CPU)): finished 2026-10-17 20:57:47
-[v21r] skip bench-export-cap768 (every other bench's reported rows again (CPU)): finished 2026-10-17 20:57:57
-[v21r] skip bench-stats-cap768 (every bench's statistics again (CPU, DESIGN.md 34)): finished 2026-10-17 20:58:03
 
 [v21r] ===== a8: A8: LoRA on qwen2.5-7B with the same supervision; benches on the merged model =====
 [ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r a8
@@ -54,4 +45,13 @@ step 380/3286 loss 0.2662 (1176 s, 3.8 s/step, peak reserved 24.2 GiB)
 step 400/3286 loss 0.2104 (1258 s, 4.1 s/step, peak reserved 24.1 GiB)
 step 420/3286 loss 0.2742 (1341 s, 4.2 s/step, peak reserved 24.2 GiB)
 step 440/3286 loss 0.2651 (1414 s, 3.7 s/step, peak reserved 24.2 GiB)
+step 460/3286 loss 0.2957 (1476 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 480/3286 loss 0.206 (1537 s, 3.0 s/step, peak reserved 24.0 GiB)
+step 500/3286 loss 0.2664 (1595 s, 2.9 s/step, peak reserved 24.2 GiB)
+step 520/3286 loss 0.2155 (1657 s, 3.1 s/step, peak reserved 24.2 GiB)
+step 540/3286 loss 0.3231 (1716 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 560/3286 loss 0.2619 (1777 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 580/3286 loss 0.2501 (1838 s, 3.0 s/step, peak reserved 24.2 GiB)
+step 600/3286 loss 0.2845 (1899 s, 3.0 s/step, peak reserved 24.3 GiB)
+step 620/3286 loss 0.1876 (1961 s, 3.1 s/step, peak reserved 24.1 GiB)
 ```
