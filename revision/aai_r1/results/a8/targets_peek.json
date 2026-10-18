@@ -1,5 +1,5 @@
 {
- "rows": 51321,
+ "rows": 51329,
  "skipped_repeat_limit": 0,
  "num_predict": 512,
  "classes": {
@@ -14,20 +14,20 @@
    "chars_median": 1018.0
   },
   "harm": {
-   "n": 19031,
+   "n": 19033,
    "tokens_median": null,
    "tokens_p90": null,
    "at_cap": 0,
    "at_cap_share": 0.0,
    "empty": 0,
-   "opens_with_refusal": 19031,
+   "opens_with_refusal": 19033,
    "chars_median": 46.0
   },
   "safe": {
-   "n": 30987,
+   "n": 30993,
    "tokens_median": 495.0,
    "tokens_p90": 512.0,
-   "at_cap": 14414,
+   "at_cap": 14419,
    "at_cap_share": 0.4652,
    "empty": 0,
    "opens_with_refusal": 1504,
