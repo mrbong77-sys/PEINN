@@ -1,19 +1,14 @@
 {
- "verdict": "임무 실행 중",
- "seq": 406,
- "mission": "ops.run",
- "time_utc": "2026-10-18 10:56:00",
- "time_local": "2026-10-18 19:56:00",
- "code": "dd2efe2 v21r: the main variant's whole input gate, time and peak memory (DESIGN.md 37)",
- "gpu": "14598 MiB, 32607 MiB, 96 %, 70",
+ "verdict": "대기",
+ "seq": 407,
+ "mission": null,
+ "time_utc": "2026-10-18 11:04:03",
+ "time_local": "2026-10-18 20:04:03",
+ "code": "a2209be v2.1 심사 대응 runner: 완료 (attempt 1)",
+ "gpu": "1716 MiB, 32607 MiB, 4 %, 43",
  "ack": "20261018T105500Z-launch launch (임무 시작 ops.run, 2026-10-18 10:45:57 UTC)",
- "reason": "정기 보고",
+ "reason": "ops.run 종료(코드 0)",
  "history": [
-  {
-   "module": "ops.run",
-   "rc": 0,
-   "end_utc": "2026-10-15 15:21:55"
-  },
   {
    "module": "ops.run",
    "rc": 0,
@@ -33,6 +28,11 @@
    "module": "ops.run",
    "rc": 0,
    "end_utc": "2026-10-18 09:17:08"
+  },
+  {
+   "module": "ops.run",
+   "rc": 0,
+   "end_utc": "2026-10-18 11:04:03"
   }
  ],
  "beacon_min": 10.0,
