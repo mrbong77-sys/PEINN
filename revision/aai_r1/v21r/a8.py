@@ -331,6 +331,48 @@ def collect(check: bool) -> pd.DataFrame:
     return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
 
 
+REFUSAL_START = re.compile(r"^\W*(i'?m sorry|i am sorry|i can(no|')t|i cannot|i won'?t|i'?m (not able|unable)|as an ai)", re.I)
+
+
+def a8_peek(check: bool = False, log=print) -> int:
+    """Read-only look at the A8 targets written so far (Eugene 2026-10-18 10:13 KST: is the self-distillation sound?).
+    Safe to run beside the running a8 step: the file is only read, a cut last line is skipped. Per class: count, answer
+    tokens (median, p90, share at the 512 cap = cut answers), empty answers, answers that open with a refusal; and a few
+    seeded random examples of the safe and dilemma targets (the harm target is the fixed refusal)."""
+    import random
+    w = wdir(check)
+    rows = []
+    for x in (w / "targets.jsonl").read_text(encoding="utf-8").split("\n") if (w / "targets.jsonl").exists() else []:
+        try:
+            rows.append(json.loads(x))
+        except json.JSONDecodeError:
+            continue
+    if not rows:
+        log("A8 peek: no targets yet")
+        return 1
+    df = pd.DataFrame(rows)
+    cap = GEN_OPTS["num_predict"]
+    out = {"rows": len(df), "skipped_repeat_limit": len(C.jsonl(w / "targets_skipped.jsonl")), "num_predict": cap, "classes": {}}
+    for c, g in df.groupby("cls"):
+        t = pd.to_numeric(g["tokens"], errors="coerce")
+        out["classes"][c] = {
+            "n": len(g), "tokens_median": None if t.isna().all() else float(t.median()),
+            "tokens_p90": None if t.isna().all() else float(t.quantile(0.9)),
+            "at_cap": int((t >= cap).sum()), "at_cap_share": round(float((t >= cap).mean()), 4),
+            "empty": int(g["target"].fillna("").str.strip().eq("").sum()),
+            "opens_with_refusal": int(g["target"].fillna("").map(lambda s: bool(REFUSAL_START.search(s))).sum()),
+            "chars_median": float(g["target"].fillna("").str.len().median())}
+    rnd = random.Random(42)
+    out["examples"] = {c: [{"text": r["text"][:400], "target": r["target"][:900], "tokens": r.get("tokens")}
+                           for r in rnd.sample(df[df.cls == c].to_dict("records"), min(6, int((df.cls == c).sum())))]
+                       for c in ("safe", "dilemma") if (df.cls == c).any()}
+    o = D.odir(check) / "a8"
+    o.mkdir(parents=True, exist_ok=True)
+    f = C.jdump(out, o / "targets_peek.json")
+    log(json.dumps({k: out[k] for k in ("rows", "skipped_repeat_limit", "classes")}, ensure_ascii=False))
+    return 0 if C.publish([f], "v21r A8: look at the targets written so far (read-only)") else 1
+
+
 def summary(check: bool) -> dict:
     w, d = wdir(check), D.wdir(check) / "matrix" / "a8"
     tr = C.jload(w / "train.json") if (w / "train.json").exists() else {}

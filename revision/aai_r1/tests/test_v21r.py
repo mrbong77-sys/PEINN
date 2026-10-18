@@ -1265,3 +1265,21 @@ def test_a8_targets_skip_items_at_ollamas_repeat_limit(tmp_path, monkeypatch):
     (tmp_path / "targets_skipped.jsonl").unlink()
     monkeypatch.setattr(C, "_ollama", other)
     assert A8.targets(False, log=lambda *_: None) == 1                     # any other 500 still stops the step
+
+
+def test_a8_peek_counts_cut_and_refusing_targets_without_touching_the_file(tmp_path, monkeypatch):
+    from v21r import a8 as A8
+    monkeypatch.setattr(A8, "wdir", lambda check: tmp_path)
+    monkeypatch.setattr(A8.D, "odir", lambda check: tmp_path / "out")
+    monkeypatch.setattr(C, "publish", lambda *a, **k: True)
+    rows = [{"sha": "a", "split": "train", "cls": "safe", "text": "q", "target": "Sure, here it is.", "tokens": 100},
+            {"sha": "b", "split": "train", "cls": "safe", "text": "q2", "target": "I'm sorry, I can't help.", "tokens": 9},
+            {"sha": "c", "split": "train", "cls": "dilemma", "text": "d", "target": "On one hand ...", "tokens": 512},
+            {"sha": "d", "split": "train", "cls": "harm", "text": "h", "target": "No.", "tokens": None}]
+    raw = "".join(json.dumps(r) + "\n" for r in rows) + '{"sha": "e", "cut'
+    (tmp_path / "targets.jsonl").write_text(raw, encoding="utf-8")
+    assert A8.a8_peek(False, log=lambda *_: None) == 0
+    assert (tmp_path / "targets.jsonl").read_text(encoding="utf-8") == raw          # read only
+    out = json.loads((tmp_path / "out" / "a8" / "targets_peek.json").read_text(encoding="utf-8"))
+    assert out["rows"] == 4 and out["classes"]["safe"]["opens_with_refusal"] == 1
+    assert out["classes"]["dilemma"]["at_cap"] == 1 and set(out["examples"]) == {"safe", "dilemma"}
