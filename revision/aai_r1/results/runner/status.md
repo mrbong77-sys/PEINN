@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-18 13:05:12 (UTC 2026-10-18 04:05:12), 시도 3, 비컨 #421 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 47980cb station: 임무 실행 중
-- 현재 단계: a8 (40.4분째)
-- 마지막 출력 후: 0.2분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 32019 MiB, 32607 MiB, 100 %, 56
+- 시각 2026-10-18 13:15:17 (UTC 2026-10-18 04:15:17), 시도 3, 비컨 #422 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: b7ed9f6 station: 임무 실행 중
+- 현재 단계: a8 (50.4분째)
+- 마지막 출력 후: 1.0분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 32012 MiB, 32607 MiB, 100 %, 55
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261017T091200Z-restart restart (자식 종료 후 재실행, 2026-10-17 09:10:54 UTC)
@@ -14,10 +14,6 @@
 ## 마지막 로그
 
 ```
-[v21r] skip repeat-diff-means (each arm's metrics before and after the repeat-guard rerun (CPU, DESIGN.md 31)): finished 2026-10-17 13:40:21
-[v21r] skip nemo-orr-detail (the logged NeMo calls of the XSTest safe prompts no rail event explains (CPU)): finished 2026-10-17 13:44:36
-[v21r] skip nemo-orr-dialog (NeMo dialog calls whose user turn matches no XSTest safe prompt: examples (CPU)): finished 2026-10-17 13:46:53
-[v21r] skip nemo-orr-totals (NeMo on all XSTest rows: fixed refusals against input blocks and 'ask harmful' dialogs (CPU)): finished 2026-10-17 13:51:12
 [v21r] skip a8-check (A8 end to end on a 0.5B model and 24 items (catches path errors before the 7B run)): finished 2026-10-17 14:29:34
 [v21r] skip ggb-export (every GGB answer of the reported systems with the pipeline's score (CPU)): finished 2026-10-17 14:47:23
 [v21r] skip bench-export (every other bench's reported rows: answers, verdicts, scores (CPU, Eugene 2026-10-17 14:55 KST)): finished 2026-10-17 15:00:09
@@ -54,4 +50,8 @@ step 120/3286 loss 0.3165 (877 s)
 step 140/3286 loss 0.3127 (1019 s)
 step 160/3286 loss 0.278 (1155 s)
 step 180/3286 loss 0.2245 (1300 s)
+step 200/3286 loss 0.3161 (1433 s)
+step 220/3286 loss 0.3331 (1573 s)
+step 240/3286 loss 0.2744 (1701 s)
+step 260/3286 loss 0.2886 (1859 s)
 ```
