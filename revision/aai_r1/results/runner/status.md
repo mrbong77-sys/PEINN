@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-19 12:22:48 (UTC 2026-10-19 03:22:48), 시도 2, 비컨 #463 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 0fd92b5 v2.1 심사 대응 runner: 실행 중 (attempt 1)
-- 현재 단계: ftv (19.3분째)
-- 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7811 MiB, 32607 MiB, 97 %, 68
+- 시각 2026-10-19 12:25:33 (UTC 2026-10-19 03:25:33), 시도 1, 비컨 #464 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: f20a4a3 v2.1 심사 대응 runner: 실행 중 (attempt 2)
+- 현재 단계: ftv (20.2분째)
+- 마지막 출력 후: 1.9분
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 7958 MiB, 32607 MiB, 0 %, 41
 - 다음 동작: 단계 진행
 - 사유: 정기 보고
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -14,10 +14,6 @@
 ## 마지막 로그
 
 ```
-    head epoch 1 batch 1400 loss 0.1822
-    head epoch 1 batch 1600 loss 0.3571
-    head epoch 1 val loss 0.2326
-    head epoch 2 batch 0 loss 0.2431
     head epoch 2 batch 200 loss 0.1575
     head epoch 2 batch 400 loss 0.1712
     head epoch 2 batch 600 loss 0.1016
@@ -31,27 +27,31 @@
     head epoch 3 batch 200 loss 0.0585
     head epoch 3 batch 400 loss 0.0066
     head epoch 3 batch 600 loss 0.0930
-    head epoch 3 batch 800 loss 0.0626
-    head epoch 3 batch 1000 loss 0.0166
-    head epoch 3 batch 1200 loss 0.0136
-    head epoch 3 batch 1400 loss 0.0288
-    head epoch 3 batch 1600 loss 0.0195
-    head epoch 3 val loss 0.2723
-    head epoch 4 batch 0 loss 0.1660
-    head epoch 4 batch 200 loss 0.2091
-    head epoch 4 batch 400 loss 0.0406
-    head epoch 4 batch 600 loss 0.0064
-    head epoch 4 batch 800 loss 0.0018
-    head epoch 4 batch 1000 loss 0.1526
-    head epoch 4 batch 1200 loss 0.0020
-    head epoch 4 batch 1400 loss 0.0016
-    head epoch 4 batch 1600 loss 0.0673
-    head epoch 4 val loss 0.3394
-    head epoch 5 batch 0 loss 0.0471
-    head epoch 5 batch 200 loss 0.0027
-    head epoch 5 batch 400 loss 0.0052
-    head epoch 5 batch 600 loss 0.0013
-    head epoch 5 batch 800 loss 0.0015
+    head epoch 3 batch 800 loss 0.0624
+    head epoch 3 batch 1000 loss 0.0165
+    head epoch 3 batch 1200 loss 0.0134
+    head epoch 3 batch 1400 loss 0.0294
+    head epoch 3 batch 1600 loss 0.0194
+    head epoch 3 val loss 0.2718
+    head epoch 4 batch 0 loss 0.1638
+    head epoch 4 batch 200 loss 0.2140
+    head epoch 4 batch 400 loss 0.0421
+    head epoch 4 batch 600 loss 0.0066
+    head epoch 4 batch 800 loss 0.0023
+    head epoch 4 batch 1000 loss 0.1695
+    head epoch 4 batch 1200 loss 0.0024
+    head epoch 4 batch 1400 loss 0.0020
+    head epoch 4 batch 1600 loss 0.0722
+    head epoch 4 val loss 0.3439
+    head epoch 5 batch 0 loss 0.0464
+    head epoch 5 batch 200 loss 0.0026
+    head epoch 5 batch 400 loss 0.0066
+    head epoch 5 batch 600 loss 0.0011
+    head epoch 5 batch 800 loss 0.0017
     head epoch 5 batch 1000 loss 0.0009
-    head epoch 5 batch 1200 loss 0.0022
+    head epoch 5 batch 1200 loss 0.0023
+    head epoch 5 batch 1400 loss 0.0002
+    head epoch 5 batch 1600 loss 0.0007
+    head epoch 5 val loss 0.3580
+{"out": "binary", "val_loss": 0.22345, "epochs": [{"epoch": 1, "val": 0.2326, "val_F_auroc": 0.9785}, {"epoch": 2, "val": 0.2235, "val_F_auroc": 0.985}, {"epoch": 3, "val": 0.2718, "val_F_auroc": 0.9858}, {"epoch": 4, "val": 0.3439, "val_F_auroc": 0.986}, {"epoch": 5, "val": 0.358, "val_F_auroc": 0.9866}], "sec": 347.4, "gpu_peak_GB": 1.787}
 ```
