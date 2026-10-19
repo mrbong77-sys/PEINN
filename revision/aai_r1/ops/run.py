@@ -32,9 +32,25 @@ LOG = paths.CACHE / "run.log"
 LOG_CHECK = paths.CACHE / "check_run.log"
 
 
+def python() -> str:
+    """The interpreter of the v21r steps: V21R_PYTHON, else this one if it has the stack, else conda base (a runner
+    started from another environment, e.g. an agent's own venv, still runs the steps in the professor's conda base)."""
+    import importlib.util
+    from pathlib import Path
+    if os.environ.get("V21R_PYTHON"):
+        return os.environ["V21R_PYTHON"]
+    if all(importlib.util.find_spec(m) for m in ("pandas", "torch")):
+        return sys.executable
+    for c in (Path.home() / "miniconda3" / "python.exe", Path.home() / "anaconda3" / "python.exe",
+              Path.home() / "miniconda3" / "bin" / "python", Path.home() / "anaconda3" / "bin" / "python"):
+        if c.exists():
+            return str(c)
+    return sys.executable
+
+
 def step(name: str, check: bool, *extra: str, env_add: dict | None = None) -> int:
     env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1", V21R_PUSH="1", **(env_add or {}))
-    cmd = [sys.executable, "-u", "-m", "v21r", name, *extra, *(["--check"] if check else [])]
+    cmd = [python(), "-u", "-m", "v21r", name, *extra, *(["--check"] if check else [])]
     print(f"[ops] $ {' '.join(cmd)}", flush=True)
     return subprocess.run(cmd, cwd=str(paths.RUN), env=env).returncode
 
