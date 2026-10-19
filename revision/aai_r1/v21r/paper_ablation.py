@@ -191,31 +191,38 @@ def table(out: dict, o) -> None:
 
 
 def curves(out: dict, caps, o) -> None:
+    """Two panels: the fine-tuned encoders (PEINN, A0ft, A1ft-A3ft, A9) and the frozen encoders (A0, A1-A7)."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    fig, ax = plt.subplots(figsize=(6.4, 4.2))
-    style = {"A0ftM": ("#009e73", "o", "-"), "A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"),
-             "A2": ("#56b4e9", "v", "-"), "A3": ("#cc79a7", "D", "-"), "A5": ("#d55e00", "x", "-"),
-             "A6p": ("#0072b2", "<", "-."), "A6e": ("#999933", ">", "-."), "A7": ("#882255", "h", "-."),
-             "A9": ("#000000", "+", ":")}
-    for v, (col, mk, ls) in style.items():
-        pts = [(_mean(out["variants"][f"{v}@{c:g}"], "orr"), _mean(out["variants"][f"{v}@{c:g}"], "ucr"))
-               for c in caps if f"{v}@{c:g}" in out["variants"]]
-        if pts:
-            x, y = zip(*sorted(pts))
-            ax.plot(x, y, ls, marker=mk, color=col, ms=3.5, lw=1, label=LABEL[v])
-    for s, mk in (("Vanilla", "*"), ("NeMo", "P"), ("LlamaGuard", "X")):
-        r = out["defences"][s]
-        ax.scatter([_mean(r, "orr")], [_mean(r, "ucr")], marker=mk, s=60, color="black", zorder=3,
-                   label={"LlamaGuard": "Llama Guard 3"}.get(s, s))
-    m = out["variants"][MAIN]
-    ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=90, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
-    ax.set_xlabel("XSTest over-refusal rate, ORR (%)")
-    ax.set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)")
-    ax.legend(fontsize=6.5, frameon=False, ncol=2)
-    ax.set_xlim(left=0)
-    ax.set_ylim(bottom=0)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.6), sharex=True, sharey=True)
+    ft = {"A0ftM": ("#009e73", "o", "-"), "A0ft": ("#666666", "s", "--"), "A1ft": ("#e69f00", "^", "-"),
+          "A2ft": ("#56b4e9", "v", "-"), "A3ft": ("#cc79a7", "D", "-"), "A9": ("#000000", "+", ":")}
+    fr = {"A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"), "A2": ("#56b4e9", "v", "-"),
+          "A3": ("#cc79a7", "D", "-"), "A5": ("#d55e00", "x", "-"), "A6p": ("#0072b2", "<", "-."),
+          "A6e": ("#999933", ">", "-."), "A7": ("#882255", "h", "-.")}
+    for ax, style, title in ((axes[0], ft, "(a) Fine-tuned encoders"), (axes[1], fr, "(b) Frozen encoders")):
+        for v, (col, mk, ls) in style.items():
+            pts = [(_mean(out["variants"][f"{v}@{c:g}"], "orr"), _mean(out["variants"][f"{v}@{c:g}"], "ucr"))
+                   for c in caps if f"{v}@{c:g}" in out["variants"]]
+            if pts:
+                x, y = zip(*sorted(pts))
+                ax.plot(x, y, ls, marker=mk, color=col, ms=3, lw=1,
+                        label=LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})")
+        for s, mk in (("Vanilla", "*"), ("NeMo", "P"), ("LlamaGuard", "X")):
+            r = out["defences"][s]
+            ax.scatter([_mean(r, "orr")], [_mean(r, "ucr")], marker=mk, s=45, color="black", zorder=3,
+                       label={"LlamaGuard": "Llama Guard 3"}.get(s, s))
+        if ax is axes[0]:
+            m = out["variants"][MAIN]
+            ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=80, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
+        ax.set_title(title, fontsize=8)
+        ax.set_xlabel("XSTest over-refusal rate, ORR (%)", fontsize=8)
+        ax.tick_params(labelsize=7)
+        ax.legend(fontsize=5.5, frameon=False, ncol=1)
+        ax.set_xlim(left=0)
+        ax.set_ylim(bottom=0)
+    axes[0].set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)", fontsize=8)
     fig.tight_layout()
     fig.savefig(o / "ablation_curves.png", dpi=300)
     plt.close(fig)
