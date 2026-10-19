@@ -195,7 +195,7 @@ def curves(out: dict, caps, o) -> None:
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.6), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.4), sharex=True, sharey=True)
     ft = {"A0ftM": ("#009e73", "o", "-"), "A0ft": ("#666666", "s", "--"), "A1ft": ("#e69f00", "^", "-"),
           "A2ft": ("#56b4e9", "v", "-"), "A3ft": ("#cc79a7", "D", "-"), "A9": ("#000000", "+", ":")}
     fr = {"A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"), "A2": ("#56b4e9", "v", "-"),
@@ -219,7 +219,7 @@ def curves(out: dict, caps, o) -> None:
         ax.set_title(title, fontsize=8)
         ax.set_xlabel("XSTest over-refusal rate, ORR (%)", fontsize=8)
         ax.tick_params(labelsize=7)
-        ax.legend(fontsize=5.5, frameon=False, ncol=1)
+        ax.legend(fontsize=6.5, frameon=False, ncol=1)
         ax.set_xlim(left=0)
         ax.set_ylim(bottom=0)
     axes[0].set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)", fontsize=8)
