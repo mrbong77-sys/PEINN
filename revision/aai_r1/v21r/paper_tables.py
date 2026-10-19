@@ -100,7 +100,7 @@ def harmbench(check: bool, o, num: dict) -> None:
     import matplotlib.pyplot as plt
     for name, systems in (("harmbench_asr_boxplot.png", MAIN), ("appendix_harmbench_lg.png", (*MAIN, "LlamaGuard"))):
         keys = [a for b, s, a in arms(systems) if a in res]
-        fig, ax = plt.subplots(1, 2 if name.startswith("harmbench") else 1, figsize=(11 if name.startswith("harmbench") else 7.5, 3.6),
+        fig, ax = plt.subplots(1, 2 if name.startswith("harmbench") else 1, figsize=(7.2 if name.startswith("harmbench") else 7.5, 3.0 if name.startswith("harmbench") else 3.6),
                                gridspec_kw={"width_ratios": [1.6, 1]} if name.startswith("harmbench") else None)
         a0 = ax[0] if name.startswith("harmbench") else ax
         col = {"Vanilla": "#9e9e9e", "R2D2": "#e69f00", "NeMo": "#56b4e9", "PEINN": "#009e73", "LlamaGuard": "#cc79a7"}
@@ -108,11 +108,13 @@ def harmbench(check: bool, o, num: dict) -> None:
         a0.bar(x, [res[k]["mean"] for k in keys], yerr=[res[k]["sd"] for k in keys], capsize=2,
                color=[col[res[k]["system"]] for k in keys], edgecolor="black", linewidth=0.4)
         a0.scatter(x, [res[k]["median_run"] for k in keys], s=10, color="white", edgecolor="black", linewidth=0.5, zorder=3)
-        a0.set_xticks(x, [f"{k}\n{res[k]['system'].replace('LlamaGuard', 'LG')}" for k in keys], fontsize=6.5)
-        a0.set_ylabel("ASR (%)")
-        a0.set_title("(a) ASR per arm (bar: mean of runs; line: ±1 SD; dot: median run)", fontsize=8)
+        a0.set_xticks(x, [f"{k}\n{res[k]['system'].replace('LlamaGuard', 'LG')}" for k in keys], fontsize=6, rotation=90)
+        a0.tick_params(axis="y", labelsize=7)
+        a0.set_ylabel("ASR (%)", fontsize=8)
+        a0.set_title("(a) ASR per arm" if name.startswith("harmbench") else "ASR per arm", fontsize=8)
+        a0.set_ylim(0, max(res[k]["mean"] + res[k]["sd"] for k in keys) + 9)
         for i, k in enumerate(keys):
-            a0.text(i, res[k]["mean"] + res[k]["sd"] + 1.5, f"{C.fx(res[k]['mean'], 1)}", ha="center", fontsize=5.5)
+            a0.text(i, res[k]["mean"] + res[k]["sd"] + 1.5, f"{C.fx(res[k]['mean'], 1)}", ha="center", fontsize=6)
         if name.startswith("harmbench"):
             c = cat.mean(axis=1).sort_values(ascending=False)
             ax[1].barh(np.arange(len(c)), c.values, color="#d9d9d9", edgecolor="black", linewidth=0.4)
@@ -121,12 +123,13 @@ def harmbench(check: bool, o, num: dict) -> None:
                 if bb in cat:
                     ax[1].scatter(cat.loc[c.index, bb].values, np.arange(len(c)), marker=mk[bb], s=14, color="black",
                                   facecolor="white" if bb in ("qwen", "gemma3") else "black", label=NAME[bb], zorder=3)
-            ax[1].legend(fontsize=6, loc="upper center", bbox_to_anchor=(0.45, -0.17), ncol=4, frameon=False)
+            ax[1].legend(fontsize=6.5, loc="upper center", bbox_to_anchor=(0.35, -0.2), ncol=2, frameon=False)
             ax[1].set_xlim(0, 100)
-            ax[1].set_yticks(np.arange(len(c)), [k.replace("_", " ") for k in c.index], fontsize=7)
+            ax[1].set_yticks(np.arange(len(c)), [k.replace("_", " ").replace("misinformation disinformation", "misinformation/\ndisinformation") for k in c.index], fontsize=7)
+            ax[1].tick_params(axis="x", labelsize=7)
             ax[1].invert_yaxis()
-            ax[1].set_xlabel("Vanilla ASR (%)")
-            ax[1].set_title("(b) Vanilla ASR by category (bar: mean of the 4 bases)", fontsize=8)
+            ax[1].set_xlabel("Vanilla ASR (%)", fontsize=8)
+            ax[1].set_title("(b) Vanilla ASR by category", fontsize=8)
         fig.tight_layout()
         fig.savefig(o / name, dpi=300)
         plt.close(fig)

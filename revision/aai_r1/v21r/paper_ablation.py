@@ -190,12 +190,17 @@ def table(out: dict, o) -> None:
                                             for lab, r in rows) + "\n", encoding="utf-8")
 
 
+XLIM, YLIM = (4.0, 18.0), (0.0, 12.0)     # the crowded region; defences outside it are marked at the edge
+
+
 def curves(out: dict, caps, o) -> None:
-    """Two panels: the fine-tuned encoders (PEINN, A0ft, A1ft-A3ft, A9) and the frozen encoders (A0, A1-A7)."""
+    """Two panels, zoomed on the crowded region: the fine-tuned encoders (PEINN, A0ft, A1ft-A3ft, A9) and the frozen
+    encoders (A0, A1-A7). Operating points outside the axes are cut; a defence outside them is drawn at the edge with
+    its values."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.4), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.6), sharex=True, sharey=True)
     ft = {"A0ftM": ("#009e73", "o", "-"), "A0ft": ("#666666", "s", "--"), "A1ft": ("#e69f00", "^", "-"),
           "A2ft": ("#56b4e9", "v", "-"), "A3ft": ("#cc79a7", "D", "-"), "A9": ("#000000", "+", ":")}
     fr = {"A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"), "A2": ("#56b4e9", "v", "-"),
@@ -207,21 +212,30 @@ def curves(out: dict, caps, o) -> None:
                    for c in caps if f"{v}@{c:g}" in out["variants"]]
             if pts:
                 x, y = zip(*sorted(pts))
-                ax.plot(x, y, ls, marker=mk, color=col, ms=3, lw=1,
+                ax.plot(x, y, ls, marker=mk, color=col, ms=3.5, lw=0.9, alpha=0.9,
                         label=LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})")
         for s, mk in (("Vanilla", "*"), ("NeMo", "P"), ("LlamaGuard", "X")):
             r = out["defences"][s]
-            ax.scatter([_mean(r, "orr")], [_mean(r, "ucr")], marker=mk, s=45, color="black", zorder=3,
-                       label={"LlamaGuard": "Llama Guard 3"}.get(s, s))
+            x, y = _mean(r, "orr"), _mean(r, "ucr")
+            lab = {"LlamaGuard": "Llama Guard 3"}.get(s, s)
+            if XLIM[0] <= x <= XLIM[1] and YLIM[0] <= y <= YLIM[1]:
+                ax.scatter([x], [y], marker=mk, s=40, color="black", zorder=3, label=lab)
+            else:
+                cx, cy = min(max(x, XLIM[0]), XLIM[1]), min(max(y, YLIM[0]), YLIM[1])
+                ax.scatter([cx], [cy], marker=mk, s=40, color="black", zorder=3, clip_on=False, label=lab)
+                ax.annotate(f"{lab} ({C.fx(x, 1)}, {C.fx(y, 1)})", (cx, cy), fontsize=6,
+                            xytext=(-4 if cx >= XLIM[1] else 6, -9 if cy >= YLIM[1] else 5), textcoords="offset points",
+                            ha="right" if cx >= XLIM[1] else "left")
         if ax is axes[0]:
             m = out["variants"][MAIN]
-            ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=80, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
+            ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=90, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
         ax.set_title(title, fontsize=8)
         ax.set_xlabel("XSTest over-refusal rate, ORR (%)", fontsize=8)
         ax.tick_params(labelsize=7)
-        ax.legend(fontsize=6.5, frameon=False, ncol=1)
-        ax.set_xlim(left=0)
-        ax.set_ylim(bottom=0)
+        ax.grid(lw=0.3, alpha=0.4)
+        ax.legend(fontsize=6, frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.17))
+        ax.set_xlim(*XLIM)
+        ax.set_ylim(*YLIM)
     axes[0].set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)", fontsize=8)
     fig.tight_layout()
     fig.savefig(o / "ablation_curves.png", dpi=300)
