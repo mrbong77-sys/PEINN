@@ -185,7 +185,7 @@ def table(out: dict, o) -> None:
             cells += ([C.fx(mt["ucr"], 1), C.fx(mt["orr"], 1), f"{100 * float(mt['cap']):g}"] if mt else ["---"] * 3)
             body.append(" & ".join(cells) + " \\\\")
         body.append("\\midrule")
-    for s, lab in (("Vanilla", "Vanilla (no defense)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
+    for s, lab in (("Vanilla", "Vanilla (no defence)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
         r = out["defences"][s]
         body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")] + ["---"] * 3) + " \\\\")
     (o / "tab_ablation.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
