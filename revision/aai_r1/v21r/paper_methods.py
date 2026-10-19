@@ -107,7 +107,7 @@ def calibration(check: bool, o) -> None:
     (analysis.json); ten-bin reliability diagrams."""
     a = C.jload(D.odir(check) / "analysis" / "analysis.json")
     c, x = a["calibration"][TH.MAIN_VARIANT], a["xstest_F"][TH.MAIN_VARIANT]
-    rows = [(f"${k}$", "test split, teacher label", c[k]["binary"]) for k in ("T", "I", "F")]
+    rows = [(f"${k}$", "test split, reference label", c[k]["binary"]) for k in ("T", "I", "F")]
     rows.append(("$F$", "XSTest, human label", x))
     (o / "tab_calibration.tex").write_text("\n".join(f"{a_} & {b} & {r['n']:,} & {_r3(r['ece'])} & {_r3(r['brier'])} \\\\".replace(f"{r['n']:,}", f"{r['n']:,}".replace(",", "{,}"))
                                                      for a_, b, r in rows) + "\n", encoding="utf-8")
@@ -130,13 +130,25 @@ def calibration(check: bool, o) -> None:
 
 
 def route_cost(check: bool, o) -> None:
-    """Generation calls, input and output tokens and Ollama generation seconds per request for each route and base
-    (route_cost.json tiers, deployed accounting: a Hard-block calls nothing)."""
+    """Generation calls, input and output tokens and Ollama generation seconds per request for each route and base, as
+    a deployment needs them (DESIGN.md 41): a Hard-block calls nothing, and a two-pass route only its second call. The
+    harness's first call of a two-pass route is the bare call of Direct-answer (same request and seed; the Hard-block
+    harness figures equal Direct-answer's), so the second call is the route's harness figure minus Direct-answer's."""
     t = C.jload(D.odir(check) / "route_cost.json")["tiers"]
     bases = ("zephyr", "qwen", "gemma4", "gemma3")
+    keys = ("calls", "prompt_tokens", "output_tokens", "ollama_s")
+
+    def deployed(b, tier):
+        h, da = t[f"{b}|{tier}"]["harness"], t[f"{b}|Direct-Answer"]["harness"]
+        if tier == "Hard-block":
+            return {k: 0 for k in keys}
+        if tier == "Direct-Answer":
+            return {k: h[k] for k in keys}
+        return {k: h[k] - da[k] for k in keys}
+
     body = []
     for tier in TIERS:
-        r = [t[f"{b}|{tier}"]["deployed"] for b in bases]
+        r = [deployed(b, tier) for b in bases]
         calls = {int(x["calls"]) for x in r}
         cells = [LABEL[tier], "/".join(str(c) for c in sorted(calls))]
         cells += [f"{C.fx(x['prompt_tokens'] + x['output_tokens'], 1)}" for x in r] + [f"{C.fx(x['ollama_s'], 2)}" for x in r]

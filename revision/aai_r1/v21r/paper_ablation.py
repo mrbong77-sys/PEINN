@@ -28,6 +28,7 @@ from . import bench_stats as BS
 from . import common as C
 from . import data as D
 from . import theta as TH
+from . import verdicts as V
 
 ORDER = ("zephyr", "qwen", "gemma4", "gemma3")
 BENCHES = ("harmbench", "taxonomy", "xstest", "ethics", "morables")
@@ -49,7 +50,7 @@ def forced(check: bool, bench: str, base: str) -> pd.DataFrame:
     d = pd.read_csv(f, low_memory=False, dtype={"sha": str})
     d["rep"] = pd.to_numeric(d.rep, errors="coerce")
     d["base"] = base
-    return d
+    return V.apply(check, bench, d)
 
 
 def energy_only(check: bool, caps) -> dict:

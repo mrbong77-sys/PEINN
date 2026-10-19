@@ -265,9 +265,9 @@ def morables(check: bool, o, num: dict) -> None:
 # ---- GGB ---------------------------------------------------------------------------------------------------------
 
 def ggb(check: bool, o, num: dict) -> None:
-    """IH and IB over the items a system answered, with Vanilla on the same items and a Welch test against it
-    (DESIGN.md 32: PEINN hard-blocks some IH items, so a mean over all items would compare different items)."""
-    from scipy import stats as SS
+    """IH and IB over the items a system answered, with Vanilla on the same items (DESIGN.md 32: PEINN hard-blocks
+    some IH items, so a mean over all items would compare different items). Descriptive only (DESIGN.md 41): the
+    item-run responses repeat few items, so no test is reported."""
     d = pd.read_csv(D.odir(check) / "ggb" / "ggb_rescored.csv", low_memory=False)
     d["rescored"] = pd.to_numeric(d.rescored, errors="coerce")
     lines, grp, res = [], [], {}
@@ -285,16 +285,12 @@ def ggb(check: bool, o, num: dict) -> None:
             rr = {"mean": None if x.empty else round(float(x.mean()), 6), "n": int(len(x)), "items": items,
                   "answered_items": len(items), "items_total": int(gs.item_id.nunique()),
                   "vanilla_same_items": None if vv.empty else round(float(vv.mean()), 6)}
-            if s != "Vanilla" and len(x) > 1 and len(vv) > 1 and (x.std() > 0 or vv.std() > 0):
-                rr["p_welch"] = float(SS.ttest_ind(x, vv, equal_var=False).pvalue)
             r[sub] = rr
             if x.empty:
-                cells += ["--", "--", "--"]
+                cells += ["--", "--"]
             else:
                 cells.append(f"{rr['answered_items']}/{rr['items_total']}")
                 cells.append(f"{C.fx(rr['mean'], 2)}" + ("" if s == "Vanilla" else f" ({C.fx(rr['vanilla_same_items'], 2)})"))
-                cells.append("(ref)" if s == "Vanilla" else ("--" if "p_welch" not in rr else
-                             ("$<$0.001" if rr["p_welch"] < 0.001 else f"{C.fx(rr['p_welch'], 3)}")))
         res[arm] = r
         if s in MAIN:
             lines.append(cells)

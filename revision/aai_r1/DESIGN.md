@@ -424,3 +424,12 @@ M 단계 전에 생성·판정 호출 수와 예상 시간을 보고하고 교�
 - **같은 ORR 비교(R1-3):** `paper-ablation`이 `matched`를 냅니다. 각 변형의 운영점(상한 0.5–30%, 14개) 중 평균 ORR이 기준의 주 운영점 ORR 이하인 것의 최저 평균 UCR입니다. 기준은 encoder·라우팅 변형은 PEINN(8.4%), 구성요소 변형은 A0(9.2%)입니다. 표 12의 마지막 열입니다. 결과: A1 4.4, A2 5.5, A3 6.7, A6p 4.3, A6e 6.0, A7 4.4 (A0 5.3), A0ft 3.9, A0 5.8, A9 3.3 (PEINN 2.7). 동결 encoder에서 I를 뺀 A1은 같은 ORR에서 A0보다 낮고 Ethics·MORABLES도 높습니다. 원고와 답변서에 그대로 적었습니다.
 - 원고는 이 합성 지표를 MUR(mean unsafe rate)로 부릅니다(XSTest UCR과 구별). 곡선 그림의 축 이름도 바꾸고 A6p·A6e·A7 곡선을 더했습니다. 코드의 키 `ucr`는 그대로입니다.
 - **공개본 누락분:** `nemo/nemo_orr.json`·`.md`(거절된 XSTest 질문 예, 고정 거절 키, 대화 기록 줄), `nemo/nemo_audit.json`(HarmBench·Taxonomy·XSTest의 NeMo 답 예), `matrix/repeat_diff.json`(세 벤치 답 예)에 원문이 남아 있었습니다. `redact-public`이 이 요약들도 해시하고(`ggb.redact_summaries`), 작성 코드도 처음부터 해시합니다(`common.htext`, 이미 해시된 값은 그대로). 개수·점수는 바뀌지 않습니다. v2.2.0 릴리스 보관본에는 원문이 들어 있습니다.
+
+## 41. 같은 답 하나의 판정, GGB 기술 통계, 배포 기준 경로 비용 (2026-10-19 KST, 교수님 카드 "통일 재집계")
+
+- **문제(사전 리뷰 2.1, 2.3, 5.1):** judge가 여러 답을 한 호출로 채점해(31절) 같은 요청·같은 답이 호출마다 다른 판정을 받았습니다. 바닐라와 강제 Direct는 XSTest·Taxonomy에서 답이 모두 같고, Soft-reasoning과 Deliberation은 모든 벤치에서 답이 글자까지 같습니다(같은 프롬프트·seed). 그런데도 XSTest 30/900행, Taxonomy 66/800행에서 두 경로의 판정이 달랐습니다.
+- **수정(`verdicts.py`):** 평가 대상 = (벤치, 요청, 사용자가 받는 답 `response_p2`)입니다. 팔·기반 모델·실행은 키에 넣지 않습니다. 강제 경로 행 전부와 PEINN 밖 체계의 보고 행에서 같은 대상의 사본을 모아, 이진 판정은 다수결(동수면 불리한 쪽: unsafe, 거절), 등급 점수(Taxonomy HSL, 딜레마 RQI)는 평균을 모든 사본에 씁니다. `bench_stats.load`와 `paper_ablation.forced`가 적용하므로 모든 표·그림이 같은 판정을 씁니다. 모델 호출은 없습니다. 요약은 `results/benches/verdict_pooling.json`입니다(사본이 갈린 대상: XSTest 66/4,168, HarmBench 5/8,551, Taxonomy 98/4,232, 딜레마 RQI 29/2,130).
+- **결과:** PEINN ASR_avg 2.7→3.0, ORR 8.4→8.8, 에너지만 3.3→3.7, A0 5.3→6.4, 바닐라 29.6→31.5(ORR 4.6→4.8), Llama Guard 4.3→4.4. A4a는 XSTest·Taxonomy에서 바닐라와 같아지고, HarmBench만 다릅니다(첫 호출 상한 256 대 768: 37.35 대 37.75). 표 6의 T6 차이도 사라집니다. 결론(미세 조정 효과, 에너지만과의 차이, I·앵커의 비일관 이득)은 그대로입니다.
+- **GGB:** item–run 응답은 적은 문항의 반복이라 Welch 검정을 빼고 기술 통계(답한 문항, 같은 문항의 바닐라 평균)만 냅니다.
+- **경로 비용 표:** 배포에 필요한 호출만 셉니다. Hard-block 0회, 두 단계 경로는 둘째 호출 1회입니다. 하네스의 첫 호출은 Direct-answer와 같은 맨 호출(같은 요청·seed, Hard-block 하네스 토큰이 Direct와 같음)이므로 둘째 호출 = 경로 측정값 − Direct 측정값입니다.
+- **보정 표:** 라벨 이름을 "reference label"(교사 또는 데이터셋 라벨)로 바꿨습니다.

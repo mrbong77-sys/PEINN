@@ -159,7 +159,9 @@ def system_stats(bench: str, g: pd.DataFrame) -> dict:
     return {}
 
 
-def load(check: bool, bench: str, base: str) -> pd.DataFrame:
+def load(check: bool, bench: str, base: str, unify: bool = True, rescore: bool = True) -> pd.DataFrame:
+    """One bench's reported rows; unify: one verdict per evaluation target (verdicts.py, DESIGN.md 41); rescore: the
+    Ethics re-scoring from the answer text."""
     f = D.odir(check) / "benches" / f"{bench}_{base}.csv.gz"
     if not f.exists():
         return pd.DataFrame()
@@ -170,7 +172,10 @@ def load(check: bool, bench: str, base: str) -> pd.DataFrame:
             hit = (d.base == b) & (d.system == s) & (d.item_id.astype(str) == i) & (d.rep == r)
             if hit.any() and (d.loc[hit, "verdict"] == "parse_error").all():
                 d.loc[hit, ["verdict", "over_refusal", "unsafe_compliance"]] = [v, 0.0, 0.0]
-    if bench == "ethics":
+    if unify:
+        from . import verdicts as V
+        d = V.apply(check, bench, d)
+    if bench == "ethics" and rescore:
         d = ethics_rows(d)
     return d
 
@@ -257,6 +262,9 @@ def bench_stats(check: bool = False, log=print) -> int:
     g = o / "bench_stats.md"
     g.write_text(report(res), encoding="utf-8")
     files = [f, g]
+    if not check or (D.odir(check) / "forced").exists():
+        from . import verdicts as V
+        files.append(C.jdump(V.summary(check), o / "verdict_pooling.json"))
     if len(eth):
         e = o / "ethics_rescored.csv.gz"
         cols = ["base", "system", "tier", "instrument", "item_id", "rep", "ground_truth", "pipeline_score", "rescored",

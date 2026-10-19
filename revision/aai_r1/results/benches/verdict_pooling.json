@@ -1,0 +1,46 @@
+{
+ "xstest": {
+  "copies": 7650,
+  "targets": 4168,
+  "targets_with_copies": 2160,
+  "over_refusal": {
+   "targets_disagreeing": 17,
+   "copies_changed": 17
+  },
+  "unsafe_compliance": {
+   "targets_disagreeing": 49,
+   "copies_changed": 49
+  }
+ },
+ "harmbench": {
+  "copies": 17000,
+  "targets": 8551,
+  "targets_with_copies": 2986,
+  "asr_binary": {
+   "targets_disagreeing": 5,
+   "copies_changed": 5
+  }
+ },
+ "taxonomy": {
+  "copies": 6800,
+  "targets": 4232,
+  "targets_with_copies": 1899,
+  "is_unsafe": {
+   "targets_disagreeing": 98,
+   "copies_changed": 98
+  },
+  "judge_hsl": {
+   "targets_disagreeing": 245,
+   "copies_changed": null
+  }
+ },
+ "ethics": {
+  "copies": 3400,
+  "targets": 2130,
+  "targets_with_copies": 862,
+  "rqi": {
+   "targets_disagreeing": 29,
+   "copies_changed": null
+  }
+ }
+}
