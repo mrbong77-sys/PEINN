@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 464,
+ "verdict": "완료",
+ "seq": 465,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-19 12:25:33",
- "time_utc": "2026-10-19 03:25:33",
+ "time_local": "2026-10-19 12:27:06",
+ "time_utc": "2026-10-19 03:27:06",
  "attempt": 1,
- "code": "f20a4a3 v2.1 심사 대응 runner: 실행 중 (attempt 2)",
+ "code": "4c12ce3 v21r ftv: A1-A3 with the fine-tuned encoders, thresholds and routes (DESIGN.md 42)",
  "step": "ftv",
- "step_min": 20.2,
- "since_output_min": 1.9,
- "gpu": "7958 MiB, 32607 MiB, 0 %, 41",
- "next": "단계 진행",
- "reason": "정기 보고",
+ "step_min": 21.7,
+ "since_output_min": 0.0,
+ "gpu": "4786 MiB, 32607 MiB, 0 %, 43",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -96,9 +96,8 @@
   "forced-export",
   "gate-mem",
   "gate-retrain",
-  "ftv-check"
- ],
- "left": [
+  "ftv-check",
   "ftv"
- ]
+ ],
+ "left": []
 }
