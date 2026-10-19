@@ -14,7 +14,8 @@ Each variant and operating point gets UCR (mean of HarmBench ASR, Taxonomy unsaf
 the Ethics composite and MORABLES clean accuracy per base; A8 and the defences come from bench_stats.json. The paper
 calls this composite the average attack success rate (ASR_avg), apart from the XSTest UCR. `matched` gives, for each variant with
 operating points, the lowest mean UCR over its caps whose mean ORR does not exceed the reference's ORR at the main cap
-(PEINN for the encoder and routing variants, A0 for the component variants; R1-3, matched comparison).
+(PEINN for the encoder and routing variants, A0 for the component variants; R1-3), with that point's ORR and cap; the table
+calls it the best ASR_avg under an ORR budget (a summary of the test-set curve, not an operating point chosen on val).
 """
 from __future__ import annotations
 
@@ -168,12 +169,12 @@ def table(out: dict, o) -> None:
             cells = [LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})"]
             cells += [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")]
             mt = out["matched"].get(v)
-            cells.append(f"{C.fx(mt['ucr'], 1)}" if mt else "---")
+            cells += ([C.fx(mt["ucr"], 1), C.fx(mt["orr"], 1), f"{100 * float(mt['cap']):g}"] if mt else ["---"] * 3)
             body.append(" & ".join(cells) + " \\\\")
         body.append("\\midrule")
     for s, lab in (("Vanilla", "Vanilla (no defense)"), ("NeMo", "NeMo Guardrails"), ("LlamaGuard", "Llama Guard 3")):
         r = out["defences"][s]
-        body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")] + ["---"]) + " \\\\")
+        body.append(" & ".join([lab] + [f"{C.fx(_mean(r, k), 1)}" for k in ("ucr", "orr", "ethics", "morables")] + ["---"] * 3) + " \\\\")
     (o / "tab_ablation.tex").write_text("\n".join(body) + "\n", encoding="utf-8")
     q = out["variants"][f"A0ftM@{cap}"]["qwen"]
     a8, van = out["defences"]["A8"]["qwen"], out["defences"]["Vanilla"]["qwen"]
