@@ -1441,3 +1441,107 @@ def test_verdicts_pool_every_copy_of_one_evaluation_target(tmp_path, monkeypatch
     d = B.load(False, "harmbench", "qwen")
     assert d.asr_binary.tolist() == [0.0, 0.0]
     V.table.cache_clear()
+
+
+def test_ft_variants_share_the_gate_of_their_frozen_counterparts():
+    """DESIGN.md 42: A1ft has no Deliberation route, A3ft routes on 1 - 2|p - .5|, A2ft is gated like A0."""
+    assert TH.options("A1ft")["deliberation"] is False and TH.options("A2ft") == TH.options("A0")
+    sig = {"T": np.array([0.9]), "I": np.array([0.0]), "F": np.array([0.4]), "E": np.array([1.0])}
+    assert TH.inputs("A3ft", sig)[1][0] == TH.inputs("A3", sig)[1][0] == 0.8
+    assert TH.kind("A0ft") == "A0ft" and TH.kind("A0ftM") == "A0ftM"
+
+
+def test_ft_heads_train_and_reload_for_every_output(tmp_path):
+    """DESIGN.md 42: the fine-tuned head trains with each output of A1-A3 and reloads from its checkpoint (MiniLM from
+    the local Hugging Face cache; skipped where it is not cached)."""
+    import pytest
+    torch = pytest.importorskip("torch")
+    from v21r import ftv
+    from v21r import models as M
+    try:
+        from transformers import AutoTokenizer
+        AutoTokenizer.from_pretrained(M.FT_ENC["head"], local_files_only=True)
+    except Exception:                                                             # noqa: BLE001
+        pytest.skip("MiniLM not cached")
+    rng = np.random.default_rng(0)
+    n = 24
+    d = pd.DataFrame({"text": [f"text number {i}" for i in range(n)], "T": rng.random(n), "I": rng.random(n),
+                      "F": rng.random(n), "mask_T": 1.0, "mask_I": 1.0, "mask_F": 1.0, "rw": 1.0})
+    X = np.zeros((n, 416), dtype="float32")
+    hp = dict(M.FT_HEAD_HP, epochs=1, batch=8, max_len=16)
+    for out, k in (("tf", 2), ("softmax", 3), ("binary", 1)):
+        infer, vl = M.train_ft("head", d, d, X, X, M.SHIPPED_NEG_W, hp, lambda *a: None, save=tmp_path / f"{out}.pt",
+                               out=out)
+        p = infer(d.text.tolist(), X)
+        assert p.shape == (n, k) and np.isfinite(vl) and ((p >= 0) & (p <= 1)).all()
+        if out == "softmax":
+            assert np.allclose(p.sum(1), 1, atol=1e-5)
+        g = ftv.tif(out, p)
+        assert set(g) == {"T", "I", "F"} and all(len(v) == n for v in g.values())
+        net, _, ck = M.ft_load(tmp_path / f"{out}.pt")
+        assert ck["out"] == out and net.out[-1].__class__.__name__ == ("Linear" if out == "softmax" else "Sigmoid")
+
+
+def test_ftv_end_to_end_on_a_small_cache(tmp_path, monkeypatch):
+    """DESIGN.md 42: the ftv step trains A1ft-A3ft, fits their thresholds, adds their routes and signals to the exports,
+    and on a second call keeps the finished heads (MiniLM from the local cache; skipped where it is not cached)."""
+    import hashlib
+    import pytest
+    pytest.importorskip("torch")
+    from v21r import ftv
+    from v21r import models as M
+    try:
+        from transformers import AutoTokenizer
+        AutoTokenizer.from_pretrained(M.FT_ENC["head"], local_files_only=True)
+    except Exception:                                                             # noqa: BLE001
+        pytest.skip("MiniLM not cached")
+    monkeypatch.setattr(C, "CACHE", tmp_path / "cache")
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.delenv("V21R_PUSH", raising=False)
+    rng = np.random.default_rng(1)
+    h = lambda s: hashlib.sha1(s.encode()).hexdigest()                           # noqa: E731
+    sp = pd.DataFrame({"text": [f"corpus text {i}" for i in range(60)]})
+    sp["sha"] = sp.text.map(h)
+    sp["split"] = ["train"] * 30 + ["val"] * 20 + ["test"] * 10
+    sp["source"] = ["a", "b"] * 30
+    harm = np.arange(60) % 3 == 0
+    sp["F"] = np.where(harm, 0.9, 0.05)
+    sp["I"] = np.where(np.arange(60) % 5 == 1, 0.8, 0.0)
+    sp["T"] = 1 - sp.F
+    sp[["mask_T", "mask_I", "mask_F"]] = 1.0
+    rec = pd.DataFrame({"text": [f"bench text {i}" for i in range(6)], "bench": "xstest"})
+    rec["sha"] = rec.text.map(h)
+    full = D.wdir(False)
+    sp.to_csv(full / "corpus_split.csv", index=False)
+    (full / "record.jsonl").write_text("\n".join(json.dumps(r) for r in rec.to_dict("records")) + "\n", encoding="utf-8")
+    keys = list(sp.sha) + list(rec.sha)
+    np.savez(full / "features.npz", keys=np.array(keys), head_x=rng.random((len(keys), 800)).astype("float32"),
+             cal_x=rng.random((len(keys), 800)).astype("float32"), tif=rng.random((len(keys), 3)), e1=rng.random(len(keys)))
+    va, te = sp[sp.split == "val"], sp[sp.split == "test"]
+    uni_sha = list(va.sha) + list(te.sha) + list(rec.sha)
+    part = ["val"] * len(va) + ["test"] * len(te) + ["bench"] * len(rec)
+    E = np.r_[np.where(va.F > 0.5, 9.0, 1.0), np.full(len(te), 1.0), np.linspace(0, 10, len(rec))]
+    np.savez(M.sigdir(False) / "A0ft.npz", sha=np.array(uni_sha), part=np.array(part), E=E, T=np.zeros(len(E)),
+             I=np.zeros(len(E)), F=np.zeros(len(E)))
+    (C.OUT / "forced").mkdir(parents=True)
+    C.jdump({"caps": [0.03, 0.1], "variants": {"A0ft": {}}}, C.OUT / "thresholds.json")
+    pd.DataFrame({"sha": rec.sha, "bench": rec.bench, "A0ft@0.03": "Direct-Answer"}).to_csv(
+        C.OUT / "forced" / "routes.csv.gz", index=False, compression="gzip")
+    sp[sp.split.isin(("val", "test"))][["sha", "split", "source", "T", "I", "F"]].to_csv(
+        C.OUT / "forced" / "split_labels.csv.gz", index=False, compression="gzip")
+    assert ftv.ftv(True, lambda *a: None) == 0
+    assert ftv.ftv(False, lambda *a: None) == 0
+    th = C.jload(C.OUT / "thresholds.json")
+    rt = pd.read_csv(C.OUT / "forced" / "routes.csv.gz")
+    assert set(th["variants"]) == {"A0ft", "A1ft", "A2ft", "A3ft"} and set(th["variants"]["A1ft"]) == {"0.03", "0.1"}
+    assert {"A0ft@0.03", "A1ft@0.03", "A2ft@0.1", "A3ft@0.03", "bench"} <= set(rt.columns) and len(rt) == len(rec)
+    assert "Deliberation" not in set(rt["A1ft@0.03"]) and "delta" in th["variants"]["A3ft"]["0.03"]
+    s = pd.read_csv(C.OUT / "forced" / "signals_A2ft.csv.gz")
+    assert list(s.columns) == ["sha", "part", "T", "I", "F", "E"] and np.allclose(s.E, E)
+    rep = C.jload(C.OUT / "ftv_report.json")
+    assert set(rep["heads"]) == {"A1ft", "A2ft", "A3ft"}
+    t0 = rep["heads"]["A2ft"]["sec"]
+    assert ftv.ftv(False, lambda *a: None) == 0                                   # resumes: nothing trained again
+    assert C.jload(C.OUT / "ftv_report.json")["heads"]["A2ft"]["sec"] == t0
+    assert ftv.ftv_fit(False, lambda *a: None) == 0
+    assert pd.read_csv(C.OUT / "forced" / "routes.csv.gz").columns.tolist() == rt.columns.tolist()

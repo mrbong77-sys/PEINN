@@ -330,9 +330,13 @@ def _fp32_model(cls, name: str):
     return m
 
 
-def _ft_net(kind: str, name: str):
+HEAD_OUT = {"tif": 3, "tf": 2, "softmax": 3, "binary": 1}   # DESIGN.md 42: the head's output in A0ft and A1ft-A3ft
+
+
+def _ft_net(kind: str, name: str, out: str = "tif"):
     """The v2.1 network around a trainable encoder: energy [emotion 32 | encoder] -> calibrator; head [emotion 32 |
-    encoder | principle 384] -> neutro head. embed() is the pooled, normalised sentence representation."""
+    encoder | principle 384] -> neutro head (out 'tif'), or the head of A1 ('tf': T and F), A2 ('softmax': logits of
+    safe, ambiguous, harmful) or A3 ('binary': p(harm)). embed() is the pooled, normalised sentence representation."""
     import torch
     import torch.nn as nn
     from transformers import AutoModel
@@ -343,7 +347,7 @@ def _ft_net(kind: str, name: str):
             super().__init__()
             self.enc = _fp32_model(AutoModel, name)
             h = self.enc.config.hidden_size
-            self.out = calibrator(32 + h) if energy_kind else mlp(32 + h + 384, 3, sigmoid=True)
+            self.out = calibrator(32 + h) if energy_kind else mlp(32 + h + 384, HEAD_OUT[out], sigmoid=out != "softmax")
 
         def embed(self, ids, att):
             h = self.enc(input_ids=ids, attention_mask=att).last_hidden_state
@@ -360,12 +364,15 @@ def _ft_net(kind: str, name: str):
 
 
 def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: float = SHIPPED_NEG_W, hp=FT_HP, log=print,
-             hist: list | None = None, save: Path | None = None):
+             hist: list | None = None, save: Path | None = None, out: str = "tif"):
     """The v2.1 network with its encoder trained end to end. kind 'energy': [emotion 32 | mpnet 768] -> calibrator,
     focal BCE on F >= .5 with class and row weights, selection by val AUROC. kind 'head': [emotion 32 | MiniLM 384 |
     principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
     Xtr / Xva: the frozen blocks around the encoder slot (energy: emotion; head: emotion and principle).
     save: the selected weights go there with the encoder name (the released checkpoint, ft_load reads it).
+    out (head only, DESIGN.md 42): 'tif' as above; 'tf' the same loss on T and F only (A1); 'softmax' cross-entropy on
+    the classes of three_class (A2); 'binary' BCE on F >= .5 (A3); the last two with row weights as their
+    frozen-encoder counterparts, selection by the same loss on val. infer returns probabilities (softmax applied).
     Returns (infer(texts, X) -> outputs, best val score)."""
     import torch
     import torch.nn as nn
@@ -376,7 +383,7 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     tok = AutoTokenizer.from_pretrained(name)
     energy_kind = kind == "energy"
 
-    net = _ft_net(kind, name).to(dev)
+    net = _ft_net(kind, name, out).to(dev)
     opt = torch.optim.AdamW([{"params": net.enc.parameters(), "lr": hp["lr_enc"]},
                              {"params": net.out.parameters(), "lr": hp["lr_out"]}], weight_decay=0.01)
     acc = int(hp.get("accum") or 1)
@@ -386,7 +393,8 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     ytr = (tr.F.to_numpy() >= 0.5).astype("float32")
     pos_w = float((ytr == 0).sum() / max(1, (ytr == 1).sum()))
     neg_cw = float((ytr == 1).sum() / max(1, (ytr == 0).sum()))
-    dw = torch.tensor([1.0, HEAD_HP["i_weight"], 1.0], device=dev)
+    cols = [0, 2] if out == "tf" else [0, 1, 2]
+    dw = torch.tensor([1.0, HEAD_HP["i_weight"], 1.0], device=dev)[cols]
 
     def batches(df, X, shuffle):
         ix = np.arange(len(df))
@@ -402,13 +410,24 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
             if energy_kind:
                 y = torch.tensor((b.F.to_numpy() >= 0.5).astype("float32"), device=dev).unsqueeze(1)
                 w = (y * pos_w + (1 - y) * neg_cw) * r[:, None]
+            elif out == "softmax":
+                y = torch.tensor(three_class(b["T"], b["I"], b["F"]), device=dev, dtype=torch.long)
+                w = r
+            elif out == "binary":
+                y = torch.tensor((b.F.to_numpy() >= 0.5).astype("float32"), device=dev).unsqueeze(1)
+                w = r
             else:
-                y = torch.tensor(b[["T", "I", "F"]].to_numpy(dtype="float32"), device=dev)
-                w = torch.tensor(head_weights(b, neg_w), device=dev) * r[:, None]
+                y = torch.tensor(b[["T", "I", "F"]].to_numpy(dtype="float32")[:, cols], device=dev)
+                w = torch.tensor(head_weights(b, neg_w)[:, cols], device=dev) * r[:, None]
             yield enc["input_ids"].to(dev), enc["attention_mask"].to(dev), x, y, w
 
     def loss(p, y, w):
+        if out == "softmax" and not energy_kind:                           # as train_head 'softmax'
+            return (nn.functional.cross_entropy(p, y, reduction="none") * w).sum() / w.sum().clamp_min(1e-8)
         p = p.clamp(1e-7, 1 - 1e-7)
+        if out == "binary" and not energy_kind:                            # as train_head 'binary'
+            el = nn.functional.binary_cross_entropy(p, y, reduction="none").squeeze(1)
+            return (el * w).sum() / w.sum().clamp_min(1e-8)
         if energy_kind:                                                   # focal BCE as train_calibrator
             pt = y * p + (1 - y) * (1 - p)
             lp = y * torch.log(p) + (1 - y) * torch.log(1 - p)
@@ -417,12 +436,13 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
         return (el * dw * w).sum() / w.sum().clamp_min(1.0)
 
     def predict(df, X):
-        out = []
+        res = []
         net.eval()
         with torch.no_grad():
             for ids, att, x, _, _ in batches(df, X, False):
-                out.append(fwd(ids, att, x).cpu().numpy())
-        return np.concatenate(out) if out else np.zeros((0, 1 if energy_kind else 3), dtype="float32")
+                h = fwd(ids, att, x)
+                res.append((torch.softmax(h, dim=1) if out == "softmax" and not energy_kind else h).cpu().numpy())
+        return np.concatenate(res) if res else np.zeros((0, 1 if energy_kind else HEAD_OUT[out]), dtype="float32")
 
     amp = bool(hp.get("amp")) and dev.type == "cuda"
 
@@ -455,21 +475,31 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
                 raise SystemExit(f"{kind} ({name}): non-finite validation output at epoch {ep + 1}")
             sc = _auroc((va.F.to_numpy() >= 0.5).astype(int), pv.ravel())
             better = best is None or sc > best
+        elif out == "softmax":
+            rv, cv = va["rw"].to_numpy(), three_class(va["T"], va["I"], va["F"])
+            sc = float((-np.log(np.clip(pv[np.arange(len(cv)), cv], 1e-7, 1)) * rv).sum() / max(rv.sum(), 1e-8))
+            better = best is None or sc < best
+        elif out == "binary":
+            rv, yv = va["rw"].to_numpy(), (va.F.to_numpy() >= 0.5).astype(float)
+            q = np.clip(pv.ravel(), 1e-7, 1 - 1e-7)
+            sc = float((-(yv * np.log(q) + (1 - yv) * np.log(1 - q)) * rv).sum() / max(rv.sum(), 1e-8))
+            better = best is None or sc < best
         else:
-            yv, wv = va[["T", "I", "F"]].to_numpy(dtype="float32"), head_weights(va, neg_w) * va["rw"].to_numpy()[:, None]
+            yv = va[["T", "I", "F"]].to_numpy(dtype="float32")[:, cols]
+            wv = head_weights(va, neg_w)[:, cols] * va["rw"].to_numpy()[:, None]
             el = -(yv * np.log(np.clip(pv, 1e-7, 1)) + (1 - yv) * np.log(np.clip(1 - pv, 1e-7, 1)))
-            sc = float((el * np.array([1.0, HEAD_HP["i_weight"], 1.0]) * wv).sum() / max(wv.sum(), 1.0))
+            sc = float((el * np.array([1.0, HEAD_HP["i_weight"], 1.0])[cols] * wv).sum() / max(wv.sum(), 1.0))
             better = best is None or sc < best
         log(f"    {kind} epoch {ep + 1} val {'AUROC' if energy_kind else 'loss'} {sc:.4f}")
         if hist is not None:                                              # per-epoch record for train_report.json
             yb = (va.F.to_numpy() >= 0.5).astype(int)
             hist.append({"epoch": ep + 1, "val": round(float(sc), 4),
-                         "val_F_auroc": round(float(_auroc(yb, pv.ravel() if energy_kind else pv[:, 2])), 4)})
+                         "val_F_auroc": round(float(_auroc(yb, pv.ravel() if energy_kind or out == "binary" else pv[:, -1])), 4)})
         if better:
             best, best_state = sc, {k: v.detach().cpu().clone() for k, v in net.state_dict().items()}
     net.load_state_dict(best_state)
     if save is not None:
-        torch.save({"kind": kind, "enc": name, "max_len": hp["max_len"], "state_dict": best_state}, save)
+        torch.save({"kind": kind, "enc": name, "max_len": hp["max_len"], "out": out, "state_dict": best_state}, save)
 
     def infer(texts: list[str], X, emb: bool = False) -> np.ndarray:
         """Outputs, or with emb the fine-tuned encoder's pooled, normalised representation (DESIGN.md 20)."""
@@ -520,7 +550,7 @@ def ft_load(f: Path):
     import torch
     from transformers import AutoTokenizer
     ck = torch.load(f, map_location="cpu")
-    net = _ft_net(ck["kind"], ck["enc"])
+    net = _ft_net(ck["kind"], ck["enc"], ck.get("out", "tif"))
     net.load_state_dict(ck["state_dict"])
     return net.to(_dev()).eval(), AutoTokenizer.from_pretrained(ck["enc"]), ck
 

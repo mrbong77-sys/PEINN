@@ -34,15 +34,23 @@ E_QUANTILES = np.r_[np.arange(0.50, 0.99, 0.02), np.arange(0.99, 0.9995, 0.0025)
 FITTED = ("A0", "A1", "A2", "A3", "A5", "A6p", "A6e", "A7", "A0ft", "A0ftM")
 
 
+FT_VARIANTS = ("A1ft", "A2ft", "A3ft")   # DESIGN.md 42: A1-A3 with PEINN's fine-tuned encoders (against A0ft)
+
+
+def kind(v: str) -> str:
+    """The frozen-encoder variant whose head and gate a fine-tuned variant shares (A1ft -> A1)."""
+    return v[:-2] if v in FT_VARIANTS else v
+
+
 def options(v: str) -> dict:
     """Gate options per variant (DESIGN.md 4)."""
-    return {"energy": v != "A5", "deliberation": v != "A1", "order": "revised"}
+    return {"energy": kind(v) != "A5", "deliberation": kind(v) != "A1", "order": "revised"}
 
 
 def inputs(v: str, sig: dict) -> tuple:
     """T, I, F, E the gate sees. A3: I = 1 - 2|p - .5| so that I >= tau  <=>  |p - .5| <= delta = (1 - tau) / 2."""
     T, I, F, E = (np.asarray(sig[k], dtype=float) for k in ("T", "I", "F", "E"))
-    if v == "A3":
+    if kind(v) == "A3":
         I = 1.0 - 2.0 * np.abs(F - 0.5)
     return T, I, F, E
 
@@ -133,7 +141,7 @@ def fit(v: str, sig: dict, val: pd.DataFrame, cap: float) -> dict:
             if (cls == c).any()}
     out = {"variant": v, "cap": cap, "th": s2["th"], "stage1": {k: s1[k] for k in ("harm_hb", "safe_hb", "met")},
            "val_cost": s2["cost"], "val_routes": dist, "n_val": {c: int((cls == c).sum()) for c in ("safe", "dilemma", "harm")}}
-    if v == "A3" and opt["deliberation"]:
+    if kind(v) == "A3" and opt["deliberation"]:
         out["delta"] = round((1.0 - s2["th"]["I"]) / 2.0, 4)
     return out
 

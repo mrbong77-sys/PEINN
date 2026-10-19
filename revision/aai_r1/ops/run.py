@@ -285,6 +285,11 @@ def steps(check: bool) -> list:
                run("gate-mem")),
               ("gate-retrain", "A0ftM's gate trained again from the same corpus into a scratch folder: time, memory",
                run("gate-retrain"))]
+        # DESIGN.md 42 (Eugene card 2026-10-19 10:47 KST "헤드 3개 재학습"): A1-A3 with the fine-tuned encoders
+        s += [("ftv-check", "A1-A3 fine-tuned heads on 64 rows, one epoch (pre-test; nothing pushed)",
+               lambda: step("ftv", True)),
+              ("ftv", "A1-A3 heads with PEINN's fine-tuned MiniLM, thresholds on val, routes -> results/forced",
+               run("ftv"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
