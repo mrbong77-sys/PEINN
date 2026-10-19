@@ -1,19 +1,19 @@
 {
- "verdict": "완료",
- "seq": 458,
+ "verdict": "실행 중",
+ "seq": 459,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-18 20:03:50",
- "time_utc": "2026-10-18 11:03:50",
+ "time_local": "2026-10-19 11:56:30",
+ "time_utc": "2026-10-19 02:56:30",
  "attempt": 1,
- "code": "8de0ad5 v21r: A0ftM gate retrained from the same corpus, time and memory (DESIGN.md 37)",
- "step": "gate-retrain",
- "step_min": 15.1,
- "since_output_min": 0.1,
- "gpu": "1704 MiB, 32607 MiB, 5 %, 45",
- "next": "없음(모든 단계 끝)",
- "reason": "",
+ "code": "091510d v21r ftv: A1-A3 heads with PEINN's fine-tuned MiniLM, thresholds on val, routes (DESIGN.md 42)",
+ "step": null,
+ "step_min": null,
+ "since_output_min": 0.0,
+ "gpu": "28775 MiB, 32607 MiB, 0 %, 56",
+ "next": "단계 진행",
+ "reason": "시작",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -97,5 +97,8 @@
   "gate-mem",
   "gate-retrain"
  ],
- "left": []
+ "left": [
+  "ftv-check",
+  "ftv"
+ ]
 }
