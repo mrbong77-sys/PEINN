@@ -5,7 +5,7 @@ bench_stats (DESIGN.md 34). No model call; runs anywhere.
 
 A variant's answer to a bench unit (item x run) is the forced-tag row of the tier the variant assigns to that unit's
 routing text (analyze.assemble). Variants:
-  A0ftM (PEINN), A0ft, A0 and A1-A7 at their val-fitted thresholds (thresholds.json, routes.csv);
+  A0ftM (PEINN), A0ft, A0, A1-A7 and A1ft-A3ft (DESIGN.md 42) at their val-fitted thresholds (thresholds.json, routes.csv);
   A4a-d from the main variant's routes: every item Direct, every item Deliberation, the main variant's refusals
         (Hard-block, Reasoned-Refusal) and Direct elsewhere, or and Deliberation elsewhere;
   A9    energy only (R2-2): no head; Hard-block when the main variant's energy E >= tau, Direct-Answer otherwise; tau
@@ -14,7 +14,8 @@ Each variant and operating point gets UCR (mean of HarmBench ASR, Taxonomy unsaf
 the Ethics composite and MORABLES clean accuracy per base; A8 and the defences come from bench_stats.json. The paper
 calls this composite the average attack success rate (ASR_avg), apart from the XSTest UCR. `matched` gives, for each variant with
 operating points, the lowest mean UCR over its caps whose mean ORR does not exceed the reference's ORR at the main cap
-(PEINN for the encoder and routing variants, A0 for the component variants; R1-3), with that point's ORR and cap; the table
+(PEINN for the encoder and routing variants, A0ft for the fine-tuned component variants, A0 for the frozen ones; R1-3),
+with that point's ORR and cap; the table
 calls it the best ASR_avg under an ORR budget (a summary of the test-set curve, not an operating point chosen on val).
 """
 from __future__ import annotations
@@ -36,12 +37,16 @@ KEYS = {"harmbench": ["behavior_id"], "xstest": ["item_id"], "taxonomy": ["scena
         "morables": ["item_id", "variant"]}
 MAIN = f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}"
 LABEL = {"A0ftM": "PEINN", "A0ft": "No OOD check", "A0": "Frozen encoders",
-         "A1": "No $I$ channel", "A2": "Softmax head", "A3": "Uncertainty routing", "A5": "No emotion energy",
+         "A1": "No $I$ channel", "A1ft": "No $I$ channel", "A2ft": "Softmax head", "A3ft": "Uncertainty routing",
+         "A2": "Softmax head", "A3": "Uncertainty routing", "A5": "No emotion energy",
          "A6p": "No principle anchors", "A6e": "No emotion feature", "A7": "MiniLM classifier",
          "A4a": "Always Direct", "A4b": "Always Deliberation", "A4c": "Block + Direct", "A4d": "Block + Deliberation",
          "A9": "Energy only"}
-# groups, a rule between them: PEINN | encoders (against PEINN) | components (against the frozen-encoder A0) | routing
-GROUPS = (("A0ftM",), ("A0ft", "A0"), ("A1", "A2", "A3", "A5", "A6p", "A6e", "A7"), ("A9", "A4a", "A4b", "A4c", "A4d"))
+# groups, a rule between them: PEINN | encoders (against PEINN) | components with the fine-tuned encoders (against A0ft,
+# DESIGN.md 42) | components with the frozen encoders (against A0) | routing
+FT_COMP = ("A1ft", "A2ft", "A3ft")
+FROZEN_COMP = ("A1", "A2", "A3", "A5", "A6p", "A6e", "A7")
+GROUPS = (("A0ftM",), ("A0ft", "A0"), FT_COMP, FROZEN_COMP, ("A9", "A4a", "A4b", "A4c", "A4d"))
 ROWS = tuple(v for g in GROUPS for v in g)
 
 
@@ -139,7 +144,8 @@ def _mean(d: dict, k: str) -> float:
 
 def matched(out: dict) -> dict:
     """Per variant with operating points: the lowest mean UCR over its caps whose mean ORR is at most the reference's
-    ORR at the main cap (PEINN for the encoder and routing variants, A0 for the component variants)."""
+    ORR at the main cap (PEINN for the encoder and routing variants, A0ft for the fine-tuned component variants, A0 for the
+    frozen ones)."""
     cap = f"{TH.MAIN_CAP:g}"
     pts = {}
     for k, r in out["variants"].items():
@@ -148,7 +154,7 @@ def matched(out: dict) -> dict:
             pts.setdefault(v, []).append((c, _mean(r, "ucr"), _mean(r, "orr")))
     res = {}
     for v, p in pts.items():
-        ref = "A0" if v in GROUPS[2] else "A0ftM"
+        ref = "A0" if v in FROZEN_COMP else "A0ft" if v in FT_COMP else "A0ftM"
         lim = _mean(out["variants"][f"{ref}@{cap}"], "orr")
         ok = [x for x in p if round(x[2], 6) <= round(lim, 6)]
         if ok:
