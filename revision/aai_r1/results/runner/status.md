@@ -1,10 +1,10 @@
 # v2.1 심사 대응 무인 실행 상태: 완료
 
-- 시각 2026-10-19 12:27:06 (UTC 2026-10-19 03:27:06), 시도 1, 비컨 #465 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 4c12ce3 v21r ftv: A1-A3 with the fine-tuned encoders, thresholds and routes (DESIGN.md 42)
-- 현재 단계: ftv (21.7분째)
+- 시각 2026-10-19 12:29:56 (UTC 2026-10-19 03:29:56), 시도 2, 비컨 #464 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: a8004aa v21r ftv: A1-A3 with the fine-tuned encoders, thresholds and routes (DESIGN.md 42)
+- 현재 단계: ftv (26.4분째)
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 4786 MiB, 32607 MiB, 0 %, 43
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 1790 MiB, 32607 MiB, 0 %, 47
 - 다음 동작: 없음(모든 단계 끝)
 - 사유: –
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
@@ -22,91 +22,91 @@
     head epoch 2 batch 1600 loss 0.1462
     head epoch 2 val loss 0.2242
     head epoch 3 batch 0 loss 0.1990
-    head epoch 3 batch 200 loss 0.1730
-    head epoch 3 batch 400 loss 0.1059
-    head epoch 3 batch 600 loss 0.1732
-    head epoch 3 batch 800 loss 0.0850
-    head epoch 3 batch 1000 loss 0.0511
-    head epoch 3 batch 1200 loss 0.0560
-    head epoch 3 batch 1400 loss 0.0563
-    head epoch 3 batch 1600 loss 0.2148
-    head epoch 3 val loss 0.2533
-    head epoch 4 batch 0 loss 0.1382
-    head epoch 4 batch 200 loss 0.1065
-    head epoch 4 batch 400 loss 0.0028
-    head epoch 4 batch 600 loss 0.1092
-    head epoch 4 batch 800 loss 0.0574
-    head epoch 4 batch 1000 loss 0.2243
-    head epoch 4 batch 1200 loss 0.0037
-    head epoch 4 batch 1400 loss 0.0500
-    head epoch 4 batch 1600 loss 0.0710
-    head epoch 4 val loss 0.3079
-    head epoch 5 batch 0 loss 0.1015
-    head epoch 5 batch 200 loss 0.0776
-    head epoch 5 batch 400 loss 0.0018
-    head epoch 5 batch 600 loss 0.1602
-    head epoch 5 batch 800 loss 0.0492
+    head epoch 3 batch 200 loss 0.1732
+    head epoch 3 batch 400 loss 0.1056
+    head epoch 3 batch 600 loss 0.1765
+    head epoch 3 batch 800 loss 0.0845
+    head epoch 3 batch 1000 loss 0.0512
+    head epoch 3 batch 1200 loss 0.0576
+    head epoch 3 batch 1400 loss 0.0557
+    head epoch 3 batch 1600 loss 0.2323
+    head epoch 3 val loss 0.2531
+    head epoch 4 batch 0 loss 0.1345
+    head epoch 4 batch 200 loss 0.1230
+    head epoch 4 batch 400 loss 0.0144
+    head epoch 4 batch 600 loss 0.1124
+    head epoch 4 batch 800 loss 0.0560
+    head epoch 4 batch 1000 loss 0.2394
+    head epoch 4 batch 1200 loss 0.0040
+    head epoch 4 batch 1400 loss 0.0501
+    head epoch 4 batch 1600 loss 0.0707
+    head epoch 4 val loss 0.3056
+    head epoch 5 batch 0 loss 0.0988
+    head epoch 5 batch 200 loss 0.0709
+    head epoch 5 batch 400 loss 0.0017
+    head epoch 5 batch 600 loss 0.1630
+    head epoch 5 batch 800 loss 0.0490
     head epoch 5 batch 1000 loss 0.0396
-    head epoch 5 batch 1200 loss 0.0042
-    head epoch 5 batch 1400 loss 0.0514
-    head epoch 5 batch 1600 loss 0.0740
-    head epoch 5 val loss 0.2986
-{"out": "tf", "val_loss": 0.224218, "epochs": [{"epoch": 1, "val": 0.2412, "val_F_auroc": 0.9785}, {"epoch": 2, "val": 0.2242, "val_F_auroc": 0.9851}, {"epoch": 3, "val": 0.2533, "val_F_auroc": 0.9858}, {"epoch": 4, "val": 0.3079, "val_F_auroc": 0.9847}, {"epoch": 5, "val": 0.2986, "val_F_auroc": 0.9862}], "sec": 367.2, "gpu_peak_GB": 1.697}
+    head epoch 5 batch 1200 loss 0.0051
+    head epoch 5 batch 1400 loss 0.0515
+    head epoch 5 batch 1600 loss 0.0701
+    head epoch 5 val loss 0.2984
+{"out": "tf", "val_loss": 0.224218, "epochs": [{"epoch": 1, "val": 0.2412, "val_F_auroc": 0.9786}, {"epoch": 2, "val": 0.2242, "val_F_auroc": 0.9851}, {"epoch": 3, "val": 0.2531, "val_F_auroc": 0.9858}, {"epoch": 4, "val": 0.3056, "val_F_auroc": 0.9848}, {"epoch": 5, "val": 0.2984, "val_F_auroc": 0.9861}], "sec": 370.1, "gpu_peak_GB": 1.697}
 == A2ft: fine-tuned MiniLM head, out 'softmax'
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 4259.06it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2909.36it/s]
     head epoch 1 batch 0 loss 1.0987
     head epoch 1 batch 200 loss 0.4241
     head epoch 1 batch 400 loss 0.1841
     head epoch 1 batch 600 loss 0.6325
     head epoch 1 batch 800 loss 0.2664
-    head epoch 1 batch 1000 loss 0.2275
-    head epoch 1 batch 1200 loss 0.4403
-    head epoch 1 batch 1400 loss 0.1235
-    head epoch 1 batch 1600 loss 0.3268
-    head epoch 1 val loss 0.2516
-    head epoch 2 batch 0 loss 0.1916
-    head epoch 2 batch 200 loss 0.2817
-    head epoch 2 batch 400 loss 0.2387
-    head epoch 2 batch 600 loss 0.2596
-    head epoch 2 batch 800 loss 0.0575
-    head epoch 2 batch 1000 loss 0.0715
-    head epoch 2 batch 1200 loss 0.0322
-    head epoch 2 batch 1400 loss 0.0360
-    head epoch 2 batch 1600 loss 0.1811
-    head epoch 2 val loss 0.2569
-    head epoch 3 batch 0 loss 0.1005
-    head epoch 3 batch 200 loss 0.2652
-    head epoch 3 batch 400 loss 0.1648
-    head epoch 3 batch 600 loss 0.3188
-    head epoch 3 batch 800 loss 0.0204
-    head epoch 3 batch 1000 loss 0.0220
-    head epoch 3 batch 1200 loss 0.0096
-    head epoch 3 batch 1400 loss 0.0179
-    head epoch 3 batch 1600 loss 0.1507
-    head epoch 3 val loss 0.3420
-    head epoch 4 batch 0 loss 0.0689
-    head epoch 4 batch 200 loss 0.2163
-    head epoch 4 batch 400 loss 0.0181
-    head epoch 4 batch 600 loss 0.0821
-    head epoch 4 batch 800 loss 0.0070
-    head epoch 4 batch 1000 loss 0.0502
-    head epoch 4 batch 1200 loss 0.0090
-    head epoch 4 batch 1400 loss 0.0008
-    head epoch 4 batch 1600 loss 0.0548
-    head epoch 4 val loss 0.3734
-    head epoch 5 batch 0 loss 0.0309
-    head epoch 5 batch 200 loss 0.0720
-    head epoch 5 batch 400 loss 0.0062
-    head epoch 5 batch 600 loss 0.0605
-    head epoch 5 batch 800 loss 0.0025
-    head epoch 5 batch 1000 loss 0.0034
+    head epoch 1 batch 1000 loss 0.2227
+    head epoch 1 batch 1200 loss 0.4400
+    head epoch 1 batch 1400 loss 0.1147
+    head epoch 1 batch 1600 loss 0.3341
+    head epoch 1 val loss 0.2511
+    head epoch 2 batch 0 loss 0.1937
+    head epoch 2 batch 200 loss 0.2800
+    head epoch 2 batch 400 loss 0.2314
+    head epoch 2 batch 600 loss 0.2520
+    head epoch 2 batch 800 loss 0.0644
+    head epoch 2 batch 1000 loss 0.0596
+    head epoch 2 batch 1200 loss 0.0249
+    head epoch 2 batch 1400 loss 0.0377
+    head epoch 2 batch 1600 loss 0.1851
+    head epoch 2 val loss 0.2563
+    head epoch 3 batch 0 loss 0.0992
+    head epoch 3 batch 200 loss 0.2553
+    head epoch 3 batch 400 loss 0.1319
+    head epoch 3 batch 600 loss 0.4169
+    head epoch 3 batch 800 loss 0.0331
+    head epoch 3 batch 1000 loss 0.0142
+    head epoch 3 batch 1200 loss 0.0069
+    head epoch 3 batch 1400 loss 0.0191
+    head epoch 3 batch 1600 loss 0.1352
+    head epoch 3 val loss 0.3203
+    head epoch 4 batch 0 loss 0.0643
+    head epoch 4 batch 200 loss 0.2124
+    head epoch 4 batch 400 loss 0.0059
+    head epoch 4 batch 600 loss 0.0205
+    head epoch 4 batch 800 loss 0.0044
+    head epoch 4 batch 1000 loss 0.0215
+    head epoch 4 batch 1200 loss 0.0035
+    head epoch 4 batch 1400 loss 0.0009
+    head epoch 4 batch 1600 loss 0.0609
+    head epoch 4 val loss 0.3855
+    head epoch 5 batch 0 loss 0.0338
+    head epoch 5 batch 200 loss 0.0896
+    head epoch 5 batch 400 loss 0.0024
+    head epoch 5 batch 600 loss 0.1167
+    head epoch 5 batch 800 loss 0.0041
+    head epoch 5 batch 1000 loss 0.0031
     head epoch 5 batch 1200 loss 0.0017
     head epoch 5 batch 1400 loss 0.0006
-    head epoch 5 batch 1600 loss 0.0781
-    head epoch 5 val loss 0.3792
-{"out": "softmax", "val_loss": 0.251635, "epochs": [{"epoch": 1, "val": 0.2516, "val_F_auroc": 0.9784}, {"epoch": 2, "val": 0.2569, "val_F_auroc": 0.9845}, {"epoch": 3, "val": 0.342, "val_F_auroc": 0.9853}, {"epoch": 4, "val": 0.3734, "val_F_auroc": 0.9857}, {"epoch": 5, "val": 0.3792, "val_F_auroc": 0.9859}], "sec": 363.2, "gpu_peak_GB": 1.787}
+    head epoch 5 batch 1600 loss 0.0849
+    head epoch 5 val loss 0.3756
+{"out": "softmax", "val_loss": 0.251083, "epochs": [{"epoch": 1, "val": 0.2511, "val_F_auroc": 0.9782}, {"epoch": 2, "val": 0.2563, "val_F_auroc": 0.985}, {"epoch": 3, "val": 0.3203, "val_F_auroc": 0.9855}, {"epoch": 4, "val": 0.3855, "val_F_auroc": 0.9856}, {"epoch": 5, "val": 0.3756, "val_F_auroc": 0.9859}], "sec": 394.8, "gpu_peak_GB": 1.787}
 == A3ft: fine-tuned MiniLM head, out 'binary'
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 4197.48it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 3017.93it/s]
     head epoch 1 batch 0 loss 0.6909
     head epoch 1 batch 200 loss 0.3609
     head epoch 1 batch 400 loss 0.2071
@@ -131,37 +131,37 @@
     head epoch 3 batch 200 loss 0.0585
     head epoch 3 batch 400 loss 0.0066
     head epoch 3 batch 600 loss 0.0930
-    head epoch 3 batch 800 loss 0.0624
-    head epoch 3 batch 1000 loss 0.0165
-    head epoch 3 batch 1200 loss 0.0134
-    head epoch 3 batch 1400 loss 0.0294
-    head epoch 3 batch 1600 loss 0.0194
-    head epoch 3 val loss 0.2718
-    head epoch 4 batch 0 loss 0.1638
-    head epoch 4 batch 200 loss 0.2140
-    head epoch 4 batch 400 loss 0.0421
-    head epoch 4 batch 600 loss 0.0066
-    head epoch 4 batch 800 loss 0.0023
-    head epoch 4 batch 1000 loss 0.1695
-    head epoch 4 batch 1200 loss 0.0024
-    head epoch 4 batch 1400 loss 0.0020
-    head epoch 4 batch 1600 loss 0.0722
-    head epoch 4 val loss 0.3439
-    head epoch 5 batch 0 loss 0.0464
-    head epoch 5 batch 200 loss 0.0026
-    head epoch 5 batch 400 loss 0.0066
-    head epoch 5 batch 600 loss 0.0011
-    head epoch 5 batch 800 loss 0.0017
+    head epoch 3 batch 800 loss 0.0626
+    head epoch 3 batch 1000 loss 0.0166
+    head epoch 3 batch 1200 loss 0.0136
+    head epoch 3 batch 1400 loss 0.0288
+    head epoch 3 batch 1600 loss 0.0195
+    head epoch 3 val loss 0.2723
+    head epoch 4 batch 0 loss 0.1660
+    head epoch 4 batch 200 loss 0.2091
+    head epoch 4 batch 400 loss 0.0406
+    head epoch 4 batch 600 loss 0.0064
+    head epoch 4 batch 800 loss 0.0018
+    head epoch 4 batch 1000 loss 0.1526
+    head epoch 4 batch 1200 loss 0.0020
+    head epoch 4 batch 1400 loss 0.0016
+    head epoch 4 batch 1600 loss 0.0673
+    head epoch 4 val loss 0.3394
+    head epoch 5 batch 0 loss 0.0471
+    head epoch 5 batch 200 loss 0.0027
+    head epoch 5 batch 400 loss 0.0052
+    head epoch 5 batch 600 loss 0.0013
+    head epoch 5 batch 800 loss 0.0015
     head epoch 5 batch 1000 loss 0.0009
-    head epoch 5 batch 1200 loss 0.0023
+    head epoch 5 batch 1200 loss 0.0022
     head epoch 5 batch 1400 loss 0.0002
-    head epoch 5 batch 1600 loss 0.0007
-    head epoch 5 val loss 0.3580
-{"out": "binary", "val_loss": 0.22345, "epochs": [{"epoch": 1, "val": 0.2326, "val_F_auroc": 0.9785}, {"epoch": 2, "val": 0.2235, "val_F_auroc": 0.985}, {"epoch": 3, "val": 0.2718, "val_F_auroc": 0.9858}, {"epoch": 4, "val": 0.3439, "val_F_auroc": 0.986}, {"epoch": 5, "val": 0.358, "val_F_auroc": 0.9866}], "sec": 347.4, "gpu_peak_GB": 1.787}
+    head epoch 5 batch 1600 loss 0.0009
+    head epoch 5 val loss 0.3589
+{"out": "binary", "val_loss": 0.22345, "epochs": [{"epoch": 1, "val": 0.2326, "val_F_auroc": 0.9785}, {"epoch": 2, "val": 0.2235, "val_F_auroc": 0.985}, {"epoch": 3, "val": 0.2723, "val_F_auroc": 0.9858}, {"epoch": 4, "val": 0.3394, "val_F_auroc": 0.986}, {"epoch": 5, "val": 0.3589, "val_F_auroc": 0.9865}], "sec": 396.8, "gpu_peak_GB": 1.787}
 A1ft@0.03: {"harm": 1.5, "soft": 1.5, "F": 0.95, "extreme": 6.25, "Fref": 0.95, "I": 2.0, "Fblk": 1.0}
-A2ft@0.03: {"harm": 1.25, "soft": 1.25, "F": 0.9, "extreme": 6.25, "Fref": 0.95, "I": 0.2, "Fblk": 0.05}
+A2ft@0.03: {"harm": 4.75, "soft": 4.75, "F": 0.75, "extreme": 6.25, "Fref": 0.95, "I": 0.2, "Fblk": 0.65}
 A3ft@0.03: {"harm": 2.941, "soft": 2.941, "F": 0.95, "extreme": 6.25, "Fref": 0.95, "I": 0.4, "Fblk": 0.25}
 [git] pushed to main
 
-[v21r] all steps finished and pushed in 21.7 min
+[v21r] all steps finished and pushed in 27.3 min
 ```
