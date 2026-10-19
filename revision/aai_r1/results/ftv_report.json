@@ -1,0 +1,109 @@
+{
+ "rule": "DESIGN.md 42",
+ "reference": "A0ft",
+ "n_train": 52569,
+ "n_val": 6206,
+ "epochs": 5,
+ "device": "NVIDIA GeForce RTX 5090",
+ "heads": {
+  "A1ft": {
+   "out": "tf",
+   "val_loss": 0.224218,
+   "epochs": [
+    {
+     "epoch": 1,
+     "val": 0.2412,
+     "val_F_auroc": 0.9785
+    },
+    {
+     "epoch": 2,
+     "val": 0.2242,
+     "val_F_auroc": 0.9851
+    },
+    {
+     "epoch": 3,
+     "val": 0.2533,
+     "val_F_auroc": 0.9858
+    },
+    {
+     "epoch": 4,
+     "val": 0.3079,
+     "val_F_auroc": 0.9847
+    },
+    {
+     "epoch": 5,
+     "val": 0.2986,
+     "val_F_auroc": 0.9862
+    }
+   ],
+   "sec": 367.2,
+   "gpu_peak_GB": 1.697
+  },
+  "A2ft": {
+   "out": "softmax",
+   "val_loss": 0.251635,
+   "epochs": [
+    {
+     "epoch": 1,
+     "val": 0.2516,
+     "val_F_auroc": 0.9784
+    },
+    {
+     "epoch": 2,
+     "val": 0.2569,
+     "val_F_auroc": 0.9845
+    },
+    {
+     "epoch": 3,
+     "val": 0.342,
+     "val_F_auroc": 0.9853
+    },
+    {
+     "epoch": 4,
+     "val": 0.3734,
+     "val_F_auroc": 0.9857
+    },
+    {
+     "epoch": 5,
+     "val": 0.3792,
+     "val_F_auroc": 0.9859
+    }
+   ],
+   "sec": 363.2,
+   "gpu_peak_GB": 1.787
+  },
+  "A3ft": {
+   "out": "binary",
+   "val_loss": 0.22345,
+   "epochs": [
+    {
+     "epoch": 1,
+     "val": 0.2326,
+     "val_F_auroc": 0.9785
+    },
+    {
+     "epoch": 2,
+     "val": 0.2235,
+     "val_F_auroc": 0.985
+    },
+    {
+     "epoch": 3,
+     "val": 0.2718,
+     "val_F_auroc": 0.9858
+    },
+    {
+     "epoch": 4,
+     "val": 0.3439,
+     "val_F_auroc": 0.986
+    },
+    {
+     "epoch": 5,
+     "val": 0.358,
+     "val_F_auroc": 0.9866
+    }
+   ],
+   "sec": 347.4,
+   "gpu_peak_GB": 1.787
+  }
+ }
+}
