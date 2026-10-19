@@ -167,7 +167,13 @@ def table(out: dict, o) -> None:
     """Mean over the four bases at the main cap; A8 is qwen2.5-7B only, so it is given with qwen's PEINN beside it."""
     cap = f"{TH.MAIN_CAP:g}"
     body = []
+    head = {GROUPS[1]: "Encoders", FT_COMP: "Components with fine-tuned encoders",
+            FROZEN_COMP: "Components with frozen encoders", GROUPS[4]: "Routing"}
     for g in GROUPS:
+        mt = out["matched"].get(g[0])
+        if g in head and mt:                    # the ORR budget of the last column differs between groups
+            body.append(f"\\multicolumn{{8}}{{@{{}}L}}{{\\emph{{{head[g]} (budget: ORR of "
+                        f"{'PEINN' if mt['reference'] == 'A0ftM' else mt['reference']}, {C.fx(mt['reference_orr'], 1)}\\%)}}}} \\\\")
         for v in g:
             key = v if v.startswith("A4") else f"{v}@{cap}"
             r = out["variants"].get(key)
@@ -190,52 +196,66 @@ def table(out: dict, o) -> None:
                                             for lab, r in rows) + "\n", encoding="utf-8")
 
 
-XLIM, YLIM = (4.0, 18.0), (0.0, 12.0)     # the crowded region; defences outside it are marked at the edge
+ZOOM_X, ZOOM_Y = (4.0, 18.0), (0.0, 12.0)     # the crowded region, drawn again as a magnified inset
 
 
 def curves(out: dict, caps, o) -> None:
-    """Two panels, zoomed on the crowded region: the fine-tuned encoders (PEINN, A0ft, A1ft-A3ft, A9) and the frozen
-    encoders (A0, A1-A7). Operating points outside the axes are cut; a defence outside them is drawn at the edge with
-    its values."""
+    """Two panels over the full range of every operating point: the fine-tuned encoders (PEINN, A0ft, A1ft-A3ft, A9)
+    and the frozen encoders (A0, A1-A7). An inset in each panel magnifies the crowded region, marked on the panel."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.6), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.9), sharex=True, sharey=True)
     ft = {"A0ftM": ("#009e73", "o", "-"), "A0ft": ("#666666", "s", "--"), "A1ft": ("#e69f00", "^", "-"),
           "A2ft": ("#56b4e9", "v", "-"), "A3ft": ("#cc79a7", "D", "-"), "A9": ("#000000", "+", ":")}
     fr = {"A0": ("#666666", "s", "--"), "A1": ("#e69f00", "^", "-"), "A2": ("#56b4e9", "v", "-"),
           "A3": ("#cc79a7", "D", "-"), "A5": ("#d55e00", "x", "-"), "A6p": ("#0072b2", "<", "-."),
           "A6e": ("#999933", ">", "-."), "A7": ("#882255", "h", "-.")}
-    for ax, style, title in ((axes[0], ft, "(a) Fine-tuned encoders"), (axes[1], fr, "(b) Frozen encoders")):
-        for v, (col, mk, ls) in style.items():
+    defs = {s: (_mean(out["defences"][s], "orr"), _mean(out["defences"][s], "ucr")) for s in ("Vanilla", "NeMo", "LlamaGuard")}
+    allx, ally = [x for x, _ in defs.values()], [y for _, y in defs.values()]
+    lines = {}
+    for style in (ft, fr):
+        for v in style:
             pts = [(_mean(out["variants"][f"{v}@{c:g}"], "orr"), _mean(out["variants"][f"{v}@{c:g}"], "ucr"))
                    for c in caps if f"{v}@{c:g}" in out["variants"]]
             if pts:
-                x, y = zip(*sorted(pts))
-                ax.plot(x, y, ls, marker=mk, color=col, ms=3.5, lw=0.9, alpha=0.9,
-                        label=LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})")
+                lines[v] = sorted(pts)
+                allx += [x for x, _ in pts]
+                ally += [y for _, y in pts]
+    xmax, ymax = max(allx) * 1.04, max(ally) * 1.06
+    m = out["variants"][MAIN]
+    main_pt = (_mean(m, "orr"), _mean(m, "ucr"))
+
+    def draw(ax, style, legend, small):
+        for v, (col, mk, ls) in style.items():
+            if v in lines:
+                x, y = zip(*lines[v])
+                ax.plot(x, y, ls, marker=mk, color=col, ms=2.8 if small else 3.2, lw=0.8 if small else 0.9, alpha=0.9,
+                        label=(LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})") if legend else None)
         for s, mk in (("Vanilla", "*"), ("NeMo", "P"), ("LlamaGuard", "X")):
-            r = out["defences"][s]
-            x, y = _mean(r, "orr"), _mean(r, "ucr")
-            lab = {"LlamaGuard": "Llama Guard 3"}.get(s, s)
-            if XLIM[0] <= x <= XLIM[1] and YLIM[0] <= y <= YLIM[1]:
-                ax.scatter([x], [y], marker=mk, s=40, color="black", zorder=3, label=lab)
-            else:
-                cx, cy = min(max(x, XLIM[0]), XLIM[1]), min(max(y, YLIM[0]), YLIM[1])
-                ax.scatter([cx], [cy], marker=mk, s=40, color="black", zorder=3, clip_on=False, label=lab)
-                ax.annotate(f"{lab} ({C.fx(x, 1)}, {C.fx(y, 1)})", (cx, cy), fontsize=6,
-                            xytext=(-4 if cx >= XLIM[1] else 6, -9 if cy >= YLIM[1] else 5), textcoords="offset points",
-                            ha="right" if cx >= XLIM[1] else "left")
-        if ax is axes[0]:
-            m = out["variants"][MAIN]
-            ax.scatter([_mean(m, "orr")], [_mean(m, "ucr")], s=90, facecolor="none", edgecolor="#009e73", lw=1.5, zorder=4)
+            x, y = defs[s]
+            ax.scatter([x], [y], marker=mk, s=30 if small else 40, color="black", zorder=3,
+                       label={"LlamaGuard": "Llama Guard 3"}.get(s, s) if legend else None)
+        if style is ft:
+            ax.scatter([main_pt[0]], [main_pt[1]], s=70 if small else 90, facecolor="none", edgecolor="#009e73", lw=1.3, zorder=4)
+
+    for ax, style, title in ((axes[0], ft, "(a) Fine-tuned encoders"), (axes[1], fr, "(b) Frozen encoders")):
+        draw(ax, style, True, False)
+        ax.set_xlim(0, xmax)
+        ax.set_ylim(0, ymax)
         ax.set_title(title, fontsize=8)
         ax.set_xlabel("XSTest over-refusal rate, ORR (%)", fontsize=8)
         ax.tick_params(labelsize=7)
         ax.grid(lw=0.3, alpha=0.4)
-        ax.legend(fontsize=6, frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.17))
-        ax.set_xlim(*XLIM)
-        ax.set_ylim(*YLIM)
+        ax.legend(fontsize=6, frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.15))
+        ins = ax.inset_axes([0.37, 0.37, 0.6, 0.6])
+        draw(ins, style, False, True)
+        ins.set_xlim(*ZOOM_X)
+        ins.set_ylim(*ZOOM_Y)
+        ins.tick_params(labelsize=6, pad=1)
+        ins.grid(lw=0.3, alpha=0.4)
+        ins.set_facecolor("white")
+        ax.indicate_inset_zoom(ins, edgecolor="0.35", lw=0.7)
     axes[0].set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)", fontsize=8)
     fig.tight_layout()
     fig.savefig(o / "ablation_curves.png", dpi=300)

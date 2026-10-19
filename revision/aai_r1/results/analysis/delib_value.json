@@ -128,57 +128,57 @@
   "A2ft": {
    "MFQ": {
     "Deliberation": 0,
-    "Direct-Answer": 29,
+    "Direct-Answer": 0,
     "Hard-block": 0,
-    "Soft-reasoning": 0
+    "Soft-reasoning": 29
    },
    "WVS": {
     "Deliberation": 0,
-    "Direct-Answer": 51,
+    "Direct-Answer": 45,
     "Hard-block": 0,
-    "Soft-reasoning": 0
+    "Soft-reasoning": 6
    },
    "dilemma": {
-    "Deliberation": 28,
-    "Direct-Answer": 6,
+    "Deliberation": 17,
+    "Direct-Answer": 3,
     "Hard-block": 2,
-    "Soft-reasoning": 0
+    "Soft-reasoning": 14
    },
    "ggb": {
     "Deliberation": 0,
-    "Direct-Answer": 5,
+    "Direct-Answer": 0,
     "Hard-block": 2,
-    "Soft-reasoning": 2
+    "Soft-reasoning": 7
    },
    "harmbench": {
     "Deliberation": 0,
-    "Direct-Answer": 7,
+    "Direct-Answer": 0,
     "Hard-block": 232,
-    "Soft-reasoning": 6
+    "Soft-reasoning": 13
    },
    "morables": {
-    "Deliberation": 156,
-    "Direct-Answer": 558,
+    "Deliberation": 1,
+    "Direct-Answer": 36,
     "Hard-block": 29,
-    "Soft-reasoning": 21
+    "Soft-reasoning": 698
    },
    "taxonomy": {
     "Deliberation": 0,
-    "Direct-Answer": 10,
+    "Direct-Answer": 2,
     "Hard-block": 178,
-    "Soft-reasoning": 8
+    "Soft-reasoning": 16
    },
    "xstest_safe": {
     "Deliberation": 0,
-    "Direct-Answer": 102,
+    "Direct-Answer": 78,
     "Hard-block": 4,
-    "Soft-reasoning": 2
+    "Soft-reasoning": 26
    },
    "xstest_unsafe": {
     "Deliberation": 0,
-    "Direct-Answer": 16,
+    "Direct-Answer": 6,
     "Hard-block": 67,
-    "Soft-reasoning": 0
+    "Soft-reasoning": 10
    }
   },
   "A3ft": {
