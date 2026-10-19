@@ -1,17 +1,17 @@
 {
  "verdict": "실행 중",
- "seq": 461,
+ "seq": 462,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-19 12:02:38",
- "time_utc": "2026-10-19 03:02:38",
- "attempt": 2,
- "code": "35e38cf ops.run: run the v21r steps in conda base when the runner was started from another environment",
+ "time_local": "2026-10-19 12:05:23",
+ "time_utc": "2026-10-19 03:05:23",
+ "attempt": 1,
+ "code": "654b384 v2.1 심사 대응 runner: 실행 중 (attempt 2)",
  "step": null,
  "step_min": null,
  "since_output_min": 0.0,
- "gpu": "28858 MiB, 32607 MiB, 0 %, 42",
+ "gpu": "4877 MiB, 32607 MiB, 59 %, 59",
  "next": "단계 진행",
  "reason": "시작",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
@@ -95,10 +95,10 @@
   "finish-check",
   "forced-export",
   "gate-mem",
-  "gate-retrain"
+  "gate-retrain",
+  "ftv-check"
  ],
  "left": [
-  "ftv-check",
   "ftv"
  ]
 }

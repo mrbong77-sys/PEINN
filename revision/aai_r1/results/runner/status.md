@@ -1,20 +1,19 @@
 # v2.1 심사 대응 무인 실행 상태: 실행 중
 
-- 시각 2026-10-19 12:02:38 (UTC 2026-10-19 03:02:38), 시도 2, 비컨 #461 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
-- 실행 코드: 35e38cf ops.run: run the v21r steps in conda base when the runner was started from another environment
+- 시각 2026-10-19 12:05:23 (UTC 2026-10-19 03:05:23), 시도 1, 비컨 #462 (주기 10분, 명령 확인 2분마다, 명령 파일 `revision/aai_r1/commands/run.json`)
+- 실행 코드: 654b384 v2.1 심사 대응 runner: 실행 중 (attempt 2)
 - 현재 단계: 없음
 - 마지막 출력 후: 0.0분
-- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 28858 MiB, 32607 MiB, 0 %, 42
+- GPU(사용 MiB, 전체 MiB, 사용률, 온도): 4877 MiB, 32607 MiB, 59 %, 59
 - 다음 동작: 단계 진행
 - 사유: 시작
 - 마지막으로 처리한 명령: 20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)
-- 남은 단계: ftv-check; ftv
-- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost, analyze, release, cost-gate, analyze-cost, repeat-diff, nemo-orr-final, repeat-diff-means, nemo-orr-detail, nemo-orr-dialog, nemo-orr-totals, a8-check, ggb-export, bench-export, bench-stats, cap-check, cap-reset, matrix-cap768, analyze-cap768, ggb-export-cap768, ggb-rescore-cap768, bench-export-cap768, bench-stats-cap768, a8, analyze-a8, ggb-export-a8, ggb-rescore-a8, bench-export-a8, bench-stats-a8, ethics-diag-check, ethics-diag, finish-check, forced-export, gate-mem, gate-retrain
+- 남은 단계: ftv
+- 끝난 단계(코드): record, nemo, approval, nemo-doc-early, unload-1, supplement, audit, features, split, dev-guard-check, dev-guard, supp-check, train, thresholds, routes, gate-diag-check, gate-diag, preview-check, preview, gate-review, main-check, matrix-zephyr-check, r2d2-probe, ollama-list, matrix-gemma3, biomon-check, biomon, nemo-orr, nemo-audit, nemo-reset-check, matrix-nemo-check, nemo-fair-review, r2d2-cpeg, r2d2-fingerprint, matrix-zephyr-check2, zephyr-review, nemo-fair-review-zephyr, nemo-reset, matrix, nemo-doc, repeat-reset, matrix-repeat, repeat-review, nemo-orr-all, nemo-audit-all, cost, analyze, release, cost-gate, analyze-cost, repeat-diff, nemo-orr-final, repeat-diff-means, nemo-orr-detail, nemo-orr-dialog, nemo-orr-totals, a8-check, ggb-export, bench-export, bench-stats, cap-check, cap-reset, matrix-cap768, analyze-cap768, ggb-export-cap768, ggb-rescore-cap768, bench-export-cap768, bench-stats-cap768, a8, analyze-a8, ggb-export-a8, ggb-rescore-a8, bench-export-a8, bench-stats-a8, ethics-diag-check, ethics-diag, finish-check, forced-export, gate-mem, gate-retrain, ftv-check
 
 ## 마지막 로그
 
 ```
-[v21r] skip nemo-orr-all (NeMo's XSTest safe refusals by type and rail on every base (CPU)): finished 2026-10-17 11:18:27
 [v21r] skip nemo-audit-all (NeMo set-up audit on the final answers of every base (CPU, DESIGN.md 29)): finished 2026-10-17 11:18:33
 [v21r] skip cost (route cost per tier (gate time, calls, tokens)): finished 2026-10-17 13:21:39
 [v21r] skip analyze (benchmark results, curves, calibration, I construct): finished 2026-10-17 13:22:49
@@ -51,7 +50,8 @@
 [v21r] skip forced-export (forced-tag rows, route tables, signals, val/test labels -> results/forced (CPU)): finished 2026-10-18 19:47:34
 [v21r] skip gate-mem (A0ftM's whole input gate in one process: time and peak memory, GPU and one CPU thread): finished 2026-10-18 19:48:46
 [v21r] skip gate-retrain (A0ftM's gate trained again from the same corpus into a scratch folder: time, memory): finished 2026-10-18 20:03:46
+[v21r] skip ftv-check (A1-A3 fine-tuned heads on 64 rows, one epoch (pre-test; nothing pushed)): finished 2026-10-19 12:03:30
 
-[v21r] ===== ftv-check: A1-A3 fine-tuned heads on 64 rows, one epoch (pre-test; nothing pushed) =====
-[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r ftv --check
+[v21r] ===== ftv: A1-A3 heads with PEINN's fine-tuned MiniLM, thresholds on val, routes -> results/forced =====
+[ops] $ C:\Users\bojung\miniconda3\python.exe -u -m v21r ftv
 ```
