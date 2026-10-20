@@ -125,6 +125,116 @@
      "sha256": "4c0d7005c20ea58d39b89477ce476c9c96997f0e898518b90e69380aba8d3edb"
     }
    ]
+  },
+  {
+   "file": "A1ft_head.pt",
+   "dir": "ablation_ft",
+   "bytes": 91332107,
+   "sha256": "057a0019fdf4dcb97899071e033cf1ab29849aebf6c3d5f0716e265a7843060a",
+   "variant": "A1ft: ablation head with its fine-tuned MiniLM (DESIGN.md 42; output 'tf')",
+   "max_signal_diff": 4.14e-06,
+   "texts_checked": 13938,
+   "parts": [
+    {
+     "file": "A1ft_head.pt.part00",
+     "bytes": 47185920,
+     "sha256": "230438afb746fa6bfca0f938bd002b47707316821bd67eac5dcc32fc79a80921"
+    },
+    {
+     "file": "A1ft_head.pt.part01",
+     "bytes": 44146187,
+     "sha256": "098df6f368ab30cab265ed473ae3aacd205da12c3cc1c262d514e48af48a310c"
+    }
+   ]
+  },
+  {
+   "file": "A2ft_head.pt",
+   "dir": "ablation_ft",
+   "bytes": 91332363,
+   "sha256": "a15f3f7a692f2d400fb96fc5924708c8a3be2615728fc1b43a7281dff2be9f26",
+   "variant": "A2ft: ablation head with its fine-tuned MiniLM (DESIGN.md 42; output 'softmax')",
+   "max_signal_diff": 1.85e-06,
+   "texts_checked": 13938,
+   "parts": [
+    {
+     "file": "A2ft_head.pt.part00",
+     "bytes": 47185920,
+     "sha256": "2c4ec42d6869d2eb2f4f5f46af968e50e53c684af9a6b3f3dd30123e4b42341e"
+    },
+    {
+     "file": "A2ft_head.pt.part01",
+     "bytes": 44146443,
+     "sha256": "a9a0786e442769418e0a387d7b2e62742a579728bd40c84e35c877e7f6956502"
+    }
+   ]
+  },
+  {
+   "file": "A3ft_head.pt",
+   "dir": "ablation_ft",
+   "bytes": 91331851,
+   "sha256": "75a201d3d3912d0e53ee349f1e192bb455f27165806797bb84b54b54f91a1be2",
+   "variant": "A3ft: ablation head with its fine-tuned MiniLM (DESIGN.md 42; output 'binary')",
+   "max_signal_diff": 4.53e-06,
+   "texts_checked": 13938,
+   "parts": [
+    {
+     "file": "A3ft_head.pt.part00",
+     "bytes": 47185920,
+     "sha256": "c431ec76529acfb048beede32bd688bf85da61055c78c65c739b50a37fa39981"
+    },
+    {
+     "file": "A3ft_head.pt.part01",
+     "bytes": 44145931,
+     "sha256": "f52f89fb5ec566772c7d2b8027b805447eb95f35779fe7c8d6f761bd2c943a3c"
+    }
+   ]
+  },
+  {
+   "file": "adapter.safetensors",
+   "dir": "a8",
+   "bytes": 161523760,
+   "sha256": "33eb6615459dc4ec6f522f80b24e9f32b2172a9530ecf9dd6b4b8d27a6de3b97",
+   "variant": "A8: LoRA adapters on Qwen/Qwen2.5-7B-Instruct (snapshot a09a354), rank 16, alpha 32, fp32; merged weight = base + B A alpha/r",
+   "tensors": 392,
+   "merge_check": {
+    "model.layers.23.self_attn.q_proj": {
+     "equal": 1.0,
+     "changed": 11438595,
+     "equal_changed": 1.0
+    },
+    "model.layers.25.mlp.down_proj": {
+     "equal": 1.0,
+     "changed": 55756997,
+     "equal_changed": 1.0
+    },
+    "model.layers.27.self_attn.o_proj": {
+     "equal": 1.0,
+     "changed": 11244549,
+     "equal_changed": 1.0
+    }
+   },
+   "parts": [
+    {
+     "file": "adapter.safetensors.part00",
+     "bytes": 47185920,
+     "sha256": "0bf294c99ef09c2b7ea5171645113883d96c1c362cb6c3075ed70fb65eeec9b6"
+    },
+    {
+     "file": "adapter.safetensors.part01",
+     "bytes": 47185920,
+     "sha256": "83339dad9918b8a70ccb02c6b3156ce54786dfe56445ac84eeef9107db38e2af"
+    },
+    {
+     "file": "adapter.safetensors.part02",
+     "bytes": 47185920,
+     "sha256": "10b48aef79a1654657731634dc9ed8e240f359e6b7d6ff82b1d3af16cb19b788"
+    },
+    {
+     "file": "adapter.safetensors.part03",
+     "bytes": 19966000,
+     "sha256": "0f4927c3f8e6396a64f897f4f2afee361846635d64c19db45c498a5c85aa228e"
+    }
+   ]
   }
  ],
  "kept_out": []
