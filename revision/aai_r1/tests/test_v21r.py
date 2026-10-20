@@ -407,6 +407,68 @@ def test_release_refuses_a_final_checkpoint_that_is_not_the_reported_one(tmp_pat
     assert not list((D.odir(False) / "checkpoints" / "final").glob("*.part*"))
 
 
+def _extra_fixture(tmp_path, monkeypatch):
+    import pandas as pd
+    from v21r import release as RL
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    sp = pd.DataFrame({"sha": [f"s{i}" for i in range(6)], "text": [f"t{i}" for i in range(6)],
+                       "split": ["train", "train", "train", "val", "test", "test"], "source": "src",
+                       "T": 0.9, "I": 0.1, "F": 0.1, "near_cos": 0.3})
+    sp.to_csv(D.wdir(False) / "corpus_split.csv", index=False)
+    (C.OUT / "forced").mkdir(parents=True)
+    sp[sp.split != "train"][["sha", "split", "source", "T", "I", "F"]].to_csv(C.OUT / "forced" / "split_labels.csv.gz",
+                                                                              index=False, compression="gzip")
+    (C.OUT / "corpus").mkdir()
+    (C.OUT / "corpus" / "corpus_audit.json").write_text(json.dumps({"split": {"train": 3, "test": 2, "val": 1}}))
+    o = C.OUT / "checkpoints"
+    o.mkdir()
+    (o / "manifest.json").write_text(json.dumps({"files": [], "split": [{"file": "A0ft_head.pt", "parts": []}],
+                                                 "kept_out": []}))
+    md = D.wdir(False) / "models"
+    md.mkdir()
+    heads = {v: bytes([i]) * 250 for i, v in enumerate(("A1ft_head.pt", "A2ft_head.pt", "A3ft_head.pt"))}
+    for k, b in heads.items():
+        (md / k).write_bytes(b)
+    (md / "adapter.safetensors").write_bytes(b"z" * 120)
+    monkeypatch.setattr(RL, "PART", 100)
+    monkeypatch.setattr(RL, "check_ft_heads", lambda check, log: [{"file": k, "path": md / k, "variant": k} for k in heads])
+    monkeypatch.setattr(RL, "check_a8_adapter",
+                        lambda check, log: {"file": "adapter.safetensors", "path": md / "adapter.safetensors",
+                                            "variant": "A8", "tensors": 392})
+    return RL, o, heads, sp
+
+
+def test_release_extra_splits_heads_and_adapter_and_writes_identifiers_without_text(tmp_path, monkeypatch):
+    import pandas as pd
+    RL, o, heads, sp = _extra_fixture(tmp_path, monkeypatch)
+    assert RL.release_extra(check=False, log=lambda *_: None) == 0
+    man = json.loads((o / "manifest.json").read_text())
+    assert [(r["file"], r.get("dir", "final")) for r in man["split"]] == [
+        ("A0ft_head.pt", "final"), ("A1ft_head.pt", "ablation_ft"), ("A2ft_head.pt", "ablation_ft"),
+        ("A3ft_head.pt", "ablation_ft"), ("adapter.safetensors", "a8")]
+    assert all("path" not in r for r in man["split"]) and len(man["split"][1]["parts"]) == 3
+    ids = pd.read_csv(C.OUT / "corpus" / "corpus_split_ids.csv.gz")
+    assert "text" not in ids and "near_cos" not in ids and list(ids.sha) == list(sp.sha)
+    man["split"] = man["split"][1:]                               # A0ft's parts are not in this fixture
+    (o / "manifest.json").write_text(json.dumps(man))
+    assert RL.assemble(check=False, log=lambda *_: None) == 0
+    assert (o / "ablation_ft" / "A2ft_head.pt").read_bytes() == heads["A2ft_head.pt"]
+    assert (o / "a8" / "adapter.safetensors").read_bytes() == b"z" * 120
+    assert RL.release_extra(check=False, log=lambda *_: None) == 0  # a second run replaces, never duplicates
+    assert len(json.loads((o / "manifest.json").read_text())["split"]) == 4
+
+
+def test_release_extra_stops_when_the_split_differs_from_the_published_one(tmp_path, monkeypatch):
+    import pandas as pd
+    RL, o, _, sp = _extra_fixture(tmp_path, monkeypatch)
+    sp.assign(split=["train", "train", "val", "val", "test", "test"]).to_csv(D.wdir(False) / "corpus_split.csv", index=False)
+    assert RL.release_extra(check=False, log=lambda *_: None) == 1
+    assert not (o / "ablation_ft").exists() and not (C.OUT / "corpus" / "corpus_split_ids.csv.gz").exists()
+    monkeypatch.setattr(RL, "check_ft_heads", lambda check, log: None)
+    assert RL.release_extra(check=True, log=lambda *_: None) == 1
+
+
 def _diag_fixture(tmp_path, monkeypatch):
     """A tiny check cache: corpus split, features, A0 and SHIPPED signals, thresholds and one judged XSTest CSV."""
     monkeypatch.setattr(C, "CACHE", tmp_path)
@@ -1545,3 +1607,70 @@ def test_ftv_end_to_end_on_a_small_cache(tmp_path, monkeypatch):
     assert C.jload(C.OUT / "ftv_report.json")["heads"]["A2ft"]["sec"] == t0
     assert ftv.ftv_fit(False, lambda *a: None) == 0
     assert pd.read_csv(C.OUT / "forced" / "routes.csv.gz").columns.tolist() == rt.columns.tolist()
+
+
+def test_a8_adapter_check_accepts_the_folded_adapter_and_refuses_another(tmp_path, monkeypatch):
+    import huggingface_hub
+    import torch
+    from safetensors.torch import save_file
+    from v21r import a8 as A8
+    from v21r import release as RL
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    monkeypatch.setattr(RL, "A8_TENSORS", ("m.l0.q", "m.l1.o"))
+    (C.OUT / "a8").mkdir(parents=True)
+    (C.OUT / "a8" / "a8.json").write_text(json.dumps({"train": {"model": "base/m", "snapshot": "abc1234567", "wrapped": 2,
+                                                                "hp": {"r": 4, "alpha": 8}}}))
+    g = torch.Generator().manual_seed(0)
+    base, ad, merged = {}, {}, {}
+    for n in RL.A8_TENSORS:
+        w = (torch.randn(32, 24, generator=g) * 0.02).to(torch.bfloat16)
+        A, B = torch.randn(4, 24, generator=g) * 0.1, torch.randn(32, 4, generator=g) * 0.05
+        base[f"{n}.weight"], ad[f"{n}.lora_A"], ad[f"{n}.lora_B"] = w, A, B
+        merged[f"{n}.weight"] = w + (B @ A * 2.0).to(torch.bfloat16)
+    bd, w8 = tmp_path / "hf", A8.wdir(False)
+    bd.mkdir()
+    (w8 / "merged").mkdir(parents=True)
+    save_file(base, str(bd / "model.safetensors"))
+    save_file(merged, str(w8 / "merged" / "model.safetensors"))
+    save_file(ad, str(w8 / "adapter.safetensors"))
+    monkeypatch.setattr(huggingface_hub, "snapshot_download", lambda *a, **k: str(bd))
+    r = RL.check_a8_adapter(False, log=lambda *_: None)
+    assert r["tensors"] == 4 and all(v["equal"] == 1.0 for v in r["merge_check"].values())
+    ad["m.l1.o.lora_B"] = torch.randn(32, 4, generator=g) * 0.05          # an adapter the merged model does not hold
+    save_file(ad, str(w8 / "adapter.safetensors"))
+    assert RL.check_a8_adapter(False, log=lambda *_: None) is None
+
+
+def test_ft_head_check_compares_with_the_published_signals(tmp_path, monkeypatch):
+    import numpy as np
+    import pandas as pd
+    from v21r import release as RL
+    monkeypatch.setattr(C, "CACHE", tmp_path)
+    monkeypatch.setattr(C, "OUT", tmp_path / "out")
+    pd.DataFrame({"sha": ["a", "b"], "text": ["x", "y"], "split": ["val", "test"]}).to_csv(D.wdir(False) / "corpus_split.csv",
+                                                                                        index=False)
+    (D.wdir(False) / "record.jsonl").write_text(json.dumps({"sha": "c", "text": "z"}) + "\n")
+    np.savez(D.wdir(False) / "features.npz", keys=np.array(["a", "b", "c"]), head_x=np.zeros((3, 800)), cal_x=np.zeros(3),
+             tif=np.zeros(3), e1=np.zeros(3))
+    (C.OUT / "forced").mkdir(parents=True)
+    md = D.wdir(False) / "models"
+    md.mkdir()
+    sig = {}
+    for v, out in RL.FT_HEADS:
+        (md / f"{v}_head.pt").write_bytes(b"w")
+        sig[v] = pd.DataFrame({"sha": ["a", "b", "c"], "part": ["val", "test", "bench"], "T": [.9, .2, .5], "I": [0, .1, .3],
+                               "F": [.1, .8, .5], "E": 0.0})
+        sig[v].to_csv(C.OUT / "forced" / f"signals_{v}.csv.gz", index=False, compression="gzip")
+    shift = {"v": 0.0}
+
+    def fake(f, texts, X):
+        v = f.name.split("_")[0]
+        assert X.shape == (3, 416) and texts == ["x", "y", "z"]
+        s = sig[v]
+        return {k: s[k].to_numpy() + (shift["v"] if v == "A2ft" else 0) for k in "TIF"}, {"out": dict(RL.FT_HEADS)[v]}
+    monkeypatch.setattr(RL, "_head_outputs", fake)
+    rows = RL.check_ft_heads(False, log=lambda *_: None)
+    assert [r["file"] for r in rows] == ["A1ft_head.pt", "A2ft_head.pt", "A3ft_head.pt"]
+    shift["v"] = 1e-3                                              # a copy whose signals are not the published ones
+    assert RL.check_ft_heads(False, log=lambda *_: None) is None

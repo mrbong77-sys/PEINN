@@ -17,11 +17,16 @@ The frozen Emotion Engine and principle anchors are those of the submitted packa
 | `checkpoints/final/A0ft_energy.pt.part*` | PEINN's energy calibrator with its fine-tuned mpnet (438 MB, in parts) |
 | `checkpoints/A0ftM_ood.pt` | out-of-distribution statistics (class means, precision, τ) |
 | `checkpoints/A0.pt`, `calibrator.pt`, `A1.pt` … `A6p.pt` | heads of the ablation variants (A0: frozen encoders) |
+| `checkpoints/ablation_ft/A{1,2,3}ft_head.pt.part*` | heads of the fine-tuned ablation variants A1ft–A3ft, each with its fine-tuned MiniLM (in parts) |
+| `checkpoints/a8/adapter.safetensors.part*` | A8's LoRA adapters on Qwen2.5-7B-Instruct (rank 16, alpha 32, fp32; in parts) |
 | `checkpoints/manifest.json` | bytes and SHA-256 of every file and every part |
+| `corpus/corpus_split_ids.csv.gz` | every row of the isolated corpus: SHA-1 of its text, split, source, teacher T/I/F (no text) |
 | `thresholds.json` | the fitted thresholds of every variant and cap (`A0ftM@0.03` is PEINN) |
 
-The two large files are stored as byte parts of at most 45 MiB so that the repository archive holds them. Join and
-check them with `python -m v21r assemble` (run from this folder); the joined files appear next to the parts.
+The large files are stored as byte parts of at most 45 MiB so that the repository archive holds them. Join and
+check them with `python -m v21r assemble` (run from this folder); the joined files appear next to the parts. Before
+release, each A1ft–A3ft head was checked to reproduce its published signals (`forced/signals_A*ft.csv.gz`) and the A8
+adapters to be the ones folded into the merged model that answered the benchmarks (`python -m v21r release-extra`).
 
 ## Results
 

@@ -306,6 +306,11 @@ def steps(check: bool) -> list:
                lambda: step("ftv", True)),
               ("ftv", "A1-A3 heads with PEINN's fine-tuned MiniLM, thresholds on val, routes -> results/forced",
                run("ftv"))]
+        # release 2.2.2 (Eugene card 2026-10-21 03:15 KST "전부 공개"): what release 2.2.1 left in the cache
+        s += [("release-extra-check", "A1ft-A3ft heads, A8 adapters and split identifiers checked on a few rows first "
+                                      "(pre-test; nothing pushed)", lambda: step("release-extra", True)),
+              ("release-extra", "A1ft-A3ft heads and A8 adapters (in parts), corpus split identifiers -> results",
+               run("release-extra"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]
