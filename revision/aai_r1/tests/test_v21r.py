@@ -1610,7 +1610,6 @@ def test_ftv_end_to_end_on_a_small_cache(tmp_path, monkeypatch):
 
 
 def test_a8_adapter_check_accepts_the_folded_adapter_and_refuses_another(tmp_path, monkeypatch):
-    import huggingface_hub
     import torch
     from safetensors.torch import save_file
     from v21r import a8 as A8
@@ -1634,7 +1633,7 @@ def test_a8_adapter_check_accepts_the_folded_adapter_and_refuses_another(tmp_pat
     save_file(base, str(bd / "model.safetensors"))
     save_file(merged, str(w8 / "merged" / "model.safetensors"))
     save_file(ad, str(w8 / "adapter.safetensors"))
-    monkeypatch.setattr(huggingface_hub, "snapshot_download", lambda *a, **k: str(bd))
+    monkeypatch.setattr(RL, "_base_files", lambda m, r, names, log=None: bd)
     r = RL.check_a8_adapter(False, log=lambda *_: None)
     assert r["tensors"] == 4 and all(v["equal"] == 1.0 for v in r["merge_check"].values())
     ad["m.l1.o.lora_B"] = torch.randn(32, 4, generator=g) * 0.05          # an adapter the merged model does not hold
@@ -1674,3 +1673,19 @@ def test_ft_head_check_compares_with_the_published_signals(tmp_path, monkeypatch
     assert [r["file"] for r in rows] == ["A1ft_head.pt", "A2ft_head.pt", "A3ft_head.pt"]
     shift["v"] = 1e-3                                              # a copy whose signals are not the published ones
     assert RL.check_ft_heads(False, log=lambda *_: None) is None
+
+
+def test_base_files_reads_the_hf_cache_without_network(tmp_path, monkeypatch):
+    from v21r import release as RL
+    snap = tmp_path / "hub" / "models--o--m" / "snapshots" / ("a" * 40)
+    snap.mkdir(parents=True)
+    (tmp_path / "hub" / "models--o--m" / "refs").mkdir()
+    (snap / "model.safetensors.index.json").write_text(json.dumps({"weight_map": {"l.q.weight": "s2.safetensors",
+                                                                                 "l.o.weight": "s1.safetensors"}}))
+    (snap / "s2.safetensors").write_bytes(b"x")
+    monkeypatch.setenv("HF_HOME", str(tmp_path))
+    monkeypatch.setenv("HF_HUB_CACHE", str(tmp_path / "hub"))
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")                     # stripped for the child; the cache answers anyway
+    monkeypatch.setenv("HF_ENDPOINT", "http://127.0.0.1:9")       # no network: a download attempt would fail
+    assert RL._base_files("o/m", "a" * 40, ["l.q"], log=lambda *_: None) == snap
+    assert RL._base_files("o/m", "a" * 40, ["l.o"], log=lambda *_: None) is None   # shard missing, no network

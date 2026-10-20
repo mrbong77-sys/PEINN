@@ -95,7 +95,8 @@ A8_DIR = "a8"
 SIG_TOL = 1e-4               # largest |T|, |I|, |F| difference to the published signals (same weights, same texts)
 A8_MATCH = 0.99              # share of a checked merged tensor equal to bf16(base + bf16(B A alpha/r))
 A8_CHANGED = 0.95            # the same share among the elements the merge changed
-A8_TENSORS = ("model.layers.0.self_attn.q_proj", "model.layers.14.mlp.down_proj", "model.layers.27.self_attn.o_proj")
+A8_TENSORS = ("model.layers.23.self_attn.q_proj", "model.layers.25.mlp.down_proj", "model.layers.27.self_attn.o_proj")
+# all three in the base's last shard (model-00004-of-00004, 3.6 GB), the only file fetched when the HF cache lacks it
 SPLIT_COLS = ("sha", "split", "source", "file_role", "polar", "T", "I", "F", "mask_T", "mask_I", "mask_F")
 CHECK_ROWS = 200
 
@@ -153,11 +154,32 @@ def check_ft_heads(check: bool, log=print) -> list | None:
     return rows
 
 
+def _base_files(model: str, rev: str, names, log=print) -> Path | None:
+    """The base snapshot folder holding the index and the shards of `names` at commit `rev`: read from the HF cache when
+    there, else downloaded (only those files). A child process without HF_HUB_OFFLINE, which some imports set."""
+    import os
+    import subprocess
+    import sys
+    code = ("import json, sys; from pathlib import Path; from huggingface_hub import hf_hub_download as g\n"
+            "m, r, names = sys.argv[1], sys.argv[2], sys.argv[3:]\n"
+            "i = Path(g(m, 'model.safetensors.index.json', revision=r))\n"
+            "wm = json.loads(i.read_text(encoding='utf-8'))['weight_map']\n"
+            "for f in sorted({wm[n + '.weight'] for n in names}): g(m, f, revision=r)\n"
+            "print(i.parent)\n")
+    env = {k: v for k, v in os.environ.items() if k not in ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE")}
+    log(f"  base {model}@{rev[:7]}: index and the shards of {len(names)} tensor(s) (cache first, else download)")
+    p = subprocess.run([sys.executable, "-c", code, model, rev, *names], env=env, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
+    if p.returncode:
+        log(f"stop: could not get the base shards of {model}@{rev[:7]}\n{p.stderr[-2000:]}")
+        return None
+    return Path(p.stdout.strip().splitlines()[-1])
+
+
 def check_a8_adapter(check: bool, log=print) -> dict | None:
     """The LoRA adapters of A8 (a8_train.py, fp32) must be the ones folded into the merged model the benches served:
     for A8_TENSORS, merged == bf16(base + bf16(B A alpha/r)) on nearly every element and on those the merge changed."""
     import json
-    from huggingface_hub import snapshot_download
     from safetensors import safe_open
     from . import a8 as A8
     w = A8.wdir(False)
@@ -166,8 +188,9 @@ def check_a8_adapter(check: bool, log=print) -> dict | None:
     if not f.exists():
         log(f"stop: {f} not found")
         return None
-    base = Path(snapshot_download(rep["model"], revision=rep["snapshot"], allow_patterns=["*.json", "*.safetensors"],
-                                  local_files_only=True))
+    base = _base_files(rep["model"], rep["snapshot"], A8_TENSORS[:1] if check else A8_TENSORS, log)
+    if base is None:
+        return None
     scale = rep["hp"]["alpha"] / rep["hp"]["r"]
 
     def tensor(d: Path, name: str):
