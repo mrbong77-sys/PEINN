@@ -311,6 +311,9 @@ def steps(check: bool) -> list:
                                       "(pre-test; nothing pushed)", lambda: step("release-extra", True)),
               ("release-extra", "A1ft-A3ft heads and A8 adapters (in parts), corpus split identifiers -> results",
                run("release-extra"))]
+        # public package clean-up (Eugene 2026-10-21 04:33 KST): is src/ the harness the runs called?
+        s += [("peaos-diff-check", "PEAOS harness against src/ (pre-test; nothing pushed)", lambda: step("peaos-diff", True)),
+              ("peaos-diff", "PEAOS harness against its copy in src/ -> results/peaos_diff.json", run("peaos-diff"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]

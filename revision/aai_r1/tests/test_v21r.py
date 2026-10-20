@@ -1689,3 +1689,24 @@ def test_base_files_reads_the_hf_cache_without_network(tmp_path, monkeypatch):
     monkeypatch.setenv("HF_ENDPOINT", "http://127.0.0.1:9")       # no network: a download attempt would fail
     assert RL._base_files("o/m", "a" * 40, ["l.q"], log=lambda *_: None) == snap
     assert RL._base_files("o/m", "a" * 40, ["l.o"], log=lambda *_: None) is None   # shard missing, no network
+
+
+def test_peaos_diff_reports_each_file_and_withholds_secrets(tmp_path, monkeypatch):
+    from v21r import peaos_diff as PD
+    pe, src = tmp_path / "PEAOS", tmp_path / "src"
+    for root in (pe, src):
+        (root / "pea_eval" / "evaluators").mkdir(parents=True)
+        (root / "pea_eval" / "__init__.py").write_text("")
+        (root / "pea_eval" / "evaluators" / "__init__.py").write_text("")
+        (root / "run_stat_batch.py").write_text("from pea_eval.evaluators import harmbench_eval\n")
+    (pe / "pea_eval" / "evaluators" / "harmbench_eval.py").write_text("from . import judge\nX = 2\n")
+    (src / "pea_eval" / "evaluators" / "harmbench_eval.py").write_text("from . import judge\nX = 1\n")
+    (pe / "pea_eval" / "evaluators" / "judge.py").write_text('API_KEY = "abcdefghijklmnop"\n')
+    (src / "pea_eval" / "evaluators" / "unused.py").write_text("")
+    monkeypatch.setattr(PD, "v21r_imports", lambda: ["pea_eval.evaluators.harmbench_eval"])
+    r = PD.compare(pe, src)["files"]
+    assert r["run_stat_batch.py"]["status"] == "same"
+    assert r["pea_eval/evaluators/harmbench_eval.py"]["status"] == "differs"
+    assert "+X = 2" in r["pea_eval/evaluators/harmbench_eval.py"]["diff"]
+    assert r["pea_eval/evaluators/judge.py"]["status"] == "only_peaos" and r["pea_eval/evaluators/judge.py"]["diff"] is None
+    assert "pea_eval/evaluators/unused.py" not in r
