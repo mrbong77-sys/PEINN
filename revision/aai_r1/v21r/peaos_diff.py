@@ -1,7 +1,7 @@
 """The PEAOS harness the revised runs called against its copy in this repository (src/): every code file the runs could
 import from PEAOS, with its status (same, differs, only in PEAOS, only in src) and, where it differs, the unified diff
 src -> PEAOS, so that the public src/ can be made the code that ran. Secret-like strings withhold a file's diff.
-Nothing is run or imported. -> results/peaos_diff.json (pushed)."""
+Nothing is run or imported. Statuses -> results/peaos_diff.json (pushed); diffs -> cache only."""
 from __future__ import annotations
 
 import ast
@@ -164,6 +164,9 @@ def peaos_diff(check: bool = False, log=print) -> int:
     for rel, r in rep["files"].items():
         if r["status"] != "same":
             log(f"  {r['status']:10s} {'used' if r['used_by_runs'] else '    '} {rel} {r.get('withheld', '')}")
+    C.jdump(rep, D.wdir(check) / "peaos_diff_full.json")                      # diffs stay in the cache (PEAOS is private)
+    for r in rep["files"].values():
+        r.pop("diff", None)
     out = C.jdump(rep, D.odir(check) / "peaos_diff.json")
     if check:
         return 0
