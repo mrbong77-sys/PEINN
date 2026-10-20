@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 467,
+ "verdict": "완료",
+ "seq": 468,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-21 03:43:30",
- "time_utc": "2026-10-20 18:43:30",
+ "time_local": "2026-10-21 03:46:31",
+ "time_utc": "2026-10-20 18:46:31",
  "attempt": 1,
- "code": "b455bc3 v21r release-extra: get the A8 base shard by its pinned commit (cache first, else download one 3.6 GB shard); ch",
- "step": null,
- "step_min": null,
+ "code": "b227dec v21r release 2.2.2: A1ft-A3ft heads and A8 adapters (in parts), corpus split identifiers",
+ "step": "release-extra",
+ "step_min": 1.6,
  "since_output_min": 0.0,
- "gpu": "3406 MiB, 32607 MiB, 1 %, 51",
- "next": "단계 진행",
- "reason": "시작",
+ "gpu": "3416 MiB, 32607 MiB, 0 %, 39",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -97,10 +97,9 @@
   "gate-mem",
   "gate-retrain",
   "ftv-check",
-  "ftv"
- ],
- "left": [
+  "ftv",
   "release-extra-check",
   "release-extra"
- ]
+ ],
+ "left": []
 }
