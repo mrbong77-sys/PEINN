@@ -386,7 +386,7 @@
    "status": "differs",
    "used_by_runs": true,
    "lines": {
-    "src": 941,
+    "src": 943,
     "peaos": 947
    }
   },
@@ -588,9 +588,18 @@
    "scikit-learn": "1.8.0",
    "matplotlib": "3.11.2",
    "pyyaml": "6.0.3",
-   "gguf": null
+   "gguf": null,
+   "httpx": "0.28.1",
+   "jinja2": "3.1.6",
+   "psutil": "7.2.2",
+   "datasets": "5.0.1"
   },
   "ollama": "ollama version is 0.40.6",
   "gpu": "NVIDIA GeForce RTX 5090, 617.14, 32607 MiB"
+ },
+ "peaos_data": {
+  "pea_eval/data": [
+   "ee_hybrid_calibrator_best.pt 216941"
+  ]
  }
 }
