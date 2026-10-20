@@ -1,0 +1,596 @@
+{
+ "peaos": {
+  "head": "2c7c850e055d33864293947092b3b39625783712",
+  "remote": "https://github.com/mrbong77-sys/PEAOS",
+  "dirty_files": 0
+ },
+ "v21r_imports": [
+  "pea_eval",
+  "pea_eval.config.settings",
+  "pea_eval.evaluators",
+  "pea_eval.evaluators.ee_runner",
+  "pea_eval.evaluators.intent_router",
+  "pea_eval.evaluators.llm_client",
+  "pea_eval.pge"
+ ],
+ "count": {
+  "same": 13,
+  "differs": 31,
+  "only_peaos": 30,
+  "only_src": 0
+ },
+ "files": {
+  "config/__init__.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 1
+   }
+  },
+  "config/arms_nla.yaml": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "config/default_config.yaml": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "withheld": "secret-like string at line 25",
+   "lines": {
+    "src": 0,
+    "peaos": 117
+   }
+  },
+  "config/settings.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 260
+   }
+  },
+  "config/user_config.yaml": {
+   "status": "differs",
+   "used_by_runs": true,
+   "withheld": "secret-like string at line 114",
+   "lines": {
+    "src": 37,
+    "peaos": 118
+   }
+  },
+  "core/__init__.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 1,
+    "peaos": 1
+   }
+  },
+  "core/emotion_engine.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 445,
+    "peaos": 445
+   }
+  },
+  "core/golden_anchors.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 356,
+    "peaos": 356
+   }
+  },
+  "core/golden_anchors_reverse.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 81,
+    "peaos": 81
+   }
+  },
+  "core/memory_bank.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 504
+   }
+  },
+  "core/peinn.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 230,
+    "peaos": 230
+   }
+  },
+  "core/utils.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 121,
+    "peaos": 121
+   }
+  },
+  "integrations/__init__.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 1
+   }
+  },
+  "integrations/gemini_api.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 485
+   }
+  },
+  "integrations/ollama_client.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 215
+   }
+  },
+  "integrations/vllm_openai_client.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 156
+   }
+  },
+  "orchestrator/__init__.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 1
+   }
+  },
+  "orchestrator/tci_module.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 956
+   }
+  },
+  "pea_eval/backends/__init__.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/backends/hf_backend.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 261,
+    "peaos": 257
+   }
+  },
+  "pea_eval/config/__init__.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/config/arms.yaml": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 95
+   }
+  },
+  "pea_eval/config/arms_harmbench.yaml": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/config/arms_shieldstral.yaml": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 76
+   }
+  },
+  "pea_eval/config/settings.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 485,
+    "peaos": 478
+   }
+  },
+  "pea_eval/config/unesco_rubric.yaml": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 75
+   }
+  },
+  "pea_eval/evaluators/__init__.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/evaluators/anchor_category_runner.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 153,
+    "peaos": 153
+   }
+  },
+  "pea_eval/evaluators/arm_runner.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 499
+   }
+  },
+  "pea_eval/evaluators/benign_detector.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 125,
+    "peaos": 125
+   }
+  },
+  "pea_eval/evaluators/confucian_mux.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/evaluators/decision_flip_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 1260
+   }
+  },
+  "pea_eval/evaluators/delphi_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 511
+   }
+  },
+  "pea_eval/evaluators/dilemma_runner.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 166,
+    "peaos": 166
+   }
+  },
+  "pea_eval/evaluators/ee_runner.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 1071,
+    "peaos": 1070
+   }
+  },
+  "pea_eval/evaluators/ethics_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 879,
+    "peaos": 879
+   }
+  },
+  "pea_eval/evaluators/ggb_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 242,
+    "peaos": 242
+   }
+  },
+  "pea_eval/evaluators/harmbench_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 1404,
+    "peaos": 1404
+   }
+  },
+  "pea_eval/evaluators/intent_router.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 459,
+    "peaos": 459
+   }
+  },
+  "pea_eval/evaluators/ksafe_mm_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 827
+   }
+  },
+  "pea_eval/evaluators/llm_client.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 893,
+    "peaos": 893
+   }
+  },
+  "pea_eval/evaluators/mach_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 851
+   }
+  },
+  "pea_eval/evaluators/morables_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 408,
+    "peaos": 408
+   }
+  },
+  "pea_eval/evaluators/or_bench_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 507
+   }
+  },
+  "pea_eval/evaluators/prompt_builder.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 431,
+    "peaos": 431
+   }
+  },
+  "pea_eval/evaluators/refusal_classifier.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 205
+   }
+  },
+  "pea_eval/evaluators/taxonomy_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 1011,
+    "peaos": 1011
+   }
+  },
+  "pea_eval/evaluators/unesco_eval.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 1077
+   }
+  },
+  "pea_eval/evaluators/xstest_eval.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 941,
+    "peaos": 947
+   }
+  },
+  "pea_eval/nemo_config/actions.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/nemo_config/config.yml": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/nemo_config/rails.co": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "pea_eval/pge/__init__.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 7,
+    "peaos": 17
+   }
+  },
+  "pea_eval/pge/build_corpus.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 155
+   }
+  },
+  "pea_eval/pge/combiner.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 178
+   }
+  },
+  "pea_eval/pge/construction_vector_gate.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 207
+   }
+  },
+  "pea_eval/pge/energy_resolution.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 145
+   }
+  },
+  "pea_eval/pge/label_corpus_llm.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 130
+   }
+  },
+  "pea_eval/pge/provenance_guard.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 146,
+    "peaos": 147
+   }
+  },
+  "pea_eval/pge/readout.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 256
+   }
+  },
+  "pea_eval/pge/route_dryrun.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 198
+   }
+  },
+  "pea_eval/pge/upsampler.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 130
+   }
+  },
+  "peinn_v2/__init__.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 10,
+    "peaos": 10
+   }
+  },
+  "peinn_v2/encoder/__init__.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "peinn_v2/encoder/model.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "peinn_v2/energy.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 68,
+    "peaos": 68
+   }
+  },
+  "peinn_v2/train/__init__.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "peinn_v2/train/data.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 106,
+    "peaos": 106
+   }
+  },
+  "run_stat_batch.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 795,
+    "peaos": 991
+   }
+  },
+  "scripts/build_morables_dataset.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 347,
+    "peaos": 347
+   }
+  },
+  "scripts/fetch_benchmark_data.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 245,
+    "peaos": 245
+   }
+  },
+  "scripts/fetch_ggb_morables.py": {
+   "status": "differs",
+   "used_by_runs": true,
+   "lines": {
+    "src": 172,
+    "peaos": 172
+   }
+  },
+  "scripts/prefetch_fastembed.py": {
+   "status": "same",
+   "used_by_runs": true
+  },
+  "scripts/run_shieldstral_bench.py": {
+   "status": "only_peaos",
+   "used_by_runs": true,
+   "lines": {
+    "src": 0,
+    "peaos": 634
+   }
+  }
+ },
+ "environment": {
+  "python": "3.13.2",
+  "os": "Windows-11-10.0.26300-SP0",
+  "packages": {
+   "torch": "2.10.0+cu128",
+   "transformers": "5.17.0",
+   "sentence-transformers": "5.3.0",
+   "safetensors": "0.8.0",
+   "huggingface-hub": "1.7.1",
+   "peft": "0.21.0",
+   "accelerate": "1.15.0",
+   "nemoguardrails": "0.21.0",
+   "langchain": "1.2.15",
+   "langchain-core": "1.2.26",
+   "langchain-community": "0.4.1",
+   "fastembed": "0.8.0",
+   "openai": "2.26.0",
+   "pydantic": "2.10.3",
+   "pydantic-settings": "2.13.1",
+   "numpy": "2.2.6",
+   "pandas": "2.3.2",
+   "scipy": "1.17.1",
+   "scikit-learn": "1.8.0",
+   "matplotlib": "3.11.2",
+   "pyyaml": "6.0.3",
+   "gguf": null
+  },
+  "ollama": "ollama version is 0.40.6",
+  "gpu": "NVIDIA GeForce RTX 5090, 617.14, 32607 MiB"
+ }
+}
