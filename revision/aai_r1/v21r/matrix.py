@@ -1,4 +1,4 @@
-"""DESIGN.md 6 and 7 (steps N, M, K): the response matrix, the other arms and the route-cost probe.
+"""Steps N, M, K: the response matrix, the other arms and the route-cost probe.
 
 Per base model, one folder (.cache/v21r/<mode>/matrix/<base>/) shares one generation store and one judge store:
     gen phase   PEINN arm forced to each tier (Direct-Answer first, so pass 1 is generated once and reused), then the
@@ -23,7 +23,7 @@ COST_BENCHES = {"xstest": 1, "harmbench": 1}          # K: one run of each (95 t
 
 
 def bases(check: bool) -> tuple:
-    """V21R_BASES (comma list) narrows a run to some bases (the zephyr pre-test on the check benches, DESIGN.md 24)."""
+    """V21R_BASES (comma list) narrows a run to some bases (the zephyr pre-test on the check benches)."""
     only = tuple(b for b in os.environ.get("V21R_BASES", "").split(",") if b in ORDER)
     return only or (("qwen",) if check else ORDER)
 
@@ -171,7 +171,7 @@ def matrix(check: bool = False, log=print) -> int:
     return 0
 
 
-# ---- DESIGN.md 29: NeMo again with the fixed provider ------------------------------------------------------------
+# ---- NeMo again with the fixed provider ------------------------------------------------------------
 
 def nemo_reset(check: bool = False, log=print) -> int:
     """Moves the 'others' tag's done files, answers and NeMo logs of every base already answered into
@@ -197,7 +197,7 @@ def nemo_reset(check: bool = False, log=print) -> int:
     return 0
 
 
-# ---- DESIGN.md 30: calls Ollama cut with HTTP 500 (token repeat limit) answered again --------------------------------
+# ---- calls Ollama cut with HTTP 500 (token repeat limit) answered again --------------------------------
 
 def _error_rows(df: pd.DataFrame) -> dict:
     """Rows of the 'others' tag per arm whose answer is an internal error, empty, or carries an error field."""
@@ -246,7 +246,7 @@ def repeat_reset(check: bool = False, log=print) -> int:
     return 0
 
 
-# ---- DESIGN.md 35: first answers of Ethics, MORABLES and GGB at 768 tokens (Eugene's card 2026-10-17 15:19 KST) -----
+# ---- first answers of Ethics, MORABLES and GGB at 768 tokens -----
 
 CAP_BENCHES = ("ethics", "morables", "ggb")
 _STATED = r"answer\s*(?:is|:|=|-)?\s*\(?\*{0,2}\s*[A-G]\b"
@@ -289,7 +289,7 @@ def cap_check(check: bool = False, log=print) -> int:
     log(json.dumps(rep))
     if not rep["ok"]:
         log("stop: the 768-token cap did not give final answers on the pre-test; the rerun waits")
-    if not check and not C.publish([f], "v21r: 768-token first answers, pre-test on gemma4 MORABLES run 1 (DESIGN.md 35)"):
+    if not check and not C.publish([f], "v21r: 768-token first answers, pre-test on gemma4 MORABLES run 1"):
         return 1
     return 0 if rep["ok"] else 1
 
@@ -368,7 +368,7 @@ def repeat_diff(check: bool = False, log=print) -> int:
     PEAOS judges five answers per call (xstest_eval JUDGE_BATCH_SIZE, ethics judge_dilemmas_batch): an error row
     that now has an answer enters the judged list and shifts every later batch, and the Dilemma list follows the
     order of a set of item ids (ethics_eval run_dilemmas), so a verdict can change on an unchanged answer
-    ('score_changed_same_answer'). 'means' gives each arm's metrics before and after (DESIGN.md 31)."""
+    ('score_changed_same_answer'). 'means' gives each arm's metrics before and after."""
     from . import analyze as A
     out = {}
     for b in bases(check):
@@ -473,7 +473,7 @@ CPU1_ENV = {"CUDA_VISIBLE_DEVICES": "-1", "V21R_CPU_THREADS": "1", "OMP_NUM_THRE
 
 def gate_time(check: bool, log=print) -> dict:
     """Gate compute per text (features + head + energy) on the GPU and on one CPU thread; ft_* is what the main
-    variant A0ftM adds (its fine-tuned encoder passes and the Mahalanobis distance, DESIGN.md 24)."""
+    variant A0ftM adds (its fine-tuned encoder passes and the Mahalanobis distance)."""
     texts = D.record_texts(check).text.tolist()[: 20 if check else 200]
     d = D.wdir(check) / "cost"
     d.mkdir(parents=True, exist_ok=True)
@@ -554,7 +554,7 @@ def cost_summary(rows: list[dict], n_req: int, tier: str) -> dict:
 def estimate(log=print) -> int:
     """Calls and hours for the full matrix, scaled from the check run (qwen, GGB + XSTest, one run) per answered row:
     rows per tag at the full protocol = the submitted rows of one arm (2,315) times the arms in the tag. A rough
-    figure (the check benches are short; gemma3:12b is slower than qwen) reported before step M (DESIGN.md 8)."""
+    figure (the check benches are short; gemma3:12b is slower than qwen) reported before step M."""
     d = mdir(True, "qwen")
     df = collect(True, "qwen")
     if not len(df):
@@ -582,4 +582,4 @@ def estimate(log=print) -> int:
     C.jdump(out, D.odir(True) / "estimate.json")
     f = C.jdump(out, C.OUT / "estimate_before_M.json")
     log(json.dumps(out["total"]))
-    return 0 if C.publish([f], "v21r: call and time estimate for the full matrix, from the check run (DESIGN.md 8)") else 1
+    return 0 if C.publish([f], "v21r: call and time estimate for the full matrix, from the check run") else 1

@@ -1,6 +1,6 @@
-"""The satellite in orbit between missions (docs/11_ops_loop.md 9): beacons and commands with nothing running.
+"""The satellite in orbit between missions: beacons and commands with nothing running.
 
-    python revision/aai_r1/station.py   # from the PEINN checkout; start once on the PC; it idles, beacons every 10 min and waits for a mission
+    python -m ops.station   # from revision/aai_r1; start once on the PC; it idles, beacons every 10 min and waits for a mission
 
 Commands in revision/aai_r1/commands/station.json on main (same channel as the pipelines, executed once, echoed in the beacon):
     launch  {"module": "ops.run", "args": [...]}  run that pipeline (its own launcher, supervisor and

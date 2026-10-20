@@ -1,4 +1,4 @@
-"""Weights check for H02 (DESIGN.md 25): the F16 GGUF Ollama serves against the canonical bf16 safetensors.
+"""Weights check for H02: the F16 GGUF Ollama serves against the canonical bf16 safetensors.
 
 Reads both formats directly (no torch, no gguf package): every tensor of the checkpoint must be in the GGUF with the
 same shape, and its values must equal the bf16 weights cast to float16 (llama.cpp's converter permutes attn_q and
@@ -104,7 +104,7 @@ def gguf_name(hf: str) -> str | None:
 
 
 def permute(w: np.ndarray, n_head: int) -> np.ndarray:
-    """llama.cpp convert_hf_to_gguf LlamaModel.permute (rotary halves interleaved)."""
+    """Llama.cpp convert_hf_to_gguf LlamaModel.permute (rotary halves interleaved)."""
     return w.reshape(n_head, 2, w.shape[0] // n_head // 2, *w.shape[1:]).swapaxes(1, 2).reshape(w.shape)
 
 

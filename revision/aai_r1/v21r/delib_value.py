@@ -1,4 +1,4 @@
-"""DESIGN.md 43: what the I channel's routing does and what deliberation adds (Eugene 2026-10-19 KST, option B).
+"""What the I channel's routing does and what deliberation adds (option B).
 
 CPU only, from results/forced (no generation, no judging):
   selection  per variant, how the routing texts of each kind are routed at the main cap; the texts whose route PEINN's
@@ -62,7 +62,7 @@ def delib_value(check: bool = False, log=print) -> int:
     rt = pd.read_csv(o / "forced" / "routes.csv.gz", dtype={"sha": str}).set_index("sha")
     cat = categories(check).loc[rt.index]
     cap = f"{TH.MAIN_CAP:g}"
-    out = {"rule": "DESIGN.md 43", "cap": cap, "texts": cat.value_counts().to_dict(), "routes": {}, "detection": {}}
+    out = {"rule": "I routing: selection and deliberation effect", "cap": cap, "texts": cat.value_counts().to_dict(), "routes": {}, "detection": {}}
     for v in VARIANTS:
         if f"{v}@{cap}" in rt:
             out["routes"][v] = pd.crosstab(cat, rt[f"{v}@{cap}"]).to_dict(orient="index")
@@ -120,7 +120,7 @@ def delib_value(check: bool = False, log=print) -> int:
     od = o / "analysis"
     od.mkdir(parents=True, exist_ok=True)
     C.jdump(out, od / "delib_value.json")
-    md = ["# I 라우팅의 선별과 숙고 효과 (DESIGN.md 43)", "",
+    md = ["# I 라우팅의 선별과 숙고 효과", "",
           f"주 운영점 {cap}. 딜레마 = Ethics 딜레마 {int(y.sum())}문장, 나머지 벤치 문장 {int(len(y) - y.sum())}개.", "",
           "## PEINN의 딜레마 조건이 바꾸는 경로", "", "| 범주 | PEINN | 딜레마 조건 없을 때 | 문장 |", "|---|---|---|---|"]
     md += [f"| {r['cat']} | {r['route']} | {r['without_I']} | {r['n']} |" for r in out["changed_by_I"]]

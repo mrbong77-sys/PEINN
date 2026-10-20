@@ -1,4 +1,4 @@
-"""DESIGN.md 25 (Eugene 2026-10-16 17:51 KST): the models Ollama holds on the satellite, and the source of every R2D2 or
+"""The models Ollama holds on the satellite, and the source of every R2D2 or
 zephyr build (its Modelfile FROM line and template) -> results/diag/ollama_list.md (pushed)."""
 from __future__ import annotations
 

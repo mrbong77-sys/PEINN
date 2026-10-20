@@ -1,6 +1,9 @@
 # Finished checkpoints
 
-The trained/frozen PEINN components, shipped for direct standalone reproduction.
+The frozen components of PEINN v2.1. The revised paper keeps the Emotion Engine trunk and the principle anchors
+frozen; the revised experiments load all four files in their feature and gate-time steps (`v21r/data.py` copies them
+into `src/pea_eval/data/`, where `v21r/peinn_side.py` loads them). PEINN's own head and energy calibrator, retrained on the isolated corpus, are in
+`revision/aai_r1/results/checkpoints/`.
 The base LLM and the two sentence encoders are **not** here — they are downloaded
 from their original sources at run time.
 
@@ -45,9 +48,8 @@ export PEINN_NEUTRO_HEAD=ee_neutro_head_v4.pt   # selects the head
 
 The calibrator uses the mpnet encoder by default (its shipped weights expect a 800-d
 input = 32 affect + 768 mpnet), so no embedder env var is needed. The gate is only used
-when the router is built with `engine="neutro_v21"`. The benchmark driver
-`src/scripts/run_v21_bench.py` sets the engine and the head env for you, so the simplest
-path is to use it rather than wiring these by hand. The gate thresholds θ are frozen in
+when the router is built with `engine="neutro_v21"`. The revised experiments set the
+engine and the head env themselves. The gate thresholds θ are frozen in
 code (`src/pea_eval/evaluators/intent_router.py`, `NeutroEERouterV21.THETA`); the
 `neutro_gate_theta_v4.json` shipped here is a matching **reference copy**, not a file the
 router loads.
@@ -62,6 +64,3 @@ state_dict = ckpt["state_dict"] if "state_dict" in ckpt else ckpt
 
 The Emotion Engine trunk (`ee_checkpoint_agent_a.pt`) is a raw `state_dict` and is loaded
 into `core.emotion_engine.EmotionEngine` automatically by the runner.
-
-To retrain any component from scratch instead, see
-[`../docs/REGENERATE_CHECKPOINTS.md`](../docs/REGENERATE_CHECKPOINTS.md).

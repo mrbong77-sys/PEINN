@@ -1,15 +1,15 @@
-"""DESIGN.md: the submitted v2.1 PEAOS benches for the revision. Runs inside a PEAOS checkout (cwd = PEAOS root) as a
+"""The submitted v2.1 PEAOS benches for the revision. Runs inside a PEAOS checkout (cwd = PEAOS root) as a
 child of peinn2.v21r; loads peaos_patches.py by path (lookup router, generation store, Ollama recovery, langchain shim).
 
     python peaos_driver.py record --out DIR --runs JSON [--morables F]
         mock LLM, judges off; logs every routing text the PEINN arm sends (record.jsonl) with the run protocol
     python peaos_driver.py run --out DIR --tag TAG --runs JSON --arms H05,... [--force TIER] --phase gen|judge
         real Ollama; TAG names the sub-folder of DIR/peaos_out; --force sends every PEINN-arm text to one tier
-        (the response matrix, DESIGN.md 6); the generation store DIR/gen_cache.jsonl is shared by all tags of DIR
+        (the response matrix); the generation store DIR/gen_cache.jsonl is shared by all tags of DIR
         generation seed: 42 + k for the k-th identical request (same model and prompt) in the process, so run r of a
         bench gets the same seed in every tag (the stored answer is reused) and runs differ; judge calls seed 42
         --capture: every generation call is logged (tier, model, prompt) and replayed once against Ollama for its
-        token counts and durations (route cost, DESIGN.md 7) -> DIR/cost_<tag>.jsonl
+        token counts and durations (route cost) -> DIR/cost_<tag>.jsonl
     python peaos_driver.py audit --out DIR --record F --corpus CSV [CSV ...]
         PEAOS ProvenanceGuard (all benchmark files must be found) + every recorded routing text and its pieces;
         writes DIR/audit.jsonl (sha, verdict, reason, containment) for every corpus row
@@ -94,7 +94,7 @@ async def _benches(E, a, mode: str) -> int:
     return 0
 
 
-# ---- generation seeds and the cost capture (DESIGN.md 6, 7) -------------------------------------------
+# ---- generation seeds and the cost capture -------------------------------------------
 
 NEMO_TASKS = (("Should the user message be blocked", "self_check_input"),
               ("Should the bot response be blocked", "self_check_output"),
@@ -209,7 +209,7 @@ def replay(E, capture: list, f: Path) -> None:
             fh.write(json.dumps({"model": c["model"], "seed": c["seed"], "wall_ms": c["wall_ms"], "chars": c["chars"], **m}) + "\n")
 
 
-# ---- isolation audit (DESIGN.md 3) ----------------------------------------------------------------
+# ---- isolation audit ----------------------------------------------------------------
 
 def audit(a) -> int:
     from pea_eval.pge import provenance_guard as pg
@@ -281,7 +281,7 @@ def main(argv=None) -> int:
     E.quiet_noise()
     E.langchain_shim()
     E.nemo_fair()
-    E.repeat_guard(a.out / "repeat_guard.jsonl")                              # DESIGN.md 30
+    E.repeat_guard(a.out / "repeat_guard.jsonl")                              # 30
     if a.mode == "nemo-probe":
         E.patch("run", a.out, {}, a.morables, a.judge)
         return asyncio.run(E.nemo_probe(a.out, a.model))
@@ -296,7 +296,7 @@ def main(argv=None) -> int:
             return 2
     routes = Forced(a.force) if a.force else {}
     E.patch("run", a.out, routes, a.morables, a.judge)
-    E.answer_cap(a.out / f"answer_cap_{a.tag}_{a.phase}.jsonl")                # DESIGN.md 35
+    E.answer_cap(a.out / f"answer_cap_{a.tag}_{a.phase}.jsonl")                # 35
     from pea_eval.evaluators import llm_client as L
     cap = [] if a.capture else None
     seeds(E, L, a.judge, a.out, a.tag, a.phase, cap)

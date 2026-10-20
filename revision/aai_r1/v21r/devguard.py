@@ -1,5 +1,5 @@
-"""DESIGN.md 14 (step dev-guard): Llama Guard 3's input verdict on the corpus test split, the reference the PEINN
-variants are compared with before any evaluation benchmark is looked at (Eugene 2026-10-16 10:02 KST: ORR and ASR at
+"""Step dev-guard: Llama Guard 3's input verdict on the corpus test split, the reference the PEINN
+variants are compared with before any evaluation benchmark is looked at (ORR and ASR at
 least on par with Llama Guard).
 
 The call is the one the LlamaGuard arms make for input moderation (pea_eval harmbench_eval.llamaguard_moderate): the

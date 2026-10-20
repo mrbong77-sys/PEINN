@@ -1,4 +1,4 @@
-"""The revision experiments, one step per call (DESIGN.md 8). Run from revision/aai_r1:
+"""The revision experiments, one step per call. Run from revision/aai_r1:
 
     python -m v21r STEP [--check]
 

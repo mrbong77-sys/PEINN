@@ -1,4 +1,4 @@
-"""DESIGN.md 10 (A8): peaos_driver.py run, plus --model-map JSON {served model: replacement}.
+"""A8: peaos_driver.py run, plus --model-map JSON {served model: replacement}.
 
     python peaos_driver_a8.py run --out DIR --tag a8 --runs JSON --arms H05 --phase gen|judge --judge M
         --model-map '{"qwen2.5:7b-instruct": "qwen2.5-a8:latest"}'

@@ -1,6 +1,6 @@
-"""DESIGN.md 25: is the R2D2 arm (H02) served as its authors ran it?
+"""Is the R2D2 arm (H02) served as its authors ran it?
 
-The zephyr pre-test (DESIGN.md 24) found R2D2 refusing 24 of 25 XSTest safe prompts with the same "Sorry, I can't do
+The zephyr pre-test found R2D2 refusing 24 of 25 XSTest safe prompts with the same "Sorry, I can't do
 that." and leaving 3 of 27 GGB items empty; the submitted run had XSTest over-refusal 14.4 %. The model is the Q4_0 GGUF
 of cais/zephyr_7b_r2d2 under zephyr:7b's Ollama template, which puts a newline before </s>; the model's own template
 (tokenizer_config.json, as HarmBench) is "<|user|>\\n{prompt}</s>\\n<|assistant|>\\n".
@@ -85,7 +85,7 @@ def r2d2_probe(check: bool = False, log=print) -> int:
                 log(f"    {cfg} {g}: {a.strip()[:140]!r}")
         C._ollama("/api/generate", {"model": C.R2D2 if cfg == "served" else Q4 if cfg == "raw_q4" else
                                     Q8 if cfg == "raw_q8" else C.BASES["zephyr"], "keep_alive": 0})
-    f = C.jdump({"design": "DESIGN.md 25", "own_template": OWN, "options": OPTS, "configs": res},
+    f = C.jdump({"own_template": OWN, "options": OPTS, "configs": res},
                 D.odir(check) / "diag" / "r2d2_probe.json")
     if check:
         return 0
@@ -93,7 +93,7 @@ def r2d2_probe(check: bool = False, log=print) -> int:
 
 
 def r2d2_diag(check: bool = False, log=print) -> int:
-    """DESIGN.md 25: the probe found no refusal in any setting (results/diag/r2d2_probe.json), while the matrix pre-test
+    """The probe found no refusal in any setting (results/diag/r2d2_probe.json), while the matrix pre-test
     found R2D2 refusing XSTest safe prompts. Shows what the harness sent to H02 and H01 in the pre-test (system part of
     the recorded prompt, the answer columns) and keeps the probe's answers this time (first 100 characters; harmful
     prompts 60), with the harness options (temperature 0.3, 768 tokens) besides greedy."""
@@ -135,22 +135,22 @@ def r2d2_diag(check: bool = False, log=print) -> int:
     return 0 if C.publish([f], "v21r R2D2 diagnosis: what the harness sent in the pre-test, the probe's answers") else 1
 
 
-# ---- which build was the submitted R2D2? (Eugene 2026-10-16 17:48 KST: find the original model) ------------------
+# ---- which build was the submitted R2D2? ------------------
 FP_CANDIDATES = ("zephyr-r2d2:latest",                                   # served now (r2d2-cpeg): canonical, unquantized
                  "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0",          # CPEG's Q8_0 weights, the GGUF's template
                  Q4,                                                     # RichardErkhov Q4_0 (tested 10-16)
                  Q8,
                  "zephyr:7b")                                            # the base model (negative control)
-# Eugene 2026-10-16 17:56 KST: the submitted build was on another PC and cannot be recovered; use CPEG's. Only models
+# the submitted build was on another PC and cannot be recovered; use CPEG's. Only models
 # Ollama already holds are compared (results/diag/ollama_list.md), nothing is downloaded.
 
 
 def r2d2_fingerprint(check: bool = False, log=print) -> int:
-    """DESIGN.md 25: the submitted H02 answers (results/per_item/xstest_per_item.csv, run 1, safe prompts, kept in full)
+    """The submitted H02 answers (inputs/submitted_per_item/xstest_per_item.csv, run 1, safe prompts, kept in full)
     against greedy answers of each public R2D2 build to the same prompt (no system prompt, as the submitted records).
     Identifies the weights only; nothing is scored or fitted. First 120 characters compared (difflib ratio, exact start)."""
     import difflib
-    sub = pd.read_csv(C.peinn() / "results" / "per_item" / "xstest_per_item.csv", low_memory=False)
+    sub = pd.read_csv(C.ROOT / "inputs" / "submitted_per_item" / "xstest_per_item.csv", low_memory=False)
     s = sub[(sub.arm_id == C.ARMS["zephyr"]["R2D2"]) & (sub.expected_label == "safe") & sub.run_id.str.contains("_r01_")]
     s = pd.concat([s[s.over_refusal == 0].head(8), s[s.over_refusal == 1].head(4)]).head(4 if check else 12)
     norm = lambda x: " ".join(str(x).split())[:120]                             # noqa: E731
@@ -178,8 +178,8 @@ def r2d2_fingerprint(check: bool = False, log=print) -> int:
 
 
 def r2d2_cpeg(check: bool = False, log=print) -> int:
-    """DESIGN.md 25 (Eugene 2026-10-16 17:56 KST): serve H02 with the canonical checkpoint unquantized (an F16 GGUF
-    checked against cais/zephyr_7b_r2d2, Eugene 2026-10-17 00:15 KST) and HarmBench's prompt (common.ensure_r2d2), then
+    """Serve H02 with the canonical checkpoint unquantized (an F16 GGUF
+    checked against cais/zephyr_7b_r2d2) and HarmBench's prompt (common.ensure_r2d2), then
     drop the zephyr pre-test cache (answers and done files of every zephyr tag) so the pre-test runs again."""
     import shutil
     from . import matrix as MX

@@ -1,8 +1,8 @@
-"""DESIGN.md 4: the frozen v2.1 features for a list of texts, computed with the paper's own runtime code. Runs inside the
+"""The frozen v2.1 features for a list of texts, computed with the paper's own runtime code. Runs inside the
 public PEINN checkout (cwd = PEINN/src), as run_energy_isolation.py did; no other imports.
 
     python peinn_side.py features --texts texts.json --out feats.npz
-    python peinn_side.py gate-time --texts texts.json --out gate.json     # per-text gate compute (DESIGN.md 7)
+    python peinn_side.py gate-time --texts texts.json --out gate.json     # per-text gate compute
 
 texts.json is a JSON list of strings. feats.npz (resumable, keyed by sha1 of the text) holds
     keys     sha1 per text
@@ -89,7 +89,7 @@ class Features:
 
 
 def _ft_pass(ft_root: Path, ft_models: Path):
-    """DESIGN.md 37: A0ftM's fine-tuned mpnet energy and MiniLM head passes and the Mahalanobis distance, on the real
+    """A0ftM's fine-tuned mpnet energy and MiniLM head passes and the Mahalanobis distance, on the real
     emotion and principle blocks of the shipped feature path (v21r.models.ft_gate_time uses zeros for them)."""
     import torch
     sys.path.insert(0, str(ft_root))
@@ -116,7 +116,7 @@ def _ft_pass(ft_root: Path, ft_models: Path):
 def gate_time(texts: list[str], out: Path, ft_root: Path | None = None, ft_models: Path | None = None) -> int:
     """Wall time per text of the whole input gate (emotion trunk, MiniLM, principle anchors, mpnet, head, energy),
     after five warm-up texts, on whatever device torch sees (CUDA_VISIBLE_DEVICES=-1 and V21R_CPU_THREADS for the CPU run).
-    ft_models: A0ftM's fine-tuned passes run as well, in the same process (DESIGN.md 37)."""
+    ft_models: A0ftM's fine-tuned passes run as well, in the same process."""
     import statistics
     import torch
     f = Features(out.with_suffix(".unused.npz"))

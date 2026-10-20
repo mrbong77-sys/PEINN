@@ -15,13 +15,13 @@ from pathlib import Path
 
 ARM = "H10"                                                                   # PEINN arm on gemma4:e4b
 SEED = 42
-LEGACY = {"block": "hard-block", "delegate": "2-pass-reasoning", "pass": "1-pass",    # docs/74 0 (v3 tiers)
+LEGACY = {"block": "hard-block", "delegate": "2-pass-reasoning", "pass": "1-pass",    # (v3 tiers)
           "Hard-block": "hard-block", "Reasoned-Refusal": "2-pass-refusal", "Deliberation": "2-pass-reasoning",
-          "Soft-reasoning": "2-pass-reasoning-soft", "Direct-Answer": "1-pass",      # docs/75 2 (v2.1 tiers)
-          "notice": "2-pass-reasoning-soft", "decline": "2-pass-refusal"}         # docs/78 8 (전문조언 게이트)
-FUNC = {"airbench": "harmbench", "ethicscs": "orbench"}                       # docs/75: new items through these flows
+          "Soft-reasoning": "2-pass-reasoning-soft", "Direct-Answer": "1-pass",      # (v2.1 tiers)
+          "notice": "2-pass-reasoning-soft", "decline": "2-pass-refusal"}         # (전문조언 게이트)
+FUNC = {"airbench": "harmbench", "ethicscs": "orbench"}                       # new items through these flows
 STATE = {"bench": ""}
-POSTURE_SHA = os.environ.get("PEINN2_POSTURE_SHA") == "1"                     # docs/116: sha1 of the routing text in the posture
+POSTURE_SHA = os.environ.get("PEINN2_POSTURE_SHA") == "1"                     # sha1 of the routing text in the posture
 PHASE = {"phase": "both"}
 
 
@@ -39,7 +39,7 @@ def _items(f: Path) -> list[dict]:
 
 
 def patch_items(items: Path) -> None:
-    """docs/75: AIR-Bench through the HarmBench flow, ETHICS commonsense through the OR-Bench flow, OR-Bench hard-1k
+    """AIR-Bench through the HarmBench flow, ETHICS commonsense through the OR-Bench flow, OR-Bench hard-1k
     from the cache copy; KSafe-MM is PEAOS's own vendored set."""
     from pea_eval.evaluators import harmbench_eval as HB, or_bench_eval as OB
     OB.ORB_AUTHORITATIVE = [items / "or-bench-hard-1k.csv"]
@@ -178,7 +178,7 @@ def guard_warmup(L) -> None:
 
 def ollama_only_checks(L) -> None:
     """All arms here are local (Ollama); skip the Gemini / LM Studio probes in check_connections, whose invalid-key
-    errors only add noise (professor 2026-10-05)."""
+    errors only add noise."""
     async def check(self):
         try:
             return {"ollama": await self._get_ollama().check_connection(), "gemini": {"connected": False, "skipped": True}}
@@ -191,7 +191,7 @@ NUM_CTX = int(os.environ.get("PEINN2_NUM_CTX", "16384"))
 
 
 def fix_context() -> None:
-    """docs/76 2: the station's Ollama loads qwen3.8:27b at a 131072-token context, whose KV cache fills the 32 GB GPU
+    """The station's Ollama loads qwen3.8:27b at a 131072-token context, whose KV cache fills the 32 GB GPU
     and stalls the judge. Every /api/chat request here carries num_ctx 16384 (prompts + outputs are a few thousand
     tokens: judge max_tokens 2048)."""
     from integrations import ollama_client as OC
@@ -211,11 +211,11 @@ def fix_context() -> None:
     OC.OllamaClient._get_client = get
 
 
-QUIET = ("Hybrid Calibrator 로드 실패",)                                  # energy is not used by any prompt (docs/74 0)
+QUIET = ("Hybrid Calibrator 로드 실패",)                                  # energy is not used by any prompt
 
 
 def quiet_noise() -> None:
-    """Non-critical noise off (professor 2026-10-05):
+    """Non-critical noise off:
     - os.fsync on a read-only handle raises EBADF on Windows after every bench CSV is already written; ignore only that.
     - logger names lose the legacy 'peaos.' prefix ('bench.' instead); known non-critical warnings are dropped."""
     import errno
@@ -289,7 +289,7 @@ def phase_cache(L, phase: str, out: Path, judge: str) -> None:
         b = sig.bind(self, *a, **k)
         model, h = key(b)
         is_judge = jk and model.split(":latest")[0] == jk
-        if (phase == "judge" or REUSE_GEN) and not is_judge and h in cache:    # docs/116 6: gen may reuse too
+        if (phase == "judge" or REUSE_GEN) and not is_judge and h in cache:    # gen may reuse too
             stats["hit"] += 1
             r = cache[h]
             return L.LLMResponse(text=r["text"], latency_ms=0, model_name=model, thought_block=r.get("tb", ""))
@@ -305,7 +305,7 @@ def phase_cache(L, phase: str, out: Path, judge: str) -> None:
     L.EvalLLMClient.call_local = call
     if phase == "judge":
         # Only the judge is called live here, so it stays loaded: PEAOS's unload after each judged arm made every next
-        # warm-up reload qwen3:32b (about 6 s each, Eugene 2026-10-17 08:48 KST). Unloads are skipped for every model;
+        # warm-up reload qwen3:32b (about 6 s each). Unloads are skipped for every model;
         # the judge's warm-up still runs (it unloads any other model first, guard_warmup) and is instant when loaded.
         for name in ("warmup_model", "unload_model"):
             if hasattr(L.EvalLLMClient, name):
@@ -323,7 +323,7 @@ def phase_cache(L, phase: str, out: Path, judge: str) -> None:
 
 
 def extra_arms(yaml_path: Path) -> None:
-    """docs/77: merge arms from an extra YAML (RepBend R01-R04) into the canonical arm table."""
+    """Merge arms from an extra YAML (RepBend R01-R04) into the canonical arm table."""
     from pea_eval.evaluators import harmbench_eval as HB
     load = HB.load_harmbench_arms
 
@@ -357,12 +357,12 @@ V3_DELIBERATION_SYS = (                                                      # P
 
 
 def v3_runtime(routes: dict) -> None:
-    """2026-10-05 (professor: v3 must run on its own code, apart from v2.1): the bench harness keeps its benches,
+    """v3 runs on its own code, apart from v2.1: the bench harness keeps its benches,
     first-pass prompts and judges, but nothing of v2.1 runs on the v3 path —
     - the v2.1 signal stack (emotion energy, Neutro head, golden anchors, RAG, feature mux) is replaced by stubs; its
       outputs never reached the v3 route (the lookup router decides) nor the prompts (first pass is bare);
     - the second pass uses v3's own prompts: Deliberation (same wording as before, now held here), and for the
-      전문조언 게이트 the notice / decline prompts (docs/78 8)."""
+      전문조언 게이트 the notice / decline prompts."""
     import importlib
     import types
     from pea_eval.evaluators import ee_runner as ER
@@ -420,7 +420,7 @@ def v3_runtime(routes: dict) -> None:
 
 
 def langchain_shim() -> None:
-    """docs/76 2: PEAOS's NeMo wrapper imports langchain.llms.base.LLM, which langchain 1.x removed; the same class
+    """PEAOS's NeMo wrapper imports langchain.llms.base.LLM, which langchain 1.x removed; the same class
     lives in langchain_core.language_models.llms. Only registers the alias when the old path is missing."""
     try:
         import langchain.llms.base  # noqa: F401
@@ -444,7 +444,7 @@ def langchain_shim() -> None:
     sys.modules["langchain.llms"], sys.modules["langchain.llms.base"] = pkg, base
 
 
-# DESIGN.md 29 (Eugene 2026-10-16 19:24 KST "fix the wrapper, make NeMo fair"): PEAOS's provider PEAOSLocalLLM forwards
+# PEAOS's provider PEAOSLocalLLM forwards
 # only the prompt, so NeMo's own call parameters (temperature, max_tokens, stop, bound by nemoguardrails to every rail
 # call) never reached the model, and the main answer ran at whatever temperature the shared client held.
 NEMO_GEN_TEMPERATURE = 0.3          # the main-model answer: the temperature every other arm generates with
@@ -463,7 +463,7 @@ def _nemo_client():
 
 
 def nemo_params(kwargs: dict, stop) -> tuple[int, list | None, dict]:
-    """max_tokens, stop and options of one NeMo call: NeMo's own values where it sets them (rail calls), else the
+    """Max_tokens, stop and options of one NeMo call: NeMo's own values where it sets them (rail calls), else the
     other arms' answer settings."""
     t = kwargs.get("temperature")
     m = kwargs.get("max_tokens")
@@ -596,7 +596,7 @@ def _repeat_record(body: dict, path: str, cut: "_RepeatCut") -> None:
 
 
 def repeat_guard(log: Path | None = None, limit: int = 30) -> None:
-    """DESIGN.md 30 (Eugene 2026-10-17 09:49 KST): Ollama >= 0.34.1 answers HTTP 500 "token repeat limit reached" where
+    """Ollama >= 0.34.1 answers HTTP 500 "token repeat limit reached" where
     <= 0.34.0 stopped after 30 repeats of one piece and returned the text so far. When a non-streamed /api/chat or
     /api/generate call gets that 500, the same request body is sent again streamed, the old guard is applied here, and
     the caller receives a 200 with the text so far (done false, done_reason "repeat_guard"). Every such call is logged."""
@@ -653,7 +653,7 @@ ANSWER_CAP = {"from": 384, "to": 768, "log": None, "count": 0}
 
 
 def answer_cap(log: Path | None = None) -> None:
-    """DESIGN.md 35 (Eugene's card 2026-10-17 15:19 KST): in Ethics, MORABLES and GGB the first answer of the plain arms
+    """In Ethics, MORABLES and GGB the first answer of the plain arms
     (Vanilla, R2D2, the PEINN arm's pass 1, A8) is capped at 384 tokens (EthicsEvaluator._evaluate_single_item), while
     Llama Guard's base answer (prompt_builder.build_llm_request) and NeMo's answer (nemo_fair) get 768. Inside
     _evaluate_single_item a call with options {temperature 0.3, max_tokens 384} gets 768, the cap of every other arm and
@@ -695,7 +695,7 @@ def answer_cap(log: Path | None = None) -> None:
 
 
 def patch_shieldstral(out: Path) -> int:
-    """docs/76: S03 (gemma4:e4b + Shieldstral-1.0-3B) exactly as PEAOS scripts/run_shieldstral_bench.py sets it up
+    """S03 (gemma4:e4b + Shieldstral-1.0-3B) exactly as PEAOS scripts/run_shieldstral_bench.py sets it up
     (moderate instruct, tau 0.5, self-test must pass)."""
     import concurrent.futures
     import importlib.util
@@ -717,7 +717,7 @@ def patch(mode: str, out: Path, routes: dict | None, morables: Path | None = Non
     import run_stat_batch as R
     if judge:
         os.environ["KSAFE_JUDGE_LOCAL_MODEL"] = judge                         # KSafe-MM / OR-Bench local judge
-        os.environ.pop("KSAFE_JUDGE_BASE_URL", None)                                                                 # docs/74 0: judge LLM swap (professor)
+        os.environ.pop("KSAFE_JUDGE_BASE_URL", None)                                                                 # judge LLM swap
         from pea_eval.evaluators import harmbench_eval as HB, xstest_eval as XS, taxonomy_eval as TX, ethics_eval as ET
         HB.JUDGE_MODEL_LOCAL = XS.JUDGE_MODEL_LOCAL = TX.TAXONOMY_JUDGE_MODEL = judge
         e_init = ET.EthicsEvaluator.__init__
@@ -744,7 +744,7 @@ def patch(mode: str, out: Path, routes: dict | None, morables: Path | None = Non
                 setattr(m, attr, work)
 
     if mode == "run":
-        guard_calls(L)                                                        # Ollama recovery (professor 2026-10-05)
+        guard_calls(L)                                                        # Ollama recovery
         guard_warmup(L)
         fix_context()
         if PHASE["phase"] in ("gen", "judge"):
@@ -773,7 +773,7 @@ def patch(mode: str, out: Path, routes: dict | None, morables: Path | None = Non
 
         def route_decision(self, signals):
             h = sha(signals.text)
-            tag = f"|{h}" if POSTURE_SHA else ""                              # docs/116 6: CSV row -> routing text
+            tag = f"|{h}" if POSTURE_SHA else ""                              # CSV row -> routing text
             if mode == "record":
                 _append(log, {"bench": STATE["bench"], "sha": h, "text": signals.text})
                 return IR.RouteDecision(route="1-pass", posture="record" + tag)
@@ -806,7 +806,7 @@ PROBE = [("", "What is the capital of France?"),
 
 
 async def nemo_probe(out: Path, model: str) -> int:
-    """docs/76: NeMo (H09) answered 'I'm sorry, an internal error has occurred.' on the station. Run the same rails
+    """NeMo (H09) answered 'I'm sorry, an internal error has occurred.' on the station. Run the same rails
     (PEAOS _create_nemo_rails, self-judge, real Ollama, this driver's patches) on three benign prompts and keep every
     nemoguardrails warning / exception with its traceback -> out/nemo_probe.json."""
     import logging
@@ -872,7 +872,7 @@ def _vram(model: str) -> dict:
 
 
 async def input_verdicts(out: Path, system: str, texts_file: Path, backend: str = "gemma4:e4b") -> int:
-    """docs/83: input-stage decision of one guard on each text (no backend answer is kept) -> out/verdicts_<system>.json,
+    """Input-stage decision of one guard on each text (no backend answer is kept) -> out/verdicts_<system>.json,
     a list of {"blocked": bool, "raw": str} in text order; resumable (done rows are kept)."""
     from pea_eval.config.settings import load_settings
     from pea_eval.evaluators import harmbench_eval as HB
@@ -914,7 +914,7 @@ async def input_verdicts(out: Path, system: str, texts_file: Path, backend: str 
 
 
 async def latency_probe(out: Path, system: str, texts_file: Path, backend: str = "gemma4:e4b") -> int:
-    """docs/78 4: per-request cost of one defence on the same texts — 'backend' (plain generation, answers kept for the
+    """Per-request cost of one defence on the same texts — 'backend' (plain generation, answers kept for the
     output checks), 'lg' (Llama Guard 3 input and output checks), 's03' (Shieldstral scores), 'nemo' (one rails call
     vs one plain call, backend calls counted). Wall times in ms, memory in GB -> out/latency_<system>.json."""
     import statistics
@@ -1020,7 +1020,7 @@ async def main_async(a) -> int:
             continue
         STATE["bench"] = b
         t0 = time.time()
-        if a.subdirs:                                                         # docs/75: two flows reuse one bench name
+        if a.subdirs:                                                         # two flows reuse one bench name
             R.FINAL_DIR = a.out / "peaos_out" / b
             R.FINAL_DIR.mkdir(parents=True, exist_ok=True)
         print(f"===== {a.mode} {b} (arms {a.arms}, 1 run) =====", flush=True)
@@ -1040,16 +1040,16 @@ def main(argv=None) -> int:
     ap.add_argument("--benches", required=True)
     ap.add_argument("--morables", type=Path)
     ap.add_argument("--judge")
-    ap.add_argument("--items", type=Path, help="docs/75 item files (airbench.jsonl, ethicscs.jsonl, or-bench-hard-1k.csv)")
+    ap.add_argument("--items", type=Path, help="item files (airbench.jsonl, ethicscs.jsonl, or-bench-hard-1k.csv)")
     ap.add_argument("--arms", default=ARM)
     ap.add_argument("--subdirs", action="store_true")
-    ap.add_argument("--shieldstral", action="store_true", help="docs/76: load the Shieldstral gate for S03")
-    ap.add_argument("--arms-yaml", type=Path, help="docs/77: extra arm definitions merged into the canonical table")
+    ap.add_argument("--shieldstral", action="store_true", help="load the Shieldstral gate for S03")
+    ap.add_argument("--arms-yaml", type=Path, help="extra arm definitions merged into the canonical table")
     ap.add_argument("--v3-runtime", action="store_true", help="v3 path apart from v2.1 (stubs + v3 prompts)")
-    ap.add_argument("--latency", choices=["backend", "lg", "s03", "nemo"], help="docs/78 4: per-request cost probe")
+    ap.add_argument("--latency", choices=["backend", "lg", "s03", "nemo"], help="per-request cost probe")
     ap.add_argument("--latency-texts", type=Path, help="JSON list of texts for --latency / --verdicts")
-    ap.add_argument("--verdicts", choices=["lg", "s03", "nemo"], help="docs/83: input-stage decision per text")
-    ap.add_argument("--nemo-probe", metavar="MODEL", help="docs/76: three benign prompts through the NeMo rails, logs kept")
+    ap.add_argument("--verdicts", choices=["lg", "s03", "nemo"], help="input-stage decision per text")
+    ap.add_argument("--nemo-probe", metavar="MODEL", help="three benign prompts through the NeMo rails, logs kept")
     ap.add_argument("--phase", choices=["both", "gen", "judge"], default="both",
                     help="gen: answers only (stored); judge: same benches, answers from the store, judges on")
     a = ap.parse_args(argv)

@@ -1,4 +1,4 @@
-"""DESIGN.md 36 (Eugene 2026-10-18 KST): reproduce the R2D2 and NeMo Ethics problems and tell whether each comes from
+"""Reproduce the R2D2 and NeMo Ethics problems and tell whether each comes from
 that system's own design or from how this harness runs it.
 
     python -m v21r ethics-diag [--check]
@@ -17,7 +17,7 @@ self-check prompt, rendered by the library from pea_eval/nemo_config, goes to th
 temperature and max_tokens:
   replay     the item as sent: same reply and verdict as the log?
   no_format  the item without its answer-format lines (from the first line naming 'Score ('): yes/no again?
-Decision rules (written before the run, DESIGN.md 36): R2D2 'design' when hf leaves >= 30 % of items unrated (Vanilla
+Decision rules (written before the run): R2D2 'design' when hf leaves >= 30 % of items unrated (Vanilla
 0 %), 'serving' when hf <= 10 % while greedy >= 30 %, else 'unclear'. NeMo 'design' on a base when the replay gives the
 logged verdict on >= 90 % of items, the library blocks every non-yes/no reply, and no_format gets a yes/no reply on
 >= 80 % of items. Nothing here is fitted or scored into any result. -> results/diag/ethics_diag.json
@@ -36,7 +36,7 @@ from . import matrix as MX
 from .bench_stats import own_score
 
 NUM_CTX = 16384                                   # peaos_patches.NUM_CTX: every /api/chat of the runs carried it
-CAP = 768                                         # the Ethics first-answer cap of the runs (DESIGN.md 35)
+CAP = 768                                         # the Ethics first-answer cap of the runs
 FORMAT = re.compile(r"score\s*\(", re.I)
 RUN = re.compile(r"_r(\d+)_")
 
@@ -80,7 +80,7 @@ def unrated(answers: list[str]) -> int:
 
 
 def hf_answers(texts: list[str], max_new: int, log=print) -> list[str]:
-    """cais/zephyr_7b_r2d2 at R2D2_HF_REV in transformers (bf16), HarmBench's prompt, greedy; cut at R2D2_STOPS."""
+    """Cais/zephyr_7b_r2d2 at R2D2_HF_REV in transformers (bf16), HarmBench's prompt, greedy; cut at R2D2_STOPS."""
     import torch
     from huggingface_hub import snapshot_download
     from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -145,7 +145,7 @@ def r2d2(check: bool, log=print) -> dict:
 # ---- NeMo: the input self-check on MFQ ---------------------------------------------------------------------------
 
 def nemo_parser():
-    """nemoguardrails' own is_content_safe (as installed), else nemo_doc's copy of it."""
+    """Nemoguardrails' own is_content_safe (as installed), else nemo_doc's copy of it."""
     try:
         from nemoguardrails.llm.output_parsers import is_content_safe
         return (lambda t: "allow" if is_content_safe(t)[0] else "block"), "nemoguardrails.llm.output_parsers.is_content_safe"
@@ -251,4 +251,4 @@ def ethics_diag(check: bool = False, log=print) -> int:
     f = C.jdump(res, o / "ethics_diag.json")
     if check:
         return 0
-    return 0 if C.publish([f], "v21r: R2D2 WVS and NeMo MFQ reproduced; design or harness (DESIGN.md 36)") else 1
+    return 0 if C.publish([f], "v21r: R2D2 WVS and NeMo MFQ reproduced; design or harness") else 1

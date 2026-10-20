@@ -9,8 +9,8 @@ bytes, sha256, the variant it belongs to). PEINN's own head and calibrator carry
 91 MB, A0ft_energy.pt 438 MB), larger than GitHub takes in one file; they are stored as byte parts of at most 45 MiB in
 results/checkpoints/final/, so the repository archive (and the Zenodo release made from it) holds them without Git LFS.
 `assemble` joins the parts and checks each file against its SHA-256. The parts are taken only when the file is the one
-behind every reported result (FINAL below; Eugene 2026-10-18: the final tuned version is the one pushed now), never the
-gate-retrain copies (DESIGN.md 37), whose head weights differ.
+behind every reported result (FINAL below; the final tuned version is the one pushed now), never the
+gate-retrain copies, whose head weights differ.
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def sha256(f) -> str:
 
 
 def split(f, o) -> list[dict]:
-    """f as byte parts f.name.part00, .part01, ... of at most PART bytes in o."""
+    """F as byte parts f.name.part00, .part01, ... of at most PART bytes in o."""
     for old in o.glob(f"{f.name}.part*"):
         old.unlink()
     parts = []
@@ -87,9 +87,9 @@ def release(check: bool = False, log=print) -> int:
     return 0 if C.publish([o], "v21r release: PEINN's final head and calibrator (fine-tuned encoders, in parts) and the ablation heads") else 1
 
 
-# ---- release 2.2.2 (Eugene card 2026-10-21 03:15 KST "전부 공개"): what release 2.2.1 left in the cache -------------
+# ---- release 2.2.2: what release 2.2.1 left in the cache -------------
 
-FT_HEADS = (("A1ft", "tf"), ("A2ft", "softmax"), ("A3ft", "binary"))      # ftv.HEADS (DESIGN.md 42)
+FT_HEADS = (("A1ft", "tf"), ("A2ft", "softmax"), ("A3ft", "binary"))      # ftv.HEADS
 FT_DIR = "ablation_ft"
 A8_DIR = "a8"
 SIG_TOL = 1e-4               # largest |T|, |I|, |F| difference to the published signals (same weights, same texts)
@@ -121,7 +121,7 @@ def _head_outputs(f, texts: list[str], X):
 
 def check_ft_heads(check: bool, log=print) -> list | None:
     """Each A1ft-A3ft head in the cache must give the published signals (results/forced/signals_<v>.csv.gz, the values
-    behind Table 13) on their own texts; None when one does not (e.g. a copy a second runner wrote, DESIGN.md 42)."""
+    behind Table 13) on their own texts; None when one does not (e.g. a copy a second runner wrote)."""
     import numpy as np
     import pandas as pd
     md = D.wdir(False) / "models"
@@ -150,7 +150,7 @@ def check_ft_heads(check: bool, log=print) -> list | None:
             log(f"stop: {f.name} does not give the published signals of {v} (max difference {diff:.3g} > {SIG_TOL:g})")
             return None
         rows.append({"file": f.name, "path": f, "variant": f"{v}: ablation head with its fine-tuned MiniLM "
-                     f"(DESIGN.md 42; output '{out}')", "max_signal_diff": float(f"{diff:.3g}"), "texts_checked": len(pub)})
+                     f"(output '{out}')", "max_signal_diff": float(f"{diff:.3g}"), "texts_checked": len(pub)})
     return rows
 
 

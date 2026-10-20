@@ -10,7 +10,7 @@ from pathlib import Path
 from . import paths
 
 TRAILER = "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-# Windows: background git / nvidia-smi calls get a hidden console (no window flashing every poll; professor 2026-10-05)
+# Windows: background git / nvidia-smi calls get a hidden console (no window flashing every poll)
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
 
 

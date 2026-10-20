@@ -1,4 +1,4 @@
-"""DESIGN.md 4 (step T): every variant trained on the same isolated corpus, the same teacher labels and seed 42.
+"""Step T: every variant trained on the same isolated corpus, the same teacher labels and seed 42.
 
 Signals for the val/test splits and every recorded routing text are written to .cache/v21r/<mode>/signals/<V>.npz
 (keys: sha plus the variant's outputs). Small checkpoints go to .cache/v21r/<mode>/models/.
@@ -21,11 +21,11 @@ SEED = 42
 EMO, SEM, PRI = slice(0, 32), slice(32, 416), slice(416, 800)
 HEAD_HP = dict(epochs=60, lr=1e-3, batch=128, wd=1e-4, i_weight=2.5)      # train_neutro_head.py defaults (v4 head)
 CAL_HP = dict(epochs=80, batch=64, lr=1e-3, wd=1e-2, focal_gamma=2.0, warmup=5, patience=12)   # ee_threshold_finder
-# DESIGN.md 4 (corrected 2026-10-16, results/diag/gate_diag.md 2): the shipped head was trained on every axis (its
+# corrected 2026-10-16, results/diag/gate_diag.md 2: the shipped head was trained on every axis (its
 # report: n_sup 1,880 = the whole held-out file on T, I and F), so an unlabelled axis's placeholder 0 is a negative
 # target. neg_weight 1.0 reproduces that; the 2-of-3 mask with neg_weight 0 left F almost without negatives.
 SHIPPED_NEG_W = 1.0
-# DESIGN.md 12 (Eugene 2026-10-16 09:28 KST: diverse isolated data, finer head training): every row's loss is weighted by
+# every row's loss is weighted by
 # sqrt(N / (K * n_source)) from the train split (mean 1 on train), so the many small sources of the supplement are not
 # drowned by the large ones and no single source decides the boundary. Same weights for every variant and the calibrator.
 ROW_WEIGHT = "sqrt_inverse_source_frequency"
@@ -62,7 +62,7 @@ def shipped_meta() -> dict:
 
 
 def three_class(T, I, F) -> np.ndarray:
-    """A2 labels (DESIGN.md 4): harmful if F >= .5 and F >= I; else ambiguous if I >= .5; else safe. 0 safe, 1 amb, 2 harm."""
+    """A2 labels: harmful if F >= .5 and F >= I; else ambiguous if I >= .5; else safe. 0 safe, 1 amb, 2 harm."""
     T, I, F = (np.asarray(x, dtype=float) for x in (T, I, F))
     y = np.zeros(len(F), dtype=int)
     y[I >= 0.5] = 1
@@ -71,7 +71,7 @@ def three_class(T, I, F) -> np.ndarray:
 
 
 def row_weights(train: pd.DataFrame, d: pd.DataFrame) -> np.ndarray:
-    """sqrt(N / (K * n_s)) per row of d, n_s counted on the train split; scaled to mean 1 over the train split."""
+    """Sqrt(N / (K * n_s)) per row of d, n_s counted on the train split; scaled to mean 1 over the train split."""
     n = train.source.value_counts()
     w = np.sqrt(len(train) / (len(n) * n))
     scale = float(w.reindex(train.source).mean())
@@ -87,8 +87,8 @@ def head_weights(d: pd.DataFrame, neg_w: float) -> np.ndarray:
 # ---- heads on frozen features -------------------------------------------------------------------------
 
 def train_head(Xtr, Ytr, Wtr, Xva, Yva, Wva, kind: str, dim_w=None, hp=HEAD_HP, log=print, rtr=None, rva=None):
-    """kind 'sigmoid': masked soft-target BCE (weights W per element); 'softmax': cross-entropy on class ids (Y 1-d);
-    'binary': BCE on a 0/1 target. rtr / rva: row weights (DESIGN.md 12). Model selection by the lowest validation loss."""
+    """Kind 'sigmoid': masked soft-target BCE (weights W per element); 'softmax': cross-entropy on class ids (Y 1-d);
+    'binary': BCE on a 0/1 target. rtr / rva: row weights. Model selection by the lowest validation loss."""
     import torch
     import torch.nn as nn
     _seed()
@@ -170,8 +170,8 @@ def _auroc(y, s) -> float:
 
 
 def train_calibrator(Xtr, ytr, Xva, yva, hp=CAL_HP, log=print, rtr=None):
-    """ee_threshold_finder.train_calibrator: class-weighted focal BCE, AdamW, cosine LR with warm-up, selection by
-    validation AUROC, patience 12. rtr: row weights (DESIGN.md 12) times the class weights."""
+    """Ee_threshold_finder.train_calibrator: class-weighted focal BCE, AdamW, cosine LR with warm-up, selection by
+    validation AUROC, patience 12. rtr: row weights times the class weights."""
     import torch
     from torch.utils.data import DataLoader, TensorDataset
     _seed()
@@ -231,7 +231,7 @@ def energy(model, X) -> np.ndarray:
 # ---- A7: fine-tuned sentence encoder ----------------------------------------------------------------------
 
 def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, log=print):
-    """MiniLM-L6 fine-tuned end to end with three sigmoid outputs and the head's masked loss (DESIGN.md 4, A7)."""
+    """MiniLM-L6 fine-tuned end to end with three sigmoid outputs and the head's masked loss (A7)."""
     import torch
     import torch.nn as nn
     from transformers import AutoModel, AutoTokenizer
@@ -305,20 +305,20 @@ def train_sbert(tr: pd.DataFrame, va: pd.DataFrame, neg_w: float, hp=SBERT_HP, l
     return infer, best
 
 
-# ---- FT: PEINN with its sentence encoders fine-tuned (DESIGN.md 13) ------------------------------------------
+# ---- FT: PEINN with its sentence encoders fine-tuned ------------------------------------------
 
 FT_ON = True
 FT_HP = dict(epochs=3, lr_enc=2e-5, lr_out=1e-3, batch=32, accum=1, max_len=256, amp=False)
-# DESIGN.md 18: the head's F separates less than the energy (test AUROC 0.914 vs 0.962 on adversarial pairs, XSTest 0.885 vs
+# the head's F separates less than the energy (test AUROC 0.914 vs 0.962 on adversarial pairs, XSTest 0.885 vs
 # 0.962); the small MiniLM head is trained longer at the learning rate usual for it
 FT_HEAD_HP = dict(FT_HP, epochs=5, lr_enc=4e-5)
-OOD_ON = True                # DESIGN.md 20: variant A0ftM
+OOD_ON = True                # variant A0ftM
 FT_ENC = {"energy": "sentence-transformers/all-mpnet-base-v2",       # the v2.1 calibrator's embedder (ee_runner.py)
           "head": "sentence-transformers/all-MiniLM-L6-v2"}          # the v2.1 head's embedder
 
 
 def _fp32_model(cls, name: str):
-    """transformers 5 keeps a checkpoint's fp16 weights (DeBERTa-v3-large ships fp16), and AdamW on fp16 weights gives
+    """Transformers 5 keeps a checkpoint's fp16 weights (DeBERTa-v3-large ships fp16), and AdamW on fp16 weights gives
     NaN (PEINN_v2 peinn2/c/ftenc.py): load in float32 and check."""
     import torch
     try:
@@ -330,7 +330,7 @@ def _fp32_model(cls, name: str):
     return m
 
 
-HEAD_OUT = {"tif": 3, "tf": 2, "softmax": 3, "binary": 1}   # DESIGN.md 42: the head's output in A0ft and A1ft-A3ft
+HEAD_OUT = {"tif": 3, "tf": 2, "softmax": 3, "binary": 1}   # the head's output in A0ft and A1ft-A3ft
 
 
 def _ft_net(kind: str, name: str, out: str = "tif"):
@@ -370,7 +370,7 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     principle 384] -> neutro head, BCE on T/I/F on every axis with row weights, selection by val loss.
     Xtr / Xva: the frozen blocks around the encoder slot (energy: emotion; head: emotion and principle).
     save: the selected weights go there with the encoder name (the released checkpoint, ft_load reads it).
-    out (head only, DESIGN.md 42): 'tif' as above; 'tf' the same loss on T and F only (A1); 'softmax' cross-entropy on
+    out (head only): 'tif' as above; 'tf' the same loss on T and F only (A1); 'softmax' cross-entropy on
     the classes of three_class (A2); 'binary' BCE on F >= .5 (A3); the last two with row weights as their
     frozen-encoder counterparts, selection by the same loss on val. infer returns probabilities (softmax applied).
     Returns (infer(texts, X) -> outputs, best val score)."""
@@ -502,7 +502,7 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
         torch.save({"kind": kind, "enc": name, "max_len": hp["max_len"], "out": out, "state_dict": best_state}, save)
 
     def infer(texts: list[str], X, emb: bool = False) -> np.ndarray:
-        """Outputs, or with emb the fine-tuned encoder's pooled, normalised representation (DESIGN.md 20)."""
+        """Outputs, or with emb the fine-tuned encoder's pooled, normalised representation."""
         if not emb:
             df = pd.DataFrame({"text": texts, "F": 0.0, "T": 0.0, "I": 0.0, "mask_T": 1.0, "mask_I": 1.0, "mask_F": 1.0})
             return predict(df, X)
@@ -518,7 +518,7 @@ def train_ft(kind: str, tr: pd.DataFrame, va: pd.DataFrame, Xtr, Xva, neg_w: flo
     return infer, best
 
 
-# ---- OOD by Mahalanobis distance (DESIGN.md 20; AdaptiveGuard, Yang et al. 2025, arXiv 2509.16861 sec. III-B) ----
+# ---- OOD by Mahalanobis distance (AdaptiveGuard, Yang et al. 2025, arXiv 2509.16861 sec. III-B) ----
 
 OOD_Q = 0.99                 # tau: the 99th percentile of the training rows' distances (fixed before any result)
 OOD_RIDGE = 1e-3             # shrinkage of the shared covariance, relative to its mean variance
@@ -539,7 +539,7 @@ def mahalanobis_fit(Z: np.ndarray, y: np.ndarray, q: float = OOD_Q, ridge: float
 
 
 def mahalanobis_min(m: dict, Z: np.ndarray) -> np.ndarray:
-    """d_min(x) = min over the two classes of sqrt((f - mu_c)^T S^-1 (f - mu_c))."""
+    """D_min(x) = min over the two classes of sqrt((f - mu_c)^T S^-1 (f - mu_c))."""
     Z = np.asarray(Z, dtype=np.float64)
     d = [np.sqrt(np.maximum(np.einsum("ij,jk,ik->i", Z - mu, m["P"], Z - mu), 0.0)) for mu in m["mu"]]
     return np.minimum(d[0], d[1])
@@ -556,7 +556,7 @@ def ft_load(f: Path):
 
 
 def ft_gate_time(texts: list[str], out: Path, check: bool = False) -> int:
-    """DESIGN.md 24: per-text compute of what A0ftM adds to the v2.1 input gate: the fine-tuned mpnet energy and MiniLM
+    """Per-text compute of what A0ftM adds to the v2.1 input gate: the fine-tuned mpnet energy and MiniLM
     head passes (in place of the frozen passes the shipped gate makes) and the Mahalanobis distance, after five warm-up
     texts, on whatever device torch sees. The emotion and principle blocks are the shipped gate's (timed there), so
     zeros stand in for them here."""
@@ -620,7 +620,7 @@ def train_all(check: bool = False, log=print) -> int:
     meta = shipped_meta()
     neg_w = SHIPPED_NEG_W
     log(f"shipped head recipe: {json.dumps({k: v for k, v in meta.items() if k != 'arch'})}; trained on every axis "
-        f"(neg_weight {neg_w}, DESIGN.md 4)")
+        f"(neg_weight {neg_w})")
     tr, va, te = (sp[sp.split == s].reset_index(drop=True) for s in ("train", "val", "test"))
     if check:
         tr = tr if len(tr) else sp
@@ -631,7 +631,7 @@ def train_all(check: bool = False, log=print) -> int:
     ru = D.rows_of(F, uni.sha)
     Hx, Cx = F["head_x"], F["cal_x"]
     rtr, rva = D.rows_of(F, tr.sha), D.rows_of(F, va.sha)
-    wtr, wva = row_weights(tr, tr), row_weights(tr, va)                              # DESIGN.md 12
+    wtr, wva = row_weights(tr, tr), row_weights(tr, va)                              # 12
     tr, va = tr.assign(rw=wtr), va.assign(rw=wva)
     rw_src = {k: round(float(v), 3) for k, v in tr.groupby("source").rw.first().items()}
     Y = lambda d: d[["T", "I", "F"]].to_numpy(dtype="float32")                       # noqa: E731
@@ -699,7 +699,7 @@ def train_all(check: bool = False, log=print) -> int:
     report["A7_val_loss"] = vl
 
     if FT_ON:
-        log("== A0ft: PEINN with the calibrator's mpnet and the head's MiniLM fine-tuned (DESIGN.md 13)")
+        log("== A0ft: PEINN with the calibrator's mpnet and the head's MiniLM fine-tuned")
         fhp = dict(FT_HP, epochs=1) if check else FT_HP
         hb = np.r_[0:32, 416:800]                                                  # emotion | principle
         e_inf, e_auc = train_ft("energy", trs, va, Cx[D.rows_of(F, trs.sha)][:, :32], Cx[rva][:, :32], neg_w, fhp, log,
@@ -712,7 +712,7 @@ def train_all(check: bool = False, log=print) -> int:
         save("A0ft", E_=E_ft, T=p[:, 0], I=p[:, 1], F=p[:, 2])
         report["A0ft_energy_val_auroc"], report["A0ft_head_val_loss"] = e_auc, h_vl
         if OOD_ON:
-            log("== A0ftM: A0ft with I raised to 1 for inputs out of the training distribution (DESIGN.md 20)")
+            log("== A0ftM: A0ft with I raised to 1 for inputs out of the training distribution")
             md_ = mahalanobis_fit(e_inf(trs.text.astype(str).tolist(), None, emb=True), trs.F.to_numpy() >= 0.5)
             dm = mahalanobis_min(md_, e_inf(uni.text.astype(str).tolist(), None, emb=True))
             ood = (dm > md_["tau"]).astype(float)

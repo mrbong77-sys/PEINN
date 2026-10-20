@@ -1,9 +1,9 @@
-"""DESIGN.md 12 (step S): public over-refusal and adversarial training sets added to the isolated corpus.
+"""Step S: public over-refusal and adversarial training sets added to the isolated corpus.
 
-The v4 corpus keeps few benign prompts that look harmful once the XSTest-type sources are out (DESIGN.md 11), so the
+The v4 corpus keeps few benign prompts that look harmful once the XSTest-type sources are out, so the
 isolated gate over-blocks such prompts. As in CPEG's "no benchmark items" retrain (PEINN_v2 energy.py `_cf_sources`),
 the corpus takes public sets built for training against over-refusal and jailbreaks. None is one of the six evaluation
-benchmarks, none was written from XSTest, and the isolation audit (DESIGN.md 3) still drops any row that matches or
+benchmarks, none was written from XSTest, and the isolation audit still drops any row that matches or
 nears a recorded routing text. Labels are the datasets' own: benign rows T 1, I 0, F 0; harmful rows T 0, I 0, F 1.
 The recipe is fixed before any result (seed 42); rows split 80/10/10 by source and label (data.assign_split).
 """
@@ -18,14 +18,14 @@ from . import common as C
 from . import data as D
 
 SEED = 42
-# (source, label, rows): benign over-refusal 7,379 at most, harmful counterparts 3,000; DESIGN.md 15/17 add 14,000 plain rows
-# DESIGN.md 19: contrast and adversarial sets taken further in the same seed-42 orders (earlier rows kept)
+# (source, label, rows): benign over-refusal 7,379 at most, harmful counterparts 3,000; then 14,000 plain rows
+# contrast and adversarial sets taken further in the same seed-42 orders (earlier rows kept)
 RECIPE = (("orbench_80k", 0, 3000), ("falsereject_train", 0, 5000), ("phtest_harmless", 0, 3000),
           ("coconot_contrast", 0, 1000), ("wildjailbreak_adv_benign", 0, 3000), ("wildguardmix_adv_benign", 0, 1500),
           ("orbench_toxic", 1, 1500), ("wildjailbreak_adv_harmful", 1, 3000), ("wildguardmix_adv_harmful", 1, 1500),
-          # DESIGN.md 15: plain (vanilla) requests, harmful and harmful-looking benign, as in CPEG's WildGuardMix patch
-          # DESIGN.md 17: the same seed-42 orders taken further (the first rows are the ones of DESIGN.md 15)
-          ("wildjailbreak_van_benign", 0, 12000), ("wildguardmix_van_benign", 0, 4000),       # DESIGN.md 23
+          # plain (vanilla) requests, harmful and harmful-looking benign, as in CPEG's WildGuardMix patch
+          # the same seed-42 orders taken further (the first rows are the earlier ones)
+          ("wildjailbreak_van_benign", 0, 12000), ("wildguardmix_van_benign", 0, 4000),       # 23
           ("wildjailbreak_van_harmful", 1, 12000), ("wildguardmix_van_harmful", 1, 4000),
           ("orbench_hard", 0, 1500))
 CHECK_ROWS = 20

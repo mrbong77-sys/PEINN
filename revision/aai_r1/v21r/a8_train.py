@@ -1,11 +1,11 @@
-"""DESIGN.md 10 (A8): LoRA on the protected model with the same supervision, merged into the weights.
+"""A8: LoRA on the protected model with the same supervision, merged into the weights.
 
     python a8_train.py --data DIR/targets.jsonl --out DIR/merged --report DIR/train.json --model Qwen/Qwen2.5-7B-Instruct
 
 targets.jsonl rows: {"sha", "split" (train | val), "cls", "text", "target"}. The loss is on the answer tokens only; the
 prompt is the bare request in the model's own chat template (as the Vanilla arm sends it). LoRA (rank 16, alpha 32,
 dropout 0.05) on every attention and MLP projection, AdamW 1e-4, one epoch, batch 2 x 8 accumulation (16 per step, as
-the planned 4 x 4; DESIGN.md 10.8), cosine with 3% warm-up, max 1,024 tokens, seed 42. On CUDA the process may use at
+the planned 4 x 4), cosine with 3% warm-up, max 1,024 tokens, seed 42. On CUDA the process may use at
 most MEM_FRAC of the GPU, so the allocator frees its cache instead of spilling into shared system memory (Windows), and
 the run saves its state every CKPT_EVERY steps to --ckpt and resumes from it. The adapters are merged into the base weights and the merged model is saved
 (safetensors) for Ollama; the adapters alone go to adapter.safetensors. Hand-written LoRA (no peft dependency).
@@ -20,7 +20,7 @@ import random
 import time
 from pathlib import Path
 
-# read at the first CUDA allocation: smaller cached blocks and early collection against fragmentation (DESIGN.md 10.8)
+# read at the first CUDA allocation: smaller cached blocks and early collection against fragmentation
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "max_split_size_mb:512,garbage_collection_threshold:0.8")
 import torch  # noqa: E402
 from torch import nn
@@ -34,7 +34,7 @@ TARGETS = ("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down
 
 
 class LoRALinear(nn.Module):
-    """y = W x + (alpha / r) B A dropout(x); A, B in float32, W frozen."""
+    """Y = W x + (alpha / r) B A dropout(x); A, B in float32, W frozen."""
 
     def __init__(self, base: nn.Linear, r: int, alpha: float, dropout: float):
         super().__init__()
@@ -94,7 +94,7 @@ def _ids(x) -> list[int]:
 
 def encode(tok, text: str, target: str, max_len: int, cut: bool = False, tail: int = 0) -> tuple[list[int], list[int]]:
     """Token ids of prompt + answer in the chat template; labels -100 on the prompt (and nothing past max_len).
-    cut (DESIGN.md 10.7): the answer was stopped by the generation cap, so the template's end-of-turn tokens after it
+    cut: the answer was stopped by the generation cap, so the template's end-of-turn tokens after it
     (`tail` of them) carry no loss: the model learns the answer text, not to stop mid-sentence."""
     msgs = [{"role": "user", "content": text}]
     p = tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=True)

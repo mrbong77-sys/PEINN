@@ -1,4 +1,4 @@
-"""A8 (DESIGN.md 10): target plan, the LoRA layer and its merge, the training loop on a tiny random Qwen2, the
+"""A8: target plan, the LoRA layer and its merge, the training loop on a tiny random Qwen2, the
 model map of the bench driver. No real data, no downloads."""
 from __future__ import annotations
 

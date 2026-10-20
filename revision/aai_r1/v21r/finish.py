@@ -1,4 +1,4 @@
-"""DESIGN.md 37: the last satellite step before the manuscript (Eugene 2026-10-18 19:39 KST "위성 먼저 사용 끝내").
+"""The last satellite step before the manuscript.
 Everything the manuscript still needs from the satellite's cache goes into the repository, so the rest runs anywhere.
 
   forced-export  every forced-tag row (the answer of each bench unit under each of the five tiers), the route table of
@@ -75,7 +75,7 @@ def forced_export(check: bool = False, log=print) -> int:
         f"{sum(x.stat().st_size for x in files) / 2**20:.1f} MiB")
     if check:
         return 0
-    return 0 if C.publish(files, "v21r: forced-tag rows, route tables, signals and val/test labels (DESIGN.md 37)") else 1
+    return 0 if C.publish(files, "v21r: forced-tag rows, route tables, signals and val/test labels") else 1
 
 
 def gate_mem(check: bool = False, log=print) -> int:
@@ -111,7 +111,7 @@ def gate_mem(check: bool = False, log=print) -> int:
     if bad:
         log(f"gate main failed: {bad}")
         return 1
-    return 0 if C.publish([f], "v21r: the main variant's whole input gate, time and peak memory (DESIGN.md 37)") else 1
+    return 0 if C.publish([f], "v21r: the main variant's whole input gate, time and peak memory") else 1
 
 
 def _same(a, b) -> dict:
@@ -176,4 +176,4 @@ def gate_retrain(check: bool = False, log=print) -> int:
     f = C.jdump(res, D.odir(check) / "gate_retrain.json")
     if check:
         return 0
-    return 0 if C.publish([f], "v21r: A0ftM gate retrained from the same corpus, time and memory (DESIGN.md 37)") else 1
+    return 0 if C.publish([f], "v21r: A0ftM gate retrained from the same corpus, time and memory") else 1

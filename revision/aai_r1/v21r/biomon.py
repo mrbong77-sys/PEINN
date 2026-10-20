@@ -1,4 +1,4 @@
-"""Outside the paper (Eugene 2026-10-16 11:33 and 16:43 KST; DESIGN.md 26): Anthropic's "cheap monitors" bioweapons
+"""Outside the paper: Anthropic's "cheap monitors" bioweapons
 prompt (https://alignment.anthropic.com/2025/cheap-monitors/) as the input of the final isolated PEINN operating point
 (A0ftM@0.03), a plain model (Vanilla), Llama Guard 3, NeMo Guardrails and Shieldstral-1.0-3B.
 
@@ -215,7 +215,7 @@ def biomon(check: bool = False, log=print) -> int:
     flags["NeMo"] = np.array([r["blocked"] for r in guard_verdicts("nemo", texts, check)])
     C.unload([BACKEND])
     flags["Shieldstral"] = np.array([r["blocked"] for r in guard_verdicts("s03", texts, check)])
-    res = {"design": "DESIGN.md 26", "backend": BACKEND, "peinn": f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}", "systems": {},
+    res = {"backend": BACKEND, "peinn": f"{TH.MAIN_VARIANT}@{TH.MAIN_CAP:g}", "systems": {},
            "peinn_tiers": {f"{g}|{c}": x.peinn_tier.value_counts().to_dict() for (g, c), x in df.groupby(["group", "cond"])}}
     for s, fl in flags.items():
         df[s] = fl
@@ -237,7 +237,7 @@ def biomon(check: bool = False, log=print) -> int:
 
 def render(res: dict) -> str:
     gs = ("bio", "chem", "orbench", "wildchat")
-    L = ["# 생물무기 감시 프롬프트 시험 (논문 밖, DESIGN.md 26)", "",
+    L = ["# 생물무기 감시 프롬프트 시험 (논문 밖)", "",
          f"PEINN은 {res['peinn']}, Vanilla·NeMo의 기반 모델은 {res['backend']}입니다. 값은 표시 비율(표시 수/문항 수)입니다. "
          "bio·chem은 유해 문항이라 높을수록, orbench·wildchat은 무해 문항이라 낮을수록 좋습니다. ★ PEINN이 학습한 출처.", "",
          "| 체계 | 조건 | " + " | ".join("orbench ★" if g == "orbench" else g for g in gs) + " |", "|---|---|" + "---|" * len(gs)]

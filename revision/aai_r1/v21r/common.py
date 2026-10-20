@@ -1,4 +1,4 @@
-"""Shared constants and helpers for the v2.1 revision experiments (DESIGN.md)."""
+"""Shared constants and helpers for the v2.1 revision experiments."""
 from __future__ import annotations
 
 import hashlib
@@ -29,13 +29,13 @@ ARMS = {  # base -> {defense: arm id} (paper Table 2 and Appendix A)
 }
 JUDGE = "qwen3:32b"                                  # the submitted judge (all LLM-judged benches)
 R2D2 = "zephyr-r2d2:latest"                          # the name the PEAOS arm H02 calls
-# The submitted run's build is lost (another PC, Eugene 2026-10-16 17:56 KST). R2D2 is the canonical checkpoint HarmBench's
-# authors evaluated, cais/zephyr_7b_r2d2 (bf16, pinned revision), unquantized (Eugene 2026-10-17 00:15 KST: quantization may
+# The submitted run's build is lost (another PC). R2D2 is the canonical checkpoint HarmBench's
+# authors evaluated, cais/zephyr_7b_r2d2 (bf16, pinned revision), unquantized (quantization may
 # degrade it). Ollama cannot import its safetensors ("unsupported MLX architecture: MistralForCausalLM"), so H02 serves
 # mradermacher's F16 GGUF of it, checked tensor by tensor against the checkpoint (v21r.wcheck), with HarmBench's own prompt
 # for this model (baselines/model_utils.py ZEPHYR_ROBUST_PROMPT, configs/model_configs/models.yaml zephyr_7b_robust; no
 # system block). CPEG's Q8_0 build took zephyr:7b-beta-q8_0's template ("{prompt}\n</s>"), under which R2D2 left 8 of 12
-# submitted XSTest safe prompts empty (results/diag/r2d2_fingerprint.json, DESIGN.md 25).
+# submitted XSTest safe prompts empty.
 R2D2_CPEG = "zephyr-r2d2:7b-q8_0"
 R2D2_GGUF = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:Q8_0"       # CPEG's weights (compared in r2d2-fingerprint only)
 R2D2_F16 = "hf.co/mradermacher/zephyr_7b_r2d2-GGUF:F16"         # served (after the weights check)
@@ -52,7 +52,7 @@ LOCKED = {"extreme": 9.4, "harm": 8.5, "F": 0.15, "I": 0.45, "Fref": 0.30, "soft
 
 
 def fx(x, d: int = 1, sign: bool = False) -> str:
-    """x printed with d decimals, rounding half up from x's value at 6 decimals (Python's own rounding goes to even and
+    """X printed with d decimals, rounding half up from x's value at 6 decimals (Python's own rounding goes to even and
     works on the binary value, so an exact 68.55 would print 68.5). Every number the paper prints goes through this."""
     from decimal import ROUND_HALF_UP, Decimal
     q = Decimal(repr(round(float(x), 6))).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP)
@@ -71,7 +71,7 @@ def gate(T, I, F, E, th: dict, order: str = "revised", energy: bool = True, deli
     """The v2.1 five-tier gate, vectorised.
 
     order "paper": Deliberation (I >= I, F < Fblk) is checked first, as in NeutroEERouterV21._gate.
-    order "revised" (docs/116 1.3): the extreme-energy override comes first, so no input above the benign energy
+    order "revised": the extreme-energy override comes first, so no input above the benign energy
     ceiling is deliberated; the rest keeps the paper order.
     energy False (A5): no energy terms; Hard-block when F >= th["Fhb"]; no Soft-reasoning.
     deliberation False (A1, A4 block-only): the Deliberation tier is removed.
@@ -109,7 +109,7 @@ def teacher_class(T, I, F) -> np.ndarray:
 
 # ---- io ----------------------------------------------------------------------------------------------
 
-SAFETY = ("harmbench", "taxonomy", "xstest")      # benches whose prompts and answers are not re-hosted (DESIGN.md 39)
+SAFETY = ("harmbench", "taxonomy", "xstest")      # benches whose prompts and answers are not re-hosted
 
 
 def htext(t) -> str:
@@ -149,7 +149,7 @@ def jsonl(f: Path) -> list[dict]:
 def child(cmd: list[str], cwd: Path, env: dict | None = None) -> int:
     """Run a helper in another checkout (PEAOS or PEINN) with UTF-8 pipes (Windows cp949, CLAUDE.md). The string hash
     seed is fixed: PEAOS orders the Ethics Dilemma items by a set of ids, and that order makes the judge's batches
-    (DESIGN.md 31)."""
+   ."""
     e = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1", PYTHONHASHSEED="0", **(env or {}))
     print(f"[v21r] $ {' '.join(str(c) for c in cmd)}  (cwd {cwd})", flush=True)
     return subprocess.run([str(c) for c in cmd], cwd=str(cwd), env=e).returncode
@@ -264,7 +264,7 @@ def ensure_r2d2(log=print) -> Path | None:
     jdump(chk, OUT / "diag" / "r2d2_weights_check.json")
     if not chk["ok"]:
         publish([OUT / "diag" / "r2d2_weights_check.json"], f"v21r R2D2: weights check failed ({R2D2_F16})")
-        raise SystemExit(f"{R2D2_F16} does not hold {R2D2_HF}'s weights (results/diag/r2d2_weights_check.json)")
+        raise SystemExit(f"{R2D2_F16} does not hold {R2D2_HF}'s weights (diag/r2d2_weights_check.json)")
     if R2D2 in _digests():
         log(f"  ollama rm {R2D2} (not the checked F16 import)")
         subprocess.run(["ollama", "rm", R2D2])

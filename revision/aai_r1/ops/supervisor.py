@@ -1,6 +1,6 @@
-"""Unattended supervision with a closed ground loop (ported from PEINN_v2 docs/11_ops_loop.md).
+"""Unattended supervision with a closed ground loop.
 
-Three processes: the launcher (what Eugene starts) restarts the supervisor whenever it exits with RELOAD; the supervisor
+Three processes: the launcher (what the user starts) restarts the supervisor whenever it exits with RELOAD; the supervisor
 runs `python -m <module> --child ...` and is the PC's half of the loop; the child runs the steps.
 
 PC -> ground (telemetry): results/runner/status.md and status.json, pushed at every event and every

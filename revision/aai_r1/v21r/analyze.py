@@ -1,4 +1,4 @@
-"""DESIGN.md 5-7 (step A): benchmark results of every defence and variant from the response matrix, the curves, the
+"""Step A: benchmark results of every defence and variant from the response matrix, the curves, the
 T/I/F calibration and the I-construct analyses -> results/v21r/analysis/ (metrics only, pushed).
 
 A PEINN variant's answer to a unit (bench item x run) is the answer of the forced tag equal to the variant's tier for
@@ -53,7 +53,7 @@ def bench_metrics(bench: str, d: pd.DataFrame) -> dict:
     if bench == "xstest":
         r = {"over_refusal_safe": m(d.over_refusal[d.expected_label == "safe"]),
              "unsafe_compliance": m(d.unsafe_compliance[d.expected_label == "unsafe"])}
-        if "tier" in d:                       # DESIGN.md 16: the gate's own share (Hard-block or Reasoned-Refusal)
+        if "tier" in d:                       # the gate's own share (Hard-block or Reasoned-Refusal)
             safe = d[d.expected_label == "safe"]
             r["gate_refusal_safe"] = m(safe.tier.isin(("Hard-block", "Reasoned-Refusal")).astype(float))
         return r
@@ -110,7 +110,7 @@ def evaluate(check: bool, log=print, only=None) -> dict:
             r = {bn: bench_metrics(bn, defence_rows(df, bn, arm)) for bn in D.runs(check)}
             r["summary"] = leak_and_orr(r)
             res["defences"][dname] = r
-        if b == "qwen":                                         # A8: LoRA on the protected model (DESIGN.md 10)
+        if b == "qwen":                                         # A8: LoRA on the protected model
             from . import a8 as A8
             da = A8.collect(check)
             if len(da):
@@ -252,8 +252,8 @@ def analyze(check: bool = False, log=print) -> int:
     return 0 if C.publish([f, md], "v21r A: benchmark results, curves, calibration and I-construct analyses") else 1
 
 
-# DESIGN.md 14: the evaluation benches were scored only after the dev target was met; DESIGN.md 17: each iteration is
-# rescored (CPU only; operating points stay fitted on val) and every look is logged in DESIGN.md
+# the evaluation benches were scored only after the dev target was met; each iteration is
+# rescored (CPU only; operating points stay fitted on val)
 PREVIEW_NEEDS_DEV_PARITY = False
 
 
@@ -281,7 +281,7 @@ def _cell(f, r):
 
 
 def preview(check: bool = False, log=print) -> int:
-    """DESIGN.md 11: benchmark metrics of the current gate on the bases already answered (CPU, no model call), so the
+    """Benchmark metrics of the current gate on the bases already answered (CPU, no model call), so the
     gate is reviewed on real answers before the rest of the matrix spends GPU time."""
     gd = D.odir(check) / "diag" / "gate_diag.json"
     gdj = C.jload(gd) if gd.exists() else {}
@@ -290,7 +290,7 @@ def preview(check: bool = False, log=print) -> int:
         o = D.odir(check) / "analysis_preview"
         md = o / "preview.md"
         o.mkdir(parents=True, exist_ok=True)
-        md.write_text("# 미리보기 보류 (DESIGN.md 14)\n\n검증 자료(test 분할)에서 Llama Guard 동등에 이른 변형이 없어 평가 벤치를 "
+        md.write_text("# 미리보기 보류\n\n검증 자료(test 분할)에서 Llama Guard 동등에 이른 변형이 없어 평가 벤치를 "
                       f"채점하지 않았습니다. 동등 판정: {json.dumps(par, ensure_ascii=False)}\n", encoding="utf-8")
         log(md.read_text(encoding="utf-8"))
         return 0 if C.publish([md], "v21r A-preview: held (no variant on par with Llama Guard on the test split yet)") else 1
@@ -300,7 +300,7 @@ def preview(check: bool = False, log=print) -> int:
     main = str(th["main_cap"])
     rows = [f"{v}@{c}" for v in th["variants"] for c in th["variants"][v] if c == main or v in ("A0", "A0ft", "A0ftM")]
     rows += ["SHIPPED", "A0paper", "A4a", "A4b", "A4c", "A4d"]
-    L = ["# 게이트 수정 뒤 미리보기 (DESIGN.md 11)", "",
+    L = ["# 게이트 수정 뒤 미리보기", "",
          f"끝난 기반 모델: {', '.join(done) or '없음'}. 주 운영점 {main_point()['name']} (제출본 운영점 {main}). "
          "모델 호출 없이 응답 행렬을 다시 채점했습니다.", ""]
     for b, res in ev["bases"].items():
@@ -328,9 +328,9 @@ def main_point() -> dict:
 
 
 def render(res: dict) -> str:
-    L = ["# v2.1 심사 대응 결과 요약 (DESIGN.md)", ""]
+    L = ["# v2.1 심사 대응 결과 요약", ""]
     mp = res.get("main") or main_point()
-    L += [f"## 주 운영점: 격리 PEINN {mp['name']} (DESIGN.md 24)", "", "| 기반 모델 | 체계 | UCR | ORR | 게이트 ORR |",
+    L += [f"## 주 운영점: 격리 PEINN {mp['name']}", "", "| 기반 모델 | 체계 | UCR | ORR | 게이트 ORR |",
           "|---|---|---|---|---|"]
     for b, r in res["benchmarks"]["bases"].items():
         rows = [("PEINN", r["variants"].get(mp["name"]))] + list(r["defences"].items())

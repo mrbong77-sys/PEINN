@@ -1,11 +1,11 @@
-"""Section 4.7 (ablations, R1-3, R1-4, R2-2) from the exported forced-tag rows (DESIGN.md 37), in the definitions of
-bench_stats (DESIGN.md 34). No model call; runs anywhere.
+"""Section 4.7 (ablations, R1-3, R1-4, R2-2) from the exported forced-tag rows, in the definitions of
+bench_stats. No model call; runs anywhere.
 
     python -m v21r paper-ablation        -> results/paper/ablation.json, tab_ablation.tex, ablation_curves.png
 
 A variant's answer to a bench unit (item x run) is the forced-tag row of the tier the variant assigns to that unit's
 routing text (analyze.assemble). Variants:
-  A0ftM (PEINN), A0ft, A0, A1-A7 and A1ft-A3ft (DESIGN.md 42) at their val-fitted thresholds (thresholds.json, routes.csv);
+  A0ftM (PEINN), A0ft, A0, A1-A7 and A1ft-A3ft at their val-fitted thresholds (thresholds.json, routes.csv);
   A4a-d from the main variant's routes: every item Direct, every item Deliberation, the main variant's refusals
         (Hard-block, Reasoned-Refusal) and Direct elsewhere, or and Deliberation elsewhere;
   A9    energy only (R2-2): no head; Hard-block when the main variant's energy E >= tau, Direct-Answer otherwise; tau
@@ -43,7 +43,7 @@ LABEL = {"A0ftM": "PEINN", "A0ft": "No OOD check", "A0": "Frozen encoders",
          "A4a": "Always Direct", "A4b": "Always Deliberation", "A4c": "Block + Direct", "A4d": "Block + Deliberation",
          "A9": "Energy only"}
 # groups, a rule between them: PEINN | encoders (against PEINN) | components with the fine-tuned encoders (against A0ft,
-# DESIGN.md 42) | components with the frozen encoders (against A0) | routing
+# 42) | components with the frozen encoders (against A0) | routing
 FT_COMP = ("A1ft", "A2ft", "A3ft")
 FROZEN_COMP = ("A1", "A2", "A3", "A5", "A6p", "A6e", "A7")
 GROUPS = (("A0ftM",), ("A0ft", "A0"), FT_COMP, FROZEN_COMP, ("A9", "A4a", "A4b", "A4c", "A4d"))

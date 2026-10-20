@@ -1,11 +1,11 @@
-"""DESIGN.md 42: A1-A3 with PEINN's fine-tuned encoders (pre-review 2.2; Eugene card 2026-10-19 10:47 KST "헤드 3개 재학습").
+"""A1-A3 with PEINN's fine-tuned encoders (pre-review 2.2).
 
 The frozen-encoder ablations A1 (no I), A2 (softmax safe / ambiguous / harmful) and A3 (binary harm classifier with
 uncertainty routing) are trained again in PEINN's fine-tuned configuration: the head's MiniLM is trained end to end
 with each head exactly as A0ft's head was (train_ft 'head', FT_HEAD_HP, seed 42, the same corpus, row weights and
 validation selection), and the energy is A0ft's (the released fine-tuned mpnet calibrator, unchanged). Their reference
-is A0ft (PEINN without the OOD flag, which changes no answer at the main operating point; DESIGN.md 41).
-Thresholds are fitted on val by the procedure of DESIGN.md 5 at every curve cap, and the routes of the bench routing
+is A0ft (PEINN without the OOD flag, which changes no answer at the main operating point).
+Thresholds are fitted on val by the procedure of theta.thresholds at every curve cap, and the routes of the bench routing
 texts follow. No generation and no judging: the answers of every route already exist (results/forced).
 
     python -m v21r ftv --check   # 64 training rows, one epoch, 200 val rows; nothing pushed
@@ -71,7 +71,7 @@ def merge(check: bool, th: dict, rt: pd.DataFrame) -> list:
     tf = o / "thresholds.json"
     t = C.jload(tf)
     t["variants"].update(th)
-    t.setdefault("ft_variants", {"rule": "DESIGN.md 42", "reference": REF, "variants": list(th)})
+    t.setdefault("ft_variants", {"rule": "A1-A3 heads with a fine-tuned MiniLM", "reference": REF, "variants": list(th)})
     C.jdump(t, tf)
     rf = o / "forced" / "routes.csv.gz"
     r = pd.read_csv(rf, dtype={"sha": str})
@@ -114,7 +114,7 @@ def ftv(check: bool = False, log=print) -> int:
     uni = pd.DataFrame({"sha": list(va.sha) + list(te.sha) + list(rec.sha),
                         "part": ["val"] * len(va) + ["test"] * len(te) + ["bench"] * len(rec),
                         "text": list(va.text) + list(te.text) + list(rec.text)})
-    ref = M.load_signals(False, REF)                              # A0ft's energy on the same texts (DESIGN.md 42)
+    ref = M.load_signals(False, REF)                              # A0ft's energy on the same texts
     e_of = {(p, s): e for p, s, e in zip(ref["part"], ref["sha"], ref["E"])}
     E = np.array([e_of[(p, s)] for p, s in zip(uni.part, uni.sha)], dtype=float)
     Hx = F["head_x"]
@@ -125,7 +125,7 @@ def ftv(check: bool = False, log=print) -> int:
     md.mkdir(parents=True, exist_ok=True)
     rf = D.odir(check) / "ftv_report.json"
     rep = C.jload(rf) if rf.exists() and not check else {}
-    rep.update({"rule": "DESIGN.md 42", "reference": REF, "n_train": len(trs), "n_val": len(va), "epochs": hhp["epochs"],
+    rep.update({"rule": "A1-A3 heads with a fine-tuned MiniLM", "reference": REF, "n_train": len(trs), "n_val": len(va), "epochs": hhp["epochs"],
                 "device": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu"})
     sigs = {}
     for v, out in HEADS:
@@ -169,4 +169,4 @@ def ftv(check: bool = False, log=print) -> int:
     if ftv_fit(False, log):
         return 1
     files += [D.odir(False) / "thresholds.json", o / "routes.csv.gz", rf]
-    return 0 if C.publish(files, "v21r ftv: A1-A3 with the fine-tuned encoders, thresholds and routes (DESIGN.md 42)") else 1
+    return 0 if C.publish(files, "v21r ftv: A1-A3 with the fine-tuned encoders, thresholds and routes") else 1

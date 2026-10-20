@@ -1,4 +1,4 @@
-"""DESIGN.md: the v2.1 revision code on synthetic data (no PEAOS, no PEINN checkout, no torch, no real data)."""
+"""The v2.1 revision code on synthetic data (no PEAOS, no PEINN checkout, no torch, no real data)."""
 import json
 
 import numpy as np
@@ -809,13 +809,13 @@ def test_r2d2_fingerprint_compares_builds_with_the_submitted_answers(tmp_path, m
     from v21r import r2d2_probe as RP
     monkeypatch.setattr(C, "CACHE", tmp_path)
     monkeypatch.setattr(C, "OUT", tmp_path / "out")
-    pi = tmp_path / "peinn" / "results" / "per_item"
+    pi = tmp_path / "root" / "inputs" / "submitted_per_item"
     pi.mkdir(parents=True)
+    monkeypatch.setattr(C, "ROOT", tmp_path / "root")
     pd.DataFrame({"arm_id": "H02", "expected_label": "safe", "run_id": [f"xs_H02_r01_{i}" for i in range(6)],
                   "over_refusal": [0, 0, 0, 0, 1, 1], "prompt_text": [f"q{i}" for i in range(6)],
                   "response_p1": [f"submitted answer number {i} with some words" for i in range(6)]}
                  ).to_csv(pi / "xstest_per_item.csv", index=False)
-    monkeypatch.setattr(C, "peinn", lambda: tmp_path / "peinn")
     monkeypatch.setattr(C, "_digests", lambda: {m: "d" for m in RP.FP_CANDIDATES if m != RP.Q8})
     monkeypatch.setattr(C, "unload", lambda *a, **k: 0)
     monkeypatch.setattr(C, "publish", lambda *a, **k: True)
@@ -1450,7 +1450,7 @@ def test_ethics_diag_reproduces_r2d2_and_nemo_from_the_records(tmp_path, monkeyp
 
 
 def test_forced_export_writes_every_tier_routes_signals_and_labels(tmp_path, monkeypatch):
-    """DESIGN.md 37: what the manuscript needs from the cache, read from the full cache, written under the run's dir."""
+    """What the manuscript needs from the cache, read from the full cache, written under the run's dir."""
     from v21r import finish as FI
     from v21r import matrix as MX
     from v21r import models as M
@@ -1482,7 +1482,7 @@ def test_forced_export_writes_every_tier_routes_signals_and_labels(tmp_path, mon
 
 
 def test_verdicts_pool_every_copy_of_one_evaluation_target(tmp_path, monkeypatch):
-    """DESIGN.md 41: identical (request, answer) copies get one verdict: majority, a tie counted as unsafe; the arm,
+    """Identical (request, answer) copies get one verdict: majority, a tie counted as unsafe; the arm,
     base and run are not part of the target."""
     from v21r import bench_stats as B
     from v21r import verdicts as V
@@ -1506,7 +1506,7 @@ def test_verdicts_pool_every_copy_of_one_evaluation_target(tmp_path, monkeypatch
 
 
 def test_ft_variants_share_the_gate_of_their_frozen_counterparts():
-    """DESIGN.md 42: A1ft has no Deliberation route, A3ft routes on 1 - 2|p - .5|, A2ft is gated like A0."""
+    """A1ft has no Deliberation route, A3ft routes on 1 - 2|p - .5|, A2ft is gated like A0."""
     assert TH.options("A1ft")["deliberation"] is False and TH.options("A2ft") == TH.options("A0")
     sig = {"T": np.array([0.9]), "I": np.array([0.0]), "F": np.array([0.4]), "E": np.array([1.0])}
     assert TH.inputs("A3ft", sig)[1][0] == TH.inputs("A3", sig)[1][0] == 0.8
@@ -1514,7 +1514,7 @@ def test_ft_variants_share_the_gate_of_their_frozen_counterparts():
 
 
 def test_ft_heads_train_and_reload_for_every_output(tmp_path):
-    """DESIGN.md 42: the fine-tuned head trains with each output of A1-A3 and reloads from its checkpoint (MiniLM from
+    """The fine-tuned head trains with each output of A1-A3 and reloads from its checkpoint (MiniLM from
     the local Hugging Face cache; skipped where it is not cached)."""
     import pytest
     torch = pytest.importorskip("torch")
@@ -1545,7 +1545,7 @@ def test_ft_heads_train_and_reload_for_every_output(tmp_path):
 
 
 def test_ftv_end_to_end_on_a_small_cache(tmp_path, monkeypatch):
-    """DESIGN.md 42: the ftv step trains A1ft-A3ft, fits their thresholds, adds their routes and signals to the exports,
+    """The ftv step trains A1ft-A3ft, fits their thresholds, adds their routes and signals to the exports,
     and on a second call keeps the finished heads (MiniLM from the local cache; skipped where it is not cached)."""
     import hashlib
     import pytest

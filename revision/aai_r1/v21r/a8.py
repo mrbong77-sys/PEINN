@@ -1,4 +1,4 @@
-"""DESIGN.md 10 (step A8): LoRA on the protected model (qwen2.5-7B) with the same supervision, no router.
+"""Step A8: LoRA on the protected model (qwen2.5-7B) with the same supervision, no router.
 
     python -m v21r a8 [--check]
 
@@ -101,7 +101,7 @@ REPEAT_LIMIT = "Ollama repeat limit"
 
 
 def targets(check: bool, log=print) -> int:
-    """Items whose teacher answer hits Ollama's token repeat limit (HTTP 500 "token repeat limit reached", DESIGN.md 30)
+    """Items whose teacher answer hits Ollama's token repeat limit (HTTP 500 "token repeat limit reached")
     get no target: a looping answer is no supervision. They are listed in targets_skipped.jsonl and counted in a8.json."""
     w = wdir(check)
     out, skip = w / "targets.jsonl", w / "targets_skipped.jsonl"
@@ -204,9 +204,9 @@ def _get(url: str, timeout: float = 120):
 
 
 def llama_quantize(log=print) -> tuple[Path, dict]:
-    """llama.cpp's llama-quantize from the latest release (Windows CPU build) in the cache, with its tag and sha256.
+    """Llama.cpp's llama-quantize from the latest release (Windows CPU build) in the cache, with its tag and sha256.
     Ollama no longer quantises at import: a GGUF must arrive quantised, and a safetensors folder only goes to int4,
-    int8, nvfp4, mxfp4 or mxfp8 (a8-check, 2026-10-17). Eugene's card 10-17: use llama.cpp's own tool."""
+    int8, nvfp4, mxfp4 or mxfp8 (a8-check, 2026-10-17). use llama.cpp's own tool."""
     import hashlib
     import zipfile
     d = C.CACHE / "llama.cpp"
@@ -335,7 +335,7 @@ REFUSAL_START = re.compile(r"^\W*(i'?m sorry|i am sorry|i can(no|')t|i cannot|i 
 
 
 def a8_peek(check: bool = False, log=print) -> int:
-    """Read-only look at the A8 targets written so far (Eugene 2026-10-18 10:13 KST: is the self-distillation sound?).
+    """Read-only look at the A8 targets written so far.
     Safe to run beside the running a8 step: the file is only read, a cut last line is skipped. Per class: count, answer
     tokens (median, p90, share at the 512 cap = cut answers), empty answers, answers that open with a refusal; and a few
     seeded random examples of the safe and dilemma targets (the harm target is the fixed refusal)."""

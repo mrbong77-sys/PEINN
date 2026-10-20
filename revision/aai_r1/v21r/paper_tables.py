@@ -1,5 +1,5 @@
 """Section 4 and Appendix A of the revised manuscript from the exported records (bench-export, ggb-rescore), in the
-definitions of bench_stats (DESIGN.md 34). No model call; runs anywhere.
+definitions of bench_stats. No model call; runs anywhere.
 
     python -m v21r paper-tables          -> results/paper/*.tex (table bodies), *.png (figures), numbers.json
 
@@ -268,8 +268,8 @@ def morables(check: bool, o, num: dict) -> None:
 # ---- GGB ---------------------------------------------------------------------------------------------------------
 
 def ggb(check: bool, o, num: dict) -> None:
-    """IH and IB over the items a system answered, with Vanilla on the same items (DESIGN.md 32: PEINN hard-blocks
-    some IH items, so a mean over all items would compare different items). Descriptive only (DESIGN.md 41): the
+    """IH and IB over the items a system answered, with Vanilla on the same items (PEINN hard-blocks
+    some IH items, so a mean over all items would compare different items). Descriptive only: the
     item-run responses repeat few items, so no test is reported."""
     d = pd.read_csv(D.odir(check) / "ggb" / "ggb_rescored.csv", low_memory=False)
     d["rescored"] = pd.to_numeric(d.rescored, errors="coerce")

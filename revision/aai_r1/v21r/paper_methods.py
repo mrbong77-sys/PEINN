@@ -1,5 +1,5 @@
 """Section 3 numbers and Figures 2-4 of the revised manuscript for the main variant, from the exported rows
-(DESIGN.md 37). No model call; runs anywhere.
+. No model call; runs anywhere.
 
     python -m v21r paper-methods        -> results/paper/methods.json, fig3_routing.png, fig4_energy_signals.png,
                                             fig5_signal_distribution.png
@@ -131,7 +131,7 @@ def calibration(check: bool, o) -> None:
 
 def route_cost(check: bool, o) -> None:
     """Generation calls, input and output tokens and Ollama generation seconds per request for each route and base, as
-    a deployment needs them (DESIGN.md 41): a Hard-block calls nothing, and a two-pass route only its second call. The
+    a deployment needs them: a Hard-block calls nothing, and a two-pass route only its second call. The
     harness's first call of a two-pass route is the bare call of Direct-answer (same request and seed; the Hard-block
     harness figures equal Direct-answer's), so the second call is the route's harness figure minus Direct-answer's."""
     t = C.jload(D.odir(check) / "route_cost.json")["tiers"]

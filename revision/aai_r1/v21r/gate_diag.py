@@ -1,4 +1,4 @@
-"""Gate diagnosis (DESIGN.md 11): why the isolated A0 gate Hard-blocks XSTest safe texts. CPU only, no model calls.
+"""Gate diagnosis: why the isolated A0 gate Hard-blocks XSTest safe texts. CPU only, no model calls.
 
     python -m v21r gate-diag [--check]
 
@@ -71,7 +71,7 @@ def on(sig: dict, part: str, shas) -> dict:
 
 
 def xstest_labels(check: bool) -> pd.DataFrame:
-    """sha -> human label of the XSTest routing texts, from the judged CSVs of the first base that has them."""
+    """Sha -> human label of the XSTest routing texts, from the judged CSVs of the first base that has them."""
     for b in MX.bases(check):
         df = MX.collect(check, b)
         if len(df) and "bench" in df and (df.bench == "xstest").any():
@@ -222,7 +222,7 @@ def neighbours(Fe: dict, sp: pd.DataFrame, lab: pd.DataFrame, groups: dict, k: i
 OVERREFUSAL = ("supp:orbench_80k", "supp:falsereject_train", "supp:phtest_harmless", "supp:coconot_contrast",
                "supp:orbench_hard")
 ADV_BENIGN = ("supp:wildjailbreak_adv_benign", "supp:wildguardmix_adv_benign")
-# DESIGN.md 15: plain requests, the form of most evaluation items, judged apart from the adversarial ones
+# plain requests, the form of most evaluation items, judged apart from the adversarial ones
 PLAIN_BENIGN = ("supp:wildjailbreak_van_benign", "supp:wildguardmix_van_benign")
 PLAIN_HARMFUL = ("supp:orbench_toxic", "supp:wildjailbreak_van_harmful", "supp:wildguardmix_van_harmful")
 ADV_HARMFUL = ("supp:wildjailbreak_adv_harmful", "supp:wildguardmix_adv_harmful")
@@ -232,7 +232,7 @@ HARMFUL_GROUPS = ("v4_harmful", "plain_harmful", "adversarial_harmful")
 
 
 def parity(dev: dict, guard: dict) -> dict:
-    """DESIGN.md 14: a variant is on par with Llama Guard when it refuses no more benign and no fewer harmful test rows
+    """A variant is on par with Llama Guard when it refuses no more benign and no fewer harmful test rows
     than the guard's input verdicts, group by group."""
     out = {}
     for v, g in dev.items():
@@ -243,7 +243,7 @@ def parity(dev: dict, guard: dict) -> dict:
 
 
 def dev_groups(sp: pd.DataFrame) -> dict:
-    """DESIGN.md 13: groups of the test split (never used for fitting) on which variants are compared; not XSTest."""
+    """Groups of the test split (never used for fitting) on which variants are compared; not XSTest."""
     te = sp[sp.split == "test"]
     y = te["F"].to_numpy(dtype=float) >= 0.5
     supp = te.source.astype(str).str.startswith("supp:").to_numpy()
@@ -321,7 +321,7 @@ def run(check: bool) -> dict:
 
 
 def render(r: dict) -> str:
-    L = ["# 게이트 진단 (DESIGN.md 11)", "", f"주 운영점 {r['main_cap']} 문턱: {r['main_th']}", ""]
+    L = ["# 게이트 진단", "", f"주 운영점 {r['main_cap']} 문턱: {r['main_th']}", ""]
     x = r.get("xstest", {})
     if "hard_block" in x:
         L += ["## 1. XSTest 증상", "", f"- 문장 수: {x['texts']}", f"- AUROC(위험 > 안전): {x['auroc_unsafe_vs_safe']}", "",
@@ -343,7 +343,7 @@ def render(r: dict) -> str:
         for g, v in r["neighbours"].items():
             L.append(f"- {g}: 문장 {v['texts']}, 이웃 에너지 라벨 1 비율 {v.get('energy_label_1_share')}, 출처 {v.get('by_source')}")
     if r.get("dev"):
-        L += ["", "## 5. 변형 비교: test 분할 거절 비율 (주 운영점, 평가 벤치 아님, DESIGN.md 13)", "",
+        L += ["", "## 5. 변형 비교: test 분할 거절 비율 (주 운영점, 평가 벤치 아님)", "",
               "| 변형 | " + " | ".join(next(iter(r["dev"].values())).keys()) + " |",
               "|---|" + "---|" * len(next(iter(r["dev"].values())))]
         for v, g in r["dev"].items():

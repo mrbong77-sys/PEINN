@@ -1,4 +1,4 @@
-"""DESIGN.md 3 and 8 (R, C, F): routing texts, the isolated corpus and the frozen features.
+"""R, C, F: routing texts, the isolated corpus and the frozen features.
 
 Texts never leave .cache/v21r; results/v21r holds counts, ids (sha1) and reasons only.
 """
@@ -16,15 +16,15 @@ from . import common as C
 
 DRIVER = Path(__file__).with_name("peaos_driver.py")
 SIDE = Path(__file__).with_name("peinn_side.py")
-NEAR_COS = 0.92                    # DESIGN.md 3: MiniLM cosine to any routing text at or above this -> excluded
+NEAR_COS = 0.92                    # MiniLM cosine to any routing text at or above this -> excluded
 SPLIT_SEED = 42
-# DESIGN.md 11: synthetic sources written to the categories of XSTest's safe prompts (no item copied) to lower XSTest
-# over-refusal (src/scripts/gen_trick_safe_corpus.py, label_ee_3class.py 100-146). Dropped from the corpus when
-# EXCLUDE_SOURCES names them; dropped after the split so no other row changes split. The professor chose to drop
-# both (2026-10-16 09:06 KST decision card: evaluation-bench isolation also covers sources designed from a bench).
+# synthetic sources written to the categories of XSTest's safe prompts (no item copied) to lower XSTest
+# over-refusal in the submitted version. Dropped from the corpus when
+# EXCLUDE_SOURCES names them; dropped after the split so no other row changes split. Both are dropped:
+# evaluation-bench isolation also covers sources designed from a bench.
 XSTEST_TYPE_SOURCES = ("trick_safe", "benign_harm_discuss")
 EXCLUDE_SOURCES: tuple = XSTEST_TYPE_SOURCES
-USE_SUPPLEMENT = True              # DESIGN.md 12: public over-refusal and adversarial training sets (v21r/supplement.py)
+USE_SUPPLEMENT = True              # public over-refusal and adversarial training sets (v21r/supplement.py)
 
 
 def wdir(check: bool) -> Path:
@@ -58,10 +58,10 @@ def morables() -> Path:
 # ---- R: record -----------------------------------------------------------------------------------
 
 def sheet_rows(arm: str = "H07") -> dict[str, int]:
-    """Rows of one PEINN arm per bench in the submitted per-item sheets (results/per_item, all runs)."""
+    """Rows of one PEINN arm per bench in the submitted per-item sheets (inputs/submitted_per_item, all runs)."""
     out = {}
     for b in C.BENCHES:
-        s = pd.read_csv(C.PEINN / "results" / "per_item" / f"{b}_per_item.csv", usecols=["arm_id"], low_memory=False)
+        s = pd.read_csv(C.ROOT / "inputs" / "submitted_per_item" / f"{b}_per_item.csv", usecols=["arm_id"], low_memory=False)
         out[b] = int((s.arm_id == arm).sum())
     return out
 
@@ -170,7 +170,7 @@ def corpus_frame(check: bool) -> pd.DataFrame:
     sp = supplement_file(check)
     if USE_SUPPLEMENT:
         if not sp.exists():
-            raise SystemExit(f"supplement missing: {sp} (step supplement, DESIGN.md 12)")
+            raise SystemExit(f"supplement missing: {sp} (step supplement)")
         x = pd.read_csv(sp)
         x["file_role"] = "supp"
         parts.append(x)
@@ -228,8 +228,8 @@ def _cos_max(A: np.ndarray, B: np.ndarray, chunk: int = 4096) -> np.ndarray:
 
 
 def assign_split(df: pd.DataFrame, seed: int = SPLIT_SEED) -> pd.Series:
-    """train file -> train; held-out file halved by (source, polar) into val and test. Without a held-out file the
-    train file is split 80/10/10 by (source, polar). Supplement rows (file_role 'supp', DESIGN.md 12) are split
+    """Train file -> train; held-out file halved by (source, polar) into val and test. Without a held-out file the
+    train file is split 80/10/10 by (source, polar). Supplement rows (file_role 'supp') are split
     80/10/10 by (source, polar) after the v4 rows, so the v4 rows keep their split."""
     rng = random.Random(seed)
     split = pd.Series("train", index=df.index, dtype=object)
@@ -299,11 +299,11 @@ def split(check: bool = False, log=print) -> int:
           "dropped_sha": sorted(df[df["drop"] != ""].sha)}
     o = odir(check) / "corpus"
     C.jdump(st, o / "corpus_audit.json")
-    L = ["# 코퍼스 격리 검사 (DESIGN.md 3)", "",
+    L = ["# 코퍼스 격리 검사", "",
          f"- 대상 행 {st['rows']:,}, 남긴 행 {st['kept']:,}",
          f"- 가드 탈락 {st['dropped']['guard']:,} (정확 일치·5-gram 포함률 > 0.5), 임베딩 탈락 {st['dropped']['embedding']:,} "
          f"(MiniLM 코사인 ≥ {NEAR_COS}), XSTest 유형 합성 출처 탈락 {st['dropped']['xstest_type']:,} "
-         f"({', '.join(EXCLUDE_SOURCES) or '없음'}, DESIGN.md 11)",
+         f"({', '.join(EXCLUDE_SOURCES) or '없음'})",
          f"- 분할: {st['split']}", "", "## 출처별 탈락", ""]
     L += [f"- {k}: {v}" for k, v in sorted(st["dropped_by_source"].items())] or ["- 없음"]
     (o / "corpus_audit.md").write_text("\n".join(L) + "\n", encoding="utf-8")

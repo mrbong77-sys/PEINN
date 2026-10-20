@@ -1,6 +1,0 @@
-{
- "id": "20261018T052300Z-restart",
- "action": "restart",
- "note": "Eugene card 10-18 14:22 KST '지금 재시작': A8 training slowed to 76 s/step (VRAM spill). Restart on 98db005 (memory cap, 2x8 micro-batches, resumable state). Also picks up ethics-diag steps (526a30a).",
- "issued_utc": "2026-10-18 05:23:00"
-}

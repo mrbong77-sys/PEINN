@@ -1,4 +1,4 @@
-"""A8 serving (DESIGN.md 10): the merged Qwen2 checkpoint written as an F16 GGUF, the input llama.cpp's own
+"""A8 serving: the merged Qwen2 checkpoint written as an F16 GGUF, the input llama.cpp's own
 convert_hf_to_gguf.py --outtype f16 gives Ollama. Ollama then quantises it to q4_K_M; it no longer quantises a
 safetensors folder to K-quants (only int4, int8, nvfp4, mxfp4, mxfp8).
 
@@ -56,7 +56,7 @@ def _kv(key: str, t: int, v) -> bytes:
 
 
 def _looks_special(t: str) -> bool:
-    """llama.cpp TextModel.does_token_look_special: added tokens of this shape are control tokens."""
+    """Llama.cpp TextModel.does_token_look_special: added tokens of this shape are control tokens."""
     return t in ("<pad>", "<mask>", "<2mass>", "[@BOS@]") or (t.startswith("<|") and t.endswith("|>")) or \
         (t.startswith("<\uff5c") and t.endswith("\uff5c>")) or (t.startswith("<unused") and t.endswith(">"))
 
