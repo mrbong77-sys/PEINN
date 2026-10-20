@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 469,
+ "verdict": "완료",
+ "seq": 470,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-21 05:46:02",
- "time_utc": "2026-10-20 20:46:02",
+ "time_local": "2026-10-21 05:46:15",
+ "time_utc": "2026-10-20 20:46:15",
  "attempt": 1,
- "code": "dfb497d Public package of the revised paper only: submitted-version docs, tools, demo, samples and results removed (per-",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "3494 MiB, 32607 MiB, 4 %, 42",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "0842e65 v21r peaos-diff: the PEAOS harness the runs called against its copy in src/",
+ "step": "peaos-diff",
+ "step_min": 0.1,
+ "since_output_min": 0.1,
+ "gpu": "3542 MiB, 32607 MiB, 1 %, 43",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -99,10 +99,9 @@
   "ftv-check",
   "ftv",
   "release-extra-check",
-  "release-extra"
- ],
- "left": [
+  "release-extra",
   "peaos-diff-check",
   "peaos-diff"
- ]
+ ],
+ "left": []
 }
