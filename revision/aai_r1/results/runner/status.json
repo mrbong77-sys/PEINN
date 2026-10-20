@@ -1,19 +1,19 @@
 {
- "verdict": "실행 중",
- "seq": 471,
+ "verdict": "완료",
+ "seq": 472,
  "standby": false,
  "beacon_min": 10.0,
  "poll_min": 2.0,
- "time_local": "2026-10-21 06:12:09",
- "time_utc": "2026-10-20 21:12:09",
+ "time_local": "2026-10-21 06:12:21",
+ "time_utc": "2026-10-20 21:12:21",
  "attempt": 1,
- "code": "4d5e925 v21r peaos-diff: push file statuses only, the diffs stay in the cache; diffs removed from results/peaos_diff.jso",
- "step": null,
- "step_min": null,
- "since_output_min": 0.0,
- "gpu": "31983 MiB, 32607 MiB, 100 %, 40",
- "next": "단계 진행",
- "reason": "시작",
+ "code": "1e7f92d v21r peaos-diff: the PEAOS harness the runs called against its copy in src/",
+ "step": "peaos-diff-2",
+ "step_min": 0.2,
+ "since_output_min": 0.1,
+ "gpu": "31948 MiB, 32607 MiB, 99 %, 39",
+ "next": "없음(모든 단계 끝)",
+ "reason": "",
  "ack": "20261018T052300Z-restart restart (자식 종료 후 재실행, 2026-10-18 05:23:59 UTC)",
  "done": [
   "record",
@@ -101,9 +101,8 @@
   "release-extra-check",
   "release-extra",
   "peaos-diff-check",
-  "peaos-diff"
- ],
- "left": [
+  "peaos-diff",
   "peaos-diff-2"
- ]
+ ],
+ "left": []
 }
