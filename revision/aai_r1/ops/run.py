@@ -312,7 +312,9 @@ def steps(check: bool) -> list:
                run("release-extra"))]
         # public package clean-up: is src/ the harness the runs called?
         s += [("peaos-diff-check", "PEAOS harness against src/ (pre-test; nothing pushed)", lambda: step("peaos-diff", True)),
-              ("peaos-diff", "PEAOS harness against its copy in src/ -> results/peaos_diff.json", run("peaos-diff"))]
+              ("peaos-diff", "PEAOS harness against its copy in src/ -> results/peaos_diff.json", run("peaos-diff")),
+              ("peaos-diff-2", "the same after the XSTest rule was ported, with PEAOS's data checkpoints",
+               run("peaos-diff"))]
     if check:
         s += [("push-check", "check outputs -> results/check/", run("push-check")),
               ("estimate", "calls and hours for the full matrix", run("estimate"))]

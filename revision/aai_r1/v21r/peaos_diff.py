@@ -126,7 +126,8 @@ def compare(peaos: Path, src: Path) -> dict:
 
 PACKAGES = ("torch", "transformers", "sentence-transformers", "safetensors", "huggingface-hub", "peft", "accelerate",
             "nemoguardrails", "langchain", "langchain-core", "langchain-community", "fastembed", "openai", "pydantic",
-            "pydantic-settings", "numpy", "pandas", "scipy", "scikit-learn", "matplotlib", "pyyaml", "gguf")
+            "pydantic-settings", "numpy", "pandas", "scipy", "scikit-learn", "matplotlib", "pyyaml", "gguf", "httpx",
+            "jinja2", "psutil", "datasets")
 
 
 def environment() -> dict:
@@ -154,6 +155,10 @@ def environment() -> dict:
 def peaos_diff(check: bool = False, log=print) -> int:
     rep = compare(C.peaos(), C.peinn() / "src")
     rep["environment"] = environment()
+    pe = C.peaos()
+    rep["peaos_data"] = {d: sorted(f"{f.name} {f.stat().st_size}" for f in (pe / d).glob("*.pt"))
+                         for d in ("data", "pea_eval/data") if (pe / d).is_dir()}      # memory_bank.pt feeds the EE if present
+    log(f"PEAOS data checkpoints: {rep['peaos_data']}")
     log(f"environment: {rep['environment']}")
     log(f"PEAOS {rep['peaos']['head'][:12]} (dirty files {rep['peaos']['dirty_files']}): {rep['count']}")
     for rel, r in rep["files"].items():
