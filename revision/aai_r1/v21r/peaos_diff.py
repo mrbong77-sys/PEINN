@@ -124,8 +124,37 @@ def compare(peaos: Path, src: Path) -> dict:
             "v21r_imports": mods, "count": count, "files": rows}
 
 
+PACKAGES = ("torch", "transformers", "sentence-transformers", "safetensors", "huggingface-hub", "peft", "accelerate",
+            "nemoguardrails", "langchain", "langchain-core", "langchain-community", "fastembed", "openai", "pydantic",
+            "pydantic-settings", "numpy", "pandas", "scipy", "scikit-learn", "matplotlib", "pyyaml", "gguf")
+
+
+def environment() -> dict:
+    """The satellite's software: Python, the packages the steps import, Ollama, the GPU (for the README)."""
+    import platform
+    from importlib import metadata
+    pk = {}
+    for n in PACKAGES:
+        try:
+            pk[n] = metadata.version(n)
+        except metadata.PackageNotFoundError:
+            pk[n] = None
+
+    def out(*cmd):
+        try:
+            r = subprocess.run(list(cmd), capture_output=True, encoding="utf-8", errors="replace", timeout=60)
+            return (r.stdout or r.stderr).strip()[:300]
+        except (OSError, subprocess.TimeoutExpired) as e:
+            return f"[{e}]"
+    return {"python": platform.python_version(), "os": platform.platform(), "packages": pk,
+            "ollama": out("ollama", "--version"),
+            "gpu": out("nvidia-smi", "--query-gpu=name,driver_version,memory.total", "--format=csv,noheader")}
+
+
 def peaos_diff(check: bool = False, log=print) -> int:
     rep = compare(C.peaos(), C.peinn() / "src")
+    rep["environment"] = environment()
+    log(f"environment: {rep['environment']}")
     log(f"PEAOS {rep['peaos']['head'][:12]} (dirty files {rep['peaos']['dirty_files']}): {rep['count']}")
     for rel, r in rep["files"].items():
         if r["status"] != "same":
