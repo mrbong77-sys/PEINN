@@ -205,6 +205,9 @@ def curves(out: dict, caps, o) -> None:
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    # thinnest legible strokes, so that crowded curves and markers stay apart at print size
+    plt.rcParams.update({"lines.linewidth": 0.4, "lines.markeredgewidth": 0.3, "axes.linewidth": 0.4,
+                         "xtick.major.width": 0.4, "ytick.major.width": 0.4, "patch.linewidth": 0.4})
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.9), sharex=True, sharey=True)
     ft = {"A0ftM": ("#009e73", "o", "-"), "A0ft": ("#666666", "s", "--"), "A1ft": ("#e69f00", "^", "-"),
           "A2ft": ("#56b4e9", "v", "-"), "A3ft": ("#cc79a7", "D", "-"), "A9": ("#000000", "+", ":")}
@@ -230,14 +233,14 @@ def curves(out: dict, caps, o) -> None:
         for v, (col, mk, ls) in style.items():
             if v in lines:
                 x, y = zip(*lines[v])
-                ax.plot(x, y, ls, marker=mk, color=col, ms=2.8 if small else 3.2, lw=0.8 if small else 0.9, alpha=0.9,
+                ax.plot(x, y, ls, marker=mk, color=col, ms=2.2 if small else 2.6, lw=0.4, mew=0.3, alpha=0.9,
                         label=(LABEL[v] if v == "A0ftM" else f"{LABEL[v]} ({v})") if legend else None)
         for s, mk in (("Vanilla", "*"), ("NeMo", "P"), ("LlamaGuard", "X")):
             x, y = defs[s]
-            ax.scatter([x], [y], marker=mk, s=30 if small else 40, color="black", zorder=3,
+            ax.scatter([x], [y], marker=mk, s=20 if small else 26, color="black", linewidths=0.3, zorder=3,
                        label={"LlamaGuard": "Llama Guard 3"}.get(s, s) if legend else None)
         if style is ft:
-            ax.scatter([main_pt[0]], [main_pt[1]], s=70 if small else 90, facecolor="none", edgecolor="#009e73", lw=1.3, zorder=4)
+            ax.scatter([main_pt[0]], [main_pt[1]], s=55 if small else 70, facecolor="none", edgecolor="#009e73", lw=0.6, zorder=4)
 
     for ax, style, title in ((axes[0], ft, "(a) Fine-tuned encoders"), (axes[1], fr, "(b) Frozen encoders")):
         draw(ax, style, True, False)
@@ -246,16 +249,16 @@ def curves(out: dict, caps, o) -> None:
         ax.set_title(title, fontsize=8)
         ax.set_xlabel("XSTest over-refusal rate, ORR (%)", fontsize=8)
         ax.tick_params(labelsize=7)
-        ax.grid(lw=0.3, alpha=0.4)
+        ax.grid(lw=0.2, alpha=0.4)
         ax.legend(fontsize=6, frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.15))
         ins = ax.inset_axes([0.37, 0.37, 0.6, 0.6])
         draw(ins, style, False, True)
         ins.set_xlim(*ZOOM_X)
         ins.set_ylim(*ZOOM_Y)
         ins.tick_params(labelsize=6, pad=1)
-        ins.grid(lw=0.3, alpha=0.4)
+        ins.grid(lw=0.2, alpha=0.4)
         ins.set_facecolor("white")
-        ax.indicate_inset_zoom(ins, edgecolor="0.35", lw=0.7)
+        ax.indicate_inset_zoom(ins, edgecolor="0.35", lw=0.4)
     axes[0].set_ylabel(r"Average attack success rate, ASR$_{\mathrm{avg}}$ (%)", fontsize=8)
     fig.tight_layout()
     fig.savefig(o / "ablation_curves.png", dpi=300)
